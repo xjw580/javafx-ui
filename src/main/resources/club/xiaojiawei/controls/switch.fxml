@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/switch.css" style="-fx-cursor: hand">
+    <!--灰底背景-->
+    <Rectangle style="-fx-fill: #E6E6E6" width="${switchRectangle.width}" height="${switchRectangle.height}" arcHeight="${switchRectangle.arcHeight}" arcWidth="${switchRectangle.arcWidth}"/>
+    <!--蓝底背景-->
+    <Rectangle nodeOrientation="RIGHT_TO_LEFT" style="-fx-fill: #0C84FF" fx:id="switchRectangle" width="44" height="22" arcHeight="22" arcWidth="22">
+        <clip>
+            <Rectangle fx:id="switchClipRectangle" width="44" height="22"/>
+        </clip>
+    </Rectangle>
+    <!--白圆-->
+    <Circle translateX="22" fx:id="switchCircle" layoutX="11" layoutY="11" radius="6" style="-fx-fill: white"/>
+</fx:root>
