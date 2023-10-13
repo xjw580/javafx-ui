@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import lombok.Getter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,10 +24,10 @@ import static club.xiaojiawei.enums.TransitionTypeEnum.NONE;
  * @date 2023/7/3 12:21
  * @msg 开关组件
  */
-@Getter
 @SuppressWarnings("unused")
 public class Switch extends AnchorPane implements Initializable {
-//    默认动画时间为200ms
+
+    //    默认动画时间为200ms
     private Duration transitionDuration = Duration.valueOf("200ms");
 //    默认动画效果为淡入淡出
     private TransitionTypeEnum transitionType = TransitionTypeEnum.FADE;
@@ -57,6 +56,21 @@ public class Switch extends AnchorPane implements Initializable {
         if (transitionType == NONE){
             this.transitionDuration = Duration.valueOf("1ms");
         }
+    }
+    public Duration getTransitionDuration() {
+        return transitionDuration;
+    }
+
+    public TransitionTypeEnum getTransitionType() {
+        return transitionType;
+    }
+
+    public boolean isInitStatus() {
+        return initStatus.get();
+    }
+
+    public double getSize() {
+        return size;
     }
 
     public boolean getInitStatus() {

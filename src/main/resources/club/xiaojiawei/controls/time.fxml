@@ -4,22 +4,30 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import java.lang.Double?>
+<?import club.xiaojiawei.controls.Switch?>
 <fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/time.css">
-    <TextField fx:id="hour" prefWidth="35" text="00"/>
-    <Label translateX="26" text=":"/>
-    <TextField fx:id="min" translateX="44" prefWidth="35" text="00"/>
-    <AnchorPane fx:id="clock" translateX="83" prefWidth="26" prefHeight="26">
-        <ImageView fitWidth="26" fitHeight="26">
+    <fx:define>
+        <Double fx:id="textWidth" fx:value="30"/>
+        <Double fx:id="imageSize" fx:value="23"/>
+        <Double fx:id="selectorWidth" fx:value="40"/>
+        <Double fx:id="selectorHeight" fx:value="120"/>
+    </fx:define>
+    <TextField fx:id="hour" prefWidth="${textWidth}" text="00" promptText="时"/>
+    <Label translateX="23" text=":"/>
+    <TextField fx:id="min" translateX="40" prefWidth="${textWidth}" text="00" promptText="分"/>
+    <AnchorPane fx:id="clock" translateX="72" prefWidth="${imageSize}" prefHeight="${imageSize}">
+        <ImageView fitWidth="${imageSize}" fitHeight="${imageSize}">
             <Image url="@images/clock.png"/>
         </ImageView>
     </AnchorPane>
-    <AnchorPane fx:id="selector" prefWidth="95" prefHeight="150" translateY="30" styleClass="selector" visible="false">
-        <ScrollPane fx:id="hourSelectorOuter" maxHeight="150" prefWidth="45">
-            <VBox fx:id="hourSelector" style="-fx-font-size: 17">
+    <AnchorPane fx:id="selector" visible="false" styleClass="selector" prefWidth="81" prefHeight="${selectorHeight}" translateY="-127" managed="false">
+        <ScrollPane fx:id="hourSelectorOuter" maxHeight="${selectorHeight}" prefWidth="${selectorWidth}">
+            <VBox fx:id="hourSelector" style="-fx-font-size: 15">
             </VBox>
         </ScrollPane>
-        <ScrollPane fx:id="minSelectorOuter" translateX="50" maxHeight="150" prefWidth="45">
-            <VBox  fx:id="minSelector" style="-fx-font-size: 17">
+        <ScrollPane fx:id="minSelectorOuter" translateX="42" maxHeight="${selectorHeight}" prefWidth="${selectorWidth}">
+            <VBox  fx:id="minSelector" style="-fx-font-size: 15;">
             </VBox>
         </ScrollPane>
     </AnchorPane>

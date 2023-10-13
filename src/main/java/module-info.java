@@ -2,7 +2,6 @@ module club.xiaojiawei.javafxplus {
     requires java.base;
     requires javafx.controls;
     requires javafx.fxml;
-    requires static lombok;
 
     exports club.xiaojiawei.utils;
     exports club.xiaojiawei.enums;

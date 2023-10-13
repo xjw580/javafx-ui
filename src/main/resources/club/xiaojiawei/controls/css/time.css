@@ -3,7 +3,7 @@
     -fx-text-fill: white;
 }
 .label{
-    -fx-padding: 5 12 5 12;
+    -fx-padding: 5 10 5 10;
 }
 .scroll-pane{
     -fx-padding: 0;
@@ -13,5 +13,5 @@
     -fx-vbar-policy: never;
 }
 .selector{
-    -fx-border-color: rgb(128, 128, 128);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
 }

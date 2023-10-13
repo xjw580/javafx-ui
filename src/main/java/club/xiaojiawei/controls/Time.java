@@ -4,9 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
+import javafx.css.Styleable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -14,11 +17,12 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import lombok.Getter;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * @author 肖嘉威
@@ -26,10 +30,9 @@ import java.util.Objects;
  * @msg 时间组件
  */
 @SuppressWarnings("unused")
-public class Time extends AnchorPane {
+public class Time extends AnchorPane{
 
     private final StringProperty time = new SimpleStringProperty("00:00");
-    @Getter
     private boolean showSelector = true;
 
     public String getTime() {
@@ -43,7 +46,10 @@ public class Time extends AnchorPane {
     public void setShowSelector(boolean showSelector) {
         this.showSelector = showSelector;
         clock.setVisible(showSelector);
-        selector.setVisible(showSelector);
+    }
+
+    public boolean isShowSelector() {
+        return showSelector;
     }
 
     public void setTime(String timeProperty) throws ParseException {
@@ -66,11 +72,11 @@ public class Time extends AnchorPane {
     @FXML
     private AnchorPane clock;
     @FXML
+    private AnchorPane selector;
+    @FXML
     private VBox hourSelector;
     @FXML
     private VBox minSelector;
-    @FXML
-    private AnchorPane selector;
     @FXML
     private ScrollPane hourSelectorOuter;
     @FXML
@@ -91,10 +97,6 @@ public class Time extends AnchorPane {
             min.textProperty().addListener((observableValue, s, t1) -> {
                 timeProperty().setValue(timeProperty().getValue().replaceAll(":\\d{0,2}", ":" + t1));
             });
-//            隐藏时间选择器
-            selector.addEventHandler(MouseEvent.MOUSE_EXITED, e -> {
-                selector.setVisible(false);
-            });
 //            为时间选择器填充时和分元素
             ObservableList<Node> hourChildren = hourSelector.getChildren();
             for (int i = 0; i <= 24; i++) {
@@ -104,6 +106,7 @@ public class Time extends AnchorPane {
                 }else {
                     label.setText(String.valueOf(i));
                 }
+                label.setCache(false);
                 label.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                     for (Node child : hourChildren) {
                         child.getStyleClass().remove("selectLabel");
@@ -121,6 +124,7 @@ public class Time extends AnchorPane {
                 }else {
                     label.setText(String.valueOf(i));
                 }
+                label.setCache(false);
                 label.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                     for (Node child : minChildren) {
                         child.getStyleClass().remove("selectLabel");
@@ -135,8 +139,8 @@ public class Time extends AnchorPane {
                 if (selector.isVisible()){
                     selector.setVisible(false);
                 }else {
-                    hourSelectorOuter.setVvalue((double) Integer.parseInt(hour.getText()) / 24);
-                    minSelectorOuter.setVvalue((double) Integer.parseInt(min.getText()) / 59);
+                    hourSelectorOuter.setVvalue(hour.getText().isBlank()? 0 : (double) Integer.parseInt(hour.getText()) / 24);
+                    minSelectorOuter.setVvalue(min.getText().isBlank()? 0 : (double) Integer.parseInt(min.getText()) / 59);
                     for (Node hourChild : hourChildren) {
                         Label label = (Label) hourChild;
                         if (Objects.equals(label.getText(), hour.getText())){
