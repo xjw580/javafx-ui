@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<fx:root type="javafx.scene.layout.AnchorPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/time.css">
+    <TextField fx:id="hour" prefWidth="35" text="00"/>
+    <Label translateX="26" text=":"/>
+    <TextField fx:id="min" translateX="44" prefWidth="35" text="00"/>
+    <AnchorPane fx:id="clock" translateX="83" prefWidth="26" prefHeight="26">
+        <ImageView fitWidth="26" fitHeight="26">
+            <Image url="@images/clock.png"/>
+        </ImageView>
+    </AnchorPane>
+    <AnchorPane fx:id="selector" prefWidth="95" prefHeight="150" translateY="30" styleClass="selector" visible="false">
+        <ScrollPane fx:id="hourSelectorOuter" maxHeight="150" prefWidth="45">
+            <VBox fx:id="hourSelector" style="-fx-font-size: 17">
+            </VBox>
+        </ScrollPane>
+        <ScrollPane fx:id="minSelectorOuter" translateX="50" maxHeight="150" prefWidth="45">
+            <VBox  fx:id="minSelector" style="-fx-font-size: 17">
+            </VBox>
+        </ScrollPane>
+    </AnchorPane>
+</fx:root>

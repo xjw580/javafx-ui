@@ -1,0 +1,17 @@
+.selectLabel{
+    -fx-background-color: #0075FF;
+    -fx-text-fill: white;
+}
+.label{
+    -fx-padding: 5 12 5 12;
+}
+.scroll-pane{
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
+.selector{
+    -fx-border-color: rgb(128, 128, 128);
+}

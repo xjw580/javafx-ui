@@ -1,63 +1,95 @@
 package club.xiaojiawei.controls;
 
-import club.xiaojiawei.enums.TransitionType;
+import club.xiaojiawei.enums.TransitionTypeEnum;
 import club.xiaojiawei.utils.TransitionUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import lombok.Getter;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static club.xiaojiawei.enums.TransitionTypeEnum.NONE;
 
 /**
  * @author 肖嘉威
  * @date 2023/7/3 12:21
  * @msg 开关组件
  */
-
-public class Switch extends AnchorPane {
-//    默认动画时间为中等
-    private double showDuration = TransitionUtil.MODERATION_DURATION;
+@Getter
+@SuppressWarnings("unused")
+public class Switch extends AnchorPane implements Initializable {
+//    默认动画时间为200ms
+    private Duration transitionDuration = Duration.valueOf("200ms");
 //    默认动画效果为淡入淡出
-    private TransitionType transitionType = TransitionType.FADE;
+    private TransitionTypeEnum transitionType = TransitionTypeEnum.FADE;
 //    默认开关状态为开
-    private final BooleanProperty status = new SimpleBooleanProperty(true);
+    private final BooleanProperty initStatus = new SimpleBooleanProperty(true);
+    private double size = 22D;
     @FXML
     private Circle switchCircle;
     @FXML
     private Rectangle switchRectangle;
     @FXML
     private Rectangle switchClipRectangle;
+    @FXML
+    private Rectangle bgRectangle;
 
-    public double getShowDuration() {
-        return this.showDuration;
-    }
-    public void setShowDuration(double showDuration) {
-        this.showDuration = showDuration;
-    }
-
-    public TransitionType getTranslationType() {
-        return this.transitionType;
-    }
-    public void setTranslationType(TransitionType transitionType) {
-        this.transitionType = transitionType;
+    public void setTransitionDuration(Duration transitionDuration) {
+        if (transitionType == NONE){
+            this.transitionDuration = Duration.valueOf("1ms");
+        }else {
+            this.transitionDuration = transitionDuration;
+        }
     }
 
-    public boolean isStatus() {
-        return this.status.get();
+    public void setTranslationType(TransitionTypeEnum transitionTypeEnum) {
+        this.transitionType = transitionTypeEnum;
+        if (transitionType == NONE){
+            this.transitionDuration = Duration.valueOf("1ms");
+        }
     }
 
-    public BooleanProperty statusProperty() {
-        return this.status;
+    public boolean getInitStatus() {
+        return this.initStatus.get();
     }
-
-    public void setStatus(boolean status) {
-        if (status != this.status.get())
+    public BooleanProperty initStatusProperty() {
+        return this.initStatus;
+    }
+    public void setInitStatus(boolean initStatus) {
+        if (initStatus != this.initStatus.get()){
             onMouseClicked(null);
+        }
+    }
+
+    public void setSize(double size) {
+        this.size = size;
+        bgRectangle.setWidth(size * 2);
+        bgRectangle.setHeight(size);
+        bgRectangle.setArcHeight(size);
+        bgRectangle.setArcWidth(size);
+
+        switchRectangle.setWidth(size * 2);
+        switchRectangle.setHeight(size);
+        switchRectangle.setArcHeight(size);
+        switchRectangle.setArcWidth(size);
+
+        switchClipRectangle.setWidth(size * 2);
+        switchClipRectangle.setHeight(size);
+
+        switchCircle.setTranslateX(size);
+        switchCircle.setLayoutX(size / 2);
+        switchCircle.setLayoutY(size / 2);
+        switchCircle.setRadius(size / 4);
     }
 
     public Switch() {
@@ -79,43 +111,48 @@ public class Switch extends AnchorPane {
             default -> noneTranslation();
         }
         circleTranslate();
-        status.set(!status.get());
+        initStatus.set(!initStatus.get());
         if (event != null){
             event.consume();
         }
     }
 
     private void circleTranslate() {
-        double translateFrom = 0.0D, translateTo = 22.0D;
-        if (status.get()) {
+        double translateFrom = 0.0D, translateTo = size;
+        if (initStatus.get()) {
             final double temp = translateFrom;
             translateFrom = translateTo;
             translateTo = temp;
         }
-        TransitionUtil.playTranslate(switchCircle, translateFrom, translateTo, showDuration);
+        TransitionUtil.playTranslate(switchCircle, translateFrom, translateTo, transitionDuration);
     }
     private void fadeTranslation() {
         final double fadeFrom = 0.0D, fadeTo = 1.0D;
-        if (status.get()) {
-            TransitionUtil.playFadeTransition(switchRectangle, fadeTo, fadeFrom, showDuration);
+        if (initStatus.get()) {
+            TransitionUtil.playFadeTransition(switchRectangle, fadeTo, fadeFrom, transitionDuration);
         } else {
-            TransitionUtil.playFadeTransition(switchRectangle, fadeFrom, fadeTo, showDuration);
+            TransitionUtil.playFadeTransition(switchRectangle, fadeFrom, fadeTo, transitionDuration);
         }
     }
     private void translateTranslation() {
         switchRectangle.setOpacity(1.0D);
-        final double clipTranslateFrom = 44.0D, clipTranslateTo = 0.0D;
-        if (status.get()) {
-            TransitionUtil.playTranslate(switchClipRectangle, clipTranslateTo, clipTranslateFrom, showDuration);
+        final double clipTranslateFrom = size * 2, clipTranslateTo = 0.0D;
+        if (initStatus.get()) {
+            TransitionUtil.playTranslate(switchClipRectangle, clipTranslateTo, clipTranslateFrom, transitionDuration);
         } else {
-            TransitionUtil.playTranslate(switchClipRectangle, clipTranslateFrom, clipTranslateTo, showDuration);
+            TransitionUtil.playTranslate(switchClipRectangle, clipTranslateFrom, clipTranslateTo, transitionDuration);
         }
     }
     private void noneTranslation() {
-        if (status.get()) {
+        if (initStatus.get()) {
             switchRectangle.setOpacity(0.0D);
         } else {
             switchRectangle.setOpacity(1.0D);
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setSize(size);
     }
 }

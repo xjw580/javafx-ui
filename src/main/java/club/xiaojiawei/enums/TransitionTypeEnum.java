@@ -5,7 +5,7 @@ package club.xiaojiawei.enums;
  * @date 2023/7/3 15:51
  * @msg 动画效果
  */
-public enum TransitionType {
+public enum TransitionTypeEnum {
 
     /*淡入淡出*/
     FADE,
