@@ -1,17 +1,31 @@
-.selectLabel{
-    -fx-background-color: #0075FF;
-    -fx-text-fill: white;
+.selectedTimeLabelXJW{
+    -fx-background-color: #0075FF!important;
+    -fx-text-fill: white!important;
+    -fx-background-radius: 5;
 }
-.label{
+.timeLabelXJW{
     -fx-padding: 5 10 5 10;
+    -fx-background-color: white;
 }
-.scroll-pane{
+.timeLabelXJW:hover{
+    -fx-background-color: #B3D5FFFF;
+    -fx-background-radius: 5;
+}
+.timeSelectorXJW{
     -fx-padding: 0;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
+    -fx-background-insets: 0;/*防止点击时移动*/
     -fx-hbar-policy: never;
     -fx-vbar-policy: never;
 }
-.selector{
+.timeSelectorOuterXJW{
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 0);
+    -fx-background-radius: 5;
+    -fx-background-color: white;
+    -fx-font-size: 15;
+}
+.text-fieldXJW:focused{
+    -fx-background-color: #0075FF, white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 117, 255, 0.88), 8, 0, 0, 0);
 }

@@ -2,6 +2,7 @@ package club.xiaojiawei.utils;
 
 import club.xiaojiawei.enums.TransitionTypeEnum;
 import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
@@ -13,7 +14,11 @@ import javafx.util.Duration;
  * @msg
  */
 public class TransitionUtil {
-
+    private static void setAndPlayTransition(Transition transition, int cycleCount, boolean autoReverse) {
+        transition.setCycleCount(cycleCount);
+        transition.setAutoReverse(autoReverse);
+        transition.play();
+    }
     public static void playTransition(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse, TransitionTypeEnum transitionTypeEnum) {
         switch (transitionTypeEnum) {
             case SLIDE -> playTranslate(node, from, to, duration, cycleCount, autoReverse);
@@ -36,11 +41,9 @@ public class TransitionUtil {
     }
 
     public static void playTranslate(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse) {
-        TranslateTransition translate = new TranslateTransition();
-        translate.setNode(node);
+        TranslateTransition translate = new TranslateTransition(duration, node);
         translate.setFromX(from);
         translate.setToX(to);
-        translate.setDuration(duration);
         setAndPlayTransition(translate, cycleCount, autoReverse);
     }
     public static void playTranslate(Node node, double from, double to, Duration duration) {
@@ -49,20 +52,23 @@ public class TransitionUtil {
 
 
     public static void playFadeTransition(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse) {
-        FadeTransition fade = new FadeTransition();
-        fade.setNode(node);
+        FadeTransition fade = new FadeTransition(duration, node);
         fade.setFromValue(from);
         fade.setToValue(to);
-        fade.setDuration(duration);
         setAndPlayTransition(fade, cycleCount, autoReverse);
     }
     public static void playFadeTransition(Node node, double from, double to, Duration duration) {
         playFadeTransition(node, from, to, duration, 0, false);
     }
 
-    private static void setAndPlayTransition(Transition transition, int cycleCount, boolean autoReverse) {
-        transition.setCycleCount(cycleCount);
-        transition.setAutoReverse(autoReverse);
-        transition.play();
+
+    public static void playScaleYTransition(Node node, double from, double to, Duration duration){
+        playScaleYTransition(node,from, to, duration, 0, false);
+    }
+    public static void playScaleYTransition(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse){
+        ScaleTransition scaleTransition = new ScaleTransition(duration, node);
+        scaleTransition.setFromY(from);
+        scaleTransition.setToY(to);
+        setAndPlayTransition(scaleTransition, cycleCount, autoReverse);
     }
 }

@@ -6,6 +6,12 @@
 
 ## 更新信息
 
+##### 0.0.5-SNAPSHOT
+
+- 优化时间（Time）和开关（Switch）组件
+
+
+
 ##### 0.0.4-SNAPSHOT
 
 - 优化时间（Time）和开关（Switch）组件

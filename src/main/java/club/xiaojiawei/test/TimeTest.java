@@ -3,26 +3,26 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.controls.Switch;
 import club.xiaojiawei.controls.Time;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class TimeTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        VBox vBox = new VBox();
         Time time = new Time();
-//        time.setShowSelector(false);
-        Switch aSwitch = new Switch();
-        vBox.getChildren().add(aSwitch);
-        vBox.getChildren().add(new Switch());
-        vBox.getChildren().add(new Switch());
-        vBox.getChildren().add(new Switch());
-        vBox.getChildren().add(time);
-        time.timeProperty().addListener((observableValue, s, t1) -> System.out.println(t1));
-        Scene scene = new Scene(vBox, 200, 200);
+//        time.setShowRowCount(10);
+        AnchorPane group = new AnchorPane(time);
+        time.setTranslateX(50);
+        time.setTranslateY(10);
+        Scene scene = new Scene(group, 200, 200);
         stage.setScene(scene);
         stage.show();
     }

@@ -1,7 +1,8 @@
-module club.xiaojiawei.javafxplus {
+module club.xiaojiawei.javafx_ui {
     requires java.base;
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.girod.javafx.svgimage;
 
     exports club.xiaojiawei.utils;
     exports club.xiaojiawei.enums;

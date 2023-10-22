@@ -26,14 +26,23 @@ import static club.xiaojiawei.enums.TransitionTypeEnum.NONE;
  */
 @SuppressWarnings("unused")
 public class Switch extends AnchorPane implements Initializable {
-
-    //    默认动画时间为200ms
+    /**
+     * 默认动画时间为200ms
+     */
     private Duration transitionDuration = Duration.valueOf("200ms");
-//    默认动画效果为淡入淡出
+    /**
+     * 默认动画效果为淡入淡出
+     */
     private TransitionTypeEnum transitionType = TransitionTypeEnum.FADE;
-//    默认开关状态为开
+    /**
+     * 默认开关状态为开
+     */
     private final BooleanProperty initStatus = new SimpleBooleanProperty(true);
-    private double size = 22D;
+    /**
+     * 默认开关尺寸为20
+     */
+    private double size = 20D;
+
     @FXML
     private Circle switchCircle;
     @FXML
@@ -44,6 +53,7 @@ public class Switch extends AnchorPane implements Initializable {
     private Rectangle bgRectangle;
 
     public void setTransitionDuration(Duration transitionDuration) {
+//        动画效果为NONE时动画持续时间自然为0
         if (transitionType == NONE){
             this.transitionDuration = Duration.valueOf("1ms");
         }else {
@@ -107,17 +117,21 @@ public class Switch extends AnchorPane implements Initializable {
     }
 
     public Switch() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("switch.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
         try {
-            AnchorPane ap = fxmlLoader.load();
-            ap.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onMouseClicked);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("switch.fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onMouseClicked);
     }
 
+    /**
+     * 开关被点击后触发事件
+     * @param event
+     */
     protected void onMouseClicked(MouseEvent event) {
         switch (transitionType) {
             case FADE -> fadeTranslation();
@@ -131,6 +145,9 @@ public class Switch extends AnchorPane implements Initializable {
         }
     }
 
+    /**
+     * 开关中的圆平移
+     */
     private void circleTranslate() {
         double translateFrom = 0.0D, translateTo = size;
         if (initStatus.get()) {
@@ -140,6 +157,10 @@ public class Switch extends AnchorPane implements Initializable {
         }
         TransitionUtil.playTranslate(switchCircle, translateFrom, translateTo, transitionDuration);
     }
+
+    /**
+     * 开关中的背景动画：渐变
+     */
     private void fadeTranslation() {
         final double fadeFrom = 0.0D, fadeTo = 1.0D;
         if (initStatus.get()) {
@@ -148,6 +169,9 @@ public class Switch extends AnchorPane implements Initializable {
             TransitionUtil.playFadeTransition(switchRectangle, fadeFrom, fadeTo, transitionDuration);
         }
     }
+    /**
+     * 开关中的背景动画：平移
+     */
     private void translateTranslation() {
         switchRectangle.setOpacity(1.0D);
         final double clipTranslateFrom = size * 2, clipTranslateTo = 0.0D;
@@ -157,6 +181,9 @@ public class Switch extends AnchorPane implements Initializable {
             TransitionUtil.playTranslate(switchClipRectangle, clipTranslateFrom, clipTranslateTo, transitionDuration);
         }
     }
+    /**
+     * 开关中的背景动画：无
+     */
     private void noneTranslation() {
         if (initStatus.get()) {
             switchRectangle.setOpacity(0.0D);
