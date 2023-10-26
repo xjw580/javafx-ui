@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root type="FlowPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/timeSelector.css"
+            fx:id="root" minWidth="86" maxWidth="86" hgap="1.5">
+    <ScrollPane fx:id="hourSelector" styleClass="timeSelector">
+        <VBox fx:id="hourVbox" styleClass="v-box"/>
+    </ScrollPane>
+    <ScrollPane fx:id="minSelector" styleClass="timeSelector">
+        <VBox fx:id="minVbox" styleClass="v-box"/>
+    </ScrollPane>
+</fx:root>

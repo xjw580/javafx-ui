@@ -4,25 +4,22 @@
     -fx-border-color: transparent;
     -fx-background-color: transparent;
 }
-.timeSeparator, .text-field{
-    -fx-translate-y: 3.5;
-}
-.timeBackground{
+.dateTimeBackground{
     -fx-border-color: #73a5f1;
     -fx-pref-height: 24;
-    -fx-pref-width: 69;
+    -fx-pref-width: 149;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-background-color: white;
 }
-.hideIcoTimeBackground{
-    -fx-pref-width: 49!important;
+.hideIcoDateTimeBackground{
+    -fx-pref-width: 89!important;
 }
-.timeBackgroundFocus{
+.dateTimeBackgroundFocus{
     -fx-border-color: #0075FF!important;
     -fx-effect: dropshadow(gaussian, #73a5f1, 10, 0, 0, 0)!important;
 }
-#timeIco{
+#dateTimeIco{
     -fx-pref-width: 23;
     -fx-pref-height: 23;
 }

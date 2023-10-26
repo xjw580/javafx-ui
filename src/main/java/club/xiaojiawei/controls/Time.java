@@ -1,258 +1,175 @@
 package club.xiaojiawei.controls;
 
-import club.xiaojiawei.utils.TransitionUtil;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 import org.girod.javafx.svgimage.SVGLoader;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.Objects;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
+
+import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
+ * 时间选择器-完整版
  * @author 肖嘉威
  * @date 2023/7/3 12:21
- * @msg 时间组件
  */
 @SuppressWarnings("unused")
-public class Time extends FlowPane {
+public class Time extends AnchorPane {
     /**
-     * 默认时间00:00
+     * 默认当前时间
      */
-    private final StringProperty time = new SimpleStringProperty("00:00");
+    private StringProperty time;
     /**
      * 默认显示时间选择器图标
      */
     private boolean showSelector = true;
     /**
-     * 展示行数
+     * 默认显示边框
      */
-    private int showRowCount = 6;
-
-    private final Popup timeSelectorPopup = new Popup();
-    private static final String SELECTED_TIME_LABEL_XJW = "selectedTimeLabelXJW";
-
-    public int getShowRowCount() {
-        return showRowCount;
-    }
-
-    public void setShowRowCount(int showRowCount) {
-        this.showRowCount = showRowCount;
-        hourSelector.setMaxHeight(showRowCount * 30);
-        minSelector.setMaxHeight(showRowCount * 30);
-    }
-
+    private boolean showBorder = true;
     public String getTime() {
         return time.get();
     }
-
     public StringProperty timeProperty() {
         return time;
     }
-
-    public void setShowSelector(boolean showSelector) {
-        this.showSelector = showSelector;
-        clockIco.setVisible(showSelector);
+    /**
+     * @param time 格式：HH:mm
+     */
+    public void setTime(String time) {
+        this.time.set(time);
     }
-
+    public void setShowSelector(boolean showSelector) {
+        timeIco.setVisible(this.showSelector = showSelector);
+        if (showSelector){
+            timeBG.getStyleClass().remove(HIDE_ICO_TIME_BACKGROUND);
+        }else {
+            timeBG.getStyleClass().add(HIDE_ICO_TIME_BACKGROUND);
+        }
+    }
     public boolean isShowSelector() {
         return showSelector;
     }
-
-    public void setTime(String timeProperty) throws ParseException {
-        if (timeProperty == null ||timeProperty.matches("^\\d{2}:\\d{2}")){
-            throw new ParseException(timeProperty, -1);
-        }
-        String[] time = timeProperty.split(":");
-        if (time[0].compareTo("24") > 0 ||time[1].compareTo("59") > 0){
-            throw new ParseException(timeProperty, -1);
-        }
-        hour.setText(time[0]);
-        min.setText(time[1]);
-        this.time.set(timeProperty);
+    public boolean isShowBorder() {
+        return showBorder;
     }
-
+    public void setShowBorder(boolean showBorder) {
+        timeBG.setVisible(this.showBorder = showBorder);
+    }
+    @FXML
+    private Label timeBG;
     @FXML
     private TextField hour;
     @FXML
     private TextField min;
     @FXML
-    private AnchorPane clockIco;
-
+    private AnchorPane timeIco;
+    public AnchorPane getTimeIco() {
+        return timeIco;
+    }
+    private static final int MAX_HOUR = 23;
+    private static final int MAX_MIN = 59;
+    private Popup timeSelectorPopup;
+    public Popup getTimeSelectorPopup() {
+        return timeSelectorPopup;
+    }
+    private static final String TIME_BACKGROUND_FOCUS = "timeBackgroundFocus";
+    private static final String HIDE_ICO_TIME_BACKGROUND = "hideIcoTimeBackground";
+    private boolean isFromTime;
+    private ChangeListener<Boolean> focusChangeListener;
     public Time() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("time.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
-            initTimeTextField(hour, 24, (observableValue, s, t1) -> timeProperty().setValue(timeProperty().getValue().replaceAll("\\d{0,2}:", t1 + ":")));
-            initTimeTextField(min, 59, (observableValue, s, t1) -> timeProperty().setValue(timeProperty().getValue().replaceAll(":\\d{0,2}", ":" + t1)));
-            initClockIco();
-            initTimeSelectorPopup();
+            afterFXMLLoaded();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    private void initClockIco(){
-        clockIco.getChildren().add(SVGLoader.load(getClass().getResource("/club/xiaojiawei/controls/images/clock.svg")));
-        clockIco.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-            sync(hour, hourSelector, MAX_HOUR);
-            sync(min, minSelector, MAX_MIN);
-            Bounds bounds = this.localToScreen(this.getBoundsInLocal());
-            timeSelectorPopup.setAnchorX(bounds.getMaxX() - bounds.getWidth() + 40);
-            timeSelectorPopup.setAnchorY(bounds.getMaxY() - 10);
-            for (String stylesheet : this.getScene().getStylesheets()) {
-                if (stylesheet.contains("time.css")){
-                    timeSelectorPopup.show(this.getScene().getWindow());
-                    TransitionUtil.playScaleYTransition(timeSelectorHBox, 0.5D, 1D, Duration.millis(200));
-                    return;
-                }
-            }
-            this.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("css/time.css")).toString());
-            timeSelectorPopup.show(this.getScene().getWindow());
-            TransitionUtil.playScaleYTransition(timeSelectorHBox, 0.5D, 1D, Duration.millis(200));
-        });
-    }
-    private void sync(TextField timeTextField, ScrollPane timeScrollPane, int maxValue){
-        if (!timeTextField.getText().isBlank()){
-            if (timeTextField.isFocused()){
-                standardizationText(timeTextField, timeTextField.getText());
-            }
-            double hourPos = (maxValue - Integer.parseInt(timeTextField.getText())) * (1D / (maxValue + 1 - showRowCount));
-            timeScrollPane.setVvalue(hourPos);
-        }
-        setStyleForTimeLabel((VBox) (timeScrollPane.getContent()), timeTextField);
+    private void afterFXMLLoaded(){
+        initTimeSelectorPopup();
+        initTimeTextField(hour, MAX_HOUR);
+        initTimeTextField(min, MAX_MIN);
+        initTimeIco();
     }
 
-    private void setStyleForTimeLabel(VBox vBox, TextField textField){
-        for (Node child : vBox.getChildren()) {
-            Label label = (Label) child;
-            if (Objects.equals(label.getText(), textField.getText())){
-                if (!child.getStyleClass().contains(SELECTED_TIME_LABEL_XJW)){
-                    child.getStyleClass().add(SELECTED_TIME_LABEL_XJW);
-                }
-            }else {
-                child.getStyleClass().remove(SELECTED_TIME_LABEL_XJW);
-            }
-        }
-    }
-    private void initTimeTextField(TextField textField, int maxText,  ChangeListener<String> textChangeListener){
-        textField.setTextFormatter(interceptInput(textField, maxText));
-        textField.focusedProperty().addListener(standardizationTextListener(textField));
-        textField.setOnKeyPressed(directionKeyChangeTextHandler(textField));
-        textField.textProperty().addListener(textChangeListener);
-    }
-
-    private ScrollPane hourSelector;
-    private ScrollPane minSelector;
-    private static final int MAX_HOUR = 23;
-    private static final int MAX_MIN = 59;
-    private HBox timeSelectorHBox;
     /**
-     * 初始化时间选择器弹窗
+     * 初始化时间选择器
      */
     private void initTimeSelectorPopup(){
-        hourSelector = initTimeSelector(hour, MAX_HOUR);
-        minSelector = initTimeSelector(min, MAX_MIN);
-        timeSelectorHBox = new HBox();
-        ObservableList<Node> children = timeSelectorHBox.getChildren();
-        children.add(hourSelector);
-        children.add(minSelector);
-        timeSelectorHBox.setSpacing(2);
-        timeSelectorHBox.setPadding(new Insets(1));
-        timeSelectorHBox.getStyleClass().add("timeSelectorOuterXJW");
-        timeSelectorPopup.getContent().add(timeSelectorHBox);
+        timeSelectorPopup = new Popup();
+        TimeSelector timeSelector = new TimeSelector();
+        time = timeSelector.timeProperty();
+        TemporalAccessor initTime = TimeSelector.TIME_FORMATTER.parse(time.get());
+        hour.setText(DateTimeFormatter.ofPattern("HH").format(initTime));
+        min.setText(DateTimeFormatter.ofPattern("mm").format(initTime));
+        time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
+        timeSelectorPopup.getContent().add(timeSelector);
         timeSelectorPopup.setAutoHide(true);
     }
+    private void updateCompleteTimeTextField(String time){
+        TemporalAccessor times = TimeSelector.TIME_FORMATTER.parse(time);
+        isFromTime = true;
+        hour.setText(DateTimeFormatter.ofPattern("HH").format(times));
+        min.setText(DateTimeFormatter.ofPattern("mm").format(times));
+        isFromTime = false;
+    }
 
-    private ScrollPane initTimeSelector(TextField textField, int maxTime){
-        VBox selector = new VBox();
-        ObservableList<Node> children = selector.getChildren();
-        for (int i = maxTime; i >= 0 ; i--) {
-            Label label = new Label();
-            label.getStyleClass().add("timeLabelXJW");
-            if (i < 10){
-                label.setText("0" + i);
-            }else {
-                label.setText(String.valueOf(i));
+    private void initTimeIco(){
+        timeIco.getChildren().add(SVGLoader.load(getClass().getResource("images/time.svg")));
+        timeIco.setOnMouseClicked(e -> {
+            Bounds bounds = timeIco.localToScreen(timeIco.getBoundsInLocal());
+            timeSelectorPopup.setAnchorX(bounds.getMaxX() - 50);
+            timeSelectorPopup.setAnchorY(bounds.getMaxY() - 5);
+            timeSelectorPopup.show(this.getScene().getWindow());
+            FADE.play(timeSelectorPopup.getContent().get(0), 0.5D, 1D, Duration.millis(200));
+        });
+    }
+
+
+    /**
+     * 初始化时间文本框
+     * @param textField
+     * @param maxValue
+     */
+    private void initTimeTextField(TextField textField, int maxValue){
+        textField.setTextFormatter(interceptInput(textField, maxValue));
+        textField.focusedProperty().addListener(timeTextFieldBlurListener(textField));
+        textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
+        textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!isFromTime && newValue.length() == 2){
+                time.setValue(hour.getText() + ":" + min.getText());
             }
-            label.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                for (Node child : children) {
-                    child.getStyleClass().remove(SELECTED_TIME_LABEL_XJW);
-                }
-                if (!label.getStyleClass().contains(SELECTED_TIME_LABEL_XJW)){
-                    label.getStyleClass().add(SELECTED_TIME_LABEL_XJW);
-                }
-                textField.setText(label.getText());
-                if (textField == min){
-                    timeSelectorPopup.hide();
-                }
-            });
-            children.add(label);
-        }
-        ScrollPane scrollPane = new ScrollPane(selector);
-        scrollPane.getStyleClass().add("timeSelectorXJW");
-        scrollPane.setMaxHeight(30 * showRowCount);
-        return scrollPane;
+        });
     }
 
     /**
-     * 标准化时间字符串
+     * 拦截时间输入
      * @param textField
+     * @param maxValue
      * @return
      */
-    private ChangeListener<Boolean> standardizationTextListener(TextField textField) {
-        return (observableValue, aBoolean, isFocus) -> {
-            if (!isFocus){
-                standardizationText(textField, textField.getText());
-            }else if (textField == min){
-                minSelector.requestFocus();
-            }else{
-                hourSelector.requestFocus();
-            }
-        };
-    }
-
-    private void standardizationText(TextField textField, String time){
-        if (time.length() == 1){
-            textField.setText("0" + time);
-        }else if (!Objects.equals(textField.getText(), time)){
-            textField.setText(time);
-        }
-    }
-
-    /**
-     * 拦截输入
-     * @param textField
-     * @param max
-     * @return
-     */
-    private TextFormatter<TextFormatter.Change> interceptInput(TextField textField, int max) {
+    private TextFormatter<TextFormatter.Change> interceptInput(TextField textField, int maxValue) {
         return new TextFormatter<>(change -> {
             String temp;
             if (change.getText().matches("^\\d{0,2}")
-                    && (Integer.parseInt((temp = textField.getText().substring(0, change.getRangeStart()) + change.getText()).isBlank()? "0" : temp) <= max)
-                    && (change.getText().length() + textField.getText().length() - (change.getRangeEnd() - change.getRangeStart()) <= 2)
+                    && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= 2
+                    && parseInt(temp) <= maxValue
             ){
                 return change;
             }
@@ -261,31 +178,58 @@ public class Time extends FlowPane {
     }
 
     /**
-     * 通过方向键改变时间
+     * 按键处理器-通过上下键改变时间
      * @param textField
      * @return
      */
-    private EventHandler<? super KeyEvent> directionKeyChangeTextHandler(TextField textField){
+    private EventHandler<? super KeyEvent> keyPressedEventHandler(TextField textField, int maxValue){
         return (EventHandler<KeyEvent>) event -> {
-            if (!timeSelectorPopup.isShowing()){
-                switch (event.getCode()){
-                    case UP -> {
-                        if (textField == hour){
-                            standardizationText(textField, (Integer.parseInt(textField.getText()) + 1) % (MAX_HOUR + 1) + "");
-                        }else {
-                            standardizationText(textField, (Integer.parseInt(textField.getText()) + 1) % (MAX_MIN + 1) + "");
-                        }
-                    }
-                    case DOWN -> {
-                        if (textField == hour){
-                            standardizationText(textField, (Integer.parseInt(textField.getText()) - 1 + (MAX_HOUR + 1)) % (MAX_HOUR + 1) + "");
-                        }else {
-                            standardizationText(textField, (Integer.parseInt(textField.getText()) - 1 + (MAX_MIN + 1)) % (MAX_MIN + 1) + "");
-                        }
-                    }
+            int newValue;
+            switch (event.getCode()){
+                case UP -> newValue = parseInt(textField.getText()) + 1;
+                case DOWN -> newValue = parseInt(textField.getText()) - 1 + (maxValue + 1);
+                default -> {
+                    return;
                 }
+            }
+            standardizationTime(textField, String.valueOf(newValue % (maxValue + 1)));
+        };
+    }
+    /**
+     * 失焦监听器-失焦后标准化时间
+     * @param textField
+     * @return
+     */
+    private ChangeListener<Boolean> timeTextFieldBlurListener(TextField textField) {
+        return (observableValue, aBoolean, isFocus) -> {
+            if (!isFocus){
+                standardizationTime(textField, textField.getText());
+                timeBG.getStyleClass().remove(TIME_BACKGROUND_FOCUS);
+            }else {
+                timeBG.getStyleClass().add(TIME_BACKGROUND_FOCUS);
+            }
+            if (focusChangeListener != null){
+                focusChangeListener.changed(observableValue, aBoolean, isFocus);
             }
         };
     }
 
+    /**
+     * 标准化时间
+     * @param textField
+     * @param time
+     */
+    private void standardizationTime(TextField textField, String time){
+        textField.setText("0".repeat(2 - time.length()) + time);
+    }
+
+    private int parseInt(String s){
+        if (s == null || s.isBlank()){
+            return 0;
+        }
+        return Integer.parseInt(s);
+    }
+    public void setOnFocusChangeListener(ChangeListener<Boolean> changeListener){
+        focusChangeListener = changeListener;
+    }
 }

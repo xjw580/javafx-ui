@@ -1,0 +1,34 @@
+.label{
+    -fx-pref-width: 34;
+    -fx-pref-height: 25;
+    -fx-alignment: CENTER;
+    -fx-background-radius: 5;
+}
+.tile-pane{
+    -fx-alignment: TOP_CENTER;
+}
+.label:hover{
+    -fx-background-color: #cae1ff;
+}
+.selectedLabel{
+    -fx-background-color: #0075FF!important;
+    -fx-text-fill: white!important;
+}
+.scroll-pane{
+    -fx-padding: 0;
+    -fx-background: white;
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-background-insets: 0;/*防止点击时移动*/
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
+#yearsPane{
+    -fx-padding: 0 1 0 0;
+}
+#root{
+    -fx-background-color: white;
+    /*-fx-effect: dropshadow(gaussian, #b3d5ff, 10, 0, 0, 0)!important;*/
+    /*-fx-background-radius: 5;*/
+    /*-fx-padding: 0 2 0 2;*/
+}

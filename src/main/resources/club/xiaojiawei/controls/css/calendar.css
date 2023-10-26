@@ -1,0 +1,54 @@
+#calendar{
+    -fx-background-color: white;
+    -fx-background-radius:10;
+    -fx-effect: dropshadow(gaussian, #b3d5ff, 10, 0, 0, 0)!important;
+}
+#dateMsg{
+    -fx-font-weight: BOLD
+}
+#dateMsg:hover{
+    -fx-text-fill: #0075FF;
+}
+.bottomLabel{
+    -fx-text-fill: #0075FF;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+}
+.bottomLabel:hover{
+    -fx-background-color: #cae1ff;
+}
+.dayLabel, .dayLabelTitle{
+    -fx-alignment: CENTER;
+    -fx-pref-width: 30;
+    -fx-pref-height: 26;
+    -fx-background-radius: 5;
+    -fx-text-fill: rgb(128, 128, 128);
+}
+.blackFont{
+    -fx-text-fill: black;
+}
+.selectedDayLabel{
+    -fx-background-color: #0075FF!important;
+    -fx-text-fill: white!important;
+}
+.dayLabel:hover, #lastMonth:hover, #nextMonth:hover{
+    -fx-background-color: #cae1ff;
+}
+.scroll-pane{
+    -fx-padding: 0;
+    -fx-background: white;
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-background-insets: 0;/*防止点击时移动*/
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: never;
+}
+.dayPane{
+    -fx-alignment: TOP_CENTER;
+    -fx-max-width: 220;
+    -fx-min-width: 220;
+}
+#lastMonth, #nextMonth{
+    -fx-padding: 9 2 0 5;
+    -fx-background-radius: 5;
+}

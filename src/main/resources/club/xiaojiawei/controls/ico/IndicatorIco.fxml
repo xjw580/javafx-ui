@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Polygon?>
+<?import java.lang.*?>
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <Polygon>
+        <points>
+            <Double fx:value="0"/>
+            <Double fx:value="0"/>
+            <Double fx:value="6"/>
+            <Double fx:value="0"/>
+            <Double fx:value="3"/>
+            <Double fx:value="4"/>
+        </points>
+    </Polygon>
+</fx:root>

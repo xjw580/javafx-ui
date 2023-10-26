@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<fx:root type="HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateSelector.css, @css/common/scrollBar.css, @css/common/titlePane.css"
+         fx:id="root" prefWidth="180" prefHeight="222">
+    <ScrollPane fx:id="scrollPane">
+        <Accordion fx:id="yearsPane"/>
+    </ScrollPane>
+    <ScrollBar fx:id="scrollBar" orientation="VERTICAL" value="50"/>
+</fx:root>

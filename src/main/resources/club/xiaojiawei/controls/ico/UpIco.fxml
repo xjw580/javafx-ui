@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.SVGPath?>
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <SVGPath content="M0,7 7,0 14,7" style="-fx-fill: none;-fx-stroke: #0075FF;-fx-stroke-width: 2"/>
+</fx:root>

@@ -11,4 +11,11 @@ module club.xiaojiawei.javafx_ui {
 
     opens club.xiaojiawei.controls to javafx.fxml;
     opens club.xiaojiawei.test to javafx.fxml;
+    exports club.xiaojiawei.controls.ico;
+    opens club.xiaojiawei.controls.ico to javafx.fxml;
 }
+/**
+ * 主颜色：#0075FF
+ * hover颜色：#cae1ff
+ * effect颜色：#b3d5ff
+ */
