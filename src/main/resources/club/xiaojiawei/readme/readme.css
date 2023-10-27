@@ -1,0 +1,22 @@
+.hv-box{
+    -fx-padding: 0 0 0 20;
+    -fx-spacing: 25;
+}
+.title-one{
+    -fx-font-weight: bold;
+    -fx-font-size: 25;
+}
+.title-two{
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+}
+.title-three{
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+}
+.title-four{
+    -fx-font-weight: bold;
+}
+.titled-pane{
+    -fx-max-width: 150;
+}

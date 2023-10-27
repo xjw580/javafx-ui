@@ -36,9 +36,10 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
+                <excludes>
+                    <exclude>**/readme/**</exclude>
+                    <exclude>**/test/**</exclude>
+                </excludes>
             </resource>
         </resources>
         <plugins>
@@ -47,6 +48,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
+                    <excludes>
+                        <exclude>**/readme/**</exclude>
+                        <exclude>**/test/**</exclude>
+                    </excludes>
                     <source>17</source>
                     <target>17</target>
                 </configuration>

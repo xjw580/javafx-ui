@@ -9,9 +9,9 @@ import java.io.IOException;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/23 23:06
  */
-public class IndicatorIco extends AnchorPane {
+public class ArrowIco extends AnchorPane {
 
-    public IndicatorIco() {
+    public ArrowIco() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);

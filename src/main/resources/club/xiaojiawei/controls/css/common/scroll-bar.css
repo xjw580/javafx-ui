@@ -35,8 +35,8 @@
     -fx-background-insets : 5, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
-.scroll-bar:horizontal .thumb:hover,
-.scroll-bar:vertical .thumb:hover {
+.scroll-bar:hover:horizontal .thumb,
+.scroll-bar:hover:vertical .thumb {
     -fx-background-color :derive(#0075FF,0%);
     -fx-background-insets : 2, 0.0, 0.0;
     -fx-background-radius : 2.0em;

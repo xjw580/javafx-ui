@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/controls.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/enums.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/func/func.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/readme/Readme.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/readme/ReadmeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/readme/readme.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/utils/utils.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/button.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/check-box.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/combo-box.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/common.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/javafx-ui.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/progress.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/titled-pane.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/readme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/smartfox_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/IndicatorIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/ArrowIco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/custom/BaseTransitionFunc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/func/BaseTransitionFunc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/BaseTransitionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/BaseTransitionEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/PopupTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/PopupTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Calendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Calendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/DateSelector.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/DateSelector.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/scrollBar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/scroll-bar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/titlePane.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/DownIco.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/DownIco.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/IndicatorIco.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/ArrowIco.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/UpIco.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/UpIco.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package.html" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="C:\Users\zerg\.m2\repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../maven/maven-3.8.4" />
+        <option name="userSettingsFile" value="C:\Users\zerg\.m2\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2XLlKXIavQZIBrHMoiJkYr4AN47" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;graalvm-17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;S:/java_project/javafx-ui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\readme" />
+      <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei" />
+      <recent name="S:\java_project\javafx-ui\src\main\java\club\xiaojiawei\readme" />
+      <recent name="S:\java_project\javafx-ui\src\main\resources\readme" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Readme" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.readme.Readme" />
+      <module name="javafx-ui" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="club.xiaojiawei.readme.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Readme" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="" />
+      <created>1698416178131</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698416178131</updated>
+      <workItem from="1698416179211" duration="1226000" />
+      <workItem from="1698417414791" duration="43000" />
+      <workItem from="1698417466489" duration="1749000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

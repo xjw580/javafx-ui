@@ -4,9 +4,11 @@ import club.xiaojiawei.utils.ScrollUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 
@@ -58,6 +60,7 @@ public class DateSelector extends HBox {
     private Label selectedLabel;
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private boolean allowExec = true;
+    private final static String TITLED_PANE_UI = "titled-pane-ui";
     public DateSelector() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -72,6 +75,38 @@ public class DateSelector extends HBox {
     private void afterFXMLLoaded(){
         loadYearPane(LocalDate.now());
         initScrollBar();
+    }
+    /**
+     * 加载年面板
+     * @param nowDate
+     * @return
+     */
+    private TitledPane loadYearPane(LocalDate nowDate){
+        yearsPane.setOnScroll(event -> {
+            if (event.getDeltaY() > 0){
+//                往上滑
+                if (scrollPane.getVvalue() == 0D && Integer.parseInt(yearsPane.getPanes().get(0).getText()) > 0){
+                    yearsPane.getPanes().add(0, buildYearTitledPane(nowDate, Integer.parseInt(yearsPane.getPanes().get(0).getText()) - 1));
+                }
+            }else if (event.getDeltaY() < 0 && Integer.parseInt(yearsPane.getPanes().get(0).getText()) < 9999){
+//                往下滑
+                if (scrollPane.getVvalue() == 1D){
+                    yearsPane.getPanes().add(buildYearTitledPane(nowDate));
+                }
+            }
+        });
+        int endYear = nowDate.getYear() + 10;
+        TitledPane expandedPane = null;
+        for (int y = nowDate.getYear(); y < endYear; y++) {
+            TitledPane titledPane = buildYearTitledPane(nowDate, y);
+            if (y == nowDate.getYear()){
+                yearsPane.setExpandedPane(expandedPane = titledPane);
+            }
+            yearsPane.getPanes().add(titledPane);
+        }
+        yearsPane.prefWidthProperty().bind(this.widthProperty().subtract(18));
+        scrollPane.prefWidthProperty().bind(this.widthProperty().subtract(18));
+        return expandedPane;
     }
 
     /**
@@ -102,38 +137,6 @@ public class DateSelector extends HBox {
         });
     }
 
-    /**
-     * 加载年面板
-     * @param nowDate
-     * @return
-     */
-    private TitledPane loadYearPane(LocalDate nowDate){
-        yearsPane.setOnScroll(event -> {
-            if (event.getDeltaY() > 0){
-//                往上滑
-                if (scrollPane.getVvalue() == 0D){
-                    yearsPane.getPanes().add(0, buildYearTitledPane(nowDate, Integer.parseInt(yearsPane.getPanes().get(0).getText()) - 1));
-                }
-            }else if (event.getDeltaY() < 0){
-//                往下滑
-                if (scrollPane.getVvalue() == 1D){
-                    yearsPane.getPanes().add(buildYearTitledPane(nowDate));
-                }
-            }
-        });
-        int endYear = nowDate.getYear() + 10;
-        TitledPane expandedPane = null;
-        for (int y = nowDate.getYear(); y < endYear; y++) {
-            TitledPane titledPane = buildYearTitledPane(nowDate, y);
-            if (y == nowDate.getYear()){
-                yearsPane.setExpandedPane(expandedPane = titledPane);
-            }
-            yearsPane.getPanes().add(titledPane);
-        }
-        yearsPane.prefWidthProperty().bind(this.widthProperty().subtract(18));
-        scrollPane.prefWidthProperty().bind(this.widthProperty().subtract(18));
-        return expandedPane;
-    }
 
     /**
      * 创建月面板
@@ -177,6 +180,7 @@ public class DateSelector extends HBox {
      */
     private TitledPane buildYearTitledPane(LocalDate nowDate, int buildYear){
         TitledPane monthPane = new TitledPane();
+        monthPane.getStyleClass().add(TITLED_PANE_UI);
         monthPane.expandedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue){
                 ObservableList<TitledPane> panes = this.yearsPane.getPanes();

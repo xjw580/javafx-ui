@@ -1,0 +1,25 @@
+/*
+titled-pane - titled-pane-ui
+    title — HBox
+        text — Label
+        arrow-button — StackPane
+          arrow — StackPane
+    content — StackPane
+*/
+.titled-pane-ui > .title {
+    -fx-background-color: white;
+}
+.titled-pane-ui > .content{
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+.titled-pane-ui:focused > .title > .arrow-button > .arrow{
+    -fx-effect: null;
+    -fx-background-insets: 0;
+}
+.titled-pane-ui:expanded > .title > .arrow-button > .arrow{
+    -fx-background-color: #0075FF;
+}
+.titled-pane-ui > .title > .arrow-button > .arrow{
+    -fx-background-insets: 0;
+}

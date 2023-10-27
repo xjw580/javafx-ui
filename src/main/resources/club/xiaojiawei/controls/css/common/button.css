@@ -1,0 +1,83 @@
+/*Base*/
+.btn-ui{
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+    -fx-padding: 6 10 6 10;
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+.btn-ui:hover{
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
+}
+.btn-ui:pressed{
+    -fx-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1) !important;
+}
+/*Size*/
+.btn-ui-small{
+    -fx-padding: 3 5 3 5!important;
+}
+.btn-ui-big{
+    -fx-padding: 9 15 9 15!important;
+}
+/*style*/
+.btn-ui-normal{
+    -fx-background-color: #c7e3fa;
+}
+.btn-ui-normal:hover{
+    -fx-background-color: #aad6fc;
+}
+.btn-ui-normal-3d{
+    -fx-background-color: #c7e3fa;
+    -fx-effect: dropshadow(gaussian, #81c2f8, 2, 0, 0, 4) !important;
+}
+.btn-ui-normal-3d:pressed{
+    -fx-translate-y: 2;
+    -fx-background-color: #b2dafc;
+    -fx-effect: dropshadow(one-pass-box, #81c2f8, 2, 0, 0, 2) !important;
+}
+.btn-ui-success{
+    -fx-background-color: #9ecb9e;
+}
+.btn-ui-success:hover{
+    -fx-background-color: #80ce80;
+}
+.btn-ui-success-3d{
+    -fx-background-color: #9ecb9e;
+    -fx-effect: dropshadow(gaussian, #71b271, 2, 0, 0, 4) !important;
+}
+.btn-ui-success-3d:pressed{
+    -fx-translate-y: 2;
+    -fx-background-color: #80ce80;
+    -fx-effect: dropshadow(one-pass-box, #71b271, 2, 0, 0, 2) !important;
+}
+.btn-ui-warn{
+    -fx-background-color: #f8da9a;
+}
+.btn-ui-warn:hover{
+    -fx-background-color: #fccf6d;
+}
+.btn-ui-warn-3d{
+    -fx-background-color: #f8da9a;
+    -fx-effect: dropshadow(gaussian, #f6c250, 2, 0, 0, 4) !important;
+}
+.btn-ui-warn-3d:pressed{
+    -fx-translate-y: 2;
+    -fx-background-color: #fccf6d;
+    -fx-effect: dropshadow(one-pass-box, #f6c250, 2, 0, 0, 2) !important;
+}
+.btn-ui-error{
+    -fx-background-color: #f89494;
+}
+.btn-ui-error:hover{
+    -fx-background-color: #fa7a7a;
+}
+.btn-ui-error-3d{
+    -fx-background-color: #f89494;
+    -fx-effect: dropshadow(gaussian, #e75858, 2, 0, 0, 4) !important;
+}
+.btn-ui-error-3d:pressed{
+    -fx-translate-y: 2;
+    -fx-background-color: #fa7a7a;
+    -fx-effect: dropshadow(one-pass-box, #e75858, 2, 0, 0, 2) !important;
+}

@@ -1,0 +1,74 @@
+/*Base*/
+.combo-box-base.combo-box-ui  {
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+    -fx-border-width: 0;
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+}
+.combo-box-base.combo-box-ui:hover {
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
+}
+.combo-box-base.combo-box-ui:focused {
+    -fx-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1) !important;
+}
+
+/*Size*/
+.combo-box-ui-small .list-cell {
+    -fx-pref-height: 20!important;
+}
+.combo-box-ui-big .list-cell {
+    -fx-pref-height: 40!important;
+}
+
+/*Color*/
+.combo-box-base.combo-box-ui-normal{
+    -fx-background-color: #c7e3fa;
+}
+.combo-box-base.combo-box-ui-normal:hover, .combo-box-base.combo-box-ui-normal:focused{
+    -fx-background-color: #aad6fc;
+}
+.combo-box-base.combo-box-ui-success{
+    -fx-background-color: #9ecb9e;
+}
+.combo-box-base.combo-box-ui-success:hover, .combo-box-base.combo-box-ui-success:focused  {
+    -fx-background-color: #80ce80;
+}
+.combo-box-base.combo-box-ui-warn{
+    -fx-background-color: #f8da9a;
+}
+.combo-box-base.combo-box-ui-warn:hover, .combo-box-base.combo-box-ui-warn:focused  {
+    -fx-background-color: #fccf6d;
+}
+.combo-box-base.combo-box-ui-error{
+    -fx-background-color: #f89494;
+}
+.combo-box-base.combo-box-ui-error:hover, .combo-box-base.combo-box-ui-error:focused {
+    -fx-background-color: #fa7a7a;
+}
+
+
+.combo-box-ui .list-cell {
+    -fx-pref-height: 30;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+}
+.combo-box-ui .combo-box-popup .list-view {
+    -fx-padding: 3 0 3 3;
+    -fx-background-color: white, white;
+    -fx-background-radius: 0 0 5 5;
+    -fx-effect: dropshadow( three-pass-box , #cae1ff , 10, 0 , 0 , 0 );
+}
+.combo-box-ui .combo-box-popup .list-view .list-cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 0;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+}
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:selected, .combo-box-ui  .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: #0075FF;
+    -fx-text-fill: white;
+}
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: #cae1ff;
+}

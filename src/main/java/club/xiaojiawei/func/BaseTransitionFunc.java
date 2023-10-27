@@ -1,4 +1,4 @@
-package club.xiaojiawei.custom;
+package club.xiaojiawei.func;
 
 import javafx.scene.Node;
 import javafx.util.Duration;

@@ -1,6 +1,6 @@
 package club.xiaojiawei.enums;
 
-import club.xiaojiawei.custom.BaseTransitionFunc;
+import club.xiaojiawei.func.BaseTransitionFunc;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;

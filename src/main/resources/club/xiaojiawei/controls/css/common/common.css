@@ -1,0 +1,14 @@
+.bg-hover-ui{
+    -fx-background-radius: 5;
+}
+.bg-hover-ui:hover{
+    -fx-background-color: #cae1ff;
+}
+.bg-ui{
+    -fx-background-color: #0075FF!important;
+    -fx-text-fill: white!important;
+}
+.radius-ui{
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}

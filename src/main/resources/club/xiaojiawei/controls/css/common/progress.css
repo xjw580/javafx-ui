@@ -1,0 +1,21 @@
+.progress-bar-ui {
+    -fx-accent: #0075FF;
+    -fx-pref-height: 4;
+}
+.progress-bar-ui .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+.progress-bar-ui > .track {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-box-border: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+}
+.progress-indicator-ui{
+    -fx-accent: #0075FF;
+}
+.progress-indicator-ui .percentage {
+    -fx-fill:null;
+}

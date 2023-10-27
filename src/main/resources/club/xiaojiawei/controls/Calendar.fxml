@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import club.xiaojiawei.controls.ico.DownIco?>
-<?import club.xiaojiawei.controls.ico.IndicatorIco?>
+<?import club.xiaojiawei.controls.ico.ArrowIco?>
 <?import club.xiaojiawei.controls.ico.UpIco?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -10,7 +10,7 @@
     <HBox spacing="65" alignment="CENTER">
         <Label fx:id="dateMsg" contentDisplay="RIGHT">
             <graphic>
-                <IndicatorIco/>
+                <ArrowIco/>
             </graphic>
         </Label>
         <HBox spacing="10" translateY="3" fx:id="icoBox">

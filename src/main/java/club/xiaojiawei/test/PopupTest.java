@@ -32,6 +32,7 @@ public class PopupTest extends Application {
             Popup popup = new Popup();
             popup.getContent().add(buildFlowPane());
             popup.setAnchorX(600);
+            popup.setAnchorY(1500);
             popup.show(primaryStage);
         });
     }
