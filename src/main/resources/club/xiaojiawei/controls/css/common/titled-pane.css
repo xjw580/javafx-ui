@@ -8,6 +8,7 @@ titled-pane - titled-pane-ui
 */
 .titled-pane-ui > .title {
     -fx-background-color: white;
+    -fx-alignment: CENTER_LEFT;
 }
 .titled-pane-ui > .content{
     -fx-background-color: white;
@@ -22,4 +23,11 @@ titled-pane - titled-pane-ui
 }
 .titled-pane-ui > .title > .arrow-button > .arrow{
     -fx-background-insets: 0;
+}
+/*Size*/
+.titled-pane-ui-big > .title{
+    -fx-pref-height: 36!important;
+}
+.titled-pane-ui-big > .title > .text{
+    -fx-translate-y: -6!important;
 }

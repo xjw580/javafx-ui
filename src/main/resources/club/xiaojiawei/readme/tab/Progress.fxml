@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      styleClass="hv-box"
+      fx:controller="club.xiaojiawei.readme.ReadmeController"
+      translateY="20"
+      xmlns:fx="http://javafx.com/fxml">
+    <Label text="基类：progress-bar-ui、progress-indicator-ui" styleClass="title-three"/>
+    <VBox styleClass="hv-box">
+        <ProgressBar fx:id="progressBarUI" progress="0" styleClass="progress-bar-ui" prefWidth="800"/>
+        <ProgressBar styleClass="progress-bar-ui" prefWidth="800"/>
+        <ProgressIndicator fx:id="progressIndicatorUI" progress="0" styleClass="progress-indicator-ui"/>
+        <ProgressIndicator styleClass="progress-indicator-ui"/>
+    </VBox>
+</VBox>

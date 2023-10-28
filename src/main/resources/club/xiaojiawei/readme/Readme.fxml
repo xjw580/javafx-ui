@@ -4,269 +4,97 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.*?>
-<?import club.xiaojiawei.controls.ico.ArrowIco?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             stylesheets="@../controls/css/common/javafx-ui.css, @readme.css"
-            fx:controller="club.xiaojiawei.ReadmeController"
+            fx:controller="club.xiaojiawei.readme.ReadmeController"
             prefWidth="1000.0" prefHeight="1000" style="-fx-border-color: #f4f4f4;">
     <VBox styleClass="hv-box" style="-fx-border-color: #f4f4f4;">
         <Label text="样式类：" styleClass="title-one"/>
-        <!--Button-->
-<!--        <VBox styleClass="hv-box">-->
-<!--            <Label text="Button（btn-ui）" styleClass="title-two"/>-->
-<!--            <VBox styleClass="hv-box">-->
-<!--                <Label text="更改大小（依次为）：btn-ui-small、btn-ui、btn-ui-big" styleClass="title-three"/>-->
-<!--                <HBox styleClass="hv-box" alignment="CENTER_LEFT">-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-big"/>-->
-<!--                </HBox>-->
-<!--                <Label text="更改颜色（依次为）：btn-ui、btn-ui-normal、btn-ui-success、btn-ui-warn、btn-ui-error" styleClass="title-three"/>-->
-<!--                <HBox styleClass="hv-box" alignment="CENTER_LEFT">-->
-<!--                    <Button text="Hello" styleClass="btn-ui"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-success"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-error"/>-->
-<!--                </HBox>-->
-<!--                <Label text="更改3D立体样式（依次为）：btn-ui-normal、btn-ui-normal-3d" styleClass="title-three"/>-->
-<!--                <HBox styleClass="hv-box" alignment="CENTER_LEFT">-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d"/>-->
-<!--                </HBox>-->
-<!--                <Label text="所有样式" styleClass="title-three"/>-->
-<!--                <HBox styleClass="hv-box" alignment="CENTER_LEFT">-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-success, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-error, btn-ui-small"/>-->
-<!--                    <Separator orientation="VERTICAL"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d, btn-ui-small"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-small"/>-->
-<!--                </HBox>-->
-<!--                <HBox styleClass="hv-box" alignment="CENTER_LEFT">-->
-<!--                    <Button text="Hello" styleClass="btn-ui"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-success"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-error"/>-->
-<!--                    <Separator orientation="VERTICAL"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d"/>-->
-<!--                </HBox>-->
-<!--                <HBox styleClass="hv-box" alignment="CENTER_LEFT">-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-big"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal, btn-ui-big"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-success, btn-ui-big"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn, btn-ui-big"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-error, btn-ui-big"/>-->
-<!--                    <Separator orientation="VERTICAL"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-big"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d, btn-ui-big"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d, btn-ui-big"/>-->
-<!--                    <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-big"/>-->
-<!--                </HBox>-->
-<!--            </VBox>-->
-<!--        </VBox>-->
-<!--        &lt;!&ndash;ComboBox&ndash;&gt;-->
-<!--        <VBox styleClass="hv-box">-->
-<!--            <Label text="ComboBox（combo-box-ui）" styleClass="title-two"/>-->
-<!--            <VBox styleClass="hv-box">-->
-<!--                <HBox styleClass="hv-box">-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-small" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal, combo-box-ui-small" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-success, combo-box-ui-small" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-warn, combo-box-ui-small" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-error, combo-box-ui-small" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                </HBox>-->
-<!--                <HBox styleClass="hv-box">-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-success" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-warn" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-error" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                </HBox>-->
-<!--                <HBox styleClass="hv-box">-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-big" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal, combo-box-ui-big" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-success, combo-box-ui-big" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-warn, combo-box-ui-big" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                    <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-error, combo-box-ui-big" value="杀死那只知更鸟">-->
-<!--                        <items>-->
-<!--                            <FXCollections fx:factory="observableArrayList">-->
-<!--                                <String fx:value="太空漫游2001"/>-->
-<!--                                <String fx:value="许三观卖血记"/>-->
-<!--                                <String fx:value="杀死那只知更鸟"/>-->
-<!--                                <String fx:value="无人生还"/>-->
-<!--                                <String fx:value="白夜行"/>-->
-<!--                            </FXCollections>-->
-<!--                        </items>-->
-<!--                    </ComboBox>-->
-<!--                </HBox>-->
-<!--            </VBox>-->
-<!--        </VBox>-->
-<!--        &lt;!&ndash;TitledPane&ndash;&gt;-->
-<!--        <VBox styleClass="hv-box">-->
-<!--            <Label text="TitledPane（titled-pane-ui）" styleClass="title-two"/>-->
-<!--            <VBox styleClass="hv-box">-->
-<!--                <TitledPane text="TitledPane" styleClass="titled-pane-ui">-->
-<!--                    <VBox>-->
-<!--                        <Label text="Hello"/>-->
-<!--                        <Label text="太空漫游2001"/>-->
-<!--                        <Label text="许三观卖血记"/>-->
-<!--                        <Label text="杀死那只知更鸟"/>-->
-<!--                        <Label text="无人生还"/>-->
-<!--                        <Label text="白夜行"/>-->
-<!--                    </VBox>-->
-<!--                </TitledPane>-->
-<!--            </VBox>-->
-<!--        </VBox>-->
+        <VBox styleClass="hv-box">
+            <Label text="Button（btn-ui）" styleClass="title-two"/>
+            <VBox styleClass="hv-box">
+                <Label text="更改大小（依次为）：btn-ui-small、btn-ui、btn-ui-big" styleClass="title-three"/>
+                <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-big"/>
+                </HBox>
+                <Label text="更改颜色（依次为）：btn-ui、btn-ui-normal、btn-ui-success、btn-ui-warn、btn-ui-error" styleClass="title-three"/>
+                <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                    <Button text="Hello" styleClass="btn-ui"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-success"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-error"/>
+                </HBox>
+                <Label text="更改3D立体样式（依次为）：btn-ui-normal、btn-ui-normal-3d" styleClass="title-three"/>
+                <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d"/>
+                </HBox>
+                <Label text="所有样式" styleClass="title-three"/>
+                <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-success, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-error, btn-ui-small"/>
+                    <Separator orientation="VERTICAL"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d, btn-ui-small"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-small"/>
+                </HBox>
+                <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                    <Button text="Hello" styleClass="btn-ui"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-success"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-error"/>
+                    <Separator orientation="VERTICAL"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d"/>
+                </HBox>
+                <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-big"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal, btn-ui-big"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-success, btn-ui-big"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn, btn-ui-big"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-error, btn-ui-big"/>
+                    <Separator orientation="VERTICAL"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-big"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d, btn-ui-big"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d, btn-ui-big"/>
+                    <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-big"/>
+                </HBox>
+            </VBox>
+        </VBox>
+        <!--ComboBox-->
+        <VBox styleClass="hv-box">
+            <Label text="ComboBox（combo-box-ui）" styleClass="title-two"/>
+            <VBox styleClass="hv-box">
+
+            </VBox>
+        </VBox>
+        <!--TitledPane-->
+        <VBox styleClass="hv-box">
+            <Label text="TitledPane（titled-pane-ui）" styleClass="title-two"/>
+            <VBox styleClass="hv-box">
+                <TitledPane text="TitledPane" styleClass="titled-pane-ui">
+                    <VBox>
+                        <Label text="Hello"/>
+                        <Label text="太空漫游2001"/>
+                        <Label text="许三观卖血记"/>
+                        <Label text="杀死那只知更鸟"/>
+                        <Label text="无人生还"/>
+                        <Label text="白夜行"/>
+                    </VBox>
+                </TitledPane>
+            </VBox>
+        </VBox>
         <!--Progress-->
         <VBox styleClass="hv-box">
             <Label text="Progress（progress-bar-ui和progress-indicator-ui）" styleClass="title-two"/>

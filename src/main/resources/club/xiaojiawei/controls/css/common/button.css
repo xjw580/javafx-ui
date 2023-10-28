@@ -81,3 +81,6 @@
     -fx-background-color: #fa7a7a;
     -fx-effect: dropshadow(one-pass-box, #e75858, 2, 0, 0, 2) !important;
 }
+.label{
+    -fx-background-color: rgba(0, 117, 255, 0.2);
+}

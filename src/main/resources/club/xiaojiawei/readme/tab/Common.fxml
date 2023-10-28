@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      styleClass="hv-box"
+      translateY="20"
+      xmlns:fx="http://javafx.com/fxml">
+    <Label text="hover背景色类：bg-hover-ui" styleClass="title-three"/>
+    <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        <Label styleClass="bg-hover-ui" text="hover me"><tooltip><Tooltip text="bg-hover-ui"/></tooltip></Label>
+    </HBox>
+    <Label text="背景色类：bg-ui" styleClass="title-three"/>
+    <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        <Label styleClass="bg-ui" text="me"><tooltip><Tooltip text="bg-ui"/></tooltip></Label>
+    </HBox>
+    <Label text="圆角类：radius-ui" styleClass="title-three"/>
+    <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        <Label styleClass="bg-ui, radius-ui" text="me"><tooltip><Tooltip text="radius-ui"/></tooltip></Label>
+    </HBox>
+    <Label text="大圆角类：radius-ui-big" styleClass="title-three"/>
+    <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        <Label styleClass="bg-ui, radius-ui-big" text="me"><tooltip><Tooltip text="radius-ui-big"/></tooltip></Label>
+    </HBox>
+</VBox>

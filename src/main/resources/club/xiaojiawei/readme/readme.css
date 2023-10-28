@@ -20,3 +20,6 @@
 .titled-pane{
     -fx-max-width: 150;
 }
+.bg-hover-ui, .bg-ui{
+    -fx-padding: 10 25 10 25;
+}

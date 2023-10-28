@@ -29,6 +29,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @date 2023/10/23 14:38
  */
 public class Date extends AnchorPane {
+//    TODO StringProperty改为ObjectProperty，其他日期时间组件也要改
     /**
      * 默认当前日期
      */

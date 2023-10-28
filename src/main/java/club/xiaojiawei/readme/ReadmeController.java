@@ -29,6 +29,6 @@ public class ReadmeController implements Initializable {
         scheduledExecutorService.scheduleWithFixedDelay(() -> Platform.runLater(() -> {
             progressBarUI.setProgress(progressBarUI.getProgress() % 1 + 0.001);
             progressIndicatorUI.setProgress(progressIndicatorUI.getProgress() % 1 + 0.001);
-        }), 1000, 2, TimeUnit.MILLISECONDS);
+        }), 100, 2, TimeUnit.MILLISECONDS);
     }
 }

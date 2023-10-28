@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      styleClass="hv-box"
+      translateY="20"
+      xmlns:fx="http://javafx.com/fxml">
+    <Label text="基类：check-box-ui" styleClass="title-three"/>
+    <HBox styleClass="hv-box">
+        <CheckBox selected="true" styleClass="check-box-ui" text="梅西"><tooltip><Tooltip text="check-box-ui"/></tooltip></CheckBox>
+    </HBox>
+    <Label text="形状类：check-box-ui-circle" styleClass="title-three"/>
+    <HBox styleClass="hv-box">
+        <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="C罗"><tooltip><Tooltip text="check-box-ui, check-box-ui-circle"/></tooltip></CheckBox>
+    </HBox>
+</VBox>
