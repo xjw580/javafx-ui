@@ -5,10 +5,15 @@
     -fx-background-radius: 3;
     -fx-border-radius:3;
 }
+
 .check-box-ui:selected .mark {
     -fx-background-color: white;
 }
+.check-box-ui:hover .box{
+    -fx-border-color: #0075FF;
+}
 .check-box-ui:selected .box {
+    -fx-border-color: #0075FF;
     -fx-background-color: #0075FF;
 }
 
@@ -16,10 +21,9 @@
     -fx-background-radius: 10!important;
     -fx-border-radius:10!important;
 }
-.check-box-ui-circle:selected .mark {
-    -fx-background-color: transparent!important;
+.check-box-ui-circle:hover .box {
+    -fx-border-color: #0075FF;
 }
 .check-box-ui-circle:selected .box {
     -fx-border-color: #0075FF!important;
-    -fx-background-insets: 4 4 4!important;
 }

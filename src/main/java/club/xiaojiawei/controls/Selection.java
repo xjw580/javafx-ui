@@ -1,12 +1,17 @@
 package club.xiaojiawei.controls;
 
 import javafx.beans.DefaultProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -20,19 +25,31 @@ import java.util.Objects;
 @DefaultProperty("selectGroup")
 public class Selection extends AnchorPane {
     private Parent selectGroup;
-//    TODO ObjectProperty<Node>改为SingleSelectionModel<Node>
-    private final ObjectProperty<Node> selectedNodeProperty = new SimpleObjectProperty<>();
+    private final ObjectProperty<Node> selectedItemProperty = new SimpleObjectProperty<>();
+    private final IntegerProperty selectedIndexProperty = new SimpleIntegerProperty(-1);
 
-    public Node getSelectedNodeProperty() {
-        return selectedNodeProperty.get();
+    public Node getSelectedItemProperty() {
+        return selectedItemProperty.get();
     }
 
-    public ObjectProperty<Node> selectedNodePropertyProperty() {
-        return selectedNodeProperty;
+    public ObjectProperty<Node> selectedItemPropertyProperty() {
+        return selectedItemProperty;
     }
 
-    public void setSelectedNodeProperty(Node selectedNodeProperty) {
-        this.selectedNodeProperty.set(selectedNodeProperty);
+    public void setSelectedItemProperty(Node selectedItemProperty) {
+        this.selectedItemProperty.set(selectedItemProperty);
+    }
+
+    public int getSelectedIndexProperty() {
+        return selectedIndexProperty.get();
+    }
+
+    public IntegerProperty selectedIndexPropertyProperty() {
+        return selectedIndexProperty;
+    }
+
+    public void setSelectedIndexProperty(int selectedIndexProperty) {
+        this.selectedIndexProperty.set(selectedIndexProperty);
     }
 
     public Parent getSelectGroup() {
@@ -45,7 +62,7 @@ public class Selection extends AnchorPane {
             node.getStyleClass().add("bg-hover-ui");
             node.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                 event.consume();
-                selectNode(node);
+                select(node);
                 selectGroup.fireEvent(event);
             });
         }
@@ -64,9 +81,9 @@ public class Selection extends AnchorPane {
     }
     public void select(Node node){
         ObservableList<Node> childrenUnmodifiable = selectGroup.getChildrenUnmodifiable();
-        for (Node node1 : childrenUnmodifiable) {
-            if (Objects.equals(node1, node)){
-                selectNode(node);
+        for (int i = 0; i < childrenUnmodifiable.size(); i++) {
+            if (Objects.equals(node, childrenUnmodifiable.get(i))){
+                selectNode(childrenUnmodifiable.get(i), i);
             }
         }
     }
@@ -74,18 +91,24 @@ public class Selection extends AnchorPane {
         ObservableList<Node> childrenUnmodifiable = selectGroup.getChildrenUnmodifiable();
         for (int i = 0; i < childrenUnmodifiable.size(); i++) {
             if (i == index){
-                selectNode(childrenUnmodifiable.get(i));
+                selectNode(childrenUnmodifiable.get(i), i);
             }
         }
     }
-    private void selectNode(Node node){
-        clearSelected();
-        selectedNodeProperty.set(node);
+    private void selectNode(Node node, int index){
+        clearStyle();
+        selectedItemProperty.set(node);
+        selectedIndexProperty.set(index);
         node.getStyleClass().add("bg-ui");
     }
-    public void clearSelected(){
-        if (selectedNodeProperty.get() != null){
-            selectedNodeProperty.get().getStyleClass().remove("bg-ui");
+    private void clearStyle(){
+        if (selectedItemProperty.get() != null){
+            selectedItemProperty.get().getStyleClass().remove("bg-ui");
         }
+    }
+    public void clearSelected(){
+        clearStyle();
+        selectedItemProperty.set(null);
+        selectedIndexProperty.set(-1);
     }
 }

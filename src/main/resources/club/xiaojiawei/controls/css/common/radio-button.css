@@ -1,0 +1,15 @@
+.radio-button-ui .radio {
+    -fx-border-width: 1px;
+    -fx-border-color:grey;
+    -fx-background-color: white;
+    -fx-border-radius: 15px;
+}
+.radio-button-ui .dot {
+    -fx-background-insets: 0;
+}
+.radio-button-ui:selected .radio, .radio-button-ui:hover .radio{
+    -fx-border-color: #0075FF;
+}
+.radio-button-ui:selected .dot {
+    -fx-background-color: #0075FF;
+}

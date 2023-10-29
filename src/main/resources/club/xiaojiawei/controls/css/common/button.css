@@ -34,7 +34,7 @@
 .btn-ui-normal-3d:pressed{
     -fx-translate-y: 2;
     -fx-background-color: #b2dafc;
-    -fx-effect: dropshadow(one-pass-box, #81c2f8, 2, 0, 0, 2) !important;
+    -fx-effect: dropshadow(gaussian, #81c2f8, 2, 0, 0, 2) !important;
 }
 .btn-ui-success{
     -fx-background-color: #9ecb9e;
@@ -49,7 +49,7 @@
 .btn-ui-success-3d:pressed{
     -fx-translate-y: 2;
     -fx-background-color: #80ce80;
-    -fx-effect: dropshadow(one-pass-box, #71b271, 2, 0, 0, 2) !important;
+    -fx-effect: dropshadow(gaussian, #71b271, 2, 0, 0, 2) !important;
 }
 .btn-ui-warn{
     -fx-background-color: #f8da9a;
@@ -64,7 +64,7 @@
 .btn-ui-warn-3d:pressed{
     -fx-translate-y: 2;
     -fx-background-color: #fccf6d;
-    -fx-effect: dropshadow(one-pass-box, #f6c250, 2, 0, 0, 2) !important;
+    -fx-effect: dropshadow(gaussian, #f6c250, 2, 0, 0, 2) !important;
 }
 .btn-ui-error{
     -fx-background-color: #f89494;
@@ -79,8 +79,5 @@
 .btn-ui-error-3d:pressed{
     -fx-translate-y: 2;
     -fx-background-color: #fa7a7a;
-    -fx-effect: dropshadow(one-pass-box, #e75858, 2, 0, 0, 2) !important;
-}
-.label{
-    -fx-background-color: rgba(0, 117, 255, 0.2);
+    -fx-effect: dropshadow(gaussian, #e75858, 2, 0, 0, 2) !important;
 }

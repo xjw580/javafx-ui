@@ -8,7 +8,7 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       styleClass="hv-box"
-      fx:controller="club.xiaojiawei.readme.ReadmeController"
+      fx:controller="club.xiaojiawei.readme.ProgressController"
       translateY="20"
       xmlns:fx="http://javafx.com/fxml">
     <Label text="基类：progress-bar-ui、progress-indicator-ui" styleClass="title-three"/>

@@ -2,16 +2,14 @@ package club.xiaojiawei.readme;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
- * @date 2023/10/26 20:31
+ * @date 2023/10/28 8:57
  */
 public class Readme extends Application {
 
@@ -21,8 +19,7 @@ public class Readme extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Readme.fxml")));
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Readme.fxml")));
         primaryStage.setScene(scene);
         primaryStage.show();
     }
