@@ -4,7 +4,7 @@
 
 
 
-## 组件展示
+## 部分组件展示（全部组件和样式需要启动Readme类查看）
 
 #### `Switch`
 
@@ -46,7 +46,7 @@
 
 ##### 0.0.7-SNAPSHOT
 
-- 新增Readme类，启动改类后可查看所有样式和自定义组件
+- 新增Readme类，启动该类后可查看所有样式和自定义组件
 - 新增 Button、CheckBox、ComboBox、Progress、ScrollBar、TitledPane、TabPane、RadioButton 样式
 - 新增Selection组件
 - 优化日期时间相关组件
