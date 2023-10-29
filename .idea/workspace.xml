@@ -4,23 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="优化readme">
+    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="修正描述">
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/JavaFXUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/accordion.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Accordion.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Calendar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Time.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/TimeSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/TimeSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CalendarTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateSelectorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateSelectorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/TimeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/TimeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/utils/ScrollUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/utils/ScrollUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/button.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/button.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/javafx-ui.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/javafx-ui.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/tab-pane.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/tab-pane.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/dateSelector.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/dateSelector.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/RadioButton.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/RadioButton.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TabPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TabPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Button.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Button.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +30,9 @@
         <option value="JavaFX Controls" />
         <option value="package.html" />
         <option value="CSS File" />
-        <option value="FxmlFile" />
-        <option value="Class" />
         <option value="JavaFXControls" />
+        <option value="Class" />
+        <option value="FxmlFile" />
         <option value="FXML Tab" />
       </list>
     </option>
@@ -99,7 +92,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "cn.yiiguxing.plugin.translate",
+    "settings.editor.selected.configurable": "fileTemplates",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -115,19 +108,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Readme">
-    <configuration name="AnimateTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.AnimateTest" />
-      <module name="javafx-ui" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="club.xiaojiawei.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="DateTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.DateTest" />
       <module name="javafx-ui" />
@@ -147,6 +127,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="club.xiaojiawei.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JavaFXUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.JavaFXUI" />
+      <module name="javafx-ui" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="club.xiaojiawei.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -196,10 +189,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Readme" />
+        <item itemvalue="Application.JavaFXUI" />
         <item itemvalue="Application.DateTimeTest" />
         <item itemvalue="Application.DateTest" />
         <item itemvalue="Application.TimeTest" />
-        <item itemvalue="Application.AnimateTest" />
       </list>
     </recent_temporary>
   </component>
@@ -241,7 +234,8 @@
       <workItem from="1698570061379" duration="268000" />
       <workItem from="1698570951957" duration="55000" />
       <workItem from="1698571013371" duration="783000" />
-      <workItem from="1698573401659" duration="14045000" />
+      <workItem from="1698573401659" duration="15365000" />
+      <workItem from="1698595351524" duration="3787000" />
     </task>
     <task id="LOCAL-00001" summary="新增 button、checkBox、comboBox、progress、scrollBar、titledPane 样式">
       <option name="closed" value="true" />
@@ -267,7 +261,23 @@
       <option name="project" value="LOCAL" />
       <updated>1698567788591</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="0.0.7-SNAPSHOT&#10;&#10;- 新增Readme类，启动改类后可查看所有样式和自定义组件&#10;- 新增 Button、CheckBox、ComboBox、Progress、ScrollBar、TitledPane、TabPane、RadioButton 样式&#10;- 新增Selection组件&#10;- 优化日期时间相关组件">
+      <option name="closed" value="true" />
+      <created>1698594890034</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698594890034</updated>
+    </task>
+    <task id="LOCAL-00005" summary="修正描述">
+      <option name="closed" value="true" />
+      <created>1698595045984</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698595045984</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +297,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="新增 button、checkBox、comboBox、progress、scrollBar、titledPane 样式" />
     <MESSAGE value="优化readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化readme" />
+    <MESSAGE value="0.0.7-SNAPSHOT&#10;&#10;- 新增Readme类，启动改类后可查看所有样式和自定义组件&#10;- 新增 Button、CheckBox、ComboBox、Progress、ScrollBar、TitledPane、TabPane、RadioButton 样式&#10;- 优化日期时间相关组件" />
+    <MESSAGE value="0.0.7-SNAPSHOT&#10;&#10;- 新增Readme类，启动改类后可查看所有样式和自定义组件&#10;- 新增 Button、CheckBox、ComboBox、Progress、ScrollBar、TitledPane、TabPane、RadioButton 样式&#10;- 新增Selection组件&#10;- 优化日期时间相关组件" />
+    <MESSAGE value="修正描述" />
+    <option name="LAST_COMMIT_MESSAGE" value="修正描述" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

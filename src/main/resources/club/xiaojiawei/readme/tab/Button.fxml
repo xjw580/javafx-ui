@@ -31,10 +31,10 @@
         <Button text="Hello" styleClass="btn-ui, btn-ui-warn, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-warn, btn-ui-small"/></tooltip></Button>
         <Button text="Hello" styleClass="btn-ui, btn-ui-error, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-error, btn-ui-small"/></tooltip></Button>
         <Separator orientation="VERTICAL"/>
-        <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-normal-3d, btn-ui-small"/></tooltip></Button>
+        <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-small" disable="true"><tooltip><Tooltip text="btn-ui, btn-ui-normal-3d, btn-ui-small"/></tooltip></Button>
         <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-success-3d, btn-ui-small"/></tooltip></Button>
         <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-warn-3d, btn-ui-small"/></tooltip></Button>
-        <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-error-3d, btn-ui-small"/></tooltip></Button>
+        <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-small" disable="true"><tooltip><Tooltip text="btn-ui, btn-ui-error-3d, btn-ui-small"/></tooltip></Button>
     </HBox>
     <HBox styleClass="hv-box" alignment="CENTER_LEFT">
         <Button text="Hello" styleClass="btn-ui"><tooltip><Tooltip text="btn-ui"/></tooltip></Button>

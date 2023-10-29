@@ -41,6 +41,9 @@
 .tab-pane-ui:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
     -fx-border-color: transparent;
 }
+.tab-pane-ui > .tab-content-area{
+    -fx-background-color: white;
+}
 /*Size*/
 .tab-pane-ui-small .tab{
     -fx-padding: 0 6 4 6!important;
@@ -55,5 +58,5 @@
 }
 .tab-pane-ui-small .control-buttons-tab .tab-down-button{
     -fx-background-radius: 3!important;
-    -fx-padding: 12 8.5 12 8.5;
+    -fx-padding: 12 8.5 12 8.5!important;
 }

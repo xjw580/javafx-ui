@@ -12,13 +12,14 @@
            xmlns:fx="http://javafx.com/fxml"
            stylesheets="@../controls/css/common/javafx-ui.css, @readme.css"
            fx:controller="club.xiaojiawei.readme.ReadmeController"
-           prefHeight="800.0" prefWidth="1100.0" dividerPositions="0.15,1">
+           prefHeight="600.0" prefWidth="1000.0" dividerPositions="0.15,1">
     <ScrollPane fx:id="left" style="-fx-background: white">
         <Accordion prefWidth="${left.width}" expandedPane="$style" fx:id="accordion">
             <panes>
                 <TitledPane fx:id="style" text="样式类" styleClass="titled-pane-ui, titled-pane-ui-big">
                     <Selection fx:id="styleGroup">
                         <VBox onMouseClicked="#styleClick">
+                            <Label text="Accordion" prefWidth="${left.width}"/>
                             <Label text="ComboBox" prefWidth="${left.width}"/>
                             <Label text="Button" prefWidth="${left.width}"/>
                             <Label text="CheckBox" prefWidth="${left.width}"/>

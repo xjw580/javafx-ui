@@ -1,0 +1,25 @@
+.accordion-ui .titled-pane > .title {
+    -fx-background-color: white;
+    -fx-alignment: CENTER_LEFT;
+}
+.accordion-ui .titled-pane > .content{
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+.accordion-ui .titled-pane:focused > .title > .arrow-button > .arrow{
+    -fx-effect: null;
+    -fx-background-insets: 0;
+}
+.accordion-ui .titled-pane:expanded > .title > .arrow-button > .arrow{
+    -fx-background-color: #0075FF;
+}
+.accordion-ui .titled-pane > .title > .arrow-button > .arrow{
+    -fx-background-insets: 0;
+}
+/*Size*/
+.accordion-ui-big .titled-pane > .title{
+    -fx-pref-height: 36!important;
+}
+.accordion-ui-big .titled-pane > .title > .text{
+    -fx-translate-y: -6!important;
+}
