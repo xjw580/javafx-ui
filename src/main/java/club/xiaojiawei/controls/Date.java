@@ -1,6 +1,6 @@
 package club.xiaojiawei.controls;
 
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,9 +18,9 @@ import org.girod.javafx.svgimage.SVGLoader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.Objects;
 
+import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
@@ -33,7 +33,7 @@ public class Date extends AnchorPane {
     /**
      * 默认当前日期
      */
-    private StringProperty date;
+    private ObjectProperty<LocalDate> date;
     /**
      * 默认显示时间选择器图标
      */
@@ -43,16 +43,19 @@ public class Date extends AnchorPane {
      */
     private boolean showBorder = true;
     public String getDate() {
-        return date.get();
+        return DATE_FORMATTER.format(date.get());
     }
-    public StringProperty dateProperty() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
     /**
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
-        this.date.set(date);
+        this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+    }
+    public void setLocalDate(LocalDate localDate){
+        date.set(localDate);
     }
     public void setShowSelector(boolean showSelector) {
         dateIco.setVisible(this.showSelector = showSelector);
@@ -121,21 +124,19 @@ public class Date extends AnchorPane {
         dateSelectorPopup = new Popup();
         Calendar calendar = new Calendar();
         date = calendar.dateProperty();
-        TemporalAccessor initTime = DateSelector.DATE_FORMATTER.parse(date.get());
-        year.setText(YEAR_FORMATTER.format(initTime));
-        month.setText(MONTH_FORMATTER.format(initTime));
-        day.setText(DAY_FORMATTER.format(initTime));
+        year.setText(YEAR_FORMATTER.format(date.get()));
+        month.setText(MONTH_FORMATTER.format(date.get()));
+        day.setText(DAY_FORMATTER.format(date.get()));
         date.addListener((observable, oldValue, newValue) -> updateCompleteDateTextField(newValue));
         dateSelectorPopup.getContent().add(calendar);
         dateSelectorPopup.setAutoHide(true);
     }
 
-    private void updateCompleteDateTextField(String date){
-        TemporalAccessor dates = DateSelector.DATE_FORMATTER.parse(date);
+    private void updateCompleteDateTextField(LocalDate newDate){
         isFromDate = true;
-        year.setText(YEAR_FORMATTER.format(dates));
-        month.setText(MONTH_FORMATTER.format(dates));
-        day.setText(DAY_FORMATTER.format(dates));
+        year.setText(YEAR_FORMATTER.format(newDate));
+        month.setText(MONTH_FORMATTER.format(newDate));
+        day.setText(DAY_FORMATTER.format(newDate));
         isFromDate = false;
     }
 
@@ -151,7 +152,7 @@ public class Date extends AnchorPane {
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!isFromDate && newValue.length() == maxLength){
-                date.setValue(year.getText() + "/" + month.getText() + "/" + day.getText());
+                date.set(LocalDate.of(Integer.parseInt(year.getText()), Integer.parseInt(month.getText()), Integer.parseInt(day.getText())));
             }
         });
     }

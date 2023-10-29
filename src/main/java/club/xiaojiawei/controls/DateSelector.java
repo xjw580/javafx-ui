@@ -1,14 +1,12 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.utils.ScrollUtil;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 
@@ -16,6 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,27 +28,27 @@ public class DateSelector extends HBox {
     /**
      * 日期：包含年月,格式：yyyy/MM/dd
      */
-    private final StringProperty date = new SimpleStringProperty();
+    private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>(LocalDate.of(1,1,1));
     public String getDate() {
-        return date.get();
+        return SHORT_DATE_FORMATTER.format(date.get());
     }
-    public StringProperty dateProperty() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
     /**
      * 加载过多年份时调用此方法清空内存,不建议直接使用date.set()方法修改日期
-     * @param date 格式：yyyy/MM/dd
+     * @param date 格式：yyyy/MM/dd 或 yyyy/MM
      */
     public void setDate(String date) {
-        this.date.set(date);
-        yearsPane.getPanes().clear();
-        selectedLabel = null;
-        TitledPane titledPane = loadYearPane(LocalDate.from(DATE_FORMATTER.parse(date)));
-//        解决错位以及pane高度异常问题
-        if (titledPane != null){
-            titledPane.setExpanded(false);
-            titledPane.setExpanded(true);
+        Objects.requireNonNull(date, "date");
+        if (date.length() == 6){
+            this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+        }else {
+            this.date.set(LocalDate.from(SHORT_DATE_FORMATTER.parse(date)));
         }
+    }
+    public void setLocalDate(LocalDate localDate){
+        date.set(localDate);
     }
     @FXML
     private Accordion yearsPane;
@@ -59,6 +58,7 @@ public class DateSelector extends HBox {
     private ScrollBar scrollBar;
     private Label selectedLabel;
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    public static final DateTimeFormatter SHORT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM");
     private boolean allowExec = true;
     private final static String TITLED_PANE_UI = "titled-pane-ui";
     public DateSelector() {
@@ -74,6 +74,16 @@ public class DateSelector extends HBox {
     }
     private void afterFXMLLoaded(){
         loadYearPane(LocalDate.now());
+        date.addListener((observable, oldDate, newDate) -> {
+            yearsPane.getPanes().clear();
+            selectedLabel = null;
+            TitledPane titledPane = loadYearPane(newDate);
+//        解决错位以及pane高度异常问题
+            if (titledPane != null){
+                titledPane.setExpanded(false);
+                titledPane.setExpanded(true);
+            }
+        });
         initScrollBar();
     }
     /**
@@ -156,11 +166,31 @@ public class DateSelector extends HBox {
             label.setOnMouseClicked(event -> {
                 selectedLabel.getStyleClass().remove("selectedLabel");
                 (selectedLabel = label).getStyleClass().add("selectedLabel");
-                date.set(DATE_FORMATTER.format(LocalDate.of(buildYear, Month.of(finalM), 1)));
+                date.set(LocalDate.of(buildYear, Month.of(finalM), Math.min(date.get().getDayOfMonth(), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1)))));
             });
             daysPane.getChildren().add(label);
         }
         return daysPane;
+    }
+
+    /**
+     * 计算指定日期的月份的最大天
+     * @param date
+     * @return
+     */
+    public static int calcMaxDayForMonth(LocalDate date){
+        int days = 30;
+        int month = date.getMonth().getValue();
+        if (month == 2){
+            if (date.getYear() % 4 == 0 && (date.getYear() % 100 != 0 || date.getYear() % 400 == 0)){
+                days = 29;
+            }else {
+                days = 28;
+            }
+        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
+            days = 31;
+        }
+        return days;
     }
 
     /**
@@ -201,9 +231,9 @@ public class DateSelector extends HBox {
                         @Override
                         public void run() {
 //                            面板展开时高度相当于5.45个未展开面板高度
-                            ScrollUtil.slide(finalI, 4.45D + panes.size(), showCount, scrollPane, 2L);
+                            ScrollUtil.slide(finalI, 4.45D + panes.size(), showCount, scrollPane, 1L);
                         }
-                    }, 100);
+                    }, 50);
                 }
             }
         });

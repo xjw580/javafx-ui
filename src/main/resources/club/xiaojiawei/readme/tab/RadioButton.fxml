@@ -12,6 +12,10 @@
       xmlns:fx="http://javafx.com/fxml">
     <Label text="基类：radio-button-ui" styleClass="title-three"/>
     <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-        <RadioButton text="Hello" styleClass="radio-button-ui"/>
+        <RadioButton text="Hello" styleClass="radio-button-ui">
+            <tooltip>
+                <Tooltip text="radio-button-ui"/>
+            </tooltip>
+        </RadioButton>
     </HBox>
 </VBox>

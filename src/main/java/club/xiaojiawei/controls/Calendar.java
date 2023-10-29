@@ -2,7 +2,7 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +25,7 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_Y;
 
@@ -38,19 +39,21 @@ public class Calendar extends VBox {
     /**
      * 日期
      */
-    private final SimpleStringProperty date = new SimpleStringProperty();
+    private ObjectProperty<LocalDate> date;
     public String getDate() {
-        return date.get();
+        return DATE_FORMATTER.format(date.get());
     }
-    public SimpleStringProperty dateProperty() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
     }
     /**
-     * 注意：传入2023/02/31、2023/04/31这种数据会导致一致性问题，传入2023/02/32、2023/05/32、2023/13/12这种数据将直接报错
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
-        this.date.set(date);
+        this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+    }
+    public void setLocalDate(LocalDate localDate){
+        date.set(localDate);
     }
     @FXML
     private Label dateMsg;
@@ -99,22 +102,20 @@ public class Calendar extends VBox {
         initDateSelectorPopup();
         today.setOnMouseClicked(event -> {
             LocalDate nowLocalDate = LocalDate.now();
-            String nowDate = DateSelector.DATE_FORMATTER.format(nowLocalDate);
-            if (Objects.equals(nowDate, date.get())){
+            if (Objects.equals(nowLocalDate, date.get())){
                 skipToPointDate(nowLocalDate);
             }else {
-                date.set(nowDate);
+                date.set(nowLocalDate);
             }
         });
         addDatePropertyListener();
-        LocalDate nowDate = LocalDate.of(1,1,1);
-        showMonthPane = buildMonthPane(nowDate);
-        date.set(DateSelector.DATE_FORMATTER.format(nowDate));
+        showMonthPane = buildMonthPane(date.get());
     }
 
     private void initDateSelectorPopup(){
         popup = new Popup();
         DateSelector dateSelector = new DateSelector();
+        dateMsg.setText(SHORT_DATE_FORMATTER.format((date = dateSelector.dateProperty()).get()));
         dateSelector.dateProperty().addListener((observable, oldValue, newValue) -> {
             date.set(newValue);
             popup.hide();
@@ -130,7 +131,7 @@ public class Calendar extends VBox {
             Bounds bounds = this.localToScreen(this.getBoundsInLocal());
             popup.setAnchorX(bounds.getMaxX() - bounds.getWidth() + 33);
             popup.setAnchorY(bounds.getMaxY() - bounds.getHeight() + 50);
-            dateSelector.setDate(date.get());
+            dateSelector.setLocalDate(date.get());
             monthPane.setVisible(false);
             icoBox.setVisible(false);
             bottomMsg.setVisible(false);
@@ -139,11 +140,7 @@ public class Calendar extends VBox {
         });
     }
     private void addDatePropertyListener(){
-        date.addListener((observable, oldValue, newValue) -> {
-            LocalDate newDate = LocalDate.from(DateSelector.DATE_FORMATTER.parse(newValue));
-            if (oldValue == null){
-                dateMsg.setText(SHORT_DATE_FORMATTER.format(LocalDate.from(DateSelector.DATE_FORMATTER.parse(newValue))));
-            }
+        date.addListener((observable, oldDate, newDate) -> {
             skipToPointDate(newDate);
         });
     }
@@ -166,26 +163,6 @@ public class Calendar extends VBox {
     }
 
     /**
-     * 计算指定日期的月份的最大天
-     * @param date
-     * @return
-     */
-    private int calcMaxDayForMonth(LocalDate date){
-        int days = 30;
-        int month = date.getMonth().getValue();
-        if (month == 2){
-            if (date.getYear() % 4 == 0 && (date.getYear() % 100 != 0 || date.getYear() % 400 == 0)){
-                days = 29;
-            }else {
-                days = 28;
-            }
-        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
-            days = 31;
-        }
-        return days;
-    }
-
-    /**
      * 向月份面板中添加天
      * @param tilePane
      * @return
@@ -193,7 +170,7 @@ public class Calendar extends VBox {
     private Label addDay(TilePane tilePane, LocalDate selfDate){
         Label label = new Label(String.valueOf(selfDate.getDayOfMonth()));
         label.getStyleClass().add(DAY_LABEL);
-        label.setOnMouseClicked(event -> date.set(DateSelector.DATE_FORMATTER.format(selfDate)));
+        label.setOnMouseClicked(event -> date.set(selfDate));
         tilePane.getChildren().add(label);
         return label;
     }
@@ -209,7 +186,7 @@ public class Calendar extends VBox {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                ScrollUtil.slide(monthPaneScroll.getVvalue(), 1D, monthPaneScroll, 2);
+                ScrollUtil.slide(monthPaneScroll.getVvalue(), 1D, monthPaneScroll, 2L);
                 Platform.runLater(() -> monthsPane.getChildren().remove(0));
                 icoBox.setDisable(false);
             }
@@ -287,7 +264,7 @@ public class Calendar extends VBox {
         return new Label();
     }
     private Node findPointDay(){
-        return findPointDay(LocalDate.from(DateSelector.DATE_FORMATTER.parse(date.get())));
+        return findPointDay(date.get());
     }
 
     /**
@@ -301,14 +278,14 @@ public class Calendar extends VBox {
         LocalDate tempDate;
 //            添加上月剩余天数
         if (lastMonthDays != 0){
-            int lastMonthMaxDay = calcMaxDayForMonth(buildDate.minusMonths(1));
+            int lastMonthMaxDay = DateSelector.calcMaxDayForMonth(buildDate.minusMonths(1));
             tempDate = buildDate.minusMonths(1);
             for (int i = lastMonthMaxDay - lastMonthDays + 1; i <= lastMonthMaxDay; i++) {
                 addDay(tilePane, tempDate.withDayOfMonth(i));
             }
         }
 //            添加当月所有天数
-        int currentMonthMaxDay = calcMaxDayForMonth(buildDate);
+        int currentMonthMaxDay = DateSelector.calcMaxDayForMonth(buildDate);
         for (int i = 1; i <= currentMonthMaxDay; i++) {
             addDay(tilePane, buildDate.withDayOfMonth(i)).getStyleClass().add(BLACK_FONT);
         }

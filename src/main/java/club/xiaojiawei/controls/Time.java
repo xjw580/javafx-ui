@@ -1,6 +1,6 @@
 package club.xiaojiawei.controls;
 
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,9 +16,11 @@ import javafx.util.Duration;
 import org.girod.javafx.svgimage.SVGLoader;
 
 import java.io.IOException;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
+import java.util.Objects;
 
+import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
@@ -29,9 +31,9 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 @SuppressWarnings("unused")
 public class Time extends AnchorPane {
     /**
-     * 默认当前时间
+     * 时间
      */
-    private StringProperty time;
+    private ObjectProperty<LocalTime> time;
     /**
      * 默认显示时间选择器图标
      */
@@ -41,16 +43,20 @@ public class Time extends AnchorPane {
      */
     private boolean showBorder = true;
     public String getTime() {
-        return time.get();
+        return TIME_FORMATTER.format(time.get());
     }
-    public StringProperty timeProperty() {
+    public ObjectProperty<LocalTime> timeProperty() {
         return time;
     }
     /**
      * @param time 格式：HH:mm
      */
     public void setTime(String time) {
-        this.time.set(time);
+        Objects.requireNonNull(time, "time");
+        this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+    }
+    public void setLocalTime(LocalTime localTime){
+        time.set(localTime);
     }
     public void setShowSelector(boolean showSelector) {
         timeIco.setVisible(this.showSelector = showSelector);
@@ -115,18 +121,16 @@ public class Time extends AnchorPane {
         timeSelectorPopup = new Popup();
         TimeSelector timeSelector = new TimeSelector();
         time = timeSelector.timeProperty();
-        TemporalAccessor initTime = TimeSelector.TIME_FORMATTER.parse(time.get());
-        hour.setText(DateTimeFormatter.ofPattern("HH").format(initTime));
-        min.setText(DateTimeFormatter.ofPattern("mm").format(initTime));
+        hour.setText(DateTimeFormatter.ofPattern("HH").format(time.get()));
+        min.setText(DateTimeFormatter.ofPattern("mm").format(time.get()));
         time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
         timeSelectorPopup.getContent().add(timeSelector);
         timeSelectorPopup.setAutoHide(true);
     }
-    private void updateCompleteTimeTextField(String time){
-        TemporalAccessor times = TimeSelector.TIME_FORMATTER.parse(time);
+    private void updateCompleteTimeTextField(LocalTime newTime){
         isFromTime = true;
-        hour.setText(DateTimeFormatter.ofPattern("HH").format(times));
-        min.setText(DateTimeFormatter.ofPattern("mm").format(times));
+        hour.setText(DateTimeFormatter.ofPattern("HH").format(newTime));
+        min.setText(DateTimeFormatter.ofPattern("mm").format(newTime));
         isFromTime = false;
     }
 
@@ -153,7 +157,7 @@ public class Time extends AnchorPane {
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!isFromTime && newValue.length() == 2){
-                time.setValue(hour.getText() + ":" + min.getText());
+                time.set(LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText())));
             }
         });
     }

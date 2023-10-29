@@ -3,9 +3,6 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.controls.DateSelector;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -23,7 +20,6 @@ public class DateSelectorTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         DateSelector dateSelector = new DateSelector();
-        dateSelector.dateProperty().set("2010/11/11");
         dateSelector.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         Scene scene = new Scene(dateSelector);
         primaryStage.setScene(scene);
@@ -31,7 +27,6 @@ public class DateSelectorTest extends Application {
         Platform.runLater(() -> {
             Popup popup = new Popup();
             DateSelector dateSelector1 = new DateSelector();
-            dateSelector.dateProperty().set("2010/11/11");
             popup.getContent().add(dateSelector1);
             popup.show(primaryStage);
         });

@@ -44,6 +44,15 @@
 
 ## 更新信息
 
+##### 0.0.7-SNAPSHOT
+
+- 新增Readme类，启动改类后可查看所有样式和自定义组件
+- 新增 Button、CheckBox、ComboBox、Progress、ScrollBar、TitledPane、TabPane、RadioButton 样式
+- 新增Selection组件
+- 优化日期时间相关组件
+
+
+
 ##### 0.0.6-SNAPSHOT
 
 - 优化时间（Time）组件

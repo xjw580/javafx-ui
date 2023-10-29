@@ -2,12 +2,8 @@ package club.xiaojiawei.test;
 
 import club.xiaojiawei.controls.Date;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -24,11 +20,11 @@ public class DateTest extends Application {
     public void start(Stage primaryStage) {
         FlowPane vBox = new FlowPane();
         Date date = new Date();
+        date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         date.setTranslateX(50);
         date.setTranslateY(50);
-        date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         vBox.getChildren().add(date);
-        Scene scene = new Scene(vBox);
+        Scene scene = new Scene(vBox, 200, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

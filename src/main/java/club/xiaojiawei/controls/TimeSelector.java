@@ -1,8 +1,8 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.utils.ScrollUtil;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,19 +28,26 @@ public class TimeSelector extends FlowPane {
     /**
      * 时间
      */
-    private final StringProperty time = new SimpleStringProperty();
+    private final ObjectProperty<LocalTime> time = new SimpleObjectProperty<>();
     /**
      * 展示行数
      */
     private double showRowCount;
     public String getTime() {
-        return time.get();
+        return TIME_FORMATTER.format(time.get());
     }
-    public StringProperty timeProperty() {
+    public ObjectProperty<LocalTime> timeProperty() {
         return time;
     }
+    /**
+     * @param time 格式：HH:mm
+     */
     public void setTime(String time) {
-        this.time.set(time);
+        Objects.requireNonNull(time, "time");
+        this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+    }
+    public void setLocalTime(LocalTime localTime){
+        time.set(localTime);
     }
     public double getShowRowCount() {
         return showRowCount;
@@ -79,18 +87,16 @@ public class TimeSelector extends FlowPane {
         fillMinSelector();
         setShowRowCount(6);
         addTimeSelectorKeyPressedListener();
-        time.set("00:00");
+        time.set(LocalTime.of(0, 0));
     }
 
     /**
      * 添加时间监听器
      */
     private void addTimePropertyChangedListener(){
-        time.addListener((observable, oldValue, newValue) -> {
+        time.addListener((observable, oldTime, newTime) -> {
             ObservableList<Node> hourChildren = hourVbox.getChildren();
             ObservableList<Node> minChildren = minVbox.getChildren();
-            LocalTime newTime = LocalTime.from(TIME_FORMATTER.parse(newValue));
-            LocalTime oldTime = oldValue == null? null : LocalTime.from(TIME_FORMATTER.parse(oldValue));
             if (oldTime == null || newTime.getHour() != oldTime.getHour()){
                 syncTimeSelector(hourChildren, newTime.getHour(), MAX_HOUR, showRowCount, hourSelector);
             }
@@ -137,7 +143,7 @@ public class TimeSelector extends FlowPane {
             }else {
                 label.setText(String.valueOf(i));
             }
-            label.setOnMouseClicked(e -> time.set(label.getText() + time.get().substring(2 )));
+            label.setOnMouseClicked(e -> time.set(time.get().withHour(Integer.parseInt(label.getText()))));
             children.add(label);
         }
     }
@@ -155,7 +161,7 @@ public class TimeSelector extends FlowPane {
             }else {
                 label.setText(String.valueOf(i));
             }
-            label.setOnMouseClicked(e -> time.set(time.get().substring(0, 3) + label.getText()));
+            label.setOnMouseClicked(e -> time.set(time.get().withMinute(Integer.parseInt(label.getText()))));
             children.add(label);
         }
     }
@@ -166,14 +172,14 @@ public class TimeSelector extends FlowPane {
     private void addTimeSelectorKeyPressedListener(){
         hourSelector.setOnKeyPressed(event -> {
             switch (event.getCode()){
-                case UP -> time.set(TIME_FORMATTER.format(LocalTime.from(TIME_FORMATTER.parse(time.get())).plusHours(1)));
-                case DOWN -> time.set(TIME_FORMATTER.format(LocalTime.from(TIME_FORMATTER.parse(time.get())).minusHours(1)));
+                case UP -> time.set(time.get().plusHours(1));
+                case DOWN -> time.set(time.get().minusHours(1));
             }
         });
         minSelector.setOnKeyPressed(event -> {
             switch (event.getCode()){
-                case UP -> time.set(TIME_FORMATTER.format(LocalTime.from(TIME_FORMATTER.parse(time.get())).plusMinutes(1)));
-                case DOWN -> time.set(TIME_FORMATTER.format(LocalTime.from(TIME_FORMATTER.parse(time.get())).minusMinutes(1)));
+                case UP -> time.set(time.get().plusMinutes(1));
+                case DOWN -> time.set(time.get().minusMinutes(1));
             }
         });
     }

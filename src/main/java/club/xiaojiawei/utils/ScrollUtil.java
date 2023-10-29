@@ -42,7 +42,4 @@ public class ScrollUtil {
         double start = scrollPane.getVvalue();
         slide(start, end, scrollPane, intervalSleep);
     }
-    public static void slide(double endIndex, int size, int showSize, ScrollPane scrollPane){
-        slide(endIndex, size, showSize, scrollPane, 2);
-    }
 }

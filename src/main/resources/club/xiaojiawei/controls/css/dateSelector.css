@@ -28,7 +28,4 @@
 }
 #root{
     -fx-background-color: white;
-    /*-fx-effect: dropshadow(gaussian, #b3d5ff, 10, 0, 0, 0)!important;*/
-    /*-fx-background-radius: 5;*/
-    /*-fx-padding: 0 2 0 2;*/
 }
