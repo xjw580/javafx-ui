@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.controls.ico.TimeIco;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
@@ -13,7 +14,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
-import org.girod.javafx.svgimage.SVGLoader;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -41,7 +41,7 @@ public class Time extends AnchorPane {
     /**
      * 默认显示边框
      */
-    private boolean showBorder = true;
+    private boolean showBG = true;
     public String getTime() {
         return TIME_FORMATTER.format(time.get());
     }
@@ -60,6 +60,7 @@ public class Time extends AnchorPane {
     }
     public void setShowSelector(boolean showSelector) {
         timeIco.setVisible(this.showSelector = showSelector);
+        timeIco.setManaged(false);
         if (showSelector){
             timeBG.getStyleClass().remove(HIDE_ICO_TIME_BACKGROUND);
         }else {
@@ -69,11 +70,11 @@ public class Time extends AnchorPane {
     public boolean isShowSelector() {
         return showSelector;
     }
-    public boolean isShowBorder() {
-        return showBorder;
+    public boolean isShowBG() {
+        return showBG;
     }
-    public void setShowBorder(boolean showBorder) {
-        timeBG.setVisible(this.showBorder = showBorder);
+    public void setShowBG(boolean showBG) {
+        timeBG.setVisible(this.showBG = showBG);
     }
     @FXML
     private Label timeBG;
@@ -82,10 +83,7 @@ public class Time extends AnchorPane {
     @FXML
     private TextField min;
     @FXML
-    private AnchorPane timeIco;
-    public AnchorPane getTimeIco() {
-        return timeIco;
-    }
+    private TimeIco timeIco;
     private static final int MAX_HOUR = 23;
     private static final int MAX_MIN = 59;
     private Popup timeSelectorPopup;
@@ -135,7 +133,6 @@ public class Time extends AnchorPane {
     }
 
     private void initTimeIco(){
-        timeIco.getChildren().add(SVGLoader.load(getClass().getResource("images/time.svg")));
         timeIco.setOnMouseClicked(e -> {
             Bounds bounds = timeIco.localToScreen(timeIco.getBoundsInLocal());
             timeSelectorPopup.setAnchorX(bounds.getMaxX() - 50);

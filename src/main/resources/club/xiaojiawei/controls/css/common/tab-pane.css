@@ -37,6 +37,26 @@
 .tab-pane-ui .tab:hover{
     -fx-background-color: rgb(0, 0, 0, 0.1);
 }
+/*修改Popup样式*/
+.tab-down-button .context-menu{
+    -fx-background-radius: 5;
+    -fx-background-color: #e0f0fd;
+}
+.tab-down-button .context-menu .menu-item{
+    -fx-background-color: transparent;
+    -fx-background-insets: 2 2 2 2;
+    -fx-pref-height: 38;
+    -fx-background-radius: 5;
+}
+.tab-down-button .context-menu .menu-item:hover{
+    -fx-background-color: rgb(0, 0, 0, 0.1);
+}
+.tab-down-button .context-menu .menu-item .label{
+    -fx-text-fill: black;
+}
+.tab-down-button .context-menu .menu-item .left-container > *{
+    -fx-background-color: black;
+}
 /* Tab选中的时候选中其边框并修改样式 */
 .tab-pane-ui:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
     -fx-border-color: transparent;

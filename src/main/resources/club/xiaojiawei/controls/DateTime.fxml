@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import club.xiaojiawei.controls.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import club.xiaojiawei.controls.Date?>
+<?import club.xiaojiawei.controls.ico.DateIco?>
 <?import club.xiaojiawei.controls.Time?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateTime.css">
     <Label fx:id="dateTimeBG" styleClass="dateTimeBackground"/>
-    <Date fx:id="dateControls" showSelector="false" showBorder="false"/>
+    <Date fx:id="dateControls" showSelector="false" showBG="false"/>
     <Label text="-" translateX="82" translateY="4"/>
-    <Time fx:id="timeControls" translateX="82" showBorder="false" showSelector="false"/>
-    <AnchorPane fx:id="dateTimeIco" translateX="125"/>
+    <Time fx:id="timeControls" translateX="82" showBG="false" showSelector="false"/>
+    <DateIco fx:id="dateTimeIco" translateX="125"/>
 </fx:root>

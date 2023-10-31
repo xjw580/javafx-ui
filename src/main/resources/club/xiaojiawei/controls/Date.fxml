@@ -3,14 +3,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import club.xiaojiawei.controls.ico.DateIco?>
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/date.css">
     <Label fx:id="dateBG" styleClass="dateBackground"/>
-    <HBox translateX="5">
+    <HBox AnchorPane.leftAnchor="5">
         <TextField fx:id="year" promptText="年" styleClass="text-field" style="-fx-pref-width: 32!important;"/>
         <Label text="/" styleClass="dateSeparator"/>
         <TextField fx:id="month" promptText="月" styleClass="text-field"/>
         <Label text="/" styleClass="dateSeparator"/>
         <TextField fx:id="day" promptText="分" styleClass="text-field"/>
-        <AnchorPane fx:id="dateIco"/>
+        <DateIco fx:id="dateIco"/>
     </HBox>
 </fx:root>

@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.controls.ico.DateIco;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
@@ -13,14 +14,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
-import org.girod.javafx.svgimage.SVGLoader;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
+import static club.xiaojiawei.controls.DateSelector.calcMaxDayForMonth;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
@@ -41,7 +41,7 @@ public class Date extends AnchorPane {
     /**
      * 默认显示边框
      */
-    private boolean showBorder = true;
+    private boolean showBG = true;
     public String getDate() {
         return DATE_FORMATTER.format(date.get());
     }
@@ -59,6 +59,7 @@ public class Date extends AnchorPane {
     }
     public void setShowSelector(boolean showSelector) {
         dateIco.setVisible(this.showSelector = showSelector);
+        dateIco.setManaged(false);
         if (showSelector){
             dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND);
         }else {
@@ -68,11 +69,11 @@ public class Date extends AnchorPane {
     public boolean isShowSelector() {
         return showSelector;
     }
-    public boolean isShowBorder() {
-        return showBorder;
+    public boolean isShowBG() {
+        return showBG;
     }
-    public void setShowBorder(boolean showBorder) {
-        dateBG.setVisible(this.showBorder = showBorder);
+    public void setShowBG(boolean showBG) {
+        dateBG.setVisible(this.showBG = showBG);
     }
     @FXML
     private Label dateBG;
@@ -83,7 +84,7 @@ public class Date extends AnchorPane {
     @FXML
     private TextField day;
     @FXML
-    private AnchorPane dateIco;
+    private DateIco dateIco;
     private static final int MAX_YEAR = 9999;
     private static final int MAX_MONTH = 12;
     private static final int MAX_DAY = 31;
@@ -149,10 +150,12 @@ public class Date extends AnchorPane {
     private void initDateTextField(TextField textField, int maxValue, int maxLength){
         textField.setTextFormatter(interceptInput(textField, maxValue, maxLength));
         textField.focusedProperty().addListener(dateTextFieldFocusListener(textField));
+//        方向键按太快会因为动画问题而报错
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!isFromDate && newValue.length() == maxLength){
-                date.set(LocalDate.of(Integer.parseInt(year.getText()), Integer.parseInt(month.getText()), Integer.parseInt(day.getText())));
+                int yearInt = parseInt(year.getText()), monthInt = parseInt(month.getText());
+                date.set(LocalDate.of(yearInt, monthInt, Math.min(calcMaxDayForMonth(yearInt, monthInt), parseInt(day.getText()))));
             }
         });
     }
@@ -161,7 +164,6 @@ public class Date extends AnchorPane {
      * 初始化日期图标
      */
     private void initDateIco(){
-        dateIco.getChildren().add(SVGLoader.load(getClass().getResource("images/date.svg")));
         dateIco.setOnMouseClicked(e -> {
             Bounds bounds = dateIco.localToScreen(dateIco.getBoundsInLocal());
             dateSelectorPopup.setAnchorX(bounds.getMaxX() - 100);
@@ -180,7 +182,7 @@ public class Date extends AnchorPane {
             if (isFocus){
                 dateBG.getStyleClass().add(DATE_BACKGROUND_FOCUS);
             }else {
-                standardizationDateText(textField, textField.getText());
+                textField.setText(standardizationDateText(textField, textField.getText()));
                 dateBG.getStyleClass().remove(DATE_BACKGROUND_FOCUS);
             }
             if (focusChangeListener != null){
@@ -194,25 +196,7 @@ public class Date extends AnchorPane {
      * @param textField
      * @param time
      */
-    private void standardizationDateText(TextField textField, String time){
-        int yearInt = parseInt(year.getText());
-        int monthInt = parseInt(month.getText());
-        int maxDay = 30;
-        if (Objects.equals(month.getText(), "02")){
-            if (yearInt % 4 == 0 && (yearInt % 100 != 0 || yearInt % 400 == 0)){
-                maxDay = 29;
-            }else {
-                maxDay = 28;
-            }
-        }else if ((monthInt < 8 && (monthInt & 1) == 1) || (monthInt >= 8 && (monthInt & 1) == 0)){
-            maxDay = MAX_DAY;
-        }
-        if (parseInt(day.getText()) > maxDay){
-            day.setText(String.valueOf(maxDay));
-            if (textField == day){
-                return;
-            }
-        }
+    private String standardizationDateText(TextField textField, String time){
         String timeStr = "0".repeat((textField == year ? 4 : 2) - time.length()) + time;
         if (timeStr.matches("0+")){
             if (textField == year){
@@ -223,7 +207,7 @@ public class Date extends AnchorPane {
                 timeStr = DAY_FORMATTER.format(LocalDate.now());
             }
         }
-        textField.setText(timeStr);
+        return timeStr;
     }
 
     /**
@@ -239,6 +223,13 @@ public class Date extends AnchorPane {
                     && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= maxLength
                     && parseInt(temp) <= maxValue
             ){
+                if (textField == year){
+                    day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(temp), parseInt(month.getText())), parseInt(day.getText())))));
+                }else if (textField == month){
+                    day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(year.getText()), parseInt(temp)), parseInt(day.getText())))));
+                }else if (parseInt(temp) > calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()))){
+                    return null;
+                }
                 return change;
             }
             return null;
@@ -252,15 +243,18 @@ public class Date extends AnchorPane {
      */
     private EventHandler<? super KeyEvent> keyPressedEventHandler(TextField textField, int maxValue){
         return (EventHandler<KeyEvent>) event -> {
-            int newValue;
+            int newValue, tempMaxValue = maxValue;
+            if (textField == day){
+                tempMaxValue = calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()));
+            }
             switch (event.getCode()){
                 case UP -> newValue = parseInt(textField.getText()) + 1;
-                case DOWN -> newValue = parseInt(textField.getText()) - 1 + maxValue;
+                case DOWN -> newValue = parseInt(textField.getText()) - 1 + tempMaxValue;
                 default -> {
                     return;
                 }
             }
-            standardizationDateText(textField, String.valueOf((newValue - 1) % maxValue + 1));
+            textField.setText(standardizationDateText(textField, String.valueOf((newValue - 1) % tempMaxValue + 1)));
         };
     }
 

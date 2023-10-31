@@ -11,6 +11,7 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei.test;
     exports club.xiaojiawei.controls.ico;
     exports club.xiaojiawei.readme;
+    exports club.xiaojiawei;
 
     opens club.xiaojiawei.controls to javafx.fxml;
     opens club.xiaojiawei.test to javafx.fxml;

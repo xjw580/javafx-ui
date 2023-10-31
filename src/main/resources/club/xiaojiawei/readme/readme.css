@@ -4,11 +4,11 @@
 }
 .title-one{
     -fx-font-weight: bold;
-    -fx-font-size: 25;
+    -fx-font-size: 20;
 }
 .title-two{
     -fx-font-weight: bold;
-    -fx-font-size: 20;
+    -fx-font-size: 16;
 }
 .title-three{
     -fx-font-weight: bold;

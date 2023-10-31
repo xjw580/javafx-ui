@@ -1,5 +1,6 @@
 package club.xiaojiawei.func;
 
+import javafx.animation.Transition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
@@ -9,5 +10,5 @@ import javafx.util.Duration;
  */
 @FunctionalInterface
 public interface BaseTransitionFunc {
-    void play(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse);
+    Transition build(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse);
 }

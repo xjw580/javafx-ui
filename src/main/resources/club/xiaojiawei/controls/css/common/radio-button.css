@@ -1,14 +1,20 @@
 .radio-button-ui .radio {
-    -fx-border-width: 1px;
-    -fx-border-color:grey;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
     -fx-background-color: white;
     -fx-border-radius: 15px;
+    -fx-background-insets: 0;
+    -fx-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
 }
 .radio-button-ui .dot {
     -fx-background-insets: 0;
 }
-.radio-button-ui:selected .radio, .radio-button-ui:hover .radio{
+.radio-button-ui:selected .radio{
     -fx-border-color: #0075FF;
+    -fx-effect: dropshadow(two-pass-box, #0075FF, 5, 0, 1, 1)!important;
+}
+.radio-button-ui:hover .radio{
+    -fx-effect: innershadow(one-pass-box, #0075FF, 5, 0, 1, 1);
 }
 .radio-button-ui:selected .dot {
     -fx-background-color: #0075FF;

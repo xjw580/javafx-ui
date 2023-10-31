@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox styleClass="hv-box">
+        <Label text="基类：radio-button-ui" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <fx:define>
+                <ToggleGroup fx:id="toggleGroup"/>
+            </fx:define>
+            <RadioButton text="奇迹法" styleClass="radio-button-ui" selected="true" toggleGroup="$toggleGroup">
+                <tooltip>
+                    <Tooltip text="radio-button-ui"/>
+                </tooltip>
+            </RadioButton>
+            <RadioButton text="战吼萨" styleClass="radio-button-ui" toggleGroup="$toggleGroup">
+                <tooltip>
+                    <Tooltip text="radio-button-ui"/>
+                </tooltip>
+            </RadioButton>
+        </HBox>
+    </VBox>
+</ScrollPane>

@@ -1,6 +1,8 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.utils.ScrollUtil;
+import javafx.animation.ParallelTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
@@ -99,27 +101,26 @@ public class Calendar extends VBox {
     private void afterFXMLLoaded(){
         lastMonth.setOnMouseClicked(event -> beforeDate());
         nextMonth.setOnMouseClicked(event -> laterDate());
-        initDateSelectorPopup();
         today.setOnMouseClicked(event -> {
             LocalDate nowLocalDate = LocalDate.now();
             if (Objects.equals(nowLocalDate, date.get())){
+//                可能不在当前日期面板，需要跳转
                 skipToPointDate(nowLocalDate);
             }else {
                 date.set(nowLocalDate);
             }
         });
+        initDateSelectorPopup();
         addDatePropertyListener();
         showMonthPane = buildMonthPane(date.get());
+//        建造玩月份pane后跳转到指定天
+        skipToPointDate(date.get());
     }
 
     private void initDateSelectorPopup(){
         popup = new Popup();
         DateSelector dateSelector = new DateSelector();
         dateMsg.setText(SHORT_DATE_FORMATTER.format((date = dateSelector.dateProperty()).get()));
-        dateSelector.dateProperty().addListener((observable, oldValue, newValue) -> {
-            date.set(newValue);
-            popup.hide();
-        });
         popup.getContent().add(dateSelector);
         popup.setAutoHide(true);
         popup.setOnHidden(event -> {
@@ -141,6 +142,7 @@ public class Calendar extends VBox {
     }
     private void addDatePropertyListener(){
         date.addListener((observable, oldDate, newDate) -> {
+            popup.hide();
             skipToPointDate(newDate);
         });
     }
@@ -177,71 +179,80 @@ public class Calendar extends VBox {
 
     /**
      * 时间流逝
-     * @param nextDate
+     * @param laterDate
      */
-    private void laterDate(LocalDate nextDate){
+    private void laterDate(LocalDate laterDate){
         icoBox.setDisable(true);
-        dateMsg.setText(SHORT_DATE_FORMATTER.format(nextDate));
-        showMonthPane = buildMonthPane(nextDate);
+        if (laterDate.getYear() > 9999){
+            laterDate = laterDate.withYear(1);
+        }
+        dateMsg.setText(SHORT_DATE_FORMATTER.format(laterDate));
+        showMonthPane = buildMonthPane(laterDate);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                ScrollUtil.slide(monthPaneScroll.getVvalue(), 1D, monthPaneScroll, 2L);
-                Platform.runLater(() -> monthsPane.getChildren().remove(0));
-                icoBox.setDisable(false);
+                Timeline timeline = ScrollUtil.buildSlideTimeLine(monthPaneScroll.getVvalue(), 1D, monthPaneScroll);
+                timeline.setOnFinished(event -> {
+                    Platform.runLater(() -> monthsPane.getChildren().remove(0));
+                    icoBox.setDisable(false);
+                });
+                timeline.play();
+                if (selectedLabel != null){
+                    selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                }
+                (selectedLabel = findPointDay()).getStyleClass().add(SELECTED_DAY_LABEL);
             }
         }, 50);
-        if (selectedLabel != null){
-            selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
-        }
-        (selectedLabel = findPointDay()).getStyleClass().add(SELECTED_DAY_LABEL);
     }
     private void laterDate(){
         LocalDate tempDate = LocalDate.from(DateTimeFormatter.ofPattern("yyyy年MM月dd").parse(dateMsg.getText() + "01"));
         if (tempDate.getMonthValue() < 12){
-            dateMsg.setText(SHORT_DATE_FORMATTER.format(tempDate = tempDate.plusMonths(1)));
+            tempDate = tempDate.plusMonths(1);
         }else {
-            dateMsg.setText(SHORT_DATE_FORMATTER.format(tempDate = tempDate.plusYears(1).withMonth(1)));
+            tempDate = tempDate.plusYears(1).withMonth(1);
         }
         laterDate(tempDate);
     }
 
     /**
      * 时间回溯
-     * @param lastDate
+     * @param beforeDate
      */
-    private void beforeDate(LocalDate lastDate){
+    private void beforeDate(LocalDate beforeDate){
         icoBox.setDisable(true);
-        dateMsg.setText(SHORT_DATE_FORMATTER.format(lastDate));
+        if (beforeDate.getYear() <= 0){
+            beforeDate = beforeDate.withYear(9999);
+        }
+        dateMsg.setText(SHORT_DATE_FORMATTER.format(beforeDate));
         TilePane oldMonthPane = showMonthPane;
-        showMonthPane = buildMonthPane(lastDate);
+        showMonthPane = buildMonthPane(beforeDate);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 double distance = 158.5D;
-                SLIDE_Y.play(showMonthPane, -distance * 2, -distance, Duration.millis(350));
-                SLIDE_Y.play(oldMonthPane, 0, distance, Duration.millis(350));
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        Platform.runLater(() -> monthsPane.getChildren().remove(0));
-                        showMonthPane.setTranslateY(0);
-                        icoBox.setDisable(false);
-                    }
-                }, 400);
+                ParallelTransition parallelTransition = new ParallelTransition(
+                        SLIDE_Y.get(oldMonthPane, 0, distance, Duration.millis(253)),
+                        SLIDE_Y.get(showMonthPane, -distance * 2, -distance, Duration.millis(253))
+                );
+                parallelTransition.setOnFinished(event -> {
+                    monthsPane.getChildren().remove(0);
+                    showMonthPane.setTranslateY(0);
+                    icoBox.setDisable(false);
+                });
+                parallelTransition.play();
+                if (selectedLabel != null){
+                    selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                }
+                (selectedLabel = findPointDay()).getStyleClass().add(SELECTED_DAY_LABEL);
             }
         }, 50);
-        if (selectedLabel != null){
-            selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
-        }
-        (selectedLabel = findPointDay()).getStyleClass().add(SELECTED_DAY_LABEL);
     }
     private void beforeDate(){
         LocalDate tempDate = LocalDate.from(DateTimeFormatter.ofPattern("yyyy年MM月dd").parse(dateMsg.getText() + "01"));
         if (tempDate.getMonthValue() > 1){
-            dateMsg.setText(SHORT_DATE_FORMATTER.format(tempDate = tempDate.minusMonths(1)));
+            tempDate = tempDate.minusMonths(1);
         }else {
-            dateMsg.setText(SHORT_DATE_FORMATTER.format(tempDate = tempDate.minusYears(1).withMonth(12)));
+            tempDate = tempDate.minusYears(1).withMonth(12);
         }
         beforeDate(tempDate);
     }
@@ -280,6 +291,9 @@ public class Calendar extends VBox {
         if (lastMonthDays != 0){
             int lastMonthMaxDay = DateSelector.calcMaxDayForMonth(buildDate.minusMonths(1));
             tempDate = buildDate.minusMonths(1);
+            if (tempDate.getYear() <= 0){
+                tempDate = tempDate.withYear(9999);
+            }
             for (int i = lastMonthMaxDay - lastMonthDays + 1; i <= lastMonthMaxDay; i++) {
                 addDay(tilePane, tempDate.withDayOfMonth(i));
             }
@@ -291,6 +305,9 @@ public class Calendar extends VBox {
         }
 //            添加下月剩余天数
         tempDate = buildDate.plusMonths(1);
+        if (tempDate.getYear() > 9999){
+            tempDate = tempDate.withYear(1);
+        }
         for (int i = 1; i <= 42 - lastMonthDays - currentMonthMaxDay; i++){
             addDay(tilePane, tempDate.withDayOfMonth(i));
         }

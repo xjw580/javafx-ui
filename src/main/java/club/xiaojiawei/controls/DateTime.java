@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.controls.ico.DateIco;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -11,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Popup;
 import javafx.util.Duration;
-import org.girod.javafx.svgimage.SVGLoader;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,13 +30,37 @@ public class DateTime extends AnchorPane {
      * 日期时间
      */
     private final ObjectProperty<LocalDateTime> dateTime = new SimpleObjectProperty<>();
-
+    /**
+     * 显示日期时间选择器
+     */
+    private boolean showSelector = true;
+    /**
+     * 默认显示边框
+     */
+    private boolean showBG = true;
     public String getDateTime() {
         return DATE_TIME_FORMATTER.format(dateTime.get());
     }
-
     public ObjectProperty<LocalDateTime> dateTimeProperty() {
         return dateTime;
+    }
+    public boolean isShowSelector() {
+        return showSelector;
+    }
+    public void setShowSelector(boolean showSelector) {
+        dateTimeIco.setVisible(this.showSelector = showSelector);
+        dateTimeIco.setManaged(false);
+        if (showSelector){
+            dateTimeBG.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND);
+        }else {
+            dateTimeBG.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND);
+        }
+    }
+    public boolean isShowBG() {
+        return showBG;
+    }
+    public void setShowBG(boolean showBG) {
+        dateTimeBG.setVisible(this.showBG = showBG);
     }
 
     /**
@@ -52,13 +76,14 @@ public class DateTime extends AnchorPane {
     @FXML
     private Label dateTimeBG;
     @FXML
-    private AnchorPane dateTimeIco;
+    private DateIco dateTimeIco;
     @FXML
     private Date dateControls;
     @FXML
     private Time timeControls;
     private Popup dateTimeSelectorPopup;
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm");
+    public static final String HIDE_ICO_DATE_TIME_BACKGROUND = "hideIcoDateTimeBackground";
     private boolean isFromDateTime;
     private static final String DATE_TIME_BACKGROUND_FOCUS = "dateTimeBackgroundFocus";
     public DateTime() {
@@ -127,7 +152,6 @@ public class DateTime extends AnchorPane {
      * 初始化日期时间图标
      */
     private void initDateTimeIco(){
-        dateTimeIco.getChildren().add(SVGLoader.load(getClass().getResource("images/date.svg")));
         dateTimeIco.setOnMouseClicked(e -> {
             Bounds bounds = dateTimeIco.localToScreen(dateTimeIco.getBoundsInLocal());
             dateTimeSelectorPopup.setAnchorX(bounds.getMaxX() - 100);

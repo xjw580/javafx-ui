@@ -19,37 +19,40 @@ public enum BaseTransitionEnum {
      * 淡入淡出
      */
     FADE((node, from, to, duration, cycleCount, autoReverse) -> {
-        FadeTransition fade = new FadeTransition(duration, node);
-        fade.setFromValue(from);
-        fade.setToValue(to);
-        setAndPlayTransition(fade, cycleCount, autoReverse);
+        FadeTransition transition = new FadeTransition(duration, node);
+        transition.setFromValue(from);
+        transition.setToValue(to);
+        commonBuild(transition, cycleCount, autoReverse);
+        return transition;
     }),
     /**
      * 滑动
      */
     SLIDE_X((node, from, to, duration, cycleCount, autoReverse) -> {
-        TranslateTransition slide = new TranslateTransition(duration, node);
-        slide.setFromX(from);
-        slide.setToX(to);
-        setAndPlayTransition(slide, cycleCount, autoReverse);
+        TranslateTransition transition = new TranslateTransition(duration, node);
+        transition.setFromX(from);
+        transition.setToX(to);
+        commonBuild(transition, cycleCount, autoReverse);
+        return transition;
     }),
     SLIDE_Y((node, from, to, duration, cycleCount, autoReverse) -> {
-        TranslateTransition slide = new TranslateTransition(duration, node);
-        slide.setFromY(from);
-        slide.setToY(to);
-        setAndPlayTransition(slide, cycleCount, autoReverse);
+        TranslateTransition transition = new TranslateTransition(duration, node);
+        transition.setFromY(from);
+        transition.setToY(to);
+        commonBuild(transition, cycleCount, autoReverse);
+        return transition;
     }),
     /**
      * Y轴缩放
      */
     SCALE_Y((node, from, to, duration, cycleCount, autoReverse) -> {
-        ScaleTransition scaleY = new ScaleTransition(duration, node);
-        scaleY.setFromY(from);
-        scaleY.setToY(to);
-        setAndPlayTransition(scaleY, cycleCount, autoReverse);
+        ScaleTransition transition = new ScaleTransition(duration, node);
+        transition.setFromY(from);
+        transition.setToY(to);
+        commonBuild(transition, cycleCount, autoReverse);
+        return transition;
     }),
-    NONE((node, from, to, duration, cycleCount, autoReverse) -> {
-    }),
+    NONE((node, from, to, duration, cycleCount, autoReverse) -> null),
     ;
     private final BaseTransitionFunc transition;
 
@@ -57,14 +60,19 @@ public enum BaseTransitionEnum {
         this.transition = transition;
     }
     public void play(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse){
-        this.transition.play(node, from, to, duration, cycleCount, autoReverse);
+        get(node, from, to, duration, cycleCount, autoReverse).play();
     }
     public void play(Node node, double from, double to, Duration duration){
-        play(node, from, to, duration, 0, false);
+        get(node, from, to, duration).play();
     }
-    private static void setAndPlayTransition(Transition transition, int cycleCount, boolean autoReverse) {
+    public Transition get(Node node, double from, double to, Duration duration){
+        return get(node, from, to, duration, 0 ,false);
+    }
+    public Transition get(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse){
+        return this.transition.build(node, from, to, duration, cycleCount, autoReverse);
+    }
+    private static void commonBuild(Transition transition, int cycleCount, boolean autoReverse) {
         transition.setCycleCount(cycleCount);
         transition.setAutoReverse(autoReverse);
-        transition.play();
     }
 }

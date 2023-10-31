@@ -1,11 +1,14 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.utils.ScrollUtil;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
@@ -36,7 +39,6 @@ public class DateSelector extends HBox {
         return date;
     }
     /**
-     * 加载过多年份时调用此方法清空内存,不建议直接使用date.set()方法修改日期
      * @param date 格式：yyyy/MM/dd 或 yyyy/MM
      */
     public void setDate(String date) {
@@ -73,7 +75,7 @@ public class DateSelector extends HBox {
         }
     }
     private void afterFXMLLoaded(){
-        loadYearPane(LocalDate.now());
+        loadYearPane(date.get());
         date.addListener((observable, oldDate, newDate) -> {
             yearsPane.getPanes().clear();
             selectedLabel = null;
@@ -147,32 +149,6 @@ public class DateSelector extends HBox {
         });
     }
 
-
-    /**
-     * 创建月面板
-     * @param nowDate
-     * @param buildYear
-     * @return
-     */
-    private TilePane buildMonthTilePane(LocalDate nowDate, int buildYear){
-        TilePane daysPane = new TilePane();
-        for (int m = 1; m <= 12; m++) {
-            Label label = new Label();
-            if (nowDate.getYear() == buildYear && nowDate.getMonthValue() == m){
-                (selectedLabel = label).getStyleClass().add("selectedLabel");
-            }
-            label.setText(String.valueOf(m));
-            int finalM = m;
-            label.setOnMouseClicked(event -> {
-                selectedLabel.getStyleClass().remove("selectedLabel");
-                (selectedLabel = label).getStyleClass().add("selectedLabel");
-                date.set(LocalDate.of(buildYear, Month.of(finalM), Math.min(date.get().getDayOfMonth(), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1)))));
-            });
-            daysPane.getChildren().add(label);
-        }
-        return daysPane;
-    }
-
     /**
      * 计算指定日期的月份的最大天
      * @param date
@@ -183,6 +159,26 @@ public class DateSelector extends HBox {
         int month = date.getMonth().getValue();
         if (month == 2){
             if (date.getYear() % 4 == 0 && (date.getYear() % 100 != 0 || date.getYear() % 400 == 0)){
+                days = 29;
+            }else {
+                days = 28;
+            }
+        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
+            days = 31;
+        }
+        return days;
+    }
+
+    /**
+     * 计算指定日期的月份的最大天
+     * @param year
+     * @param month
+     * @return
+     */
+    public static int calcMaxDayForMonth(int year, int month){
+        int days = 30;
+        if (month == 2){
+            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)){
                 days = 29;
             }else {
                 days = 28;
@@ -205,40 +201,79 @@ public class DateSelector extends HBox {
     /**
      * 创建年面板
      * @param nowDate
-     * @param buildYear
+     * @param buildYear 需要创建哪一年的年面板
      * @return
      */
     private TitledPane buildYearTitledPane(LocalDate nowDate, int buildYear){
-        TitledPane monthPane = new TitledPane();
-        monthPane.getStyleClass().add(TITLED_PANE_UI);
-        monthPane.expandedProperty().addListener((observable, oldValue, newValue) -> {
+        TitledPane newYearPane = new TitledPane();
+        newYearPane.getStyleClass().add(TITLED_PANE_UI);
+        newYearPane.expandedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue){
                 ObservableList<TitledPane> panes = this.yearsPane.getPanes();
-                int i = 0;
-                for (; i < panes.size(); i++) {
-                    if (panes.get(i) == monthPane) {
+                int yearIndex = 0;
+                for (; yearIndex < panes.size(); yearIndex++) {
+                    if (panes.get(yearIndex) == newYearPane) {
                         break;
                     }
                 }
                 double showCount = this.getHeight() / 22.2D;
-                for (int j = panes.size() - i; j < showCount; j++) {
+//                确保年面板在ScrollPane中不能全部显示
+                for (int j = panes.size() - yearIndex; j < showCount; j++) {
                     panes.add(buildYearTitledPane(nowDate));
                 }
-                if (i != 0){
-                    int finalI = i;
+                if (yearIndex != 0){
+                    int finalYearIndex = yearIndex;
 //                    延迟等待新加的pane渲染完毕
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {
-//                            面板展开时高度相当于5.45个未展开面板高度
-                            ScrollUtil.slide(finalI, 4.45D + panes.size(), showCount, scrollPane, 1L);
+//                            面板展开时高度相当于4.55个未展开面板高度
+                            Timeline timeline = ScrollUtil.buildSlideTimeLine(finalYearIndex, 3.55D + panes.size(), showCount, scrollPane);
+                            timeline.setOnFinished(event -> {
+                                new Timer().schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        Platform.runLater(() -> {
+                                            panes.remove(0, finalYearIndex);
+                                            scrollPane.setVvalue(0);
+                                        });
+                                    }
+                                }, 100);
+                            });
+                            timeline.play();
                         }
-                    }, 50);
+                    }, 100);
                 }
             }
         });
-        monthPane.setText(String.valueOf(buildYear));
-        monthPane.setContent(buildMonthTilePane(nowDate, buildYear));
-        return monthPane;
+        newYearPane.setText(String.valueOf(buildYear));
+        newYearPane.setContent(buildMonthTilePane(nowDate, buildYear));
+        return newYearPane;
     }
+    /**
+     * 创建月面板
+     * @param nowDate
+     * @param buildYear 需要创建哪一年的月面板
+     * @return
+     */
+    private TilePane buildMonthTilePane(LocalDate nowDate, int buildYear){
+        TilePane newMonthPane = new TilePane();
+        newMonthPane.setAlignment(Pos.CENTER);
+        for (int m = 1; m <= 12; m++) {
+            Label label = new Label();
+            if (nowDate.getYear() == buildYear && nowDate.getMonthValue() == m){
+                (selectedLabel = label).getStyleClass().add("selectedLabel");
+            }
+            label.setText(String.valueOf(m));
+            int finalM = m;
+            label.setOnMouseClicked(event -> {
+                selectedLabel.getStyleClass().remove("selectedLabel");
+                (selectedLabel = label).getStyleClass().add("selectedLabel");
+                date.set(LocalDate.of(buildYear, Month.of(finalM), Math.min(date.get().getDayOfMonth(), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1)))));
+            });
+            newMonthPane.getChildren().add(label);
+        }
+        return newMonthPane;
+    }
+
 }

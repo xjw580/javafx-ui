@@ -13,7 +13,7 @@
     -fx-background-color: white;
 }
 .hideIcoDateTimeBackground{
-    -fx-pref-width: 89!important;
+    -fx-pref-width: 130!important;
 }
 .dateTimeBackgroundFocus{
     -fx-border-color: #0075FF!important;

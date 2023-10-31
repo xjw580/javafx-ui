@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -19,7 +20,7 @@ public class Readme extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Readme.fxml")));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Readme.fxml"))));
         primaryStage.setScene(scene);
         primaryStage.show();
     }

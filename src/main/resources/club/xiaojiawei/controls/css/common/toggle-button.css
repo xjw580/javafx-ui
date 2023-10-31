@@ -1,0 +1,14 @@
+.toggle-btn-ui{
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+    -fx-padding: 10 15 10 15;
+}
+.toggle-btn-ui:hover{
+    -fx-background-color: #cae1ff;
+}
+.toggle-btn-ui:selected{
+    -fx-text-fill: white;
+    -fx-background-color: #0075FF;
+}

@@ -4,16 +4,122 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="修正描述">
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/JavaFXUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/accordion.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Accordion.fxml" afterDir="false" />
+    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="优化样式">
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/PasswordShowField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/DateIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/FileIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/InvisibleIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/OKIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/PauseIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/PlayIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/SettingsIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/StartIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/TimeIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/UpdateIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/VisibleIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/images/ImagesLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/proxy/ProxyControls.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/PasswordShowFieldTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/TimeLineTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/ToggleButtonTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/PasswordShowField.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/password-show-field.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/text-filed.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/toggle-button.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/passwordShowField.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/DateIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/FileIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/InvisibleIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/OKIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/PauseIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/SettingsIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/StartIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/TimeIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/UpdateIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/VisibleIco.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/FileIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/InvisibleIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/OKIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/PauseIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/SettingsIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/StartIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/UpdateIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/VisibleIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/AccordionTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ButtonTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/CalendarTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/CheckBoxTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ComboBoxTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/CommonTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/DateSelector.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/DateTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/DateTimeTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/PasswordShowFieldTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ProgressTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/RadioButtonTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/SwitchTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TabPaneTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TextFieldTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TimeSelector.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TimeTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TitledPaneTab.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ToggleButtonTab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/JavaFXUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/JavaFXUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Calendar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Date.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateTime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Selection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Time.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/TimeSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/TimeSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/ArrowIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/ArrowIco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/DownIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/DownIco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/UpIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/UpIco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/BaseTransitionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/BaseTransitionEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/func/BaseTransitionFunc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/func/BaseTransitionFunc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/readme/Readme.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/readme/Readme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/readme/ReadmeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/readme/ReadmeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/AnimateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/AnimateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CalendarTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateSelectorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateSelectorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTimeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTimeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/TimeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/TimeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/utils/ScrollUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/utils/ScrollUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Date.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Date.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/DateTime.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/DateTime.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Selection.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Time.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Time.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/accordion.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/accordion.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/button.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/button.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/check-box.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/check-box.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/common.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/javafx-ui.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/javafx-ui.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/radio-button.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/radio-button.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/tab-pane.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/tab-pane.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/titled-pane.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/titled-pane.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/dateTime.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/dateTime.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/ArrowIco.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/ArrowIco.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/DownIco.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/DownIco.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/UpIco.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/ico/UpIco.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/date.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/DateIco.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/time.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/TimeIco.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Button.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Button.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/readme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/readme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Accordion.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Button.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/CheckBox.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ComboBox.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Common.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/Progress.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/RadioButton.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TabPane.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/TitledPane.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,13 +132,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaFXApplication" />
-        <option value="JavaFX Controls" />
         <option value="package.html" />
-        <option value="CSS File" />
         <option value="JavaFXControls" />
         <option value="Class" />
+        <option value="JavaFXApplication" />
         <option value="FxmlFile" />
+        <option value="FXML Controls" />
+        <option value="JavaFX Controls" />
+        <option value="CSS File" />
+        <option value="Interface" />
         <option value="FXML Tab" />
       </list>
     </option>
@@ -55,6 +163,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -71,35 +182,42 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2XLlKXIavQZIBrHMoiJkYr4AN47" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "jdk.selected.JAVA_MODULE": "graalvm-17",
-    "last_opened_file_path": "S:/java_project/Hearthstone-Script",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "fileTemplates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;graalvm-17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;S:/java_project/javafx-ui/src/main/resources/club/xiaojiawei/controls/images&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReadonlyStatusHandler">
     <option name="SHOW_DIALOG" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\controls\images" />
+      <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\controls\ico" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\readme" />
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei" />
@@ -108,8 +226,8 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.Readme">
-    <configuration name="DateTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.DateTest" />
+    <configuration name="AnimateTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.AnimateTest" />
       <module name="javafx-ui" />
       <extension name="coverage">
         <pattern>
@@ -134,12 +252,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JavaFXUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.JavaFXUI" />
+    <configuration name="PasswordShowFieldTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.PasswordShowFieldTest" />
       <module name="javafx-ui" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="club.xiaojiawei.*" />
+          <option name="PATTERN" value="club.xiaojiawei.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -189,10 +307,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Readme" />
-        <item itemvalue="Application.JavaFXUI" />
+        <item itemvalue="Application.PasswordShowFieldTest" />
         <item itemvalue="Application.DateTimeTest" />
-        <item itemvalue="Application.DateTest" />
         <item itemvalue="Application.TimeTest" />
+        <item itemvalue="Application.AnimateTest" />
       </list>
     </recent_temporary>
   </component>
@@ -235,7 +353,10 @@
       <workItem from="1698570951957" duration="55000" />
       <workItem from="1698571013371" duration="783000" />
       <workItem from="1698573401659" duration="15365000" />
-      <workItem from="1698595351524" duration="3787000" />
+      <workItem from="1698595351524" duration="4776000" />
+      <workItem from="1698630155152" duration="1560000" />
+      <workItem from="1698639966514" duration="41993000" />
+      <workItem from="1698724843550" duration="18994000" />
     </task>
     <task id="LOCAL-00001" summary="新增 button、checkBox、comboBox、progress、scrollBar、titledPane 样式">
       <option name="closed" value="true" />
@@ -277,7 +398,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698595045984</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="优化样式">
+      <option name="closed" value="true" />
+      <created>1698600124483</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698600124483</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -300,7 +429,8 @@
     <MESSAGE value="0.0.7-SNAPSHOT&#10;&#10;- 新增Readme类，启动改类后可查看所有样式和自定义组件&#10;- 新增 Button、CheckBox、ComboBox、Progress、ScrollBar、TitledPane、TabPane、RadioButton 样式&#10;- 优化日期时间相关组件" />
     <MESSAGE value="0.0.7-SNAPSHOT&#10;&#10;- 新增Readme类，启动改类后可查看所有样式和自定义组件&#10;- 新增 Button、CheckBox、ComboBox、Progress、ScrollBar、TitledPane、TabPane、RadioButton 样式&#10;- 新增Selection组件&#10;- 优化日期时间相关组件" />
     <MESSAGE value="修正描述" />
-    <option name="LAST_COMMIT_MESSAGE" value="修正描述" />
+    <MESSAGE value="优化样式" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化样式" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

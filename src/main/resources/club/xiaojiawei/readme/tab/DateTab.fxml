@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import club.xiaojiawei.controls.Date?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox styleClass="hv-box">
+        <Label text="通过showSelector、showBG调整选择器、背景可见性" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Date/>
+            <Date showSelector="false"/>
+            <Date showBG="false"/>
+            <Date showBG="false" showSelector="false"/>
+        </HBox>
+    </VBox>
+</ScrollPane>

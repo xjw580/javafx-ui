@@ -6,7 +6,7 @@
 
     <groupId>club.xiaojiawei</groupId>
     <artifactId>javafx-ui</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.8-SNAPSHOT</version>
     <name>javafx-ui</name>
 
     <properties>
@@ -36,10 +36,10 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-<!--                <excludes>-->
+                <excludes>
 <!--                    <exclude>**/readme/**</exclude>-->
-<!--                    <exclude>**/test/**</exclude>-->
-<!--                </excludes>-->
+                    <exclude>**/test/**</exclude>
+                </excludes>
             </resource>
         </resources>
         <plugins>
@@ -48,10 +48,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-<!--                    <excludes>-->
+                    <excludes>
 <!--                        <exclude>**/readme/**</exclude>-->
-<!--                        <exclude>**/test/**</exclude>-->
-<!--                    </excludes>-->
+                        <exclude>**/test/**</exclude>
+                    </excludes>
                     <source>17</source>
                     <target>17</target>
                 </configuration>

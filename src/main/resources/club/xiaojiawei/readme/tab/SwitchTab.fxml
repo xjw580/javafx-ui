@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import club.xiaojiawei.controls.Switch?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox styleClass="hv-box">
+        <Label text="可通过size属性调整开关大小" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Switch size="15"/>
+            <Switch/>
+            <Switch size="30"/>
+        </HBox>
+    </VBox>
+</ScrollPane>

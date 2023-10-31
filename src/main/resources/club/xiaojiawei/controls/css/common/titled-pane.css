@@ -10,6 +10,10 @@ titled-pane - titled-pane-ui
     -fx-background-color: white;
     -fx-alignment: CENTER_LEFT;
 }
+/*去除内容的边距*/
+.titled-pane-ui > .content > * {
+    -fx-padding: 0;
+}
 .titled-pane-ui > .content{
     -fx-background-color: white;
     -fx-border-width: 0;

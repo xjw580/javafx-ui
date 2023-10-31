@@ -6,10 +6,10 @@
     -fx-text-fill: white!important;
 }
 .radius-ui{
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+    -fx-background-radius: 5!important;
+    -fx-border-radius: 5!important;
 }
 .radius-ui-big{
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 10!important;
+    -fx-border-radius: 10!important;
 }

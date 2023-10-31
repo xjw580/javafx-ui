@@ -56,6 +56,7 @@ public class TimeSelector extends FlowPane {
         this.showRowCount = showRowCount;
         hourSelector.setMaxHeight(showRowCount * 30);
         minSelector.setMaxHeight(showRowCount * 30);
+        this.setMaxHeight(showRowCount * 30);
     }
     @FXML
     private ScrollPane hourSelector;
@@ -123,7 +124,7 @@ public class TimeSelector extends FlowPane {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        ScrollUtil.slide(pointTime, maxValue + 1, showRowCount, timeScroll, 1);
+                        ScrollUtil.buildSlideTimeLine(pointTime, maxValue + 1, showRowCount, timeScroll).play();
                     }
                 }, 50);
             }

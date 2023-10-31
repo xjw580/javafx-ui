@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox styleClass="hv-box">
+        <Label text="基类：progress-bar-ui、progress-indicator-ui" styleClass="title-three"/>
+        <VBox styleClass="hv-box">
+            <ProgressBar fx:id="progressBarUI" progress="0" styleClass="progress-bar-ui" prefWidth="800"/>
+            <ProgressBar styleClass="progress-bar-ui" prefWidth="800"/>
+            <ProgressIndicator fx:id="progressIndicatorUI" progress="0" styleClass="progress-indicator-ui"/>
+            <ProgressIndicator styleClass="progress-indicator-ui"/>
+        </VBox>
+    </VBox>
+</ScrollPane>

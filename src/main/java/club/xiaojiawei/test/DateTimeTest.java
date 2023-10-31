@@ -3,12 +3,8 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.controls.DateTime;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-
-import java.time.LocalDate;
 
 /**
  * @author 肖嘉威 xjw580@qq.com

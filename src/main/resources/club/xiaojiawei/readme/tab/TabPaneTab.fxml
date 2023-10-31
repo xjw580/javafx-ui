@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox styleClass="hv-box">
+        <Label text="基类：tab-pane-ui" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <TabPane styleClass="tab-pane-ui">
+                <tooltip>
+                    <Tooltip text="tab-pane-ui"/>
+                </tooltip>
+                <Tab text="DJW" />
+                <Tab text="AMS" />
+            </TabPane>
+        </HBox>
+        <Label text="大小类：tab-pane-ui-small" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <TabPane styleClass="tab-pane-ui, tab-pane-ui-small">
+                <tooltip>
+                    <Tooltip text="tab-pane-ui, tab-pane-ui-small"/>
+                </tooltip>
+                <Tab text="DJW" />
+                <Tab text="AMS" />
+            </TabPane>
+        </HBox>
+    </VBox>
+</ScrollPane>

@@ -44,6 +44,17 @@
 
 ## 更新信息
 
+##### 0.0.8-SNAPSHOT
+
+- 新增样式：Accordion、ToggleButton、TextField、Common
+- 优化样式：TabPane
+- 新增组件：PasswordShowField（可见密码输入框）
+- 删除组件：Selection
+- 增加图标：DateIco、TimeIco、FileIco、InvisibleIco、VisibleIco、OKIco、StartIco、PauseIco、SettingsIco、UpdateIco
+- 优化动画
+
+
+
 ##### 0.0.7-SNAPSHOT
 
 - 新增Readme类，启动该类后可查看所有样式和自定义组件

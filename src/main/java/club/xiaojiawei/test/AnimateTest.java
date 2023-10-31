@@ -1,31 +1,23 @@
 package club.xiaojiawei.test;
 
-import javafx.animation.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.awt.*;
-import java.io.File;
-import java.util.Objects;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
-import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -44,24 +36,26 @@ public class AnimateTest extends Application {
         anchorPane.setTranslateX(50);
         anchorPane.setTranslateY(50);
         root.getChildren().add(anchorPane);
+        int height = 32;
+        int width = 60;
         Rectangle bgBottom = new Rectangle(){{
-            setHeight(35);
-            setWidth(60);
+            setHeight(height);
+            setWidth(width);
             setFill(Paint.valueOf("0075FF33"));
             setArcHeight(5D);
             setArcWidth(5D);
         }};
         Rectangle bgTop = new Rectangle(){{
-            setHeight(35);
-            setWidth(60);
+            setHeight(height);
+            setWidth(width);
             setFill(Paint.valueOf("0075FF"));
             setArcHeight(5D);
             setArcWidth(5D);
         }};
         Label label = new Label(){{
             setText("Hello");
-            setPrefHeight(35);
-            setPrefWidth(60);
+            setPrefHeight(height);
+            setPrefWidth(width);
             setAlignment(Pos.CENTER);
             setBackground(new Background(new BackgroundFill(Color.web("transparent"), new CornerRadii(5D), Insets.EMPTY)));
         }};
