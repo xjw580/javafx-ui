@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import club.xiaojiawei.controls.ico.UpdateIco?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import club.xiaojiawei.controls.ico.PlayIco?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">

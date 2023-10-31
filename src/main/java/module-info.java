@@ -11,12 +11,14 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei.test;
     exports club.xiaojiawei.controls.ico;
     exports club.xiaojiawei.readme;
+    exports club.xiaojiawei.proxy;
     exports club.xiaojiawei;
 
     opens club.xiaojiawei.controls to javafx.fxml;
     opens club.xiaojiawei.test to javafx.fxml;
     opens club.xiaojiawei.controls.ico to javafx.fxml;
     opens club.xiaojiawei.readme to javafx.fxml;
+    opens club.xiaojiawei.proxy to javafx.fxml;
 }
 /**
  * 主颜色：#0075FF

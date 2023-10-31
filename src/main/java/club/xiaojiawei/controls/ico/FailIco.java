@@ -6,11 +6,11 @@ import org.girod.javafx.svgimage.SVGLoader;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
- * @date 2023/10/31 0:05
+ * @date 2023/10/31 22:28
  */
-public class StartIco extends StackPane {
+public class FailIco extends StackPane {
 
-    public StartIco() {
+    public FailIco() {
         this.getChildren().add(SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg")));
     }
 }

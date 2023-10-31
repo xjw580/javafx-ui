@@ -2,7 +2,7 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.InvisibleIco;
 import club.xiaojiawei.controls.ico.VisibleIco;
-import club.xiaojiawei.proxy.ProxyControls;
+import club.xiaojiawei.proxy.ProxyAnchorPaneRegion;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -21,7 +20,7 @@ import java.io.IOException;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/31 14:25
  */
-public class PasswordShowField extends AnchorPane implements ProxyControls<TextField> {
+public class PasswordShowField extends ProxyAnchorPaneRegion<TextField> {
     /**
      * 密码框文本
      */
@@ -51,19 +50,15 @@ public class PasswordShowField extends AnchorPane implements ProxyControls<TextF
     public void setPromptText(String promptText) {
         textField.setPromptText(promptText);
     }
-
     public TextFormatter<?> getTextFormatter() {
         return textFormatter.get();
     }
-
     public ObjectProperty<TextFormatter<?>> textFormatterProperty() {
         return textFormatter;
     }
-
     public void setTextFormatter(TextFormatter<?> textFormatter) {
         this.textFormatter.set(textFormatter);
     }
-
 
     @FXML private StackPane icoPane;
     @FXML private InvisibleIco inVisibleIco;
@@ -71,9 +66,10 @@ public class PasswordShowField extends AnchorPane implements ProxyControls<TextF
     @FXML private TextField textField;
 
     @Override
-    public TextField getRealControls() {
+    public TextField getRegion() {
         return textField;
     }
+
 
     public PasswordShowField() {
         try {
