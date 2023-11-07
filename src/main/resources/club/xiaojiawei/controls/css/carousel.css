@@ -1,0 +1,29 @@
+.image{
+    -fx-background-size: cover ;
+}
+#left, #right{
+    -fx-opacity: 0;
+    -fx-alignment: CENTER;
+    -fx-padding: 9 0 9 0;
+    -fx-pref-width: 30;
+    -fx-background-radius: 15;
+    -fx-background-color: rgba(128, 128, 128, 0.5);
+}
+.root:hover > #left{
+    -fx-opacity: 1;
+}
+.root:hover > #right{
+    -fx-opacity: 1;
+}
+.root{
+    -fx-padding: 0 0 45 0;
+}
+.dot{
+    -fx-fill: #e5e5e5;
+}
+.dot:hover{
+    -fx-fill: #b3d5ff;
+}
+.currentDot{
+    -fx-fill: #0075FF!important;
+}

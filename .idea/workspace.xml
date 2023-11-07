@@ -4,31 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="0.0.8-SNAPSHOT&#10;&#10;- 新增样式：Accordion、ToggleButton、TextField、Common&#10;- 优化样式：TabPane&#10;- 新增组件：PasswordShowField（可见密码输入框）&#10;- 删除组件：Selection&#10;- 增加图标：DateIco、TimeIco、FileIco、InvisibleIco、VisibleIco、OKIco、StartIco、PauseIco、SettingsIco、UpdateIco&#10;- 优化动画">
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/FailIco.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/WarnIco.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/proxy/ProxyAnchorPaneRegion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/proxy/ProxyRegion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/FailIco.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/WarnIco.svg" afterDir="false" />
+    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="新增刷新图标">
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Carousel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/config/ThreadPoolConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/FlushIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/LeftIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/RightIco.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CarouselTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Carousel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/carousel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/FlushIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/LeftIco.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/RightIco.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/PasswordShowField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/PasswordShowField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/DateIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/DateIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/FileIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/FileIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/InvisibleIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/InvisibleIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/OKIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/OKIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/PauseIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/PauseIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/SettingsIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/SettingsIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/StartIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/StartIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/TimeIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/TimeIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/UpdateIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/UpdateIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/VisibleIco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/ico/VisibleIco.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/proxy/ProxyControls.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/OKIco.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/images/OKIco.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ButtonTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ButtonTab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/DateSelector.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/DateSelectorTab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ProgressTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/ProgressTab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/BaseTransitionEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/BaseTransitionEnum.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,13 +39,13 @@
       <list>
         <option value="package.html" />
         <option value="JavaFXControls" />
-        <option value="JavaFXApplication" />
         <option value="FxmlFile" />
-        <option value="FXML Controls" />
-        <option value="JavaFX Controls" />
-        <option value="CSS File" />
         <option value="Interface" />
         <option value="FXML Tab" />
+        <option value="JavaFX Controls" />
+        <option value="FXML Controls" />
+        <option value="CSS File" />
+        <option value="JavaFXApplication" />
         <option value="JavaFX Ico" />
         <option value="Class" />
       </list>
@@ -129,15 +125,16 @@
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\controls\ico" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\controls\images" />
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\readme" />
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei" />
       <recent name="S:\java_project\javafx-ui\src\main\java\club\xiaojiawei\readme" />
       <recent name="S:\java_project\javafx-ui\src\main\resources\readme" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Readme">
-    <configuration name="AnimateTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.AnimateTest" />
+  <component name="RunManager" selected="Application.CarouselTest">
+    <configuration name="CarouselTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.CarouselTest" />
       <module name="javafx-ui" />
       <extension name="coverage">
         <pattern>
@@ -216,11 +213,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CarouselTest" />
         <item itemvalue="Application.Readme" />
         <item itemvalue="Application.PasswordShowFieldTest" />
         <item itemvalue="Application.DateTimeTest" />
         <item itemvalue="Application.TimeTest" />
-        <item itemvalue="Application.AnimateTest" />
       </list>
     </recent_temporary>
   </component>
@@ -267,7 +264,11 @@
       <workItem from="1698630155152" duration="1560000" />
       <workItem from="1698639966514" duration="41993000" />
       <workItem from="1698724843550" duration="19121000" />
-      <workItem from="1698755504545" duration="10165000" />
+      <workItem from="1698755504545" duration="10208000" />
+      <workItem from="1699165696371" duration="1305000" />
+      <workItem from="1699168025679" duration="6000" />
+      <workItem from="1699285091058" duration="2208000" />
+      <workItem from="1699329596701" duration="31254000" />
     </task>
     <task id="LOCAL-00001" summary="新增 button、checkBox、comboBox、progress、scrollBar、titledPane 样式">
       <option name="closed" value="true" />
@@ -325,7 +326,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698747316565</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="代码优化">
+      <option name="closed" value="true" />
+      <created>1698774847163</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698774847163</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +359,8 @@
     <MESSAGE value="修正描述" />
     <MESSAGE value="优化样式" />
     <MESSAGE value="0.0.8-SNAPSHOT&#10;&#10;- 新增样式：Accordion、ToggleButton、TextField、Common&#10;- 优化样式：TabPane&#10;- 新增组件：PasswordShowField（可见密码输入框）&#10;- 删除组件：Selection&#10;- 增加图标：DateIco、TimeIco、FileIco、InvisibleIco、VisibleIco、OKIco、StartIco、PauseIco、SettingsIco、UpdateIco&#10;- 优化动画" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.8-SNAPSHOT&#10;&#10;- 新增样式：Accordion、ToggleButton、TextField、Common&#10;- 优化样式：TabPane&#10;- 新增组件：PasswordShowField（可见密码输入框）&#10;- 删除组件：Selection&#10;- 增加图标：DateIco、TimeIco、FileIco、InvisibleIco、VisibleIco、OKIco、StartIco、PauseIco、SettingsIco、UpdateIco&#10;- 优化动画" />
+    <MESSAGE value="代码优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码优化" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

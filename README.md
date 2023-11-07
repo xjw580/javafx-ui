@@ -44,6 +44,14 @@
 
 ## 更新信息
 
+##### 0.0.9-SNAPSHOT
+
+- 新增组件：Carousel（轮播图）
+
+- 新增图标：FlushIco（刷新）、LeftIco（向左）、RightIco（向右）
+
+    
+
 ##### 0.0.8-SNAPSHOT
 
 - 新增样式：Accordion、ToggleButton、TextField、Common

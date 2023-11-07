@@ -17,6 +17,7 @@ import javafx.scene.layout.StackPane;
 import java.io.IOException;
 
 /**
+ * 密码输入框
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/31 14:25
  */
