@@ -37,6 +37,7 @@
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Time" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="DateSelector" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Calendar" prefWidth="${left.width}"/>
+                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Carousel" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Date" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="DateTime" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="PasswordShowField" prefWidth="${left.width}"/>

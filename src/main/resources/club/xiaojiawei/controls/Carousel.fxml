@@ -3,8 +3,8 @@
 <?import club.xiaojiawei.controls.ico.LeftIco?>
 <?import club.xiaojiawei.controls.ico.RightIco?>
 <?import javafx.scene.layout.*?>
-<fx:root styleClass="root" type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/carousel.css" prefWidth="800">
-    <AnchorPane fx:id="images"  prefWidth="800"/>
+<fx:root styleClass="root" type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/carousel.css" minWidth="800">
+    <AnchorPane fx:id="images" prefWidth="800"/>
     <HBox fx:id="left" AnchorPane.topAnchor="85" AnchorPane.leftAnchor="10">
         <LeftIco/>
     </HBox>

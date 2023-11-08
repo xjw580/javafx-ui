@@ -2,6 +2,7 @@ package club.xiaojiawei.test;
 
 import club.xiaojiawei.controls.Carousel;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -25,7 +26,14 @@ public class CarouselTest extends Application {
         vBox.getChildren().add(hBox);
         Carousel carousel = new Carousel();
         carousel.setAutoPlay(true);
-//        carousel.setImagesURL(FXCollections.observableArrayList("images/1.jpg", "images/2.jpg", "images/3.jpg", "images/4.jpg", "images/5.jpg", "images/6.png"));
+        carousel.setImagesURL(FXCollections.observableArrayList(
+//                "https://zergqueen.gitee.io/images/javafx-ui/carousel1.jpg",
+                "https://zergqueen.gitee.io/images/javafx-ui/carousel2.jpg",
+//                "https://zergqueen.gitee.io/images/javafx-ui/carousel3.jpg",
+                "https://zergqueen.gitee.io/images/javafx-ui/carousel4.jpg",
+                "https://zergqueen.gitee.io/images/javafx-ui/carousel7.jpg",
+                "https://zergqueen.gitee.io/images/javafx-ui/carousel6.jpg"
+        ));
         System.out.println(carousel.getImageChildren());
         hBox.getChildren().add(carousel);
         Scene scene = new Scene(vBox, 1500, 800);

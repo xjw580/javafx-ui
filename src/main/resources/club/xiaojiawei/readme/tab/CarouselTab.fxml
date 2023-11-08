@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.Carousel?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox alignment="CENTER" translateY="50" translateX="25">
+        <HBox alignment="CENTER">
+            <Carousel autoPlay="true">
+                <imagesURL>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel2.jpg"/>
+                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel4.jpg"/>
+                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel6.jpg"/>
+                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel7.jpg"/>
+                    </FXCollections>
+                </imagesURL>
+            </Carousel>
+        </HBox>
+    </VBox>
+</ScrollPane>

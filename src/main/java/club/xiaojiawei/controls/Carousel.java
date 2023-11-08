@@ -2,6 +2,8 @@ package club.xiaojiawei.controls;
 
 import javafx.animation.ParallelTransition;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +29,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_X;
  * @date 2023/11/6 23:39
  */
 public class Carousel extends AnchorPane {
-    private int currentIndex = 0;
+    private final IntegerProperty currentIndex = new SimpleIntegerProperty(0);
     private ObservableList<String> imagesURL;
     private boolean autoPlay;
 
@@ -41,7 +43,7 @@ public class Carousel extends AnchorPane {
             }
             autoPlaySchedule = SCHEDULED_POOL.scheduleAtFixedRate(() -> {
                 if (!isHoverImage){
-                    next();
+                    currentIndex.set(getIndex(currentIndex.get() + 1));
                 }
             }, 5, 5, TimeUnit.SECONDS);
         }else {
@@ -51,24 +53,31 @@ public class Carousel extends AnchorPane {
             }
         }
     }
-
     /**
      * @return ObservableList<AnchorPane> AnchorPane的背景为图片
      */
     public ObservableList<Node> getImageChildren() {
         return images.getChildren();
     }
-
     public int getCurrentIndex() {
+        return currentIndex.get();
+    }
+    public IntegerProperty currentIndexProperty() {
         return currentIndex;
     }
-
+    public void setCurrentIndex(int currentIndex) {
+        this.currentIndex.set(currentIndex);
+    }
     public ObservableList<String> getImagesURL() {
         return imagesURL;
     }
+
+    /**
+     * @param imagesURL 图片最少3张，建议至少4张，3张的动画稍微有点问题
+     */
     public void setImagesURL(ObservableList<String> imagesURL) {
         if (imagesURL.size() < 3){
-            throw new RuntimeException("图片个数最少3个");
+            throw new RuntimeException("图片最少3张");
         }
         this.imagesURL = imagesURL;
         for (int i = imagesURL.size() - 2; i >= 2; i--) {
@@ -92,13 +101,7 @@ public class Carousel extends AnchorPane {
                 dots.getChildren().add(dot = new Circle(){{setRadius(3D);getStyleClass().add("dot");}});
             }
             int finalI = i;
-            dot.setOnMouseClicked(event -> {
-                if (finalI > currentIndex){
-                    next(finalI - currentIndex);
-                }else if (finalI < currentIndex){
-                    last(currentIndex - finalI);
-                }
-            });
+            dot.setOnMouseClicked(event -> currentIndex.set(finalI));
         }
     }
     private AnchorPane buildImage(String url, int index){
@@ -120,11 +123,7 @@ public class Carousel extends AnchorPane {
             setHeight(200D);
         }});
         image.setOnMouseClicked(event -> {
-            if (index == (currentIndex + 1) % imagesURL.size()){
-                next();
-            }else if (index == (currentIndex - 1 + imagesURL.size()) % imagesURL.size()){
-                last();
-            }
+            currentIndex.set(index);
         });
         return image;
     }
@@ -155,14 +154,29 @@ public class Carousel extends AnchorPane {
         }
     }
     private void addListener(){
-        left.setOnMouseClicked(event -> last());
-        right.setOnMouseClicked(event -> next());
-        images.hoverProperty().addListener((observable, oldValue, newValue) -> {
+        left.setOnMouseClicked(event -> currentIndex.set(getIndex(currentIndex.get() - 1)));
+        right.setOnMouseClicked(event -> currentIndex.set(getIndex(currentIndex.get() + 1)));
+        this.hoverProperty().addListener((observable, oldValue, newValue) -> {
             isHoverImage = newValue;
         });
-    }
-    private void next(){
-        next(1);
+        currentIndex.addListener((observable, oldValue, newValue) -> {
+            int newInt = newValue.intValue(), oldInt = oldValue.intValue();
+            dots.getChildren().get(oldInt).getStyleClass().remove("currentDot");
+            dots.getChildren().get(newInt).getStyleClass().add("currentDot");
+            if (newInt > oldInt){
+                if (newInt - oldInt > oldInt + imagesURL.size() - newInt){
+                    last(oldInt + imagesURL.size() - newInt);
+                }else {
+                    next(newInt - oldInt);
+                }
+            }else {
+                if (oldInt - newInt < imagesURL.size() - oldInt + newInt){
+                    last(oldInt - newInt);
+                }else {
+                    next(imagesURL.size() - oldInt + newInt);
+                }
+            }
+        });
     }
     private void next(int count){
         if (isPlaying || imagesURL == null || imagesURL.size() < 3 || count == 0){
@@ -191,14 +205,10 @@ public class Carousel extends AnchorPane {
                 Node remove = imageChildren.remove(imageChildren.size() - 2);
                 imageChildren.add(0, remove);
             }
-            changeCurrentIndex((currentIndex + 1) % imagesURL.size());
             isPlaying = false;
             next(count - 1);
         }), TIME >> 1, TimeUnit.MILLISECONDS);
         transition.play();
-    }
-    private void last(){
-        last(1);
     }
     private void last(int count){
         if (isPlaying || imagesURL == null || imagesURL.size() < 3 || count == 0){
@@ -227,16 +237,13 @@ public class Carousel extends AnchorPane {
                 Node node = imageChildren.remove(0);
                 imageChildren.add(imageChildren.size() - 2, node);
             }
-            changeCurrentIndex((currentIndex - 1 + imagesURL.size()) % imagesURL.size());
             isPlaying = false;
             last(count - 1);
         }), TIME >> 1, TimeUnit.MILLISECONDS);
         transition.play();
     }
 
-    private void changeCurrentIndex(int newIndex){
-        dots.getChildren().get(currentIndex).getStyleClass().remove("currentDot");
-        dots.getChildren().get(newIndex).getStyleClass().add("currentDot");
-        currentIndex = newIndex;
+    private int getIndex(int index){
+        return (index + imagesURL.size()) % imagesURL.size();
     }
 }
