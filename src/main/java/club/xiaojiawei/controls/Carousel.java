@@ -32,6 +32,25 @@ public class Carousel extends AnchorPane {
     private final IntegerProperty currentIndex = new SimpleIntegerProperty(0);
     private ObservableList<String> imagesURL;
     private boolean autoPlay;
+    private double nudeScale = 0.375D;
+
+    public double getNudeScale() {
+        return nudeScale;
+    }
+    public void setNudeScale(double nudeScale) {
+        if (nudeScale > 1 || nudeScale < 0){
+            throw new IllegalArgumentException("nudeScale必须处于[0,1]区间");
+        }
+        isHoverImage = true;
+        translateX = (this.nudeScale = nudeScale + (SCALE_UP - 1) / 2) * IMAGE_WIDTH;
+        images.setPrefWidth(translateX * 2 + IMAGE_WIDTH);
+        for (int i = 0; i < imageChildren.size() - 3; i++) {
+            imageChildren.get(i).setTranslateX(translateX);
+        }
+        imageChildren.get(imageChildren.size() - 2).setTranslateX(translateX * 2);
+        imageChildren.get(imageChildren.size() - 1).setTranslateX(translateX);
+        isHoverImage = false;
+    }
 
     public boolean isAutoPlay() {
         return autoPlay;
@@ -43,7 +62,7 @@ public class Carousel extends AnchorPane {
             }
             autoPlaySchedule = SCHEDULED_POOL.scheduleAtFixedRate(() -> {
                 if (!isHoverImage){
-                    currentIndex.set(getIndex(currentIndex.get() + 1));
+                    currentIndex.set(formatIndex(currentIndex.get() + 1));
                 }
             }, 5, 5, TimeUnit.SECONDS);
         }else {
@@ -73,26 +92,31 @@ public class Carousel extends AnchorPane {
     }
 
     /**
-     * @param imagesURL 图片最少3张，建议至少4张，3张的动画稍微有点问题
+     * @param imagesURL 图片最少3张
      */
     public void setImagesURL(ObservableList<String> imagesURL) {
         if (imagesURL.size() < 3){
-            throw new RuntimeException("图片最少3张");
+            throw new IllegalArgumentException("imagesURL.size()必须处于[3,+∞)区间");
         }
+        images.setPrefWidth(translateX * 2 + IMAGE_WIDTH);
         this.imagesURL = imagesURL;
-        for (int i = imagesURL.size() - 2; i >= 2; i--) {
-            images.getChildren().add(buildImage(imagesURL.get(i), i));
+        for (int i = imagesURL.size() - 2; i > 1; i--) {
+            AnchorPane image = buildImage(imagesURL.get(i), i);
+            image.setTranslateX(translateX);
+            imageChildren.add(image);
         }
-        AnchorPane leftImage = buildImage(imagesURL.get(imagesURL.size() - 1), imagesURL.size() - 1);
-        leftImage.setTranslateX(0D);
-        images.getChildren().add(leftImage);
-        AnchorPane middleImage = buildImage(imagesURL.get(1), 1);
-        middleImage.setTranslateX(400D);
-        images.getChildren().add(middleImage);
-        AnchorPane rightImage = buildImage(imagesURL.get(0), 0);
-        rightImage.setScaleX(1.25D);
-        rightImage.setScaleY(1.25D);
-        images.getChildren().add(rightImage);
+//        left image
+        imageChildren.add(buildImage(imagesURL.get(imagesURL.size() - 1), imagesURL.size() - 1));
+//        right image
+        AnchorPane image = buildImage(imagesURL.get(1), 1);
+        image.setTranslateX(translateX * 2);
+        imageChildren.add(image);
+//        middle image
+        image = buildImage(imagesURL.get(0), 0);
+        image.setTranslateX(translateX);
+        image.setScaleX(SCALE_UP);
+        image.setScaleY(SCALE_UP);
+        imageChildren.add(image);
         for (int i = 0; i < imagesURL.size(); i++) {
             Circle dot;
             if (i == 0){
@@ -107,20 +131,20 @@ public class Carousel extends AnchorPane {
     private AnchorPane buildImage(String url, int index){
         AnchorPane image = new AnchorPane(){{
             getStyleClass().add("image");
-            setPrefWidth(400D);
-            setPrefHeight(200D);
-            setTranslateX(200D);
+            setPrefWidth(IMAGE_WIDTH);
+            setPrefHeight(IMAGE_HEIGHT);
             if (url.startsWith("http")){
                 setStyle("-fx-background-image: url(" + url + ");");
             }else {
+                System.out.println(getClass().getResource(url).toExternalForm());
                 setStyle("-fx-background-image: url(" + Objects.requireNonNull(getClass().getResource(url)).toExternalForm() + ");");
             }
         }};
         image.setClip(new Rectangle(){{
-            setArcHeight(15D);
-            setArcWidth(15D);
-            setWidth(400D);
-            setHeight(200D);
+            setArcHeight(IMAGE_ARC);
+            setArcWidth(IMAGE_ARC);
+            setWidth(IMAGE_WIDTH);
+            setHeight(IMAGE_HEIGHT);
         }});
         image.setOnMouseClicked(event -> {
             currentIndex.set(index);
@@ -141,6 +165,11 @@ public class Carousel extends AnchorPane {
     private boolean isPlaying;
     private ScheduledFuture<?> autoPlaySchedule;
     private boolean isHoverImage;
+    private double translateX = (nudeScale + (SCALE_UP - 1) / 2) * IMAGE_WIDTH;
+    private static final double SCALE_UP = 1.25D;
+    private static final double IMAGE_WIDTH = 400D;
+    private static final double IMAGE_HEIGHT = 200D;
+    private static final double IMAGE_ARC = 15D;
     public Carousel() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -154,8 +183,8 @@ public class Carousel extends AnchorPane {
         }
     }
     private void addListener(){
-        left.setOnMouseClicked(event -> currentIndex.set(getIndex(currentIndex.get() - 1)));
-        right.setOnMouseClicked(event -> currentIndex.set(getIndex(currentIndex.get() + 1)));
+        left.setOnMouseClicked(event -> currentIndex.set(formatIndex(currentIndex.get() - 1)));
+        right.setOnMouseClicked(event -> currentIndex.set(formatIndex(currentIndex.get() + 1)));
         this.hoverProperty().addListener((observable, oldValue, newValue) -> {
             isHoverImage = newValue;
         });
@@ -187,15 +216,15 @@ public class Carousel extends AnchorPane {
         transition.getChildren().addAll(
                 SLIDE_X.get(imageChildren.get(imageChildren.size() - 1), 0, DURATION),
                 SCALE.get(imageChildren.get(imageChildren.size() - 1), 1, DURATION),
-                SLIDE_X.get(imageChildren.get(imageChildren.size() - 2), 200, DURATION),
-                SCALE.get(imageChildren.get(imageChildren.size() - 2), 1.25, DURATION)
+                SLIDE_X.get(imageChildren.get(imageChildren.size() - 2), translateX, DURATION),
+                SCALE.get(imageChildren.get(imageChildren.size() - 2), SCALE_UP, DURATION)
         );
         if (imageChildren.size() == 3){
-            transition.getChildren().add(SLIDE_X.get(imageChildren.get(0), 400, DURATION));
+            transition.getChildren().add(SLIDE_X.get(imageChildren.get(0), translateX * 2, DURATION));
         }else {
             transition.getChildren().addAll(
-                    SLIDE_X.get(imageChildren.get(imageChildren.size() - 3), 200, DURATION),
-                    SLIDE_X.get(imageChildren.get(imageChildren.size() - 4), 400, DURATION)
+                    SLIDE_X.get(imageChildren.get(imageChildren.size() - 3), translateX, DURATION),
+                    SLIDE_X.get(imageChildren.get(imageChildren.size() - 4), translateX * 2, DURATION)
             );
         }
         SCHEDULED_POOL.schedule(() -> Platform.runLater(() -> {
@@ -217,10 +246,10 @@ public class Carousel extends AnchorPane {
         isPlaying = true;
         ParallelTransition transition = new ParallelTransition();
         transition.getChildren().addAll(
-                SLIDE_X.get(imageChildren.get(imageChildren.size() - 1), 400, DURATION),
+                SLIDE_X.get(imageChildren.get(imageChildren.size() - 1), translateX * 2, DURATION),
                 SCALE.get(imageChildren.get(imageChildren.size() - 1), 1, DURATION),
-                SLIDE_X.get(imageChildren.get(imageChildren.size() - 3), 200, DURATION),
-                SCALE.get(imageChildren.get(imageChildren.size() - 3), 1.25, DURATION)
+                SLIDE_X.get(imageChildren.get(imageChildren.size() - 3), translateX, DURATION),
+                SCALE.get(imageChildren.get(imageChildren.size() - 3), SCALE_UP, DURATION)
 
         );
         if (imageChildren.size() == 3){
@@ -228,7 +257,7 @@ public class Carousel extends AnchorPane {
         }else {
             transition.getChildren().addAll(
                     SLIDE_X.get(imageChildren.get(0), 0, DURATION),
-                    SLIDE_X.get(imageChildren.get(imageChildren.size() - 2), 200, DURATION)
+                    SLIDE_X.get(imageChildren.get(imageChildren.size() - 2), translateX, DURATION)
             );
         }
         SCHEDULED_POOL.schedule(() -> Platform.runLater(() -> {
@@ -243,7 +272,7 @@ public class Carousel extends AnchorPane {
         transition.play();
     }
 
-    private int getIndex(int index){
+    private int formatIndex(int index){
         return (index + imagesURL.size()) % imagesURL.size();
     }
 }

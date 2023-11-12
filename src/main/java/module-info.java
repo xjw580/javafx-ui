@@ -4,6 +4,7 @@ module club.xiaojiawei.javafx_ui {
     requires javafx.fxml;
     requires org.girod.javafx.svgimage;
     requires java.desktop;
+    requires org.apache.tika.core;
 
     exports club.xiaojiawei.utils;
     exports club.xiaojiawei.enums;

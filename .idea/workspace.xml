@@ -4,22 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="0.0.9-SNAPSHOT&#10;&#10;- 新增组件：Carousel（轮播图）&#10;- 新增图标：FlushIco（刷新）、LeftIco（向左）、RightIco（向右）">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/tab/CarouselTab.fxml" afterDir="false" />
+    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="增加文件上传组件，分页样式；优化Carousel组件">
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/FileUploader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/MimeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/FileUploaderTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/ListCellApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/FileUploader.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/fileUploader.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/rebel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Carousel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Carousel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CarouselTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CarouselTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Carousel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Carousel.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -28,13 +36,14 @@
         <option value="JavaFXControls" />
         <option value="FxmlFile" />
         <option value="Interface" />
+        <option value="JavaFX Ico" />
+        <option value="FXML Tab" />
+        <option value="Class" />
         <option value="JavaFX Controls" />
         <option value="FXML Controls" />
         <option value="CSS File" />
         <option value="JavaFXApplication" />
-        <option value="JavaFX Ico" />
-        <option value="Class" />
-        <option value="FXML Tab" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -51,13 +60,21 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="f8ad85e2-b220-4ba7-8ccf-01724ffce6fc" />
+        <option name="accountId" value="5f080008-fb8d-486c-8ffa-619f80803dfa" />
         <option name="url" value="https://github.com/xjw580/javafx-ui.git" />
       </UrlAndAccount>
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="javafx-ui/invalid/JRebel" />
+    </ignored-facets>
+  </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -112,14 +129,14 @@
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\controls\ico" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="S:\java_project\javafx-ui\src\main\resources" />
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\controls\images" />
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei\readme" />
       <recent name="S:\java_project\javafx-ui\src\main\resources\club\xiaojiawei" />
       <recent name="S:\java_project\javafx-ui\src\main\java\club\xiaojiawei\readme" />
-      <recent name="S:\java_project\javafx-ui\src\main\resources\readme" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Readme">
+  <component name="RunManager" selected="Application.FileUploaderTest">
     <configuration name="CarouselTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.CarouselTest" />
       <module name="javafx-ui" />
@@ -133,8 +150,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DateTimeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.DateTimeTest" />
+    <configuration name="FileUploaderTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.FileUploaderTest" />
+      <module name="javafx-ui" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="club.xiaojiawei.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ListCellApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.ListCellApplication" />
       <module name="javafx-ui" />
       <extension name="coverage">
         <pattern>
@@ -185,26 +215,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TimeTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.TimeTest" />
-      <module name="javafx-ui" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="club.xiaojiawei.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+    <list>
+      <item itemvalue="Application.FileUploaderTest" />
+      <item itemvalue="Application.ListCellApplication" />
+      <item itemvalue="Application.CarouselTest" />
+      <item itemvalue="Application.PasswordShowFieldTest" />
+      <item itemvalue="Application.Readme" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Readme" />
+        <item itemvalue="Application.FileUploaderTest" />
         <item itemvalue="Application.CarouselTest" />
+        <item itemvalue="Application.ListCellApplication" />
         <item itemvalue="Application.PasswordShowFieldTest" />
-        <item itemvalue="Application.DateTimeTest" />
-        <item itemvalue="Application.TimeTest" />
+        <item itemvalue="Application.Readme" />
       </list>
     </recent_temporary>
   </component>
@@ -256,7 +280,27 @@
       <workItem from="1699168025679" duration="6000" />
       <workItem from="1699285091058" duration="2208000" />
       <workItem from="1699329596701" duration="31719000" />
-      <workItem from="1699419588379" duration="5156000" />
+      <workItem from="1699419588379" duration="5648000" />
+      <workItem from="1699425596728" duration="522000" />
+      <workItem from="1699440342830" duration="186000" />
+      <workItem from="1699440537160" duration="59000" />
+      <workItem from="1699440603695" duration="35000" />
+      <workItem from="1699440646239" duration="127000" />
+      <workItem from="1699440781171" duration="63000" />
+      <workItem from="1699440852344" duration="213000" />
+      <workItem from="1699441074460" duration="10000" />
+      <workItem from="1699441091461" duration="1639000" />
+      <workItem from="1699467020711" duration="68000" />
+      <workItem from="1699467095312" duration="328000" />
+      <workItem from="1699467434044" duration="134000" />
+      <workItem from="1699467575211" duration="89000" />
+      <workItem from="1699468497194" duration="161000" />
+      <workItem from="1699503978507" duration="13888000" />
+      <workItem from="1699522359633" duration="52000" />
+      <workItem from="1699535842729" duration="1703000" />
+      <workItem from="1699590895813" duration="6985000" />
+      <workItem from="1699624699703" duration="113000" />
+      <workItem from="1699680706285" duration="11376000" />
     </task>
     <task id="LOCAL-00001" summary="新增 button、checkBox、comboBox、progress、scrollBar、titledPane 样式">
       <option name="closed" value="true" />
@@ -330,11 +374,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699379006640</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="优化Carousel，增加Carousel展示">
+      <option name="closed" value="true" />
+      <created>1699425363943</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699425363943</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.openjfx:javafx-base" />
+    <option featureType="com.intellij.facetType" implementationName="JRebel" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -357,7 +413,8 @@
     <MESSAGE value="0.0.8-SNAPSHOT&#10;&#10;- 新增样式：Accordion、ToggleButton、TextField、Common&#10;- 优化样式：TabPane&#10;- 新增组件：PasswordShowField（可见密码输入框）&#10;- 删除组件：Selection&#10;- 增加图标：DateIco、TimeIco、FileIco、InvisibleIco、VisibleIco、OKIco、StartIco、PauseIco、SettingsIco、UpdateIco&#10;- 优化动画" />
     <MESSAGE value="代码优化" />
     <MESSAGE value="0.0.9-SNAPSHOT&#10;&#10;- 新增组件：Carousel（轮播图）&#10;- 新增图标：FlushIco（刷新）、LeftIco（向左）、RightIco（向右）" />
-    <option name="LAST_COMMIT_MESSAGE" value="0.0.9-SNAPSHOT&#10;&#10;- 新增组件：Carousel（轮播图）&#10;- 新增图标：FlushIco（刷新）、LeftIco（向左）、RightIco（向右）" />
+    <MESSAGE value="优化Carousel，增加Carousel展示" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化Carousel，增加Carousel展示" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

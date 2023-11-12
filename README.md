@@ -44,10 +44,16 @@
 
 ## 更新信息
 
+##### 0.1.0-SNAPSHOT
+
+- 新增组件：FileUploader（文件上传）
+- 优化组件：Carousel（轮播图），可调整图片覆盖程度
+
+    
+
 ##### 0.0.9-SNAPSHOT
 
 - 新增组件：Carousel（轮播图）
-
 - 新增图标：FlushIco（刷新）、LeftIco（向左）、RightIco（向右）
 
     
