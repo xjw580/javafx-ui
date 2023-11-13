@@ -9,13 +9,18 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -27,8 +32,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-import static club.xiaojiawei.enums.MimeEnum.IMAGE_JPEG;
-import static club.xiaojiawei.enums.MimeEnum.IMAGE_PNG;
+import static club.xiaojiawei.enums.MimeEnum.*;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -127,7 +131,7 @@ public class FileUploader extends AnchorPane {
             }
         });
         content.setOnMouseClicked(event -> {
-            if (event.getTarget() == content){
+            if (event.getTarget() == content || event.getTarget() == tip){
                 FileChooser fileChooser = new FileChooser();
                 File chooseFile = fileChooser.showOpenDialog(new Stage());
                 if (chooseFile != null){
@@ -158,19 +162,21 @@ public class FileUploader extends AnchorPane {
     @SuppressWarnings("all")
     private AnchorPane buildFilePane(String url, String fileType){
         FailIco failIco = new FailIco();
-        failIco.setTranslateX(93);
-        failIco.setTranslateY(-5);
         failIco.setScaleY(1.5D);
         failIco.setScaleX(1.5D);
-        failIco.getStyleClass().add("close");
+        VBox ico = new VBox(){{setAlignment(Pos.CENTER);}};
+        ico.getChildren().add(failIco);
+        ico.getStyleClass().add("close");
+        ico.setPrefHeight(18);
+        ico.setPrefWidth(18);
+        ico.setTranslateX(91);
+        ico.setTranslateY(-9);
         ProgressIndicator progressIndicator = new ProgressIndicator(0) {{
             getStyleClass().add("progress-indicator-ui");
         }};
         progressIndicator.progressProperty().addListener((observable, oldValue, newValue) -> {
             progressIndicator.setVisible(newValue.doubleValue() != 0D);
         });
-        progressIndicator.setTranslateX(40);
-        progressIndicator.setTranslateY(40);
         progressIndicator.setVisible(false);
         indicators.add(progressIndicator);
         AnchorPane imagePane = new AnchorPane();
@@ -178,6 +184,24 @@ public class FileUploader extends AnchorPane {
         imagePane.setPrefWidth(100);
         imagePane.getStyleClass().add("image");
         fileURLs.add(url);
+        File file = new File(url);
+        String size;
+        if (file.length() > 1024 * 1024 * 1024){
+            size = String.format("%.2f%s", file.length() / (1024D * 1024 * 1024), "GB");
+        }else if (file.length() > 1024 * 1024){
+            size = String.format("%.2f%s", file.length() / (1024D * 1024), "MB");
+        }else if (file.length() > 1024){
+            size = String.format("%.2f%s", file.length() / 1024D, "KB");
+        }else {
+            size = String.format("%d%s", file.length(), "B");
+        }
+        Label fileSize = new Label(size);
+        fileSize.getStyleClass().add("text");
+        Label fileName = new Label(file.getName());
+        fileName.setTooltip(new Tooltip(file.getName()));
+        fileName.getStyleClass().add("text");
+        VBox vBox = new VBox(){{setAlignment(Pos.CENTER);setPrefWidth(100);setSpacing(8);setPadding(new Insets(8, 0, 0, 0));}};
+        vBox.getChildren().addAll(fileName, fileSize, progressIndicator);
         url = encodePath(url.replace("\\", "/"));
         if (Objects.equals(fileType, IMAGE_JPEG.getMimeType()) || Objects.equals(fileType, IMAGE_PNG.getMimeType())){
             imagePane.setStyle("-fx-background-image: url(\"file:/"+ url +"\");");
@@ -185,10 +209,10 @@ public class FileUploader extends AnchorPane {
             imagePane.setStyle("-fx-background-color: #e0e0e0");
         }
         imagePane.getChildren().addAll(
-                progressIndicator,
-                failIco
+                vBox,
+                ico
         );
-        failIco.setOnMouseClicked(event -> {
+        ico.setOnMouseClicked(event -> {
             ObservableList<Node> children = content.getChildren();
             for (int i = 1; i < children.size(); i++) {
                 if (children.get(i) == imagePane){

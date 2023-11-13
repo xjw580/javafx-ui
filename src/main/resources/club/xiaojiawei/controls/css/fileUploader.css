@@ -11,8 +11,15 @@
 }
 .image{
     -fx-background-size: cover;
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 3, 0, 3, 3);
 }
 .close{
     -fx-background-color: white;
+    -fx-background-radius: 9;
+}
+.text{
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
     -fx-background-radius: 10;
+    -fx-padding: 1 5 1 5;
 }

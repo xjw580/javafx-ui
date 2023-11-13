@@ -4,22 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="增加文件上传组件，分页样式；优化Carousel组件">
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/FileUploader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/enums/MimeEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/FileUploaderTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/ListCellApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/FileUploader.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/fileUploader.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/rebel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="f59170ea-b715-46c9-8ed1-b5f4984c01f8" name="Changes" comment="0.1.0-SNAPSHOT&#10;&#10;- 新增组件：FileUploader（文件上传）&#10;- 优化组件：Carousel（轮播图），可调整图片覆盖程度">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Carousel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Carousel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CarouselTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CarouselTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Carousel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Carousel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/FileUploader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/FileUploader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/fileUploader.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/fileUploader.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +54,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/pom.xml" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="InvalidFacetManager">
     <ignored-facets>
@@ -300,7 +288,8 @@
       <workItem from="1699535842729" duration="1703000" />
       <workItem from="1699590895813" duration="6985000" />
       <workItem from="1699624699703" duration="113000" />
-      <workItem from="1699680706285" duration="11376000" />
+      <workItem from="1699680706285" duration="12194000" />
+      <workItem from="1699883288432" duration="3886000" />
     </task>
     <task id="LOCAL-00001" summary="新增 button、checkBox、comboBox、progress、scrollBar、titledPane 样式">
       <option name="closed" value="true" />
@@ -382,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699425363943</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="0.1.0-SNAPSHOT&#10;&#10;- 新增组件：FileUploader（文件上传）&#10;- 优化组件：Carousel（轮播图），可调整图片覆盖程度">
+      <option name="closed" value="true" />
+      <created>1699768458449</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1699768458449</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +411,8 @@
     <MESSAGE value="代码优化" />
     <MESSAGE value="0.0.9-SNAPSHOT&#10;&#10;- 新增组件：Carousel（轮播图）&#10;- 新增图标：FlushIco（刷新）、LeftIco（向左）、RightIco（向右）" />
     <MESSAGE value="优化Carousel，增加Carousel展示" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化Carousel，增加Carousel展示" />
+    <MESSAGE value="0.1.0-SNAPSHOT&#10;&#10;- 新增组件：FileUploader（文件上传）&#10;- 优化组件：Carousel（轮播图），可调整图片覆盖程度" />
+    <option name="LAST_COMMIT_MESSAGE" value="0.1.0-SNAPSHOT&#10;&#10;- 新增组件：FileUploader（文件上传）&#10;- 优化组件：Carousel（轮播图），可调整图片覆盖程度" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
