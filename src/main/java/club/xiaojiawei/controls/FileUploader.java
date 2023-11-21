@@ -105,18 +105,14 @@ public class FileUploader extends AnchorPane {
         content.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             if (db.hasFiles()) {
-                try {
-                    for (File file : db.getFiles()) {
-                        if (content.getChildren().size() > maxFileSize){
-                            return;
-                        }
-                        String mimeType = tika.detect(file);
-                        if (containsFileType(mimeType)){
-                            content.getChildren().add(buildFilePane(file.getPath(), mimeType));
-                        }
+                for (File file : db.getFiles()) {
+                    if (content.getChildren().size() > maxFileSize){
+                        return;
                     }
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    String mimeType = tika.detect(file.getName());
+                    if (containsFileType(mimeType)){
+                        content.getChildren().add(buildFilePane(file.getPath(), mimeType));
+                    }
                 }
             }
             event.setDropCompleted(true);
@@ -136,13 +132,9 @@ public class FileUploader extends AnchorPane {
                 File chooseFile = fileChooser.showOpenDialog(new Stage());
                 if (chooseFile != null){
                     String mimeType;
-                    try {
-                        mimeType = tika.detect(chooseFile);
-                        if (containsFileType(mimeType)){
-                            content.getChildren().add(buildFilePane(chooseFile.getPath(), mimeType));
-                        }
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                    mimeType = tika.detect(chooseFile.getName());
+                    if (containsFileType(mimeType)){
+                        content.getChildren().add(buildFilePane(chooseFile.getPath(), mimeType));
                     }
                 }
             }

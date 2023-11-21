@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import club.xiaojiawei.controls.ico.ExitIco?>
+<?import club.xiaojiawei.controls.ico.PauseIco?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
@@ -9,6 +11,8 @@
         <Label text="基类：btn-ui（ToggleButton也可以用）" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Button text="Hello" styleClass="btn-ui"><tooltip><Tooltip text="btn-ui"/></tooltip></Button>
+            <ExitIco/>
+            <PauseIco/>
         </HBox>
         <Label text="大小类：btn-ui-small、btn-ui-big" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">

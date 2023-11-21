@@ -25,6 +25,7 @@
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Progress" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="RadioButton" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TabPane" prefWidth="${left.width}"/>
+                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TextArea" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TextField" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TitledPane" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="ToggleButton" prefWidth="${left.width}"/>
@@ -40,6 +41,7 @@
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Carousel" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Date" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="DateTime" prefWidth="${left.width}"/>
+                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="FileUploader" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="PasswordShowField" prefWidth="${left.width}"/>
                     </VBox>
                 </TitledPane>
