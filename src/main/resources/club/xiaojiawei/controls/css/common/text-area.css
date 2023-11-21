@@ -10,4 +10,5 @@
 }
 .text-area-ui .content {
     -fx-background-insets: 0;
+    -fx-background-color:white;
 }
