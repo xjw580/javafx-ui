@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbab3fd3-55f6-4bb8-985e-f53fce64e1fd" name="Changes" comment="- 增加图标：AddPersonIco、ExitIco、">
+    <list default="true" id="bbab3fd3-55f6-4bb8-985e-f53fce64e1fd" name="Changes" comment="修复TextArea顶部阴影问题，移除不用的依赖包">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/text-area.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/common/text-area.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Calendar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Calendar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/calendar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/calendar.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -55,7 +56,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -105,7 +106,19 @@
       <workItem from="1700463529292" duration="1116000" />
       <workItem from="1700530870187" duration="6022000" />
       <workItem from="1700558125713" duration="1374000" />
+      <workItem from="1700559706252" duration="267000" />
+      <workItem from="1700560586300" duration="122000" />
+      <workItem from="1700613426552" duration="341000" />
     </task>
+    <task id="LOCAL-00001" summary="修复TextArea顶部阴影问题，移除不用的依赖包">
+      <option name="closed" value="true" />
+      <created>1700559749323</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700559749323</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,5 +134,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="修复TextArea顶部阴影问题，移除不用的依赖包" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复TextArea顶部阴影问题，移除不用的依赖包" />
   </component>
 </project>

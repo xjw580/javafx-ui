@@ -49,6 +49,6 @@
     -fx-min-width: 220;
 }
 #lastMonth, #nextMonth{
-    -fx-padding: 9 2 0 5;
+    -fx-padding: 5;
     -fx-background-radius: 5;
 }

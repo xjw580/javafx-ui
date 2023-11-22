@@ -13,7 +13,7 @@
                 <ArrowIco/>
             </graphic>
         </Label>
-        <HBox spacing="10" translateY="3" fx:id="icoBox">
+        <HBox spacing="10" translateY="1" fx:id="icoBox">
             <Label fx:id="lastMonth">
                 <graphic>
                     <UpIco/>
@@ -24,7 +24,6 @@
                     <DownIco/>
                 </graphic>
             </Label>
-
         </HBox>
     </HBox>
     <VBox prefHeight="189" fx:id="monthPane">
