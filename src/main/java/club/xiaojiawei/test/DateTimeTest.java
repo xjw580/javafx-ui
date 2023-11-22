@@ -19,6 +19,8 @@ public class DateTimeTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         DateTime dateTime = new DateTime();
+        System.out.println(dateTime.getDateTime());
+        dateTime.dateTimeProperty().addListener((observableValue, localDateTime, t1) -> System.out.println(t1));
         dateTime.setTranslateX(50);
         dateTime.setTranslateY(50);
         Scene scene = new Scene(new FlowPane(dateTime), 300, 200);

@@ -8,8 +8,8 @@
            stylesheets="@../controls/css/common/javafx-ui.css, @readme.css"
            fx:controller="club.xiaojiawei.readme.ReadmeController"
            prefHeight="600.0" prefWidth="1000.0" dividerPositions="0.15,1">
-    <ScrollPane fx:id="left" style="-fx-background: white">
-        <Accordion prefWidth="${left.width}" expandedPane="$style" styleClass="accordion-ui, accordion-ui-big">
+    <ScrollPane fx:id="left">
+        <Accordion prefWidth="${left.width}" expandedPane="$component" styleClass="accordion-ui, accordion-ui-big">
             <panes>
                 <fx:define>
                     <ToggleGroup fx:id="toggleGroup"/>
@@ -31,7 +31,7 @@
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="ToggleButton" prefWidth="${left.width}"/>
                     </VBox>
                 </TitledPane>
-                <TitledPane text="自定义组件">
+                <TitledPane fx:id="component" text="自定义组件">
                     <VBox>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Switch" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TimeSelector" prefWidth="${left.width}"/>

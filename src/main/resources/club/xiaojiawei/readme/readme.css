@@ -1,3 +1,6 @@
+#left{
+    -fx-background: white
+}
 .hv-box{
     -fx-padding: 0 0 0 20;
     -fx-spacing: 25;

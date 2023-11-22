@@ -39,7 +39,7 @@ public class DateTime extends AnchorPane {
      */
     private boolean showBG = true;
     public String getDateTime() {
-        return DATE_TIME_FORMATTER.format(dateTime.get());
+        return dateTime.get() == null? null : DATE_TIME_FORMATTER.format(dateTime.get());
     }
     public ObjectProperty<LocalDateTime> dateTimeProperty() {
         return dateTime;
@@ -104,9 +104,6 @@ public class DateTime extends AnchorPane {
         timeControls.setOnFocusChangeListener((observable, oldValue, newValue) -> {
             dealFocusChange(newValue);
         });
-        LocalDate localDate = dateControls.dateProperty().get();
-        LocalTime localTime = timeControls.timeProperty().get();
-        dateTime.set(LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
         dateControls.dateProperty().addListener(dateChangeListener());
         timeControls.timeProperty().addListener(timeChangeListener());
         dateTime.addListener((observable, oldValue, newValue) -> updateCompleteDateTime(newValue));

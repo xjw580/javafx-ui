@@ -31,7 +31,7 @@ public class DateSelector extends HBox {
     /**
      * 日期：包含年月,格式：yyyy/MM/dd
      */
-    private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>(LocalDate.of(1,1,1));
+    private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
     public String getDate() {
         return SHORT_DATE_FORMATTER.format(date.get());
     }
@@ -61,6 +61,7 @@ public class DateSelector extends HBox {
     private Label selectedLabel;
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     public static final DateTimeFormatter SHORT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM");
+    private static final String SELECTED_LABEL = "selectedLabel";
     private boolean allowExec = true;
     private final static String TITLED_PANE_UI = "titled-pane-ui";
     public DateSelector() {
@@ -75,7 +76,7 @@ public class DateSelector extends HBox {
         }
     }
     private void afterFXMLLoaded(){
-        loadYearPane(date.get());
+        loadYearPane(LocalDate.now());
         date.addListener((observable, oldDate, newDate) -> {
             yearsPane.getPanes().clear();
             selectedLabel = null;
@@ -216,7 +217,8 @@ public class DateSelector extends HBox {
                         break;
                     }
                 }
-                double showCount = this.getHeight() / 22.2D;
+                final double singleHeight = 22.2D;
+                double showCount = this.getHeight() / singleHeight;
 //                确保年面板在ScrollPane中不能全部显示
                 for (int j = panes.size() - yearIndex; j < showCount; j++) {
                     panes.add(buildYearTitledPane(nowDate));
@@ -262,14 +264,14 @@ public class DateSelector extends HBox {
         for (int m = 1; m <= 12; m++) {
             Label label = new Label();
             if (nowDate.getYear() == buildYear && nowDate.getMonthValue() == m){
-                (selectedLabel = label).getStyleClass().add("selectedLabel");
+                (selectedLabel = label).getStyleClass().add(SELECTED_LABEL);
             }
             label.setText(String.valueOf(m));
             int finalM = m;
             label.setOnMouseClicked(event -> {
-                selectedLabel.getStyleClass().remove("selectedLabel");
-                (selectedLabel = label).getStyleClass().add("selectedLabel");
-                date.set(LocalDate.of(buildYear, Month.of(finalM), Math.min(date.get().getDayOfMonth(), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1)))));
+                selectedLabel.getStyleClass().remove(SELECTED_LABEL);
+                (selectedLabel = label).getStyleClass().add(SELECTED_LABEL);
+                date.set(LocalDate.of(buildYear, Month.of(finalM), Math.min((date.get() == null? LocalDate.now().getDayOfMonth() : date.get().getDayOfMonth()), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1)))));
             });
             newMonthPane.getChildren().add(label);
         }

@@ -5,6 +5,8 @@ module club.xiaojiawei.javafx_ui {
     requires org.girod.javafx.svgimage;
     requires java.desktop;
     requires org.apache.tika.core;
+    requires org.slf4j;
+    requires static lombok;
 
     exports club.xiaojiawei.utils;
     exports club.xiaojiawei.enums;

@@ -23,14 +23,9 @@ public class CalendarTest extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Calendar calendar = new Calendar();
-//        calendar.setLocalDate(LocalDate.of(9999, 12, 1));
-//        calendar.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-//        System.out.println(calendar.getDate());
-        LocalDate localDate = LocalDate.of(9999, 12, 1);
-        System.out.println(localDate);
-        LocalDate localDate1 = localDate.plusMonths(1);
-        System.out.println(localDate1);
-        System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate1));
+        calendar.setLocalDate(LocalDate.of(9999, 12, 1));
+        calendar.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        System.out.println(calendar.getDate());
         calendar.setTranslateX(50);
         calendar.setTranslateY(50);
         Scene scene = new Scene(new AnchorPane(calendar), 400, 500);

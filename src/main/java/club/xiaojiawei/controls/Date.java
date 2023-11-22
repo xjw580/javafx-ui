@@ -29,7 +29,6 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @date 2023/10/23 14:38
  */
 public class Date extends AnchorPane {
-//    TODO StringProperty改为ObjectProperty，其他日期时间组件也要改
     /**
      * 默认当前日期
      */
@@ -43,7 +42,7 @@ public class Date extends AnchorPane {
      */
     private boolean showBG = true;
     public String getDate() {
-        return DATE_FORMATTER.format(date.get());
+        return date.get() == null? null : DATE_FORMATTER.format(date.get());
     }
     public ObjectProperty<LocalDate> dateProperty() {
         return date;
@@ -125,9 +124,6 @@ public class Date extends AnchorPane {
         dateSelectorPopup = new Popup();
         Calendar calendar = new Calendar();
         date = calendar.dateProperty();
-        year.setText(YEAR_FORMATTER.format(date.get()));
-        month.setText(MONTH_FORMATTER.format(date.get()));
-        day.setText(DAY_FORMATTER.format(date.get()));
         date.addListener((observable, oldValue, newValue) -> updateCompleteDateTextField(newValue));
         dateSelectorPopup.getContent().add(calendar);
         dateSelectorPopup.setAutoHide(true);
@@ -154,8 +150,10 @@ public class Date extends AnchorPane {
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!isFromDate && newValue.length() == maxLength){
-                int yearInt = parseInt(year.getText()), monthInt = parseInt(month.getText());
-                date.set(LocalDate.of(yearInt, monthInt, Math.min(calcMaxDayForMonth(yearInt, monthInt), parseInt(day.getText()))));
+                int yearInt = parseInt(year.getText()), monthInt = parseInt(month.getText()), dayInt = Math.min(calcMaxDayForMonth(yearInt, monthInt), parseInt(day.getText()));
+                if (yearInt != 0 && monthInt != 0 && dayInt != 0){
+                    date.set(LocalDate.of(yearInt, monthInt, dayInt));
+                }
             }
         });
     }
@@ -197,14 +195,21 @@ public class Date extends AnchorPane {
      * @param time
      */
     private String standardizationDateText(TextField textField, String time){
-        String timeStr = "0".repeat((textField == year ? 4 : 2) - time.length()) + time;
-        if (timeStr.matches("0+")){
-            if (textField == year){
-                timeStr = YEAR_FORMATTER.format(LocalDate.now());
-            }else if (textField == month){
-                timeStr = MONTH_FORMATTER.format(LocalDate.now());
-            }else if (textField == day){
-                timeStr = DAY_FORMATTER.format(LocalDate.now());
+        String timeStr = "";
+        if (time != null && !time.isBlank()) {
+            if ((textField == year ? 4 : 2) - time.length() == -1){
+                System.out.println(time);
+                System.out.println((textField == year ? 4 : 2));
+            }
+            timeStr = "0".repeat((textField == year ? 4 : 2) - time.length()) + time;
+            if (timeStr.matches("0+")){
+                if (textField == year){
+                    timeStr = YEAR_FORMATTER.format(LocalDate.now());
+                }else if (textField == month){
+                    timeStr = MONTH_FORMATTER.format(LocalDate.now());
+                }else if (textField == day){
+                    timeStr = DAY_FORMATTER.format(LocalDate.now());
+                }
             }
         }
         return timeStr;
@@ -224,9 +229,13 @@ public class Date extends AnchorPane {
                     && parseInt(temp) <= maxValue
             ){
                 if (textField == year){
-                    day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(temp), parseInt(month.getText())), parseInt(day.getText())))));
+                    if (year.getText() != null && !year.getText().isBlank() && month.getText() != null && !month.getText().isBlank()){
+                        day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(temp), parseInt(month.getText())), parseInt(day.getText())))));
+                    }
                 }else if (textField == month){
-                    day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(year.getText()), parseInt(temp)), parseInt(day.getText())))));
+                    if (year.getText() != null && !year.getText().isBlank() && month.getText() != null && !month.getText().isBlank()){
+                        day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(year.getText()), parseInt(temp)), parseInt(day.getText())))));
+                    }
                 }else if (parseInt(temp) > calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()))){
                     return null;
                 }

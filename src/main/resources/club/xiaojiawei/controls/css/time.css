@@ -3,6 +3,8 @@
     -fx-padding: 0;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+    /*选中文本的颜色*/
+    -fx-accent:#0075FF;
 }
 .timeSeparator, .text-field{
     -fx-translate-y: 3.5;

@@ -19,6 +19,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.util.Duration;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -36,6 +37,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_Y;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/23 22:54
  */
+@Slf4j
 @SuppressWarnings("unused")
 public class Calendar extends VBox {
     /**
@@ -43,7 +45,7 @@ public class Calendar extends VBox {
      */
     private ObjectProperty<LocalDate> date;
     public String getDate() {
-        return DATE_FORMATTER.format(date.get());
+        return date.get() == null? "" : DATE_FORMATTER.format(date.get());
     }
     public ObjectProperty<LocalDate> dateProperty() {
         return date;
@@ -112,15 +114,17 @@ public class Calendar extends VBox {
         });
         initDateSelectorPopup();
         addDatePropertyListener();
-        showMonthPane = buildMonthPane(date.get());
-//        建造玩月份pane后跳转到指定天
-        skipToPointDate(date.get());
+        LocalDate now = LocalDate.now();
+        showMonthPane = buildMonthPane(now);
+//        建造完月份pane后跳转到指定天
+        skipToPointDate(now);
     }
 
     private void initDateSelectorPopup(){
         popup = new Popup();
         DateSelector dateSelector = new DateSelector();
-        dateMsg.setText(SHORT_DATE_FORMATTER.format((date = dateSelector.dateProperty()).get()));
+        date = dateSelector.dateProperty();
+        dateMsg.setText(SHORT_DATE_FORMATTER.format(LocalDate.now()));
         popup.getContent().add(dateSelector);
         popup.setAutoHide(true);
         popup.setOnHidden(event -> {
@@ -132,7 +136,6 @@ public class Calendar extends VBox {
             Bounds bounds = this.localToScreen(this.getBoundsInLocal());
             popup.setAnchorX(bounds.getMaxX() - bounds.getWidth() + 33);
             popup.setAnchorY(bounds.getMaxY() - bounds.getHeight() + 50);
-            dateSelector.setLocalDate(date.get());
             monthPane.setVisible(false);
             icoBox.setVisible(false);
             bottomMsg.setVisible(false);
@@ -198,7 +201,11 @@ public class Calendar extends VBox {
                 });
                 timeline.play();
                 if (selectedLabel != null){
-                    selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                    try {
+                        selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                    }catch (NullPointerException e){
+                        log.warn("方向键按太快导致，不影响正常使用", e);
+                    }
                 }
                 (selectedLabel = findPointDay()).getStyleClass().add(SELECTED_DAY_LABEL);
             }

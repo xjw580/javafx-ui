@@ -20,7 +20,8 @@ public class DateTest extends Application {
     public void start(Stage primaryStage) {
         FlowPane vBox = new FlowPane();
         Date date = new Date();
-//        date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        System.out.println(date.getDate());
+        date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         date.setTranslateX(50);
         date.setTranslateY(50);
         vBox.getChildren().add(date);
