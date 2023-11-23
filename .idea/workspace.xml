@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbab3fd3-55f6-4bb8-985e-f53fce64e1fd" name="Changes" comment="修复calendar组件上下图标错位的问题">
+    <list default="true" id="bbab3fd3-55f6-4bb8-985e-f53fce64e1fd" name="Changes" comment="优化时间类组件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Calendar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Calendar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Date.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/Date.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateSelector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/controls/DateTime.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CalendarTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/CalendarTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTimeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/club/xiaojiawei/test/DateTimeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Date.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/Date.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/date.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/date.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/time.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/controls/css/time.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/Readme.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/readme.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/club/xiaojiawei/readme/readme.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +15,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
+        <option value="CSS File" />
         <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -59,26 +48,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/IdeaProjects/javafx-ui/src/main/resources/club/xiaojiawei/readme/tab&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Administrator/IdeaProjects/javafx-ui/src/main/resources/club/xiaojiawei/readme/tab",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "fileTemplates",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Admin\IdeaProjects\javafx-ui\src\main\resources\club\xiaojiawei\readme\tab" />
@@ -88,7 +78,7 @@
       <recent name="club.xiaojiawei.controls.ico" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DateTest">
+  <component name="RunManager" selected="Application.Readme">
     <configuration name="CalendarTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.CalendarTest" />
       <module name="javafx-ui" />
@@ -128,6 +118,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="LabelUITest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.test.LabelUITest" />
+      <module name="javafx-ui" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="club.xiaojiawei.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Readme" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="club.xiaojiawei.readme.Readme" />
       <module name="javafx-ui" />
@@ -143,9 +146,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Readme" />
+        <item itemvalue="Application.LabelUITest" />
         <item itemvalue="Application.DateTest" />
         <item itemvalue="Application.DateTimeTest" />
-        <item itemvalue="Application.Readme" />
         <item itemvalue="Application.CalendarTest" />
       </list>
     </recent_temporary>
@@ -170,7 +174,12 @@
       <workItem from="1700559706252" duration="267000" />
       <workItem from="1700560586300" duration="122000" />
       <workItem from="1700613426552" duration="6679000" />
-      <workItem from="1700622575329" duration="4515000" />
+      <workItem from="1700622575329" duration="9500000" />
+      <workItem from="1700723993262" duration="231000" />
+      <workItem from="1700724720571" duration="479000" />
+      <workItem from="1700725746926" duration="349000" />
+      <workItem from="1700726275966" duration="619000" />
+      <workItem from="1700730211926" duration="2488000" />
     </task>
     <task id="LOCAL-00001" summary="修复TextArea顶部阴影问题，移除不用的依赖包">
       <option name="closed" value="true" />
@@ -188,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700613929149</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="优化时间类组件">
+      <option name="closed" value="true" />
+      <created>1700634740689</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700634740689</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +225,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修复TextArea顶部阴影问题，移除不用的依赖包" />
     <MESSAGE value="修复calendar组件上下图标错位的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复calendar组件上下图标错位的问题" />
+    <MESSAGE value="优化时间类组件" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化时间类组件" />
   </component>
 </project>
