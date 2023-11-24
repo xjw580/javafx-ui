@@ -26,8 +26,6 @@ public class LabelUI extends Label {
             rectangle.setHeight(this.getHeight());
             rectangle.setTranslateX(-this.getHeight());
         });
-        widthProperty().addListener((observableValue, number, t1) -> {
-            rectangle.setWidth(this.getWidth());
-        });
+        widthProperty().addListener((observableValue, number, t1) -> rectangle.setWidth(this.getWidth()));
     }
 }

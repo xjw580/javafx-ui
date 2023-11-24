@@ -10,7 +10,7 @@
         <TextField fx:id="year" promptText="年" styleClass="text-field" style="-fx-pref-width: 32!important;"/>
         <Label text="/" styleClass="dateSeparator"/>
         <TextField fx:id="month" promptText="月" styleClass="text-field"/>
-        <Label text="/" styleClass="dateSeparator"/>
+        <Label text="/" styleClass="dateSeparator" />
         <TextField fx:id="day" promptText="日" styleClass="text-field"/>
         <DateIco fx:id="dateIco"/>
     </HBox>

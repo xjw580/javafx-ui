@@ -6,19 +6,25 @@
     /*选中文本的颜色*/
     -fx-accent:#0075FF;
 }
-.dateSeparator, .text-field{
+.dateSeparator{
+    -fx-font-size: 17;
+}
+.dateSeparator *{
+    -fx-fill: grey;
+}
+.text-field{
     -fx-translate-y: 3.5;
 }
 .dateBackground{
     -fx-border-color: #73a5f1;
     -fx-pref-height: 24;
-    -fx-pref-width: 109;
+    -fx-pref-width: 113;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-background-color: white;
 }
 .hideIcoDateBackground{
-    -fx-pref-width: 89!important;
+    -fx-pref-width: 93!important;
 }
 .dateBackgroundFocus{
     -fx-border-color: #0075FF!important;

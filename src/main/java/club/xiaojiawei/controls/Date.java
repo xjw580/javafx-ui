@@ -197,10 +197,6 @@ public class Date extends AnchorPane {
     private String standardizationDateText(TextField textField, String time){
         String timeStr = "";
         if (time != null && !time.isBlank()) {
-            if ((textField == year ? 4 : 2) - time.length() == -1){
-                System.out.println(time);
-                System.out.println((textField == year ? 4 : 2));
-            }
             timeStr = "0".repeat((textField == year ? 4 : 2) - time.length()) + time;
             if (timeStr.matches("0+")){
                 if (textField == year){
@@ -224,10 +220,16 @@ public class Date extends AnchorPane {
     private TextFormatter<TextFormatter.Change> interceptInput(TextField textField, int maxValue, int maxLength) {
         return new TextFormatter<>(change -> {
             String temp;
+            System.out.println("start:" + change.getRangeStart());
+            System.out.println("end:" + change.getRangeEnd());
+//            System.out.println(textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd()));
+            System.out.println("length：" + maxLength);
+            System.out.println("value:" + maxValue);
             if (change.getText().matches("^\\d{0," + maxLength + "}")
                     && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= maxLength
                     && parseInt(temp) <= maxValue
             ){
+                System.out.println("enter");
                 if (textField == year){
                     if (year.getText() != null && !year.getText().isBlank() && month.getText() != null && !month.getText().isBlank()){
                         day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(temp), parseInt(month.getText())), parseInt(day.getText())))));
