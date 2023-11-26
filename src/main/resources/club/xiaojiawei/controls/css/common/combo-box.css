@@ -1,23 +1,32 @@
 /*Base*/
-.combo-box-base.combo-box-ui  {
+.combo-box-ui  {
     -fx-cursor: hand;
     -fx-background-radius: 4;
     -fx-background-insets: 0;
     -fx-border-width: 0;
     -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
 }
-.combo-box-base.combo-box-ui:hover {
+.combo-box-ui:hover {
     -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
 }
-.combo-box-base.combo-box-ui:focused {
+.combo-box-ui:focused {
     -fx-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1) !important;
 }
-
 .combo-box-ui .list-cell {
     -fx-pref-height: 30;
     -fx-alignment: CENTER;
     -fx-background-color: transparent;
     -fx-text-fill: -fx-text-base-color;
+}
+/*editable = true*/
+.combo-box-ui .text-input {
+    -fx-pref-height: 30;
+    /*约束大小，防止过宽*/
+    -fx-pref-width: 1;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-accent: #0075FF;
 }
 .combo-box-ui .combo-box-popup .list-view {
     -fx-padding: 3 0 3 3;
@@ -42,32 +51,50 @@
 .combo-box-ui-small .list-cell {
     -fx-pref-height: 20!important;
 }
+.combo-box-ui-small .text-input {
+    -fx-pref-height: 20!important;
+}
 .combo-box-ui-big .list-cell {
+    -fx-pref-height: 40!important;
+}
+.combo-box-ui-big .text-input {
     -fx-pref-height: 40!important;
 }
 
 /*Color*/
-.combo-box-base.combo-box-ui-normal{
+.combo-box-ui-normal, .combo-box-ui-normal > .arrow-button{
     -fx-background-color: #c7e3fa;
 }
-.combo-box-base.combo-box-ui-normal:hover, .combo-box-base.combo-box-ui-normal:focused{
+.combo-box-ui-normal:hover,
+.combo-box-ui-normal:focused,
+.combo-box-ui-normal:hover > .arrow-button,
+.combo-box-ui-normal:focused > .arrow-button{
     -fx-background-color: #aad6fc;
 }
-.combo-box-base.combo-box-ui-success{
+.combo-box-ui-success, .combo-box-ui-success > .arrow-button{
     -fx-background-color: #9ecb9e;
 }
-.combo-box-base.combo-box-ui-success:hover, .combo-box-base.combo-box-ui-success:focused  {
+.combo-box-ui-success:hover,
+.combo-box-ui-success:focused,
+.combo-box-ui-success:hover > .arrow-button,
+.combo-box-ui-success:focused > .arrow-button{
     -fx-background-color: #80ce80;
 }
-.combo-box-base.combo-box-ui-warn{
+.combo-box-ui-warn, .combo-box-ui-warn > .arrow-button{
     -fx-background-color: #f8da9a;
 }
-.combo-box-base.combo-box-ui-warn:hover, .combo-box-base.combo-box-ui-warn:focused  {
+.combo-box-ui-warn:hover,
+.combo-box-ui-warn:focused,
+.combo-box-ui-warn:hover > .arrow-button,
+.combo-box-ui-warn:focused > .arrow-button{
     -fx-background-color: #fccf6d;
 }
-.combo-box-base.combo-box-ui-error{
+.combo-box-ui-error, .combo-box-ui-error > .arrow-button{
     -fx-background-color: #f89494;
 }
-.combo-box-base.combo-box-ui-error:hover, .combo-box-base.combo-box-ui-error:focused {
+.combo-box-ui-error:hover,
+.combo-box-ui-error:focused,
+.combo-box-ui-error:hover > .arrow-button,
+.combo-box-ui-error:focused > .arrow-button{
     -fx-background-color: #fa7a7a;
 }

@@ -164,7 +164,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal" value="杀死那只知更鸟">
+            <ComboBox editable="true" visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal" value="杀死那只知更鸟">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="太空漫游2001"/>
@@ -197,7 +197,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-error" value="杀死那只知更鸟">
+            <ComboBox editable="true" visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-error" value="杀死那只知更鸟">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="太空漫游2001"/>
@@ -254,7 +254,7 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-error, combo-box-ui-big" value="杀死那只知更鸟">
+            <ComboBox editable="true" visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-error, combo-box-ui-big" value="杀死那只知更鸟">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="太空漫游2001"/>
