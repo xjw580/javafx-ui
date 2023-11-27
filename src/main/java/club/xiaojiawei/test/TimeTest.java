@@ -11,11 +11,11 @@ public class TimeTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Time time = new Time();
-        time.setShowSelector(false);
+//        time.setShowSelector(false);
         time.timeProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         FlowPane flowPane = new FlowPane();
         flowPane.getChildren().add(time);
-        flowPane.getChildren().add(new Text("hello"));
+//        flowPane.getChildren().add(new Text("hello"));
 //        time.setTranslateX(50);
 //        time.setTranslateY(50);
         Scene scene = new Scene(flowPane, 200, 200);

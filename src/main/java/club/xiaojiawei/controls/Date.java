@@ -131,9 +131,15 @@ public class Date extends AnchorPane {
 
     private void updateCompleteDateTextField(LocalDate newDate){
         isFromDate = true;
-        year.setText(YEAR_FORMATTER.format(newDate));
-        month.setText(MONTH_FORMATTER.format(newDate));
-        day.setText(DAY_FORMATTER.format(newDate));
+        if (newDate == null){
+            year.setText("");
+            month.setText("");
+            day.setText("");
+        }else {
+            year.setText(YEAR_FORMATTER.format(newDate));
+            month.setText(MONTH_FORMATTER.format(newDate));
+            day.setText(DAY_FORMATTER.format(newDate));
+        }
         isFromDate = false;
     }
 
@@ -149,8 +155,11 @@ public class Date extends AnchorPane {
 //        方向键按太快会因为动画问题而报错
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (!isFromDate && newValue.length() == maxLength){
-                int yearInt = parseInt(year.getText()), monthInt = parseInt(month.getText()), dayInt = Math.min(calcMaxDayForMonth(yearInt, monthInt), parseInt(day.getText()));
+            int yearInt = parseInt(year.getText()), monthInt = parseInt(month.getText()), dayInt = Math.min(calcMaxDayForMonth(yearInt, monthInt), parseInt(day.getText()));
+//            year、month、day三项全空时，日期设置为null
+            if (yearInt == 0 && monthInt == 0 && dayInt == 0){
+                date.set(null);
+            } else if (!isFromDate && newValue.length() == maxLength){
                 if (yearInt != 0 && monthInt != 0 && dayInt != 0){
                     date.set(LocalDate.of(yearInt, monthInt, dayInt));
                 }
@@ -220,27 +229,10 @@ public class Date extends AnchorPane {
     private TextFormatter<TextFormatter.Change> interceptInput(TextField textField, int maxValue, int maxLength) {
         return new TextFormatter<>(change -> {
             String temp;
-            System.out.println("start:" + change.getRangeStart());
-            System.out.println("end:" + change.getRangeEnd());
-//            System.out.println(textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd()));
-            System.out.println("length：" + maxLength);
-            System.out.println("value:" + maxValue);
             if (change.getText().matches("^\\d{0," + maxLength + "}")
                     && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= maxLength
-                    && parseInt(temp) <= maxValue
+                    && (parseInt(temp) <= maxValue || (textField == day && parseInt(temp) <= calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()))))
             ){
-                System.out.println("enter");
-                if (textField == year){
-                    if (year.getText() != null && !year.getText().isBlank() && month.getText() != null && !month.getText().isBlank()){
-                        day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(temp), parseInt(month.getText())), parseInt(day.getText())))));
-                    }
-                }else if (textField == month){
-                    if (year.getText() != null && !year.getText().isBlank() && month.getText() != null && !month.getText().isBlank()){
-                        day.setText(standardizationDateText(day, String.valueOf(Math.min(calcMaxDayForMonth(parseInt(year.getText()), parseInt(temp)), parseInt(day.getText())))));
-                    }
-                }else if (parseInt(temp) > calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()))){
-                    return null;
-                }
                 return change;
             }
             return null;

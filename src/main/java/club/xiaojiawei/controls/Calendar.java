@@ -112,6 +112,9 @@ public class Calendar extends VBox {
                 date.set(nowLocalDate);
             }
         });
+        clear.setOnMouseClicked(mouseEvent -> {
+            date.set(null);
+        });
         initDateSelectorPopup();
         addDatePropertyListener();
         LocalDate now = LocalDate.now();
@@ -155,6 +158,9 @@ public class Calendar extends VBox {
      * @param newDate
      */
     private void skipToPointDate(LocalDate newDate){
+        if (newDate == null){
+            return;
+        }
         if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) == newDate.getYear() * 100 + newDate.getMonthValue()){
             if (selectedLabel != null){
                 selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);

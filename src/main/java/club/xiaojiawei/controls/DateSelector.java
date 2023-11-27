@@ -95,6 +95,9 @@ public class DateSelector extends HBox {
      * @return
      */
     private TitledPane loadYearPane(LocalDate nowDate){
+        if (nowDate == null){
+            return null;
+        }
         yearsPane.setOnScroll(event -> {
             if (event.getDeltaY() > 0){
 //                往上滑

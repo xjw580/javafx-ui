@@ -1,5 +1,5 @@
 .text-field{
-    -fx-pref-width: 17;
+    -fx-pref-width: 18;
     -fx-padding: 0;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
@@ -18,7 +18,7 @@
 .dateBackground{
     -fx-border-color: #73a5f1;
     -fx-pref-height: 24;
-    -fx-pref-width: 113;
+    -fx-pref-width: 115;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-background-color: white;
