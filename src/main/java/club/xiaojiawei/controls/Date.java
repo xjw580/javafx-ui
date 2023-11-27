@@ -18,6 +18,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.function.Predicate;
 
 import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.controls.DateSelector.calcMaxDayForMonth;
@@ -98,6 +99,8 @@ public class Date extends AnchorPane {
     private final static DateTimeFormatter DAY_FORMATTER = DateTimeFormatter.ofPattern("dd");
     private boolean isFromDate;
     private ChangeListener<Boolean> focusChangeListener;
+    private Predicate<LocalDate> dateInterceptor;
+    private Calendar calendar;
     public Date() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -122,7 +125,7 @@ public class Date extends AnchorPane {
      */
     private void initDateSelectorPopup(){
         dateSelectorPopup = new Popup();
-        Calendar calendar = new Calendar();
+        calendar = new Calendar();
         date = calendar.dateProperty();
         date.addListener((observable, oldValue, newValue) -> updateCompleteDateTextField(newValue));
         dateSelectorPopup.getContent().add(calendar);
@@ -161,7 +164,12 @@ public class Date extends AnchorPane {
                 date.set(null);
             } else if (!isFromDate && newValue.length() == maxLength){
                 if (yearInt != 0 && monthInt != 0 && dayInt != 0){
-                    date.set(LocalDate.of(yearInt, monthInt, dayInt));
+                    LocalDate newLocalDate = LocalDate.of(yearInt, monthInt, dayInt);
+                    if (dateInterceptor == null || dateInterceptor.test(newLocalDate)){
+                        date.set(newLocalDate);
+                    }else {
+                        updateCompleteDateTextField(date.get());
+                    }
                 }
             }
         });
@@ -207,7 +215,7 @@ public class Date extends AnchorPane {
         String timeStr = "";
         if (time != null && !time.isBlank()) {
             timeStr = "0".repeat((textField == year ? 4 : 2) - time.length()) + time;
-            if (timeStr.matches("0+")){
+            if (timeStr.matches("0+")) {
                 if (textField == year){
                     timeStr = YEAR_FORMATTER.format(LocalDate.now());
                 }else if (textField == month){
@@ -271,4 +279,13 @@ public class Date extends AnchorPane {
     public void setOnFocusChangeListener(ChangeListener<Boolean> changeListener){
         focusChangeListener = changeListener;
     }
+
+    public void setDateInterceptor(Predicate<LocalDate> dateInterceptor){
+        calendar.setDateInterceptor(this.dateInterceptor = dateInterceptor);
+    }
+    public void removeDateInterceptor(){
+        this.dateInterceptor = null;
+        calendar.removeDateInterceptor();
+    }
+
 }

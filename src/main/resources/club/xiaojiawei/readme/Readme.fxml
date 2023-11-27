@@ -9,7 +9,7 @@
            fx:controller="club.xiaojiawei.readme.ReadmeController"
            prefHeight="600.0" prefWidth="1000.0" dividerPositions="0.15,1">
     <ScrollPane fx:id="left">
-        <Accordion prefWidth="${left.width}" expandedPane="$component" styleClass="accordion-ui, accordion-ui-big">
+        <Accordion prefWidth="${left.width}" expandedPane="$style" styleClass="accordion-ui, accordion-ui-big">
             <panes>
                 <fx:define>
                     <ToggleGroup fx:id="toggleGroup"/>
@@ -24,6 +24,7 @@
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Common" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Progress" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="RadioButton" prefWidth="${left.width}"/>
+                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TabView" prefWidth="${left.width}" selected="true"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TabPane" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TextArea" prefWidth="${left.width}"/>
                         <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TextField" prefWidth="${left.width}"/>

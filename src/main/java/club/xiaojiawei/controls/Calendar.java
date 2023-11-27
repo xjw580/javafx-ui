@@ -27,6 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.*;
 
 import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
@@ -89,6 +90,10 @@ public class Calendar extends VBox {
     private static final String BLACK_FONT = "blackFont";
     private Node selectedLabel;
     private Popup popup;
+    /**
+     * 日期拦截器，点击日期时拦截是否应用
+     */
+    private Predicate<LocalDate> dateInterceptor;
     public Calendar() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -105,6 +110,9 @@ public class Calendar extends VBox {
         nextMonth.setOnMouseClicked(event -> laterDate());
         today.setOnMouseClicked(event -> {
             LocalDate nowLocalDate = LocalDate.now();
+            if (!dateInterceptor.test(nowLocalDate)){
+                return;
+            }
             if (Objects.equals(nowLocalDate, date.get())){
 //                可能不在当前日期面板，需要跳转
                 skipToPointDate(nowLocalDate);
@@ -112,9 +120,7 @@ public class Calendar extends VBox {
                 date.set(nowLocalDate);
             }
         });
-        clear.setOnMouseClicked(mouseEvent -> {
-            date.set(null);
-        });
+        clear.setOnMouseClicked(mouseEvent -> date.set(null));
         initDateSelectorPopup();
         addDatePropertyListener();
         LocalDate now = LocalDate.now();
@@ -181,7 +187,11 @@ public class Calendar extends VBox {
     private Label addDay(TilePane tilePane, LocalDate selfDate){
         Label label = new Label(String.valueOf(selfDate.getDayOfMonth()));
         label.getStyleClass().add(DAY_LABEL);
-        label.setOnMouseClicked(event -> date.set(selfDate));
+        label.setOnMouseClicked(event -> {
+            if (dateInterceptor == null || dateInterceptor.test(selfDate)){
+                date.set(selfDate);
+            }
+        });
         tilePane.getChildren().add(label);
         return label;
     }
@@ -339,5 +349,11 @@ public class Calendar extends VBox {
     }
     public void removeTodayMouseClickedListener(){
         today.removeEventHandler(MouseEvent.MOUSE_CLICKED, todayEventHandler);
+    }
+    public void setDateInterceptor(Predicate<LocalDate> dateInterceptor){
+        this.dateInterceptor = dateInterceptor;
+    }
+    public void removeDateInterceptor(){
+        this.dateInterceptor = null;
     }
 }

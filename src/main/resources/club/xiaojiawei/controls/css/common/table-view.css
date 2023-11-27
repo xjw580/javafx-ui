@@ -1,0 +1,7 @@
+.table-view-ui{
+    /*-fx-background-color: #b3d5ff;*/
+    -fx-border-color: none;
+    -fx-border-radius: 10;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+}
