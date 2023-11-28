@@ -1,9 +1,13 @@
 package club.xiaojiawei.readme.controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -18,16 +22,34 @@ import static javafx.scene.control.TableView.CONSTRAINED_RESIZE_POLICY;
  */
 public class TabViewController implements Initializable {
     @FXML
+    private TableView<Student> tableViewSmallDemo;
+    @FXML
     private TableView<Student> tableViewDemo;
+    @FXML
+    private TableView<Student> tableViewBigDemo;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tableViewDemo.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
-        // 设置 TableView 列和数据
-        tableViewDemo.setItems(FXCollections.observableArrayList(
+        ObservableList<Student> students = FXCollections.observableArrayList(
+                new Student(1, "张三", "男"),
+                new Student(2, "李四", "女"),
+                new Student(3, "王五", "二次元"),
+                new Student(1, "张三", "男"),
+                new Student(2, "李四", "女"),
+                new Student(3, "王五", "二次元"),
+                new Student(1, "张三", "男"),
+                new Student(2, "李四", "女"),
+                new Student(3, "王五", "二次元"),
                 new Student(1, "张三", "男"),
                 new Student(2, "李四", "女"),
                 new Student(3, "王五", "二次元")
-        ));
+        );
+        // 设置 TableView 列和数据
+        tableViewSmallDemo.setItems(students);
+        tableViewSmallDemo.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+        tableViewDemo.setItems(students);
+        tableViewDemo.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+        tableViewBigDemo.setItems(students);
+        tableViewBigDemo.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
     }
     @Data
     @AllArgsConstructor

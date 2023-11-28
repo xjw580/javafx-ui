@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.util.Callback?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             fx:controller="club.xiaojiawei.readme.controller.TabViewController"
             style="-fx-padding: 20 0 0 0"
@@ -12,7 +11,48 @@
     <VBox styleClass="hv-box">
         <Label text="基类：table-view-ui" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <TableView fx:id="tableViewDemo" styleClass="table-view-ui">
+            <TableView fx:id="tableViewDemo" styleClass="table-view-ui" prefHeight="200">
+                <columns>
+                    <TableColumn text="学号">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="id"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="姓名">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="性别">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="sex"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+        </HBox>
+        <Label text="大小类：table-view-ui-small、table-view-ui-big" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <TableView fx:id="tableViewSmallDemo" styleClass="table-view-ui, table-view-ui-small" prefHeight="200">
+                <columns>
+                    <TableColumn text="学号">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="id"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="姓名">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="性别">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="sex"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+            <TableView fx:id="tableViewBigDemo" styleClass="table-view-ui, table-view-ui-big" prefHeight="200">
                 <columns>
                     <TableColumn text="学号">
                         <cellValueFactory>

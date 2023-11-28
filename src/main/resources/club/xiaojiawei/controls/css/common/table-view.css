@@ -1,7 +1,77 @@
-.table-view-ui{
-    /*-fx-background-color: #b3d5ff;*/
-    -fx-border-color: none;
-    -fx-border-radius: 10;
-    -fx-background-insets: 0;
-    -fx-background-radius: 10;
+/*Base*/
+.root{
+    table-view-bg-color: #89caff;
+}
+/*空闲列列头*/
+.table-view-ui .filler{
+    -fx-background-color: table-view-bg-color;
+    -fx-background-radius: 0 10 0 0;
+}
+/*；；ColumnResizePolicy为CONSTRAINED_RESIZE_POLICY时*/
+.table-view-ui, .table-view-ui .column-header-background, .table-view-ui:constrained-resize .filler{
+    -fx-background-color: transparent;
+}
+.table-view-ui .nested-column-header{
+    -fx-background-radius: 10 0 0 0;
+    -fx-background-color: table-view-bg-color;
+}
+.table-view-ui:constrained-resize .nested-column-header{
+    -fx-background-radius: 10 10 0 0 ;
+}
+/*每一列的头头，也就是顶栏*/
+.table-view-ui .column-header{
+    -fx-background-color: transparent;
+}
+/*顶栏内的label*/
+.table-view-ui .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 15;
+}
+/*单元格*/
+.table-view-ui .table-cell{
+    -fx-padding: 15;
+}
+.table-view-ui .table-row-cell:selected .table-cell{
+    -fx-text-fill: white;
+}
+/*列头里的箭头*/
+.table-view-ui .arrow{
+    -fx-background-color: white;
+}
+/*所有行*/
+.table-view-ui .table-row-cell{
+    -fx-background-color: shallow-color;
+    -fx-padding: 0;
+}
+/*奇数行*/
+.table-view-ui .table-row-cell:odd{
+    -fx-background-color: #cae7fc;
+}
+.table-view-ui .table-row-cell:selected{
+    -fx-background-color: #298cff;
+}
+/*滚动条美化*/
+.table-view-ui > .virtual-flow > .scroll-bar:vertical,
+.table-view-ui > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view-ui > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view-ui > .virtual-flow > .scroll-bar:horizontal,
+.table-view-ui > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view-ui > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+/*Size*/
+/*big*/
+.table-view-ui-big .column-header-background .label{
+    -fx-padding: 25!important;
+}
+.table-view-ui-big .table-cell{
+    -fx-padding: 25!important;
+}
+/*small*/
+.table-view-ui-small .column-header-background .label{
+    -fx-padding: 5!important;
+}
+.table-view-ui-small .table-cell{
+    -fx-padding: 5!important;
 }

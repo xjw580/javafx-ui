@@ -17,7 +17,7 @@
     -fx-background-insets: 0;
 }
 .tab-pane-ui .control-buttons-tab:hover .tab-down-button .arrow{
-    -fx-background-color: #0075FF;
+    -fx-background-color: main-color;
 }
 .tab-pane-ui .control-buttons-tab:hover .tab-down-button{
     -fx-background-color: rgb(0, 0, 0, 0.1);
@@ -27,8 +27,8 @@
 }
 /* 修改tabPane颜色 */
 .tab-pane-ui > .tab-header-area > .tab-header-background {
-     -fx-text-box-border: #e0f0fd;/*背景颜色*/
-    -fx-background-color: #e0f0fd;/*底部线颜色*/
+    -fx-text-box-border: shallow-color;/*背景颜色*/
+    -fx-background-color: shallow-color;/*底部线颜色*/
 }
 .tab-pane-ui .tab:selected {
     -fx-background-color: white!important;
@@ -40,7 +40,7 @@
 /*修改Popup样式*/
 .tab-down-button .context-menu{
     -fx-background-radius: 5;
-    -fx-background-color: #e0f0fd;
+    -fx-background-color: shallow-color;
 }
 .tab-down-button .context-menu .menu-item{
     -fx-background-color: transparent;
