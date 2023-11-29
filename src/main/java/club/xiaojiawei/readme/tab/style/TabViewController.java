@@ -1,4 +1,4 @@
-package club.xiaojiawei.readme.controller;
+package club.xiaojiawei.readme.tab.style;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,7 +1,7 @@
-.label-ui{
+.title-ui{
     -fx-background-color: #e8f0fe;
     -fx-padding: 0 0 0 20;
 }
-.label-ui *{
+.title-ui *{
     -fx-fill: #1c74e8;
 }

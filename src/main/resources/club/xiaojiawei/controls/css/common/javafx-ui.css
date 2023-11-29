@@ -12,9 +12,10 @@
 @import "text-filed.css";
 @import "password-show-field.css";
 @import "text-area.css";
-@import "label-ui.css";
+@import "title.css";
 @import "table-view.css";
-.root{
+@import "label.css";
+.root {
     /*Base*/
     main-color: #0075ff;
     effect-color: #b3d5ff;

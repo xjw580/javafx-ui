@@ -1,23 +1,21 @@
 package club.xiaojiawei.controls;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/11/23 17:04
  */
-public class LabelUI extends Label {
-    public LabelUI() {
+public class Title extends Label {
+    public static final String DEFAULT_CLASS = "title-ui";
+    public Title() {
         this("");
     }
 
-    public LabelUI(String s) {
+    public Title(String s) {
         super(s);
-        getStyleClass().add("label-ui");
+        getStyleClass().add(DEFAULT_CLASS);
         Rectangle rectangle = new Rectangle();
         setClip(rectangle);
         heightProperty().addListener((observableValue, number, t1) -> {

@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/28 8:57
  */
-public class Readme extends Application {
+public class ReadmeApplication extends Application{
 
     public static void main(String[] args) {
         launch(args);

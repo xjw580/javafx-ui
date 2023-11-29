@@ -4,6 +4,7 @@
 #left, #right{
     -fx-opacity: 0;
     -fx-alignment: CENTER;
+    -fx-cursor: hand;
     -fx-padding: 9 0 9 0;
     -fx-pref-width: 30;
     -fx-background-radius: 15;

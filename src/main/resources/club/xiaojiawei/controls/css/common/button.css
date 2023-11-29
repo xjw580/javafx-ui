@@ -2,7 +2,7 @@
 .btn-ui{
     -fx-background-insets: 0;
     -fx-border-width: 0;
-    -fx-padding: 6 10 6 10;
+    -fx-padding: 7 14 7 14;
     -fx-effect: normal-effect;
     -fx-background-radius: 5;
     -fx-cursor: hand;
@@ -15,10 +15,10 @@
 }
 /*Size*/
 .btn-ui-small{
-    -fx-padding: 3 5 3 5!important;
+    -fx-padding: 4 8 4 8!important;
 }
 .btn-ui-big{
-    -fx-padding: 9 15 9 15!important;
+    -fx-padding: 10 20 10 20!important;
 }
 /*style*/
 .btn-ui-normal{

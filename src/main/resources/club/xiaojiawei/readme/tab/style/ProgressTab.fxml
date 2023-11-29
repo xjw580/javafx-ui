@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
-            fx:controller="club.xiaojiawei.readme.controller.ProgressController"
+            fx:controller="club.xiaojiawei.readme.tab.style.ProgressController"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
         <Label text="基类：progress-bar-ui、progress-indicator-ui" styleClass="title-three"/>

@@ -1,12 +1,15 @@
 package club.xiaojiawei.readme;
 
+import club.xiaojiawei.JavaFXUI;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
@@ -18,16 +21,45 @@ import java.util.ResourceBundle;
  */
 public class ReadmeController implements Initializable {
 
-    @FXML private TabPane tabPane;
-    @FXML private ToggleGroup toggleGroup;
-
+    @FXML private TabPane rightTabPane;
+    @FXML private TitledPane style;
+    @FXML private TitledPane component;
+    @FXML private ScrollPane leftScrollPane;
+    private final ToggleGroup toggleGroup = new ToggleGroup();
+    /**
+     * 初始选择tab的名字
+     */
+    private final static String INIT_SELECTED_TAB_NAME = "Label";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        tabPane.getSelectionModel().selectedItemProperty().addListener(selectionModelListener());
+        initTab(style, "style");
+        initTab(component, "component");
+        rightTabPane.getSelectionModel().selectedItemProperty().addListener(selectionModelListener());
         toggleGroup.selectedToggleProperty().addListener(selectedToggleListener());
         if (toggleGroup.getSelectedToggle() != null){
             selectedNewToggle(toggleGroup.getSelectedToggle());
         }
+    }
+    private void initTab(TitledPane tab, String suffixPath){
+        VBox vBox = new VBox();
+        File files = new File(Objects.requireNonNull(JavaFXUI.class.getResource("/club/xiaojiawei/readme/tab/" + suffixPath)).getPath());
+        for (File file : Objects.requireNonNull(files.listFiles())) {
+            if (file.getName().contains(".fxml")){
+                String name = file.getName().split("Tab.fxml")[0];
+                ToggleButton toggleButton = new ToggleButton();
+                toggleButton.getStyleClass().add("toggle-btn-ui");
+                toggleButton.setToggleGroup(toggleGroup);
+                toggleButton.setPrefWidth(leftScrollPane.getPrefWidth());
+                toggleButton.setText(name);
+                toggleButton.setUserData(suffixPath);
+                toggleButton.setSelected(isSelected(name));
+                vBox.getChildren().add(toggleButton);
+            }
+        }
+        tab.setContent(vBox);
+    }
+    private boolean isSelected(String name){
+        return Objects.equals(INIT_SELECTED_TAB_NAME, name);
     }
     private ChangeListener<Tab> selectionModelListener(){
         return (observable, oldValue, newValue) -> {
@@ -63,10 +95,10 @@ public class ReadmeController implements Initializable {
             if (oldValue != null){
 //                    取消选中旧button，删除对应的tab
                 String text = ((ToggleButton) Objects.requireNonNull(oldValue, "oldValue")).getText();
-                for (int i = 0; i < tabPane.getTabs().size(); i++) {
-                    Tab tab = tabPane.getTabs().get(i);
+                for (int i = 0; i < rightTabPane.getTabs().size(); i++) {
+                    Tab tab = rightTabPane.getTabs().get(i);
                     if (Objects.equals(tab.getText(), text)){
-                        tabPane.getTabs().remove(i);
+                        rightTabPane.getTabs().remove(i);
                         return;
                     }
                 }
@@ -79,18 +111,18 @@ public class ReadmeController implements Initializable {
      * @param newValue
      */
     private void selectedNewToggle(Toggle newValue){
-        String text = ((ToggleButton) Objects.requireNonNull(newValue, "newValue")).getText();
-        for (int i = 0; i < tabPane.getTabs().size(); i++) {
-            Tab tab = tabPane.getTabs().get(i);
-            if (Objects.equals(tab.getText(), text)){
+        String name = ((ToggleButton) Objects.requireNonNull(newValue, "newValue")).getText();
+        for (int i = 0; i < rightTabPane.getTabs().size(); i++) {
+            Tab tab = rightTabPane.getTabs().get(i);
+            if (Objects.equals(tab.getText(), name)){
 //            有新按钮对应的tab
-                tabPane.getSelectionModel().select(i);
+                rightTabPane.getSelectionModel().select(i);
                 return;
             }
         }
         try {
 //                没有新按钮对应的tab，创建对应tab
-            createTab(text, FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tab/" + text + "Tab.fxml"))));
+            createTab(name, FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tab/" + newValue.getUserData() + "/" + name + "Tab.fxml"))));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -98,7 +130,7 @@ public class ReadmeController implements Initializable {
 
     private void createTab(String text, Node node){
         Tab tab = new Tab(text, node);
-        tabPane.getTabs().add(tab);
-        tabPane.getSelectionModel().select(tab);
+        rightTabPane.getTabs().add(tab);
+        rightTabPane.getSelectionModel().select(tab);
     }
 }

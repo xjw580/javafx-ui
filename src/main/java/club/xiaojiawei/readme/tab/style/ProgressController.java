@@ -1,4 +1,4 @@
-package club.xiaojiawei.readme.controller;
+package club.xiaojiawei.readme.tab.style;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;

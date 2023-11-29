@@ -5,7 +5,7 @@
     -fx-background-color: white;
     /*选中文本的颜色*/
     -fx-accent:#0075FF;
-    -fx-padding: 6;
+    -fx-padding: 7;
 }
 .text-field-ui:focused{
     -fx-effect: dropshadow(two-pass-box, #0075FF, 5, 0, 1, 1)!important;
@@ -16,5 +16,5 @@
     -fx-padding: 4!important;
 }
 .text-field-ui-big{
-    -fx-padding: 8!important;
+    -fx-padding: 10!important;
 }

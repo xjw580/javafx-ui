@@ -1,54 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 <SplitPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            stylesheets="@../controls/css/common/javafx-ui.css, @readme.css"
            fx:controller="club.xiaojiawei.readme.ReadmeController"
-           prefHeight="600.0" prefWidth="1000.0" dividerPositions="0.15,1">
-    <ScrollPane fx:id="left">
-        <Accordion prefWidth="${left.width}" expandedPane="$style" styleClass="accordion-ui, accordion-ui-big">
+           fx:id="rootPane"
+           prefHeight="600.0" prefWidth="1000.0">
+    <ScrollPane fx:id="leftScrollPane" maxWidth="150" prefWidth="150" prefHeight="${rootPane.height}">
+        <Accordion expandedPane="$style" styleClass="accordion-ui, accordion-ui-big">
             <panes>
-                <fx:define>
-                    <ToggleGroup fx:id="toggleGroup"/>
-                </fx:define>
-                <!--TODO DEL id-->
-                <TitledPane fx:id="style" text="样式类">
-                    <VBox>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Accordion" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="ComboBox" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Button" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="CheckBox" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Common" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Progress" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="RadioButton" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TabView" prefWidth="${left.width}" selected="true"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TabPane" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TextArea" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TextField" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TitledPane" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="ToggleButton" prefWidth="${left.width}"/>
-                    </VBox>
-                </TitledPane>
-                <TitledPane fx:id="component" text="自定义组件">
-                    <VBox>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Switch" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="TimeSelector" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Time" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="DateSelector" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Calendar" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Carousel" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="Date" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="DateTime" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="FileUploader" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="PasswordShowField" prefWidth="${left.width}"/>
-                        <ToggleButton styleClass="toggle-btn-ui" toggleGroup="$toggleGroup" text="LabelUI" prefWidth="${left.width}"/>
-                    </VBox>
-                </TitledPane>
+                <TitledPane fx:id="style" text="样式类" />
+                <TitledPane fx:id="component" text="自定义组件" />
             </panes>
         </Accordion>
     </ScrollPane>
-    <TabPane fx:id="tabPane" prefWidth="${left.width}" prefHeight="${left.height}" styleClass="tab-pane-ui"/>
+    <TabPane fx:id="rightTabPane" prefHeight="${rootPane.height}" styleClass="tab-pane-ui"/>
 </SplitPane>

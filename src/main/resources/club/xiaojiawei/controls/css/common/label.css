@@ -1,0 +1,41 @@
+.label-ui{
+    -fx-padding: 7 14 7 14;
+    -fx-background-color: rgb(250, 250, 252);
+    -fx-border-color: rgba(0, 0, 0, .13);
+}
+/*Size*/
+.label-ui-small{
+    -fx-padding: 4 8 4 8!important;
+}
+.label-ui-big{
+    -fx-padding: 10 20 10 20!important;
+}
+/*Color*/
+.label-ui-normal{
+    -fx-background-color: rgba(32, 128, 240, 0.12) !important;
+    -fx-border-color: rgba(32, 128, 240, 0.3) !important;
+}
+.label-ui-normal *{
+    -fx-fill: rgba(32, 128, 240);
+}
+.label-ui-success{
+    -fx-background-color: rgba(24, 160, 88, 0.12)!important;
+    -fx-border-color: rgba(24, 160, 88, 0.3)!important;
+}
+.label-ui-success *{
+    -fx-fill: rgba(24, 160, 88);
+}
+.label-ui-warn{
+    -fx-background-color: rgba(240, 160, 32, 0.12)!important;
+    -fx-border-color: rgba(240, 160, 32, 0.3)!important;
+}
+.label-ui-warn *{
+    -fx-fill: rgba(240, 160, 32);
+}
+.label-ui-error{
+    -fx-background-color: rgba(208, 48, 80, 0.12)!important;
+    -fx-border-color: rgba(208, 48, 80, 0.3)!important;
+}
+.label-ui-error *{
+    -fx-fill: rgba(208, 48, 80);
+}

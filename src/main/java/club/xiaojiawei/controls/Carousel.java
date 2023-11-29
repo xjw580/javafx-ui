@@ -124,6 +124,7 @@ public class Carousel extends AnchorPane {
             }else {
                 dots.getChildren().add(dot = new Circle(){{setRadius(3D);getStyleClass().add("dot");}});
             }
+            dot.setStyle("-fx-cursor: hand");
             int finalI = i;
             dot.setOnMouseClicked(event -> currentIndex.set(finalI));
         }
