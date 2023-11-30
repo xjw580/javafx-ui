@@ -1,10 +1,10 @@
 .text-field{
-    -fx-pref-width: 17;
+    -fx-pref-width: 18;
     -fx-padding: 0;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
     /*选中文本的颜色*/
-    -fx-accent:#0075FF;
+    -fx-accent: #0075ff;
 }
 .timeSeparator, .text-field{
     -fx-translate-y: 3.5;
@@ -12,16 +12,16 @@
 .timeBackground{
     -fx-border-color: #73a5f1;
     -fx-pref-height: 24;
-    -fx-pref-width: 69;
+    -fx-pref-width: 70;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-background-color: white;
 }
 .hideIcoTimeBackground{
-    -fx-pref-width: 49!important;
+    -fx-pref-width: 50!important;
 }
 .timeBackgroundFocus{
-    -fx-border-color: #0075FF!important;
+    -fx-border-color: #0075ff!important;
     -fx-effect: dropshadow(gaussian, #73a5f1, 10, 0, 0, 0)!important;
 }
 #timeIco{

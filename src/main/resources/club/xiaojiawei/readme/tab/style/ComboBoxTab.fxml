@@ -10,7 +10,7 @@
     <VBox styleClass="hv-box">
         <Label text="基类：combo-box-ui" styleClass="title-three"/>
         <HBox styleClass="hv-box">
-            <ComboBox visibleRowCount="3" styleClass="combo-box-ui" value="杀死那只知更鸟">
+            <ComboBox visibleRowCount="3" styleClass="combo-box-ui" value="杀死那只知更鸟" editable="true">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="太空漫游2001"/>

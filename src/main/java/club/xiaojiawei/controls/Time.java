@@ -14,11 +14,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
@@ -37,11 +37,13 @@ public class Time extends AnchorPane {
     /**
      * 默认显示时间选择器图标
      */
+    @Getter
     private boolean showSelector = true;
     /**
-     * 默认显示边框
+     * 默认显示背景
      */
-    private boolean showBG = true;
+    @Getter
+    private boolean showBg = true;
     public String getTime() {
         return TIME_FORMATTER.format(time.get());
     }
@@ -52,8 +54,11 @@ public class Time extends AnchorPane {
      * @param time 格式：HH:mm
      */
     public void setTime(String time) {
-        Objects.requireNonNull(time, "time");
-        this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+        if (time == null || time.isBlank()){
+            this.time.set(null);
+        }else {
+            this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+        }
     }
     public void setLocalTime(LocalTime localTime){
         time.set(localTime);
@@ -62,19 +67,14 @@ public class Time extends AnchorPane {
         timeIco.setVisible(this.showSelector = showSelector);
         timeIco.setManaged(false);
         if (showSelector){
-            timeBG.getStyleClass().remove(HIDE_ICO_TIME_BACKGROUND);
+            timeBG.getStyleClass().remove(HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }else {
-            timeBG.getStyleClass().add(HIDE_ICO_TIME_BACKGROUND);
+            timeBG.getStyleClass().add(HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }
     }
-    public boolean isShowSelector() {
-        return showSelector;
-    }
-    public boolean isShowBG() {
-        return showBG;
-    }
-    public void setShowBG(boolean showBG) {
-        timeBG.setVisible(this.showBG = showBG);
+
+    public void setShowBg(boolean showBg) {
+        timeBG.setVisible(this.showBg = showBg);
     }
     @FXML
     private Label timeBG;
@@ -86,12 +86,10 @@ public class Time extends AnchorPane {
     private TimeIco timeIco;
     private static final int MAX_HOUR = 23;
     private static final int MAX_MIN = 59;
+    @Getter
     private Popup timeSelectorPopup;
-    public Popup getTimeSelectorPopup() {
-        return timeSelectorPopup;
-    }
-    private static final String TIME_BACKGROUND_FOCUS = "timeBackgroundFocus";
-    private static final String HIDE_ICO_TIME_BACKGROUND = "hideIcoTimeBackground";
+    private static final String TIME_BACKGROUND_FOCUS_STYLE_CLASS = "timeBackgroundFocus";
+    private static final String HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS = "hideIcoTimeBackground";
     private boolean isFromTime;
     private ChangeListener<Boolean> focusChangeListener;
     public Time() {
@@ -119,16 +117,19 @@ public class Time extends AnchorPane {
         timeSelectorPopup = new Popup();
         TimeSelector timeSelector = new TimeSelector();
         time = timeSelector.timeProperty();
-        hour.setText(DateTimeFormatter.ofPattern("HH").format(time.get()));
-        min.setText(DateTimeFormatter.ofPattern("mm").format(time.get()));
         time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
         timeSelectorPopup.getContent().add(timeSelector);
         timeSelectorPopup.setAutoHide(true);
     }
     private void updateCompleteTimeTextField(LocalTime newTime){
         isFromTime = true;
-        hour.setText(DateTimeFormatter.ofPattern("HH").format(newTime));
-        min.setText(DateTimeFormatter.ofPattern("mm").format(newTime));
+        if (newTime == null){
+            hour.setText("");
+            min.setText("");
+        }else {
+            hour.setText(DateTimeFormatter.ofPattern("HH").format(newTime));
+            min.setText(DateTimeFormatter.ofPattern("mm").format(newTime));
+        }
         isFromTime = false;
     }
 
@@ -153,8 +154,14 @@ public class Time extends AnchorPane {
         textField.focusedProperty().addListener(timeTextFieldBlurListener(textField));
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (!isFromTime && newValue.length() == 2){
-                time.set(LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText())));
+            if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank())){
+                time.set(null);
+            }else if (!isFromTime && newValue.length() == 2){
+                if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank())){
+                    time.set(null);
+                }else if (hour.getText() != null && !hour.getText().isBlank() && min.getText() != null && !min.getText().isBlank()){
+                    time.set(LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText())));
+                }
             }
         });
     }
@@ -205,9 +212,9 @@ public class Time extends AnchorPane {
         return (observableValue, aBoolean, isFocus) -> {
             if (!isFocus){
                 standardizationTime(textField, textField.getText());
-                timeBG.getStyleClass().remove(TIME_BACKGROUND_FOCUS);
+                timeBG.getStyleClass().remove(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
             }else {
-                timeBG.getStyleClass().add(TIME_BACKGROUND_FOCUS);
+                timeBG.getStyleClass().add(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
             }
             if (focusChangeListener != null){
                 focusChangeListener.changed(observableValue, aBoolean, isFocus);
@@ -221,7 +228,9 @@ public class Time extends AnchorPane {
      * @param time
      */
     private void standardizationTime(TextField textField, String time){
-        textField.setText("0".repeat(2 - time.length()) + time);
+        if (time != null && !time.isBlank()){
+            textField.setText("0".repeat(2 - time.length()) + time);
+        }
     }
 
     private int parseInt(String s){

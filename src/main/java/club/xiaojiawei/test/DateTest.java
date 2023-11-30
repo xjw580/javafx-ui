@@ -2,11 +2,14 @@ package club.xiaojiawei.test;
 
 import club.xiaojiawei.controls.Date;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.function.Predicate;
 
 /**
@@ -23,12 +26,7 @@ public class DateTest extends Application {
     public void start(Stage primaryStage) {
         FlowPane vBox = new FlowPane();
         Date date = new Date();
-        date.setDateInterceptor(new Predicate<LocalDate>() {
-            @Override
-            public boolean test(LocalDate localDate) {
-                return LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate);
-            }
-        });
+        date.setDateInterceptor(localDate -> LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
         System.out.println(date.getDate());
         date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         date.setTranslateX(50);
@@ -37,5 +35,21 @@ public class DateTest extends Application {
         Scene scene = new Scene(vBox, 200, 200);
         primaryStage.setScene(scene);
         primaryStage.show();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    date.setDate("2023/12/30");
+                });
+            }
+        }, 1500);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    date.setDate(null);
+                });
+            }
+        }, 3000);
     }
 }

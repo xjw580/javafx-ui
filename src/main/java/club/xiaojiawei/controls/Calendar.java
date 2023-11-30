@@ -55,7 +55,14 @@ public class Calendar extends VBox {
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
-        this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+        if (date == null || date.isBlank()){
+            this.date.set(null);
+        }else {
+            LocalDate localDate = LocalDate.from(DATE_FORMATTER.parse(date));
+            if (dateInterceptor == null || dateInterceptor.test(localDate)){
+                this.date.set(localDate);
+            }
+        }
     }
     public void setLocalDate(LocalDate localDate){
         date.set(localDate);
@@ -110,14 +117,13 @@ public class Calendar extends VBox {
         nextMonth.setOnMouseClicked(event -> laterDate());
         today.setOnMouseClicked(event -> {
             LocalDate nowLocalDate = LocalDate.now();
-            if (!dateInterceptor.test(nowLocalDate)){
-                return;
-            }
-            if (Objects.equals(nowLocalDate, date.get())){
+            if (dateInterceptor == null || dateInterceptor.test(nowLocalDate)){
+                if (Objects.equals(nowLocalDate, date.get())){
 //                可能不在当前日期面板，需要跳转
-                skipToPointDate(nowLocalDate);
-            }else {
-                date.set(nowLocalDate);
+                    skipToPointDate(nowLocalDate);
+                }else {
+                    date.set(nowLocalDate);
+                }
             }
         });
         clear.setOnMouseClicked(mouseEvent -> date.set(null));

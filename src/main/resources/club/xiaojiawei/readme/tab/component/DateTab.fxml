@@ -7,12 +7,12 @@
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
-        <Label text="通过showSelector、showBG调整选择器、背景可见性" styleClass="title-three"/>
+        <Label text="通过showSelector、showBg调整选择器、背景可见性" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Date/>
             <Date showSelector="false"/>
-            <Date showBG="false"/>
-            <Date showBG="false" showSelector="false"/>
+            <Date showBg="false"/>
+            <Date showBg="false" showSelector="false"/>
         </HBox>
     </VBox>
 </ScrollPane>

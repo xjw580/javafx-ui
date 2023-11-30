@@ -6,9 +6,9 @@
            stylesheets="@../controls/css/common/javafx-ui.css, @readme.css"
            fx:controller="club.xiaojiawei.readme.ReadmeController"
            fx:id="rootPane"
-           prefHeight="600.0" prefWidth="1000.0">
+           prefHeight="600.0" prefWidth="1100.0">
     <ScrollPane fx:id="leftScrollPane" maxWidth="150" prefWidth="150" prefHeight="${rootPane.height}">
-        <Accordion expandedPane="$style" styleClass="accordion-ui, accordion-ui-big">
+        <Accordion expandedPane="$component" styleClass="accordion-ui, accordion-ui-big">
             <panes>
                 <TitledPane fx:id="style" text="样式类" />
                 <TitledPane fx:id="component" text="自定义组件" />

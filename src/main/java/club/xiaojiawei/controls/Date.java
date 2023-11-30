@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -37,11 +38,13 @@ public class Date extends AnchorPane {
     /**
      * 默认显示时间选择器图标
      */
+    @Getter
     private boolean showSelector = true;
     /**
-     * 默认显示边框
+     * 默认显示背景
      */
-    private boolean showBG = true;
+    @Getter
+    private boolean showBg = true;
     public String getDate() {
         return date.get() == null? null : DATE_FORMATTER.format(date.get());
     }
@@ -52,7 +55,14 @@ public class Date extends AnchorPane {
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
-        this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+        if (date == null || date.isBlank()){
+            this.date.set(null);
+        }else {
+            LocalDate localDate = LocalDate.from(DATE_FORMATTER.parse(date));
+            if (dateInterceptor == null || dateInterceptor.test(localDate)){
+                this.date.set(localDate);
+            }
+        }
     }
     public void setLocalDate(LocalDate localDate){
         date.set(localDate);
@@ -66,14 +76,9 @@ public class Date extends AnchorPane {
             dateBG.getStyleClass().add(HIDE_ICO_DATE_BACKGROUND);
         }
     }
-    public boolean isShowSelector() {
-        return showSelector;
-    }
-    public boolean isShowBG() {
-        return showBG;
-    }
-    public void setShowBG(boolean showBG) {
-        dateBG.setVisible(this.showBG = showBG);
+
+    public void setShowBg(boolean showBg) {
+        dateBG.setVisible(this.showBg = showBg);
     }
     @FXML
     private Label dateBG;
@@ -88,10 +93,8 @@ public class Date extends AnchorPane {
     private static final int MAX_YEAR = 9999;
     private static final int MAX_MONTH = 12;
     private static final int MAX_DAY = 31;
+    @Getter
     private Popup dateSelectorPopup;
-    public Popup getDateSelectorPopup() {
-        return dateSelectorPopup;
-    }
     private static final String HIDE_ICO_DATE_BACKGROUND = "hideIcoDateBackground";
     private static final String DATE_BACKGROUND_FOCUS = "dateBackgroundFocus";
     private final static DateTimeFormatter YEAR_FORMATTER = DateTimeFormatter.ofPattern("yyyy");

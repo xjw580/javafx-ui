@@ -7,6 +7,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TimeTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
@@ -21,6 +24,19 @@ public class TimeTest extends Application {
         Scene scene = new Scene(flowPane, 200, 200);
         stage.setScene(scene);
         stage.show();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                time.setTime("13:43");
+            }
+        }, 1500);
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                time.setTime(null);
+            }
+        }, 3000);
     }
 
 }

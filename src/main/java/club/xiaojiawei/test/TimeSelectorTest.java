@@ -12,6 +12,9 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/25 17:34
@@ -27,15 +30,24 @@ public class TimeSelectorTest extends Application {
         HBox hBox = new HBox();
         hBox.setSpacing(10);
         ObservableList<Node> children = hBox.getChildren();
-        children.add(new TimeSelector());
+        TimeSelector timeSelector1 = new TimeSelector();
+        System.out.println(timeSelector1.getTime());
+        timeSelector1.timeProperty().addListener((observableValue, localTime, t1) -> System.out.println(t1));
+        children.add(timeSelector1);
         Scene scene = new Scene(hBox);
         primaryStage.setScene(scene);
         primaryStage.show();
-        Platform.runLater(() -> {
-            Popup popup = new Popup();
-            TimeSelector timeSelector = new TimeSelector();
-            popup.getContent().add(timeSelector);
-            popup.show(primaryStage);
-        });
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timeSelector1.setTime("12:30");
+            }
+        }, 1000);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timeSelector1.setTime(null);
+            }
+        }, 3000);
     }
 }

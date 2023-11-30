@@ -42,11 +42,14 @@ public class DateSelector extends HBox {
      * @param date 格式：yyyy/MM/dd 或 yyyy/MM
      */
     public void setDate(String date) {
-        Objects.requireNonNull(date, "date");
-        if (date.length() == 6){
-            this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+        if (date == null || date.isBlank()){
+            this.date.set(null);
         }else {
-            this.date.set(LocalDate.from(SHORT_DATE_FORMATTER.parse(date)));
+            if (date.length() == 6){
+                this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+            }else {
+                this.date.set(LocalDate.from(SHORT_DATE_FORMATTER.parse(date)));
+            }
         }
     }
     public void setLocalDate(LocalDate localDate){

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Popup;
 import javafx.util.Duration;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -33,20 +34,20 @@ public class DateTime extends AnchorPane {
     /**
      * 显示日期时间选择器
      */
+    @Getter
     private boolean showSelector = true;
     /**
-     * 默认显示边框
+     * 默认显示背景
      */
-    private boolean showBG = true;
+    @Getter
+    private boolean showBg = true;
     public String getDateTime() {
         return dateTime.get() == null? null : DATE_TIME_FORMATTER.format(dateTime.get());
     }
     public ObjectProperty<LocalDateTime> dateTimeProperty() {
         return dateTime;
     }
-    public boolean isShowSelector() {
-        return showSelector;
-    }
+
     public void setShowSelector(boolean showSelector) {
         dateTimeIco.setVisible(this.showSelector = showSelector);
         dateTimeIco.setManaged(false);
@@ -56,11 +57,9 @@ public class DateTime extends AnchorPane {
             dateTimeBG.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND);
         }
     }
-    public boolean isShowBG() {
-        return showBG;
-    }
-    public void setShowBG(boolean showBG) {
-        dateTimeBG.setVisible(this.showBG = showBG);
+
+    public void setShowBg(boolean showBg) {
+        dateTimeBG.setVisible(this.showBg = showBg);
     }
 
     /**
@@ -98,35 +97,31 @@ public class DateTime extends AnchorPane {
         }
     }
     private void afterFXMLLoaded(){
-        dateControls.setOnFocusChangeListener((observable, oldValue, newValue) -> {
-            dealFocusChange(newValue);
-        });
-        timeControls.setOnFocusChangeListener((observable, oldValue, newValue) -> {
-            dealFocusChange(newValue);
-        });
-        dateControls.dateProperty().addListener(dateChangeListener());
-        timeControls.timeProperty().addListener(timeChangeListener());
+        dateControls.setOnFocusChangeListener((observable, oldValue, newValue) -> dealFocusChange(newValue));
+        timeControls.setOnFocusChangeListener((observable, oldValue, newValue) -> dealFocusChange(newValue));
+        dateControls.dateProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
+        timeControls.timeProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
         dateTime.addListener((observable, oldValue, newValue) -> updateCompleteDateTime(newValue));
         initDateTimeSelectorPopup();
         initDateTimeIco();
-    }
-    private ChangeListener<LocalDate> dateChangeListener(){
-        return (observable, oldValue, newValue) -> afterDateTimeChange();
-    }
-    private ChangeListener<LocalTime> timeChangeListener(){
-        return (observable, oldValue, newValue) -> afterDateTimeChange();
     }
     private void afterDateTimeChange(){
         if (!isFromDateTime){
             LocalDate localDate = dateControls.dateProperty().get();
             LocalTime localTime = timeControls.timeProperty().get();
-            dateTime.set(LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+            if (localDate != null && localTime != null){
+                dateTime.set(LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+            }else if (localDate == null && localTime == null){
+                dateTime.set(null);
+            }
         }
     }
     private void updateCompleteDateTime(LocalDateTime newDateTime){
         isFromDateTime = true;
-        dateControls.setLocalDate(LocalDate.of(newDateTime.getYear(), newDateTime.getMonthValue(), newDateTime.getDayOfMonth()));
-        timeControls.setLocalTime(LocalTime.of(newDateTime.getHour(), newDateTime.getMinute()));
+        if (newDateTime != null){
+            dateControls.setLocalDate(LocalDate.of(newDateTime.getYear(), newDateTime.getMonthValue(), newDateTime.getDayOfMonth()));
+            timeControls.setLocalTime(LocalTime.of(newDateTime.getHour(), newDateTime.getMinute()));
+        }
         isFromDateTime = false;
     }
     /**

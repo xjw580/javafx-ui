@@ -66,39 +66,48 @@
 }
 
 /*Color*/
+.combo-box-ui, .combo-box-ui > .arrow-button{
+    -fx-background-color: linear-gradient(to bottom, #efefef, #dcdcdc);
+}
+.combo-box-ui:hover,
+.combo-box-ui:focused,
+.combo-box-ui:hover > .arrow-button,
+.combo-box-ui:focused > .arrow-button{
+    -fx-background-color: linear-gradient(to bottom, #f4f4f4, #e7e7e7);
+}
 .combo-box-ui-normal, .combo-box-ui-normal > .arrow-button{
-    -fx-background-color: normal-color;
+    -fx-background-color: normal-color!important;;
 }
 .combo-box-ui-normal:hover,
 .combo-box-ui-normal:focused,
 .combo-box-ui-normal:hover > .arrow-button,
 .combo-box-ui-normal:focused > .arrow-button{
-    -fx-background-color: normal-deep-color;
+    -fx-background-color: normal-deep-color!important;;
 }
 .combo-box-ui-success, .combo-box-ui-success > .arrow-button{
-    -fx-background-color: success-color;
+    -fx-background-color: success-color!important;;
 }
 .combo-box-ui-success:hover,
 .combo-box-ui-success:focused,
 .combo-box-ui-success:hover > .arrow-button,
 .combo-box-ui-success:focused > .arrow-button{
-    -fx-background-color: success-deep-color;
+    -fx-background-color: success-deep-color!important;;
 }
 .combo-box-ui-warn, .combo-box-ui-warn > .arrow-button{
-    -fx-background-color: warn-color;
+    -fx-background-color: warn-color!important;;
 }
 .combo-box-ui-warn:hover,
 .combo-box-ui-warn:focused,
 .combo-box-ui-warn:hover > .arrow-button,
 .combo-box-ui-warn:focused > .arrow-button{
-    -fx-background-color: warn-deep-color;
+    -fx-background-color: warn-deep-color!important;;
 }
 .combo-box-ui-error, .combo-box-ui-error > .arrow-button{
-    -fx-background-color: error-color;
+    -fx-background-color: error-color!important;;
 }
 .combo-box-ui-error:hover,
 .combo-box-ui-error:focused,
 .combo-box-ui-error:hover > .arrow-button,
 .combo-box-ui-error:focused > .arrow-button{
-    -fx-background-color: error-deep-color;
+    -fx-background-color: error-deep-color!important;
 }

@@ -1,16 +1,17 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.utils.ScrollUtil;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -18,6 +19,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
+import static club.xiaojiawei.controls.config.ThreadPoolConfig.SCHEDULED_POOL;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -32,9 +36,9 @@ public class TimeSelector extends FlowPane {
     /**
      * 展示行数
      */
-    private double showRowCount;
+    @Getter private double showRowCount;
     public String getTime() {
-        return TIME_FORMATTER.format(time.get());
+        return time.get() == null? null : TIME_FORMATTER.format(time.get());
     }
     public ObjectProperty<LocalTime> timeProperty() {
         return time;
@@ -43,34 +47,35 @@ public class TimeSelector extends FlowPane {
      * @param time 格式：HH:mm
      */
     public void setTime(String time) {
-        Objects.requireNonNull(time, "time");
-        this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+        if (time == null || time.isBlank()){
+            this.time.set(null);
+        }else {
+            this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+        }
     }
     public void setLocalTime(LocalTime localTime){
         time.set(localTime);
     }
-    public double getShowRowCount() {
-        return showRowCount;
-    }
+
     public void setShowRowCount(double showRowCount) {
         this.showRowCount = showRowCount;
-        hourSelector.setMaxHeight(showRowCount * 30);
-        minSelector.setMaxHeight(showRowCount * 30);
-        this.setMaxHeight(showRowCount * 30);
+        double height = showRowCount * ROW_HEIGHT;
+        hourSelector.setMaxHeight(height);
+        minSelector.setMaxHeight(height);
+        this.setMaxHeight(height);
     }
-    @FXML
-    private ScrollPane hourSelector;
-    @FXML
-    private ScrollPane minSelector;
-    @FXML
-    private VBox hourVbox;
-    @FXML
-    private VBox minVbox;
-    private static final String SELECTED_TIME_LABEL = "selectedTimeLabel";
-    private static final String TIME_LABEL = "timeLabel";
+    @FXML private ScrollPane hourSelector;
+    @FXML private ScrollPane minSelector;
+    @FXML private VBox hourVbox;
+    @FXML private VBox minVbox;
+    private static final String SELECTED_TIME_LABEL_STYLE_CLASS = "selectedTimeLabel";
+    private static final String TIME_LABEL_STYLE_CLASS = "timeLabel";
     private static final int MAX_HOUR = 23;
     private static final int MAX_MIN = 59;
+    private static final double ROW_HEIGHT = 30D;
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    private final ToggleGroup hourGroup = new ToggleGroup();
+    private final ToggleGroup minGroup = new ToggleGroup();
     public TimeSelector() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -84,11 +89,10 @@ public class TimeSelector extends FlowPane {
     }
     private void afterFXMLLoaded(){
         addTimePropertyChangedListener();
-        fillHourSelector();
-        fillMinSelector();
+        buildTimeSelector(hourVbox.getChildren(), MAX_HOUR, hourGroup);
+        buildTimeSelector(minVbox.getChildren(), MAX_MIN, minGroup);
         setShowRowCount(6);
         addTimeSelectorKeyPressedListener();
-        time.set(LocalTime.of(0, 0));
     }
 
     /**
@@ -96,13 +100,26 @@ public class TimeSelector extends FlowPane {
      */
     private void addTimePropertyChangedListener(){
         time.addListener((observable, oldTime, newTime) -> {
-            ObservableList<Node> hourChildren = hourVbox.getChildren();
-            ObservableList<Node> minChildren = minVbox.getChildren();
-            if (oldTime == null || newTime.getHour() != oldTime.getHour()){
-                syncTimeSelector(hourChildren, newTime.getHour(), MAX_HOUR, showRowCount, hourSelector);
-            }
-            if (oldTime == null || newTime.getMinute() != oldTime.getMinute()){
-                syncTimeSelector(minChildren, newTime.getMinute(), MAX_MIN, showRowCount, minSelector);
+            if (newTime == null){
+                hourGroup.selectToggle(null);
+                minGroup.selectToggle(null);
+            }else {
+                String[] timeArr = TIME_FORMATTER.format(newTime).split(":");
+                for (Toggle toggle : hourGroup.getToggles()) {
+                    if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[0])){
+                        hourGroup.selectToggle(toggle);
+                        break;
+                    }
+                }
+                for (Toggle toggle : minGroup.getToggles()) {
+                    if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[1])){
+                        minGroup.selectToggle(toggle);
+                        break;
+                    }
+                }
+                syncTimeSelector(hourVbox.getChildren(), newTime.getHour(), MAX_HOUR, showRowCount, hourSelector);
+//                延迟同步，防止动画播放失败
+                SCHEDULED_POOL.schedule(() -> syncTimeSelector(minVbox.getChildren(), newTime.getMinute(), MAX_MIN, showRowCount, minSelector), 50, TimeUnit.MILLISECONDS);
             }
         });
     }
@@ -118,57 +135,52 @@ public class TimeSelector extends FlowPane {
     private void syncTimeSelector(ObservableList<Node> timeChildren, int pointTime, int maxValue, double showRowCount, ScrollPane timeScroll){
         for (int i = 0; i < timeChildren.size(); i++) {
             Node child = timeChildren.get(i);
-            child.getStyleClass().remove(SELECTED_TIME_LABEL);
+            child.getStyleClass().remove(SELECTED_TIME_LABEL_STYLE_CLASS);
             if (i == pointTime){
-                child.getStyleClass().add(SELECTED_TIME_LABEL);
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        ScrollUtil.buildSlideTimeLine(pointTime, maxValue + 1, showRowCount, timeScroll).play();
-                    }
-                }, 50);
+                child.getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
+                SCHEDULED_POOL.schedule(() -> {
+                    ScrollUtil.buildSlideTimeLine(pointTime, maxValue + 1, showRowCount, timeScroll).play();
+                }, 50, TimeUnit.MILLISECONDS);
             }
         }
     }
 
     /**
-     * 填充小时选择器
+     * 构建时间选择器
+     * @param timeChildren 容器的可观察列表
+     * @param maxTime 最大时或最大分
+     * @param timeToggleGroup 时间组
      */
-    private void fillHourSelector(){
-        ObservableList<Node> children = hourVbox.getChildren();
-        for (int i = 0; i <= MAX_HOUR ; i++) {
-            Label label = new Label();
-            label.getStyleClass().add(TIME_LABEL);
+    private void buildTimeSelector(ObservableList<Node> timeChildren, int maxTime, ToggleGroup timeToggleGroup){
+        for (int i = 0; i <= maxTime ; i++) {
+            ToggleButton label = new ToggleButton();
+            label.setToggleGroup(timeToggleGroup);
+            label.getStyleClass().add(TIME_LABEL_STYLE_CLASS);
             if (i < 10){
                 label.setText("0" + i);
             }else {
                 label.setText(String.valueOf(i));
             }
-            label.setOnMouseClicked(e -> time.set(time.get().withHour(Integer.parseInt(label.getText()))));
-            children.add(label);
+            timeChildren.add(label);
         }
-    }
-
-    /**
-     * 填充分钟选择器
-     */
-    private void fillMinSelector(){
-        ObservableList<Node> children = minVbox.getChildren();
-        for (int i = 0; i <= MAX_MIN ; i++) {
-            Label label = new Label();
-            label.getStyleClass().add(TIME_LABEL);
-            if (i < 10){
-                label.setText("0" + i);
-            }else {
-                label.setText(String.valueOf(i));
+        timeToggleGroup.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
+//            移除旧选中效果
+            if (oldToggle != null){
+                ((ToggleButton)oldToggle).getStyleClass().remove(SELECTED_TIME_LABEL_STYLE_CLASS);
             }
-            label.setOnMouseClicked(e -> time.set(time.get().withMinute(Integer.parseInt(label.getText()))));
-            children.add(label);
-        }
+//            添加新选中效果
+            if (newToggle != null){
+                ((ToggleButton)newToggle).getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
+            }
+//            设置时间
+            if (hourGroup.getSelectedToggle() != null && minGroup.getSelectedToggle() != null){
+                setTime(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText());
+            }
+        });
     }
 
     /**
-     * 为事件选择器添加按键监听器
+     * 为时间选择器添加按键监听器
      */
     private void addTimeSelectorKeyPressedListener(){
         hourSelector.setOnKeyPressed(event -> {
