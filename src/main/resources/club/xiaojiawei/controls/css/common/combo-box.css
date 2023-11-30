@@ -13,17 +13,18 @@
     -fx-effect: normal-hover-effect;
 }
 .combo-box-ui:focused {
-    -fx-effect: normal-press-effect!important;
+    /*-fx-effect: normal-press-effect!important;*/
 }
-/*editable = false*/
+.combo-box-ui > .arrow-button > .arrow {
+    -fx-background-color: #585858!important;
+}
 .combo-box-ui .list-cell {
     -fx-pref-height: 30;
     -fx-alignment: CENTER;
     -fx-background-color: transparent;
     -fx-text-fill: -fx-text-base-color;
 }
-/*editable = true*/
-.combo-box-ui .text-input {
+.combo-box-ui:editable .text-input{
     -fx-pref-height: 30;
     /*约束大小，防止过宽*/
     -fx-pref-width: 1;
@@ -32,6 +33,7 @@
     -fx-text-fill: -fx-text-base-color;
     -fx-accent: main-color;
 }
+
 .combo-box-ui .combo-box-popup .list-view {
     -fx-padding: 2;
     -fx-background-color: white, white;
@@ -55,26 +57,18 @@
 .combo-box-ui-small .list-cell {
     -fx-pref-height: 22!important;
 }
-.combo-box-ui-small .text-input {
+.combo-box-ui-small:editable .text-input {
     -fx-pref-height: 22!important;
 }
 .combo-box-ui-big .list-cell {
     -fx-pref-height: 38!important;
 }
-.combo-box-ui-big .text-input {
+.combo-box-ui-big:editable .text-input {
     -fx-pref-height: 38!important;
 }
 
 /*Color*/
-.combo-box-ui, .combo-box-ui > .arrow-button{
-    -fx-background-color: linear-gradient(to bottom, #efefef, #dcdcdc);
-}
-.combo-box-ui:hover,
-.combo-box-ui:focused,
-.combo-box-ui:hover > .arrow-button,
-.combo-box-ui:focused > .arrow-button{
-    -fx-background-color: linear-gradient(to bottom, #f4f4f4, #e7e7e7);
-}
+/*normal*/
 .combo-box-ui-normal, .combo-box-ui-normal > .arrow-button{
     -fx-background-color: normal-color!important;;
 }
@@ -84,6 +78,13 @@
 .combo-box-ui-normal:focused > .arrow-button{
     -fx-background-color: normal-deep-color!important;;
 }
+.combo-box-ui-normal:editable:focused{
+    -fx-border-color: normal-deep-color;
+}
+.combo-box-ui-normal:editable:focused > .arrow-button > .arrow{
+    -fx-background-color: normal-deep-color!important;
+}
+/*success*/
 .combo-box-ui-success, .combo-box-ui-success > .arrow-button{
     -fx-background-color: success-color!important;;
 }
@@ -93,6 +94,13 @@
 .combo-box-ui-success:focused > .arrow-button{
     -fx-background-color: success-deep-color!important;;
 }
+.combo-box-ui-success:editable:focused{
+    -fx-border-color: success-deep-color;
+}
+.combo-box-ui-success:editable:focused > .arrow-button > .arrow{
+    -fx-background-color: success-deep-color!important;
+}
+/*warn*/
 .combo-box-ui-warn, .combo-box-ui-warn > .arrow-button{
     -fx-background-color: warn-color!important;;
 }
@@ -102,6 +110,13 @@
 .combo-box-ui-warn:focused > .arrow-button{
     -fx-background-color: warn-deep-color!important;;
 }
+.combo-box-ui-warn:editable:focused{
+    -fx-border-color: warn-deep-color;
+}
+.combo-box-ui-warn:editable:focused > .arrow-button > .arrow{
+    -fx-background-color: warn-deep-color!important;
+}
+/*error*/
 .combo-box-ui-error, .combo-box-ui-error > .arrow-button{
     -fx-background-color: error-color!important;;
 }
@@ -110,4 +125,33 @@
 .combo-box-ui-error:hover > .arrow-button,
 .combo-box-ui-error:focused > .arrow-button{
     -fx-background-color: error-deep-color!important;
+}
+.combo-box-ui-error:editable:focused{
+    -fx-border-color: error-deep-color;
+}
+.combo-box-ui-error:editable:focused > .arrow-button > .arrow{
+    -fx-background-color: error-deep-color!important;
+}
+/*default*/
+.combo-box-ui, .combo-box-ui > .arrow-button{
+    -fx-background-color: linear-gradient(to bottom, #efefef, #dcdcdc);
+}
+.combo-box-ui:hover,
+.combo-box-ui:focused,
+.combo-box-ui:hover > .arrow-button,
+.combo-box-ui:focused > .arrow-button{
+    -fx-background-color: linear-gradient(to bottom, #f4f4f4, #e7e7e7);
+}
+.combo-box-ui:editable, .combo-box-ui:editable > .arrow-button, .combo-box-ui:editable:hover{
+    -fx-background-color: transparent!important;
+    -fx-effect: none!important;
+}
+.combo-box-ui:editable{
+    -fx-border-width: 0 0 1 0;
+    -fx-border-insets: 0 0 1 0;
+    -fx-border-color: grey;
+}
+.combo-box-ui:editable:focused{
+    -fx-border-width: 0 0 2 0!important;
+    -fx-border-insets: 0!important;
 }

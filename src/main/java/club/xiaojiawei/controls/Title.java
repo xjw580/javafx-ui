@@ -8,14 +8,14 @@ import javafx.scene.shape.Rectangle;
  * @date 2023/11/23 17:04
  */
 public class Title extends Label {
-    public static final String DEFAULT_CLASS = "title-ui";
+    public static final String DEFAULT_STYLE_CLASS = "title-ui";
     public Title() {
         this("");
     }
 
     public Title(String s) {
         super(s);
-        getStyleClass().add(DEFAULT_CLASS);
+        getStyleClass().add(DEFAULT_STYLE_CLASS);
         Rectangle rectangle = new Rectangle();
         setClip(rectangle);
         heightProperty().addListener((observableValue, number, t1) -> {

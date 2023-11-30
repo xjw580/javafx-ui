@@ -25,11 +25,12 @@ public class ReadmeController implements Initializable {
     @FXML private TitledPane style;
     @FXML private TitledPane component;
     @FXML private ScrollPane leftScrollPane;
+    @FXML private Accordion accordion;
     private final ToggleGroup toggleGroup = new ToggleGroup();
     /**
      * 初始选择tab的名字
      */
-    private final static String INIT_SELECTED_TAB_NAME = "DateTime";
+    private final static String INIT_SELECTED_TAB_NAME = "ComboBox";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTab(style, "style");
@@ -52,7 +53,10 @@ public class ReadmeController implements Initializable {
                 toggleButton.setPrefWidth(leftScrollPane.getPrefWidth());
                 toggleButton.setText(name);
                 toggleButton.setUserData(suffixPath);
-                toggleButton.setSelected(isSelected(name));
+                if (isSelected(name)){
+                    accordion.setExpandedPane(tab);
+                    toggleButton.setSelected(true);
+                }
                 vBox.getChildren().add(toggleButton);
             }
         }
