@@ -45,11 +45,11 @@ public class TabViewController implements Initializable {
         );
         // 设置 TableView 列和数据
         tableViewSmallDemo.setItems(students);
-        tableViewSmallDemo.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+        tableViewSmallDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableViewDemo.setItems(students);
-        tableViewDemo.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+        tableViewDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableViewBigDemo.setItems(students);
-        tableViewBigDemo.setColumnResizePolicy(CONSTRAINED_RESIZE_POLICY);
+        tableViewBigDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
     @Data
     @AllArgsConstructor

@@ -54,7 +54,7 @@
 }
 /*选中*/
 .table-view-ui .table-row-cell:selected{
-    -fx-background-color: #72aff6;
+    -fx-background-color: #bcd4ff;
 }
 /*滚动条美化*/
 .table-view-ui > .virtual-flow > .scroll-bar:vertical,
