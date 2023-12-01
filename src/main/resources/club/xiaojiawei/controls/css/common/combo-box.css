@@ -25,7 +25,7 @@
     -fx-text-fill: -fx-text-base-color;
 }
 .combo-box-ui:editable .text-input{
-    -fx-pref-height: 30;
+    -fx-pref-height: 28;
     /*约束大小，防止过宽*/
     -fx-pref-width: 1;
     -fx-alignment: CENTER;
@@ -58,13 +58,13 @@
     -fx-pref-height: 22!important;
 }
 .combo-box-ui-small:editable .text-input {
-    -fx-pref-height: 22!important;
+    -fx-pref-height: 20!important;
 }
 .combo-box-ui-big .list-cell {
     -fx-pref-height: 38!important;
 }
 .combo-box-ui-big:editable .text-input {
-    -fx-pref-height: 38!important;
+    -fx-pref-height: 36!important;
 }
 
 /*Color*/
