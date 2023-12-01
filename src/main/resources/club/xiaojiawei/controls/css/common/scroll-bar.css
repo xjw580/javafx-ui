@@ -31,21 +31,21 @@
 }
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color :derive(main-color,60.0%);
-    -fx-background-insets : 5, 0.0, 0.0;
+    -fx-background-color :derive(#4f9fff,60.0%);
+    -fx-background-insets : 6, 0.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
 .scroll-bar:hover:horizontal .thumb,
 .scroll-bar:hover:vertical .thumb {
-    -fx-background-color :derive(main-color,0%);
-    -fx-background-insets : 2, 0.0, 0.0;
-    -fx-background-radius : 2.0em;
+    -fx-background-color :derive(#4f9fff,0%);
+    -fx-background-insets : 4, 0.0, 0.0, 0.0;
+    -fx-background-radius : 2em;
 }
 .scroll-bar{
-    -fx-background-color:derive(#cae1ff,0%);
-    -fx-background-insets: 5, 0, 0;
+    -fx-background-color: transparent;
     -fx-background-radius: 2em;
+    -fx-background-insets: 6, 0, 0, 0;
 }
 .scroll-bar:hover{
-    -fx-background-insets: 2, 0, 0;
+    -fx-background-insets: 4, 0, 0, 0;
 }

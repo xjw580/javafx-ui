@@ -1,6 +1,6 @@
 /*Base*/
 .root{
-    table-view-bg-color: #cae7fc;
+    table-view-bg-color: hover-color;
 }
 .table-view-ui{
     /*解决在width够的情况下还出现水平滚动条的问题*/
@@ -37,7 +37,10 @@
     -fx-padding: 15 5 15 5;
     -fx-text-fill: black!important;
 }
-.table-view-ui .table-row-cell:selected .table-cell{
+.table-view-ui .table-row-cell:selected .table-cell,
+.table-view-ui .table-row-cell:hover .table-cell{
+    -fx-border-color: rgb(202, 216, 228);
+    -fx-border-width: 1 1 1 1;
     -fx-text-fill: white;
 }
 /*列头里的箭头*/
@@ -46,19 +49,23 @@
 }
 /*所有行*/
 .table-view-ui .table-row-cell{
-    -fx-background-color: white;
+    -fx-background-color: shallow-color;
     -fx-padding: 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0 0 0 3;
 }
 /*奇数行*/
-/*.table-view-ui .table-row-cell:odd{*/
-/*    -fx-background-color: white;*/
-/*}*/
-/*选中*/
-.table-view-ui .table-row-cell:selected{
-    -fx-background-color: #f2faff;
+.table-view-ui .table-row-cell:odd{
+    /*-fx-background-color: #f1d88d;*/
 }
-.table-column{
-    -fx-border-color: white;
+/*选中*/
+.table-view-ui .table-row-cell:selected,
+.table-view-ui .table-row-cell:hover{
+    -fx-background-color: rgb(202, 216, 228);
+}
+.table-view-ui .table-row-cell:selected{
+    -fx-border-color: #0266bc;
+    -fx-border-width: 0 0 0 3;
 }
 /*滚动条美化*/
 .table-view-ui > .virtual-flow > .scroll-bar:vertical,
