@@ -1,6 +1,6 @@
 /*Base*/
 .root{
-    table-view-bg-color: #58a4fc;
+    table-view-bg-color: #cae7fc;
 }
 .table-view-ui{
     /*解决在width够的情况下还出现水平滚动条的问题*/
@@ -35,6 +35,7 @@
 /*单元格*/
 .table-view-ui .table-cell{
     -fx-padding: 15 5 15 5;
+    -fx-text-fill: black!important;
 }
 .table-view-ui .table-row-cell:selected .table-cell{
     -fx-text-fill: white;
@@ -45,16 +46,19 @@
 }
 /*所有行*/
 .table-view-ui .table-row-cell{
-    -fx-background-color: shallow-color;
+    -fx-background-color: white;
     -fx-padding: 0;
 }
 /*奇数行*/
-.table-view-ui .table-row-cell:odd{
-    -fx-background-color: #cae7fc;
-}
+/*.table-view-ui .table-row-cell:odd{*/
+/*    -fx-background-color: white;*/
+/*}*/
 /*选中*/
 .table-view-ui .table-row-cell:selected{
-    -fx-background-color: #bcd4ff;
+    -fx-background-color: #f2faff;
+}
+.table-column{
+    -fx-border-color: white;
 }
 /*滚动条美化*/
 .table-view-ui > .virtual-flow > .scroll-bar:vertical,
