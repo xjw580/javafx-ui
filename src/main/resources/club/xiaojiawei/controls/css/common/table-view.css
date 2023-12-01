@@ -29,7 +29,7 @@
 /*顶栏内的label*/
 .table-view-ui .column-header-background .label{
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-padding: 15 5 15 5;
 }
 /*单元格*/

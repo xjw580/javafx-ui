@@ -1,6 +1,7 @@
 .root {
     /*Base*/
-    main-color: #0075ff;
+    /*main-color: #0075ff;*/
+    main-color: #4f9fff;
     effect-color: #b3d5ff;
     hover-color: #cae1ff;
     shallow-color: #e0f0fd;
@@ -22,7 +23,7 @@
     -fx-background-color: #cae1ff;
 }
 .bg-ui{
-    -fx-background-color: #0075FF!important;
+    -fx-background-color: main-color!important;
     -fx-text-fill: white!important;
 }
 .radius-ui{
