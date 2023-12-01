@@ -51,7 +51,6 @@
                 <directory>src/main/resources</directory>
                 <excludes>
 <!--                    <exclude>**/readme/**</exclude>-->
-                    <exclude>**/test/**</exclude>
                 </excludes>
             </resource>
         </resources>
@@ -69,32 +68,12 @@
                         </annotationProcessorPath>
                     </annotationProcessorPaths>
                     <excludes>
-<!--                        <exclude>**/readme/**</exclude>-->
+                        <exclude>**/readme/**</exclude>
                         <exclude>**/test/**</exclude>
                     </excludes>
                     <source>17</source>
                     <target>17</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.8</version>
-                <executions>
-                    <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>club.xiaojiawei.readme.ReadmeApplication</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

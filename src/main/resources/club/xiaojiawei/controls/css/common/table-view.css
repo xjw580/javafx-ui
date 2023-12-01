@@ -1,6 +1,10 @@
 /*Base*/
 .root{
-    table-view-bg-color: #89caff;
+    table-view-bg-color: #58a4fc;
+}
+.table-view-ui{
+    /*解决在width够的情况下还出现水平滚动条的问题*/
+    -fx-padding: 0 5 0 0;
 }
 /*空闲列列头*/
 .table-view-ui .filler{
@@ -26,11 +30,11 @@
 .table-view-ui .column-header-background .label{
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-padding: 15;
+    -fx-padding: 15 5 15 5;
 }
 /*单元格*/
 .table-view-ui .table-cell{
-    -fx-padding: 15;
+    -fx-padding: 15 5 15 5;
 }
 .table-view-ui .table-row-cell:selected .table-cell{
     -fx-text-fill: white;
@@ -48,8 +52,9 @@
 .table-view-ui .table-row-cell:odd{
     -fx-background-color: #cae7fc;
 }
+/*选中*/
 .table-view-ui .table-row-cell:selected{
-    -fx-background-color: #298cff;
+    -fx-background-color: #72aff6;
 }
 /*滚动条美化*/
 .table-view-ui > .virtual-flow > .scroll-bar:vertical,
@@ -63,10 +68,10 @@
 /*Size*/
 /*big*/
 .table-view-ui-big .column-header-background .label{
-    -fx-padding: 25!important;
+    -fx-padding: 25 5 25 5!important;
 }
 .table-view-ui-big .table-cell{
-    -fx-padding: 25!important;
+    -fx-padding: 25 5 25 5!important;
 }
 /*small*/
 .table-view-ui-small .column-header-background .label{

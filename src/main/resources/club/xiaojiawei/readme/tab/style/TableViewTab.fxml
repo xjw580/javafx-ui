@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             fx:controller="club.xiaojiawei.readme.tab.style.TabViewController"
             style="-fx-padding: 20 0 0 0"
@@ -33,7 +35,7 @@
         </HBox>
         <Label text="大小类：table-view-ui-small、table-view-ui-big" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <TableView fx:id="tableViewSmallDemo" styleClass="table-view-ui, table-view-ui-small" prefHeight="200">
+            <TableView fx:id="tableViewSmallDemo" styleClass="table-view-ui, table-view-ui-small" prefHeight="200" >
                 <columns>
                     <TableColumn text="学号">
                         <cellValueFactory>

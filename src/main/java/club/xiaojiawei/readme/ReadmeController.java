@@ -1,19 +1,25 @@
 package club.xiaojiawei.readme;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.utils.SystemUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -30,7 +36,7 @@ public class ReadmeController implements Initializable {
     /**
      * 初始选择tab的名字
      */
-    private final static String INIT_SELECTED_TAB_NAME = "ComboBox";
+    private final static String INIT_SELECTED_TAB_NAME = "TableView";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTab(style, "style");
@@ -125,15 +131,41 @@ public class ReadmeController implements Initializable {
             }
         }
         try {
+            Node node = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tab/" + newValue.getUserData() + "/" + name + "Tab.fxml")));
+            /*Icons特殊处理：填充图标*/
+            if (Objects.equals(name, "Icons") && node instanceof ScrollPane scrollPane){
+                if (scrollPane.getContent() instanceof VBox vBox && vBox.getChildren().get(1) instanceof TilePane tilePane){
+                    List<String> classes = SystemUtil.getClassesInPackage("club.xiaojiawei.controls.ico");
+                    for (String aClass : classes) {
+                        if (Class.forName(aClass).getConstructor().newInstance() instanceof Node ico) {
+                            ico.setScaleX(1.2D);
+                            ico.setScaleY(1.2D);
+                            VBox group = new VBox();
+                            group.setStyle("""
+                                    -fx-background-color: white;
+                                    -fx-padding: 10 5 5 5;
+                                    -fx-alignment: CENTER;
+                                    -fx-pref-height: 50;
+                                    -fx-background-radius: 5;
+                                    """);
+                            VBox box = new VBox();
+                            VBox.setVgrow(box, Priority.ALWAYS);
+                            group.getChildren().addAll(ico, box, new Text(aClass.substring(aClass.lastIndexOf(".") + 1)));
+                            tilePane.getChildren().add(group);
+                        }
+                    }
+                }
+            }
 //                没有新按钮对应的tab，创建对应tab
-            createTab(name, FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tab/" + newValue.getUserData() + "/" + name + "Tab.fxml"))));
-        } catch (IOException e) {
+            createTab(name, node);
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
+                 InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void createTab(String text, Node node){
-        Tab tab = new Tab(text, node);
+    private void createTab(String title, Node node){
+        Tab tab = new Tab(title, node);
         rightTabPane.getTabs().add(tab);
         rightTabPane.getSelectionModel().select(tab);
     }
