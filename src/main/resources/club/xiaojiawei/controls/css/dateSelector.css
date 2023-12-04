@@ -8,10 +8,10 @@
     -fx-alignment: TOP_CENTER;
 }
 .label:hover{
-    -fx-background-color: #cae1ff;
+    -fx-background-color: hover-color;
 }
 .selectedLabel{
-    -fx-background-color: #0075FF!important;
+    -fx-background-color: main-color!important;
     -fx-text-fill: white!important;
 }
 .scroll-pane{

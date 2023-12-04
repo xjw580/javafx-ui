@@ -14,7 +14,7 @@
     -fx-background-insets: 0;
 }
 .accordion-ui .titled-pane:expanded > .title > .arrow-button > .arrow{
-    -fx-background-color: #0075FF;
+    -fx-background-color: main-color;
 }
 .accordion-ui .titled-pane > .title > .arrow-button > .arrow{
     -fx-background-insets: 0;

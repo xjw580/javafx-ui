@@ -6,9 +6,14 @@ package club.xiaojiawei;
  * @date 2023/10/30 0:03
  */
 
+import javafx.scene.Scene;
+
 import java.util.Objects;
 @SuppressWarnings("all")
 public class JavaFXUI {
+    public static void addjavafxUIStylesheet(Scene scene){
+        scene.getStylesheets().add(JavaFXUI.javafxUIStylesheet());
+    }
 
     /**
      * 加载主样式表（javafx-ui.css包含所有样式）

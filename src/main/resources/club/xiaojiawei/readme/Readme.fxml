@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <SplitPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           stylesheets="@../controls/css/common/javafx-ui.css, @readme.css"
+           stylesheets="@readme.css"
            fx:controller="club.xiaojiawei.readme.ReadmeController"
            fx:id="rootPane"
            prefHeight="750.0" prefWidth="1100.0">

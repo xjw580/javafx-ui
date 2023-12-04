@@ -1,12 +1,12 @@
 .text-area-ui{
-    -fx-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+    -fx-effect: default-press-effect;
     -fx-background-radius: 3;
     /*选中文本的颜色*/
-    -fx-accent:#0075FF;
+    -fx-accent: main-color;
     -fx-background-color: white;
 }
 .text-area-ui:focused{
-    -fx-effect: dropshadow(two-pass-box, #0075FF, 5, 0, 1, 1)!important;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1)!important;
 }
 .text-area-ui .content {
     -fx-background-insets: 0;

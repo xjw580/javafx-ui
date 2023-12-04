@@ -1,5 +1,6 @@
 package club.xiaojiawei.test;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.Date;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -10,7 +11,6 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.function.Predicate;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -33,6 +33,7 @@ public class DateTest extends Application {
         date.setTranslateY(50);
         vBox.getChildren().add(date);
         Scene scene = new Scene(vBox, 200, 200);
+        JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
         new Timer().schedule(new TimerTask() {

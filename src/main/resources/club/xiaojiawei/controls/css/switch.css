@@ -2,7 +2,7 @@
     -fx-fill: #E6E6E6;
 }
 #switchRectangle{
-    -fx-fill: #0C84FF;
+    -fx-fill: main-color;
 }
 #switchCircle{
     -fx-fill: white;

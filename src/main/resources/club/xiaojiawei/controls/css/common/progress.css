@@ -1,5 +1,5 @@
 .progress-bar-ui {
-    -fx-accent: #0075FF;
+    -fx-accent: main-color!important;
     -fx-pref-height: 4;
 }
 .progress-bar-ui .bar {
@@ -14,7 +14,7 @@
     -fx-background-color: transparent;
 }
 .progress-indicator-ui{
-    -fx-accent: #0075FF;
+    -fx-accent: main-color!important;
 }
 .progress-indicator-ui .percentage {
     -fx-fill:null;

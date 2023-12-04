@@ -23,8 +23,8 @@
     -fx-fill: #e5e5e5;
 }
 .dot:hover{
-    -fx-fill: #b3d5ff;
+    -fx-fill: effect-color;
 }
 .currentDot{
-    -fx-fill: #0075FF!important;
+    -fx-fill: main-color!important;
 }

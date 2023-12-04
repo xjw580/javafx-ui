@@ -1,21 +1,69 @@
+/*Base*/
 .check-box-ui .box {
     -fx-background-color: white;
     -fx-background-insets: 0;
     -fx-background-radius: 3;
-    -fx-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+    -fx-effect: default-press-effect;
 }
-.check-box-ui:selected .mark {
-    -fx-background-color: white;
-}
-.check-box-ui:hover .box{
-    -fx-effect: innershadow(one-pass-box, #0075FF, 5, 0, 1, 1);
-}
-.check-box-ui:selected .box {
-    -fx-background-color: #0075FF;
-    -fx-effect: dropshadow(two-pass-box, #0075FF, 5, 0, 1, 1);
-}
-/*形状*/
+/*Shape*/
 .check-box-ui-circle .box {
     -fx-background-radius: 10!important;
     -fx-border-radius:10!important;
+}
+/*Color*/
+/*default*/
+.check-box-ui:hover .box{
+    -fx-effect: innershadow(one-pass-box, grey, 5, 0, 1, 1);
+}
+.check-box-ui:selected .box {
+    -fx-background-color: system-color;
+    -fx-effect: dropshadow(two-pass-box, grey, 5, 0, 1, 1);
+}
+/*main*/
+.check-box-ui-main:hover .box{
+    -fx-effect: innershadow(one-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+.check-box-ui-main:selected .box {
+    -fx-background-color: main-color;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+/*normal*/
+.check-box-ui-normal:hover .box{
+    -fx-effect: innershadow(one-pass-box, normal-deep-color, 5, 0, 1, 1) !important;
+}
+.check-box-ui-normal:selected .box {
+    -fx-background-color: normal-deep-color;
+    -fx-effect: dropshadow(two-pass-box, normal-deep-color, 5, 0, 1, 1) !important;
+}
+/*success*/
+.check-box-ui-success:hover .box{
+    -fx-effect: innershadow(one-pass-box, success-deep-color, 5, 0, 1, 1) !important;
+}
+.check-box-ui-success:selected .box {
+    -fx-background-color: success-deep-color;
+    -fx-effect: dropshadow(two-pass-box, success-deep-color, 5, 0, 1, 1) !important;
+}
+/*warn*/
+.check-box-ui-warn:hover .box{
+    -fx-effect: innershadow(one-pass-box, warn-deep-color, 5, 0, 1, 1) !important;
+}
+.check-box-ui-warn:selected .box {
+    -fx-background-color: warn-deep-color;
+    -fx-effect: dropshadow(two-pass-box, warn-deep-color, 5, 0, 1, 1) !important;
+}
+/*error*/
+.check-box-ui-error:hover .box{
+    -fx-effect: innershadow(one-pass-box, error-deep-color, 5, 0, 1, 1) !important;
+}
+.check-box-ui-error:selected .box {
+    -fx-background-color: error-deep-color;
+    -fx-effect: dropshadow(two-pass-box, error-deep-color, 5, 0, 1, 1) !important;
+}
+/*common*/
+.check-box-ui-main .mark,
+.check-box-ui-normal .mark,
+.check-box-ui-success .mark,
+.check-box-ui-warn .mark,
+.check-box-ui-error .mark {
+    -fx-background-color: white!important;
 }

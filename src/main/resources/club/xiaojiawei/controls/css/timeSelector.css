@@ -24,9 +24,9 @@
     -fx-background-radius: 5;
 }
 .timeLabel:hover{
-    -fx-background-color: #b3d5ff;
+    -fx-background-color: hover-color;
 }
 .selectedTimeLabel{
-    -fx-background-color: #0075FF!important;
+    -fx-background-color: main-color!important;
     -fx-text-fill: white!important;
 }

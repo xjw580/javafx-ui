@@ -11,11 +11,36 @@
     <VBox styleClass="hv-box">
         <Label text="基类：check-box-ui" styleClass="title-three"/>
         <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui" text="梅西"><tooltip><Tooltip text="check-box-ui"/></tooltip></CheckBox>
+            <CheckBox selected="true" styleClass="check-box-ui" text="梅西" />
         </HBox>
         <Label text="形状类：check-box-ui-circle" styleClass="title-three"/>
         <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="C罗"><tooltip><Tooltip text="check-box-ui, check-box-ui-circle"/></tooltip></CheckBox>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="C罗" />
+        </HBox>
+        <Label text="颜色类：check-box-ui-main、check-box-ui-normal、check-box-ui-success、check-box-ui-warn、check-box-ui-error" styleClass="title-three"/>
+        <HBox styleClass="hv-box">
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main" text="乔峰" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal" text="张无忌" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success" text="郭靖" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn" text="张三丰" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error" text="杨过" />
+        </HBox>
+        <Label text="所有" styleClass="title-three"/>
+        <HBox styleClass="hv-box">
+            <CheckBox selected="true" styleClass="check-box-ui" text="虚竹" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main" text="乔峰" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal" text="张无忌" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success" text="郭靖" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn" text="张三丰" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error" text="杨过" />
+        </HBox>
+        <HBox styleClass="hv-box">
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="天山童姥" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main, check-box-ui-circle" text="无崖子" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal, check-box-ui-circle" text="扫地僧" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success, check-box-ui-circle" text="李秋水" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn, check-box-ui-circle" text="韦小宝" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error, check-box-ui-circle" text="段誉" />
         </HBox>
     </VBox>
 </ScrollPane>

@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
         <Label text="基类：radio-button-ui" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <RadioButton text="段正淳" styleClass="radio-button-ui" selected="true">
+                <tooltip>
+                    <Tooltip text="radio-button-ui"/>
+                </tooltip>
+            </RadioButton>
+        </HBox>
+        <Label text="颜色类：radio-button-ui-main、radio-button-ui-normal、radio-button-ui-success、radio-button-ui-warn、radio-button-ui-error" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <fx:define>
-                <ToggleGroup fx:id="toggleGroup"/>
+                <ToggleGroup fx:id="toggleGroup1"/>
             </fx:define>
-            <RadioButton text="奇迹法" styleClass="radio-button-ui" selected="true" toggleGroup="$toggleGroup">
-                <tooltip>
-                    <Tooltip text="radio-button-ui"/>
-                </tooltip>
-            </RadioButton>
-            <RadioButton text="战吼萨" styleClass="radio-button-ui" toggleGroup="$toggleGroup">
-                <tooltip>
-                    <Tooltip text="radio-button-ui"/>
-                </tooltip>
-            </RadioButton>
+            <RadioButton text="康敏" styleClass="radio-button-ui, radio-button-ui-main" selected="true" toggleGroup="$toggleGroup1"/>
+            <RadioButton text="甘宝宝" styleClass="radio-button-ui, radio-button-ui-normal" toggleGroup="$toggleGroup1"/>
+            <RadioButton text="秦红棉" styleClass="radio-button-ui, radio-button-ui-success" toggleGroup="$toggleGroup1"/>
+            <RadioButton text="王青萝" styleClass="radio-button-ui, radio-button-ui-warn" toggleGroup="$toggleGroup1"/>
+            <RadioButton text="刀白凤" styleClass="radio-button-ui, radio-button-ui-error" toggleGroup="$toggleGroup1"/>
         </HBox>
     </VBox>
 </ScrollPane>

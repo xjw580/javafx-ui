@@ -6,9 +6,9 @@
     -fx-padding: 10 15 10 15;
 }
 .toggle-btn-ui:hover{
-    -fx-background-color: #cae1ff;
+    -fx-background-color: hover-color;
 }
 .toggle-btn-ui:selected{
     -fx-text-fill: white;
-    -fx-background-color: #0075FF;
+    -fx-background-color: main-color;
 }

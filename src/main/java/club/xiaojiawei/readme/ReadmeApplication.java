@@ -1,5 +1,6 @@
 package club.xiaojiawei.readme;
 
+import club.xiaojiawei.JavaFXUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ public class ReadmeApplication extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Readme.fxml"))));
+        JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -1,6 +1,7 @@
 /*Base*/
 .root{
-    table-view-bg-color: hover-color;
+    table-view-bg-color: shallow-color;
+    table-view-hover-color: rgb(229, 236, 240);
 }
 .table-view-ui{
     /*解决在width够的情况下还出现水平滚动条的问题*/
@@ -33,23 +34,27 @@
     -fx-padding: 15 5 15 5;
 }
 /*单元格*/
-.table-view-ui .table-cell{
+.table-view-ui .table-row-cell .table-cell{
     -fx-padding: 15 5 15 5;
+}
+/*单元格文本颜色*/
+.table-view-ui .table-row-cell .table-cell,
+.table-view-ui .table-row-cell .table-cell *{
     -fx-text-fill: black!important;
 }
+/*选中和悬浮效果*/
 .table-view-ui .table-row-cell:selected .table-cell,
 .table-view-ui .table-row-cell:hover .table-cell{
-    -fx-border-color: rgb(202, 216, 228);
+    -fx-border-color: table-view-hover-color;
     -fx-border-width: 1 1 1 1;
-    -fx-text-fill: white;
 }
 /*列头里的箭头*/
 .table-view-ui .arrow{
-    -fx-background-color: white;
+    /*-fx-background-color: black;*/
 }
 /*所有行*/
 .table-view-ui .table-row-cell{
-    -fx-background-color: shallow-color;
+    -fx-background-color: white;
     -fx-padding: 0;
     -fx-border-color: transparent;
     -fx-border-width: 0 0 0 3;
@@ -61,20 +66,11 @@
 /*选中*/
 .table-view-ui .table-row-cell:selected,
 .table-view-ui .table-row-cell:hover{
-    -fx-background-color: rgb(202, 216, 228);
+    -fx-background-color: table-view-hover-color;
 }
 .table-view-ui .table-row-cell:selected{
-    -fx-border-color: #0266bc;
+    -fx-border-color: main-shallow-color;
     -fx-border-width: 0 0 0 3;
-}
-/*滚动条美化*/
-.table-view-ui > .virtual-flow > .scroll-bar:vertical,
-.table-view-ui > .virtual-flow > .scroll-bar:vertical > .track,
-.table-view-ui > .virtual-flow > .scroll-bar:vertical > .track-background,
-.table-view-ui > .virtual-flow > .scroll-bar:horizontal,
-.table-view-ui > .virtual-flow > .scroll-bar:horizontal > .track,
-.table-view-ui > .virtual-flow > .scroll-bar:horizontal > .track-background {
-    -fx-background-color: transparent;
 }
 /*Size*/
 /*big*/

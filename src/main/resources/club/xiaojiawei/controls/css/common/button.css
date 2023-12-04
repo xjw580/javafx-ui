@@ -3,15 +3,15 @@
     -fx-background-insets: 0;
     -fx-border-width: 0;
     -fx-padding: 7 14 7 14;
-    -fx-effect: normal-effect;
+    -fx-effect: default-effect;
     -fx-background-radius: 5;
     -fx-cursor: hand;
 }
 .btn-ui:hover{
-    -fx-effect: normal-hover-effect;
+    -fx-effect: default-hover-effect;
 }
 .btn-ui:pressed, .btn-ui:selected{
-    -fx-effect: normal-press-effect!important;
+    -fx-effect: default-press-effect!important;
 }
 /*Size*/
 .btn-ui-small{

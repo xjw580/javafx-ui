@@ -23,7 +23,7 @@ titled-pane - titled-pane-ui
     -fx-background-insets: 0;
 }
 .titled-pane-ui:expanded > .title > .arrow-button > .arrow{
-    -fx-background-color: #0075FF;
+    -fx-background-color: main-color;
 }
 .titled-pane-ui > .title > .arrow-button > .arrow{
     -fx-background-insets: 0;

@@ -1,7 +1,9 @@
 .root {
     /*Base*/
-    /*main-color: #0075ff;*/
-    main-color: #4f9fff;
+    system-color: linear-gradient(to bottom, #efefef, #dcdcdc);
+    system-hover-color: linear-gradient(to bottom, #f4f4f4, #e7e7e7);
+    main-color: #0075FF;
+    main-shallow-color: #4f9fff;
     effect-color: #b3d5ff;
     hover-color: #cae1ff;
     shallow-color: #e0f0fd;
@@ -15,12 +17,12 @@
     error-color: #f89494;
     error-deep-color: #fa7a7a;
     /*Effect*/
-    normal-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
-    normal-hover-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
-    normal-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+    default-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+    default-hover-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
+    default-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
 }
 .bg-hover-ui:hover{
-    -fx-background-color: #cae1ff;
+    -fx-background-color: effect-color;
 }
 .bg-ui{
     -fx-background-color: main-color!important;
@@ -33,4 +35,7 @@
 .radius-ui-big{
     -fx-background-radius: 10!important;
     -fx-border-radius: 10!important;
+}
+* {
+    -fx-accent: main-color;
 }

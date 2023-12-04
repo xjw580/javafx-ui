@@ -1,3 +1,4 @@
+/*Base*/
 .radio-button-ui .radio {
     -fx-border-width: 0;
     -fx-border-color: transparent;
@@ -9,13 +10,71 @@
 .radio-button-ui .dot {
     -fx-background-insets: 0;
 }
+
+/*Color*/
+/*default*/
 .radio-button-ui:selected .radio{
-    -fx-border-color: #0075FF;
-    -fx-effect: dropshadow(two-pass-box, #0075FF, 5, 0, 1, 1)!important;
+    -fx-border-color: system-color;
+    -fx-effect: dropshadow(two-pass-box, grey, 5, 0, 1, 1)!important;
 }
 .radio-button-ui:hover .radio{
-    -fx-effect: innershadow(one-pass-box, #0075FF, 5, 0, 1, 1);
+    -fx-effect: innershadow(one-pass-box, grey, 5, 0, 1, 1);
 }
 .radio-button-ui:selected .dot {
-    -fx-background-color: #0075FF;
+    -fx-background-color: system-color;
+}
+/*main*/
+.radio-button-ui-main:selected .radio{
+    -fx-border-color: main-color;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1)!important;
+}
+.radio-button-ui-main:hover .radio{
+    -fx-effect: innershadow(one-pass-box, main-color, 5, 0, 1, 1);
+}
+.radio-button-ui-main:selected .dot {
+    -fx-background-color: main-color;
+}
+/*normal*/
+.radio-button-ui-normal:selected .radio{
+    -fx-border-color: normal-deep-color;
+    -fx-effect: dropshadow(two-pass-box, normal-deep-color, 5, 0, 1, 1)!important;
+}
+.radio-button-ui-normal:hover .radio{
+    -fx-effect: innershadow(one-pass-box, normal-deep-color, 5, 0, 1, 1);
+}
+.radio-button-ui-normal:selected .dot {
+    -fx-background-color: normal-deep-color;
+}
+/*success*/
+.radio-button-ui-success:selected .radio{
+    -fx-border-color: success-deep-color;
+    -fx-effect: dropshadow(two-pass-box, success-deep-color, 5, 0, 1, 1)!important;
+}
+.radio-button-ui-success:hover .radio{
+    -fx-effect: innershadow(one-pass-box, success-deep-color, 5, 0, 1, 1);
+}
+.radio-button-ui-success:selected .dot {
+    -fx-background-color: success-deep-color;
+}
+/*warn*/
+.radio-button-ui-warn:selected .radio{
+    -fx-border-color: warn-deep-color;
+    -fx-effect: dropshadow(two-pass-box, warn-deep-color, 5, 0, 1, 1)!important;
+}
+.radio-button-ui-warn:hover .radio{
+    -fx-effect: innershadow(one-pass-box, warn-deep-color, 5, 0, 1, 1);
+}
+.radio-button-ui-warn:selected .dot {
+    -fx-background-color: warn-deep-color;
+}
+/*error*/
+.radio-button-ui-error:selected .radio{
+    -fx-border-color: error-deep-color;
+    -fx-effect: dropshadow(two-pass-box, error-deep-color, 5, 0, 1, 1)!important;
+}
+.radio-button-ui-error:hover .radio{
+    -fx-effect: innershadow(one-pass-box, error-deep-color, 5, 0, 1, 1);
+}
+.radio-button-ui-error:selected .dot {
+    -fx-background-color: error-deep-color;
 }

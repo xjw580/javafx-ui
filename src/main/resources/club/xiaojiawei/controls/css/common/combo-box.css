@@ -4,16 +4,16 @@
     -fx-background-radius: 4;
     -fx-background-insets: 0;
     -fx-border-width: 0;
-    -fx-effect: normal-effect;
+    -fx-effect: default-effect;
 }
 .combo-box-ui:disabled {
     -fx-opacity: 1;
 }
 .combo-box-ui:hover {
-    -fx-effect: normal-hover-effect;
+    -fx-effect: default-hover-effect;
 }
 .combo-box-ui:focused {
-    /*-fx-effect: normal-press-effect!important;*/
+    /*-fx-effect: default-press-effect!important;*/
 }
 .combo-box-ui > .arrow-button > .arrow {
     -fx-background-color: #585858!important;
@@ -31,7 +31,6 @@
     -fx-alignment: CENTER;
     -fx-background-color: transparent;
     -fx-text-fill: -fx-text-base-color;
-    -fx-accent: main-color;
 }
 
 .combo-box-ui .combo-box-popup .list-view {
@@ -46,6 +45,7 @@
     -fx-background-radius: 5;
     -fx-padding: 0;
 }
+/*popup中label选中颜色*/
 .combo-box-ui .combo-box-popup .list-view .list-cell:filled:selected, .combo-box-ui  .combo-box-popup .list-view .list-cell:filled:selected:hover {
     -fx-background-color: main-color;
     -fx-text-fill: white;
@@ -134,13 +134,13 @@
 }
 /*default*/
 .combo-box-ui, .combo-box-ui > .arrow-button{
-    -fx-background-color: linear-gradient(to bottom, #efefef, #dcdcdc);
+    -fx-background-color: system-color;
 }
 .combo-box-ui:hover,
 .combo-box-ui:focused,
 .combo-box-ui:hover > .arrow-button,
 .combo-box-ui:focused > .arrow-button{
-    -fx-background-color: linear-gradient(to bottom, #f4f4f4, #e7e7e7);
+    -fx-background-color: system-hover-color;
 }
 .combo-box-ui:editable, .combo-box-ui:editable > .arrow-button, .combo-box-ui:editable:hover{
     -fx-background-color: transparent!important;
