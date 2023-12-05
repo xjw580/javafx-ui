@@ -1,11 +1,19 @@
 /*Base*/
 .root{
     table-view-bg-color: shallow-color;
-    table-view-hover-color: rgb(229, 236, 240);
+    table-view-hover-color: hover-color;
+    -my-custom-table-cell-border-color: #c5c4c4;
 }
 .table-view-ui{
     /*解决在width够的情况下还出现水平滚动条的问题*/
     -fx-padding: 0 5 0 0;
+    -fx-table-cell-border-color: -my-custom-table-cell-border-color;
+}
+.table-view-ui:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:selected {
+    /*-fx-table-cell-border-color: -my-custom-table-cell-border-color;*/
+}
+.table-view-ui .table-row-cell:filled:selected {
+    /*-fx-table-cell-border-color: -my-custom-table-cell-border-color;*/
 }
 /*空闲列列头*/
 .table-view-ui .filler{
@@ -26,16 +34,19 @@
 /*每一列的头头，也就是顶栏*/
 .table-view-ui .column-header{
     -fx-background-color: transparent;
+    -fx-padding: 0;
 }
-/*顶栏内的label*/
+    /*顶栏内的label*/
 .table-view-ui .column-header-background .label{
-    -fx-background-color: transparent;
     -fx-text-fill: black;
-    -fx-padding: 15 5 15 5;
+    -fx-pref-height: 40;
 }
 /*单元格*/
 .table-view-ui .table-row-cell .table-cell{
-    -fx-padding: 15 5 15 5;
+    -fx-pref-height: 40;
+    -fx-alignment: CENTER;
+    -fx-border-width: 1 0 0 1;
+    -fx-border-color: grey;
 }
 /*单元格文本颜色*/
 .table-view-ui .table-row-cell .table-cell,
@@ -45,8 +56,8 @@
 /*选中和悬浮效果*/
 .table-view-ui .table-row-cell:selected .table-cell,
 .table-view-ui .table-row-cell:hover .table-cell{
-    -fx-border-color: table-view-hover-color;
-    -fx-border-width: 1 1 1 1;
+    /*-fx-border-color: table-view-hover-color;*/
+    /*-fx-border-width: 1;*/
 }
 /*列头里的箭头*/
 .table-view-ui .arrow{
@@ -56,8 +67,7 @@
 .table-view-ui .table-row-cell{
     -fx-background-color: white;
     -fx-padding: 0;
-    -fx-border-color: transparent;
-    -fx-border-width: 0 0 0 3;
+    -fx-border-width: 0;
 }
 /*奇数行*/
 .table-view-ui .table-row-cell:odd{
@@ -68,22 +78,18 @@
 .table-view-ui .table-row-cell:hover{
     -fx-background-color: table-view-hover-color;
 }
-.table-view-ui .table-row-cell:selected{
-    -fx-border-color: main-shallow-color;
-    -fx-border-width: 0 0 0 3;
-}
 /*Size*/
 /*big*/
 .table-view-ui-big .column-header-background .label{
-    -fx-padding: 25 5 25 5!important;
+    -fx-pref-height: 55!important;
 }
 .table-view-ui-big .table-cell{
-    -fx-padding: 25 5 25 5!important;
+    -fx-pref-height: 55!important;
 }
 /*small*/
 .table-view-ui-small .column-header-background .label{
-    -fx-padding: 5!important;
+    -fx-pref-height: 30!important;
 }
 .table-view-ui-small .table-cell{
-    -fx-padding: 5!important;
+    -fx-pref-height: 30!important;
 }

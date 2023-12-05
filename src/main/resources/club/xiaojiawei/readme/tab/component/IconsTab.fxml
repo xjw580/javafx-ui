@@ -8,7 +8,7 @@
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
-        <Label text="所有图标：1.2倍放大后" styleClass="title-three"/>
+        <Label text="所有图标：2倍放大后" styleClass="title-three"/>
         <TilePane styleClass="hv-box" vgap="10" hgap="10"/>
     </VBox>
 </ScrollPane>

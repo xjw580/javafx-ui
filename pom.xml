@@ -50,6 +50,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
+                    <exclude>**/ai/**</exclude>
 <!--                    <exclude>**/readme/**</exclude>-->
                 </excludes>
             </resource>

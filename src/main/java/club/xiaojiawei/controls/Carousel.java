@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import static club.xiaojiawei.controls.config.ThreadPoolConfig.SCHEDULED_POOL;
+import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 import static club.xiaojiawei.enums.BaseTransitionEnum.SCALE;
 import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_X;
 

@@ -1,4 +1,4 @@
-package club.xiaojiawei.controls.config;
+package club.xiaojiawei.config;
 
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/11/7 22:24
  */
-public class ThreadPoolConfig {
+public class JavaFXUIThreadPoolConfig {
 
     public static final ScheduledThreadPoolExecutor SCHEDULED_POOL = new ScheduledThreadPoolExecutor(8, new ThreadFactory() {
         private final AtomicInteger num = new AtomicInteger(0);

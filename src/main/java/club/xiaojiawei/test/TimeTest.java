@@ -1,11 +1,13 @@
 package club.xiaojiawei.test;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.Time;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,12 +24,13 @@ public class TimeTest extends Application {
 //        time.setTranslateX(50);
 //        time.setTranslateY(50);
         Scene scene = new Scene(flowPane, 200, 200);
+        JavaFXUI.addjavafxUIStylesheet(scene);
         stage.setScene(scene);
         stage.show();
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                time.setTime("13:43");
+                time.setTime("00:00");
             }
         }, 1500);
 

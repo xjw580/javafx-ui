@@ -30,6 +30,16 @@
                             <PropertyValueFactory property="sex"/>
                         </cellValueFactory>
                     </TableColumn>
+                    <TableColumn text="年龄">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="age"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="院系">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="college"/>
+                        </cellValueFactory>
+                    </TableColumn>
                 </columns>
             </TableView>
         </HBox>
@@ -52,6 +62,16 @@
                             <PropertyValueFactory property="sex"/>
                         </cellValueFactory>
                     </TableColumn>
+                    <TableColumn text="年龄">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="age"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="院系">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="college"/>
+                        </cellValueFactory>
+                    </TableColumn>
                 </columns>
             </TableView>
             <TableView fx:id="tableViewBigDemo" styleClass="table-view-ui, table-view-ui-big" prefHeight="200">
@@ -69,6 +89,16 @@
                     <TableColumn text="性别">
                         <cellValueFactory>
                             <PropertyValueFactory property="sex"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="年龄">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="age"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="院系">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="college"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>

@@ -32,11 +32,11 @@ public class ReadmeController implements Initializable {
     @FXML private TitledPane component;
     @FXML private ScrollPane leftScrollPane;
     @FXML private Accordion accordion;
-    private final ToggleGroup toggleGroup = new ToggleGroup();
     /**
      * 初始选择tab的名字
      */
     private final static String INIT_SELECTED_TAB_NAME = "TableView";
+    private final ToggleGroup toggleGroup = new ToggleGroup();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTab(style, "style");
@@ -138,14 +138,14 @@ public class ReadmeController implements Initializable {
                     List<String> classes = SystemUtil.getClassesInPackage("club.xiaojiawei.controls.ico");
                     for (String aClass : classes) {
                         if (Class.forName(aClass).getConstructor().newInstance() instanceof Node ico) {
-                            ico.setScaleX(1.2D);
-                            ico.setScaleY(1.2D);
+                            double scale = 2D;
+                            ico.setScaleX(scale);
+                            ico.setScaleY(scale);
                             VBox group = new VBox();
                             group.setStyle("""
                                     -fx-background-color: white;
-                                    -fx-padding: 10 5 5 5;
+                                    -fx-padding: 20 5 5 5;
                                     -fx-alignment: CENTER;
-                                    -fx-pref-height: 50;
                                     -fx-background-radius: 5;
                                     """);
                             VBox box = new VBox();

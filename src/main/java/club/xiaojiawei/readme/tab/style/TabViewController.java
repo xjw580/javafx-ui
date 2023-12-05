@@ -1,7 +1,9 @@
 package club.xiaojiawei.readme.tab.style;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,18 +32,12 @@ public class TabViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Student> students = FXCollections.observableArrayList(
-                new Student(1, "张三", "男"),
-                new Student(2, "李四", "女"),
-                new Student(3, "王五", "二次元"),
-                new Student(1, "张三", "男"),
-                new Student(2, "李四", "女"),
-                new Student(3, "王五", "二次元"),
-                new Student(1, "张三", "男"),
-                new Student(2, "李四", "女"),
-                new Student(3, "王五", "二次元"),
-                new Student(1, "张三", "男"),
-                new Student(2, "李四", "女"),
-                new Student(3, "王五", "二次元")
+                new Student(1, "张三", "男", 20, "野鸡大学"),
+                new Student(1, "张三", "男", 20, "野鸡大学"),
+                new Student(1, "张三", "男", 20, "野鸡大学"),
+                new Student(1, "张三", "男", 20, "野鸡大学"),
+                new Student(1, "张三", "男", 20, "野鸡大学"),
+                new Student(1, "张三", "男", 20, "野鸡大学")
         );
         // 设置 TableView 列和数据
         tableViewSmallDemo.setItems(students);
@@ -57,5 +53,7 @@ public class TabViewController implements Initializable {
         private int id;
         private String name;
         private String sex;
+        private int age;
+        private String college;
     }
 }
