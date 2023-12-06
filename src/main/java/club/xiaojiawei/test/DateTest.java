@@ -26,7 +26,7 @@ public class DateTest extends Application {
     public void start(Stage primaryStage) {
         FlowPane vBox = new FlowPane();
         Date date = new Date();
-        date.setDateInterceptor(localDate -> LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
+//        date.setDateInterceptor(localDate -> LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
         System.out.println(date.getDate());
         date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         date.setTranslateX(50);
@@ -40,17 +40,17 @@ public class DateTest extends Application {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    date.setDate("2023/12/30");
+                    date.setDate("2021/12/05");
                 });
             }
         }, 1500);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    date.setDate(null);
-                });
-            }
-        }, 3000);
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Platform.runLater(() -> {
+//                    date.dateProperty().set(LocalDate.now());
+//                });
+//            }
+//        }, 3000);
     }
 }
