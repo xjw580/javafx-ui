@@ -46,7 +46,7 @@
     -fx-pref-height: 40;
     -fx-alignment: CENTER;
     -fx-border-width: 1 0 0 1;
-    -fx-border-color: grey;
+    -fx-border-color: #bebebe;
 }
 /*单元格文本颜色*/
 .table-view-ui .table-row-cell .table-cell,

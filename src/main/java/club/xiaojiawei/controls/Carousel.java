@@ -137,7 +137,6 @@ public class Carousel extends AnchorPane {
             if (url.startsWith("http")){
                 setStyle("-fx-background-image: url(" + url + ");");
             }else {
-                System.out.println(getClass().getResource(url).toExternalForm());
                 setStyle("-fx-background-image: url(" + Objects.requireNonNull(getClass().getResource(url)).toExternalForm() + ");");
             }
         }};
