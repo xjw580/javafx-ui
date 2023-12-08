@@ -290,6 +290,9 @@ public class Calendar extends VBox {
      * 从展示的月份面板中寻找指定的日期
      */
     private Node findPointDay(LocalDate pointDate){
+        if (pointDate == null){
+            return null;
+        }
         int showPaneYear = Integer.parseInt(dateMsg.getText().substring(0, 4));
         int showPaneMonth = Integer.parseInt(dateMsg.getText().substring(5, 7));
         ObservableList<Node> showPaneChildren = showMonthPane.getChildren();

@@ -81,13 +81,15 @@ public class DateSelector extends HBox {
     private void afterFXMLLoaded(){
         loadYearPane(LocalDate.now());
         date.addListener((observable, oldDate, newDate) -> {
-            yearsPane.getPanes().clear();
-            selectedLabel = null;
-            TitledPane titledPane = loadYearPane(newDate);
+            if (newDate != null){
+                yearsPane.getPanes().clear();
+                selectedLabel = null;
+                TitledPane titledPane = loadYearPane(newDate);
 //        解决错位以及pane高度异常问题
-            if (titledPane != null){
-                titledPane.setExpanded(false);
-                titledPane.setExpanded(true);
+                if (titledPane != null){
+                    titledPane.setExpanded(false);
+                    titledPane.setExpanded(true);
+                }
             }
         });
         initScrollBar();
