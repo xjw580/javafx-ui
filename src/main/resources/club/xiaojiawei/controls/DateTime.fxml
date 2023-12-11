@@ -5,10 +5,9 @@
 <?import club.xiaojiawei.controls.Time?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateTime.css">
-    <Label fx:id="dateTimeBG" styleClass="dateTimeBackground"/>
+    <Label fx:id="dateTimeBg" styleClass="dateTimeBackground"/>
     <Date fx:id="dateControls" showSelector="false" showBg="false"/>
     <Label styleClass="dateTimeSeparator" text="-"/>
     <Time fx:id="timeControls" showBg="false" showSelector="false"/>

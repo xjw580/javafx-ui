@@ -3,7 +3,6 @@ package club.xiaojiawei.controls;
 import club.xiaojiawei.controls.ico.DateIco;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -52,14 +51,14 @@ public class DateTime extends AnchorPane {
         dateTimeIco.setVisible(this.showSelector = showSelector);
         dateTimeIco.setManaged(false);
         if (showSelector){
-            dateTimeBG.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND);
+            dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND);
         }else {
-            dateTimeBG.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND);
+            dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND);
         }
     }
 
     public void setShowBg(boolean showBg) {
-        dateTimeBG.setVisible(this.showBg = showBg);
+        dateTimeBg.setVisible(this.showBg = showBg);
     }
 
     /**
@@ -73,7 +72,7 @@ public class DateTime extends AnchorPane {
     }
 
     @FXML
-    private Label dateTimeBG;
+    private Label dateTimeBg;
     @FXML
     private DateIco dateTimeIco;
     @FXML
@@ -155,9 +154,17 @@ public class DateTime extends AnchorPane {
 
     private void dealFocusChange(boolean isFocus) {
         if (isFocus){
-            dateTimeBG.getStyleClass().add(DATE_TIME_BACKGROUND_FOCUS);
+            dateTimeBg.getStyleClass().add(DATE_TIME_BACKGROUND_FOCUS);
         }else {
-            dateTimeBG.getStyleClass().remove(DATE_TIME_BACKGROUND_FOCUS);
+            dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_FOCUS);
         }
+    }
+
+    /**
+     * 刷新显示的时间，和真正存储的时间同步
+     */
+    public void refresh(){
+        dateControls.refresh();
+        timeControls.refresh();
     }
 }

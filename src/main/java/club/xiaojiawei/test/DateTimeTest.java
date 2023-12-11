@@ -1,8 +1,10 @@
 package club.xiaojiawei.test;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.DateTime;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
@@ -23,7 +25,10 @@ public class DateTimeTest extends Application {
         dateTime.dateTimeProperty().addListener((observableValue, localDateTime, t1) -> System.out.println(t1));
         dateTime.setTranslateX(50);
         dateTime.setTranslateY(50);
-        Scene scene = new Scene(new FlowPane(dateTime), 300, 200);
+        Button refresh = new Button("refresh");
+        refresh.setOnMouseClicked(mouseEvent -> dateTime.refresh());
+        Scene scene = new Scene(new FlowPane(dateTime, refresh), 300, 200);
+        JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

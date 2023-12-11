@@ -242,4 +242,20 @@ public class Time extends AnchorPane {
     public void setOnFocusChangeListener(ChangeListener<Boolean> changeListener){
         focusChangeListener = changeListener;
     }
+
+    /**
+     * 刷新显示的时间，和真正存储的时间同步
+     */
+    public void refresh(){
+        if (time.get() == null){
+            isFromTime = true;
+            hour.setText("");
+            min.setText("");
+            isFromTime = false;
+        }else {
+            String[] times = TIME_FORMATTER.format(time.get()).split(":");
+            hour.setText(times[0]);
+            min.setText(times[1]);
+        }
+    }
 }

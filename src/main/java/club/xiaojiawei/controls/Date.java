@@ -23,6 +23,7 @@ import java.util.function.Predicate;
 
 import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.controls.DateSelector.calcMaxDayForMonth;
+import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
@@ -291,4 +292,19 @@ public class Date extends AnchorPane {
         calendar.removeDateInterceptor();
     }
 
+    /**
+     * 刷新显示的时间，和真正存储的时间同步
+     */
+    public void refresh(){
+        if (date.get() == null){
+            year.setText("");
+            month.setText("");
+            day.setText("");
+        }else {
+            String[] dates = DATE_FORMATTER.format(date.get()).split("/");
+            year.setText(dates[0]);
+            month.setText(dates[1]);
+            day.setText(dates[2]);
+        }
+    }
 }

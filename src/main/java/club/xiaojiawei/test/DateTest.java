@@ -5,6 +5,7 @@ import club.xiaojiawei.controls.Date;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
@@ -31,19 +32,21 @@ public class DateTest extends Application {
         date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         date.setTranslateX(50);
         date.setTranslateY(50);
-        vBox.getChildren().add(date);
+        Button refresh = new Button("refresh");
+        refresh.setOnMouseClicked(mouseEvent -> date.refresh());
+        vBox.getChildren().addAll(date, refresh);
         Scene scene = new Scene(vBox, 200, 200);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    date.setDate("2021/12/05");
-                });
-            }
-        }, 1500);
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Platform.runLater(() -> {
+//                    date.setDate("2021/12/05");
+//                });
+//            }
+//        }, 1500);
 //        new Timer().schedule(new TimerTask() {
 //            @Override
 //            public void run() {
