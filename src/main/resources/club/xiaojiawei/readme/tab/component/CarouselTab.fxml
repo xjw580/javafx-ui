@@ -14,10 +14,10 @@
             <Carousel autoPlay="true">
                 <imagesURL>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel2.jpg"/>
-                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel4.jpg"/>
-                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel6.jpg"/>
-                        <String fx:value="https://zergqueen.gitee.io/images/javafx-ui/carousel7.jpg"/>
+                        <String fx:value="/club/xiaojiawei/readme/tab/images/carousel6.jpg"/>
+                        <String fx:value="/club/xiaojiawei/readme/tab/images/carousel7.jpg"/>
+                        <String fx:value="/club/xiaojiawei/readme/tab/images/carousel2.jpg"/>
+                        <String fx:value="/club/xiaojiawei/readme/tab/images/carousel4.jpg"/>
                     </FXCollections>
                 </imagesURL>
             </Carousel>

@@ -93,3 +93,19 @@
 .table-view-ui-small .table-cell{
     -fx-pref-height: 30!important;
 }
+/*Style*/
+.table-view-ui-upright .filler{
+    -fx-background-color: table-view-bg-color;
+    -fx-background-radius: 0!important;
+}
+/*；；ColumnResizePolicy为CONSTRAINED_RESIZE_POLICY时*/
+.table-view-ui-upright, .table-view-ui-upright .column-header-background, .table-view-ui-upright:constrained-resize .filler{
+    -fx-background-color: transparent;
+}
+.table-view-ui-upright .nested-column-header{
+    -fx-background-radius: 0!important;
+    -fx-background-color: table-view-bg-color;
+}
+.table-view-ui-upright:constrained-resize .nested-column-header{
+    -fx-background-radius: 0!important;
+}

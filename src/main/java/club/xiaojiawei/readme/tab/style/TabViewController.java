@@ -29,6 +29,8 @@ public class TabViewController implements Initializable {
     private TableView<Student> tableViewDemo;
     @FXML
     private TableView<Student> tableViewBigDemo;
+    @FXML
+    private TableView<Student> tableViewUprightDemo;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Student> students = FXCollections.observableArrayList(
@@ -46,6 +48,8 @@ public class TabViewController implements Initializable {
         tableViewDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableViewBigDemo.setItems(students);
         tableViewBigDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableViewUprightDemo.setItems(students);
+        tableViewUprightDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
     @Data
     @AllArgsConstructor

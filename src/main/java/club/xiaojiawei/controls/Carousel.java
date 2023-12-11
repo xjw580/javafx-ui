@@ -14,6 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.ScheduledFuture;
@@ -30,6 +31,11 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_X;
  */
 public class Carousel extends AnchorPane {
     private final IntegerProperty currentIndex = new SimpleIntegerProperty(0);
+    /**
+     * 图片url
+     * 支持格式：网络http url、本地路径
+     * 例：https://zergqueen.gitee.io/images/javafx-ui/carousel7.jpg 或 /club/xiaojiawei/readme/tab/images/carousel2.jpg 或 C:\Users\Administrator\Downloads\carousel7.jpg
+     */
     private ObservableList<String> imagesURL;
     private boolean autoPlay;
     private double nudeScale = 0.375D;
@@ -134,8 +140,11 @@ public class Carousel extends AnchorPane {
             getStyleClass().add("image");
             setPrefWidth(IMAGE_WIDTH);
             setPrefHeight(IMAGE_HEIGHT);
+            File tempFile;
             if (url.startsWith("http")){
                 setStyle("-fx-background-image: url(" + url + ");");
+            }else if ((tempFile = new File(url)).exists()){
+                setStyle("-fx-background-image: url(file:/" + tempFile.getPath().replace("\\", "/") + ");");
             }else {
                 setStyle("-fx-background-image: url(" + Objects.requireNonNull(getClass().getResource(url)).toExternalForm() + ");");
             }

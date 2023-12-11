@@ -104,5 +104,38 @@
                 </columns>
             </TableView>
         </HBox>
+
+        <Label text="样式类：table-view-ui-upright" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <TableView fx:id="tableViewUprightDemo" styleClass="table-view-ui, table-view-ui-upright" prefHeight="200">
+                <columns>
+                    <TableColumn text="学号">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="id"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="姓名">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="性别">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="sex"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="年龄">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="age"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="院系">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="college"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+        </HBox>
     </VBox>
 </ScrollPane>
