@@ -4,6 +4,7 @@ import club.xiaojiawei.JavaFXUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class ReadmeApplication extends Application{
         Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Readme.fxml"))));
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image(Objects.requireNonNull(JavaFXUI.class.getResourceAsStream("/club/xiaojiawei/readme/readme.png"))));
         primaryStage.show();
     }
 }
