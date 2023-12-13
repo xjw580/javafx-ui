@@ -6,7 +6,7 @@
 
     <groupId>club.xiaojiawei</groupId>
     <artifactId>javafx-ui</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.1</version>
     <name>javafx-ui</name>
 
     <properties>
@@ -14,6 +14,14 @@
         <javafx-version>17.0.2</javafx-version>
         <lombok-version>1.18.30</lombok-version>
     </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://192.168.1.100:8081/repository/nexus-releases/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
