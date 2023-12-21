@@ -1,7 +1,8 @@
 /*Base*/
 .root{
     table-view-bg-color: shallow-color;
-    table-view-hover-color: hover-color;
+    table-view-selected-color: hover-color;
+    table-view-hover-color: shallow-color;
     -my-custom-table-cell-border-color: #c5c4c4;
 }
 .table-view-ui{
@@ -36,7 +37,7 @@
     -fx-background-color: transparent;
     -fx-padding: 0;
 }
-    /*顶栏内的label*/
+/*顶栏内的label*/
 .table-view-ui .column-header-background .label{
     -fx-text-fill: black;
     -fx-pref-height: 40;
@@ -56,7 +57,7 @@
 /*选中和悬浮效果*/
 .table-view-ui .table-row-cell:selected .table-cell,
 .table-view-ui .table-row-cell:hover .table-cell{
-    /*-fx-border-color: table-view-hover-color;*/
+    /*-fx-border-color: table-view-selected-color;*/
     /*-fx-border-width: 1;*/
 }
 /*列头里的箭头*/
@@ -74,9 +75,15 @@
     /*-fx-background-color: #f1d88d;*/
 }
 /*选中*/
-.table-view-ui .table-row-cell:selected,
+.table-view-ui .table-row-cell:selected{
+    -fx-background-color: #cbe9ff !important;
+}
+/*悬浮*/
 .table-view-ui .table-row-cell:hover{
     -fx-background-color: table-view-hover-color;
+}
+.table-view-ui:focused .table-row-cell:selected{
+    -fx-background-color: table-view-selected-color!important;
 }
 /*Size*/
 /*big*/
