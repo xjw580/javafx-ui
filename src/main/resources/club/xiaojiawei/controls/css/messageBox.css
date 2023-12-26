@@ -1,0 +1,8 @@
+#msg{
+    -fx-background-color: normal-color;
+    -fx-padding: 10;
+    -fx-background-radius: 6
+}
+#triangle{
+    -fx-fill: normal-color
+}

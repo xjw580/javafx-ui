@@ -6,7 +6,7 @@
 
     <groupId>club.xiaojiawei</groupId>
     <artifactId>javafx-ui</artifactId>
-    <version>0.1.1.1</version>
+    <version>0.1.2</version>
     <name>javafx-ui</name>
 
     <properties>
@@ -24,6 +24,21 @@
     </distributionManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>opencv-platform-gpu</artifactId>
+            <version>4.7.0-1.5.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>opencv</artifactId>
+            <version>4.7.0-1.5.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>${javafx-version}</version> <!-- 请根据你的 JavaFX 版本调整版本号 -->
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

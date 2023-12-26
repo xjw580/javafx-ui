@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="d3.min.js"></script>
+</head>
+<body>
+<!--<svg width="400" height="400"></svg>-->
+
+<script>
+    // 示例数据
+    const data = [
+        [0, 1, 2, 3],
+        [1, 2, 3, 4],
+        [2, 3, 4, 5],
+        [3, 4, 5, 6]
+    ];
+
+    // 创建 contour plot
+    const contours = d3.contours()
+        .size([data[0].length, data.length])
+        .thresholds(d3.range(2, 7));  // 阈值范围
+
+    // 选择 SVG 元素
+    const svg = d3.select("body");
+
+    // 绘制等值线
+    svg.selectAll("path")
+        .data(contours(data))
+        .enter().append("path")
+        .attr("d", d3.geoPath())
+        .attr("fill", "none")
+        .attr("stroke", "black");
+</script>
+</body>
+</html>

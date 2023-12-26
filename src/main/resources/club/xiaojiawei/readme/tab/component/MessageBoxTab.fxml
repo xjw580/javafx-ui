@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.MessageBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox styleClass="hv-box" prefWidth="400">
+        <HBox>
+            <MessageBox text="地振高冈，一派西山千古秀" nodeOrientation="RIGHT_TO_LEFT"/>
+        </HBox>
+        <HBox alignment="CENTER_RIGHT">
+            <VBox styleClass="hv-box" alignment="CENTER_RIGHT">
+                <MessageBox text="门朝大海，三河合水万年流" color="warn-color"/>
+                <MessageBox text="原来你也是天地会的兄弟" color="warn-color"/>
+                <MessageBox text="那请问，你烧的是几炷香" color="warn-color"/>
+                <MessageBox text="完蛋了" color="warn-color"/>
+            </VBox>
+        </HBox>
+        <HBox>
+            <MessageBox text="天父地母，反清复明" nodeOrientation="RIGHT_TO_LEFT"/>
+        </HBox>
+        <HBox>
+            <MessageBox text="青木堂韦香主" nodeOrientation="RIGHT_TO_LEFT"/>
+        </HBox>
+    </VBox>
+</ScrollPane>

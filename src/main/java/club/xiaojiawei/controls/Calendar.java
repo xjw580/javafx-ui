@@ -132,7 +132,7 @@ public class Calendar extends VBox {
         LocalDate now = LocalDate.now();
         showMonthPane = buildMonthPane(now);
 //        建造完月份pane后跳转到指定天
-        skipToPointDate(now);
+//        skipToPointDate(now);
     }
 
     private void initDateSelectorPopup(){
@@ -171,6 +171,9 @@ public class Calendar extends VBox {
      */
     private void skipToPointDate(LocalDate newDate){
         if (newDate == null){
+            if (selectedLabel != null){
+                selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+            }
             return;
         }
         if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) == newDate.getYear() * 100 + newDate.getMonthValue()){
@@ -229,7 +232,9 @@ public class Calendar extends VBox {
                         log.warn("方向键按太快导致，不影响正常使用", e);
                     }
                 }
-                (selectedLabel = findPointDay()).getStyleClass().add(SELECTED_DAY_LABEL);
+                if ((selectedLabel = findPointDay()) != null){
+                    selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL);
+                }
             }
         }, 50);
     }
@@ -272,7 +277,9 @@ public class Calendar extends VBox {
                 if (selectedLabel != null){
                     selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
                 }
-                (selectedLabel = findPointDay()).getStyleClass().add(SELECTED_DAY_LABEL);
+                if ((selectedLabel = findPointDay()) != null){
+                    selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL);
+                }
             }
         }, 50);
     }

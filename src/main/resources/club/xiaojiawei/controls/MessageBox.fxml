@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.shape.Polygon?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.HBox?>
+<fx:root type="Group" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+         fx:id="msgBox" stylesheets="@css/messageBox.css">
+    <HBox alignment="CENTER">
+        <Label fx:id="msg"/>
+        <Polygon fx:id="triangle">
+            <points>
+                <Double fx:value="0" />
+                <Double fx:value="0" />
+
+                <Double fx:value="0" />
+                <Double fx:value="10" />
+
+                <Double fx:value="6" />
+                <Double fx:value="5" />
+            </points>
+        </Polygon>
+    </HBox>
+</fx:root>
