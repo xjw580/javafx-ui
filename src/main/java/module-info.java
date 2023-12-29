@@ -10,6 +10,8 @@ module club.xiaojiawei.javafx_ui {
     requires javafx.web;
     requires org.bytedeco.opencv;
     requires org.bytedeco.openblas.platform;
+    requires jdk.jsobject;
+    requires commons.math3;
 
     exports club.xiaojiawei.utils;
     exports club.xiaojiawei.enums;

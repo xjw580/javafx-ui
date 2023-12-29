@@ -36,7 +36,7 @@ public class Switch extends AnchorPane implements Initializable {
     /**
      * 默认开关状态为开
      */
-    private final BooleanProperty initStatus = new SimpleBooleanProperty(true);
+    private final BooleanProperty status = new SimpleBooleanProperty(true);
     /**
      * 默认开关尺寸为20
      */
@@ -65,8 +65,8 @@ public class Switch extends AnchorPane implements Initializable {
         return transitionType;
     }
 
-    public boolean isInitStatus() {
-        return initStatus.get();
+    public boolean getStatus() {
+        return status.get();
     }
 
     public double getSize() {
@@ -74,13 +74,13 @@ public class Switch extends AnchorPane implements Initializable {
     }
 
     public boolean getInitStatus() {
-        return this.initStatus.get();
+        return this.status.get();
     }
-    public BooleanProperty initStatusProperty() {
-        return this.initStatus;
+    public BooleanProperty statusProperty() {
+        return this.status;
     }
-    public void setInitStatus(boolean initStatus) {
-        if (initStatus != this.initStatus.get()){
+    public void setStatus(boolean status) {
+        if (status != this.status.get()){
             onMouseClicked(null);
         }
     }
@@ -137,7 +137,7 @@ public class Switch extends AnchorPane implements Initializable {
             default -> noneTranslation();
         }
         circleTranslate();
-        initStatus.set(!initStatus.get());
+        status.set(!status.get());
         if (event != null){
             event.consume();
         }
@@ -148,7 +148,7 @@ public class Switch extends AnchorPane implements Initializable {
      */
     private void circleTranslate() {
         double translateFrom = 0.0D, translateTo = size;
-        if (initStatus.get()) {
+        if (status.get()) {
             final double temp = translateFrom;
             translateFrom = translateTo;
             translateTo = temp;
@@ -161,7 +161,7 @@ public class Switch extends AnchorPane implements Initializable {
      */
     private void fadeTranslation() {
         final double fadeFrom = 0.0D, fadeTo = 1.0D;
-        if (initStatus.get()) {
+        if (status.get()) {
             FADE.play(switchRectangle, fadeTo, fadeFrom, transitionDuration);
         } else {
             FADE.play(switchRectangle, fadeFrom, fadeTo, transitionDuration);
@@ -173,7 +173,7 @@ public class Switch extends AnchorPane implements Initializable {
     private void slideTranslation() {
         switchRectangle.setOpacity(1.0D);
         final double clipTranslateFrom = size * 2, clipTranslateTo = 0.0D;
-        if (initStatus.get()) {
+        if (status.get()) {
             SLIDE_X.play(switchClipRectangle, clipTranslateTo, clipTranslateFrom, transitionDuration);
         } else {
             SLIDE_X.play(switchClipRectangle, clipTranslateFrom, clipTranslateTo, transitionDuration);
@@ -190,7 +190,7 @@ public class Switch extends AnchorPane implements Initializable {
      * 开关中的背景动画：无
      */
     private void noneTranslation() {
-        if (initStatus.get()) {
+        if (status.get()) {
             switchRectangle.setOpacity(0.0D);
         } else {
             switchRectangle.setOpacity(1.0D);
