@@ -8,7 +8,7 @@
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
-        <Label text="需要自行设置高度和宽度" styleClass="title-two"/>
+        <Label text="需要自行设置高度和宽度" styleClass="title-three"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Title text="风陵渡口初相遇" prefHeight="40" prefWidth="220"/>
             <Title text="一见杨过误终身" prefHeight="40" prefWidth="220"/>

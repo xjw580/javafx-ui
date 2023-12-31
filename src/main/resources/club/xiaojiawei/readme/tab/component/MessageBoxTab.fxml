@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import club.xiaojiawei.controls.MessageBox?>
+<?import club.xiaojiawei.controls.*?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box" prefWidth="400">
+        <Label text="通过nodeOrientation属性修改该组件的朝向" styleClass="title-three"/>
         <HBox>
             <MessageBox text="地振高冈，一派西山千古秀" nodeOrientation="RIGHT_TO_LEFT"/>
         </HBox>
