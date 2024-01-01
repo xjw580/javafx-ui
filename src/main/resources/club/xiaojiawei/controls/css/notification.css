@@ -1,0 +1,32 @@
+.notificationVBox{
+    -fx-background-color: white;
+    -fx-background-radius: 3;
+    -fx-effect: default-effect;
+    -fx-alignment: CENTER;
+    -fx-padding: 15 10 15 15;
+    -fx-spacing: 20;
+}
+#titleLabel{
+    -fx-font-weight: BOLD;
+}
+#contentLabel{
+    -fx-wrap-text: true;
+}
+.topHBox{
+    -fx-alignment: CENTER;
+    -fx-spacing: 15;
+}
+#bottomHBox{
+    -fx-padding: 0 25 0 30;
+}
+#closeIcoPane{
+    -fx-padding: 3;
+    -fx-background-radius: 3;
+}
+#closeIcoPane:hover{
+    -fx-background-color: rgba(128, 128, 128, 0.1);
+}
+.closeIco{
+    -fx-scale-y: 0.75;
+    -fx-scale-x: 0.75;
+}

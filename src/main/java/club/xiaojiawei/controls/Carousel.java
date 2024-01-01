@@ -39,7 +39,7 @@ public class Carousel extends AnchorPane {
      */
     @Getter
     private ObservableList<String> imagesURL;
-    private final BooleanProperty autoPlay = new SimpleBooleanProperty(false);
+    private final BooleanProperty autoPlay = new SimpleBooleanProperty(true);
     private final DoubleProperty nudeScale = new SimpleDoubleProperty(0.375D);
 
     public int getCurrentIndex() {

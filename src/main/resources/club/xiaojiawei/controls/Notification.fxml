@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.ico.CloseIco?>
+<?import club.xiaojiawei.controls.ico.MessageIco?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.*?>
+<fx:root type="Group" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+         fx:id="notification" stylesheets="@css/notification.css">
+    <VBox styleClass="notificationVBox">
+        <HBox styleClass="topHBox">
+            <MessageIco scaleX="1.6" scaleY="1.6"/>
+            <Label fx:id="titleLabel"/>
+            <HBox HBox.hgrow="ALWAYS" minWidth="50"/>
+            <StackPane fx:id="closeIcoPane">
+                <CloseIco styleClass="closeIco"/>
+            </StackPane>
+        </HBox>
+        <HBox fx:id="bottomHBox">
+            <Label fx:id="contentLabel"/>
+        </HBox>
+    </VBox>
+</fx:root>
