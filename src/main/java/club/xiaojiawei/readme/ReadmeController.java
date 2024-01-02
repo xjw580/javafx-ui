@@ -6,9 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.TilePane;
@@ -19,7 +17,9 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -35,7 +35,7 @@ public class ReadmeController implements Initializable {
     /**
      * 初始选择tab的名字
      */
-    private final static String INIT_SELECTED_TAB_NAME = "Date";
+    private final static String INIT_SELECTED_TAB_NAME = "Notification";
     private final ToggleGroup toggleGroup = new ToggleGroup();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

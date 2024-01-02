@@ -2,7 +2,6 @@ package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.Notification;
-import club.xiaojiawei.controls.Time;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -28,10 +27,12 @@ public class NotificationTest extends Application {
         HBox hBox = new HBox();
         hBox.setStyle("-fx-padding: 20");
         Notification notification = new Notification();
+        notification.setIsShowCloseBtn(false);
         notification.setTitle("空指针异常");
         notification.setContent("顶顶顶顶的点点滴滴");
+        Label hello = new Label("hello");
         hBox.getChildren().add(notification);
-        hBox.getChildren().add(new Label("hello"));
+        hBox.getChildren().add(hello);
         Scene scene = new Scene(hBox, 500, 500);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
@@ -41,6 +42,6 @@ public class NotificationTest extends Application {
             public void run() {
                 Platform.runLater(notification::show);
             }
-        }, 5000);
+        }, 3000);
     }
 }

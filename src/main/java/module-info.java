@@ -31,6 +31,8 @@ module club.xiaojiawei.javafx_ui {
     opens club.xiaojiawei.proxy to javafx.fxml;
     opens club.xiaojiawei.readme.tab.style to javafx.fxml;
     opens club.xiaojiawei.readme.tab.component to javafx.fxml;
+    exports club.xiaojiawei.bean;
+    opens club.xiaojiawei.bean to javafx.fxml;
 }
 /**
  * 主颜色：#0075FF

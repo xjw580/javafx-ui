@@ -1,7 +1,7 @@
 .notificationVBox{
     -fx-background-color: white;
     -fx-background-radius: 3;
-    -fx-effect: default-effect;
+    -fx-effect: default-hover-effect;
     -fx-alignment: CENTER;
     -fx-padding: 15 10 15 15;
     -fx-spacing: 20;

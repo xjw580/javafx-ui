@@ -9,14 +9,16 @@
          fx:id="notification" stylesheets="@css/notification.css">
     <VBox styleClass="notificationVBox">
         <HBox styleClass="topHBox">
-            <MessageIco scaleX="1.6" scaleY="1.6"/>
+            <StackPane fx:id="tipIcoPane">
+                <MessageIco scaleX="1.6" scaleY="1.6"/>
+            </StackPane>
             <Label fx:id="titleLabel"/>
-            <HBox HBox.hgrow="ALWAYS" minWidth="50"/>
+            <HBox HBox.hgrow="ALWAYS"/>
             <StackPane fx:id="closeIcoPane">
                 <CloseIco styleClass="closeIco"/>
             </StackPane>
         </HBox>
-        <HBox fx:id="bottomHBox">
+        <HBox fx:id="bottomHBox" managed="false" visible="false">
             <Label fx:id="contentLabel"/>
         </HBox>
     </VBox>

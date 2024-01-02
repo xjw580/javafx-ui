@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            fx:controller="club.xiaojiawei.readme.tab.component.NotificationController"
+            xmlns:fx="http://javafx.com/fxml">
+    <StackPane>
+        <VBox styleClass="hv-box">
+            <Label text="Notification和NotificationManager" styleClass="title-three"/>
+            <Label text="NotificationManager用来快捷生成和管理Notification" styleClass="title-four"/>
+            <Label text="NotificationManager的父节点必须为Pane的子类，为保证位置正确，根节点也应为Pane的子类" styleClass="title-four"/>
+            <Label text="NotificationManager的notificationPos属性修改通知位置" styleClass="title-four"/>
+            <Label text="Notification的type属性修改通知类型（通知、成功、警告、错误）" styleClass="title-four"/>
+            <HBox alignment="CENTER" spacing="20">
+                <Button styleClass="btn-ui, btn-ui-normal-3d" text="左上角" onAction="#topLeft"/>
+                <Button styleClass="btn-ui, btn-ui-normal-3d" text="上居中" onAction="#topCenter"/>
+                <Button styleClass="btn-ui, btn-ui-normal-3d" text="右上角" onAction="#topRight"/>
+            </HBox>
+            <HBox alignment="CENTER">
+                <Button styleClass="btn-ui, btn-ui-normal-3d" text="居中" onAction="#center"/>
+            </HBox>
+            <HBox alignment="CENTER" spacing="20">
+                <Button styleClass="btn-ui, btn-ui-normal-3d" text="左下角" onAction="#bottomLeft"/>
+                <Button styleClass="btn-ui, btn-ui-normal-3d" text="下居中" onAction="#bottomCenter"/>
+                <Button styleClass="btn-ui, btn-ui-normal-3d" text="右下角" onAction="#bottomRight"/>
+            </HBox>
+        </VBox>
+        <NotificationManager fx:id="notificationManager"/>
+    </StackPane>
+</ScrollPane>
