@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,6 +26,12 @@ public class NotificationManager extends HBox {
 
     @Getter
     private NotificationPosEnum notificationPos = NotificationPosEnum.BOTTOM_RIGHT;
+    /**
+     * 通知最大条数
+     */
+    @Getter
+    @Setter
+    private int maxCount = Integer.MAX_VALUE;
 
     public void setNotificationPos(NotificationPosEnum notificationPos) {
         this.notificationPos = notificationPos;
@@ -172,6 +179,9 @@ public class NotificationManager extends HBox {
     }
 
     public void show(Notification notification){
+        if (notificationVBox.getChildren().size() >= maxCount){
+            return;
+        }
         notificationVBox.getChildren().add(notification);
         notification.setOnCloseEvent(() -> notificationVBox.getChildren().remove(notification));
         notification.show();

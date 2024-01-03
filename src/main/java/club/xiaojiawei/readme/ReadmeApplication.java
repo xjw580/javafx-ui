@@ -2,6 +2,7 @@ package club.xiaojiawei.readme;
 
 import club.xiaojiawei.JavaFXUI;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -26,6 +27,11 @@ public class ReadmeApplication extends Application{
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(JavaFXUI.class.getResourceAsStream("/club/xiaojiawei/readme/readme.png"))));
+        primaryStage.showingProperty().addListener((observableValue, aBoolean, t1) -> {
+            if (!t1){
+                System.exit(0);
+            }
+        });
         primaryStage.show();
     }
 }

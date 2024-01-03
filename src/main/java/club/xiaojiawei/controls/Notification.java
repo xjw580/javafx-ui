@@ -1,8 +1,10 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.enums.BaseTransitionEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.beans.property.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
@@ -108,6 +111,8 @@ public class Notification extends Group {
     private StackPane closeIcoPane;
     @FXML
     private StackPane tipIcoPane;
+    @FXML
+    private VBox notificationVBox;
 
     private ParallelTransition parallelTransition;
     private Runnable transitionFinishedRunnable;
@@ -152,12 +157,11 @@ public class Notification extends Group {
     private void addListener(){
         isShowAll.addListener((observableValue, aBoolean, t1) -> {
             parallelTransition = new ParallelTransition();
-            FadeTransition fadeTransition = new FadeTransition(Duration.millis(transitionTime), this);
-            parallelTransition.getChildren().add(fadeTransition);
+
             if (t1){
+                parallelTransition.getChildren().add(BaseTransitionEnum.FADE.get(this, 1D, Duration.millis(transitionTime / 2)));
                 this.setVisible(true);
                 this.setManaged(true);
-                fadeTransition.setToValue(1D);
                 parallelTransition.setOnFinished(actionEvent -> {
                     if (transitionFinishedRunnable != null){
                         transitionFinishedRunnable.run();
@@ -165,6 +169,7 @@ public class Notification extends Group {
                     }
                 });
             }else {
+                parallelTransition.getChildren().add(BaseTransitionEnum.FADE.get(this, 0D, Duration.millis(transitionTime)));
                 parallelTransition.setOnFinished(actionEvent -> {
                     this.setVisible(false);
                     this.setManaged(false);
@@ -177,7 +182,6 @@ public class Notification extends Group {
                         closeRunnable = null;
                     }
                 });
-                fadeTransition.setToValue(0D);
             }
             parallelTransition.play();
         });

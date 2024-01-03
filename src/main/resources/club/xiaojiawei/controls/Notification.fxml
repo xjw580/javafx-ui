@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <fx:root type="Group" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
          fx:id="notification" stylesheets="@css/notification.css">
-    <VBox styleClass="notificationVBox">
+    <VBox fx:id="notificationVBox">
         <HBox styleClass="topHBox">
             <StackPane fx:id="tipIcoPane">
                 <MessageIco scaleX="1.6" scaleY="1.6"/>
