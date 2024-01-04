@@ -40,7 +40,7 @@ public class NotificationManager extends HBox {
 
     private ChangeListener<Scene> sceneListener;
     private final VBox notificationVBox = new VBox();
-    private final ScheduledExecutorService notificationPool = new ScheduledThreadPoolExecutor(4, new ThreadFactory() {
+    private static final ScheduledExecutorService NOTIFICATION_POOL = new ScheduledThreadPoolExecutor(4, new ThreadFactory() {
         private final AtomicInteger num = new AtomicInteger(0);
         @Override
         public Thread newThread(Runnable r) {
@@ -191,6 +191,6 @@ public class NotificationManager extends HBox {
     }
     public void show(Notification notification, long closeTime, TimeUnit timeUnit){
         show(notification);
-        notificationPool.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);
+        NOTIFICATION_POOL.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);
     }
 }
