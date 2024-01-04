@@ -8,8 +8,6 @@ module club.xiaojiawei.javafx_ui {
     requires org.slf4j;
     requires static lombok;
     requires javafx.web;
-    requires org.bytedeco.opencv;
-    requires org.bytedeco.openblas.platform;
     requires jdk.jsobject;
     requires commons.math3;
 
