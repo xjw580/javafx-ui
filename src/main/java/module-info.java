@@ -7,9 +7,7 @@ module club.xiaojiawei.javafx_ui {
     requires org.apache.tika.core;
     requires org.slf4j;
     requires static lombok;
-    requires javafx.web;
     requires jdk.jsobject;
-    requires commons.math3;
 
     exports club.xiaojiawei.utils;
     exports club.xiaojiawei.enums;

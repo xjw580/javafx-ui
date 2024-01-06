@@ -6,7 +6,7 @@
 
     <groupId>club.xiaojiawei</groupId>
     <artifactId>javafx-ui</artifactId>
-    <version>0.1.8</version>
+    <version>0.1.9</version>
     <name>javafx-ui</name>
 
     <properties>
@@ -25,16 +25,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>${javafx-version}</version> <!-- 请根据你的 JavaFX 版本调整版本号 -->
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok-version}</version>
@@ -50,11 +40,13 @@
             <artifactId>javafx-fxml</artifactId>
             <version>${javafx-version}</version>
         </dependency>
+        <!--svg加载库-->
         <dependency>
             <groupId>org.girod</groupId>
             <artifactId>fxsvgimage</artifactId>
             <version>1.1</version>
         </dependency>
+        <!--媒体类型库-->
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
@@ -68,8 +60,8 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>**/ai/**</exclude>
-<!--                    <exclude>**/readme/**</exclude>-->
+                    <exclude>**/readme/**</exclude>
+                    <exclude>**/test/**</exclude>
                 </excludes>
             </resource>
         </resources>
