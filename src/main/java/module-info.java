@@ -1,4 +1,5 @@
 module club.xiaojiawei.javafx_ui {
+    requires static lombok;
     requires java.base;
     requires javafx.controls;
     requires javafx.fxml;
@@ -6,7 +7,6 @@ module club.xiaojiawei.javafx_ui {
     requires java.desktop;
     requires org.apache.tika.core;
     requires org.slf4j;
-    requires static lombok;
     requires jdk.jsobject;
 
     exports club.xiaojiawei.utils;
@@ -19,6 +19,7 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei;
     exports club.xiaojiawei.readme.tab.style;
     exports club.xiaojiawei.config;
+    exports club.xiaojiawei.bean;
 
     opens club.xiaojiawei.controls to javafx.fxml;
     opens club.xiaojiawei.test to javafx.fxml;
@@ -27,11 +28,5 @@ module club.xiaojiawei.javafx_ui {
     opens club.xiaojiawei.proxy to javafx.fxml;
     opens club.xiaojiawei.readme.tab.style to javafx.fxml;
     opens club.xiaojiawei.readme.tab.component to javafx.fxml;
-    exports club.xiaojiawei.bean;
     opens club.xiaojiawei.bean to javafx.fxml;
 }
-/**
- * 主颜色：#0075FF
- * hover颜色：#cae1ff
- * effect颜色：#b3d5ff
- */

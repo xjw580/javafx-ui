@@ -2,26 +2,25 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
-import javafx.animation.FadeTransition;
+import club.xiaojiawei.enums.SizeEnum;
 import javafx.animation.ParallelTransition;
-import javafx.animation.ScaleTransition;
 import javafx.beans.property.*;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * 通知
@@ -31,16 +30,40 @@ import java.io.IOException;
 @Slf4j
 public class Notification extends Group {
 
+    /**
+     * 内容最大宽度，超过此宽度将换行
+     */
     private final DoubleProperty contentMaxWidth;
+    /**
+     * 通知标题
+     */
     private final StringProperty title;
+    /**
+     * 通知内容
+     */
     private final StringProperty content;
+    /**
+     * 通知类型
+     */
     @Getter
     private NotificationTypeEnum type = NotificationTypeEnum.INFO;
-    private final BooleanProperty isShowAll = new SimpleBooleanProperty(false);
-    private final BooleanProperty isShowCloseBtn = new SimpleBooleanProperty(true);
+    /**
+     * 是否显示通知
+     */
+    private final BooleanProperty showing = new SimpleBooleanProperty(false);
+    /**
+     * 是否显示关闭通知按钮
+     */
+    @Getter
+    private boolean showingCloseBtn = true;
+    /**
+     * 动画时间
+     */
     @Getter
     @Setter
     private double transitionTime = 200D;
+    @Getter
+    private SizeEnum size;
 
     public double getContentMaxWidth() {
         return contentMaxWidth.get();
@@ -75,30 +98,45 @@ public class Notification extends Group {
     public void setType(NotificationTypeEnum type) {
         this.type = type;
         tipIcoPane.getChildren().clear();
-        Pane pane = type.getBuilder().get();
-        pane.setScaleY(1.6);
-        pane.setScaleX(1.6);
-        tipIcoPane.getChildren().add(pane);
+        tipIcoPane.getChildren().add(type.getBuilder().get());
     }
 
-    public boolean isIsShowAll() {
-        return isShowAll.get();
+    public boolean getShowing() {
+        return showing.get();
     }
-    public BooleanProperty isShowAllProperty() {
-        return isShowAll;
+    public BooleanProperty showingProperty() {
+        return showing;
     }
-    public void setIsShowAll(boolean isShowAll) {
-        this.isShowAll.set(isShowAll);
+    public void setShowing(boolean showing) {
+        this.showing.set(showing);
     }
 
-    public boolean isIsShowCloseBtn() {
-        return isShowCloseBtn.get();
+    public void setShowingCloseBtn(boolean showingCloseBtn) {
+        this.showingCloseBtn = showingCloseBtn;
+        closeIcoPane.setManaged(showingCloseBtn);
+        closeIcoPane.setVisible(showingCloseBtn);
     }
-    public BooleanProperty isShowCloseBtnProperty() {
-        return isShowCloseBtn;
+
+    public void setSize(SizeEnum size) {
+        this.size = size;
+        switch (size){
+            case BIG -> {
+                removeSizeStyleClass();
+                notificationVBox.getStyleClass().add("notificationVBox-big");
+            }
+            case MEDDLE, DEFAULT -> removeSizeStyleClass();
+            case SMALL -> {
+                removeSizeStyleClass();
+                notificationVBox.getStyleClass().add("notificationVBox-small");
+            }
+            case TINY -> {
+                removeSizeStyleClass();
+                notificationVBox.getStyleClass().add("notificationVBox-tiny");
+            }
+        }
     }
-    public void setIsShowCloseBtn(boolean isShowCloseBtn) {
-        this.isShowCloseBtn.set(isShowCloseBtn);
+    private void removeSizeStyleClass(){
+        notificationVBox.getStyleClass().removeIf(s -> s.startsWith("notificationVBox-"));
     }
 
     @FXML
@@ -155,7 +193,7 @@ public class Notification extends Group {
         addListener();
     }
     private void addListener(){
-        isShowAll.addListener((observableValue, aBoolean, t1) -> {
+        showing.addListener((observableValue, aBoolean, t1) -> {
             parallelTransition = new ParallelTransition();
 
             if (t1){
@@ -186,7 +224,7 @@ public class Notification extends Group {
             parallelTransition.play();
         });
         closeIcoPane.setOnMouseClicked(mouseEvent -> {
-            isShowAll.set(false);
+            showing.set(false);
         });
         content.addListener((observableValue, s, t1) -> {
             if (t1 == null || t1.isBlank()){
@@ -197,17 +235,13 @@ public class Notification extends Group {
                 bottomHBox.setVisible(true);
             }
         });
-        isShowCloseBtn.addListener((observableValue, aBoolean, t1) -> {
-            closeIcoPane.setManaged(t1);
-            closeIcoPane.setVisible(t1);
-        });
     }
 
     public void show(){
-        isShowAll.set(true);
+        showing.set(true);
     }
     public void hide(){
-        isShowAll.set(false);
+        showing.set(false);
     }
     public void hide(Runnable transitionFinishedRunnable){
         this.transitionFinishedRunnable = transitionFinishedRunnable;

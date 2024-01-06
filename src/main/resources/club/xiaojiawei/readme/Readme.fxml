@@ -7,7 +7,7 @@
            fx:controller="club.xiaojiawei.readme.ReadmeController"
            fx:id="rootPane"
            prefHeight="750.0" prefWidth="1100.0">
-    <ScrollPane fx:id="leftScrollPane" maxWidth="150" prefWidth="150" prefHeight="${rootPane.height}">
+    <ScrollPane fx:id="leftScrollPane" maxWidth="150" minWidth="150" prefWidth="150" prefHeight="${rootPane.height}">
         <Accordion fx:id="accordion" styleClass="accordion-ui, accordion-ui-big">
             <panes>
                 <TitledPane fx:id="style" text="样式类" />

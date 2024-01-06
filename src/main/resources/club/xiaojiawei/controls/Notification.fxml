@@ -10,7 +10,7 @@
     <VBox fx:id="notificationVBox">
         <HBox styleClass="topHBox">
             <StackPane fx:id="tipIcoPane">
-                <MessageIco scaleX="1.6" scaleY="1.6"/>
+                <MessageIco/>
             </StackPane>
             <Label fx:id="titleLabel"/>
             <HBox HBox.hgrow="ALWAYS"/>

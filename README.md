@@ -44,6 +44,14 @@
 
 ## 更新信息
 
+##### v0.2.0
+
+1. 优化Notification相关组件
+2. 增加NotificationFactory，让NotificationManager组件更加好用
+3. 修复介绍程序里再次点击选中Label报错的问题
+
+
+
 ##### 0.1.0-SNAPSHOT
 
 - 新增组件：FileUploader（文件上传）

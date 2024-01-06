@@ -3,6 +3,8 @@ package club.xiaojiawei.controls;
 import club.xiaojiawei.bean.LogRunnable;
 import club.xiaojiawei.enums.NotificationPosEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
+import club.xiaojiawei.enums.SizeEnum;
+import club.xiaojiawei.factory.NotificationFactory;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -12,8 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,6 +25,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class NotificationManager extends HBox {
 
+    /**
+     * 通知位置
+     */
     @Getter
     private NotificationPosEnum notificationPos = NotificationPosEnum.BOTTOM_RIGHT;
     /**
@@ -47,6 +51,9 @@ public class NotificationManager extends HBox {
             return new Thread(new LogRunnable(r), "NotificationPool Thread-" + num.getAndIncrement());
         }
     }, new ThreadPoolExecutor.AbortPolicy());
+    @Getter
+    @Setter
+    private NotificationFactory notificationFactory = new NotificationFactory();
 
     public NotificationManager() {
         setManaged(false);
@@ -127,55 +134,55 @@ public class NotificationManager extends HBox {
     }
 
     public void showInfo(String title, String content, long closeTime){
-        show(new Notification(title, content), closeTime);
+        show(notificationFactory.ofNew(title, content), closeTime);
     }
     public void showInfo(String title, String content){
-        show(new Notification(title, content));
+        showInfo(title, content, -1L);
     }
     public void showInfo(String title, long closeTime){
-        show(new Notification(title), closeTime);
+        showInfo(title, null, closeTime);
     }
     public void showInfo(String title){
-        show(new Notification(title));
+        showInfo(title, null);
     }
 
     public void showSuccess(String title, String content, long closeTime){
-        show(new Notification(NotificationTypeEnum.SUCCESS, title, content), closeTime);
+        show(notificationFactory.ofNew(NotificationTypeEnum.SUCCESS, title, content), closeTime);
     }
     public void showSuccess(String title, String content){
-        show(new Notification(NotificationTypeEnum.SUCCESS, title, content));
+        showSuccess(title, content, -1L);
     }
     public void showSuccess(String title, long closeTime){
-        show(new Notification(NotificationTypeEnum.SUCCESS, title), closeTime);
+        showSuccess(title, null, closeTime);
     }
     public void showSuccess(String title){
-        show(new Notification(NotificationTypeEnum.SUCCESS, title));
+        showSuccess(title, null);
     }
 
     public void showWarn(String title, String content, long closeTime){
-        show(new Notification(NotificationTypeEnum.WARN, title, content), closeTime);
+        show(notificationFactory.ofNew(NotificationTypeEnum.WARN, title, content), closeTime);
     }
     public void showWarn(String title, String content){
-        show(new Notification(NotificationTypeEnum.WARN, title, content));
+        showWarn(title, content, -1L);
     }
     public void showWarn(String title, long closeTime){
-        show(new Notification(NotificationTypeEnum.WARN, title), closeTime);
+        showWarn(title, null, closeTime);
     }
     public void showWarn(String title){
-        show(new Notification(NotificationTypeEnum.WARN, title));
+        showWarn(title ,null);
     }
 
     public void showError(String title, String content, long closeTime){
-        show(new Notification(NotificationTypeEnum.ERROR, title, content), closeTime);
+        show(notificationFactory.ofNew(NotificationTypeEnum.ERROR, title, content), closeTime);
     }
     public void showError(String title, String content){
-        show(new Notification(NotificationTypeEnum.ERROR, title, content));
+        showError(title, content, -1L);
     }
     public void showError(String title, long closeTime){
-        show(new Notification(NotificationTypeEnum.ERROR, title), closeTime);
+        showError(title, null, closeTime);
     }
     public void showError(String title){
-        show(new Notification(NotificationTypeEnum.ERROR, title));
+        showError(title, null);
     }
 
     public void show(Notification notification){
@@ -191,6 +198,9 @@ public class NotificationManager extends HBox {
     }
     public void show(Notification notification, long closeTime, TimeUnit timeUnit){
         show(notification);
-        NOTIFICATION_POOL.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);
+        if (closeTime > 0){
+            NOTIFICATION_POOL.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);
+        }
     }
+
 }

@@ -27,7 +27,7 @@ public class NotificationTest extends Application {
         HBox hBox = new HBox();
         hBox.setStyle("-fx-padding: 20");
         Notification notification = new Notification();
-        notification.setIsShowCloseBtn(false);
+        notification.setShowingCloseBtn(false);
         notification.setTitle("空指针异常");
         notification.setContent("顶顶顶顶的点点滴滴");
         Label hello = new Label("hello");

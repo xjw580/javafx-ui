@@ -2,11 +2,9 @@
 
 <?import club.xiaojiawei.controls.NotificationManager?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.*?>
 <ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
+            style="-fx-padding: 20 0 0 0;"
             fx:controller="club.xiaojiawei.readme.tab.component.NotificationController"
             xmlns:fx="http://javafx.com/fxml">
     <StackPane>

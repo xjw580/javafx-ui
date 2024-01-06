@@ -121,7 +121,10 @@ public class ReadmeController implements Initializable {
      * @param newValue
      */
     private void selectedNewToggle(Toggle newValue){
-        String name = ((ToggleButton) Objects.requireNonNull(newValue, "newValue")).getText();
+        if (newValue == null){
+            return;
+        }
+        String name = ((ToggleButton) newValue).getText();
         for (int i = 0; i < rightTabPane.getTabs().size(); i++) {
             Tab tab = rightTabPane.getTabs().get(i);
             if (Objects.equals(tab.getText(), name)){

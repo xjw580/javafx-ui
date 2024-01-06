@@ -26,3 +26,7 @@
 .bg-hover-ui, .bg-ui{
     -fx-padding: 10 25 10 25;
 }
+#rootPane > .split-pane-divider {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
