@@ -41,7 +41,7 @@ public class NotificationController {
     @FXML
     protected void bottomCenter(){
         notificationManager.setNotificationPos(NotificationPosEnum.BOTTOM_CENTER);
-        notificationManager.showInfo("我在这捏", 1);
+        notificationManager.showWarn("我在这捏", 1);
     }
     @FXML
     protected void bottomRight(){

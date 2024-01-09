@@ -13,10 +13,10 @@
 .notificationVBox-small > #bottomHBox{
     -fx-padding: 0 20 0 25!important;
 }
-.notificationVBox-small > .topHBox{
+.notificationVBox-small > .notificationTopHBox{
     -fx-spacing: 10!important;
 }
-.notificationVBox-small > .topHBox > #tipIcoPane{
+.notificationVBox-small > .notificationTopHBox > #tipIcoPane{
     -fx-scale-x: 1.4!important;
     -fx-scale-y: 1.4!important;
 }
@@ -27,38 +27,38 @@
 .notificationVBox-tiny > #bottomHBox{
     -fx-padding: 0 12 0 18!important;
 }
-.notificationVBox-tiny > .topHBox{
+.notificationVBox-tiny > .notificationTopHBox{
     -fx-spacing: 5!important;
 }
-.notificationVBox-tiny > .topHBox > #tipIcoPane{
+.notificationVBox-tiny > .notificationTopHBox > #tipIcoPane{
     -fx-scale-x: 1.2!important;
     -fx-scale-y: 1.2!important;
 }
-#titleLabel{
+#notificationVBox > .notificationTopHBox > #titleLabel{
     -fx-font-weight: BOLD;
 }
-#contentLabel{
+#notificationVBox > #bottomHBox > #contentLabel{
     -fx-wrap-text: true;
 }
-.topHBox{
+#notificationVBox > .notificationTopHBox{
     -fx-alignment: CENTER;
     -fx-spacing: 15;
 }
-#bottomHBox{
+#notificationVBox > #bottomHBox{
     -fx-padding: 0 25 0 30;
 }
-#closeIcoPane{
+#notificationVBox > .notificationTopHBox > #closeIcoPane{
     -fx-padding: 3;
     -fx-background-radius: 3;
 }
-#closeIcoPane:hover{
+#notificationVBox > .notificationTopHBox > #closeIcoPane:hover{
     -fx-background-color: rgba(128, 128, 128, 0.1);
 }
-.closeIco{
+#notificationVBox > .notificationTopHBox > #closeIcoPane > .notificationCloseIco{
     -fx-scale-y: 0.75;
     -fx-scale-x: 0.75;
 }
-#tipIcoPane{
+#notificationVBox > .notificationTopHBox > #tipIcoPane{
     -fx-scale-x: 1.6;
     -fx-scale-y: 1.6;
 }

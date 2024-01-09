@@ -16,14 +16,14 @@ public class Title extends Label {
     public Title(String s) {
         super(s);
         getStyleClass().add(DEFAULT_STYLE_CLASS);
-        Rectangle rectangle = new Rectangle();
-        setClip(rectangle);
-        heightProperty().addListener((observableValue, number, t1) -> {
-            rectangle.setArcHeight(this.getHeight());
-            rectangle.setArcWidth(this.getHeight());
-            rectangle.setHeight(this.getHeight());
-            rectangle.setTranslateX(-this.getHeight());
-        });
-        widthProperty().addListener((observableValue, number, t1) -> rectangle.setWidth(this.getWidth()));
+//        Rectangle rectangle = new Rectangle();
+//        setClip(rectangle);
+//        heightProperty().addListener((observableValue, number, t1) -> {
+//            rectangle.setArcHeight(this.getHeight());
+//            rectangle.setArcWidth(this.getHeight());
+//            rectangle.setHeight(this.getHeight());
+//            rectangle.setTranslateX(-this.getHeight());
+//        });
+//        widthProperty().addListener((observableValue, number, t1) -> rectangle.setWidth(this.getWidth()));
     }
 }

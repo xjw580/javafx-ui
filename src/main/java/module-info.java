@@ -20,6 +20,7 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei.readme.tab.style;
     exports club.xiaojiawei.config;
     exports club.xiaojiawei.bean;
+    exports club.xiaojiawei.factory;
 
     opens club.xiaojiawei.controls to javafx.fxml;
     opens club.xiaojiawei.test to javafx.fxml;
@@ -29,4 +30,5 @@ module club.xiaojiawei.javafx_ui {
     opens club.xiaojiawei.readme.tab.style to javafx.fxml;
     opens club.xiaojiawei.readme.tab.component to javafx.fxml;
     opens club.xiaojiawei.bean to javafx.fxml;
+    opens club.xiaojiawei.factory to javafx.fxml;
 }

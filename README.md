@@ -44,6 +44,14 @@
 
 ## 更新信息
 
+##### v0.2.1
+
+1. 增加图标：OfflineIco、OnlineIco
+2. 优化组件Title，现在不需要手动设置高和宽了
+3. 优化组件Notification，优化某些节点的命名
+
+
+
 ##### v0.2.0
 
 1. 优化Notification相关组件

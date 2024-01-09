@@ -3,6 +3,7 @@
 <?import club.xiaojiawei.controls.NotificationManager?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import club.xiaojiawei.factory.NotificationFactory?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0;"
             fx:controller="club.xiaojiawei.readme.tab.component.NotificationController"

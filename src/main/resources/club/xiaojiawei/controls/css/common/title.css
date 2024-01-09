@@ -1,6 +1,8 @@
 .title-ui{
     -fx-background-color: #e8f0fe;
-    -fx-padding: 0 0 0 20;
+    -fx-padding: 13 50 13 13;
+    -fx-fill: #1c74e8;
+    -fx-background-radius: 0 19 19 0;
 }
 .title-ui *{
     -fx-fill: #1c74e8;

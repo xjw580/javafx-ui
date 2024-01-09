@@ -8,14 +8,14 @@
 <fx:root type="Group" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
          fx:id="notification" stylesheets="@css/notification.css">
     <VBox fx:id="notificationVBox">
-        <HBox styleClass="topHBox">
+        <HBox styleClass="notificationTopHBox">
             <StackPane fx:id="tipIcoPane">
                 <MessageIco/>
             </StackPane>
             <Label fx:id="titleLabel"/>
             <HBox HBox.hgrow="ALWAYS"/>
             <StackPane fx:id="closeIcoPane">
-                <CloseIco styleClass="closeIco"/>
+                <CloseIco styleClass="notificationCloseIco"/>
             </StackPane>
         </HBox>
         <HBox fx:id="bottomHBox" managed="false" visible="false">
