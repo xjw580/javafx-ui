@@ -6,8 +6,8 @@
     /*选中文本的颜色*/
     -fx-accent: main-color;
 }
-.timeSeparator, .text-field{
-    -fx-translate-y: 3.5;
+.timeSeparator{
+    -fx-translate-y: -1;
 }
 .timeBackground{
     -fx-border-color: main-color;
@@ -17,9 +17,21 @@
     -fx-background-radius: 10;
     -fx-background-color: white;
 }
+.timeFullBackground{
+    -fx-border-color: main-color;
+    -fx-pref-height: 24;
+    -fx-pref-width: 90;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-background-color: white;
+}
 .hideIcoTimeBackground{
     -fx-pref-width: 50!important;
 }
+.hideIcoTimeFullBackground{
+    -fx-pref-width: 70!important;
+}
+
 .timeBackgroundFocus{
     -fx-border-color: main-color!important;
     -fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;

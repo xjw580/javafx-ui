@@ -9,7 +9,8 @@
     <VBox styleClass="hv-box">
         <Label text="通过showSelector、showBg调整选择器、背景可见性" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Time/>
+            <TextField text="1111" styleClass="text-field-ui"/>
+            <Time showSec="true"/>
             <Time showSelector="false"/>
             <Time showBg="false"/>
             <Time showBg="false" showSelector="false"/>

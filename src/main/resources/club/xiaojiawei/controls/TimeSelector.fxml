@@ -14,4 +14,7 @@
     <ScrollPane fx:id="minSelector" styleClass="timeSelector">
         <VBox fx:id="minVbox" styleClass="v-box"/>
     </ScrollPane>
+    <ScrollPane fx:id="secSelector" styleClass="timeSelector" visible="false" managed="false">
+        <VBox fx:id="secVbox" styleClass="v-box"/>
+    </ScrollPane>
 </fx:root>

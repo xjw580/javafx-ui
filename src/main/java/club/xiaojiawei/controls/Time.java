@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 import lombok.Getter;
@@ -21,6 +21,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
+import static club.xiaojiawei.controls.TimeSelector.TIME_FULL_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
@@ -29,7 +30,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @date 2023/7/3 12:21
  */
 @SuppressWarnings("unused")
-public class Time extends AnchorPane {
+public class Time extends StackPane {
     /**
      * 时间
      */
@@ -44,14 +45,23 @@ public class Time extends AnchorPane {
      */
     @Getter
     private boolean showBg = true;
+    /**
+     * 显示秒
+     */
+    @Getter
+    private boolean showSec;
     public String getTime() {
-        return TIME_FORMATTER.format(time.get());
+        if (showSec){
+            return TIME_FULL_FORMATTER.format(time.get());
+        }else {
+            return TIME_FORMATTER.format(time.get());
+        }
     }
     public ObjectProperty<LocalTime> timeProperty() {
         return time;
     }
     /**
-     * @param time 格式：HH:mm
+     * @param time 格式：HH:mm，showSec=true时HH:mm:ss
      */
     public void setTime(String time) {
         if (time == null || time.isBlank()){
@@ -67,15 +77,39 @@ public class Time extends AnchorPane {
         timeIco.setVisible(this.showSelector = showSelector);
         timeIco.setManaged(false);
         if (showSelector){
-            timeBG.getStyleClass().remove(HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
+            timeBG.getStyleClass().remove(showSec? HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS : HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }else {
-            timeBG.getStyleClass().add(HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
+            timeBG.getStyleClass().add(showSec? HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS : HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }
     }
 
     public void setShowBg(boolean showBg) {
         timeBG.setVisible(this.showBg = showBg);
     }
+
+    public void setShowSec(boolean showSec) {
+        this.showSec = showSec;
+        if (showSec){
+            timeBG.getStyleClass().remove(TIME_BACKGROUND);
+            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND);
+            timeBG.getStyleClass().add(TIME_FULL_BACKGROUND);
+            sec.setVisible(true);
+            sec.setManaged(true);
+            minWithSecSeparator.setVisible(true);
+            minWithSecSeparator.setManaged(true);
+            timeSelector.setShowSec(true);
+        }else {
+            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND);
+            timeBG.getStyleClass().remove(TIME_BACKGROUND);
+            timeBG.getStyleClass().add(TIME_BACKGROUND);
+            sec.setVisible(false);
+            sec.setManaged(false);
+            minWithSecSeparator.setVisible(false);
+            minWithSecSeparator.setManaged(false);
+            timeSelector.setShowSec(false);
+        }
+    }
+
     @FXML
     private Label timeBG;
     @FXML
@@ -83,14 +117,23 @@ public class Time extends AnchorPane {
     @FXML
     private TextField min;
     @FXML
+    private TextField sec;
+    @FXML
     private TimeIco timeIco;
+    @FXML
+    private Label minWithSecSeparator;
     private static final int MAX_HOUR = 23;
     private static final int MAX_MIN = 59;
+    private static final int MAX_SEC = 59;
     @Getter
     private Popup timeSelectorPopup;
+    private static final String TIME_BACKGROUND = "timeBackground";
+    private static final String TIME_FULL_BACKGROUND = "timeFullBackground";
     private static final String TIME_BACKGROUND_FOCUS_STYLE_CLASS = "timeBackgroundFocus";
     private static final String HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS = "hideIcoTimeBackground";
+    private static final String HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS = "hideIcoTimeFullBackground";
     private boolean isFromTime;
+    private TimeSelector timeSelector;
     private ChangeListener<Boolean> focusChangeListener;
     public Time() {
         try {
@@ -107,6 +150,7 @@ public class Time extends AnchorPane {
         initTimeSelectorPopup();
         initTimeTextField(hour, MAX_HOUR);
         initTimeTextField(min, MAX_MIN);
+        initTimeTextField(sec, MAX_SEC);
         initTimeIco();
     }
 
@@ -115,7 +159,7 @@ public class Time extends AnchorPane {
      */
     private void initTimeSelectorPopup(){
         timeSelectorPopup = new Popup();
-        TimeSelector timeSelector = new TimeSelector();
+        timeSelector = new TimeSelector();
         time = timeSelector.timeProperty();
         time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
         timeSelectorPopup.getContent().add(timeSelector);
@@ -126,9 +170,15 @@ public class Time extends AnchorPane {
         if (newTime == null){
             hour.setText("");
             min.setText("");
+            if (showSec){
+                sec.setText("");
+            }
         }else {
             hour.setText(DateTimeFormatter.ofPattern("HH").format(newTime));
             min.setText(DateTimeFormatter.ofPattern("mm").format(newTime));
+            if (showSec){
+                sec.setText(DateTimeFormatter.ofPattern("ss").format(newTime));
+            }
         }
         isFromTime = false;
     }
@@ -154,13 +204,17 @@ public class Time extends AnchorPane {
         textField.focusedProperty().addListener(timeTextFieldBlurListener(textField));
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank())){
+            if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank()) && (!showSec || sec.getText() == null || sec.getText().isBlank())){
                 time.set(null);
             }else if (!isFromTime && newValue.length() == 2){
-                if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank())){
+                if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank()) && (!showSec || sec.getText() == null || sec.getText().isBlank())){
                     time.set(null);
                 }else if (hour.getText() != null && !hour.getText().isBlank() && min.getText() != null && !min.getText().isBlank()){
-                    time.set(LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText())));
+                    if (showSec && sec.getText() != null && !sec.getText().isBlank()){
+                        time.set(LocalTime.from(TIME_FULL_FORMATTER.parse(hour.getText() + ":" + min.getText() + ":" + sec.getText())));
+                    }else {
+                        time.set(LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText())));
+                    }
                 }
             }
         });

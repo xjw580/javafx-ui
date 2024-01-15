@@ -1,5 +1,6 @@
 package club.xiaojiawei.test;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.TimeSelector;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -31,23 +32,25 @@ public class TimeSelectorTest extends Application {
         hBox.setSpacing(10);
         ObservableList<Node> children = hBox.getChildren();
         TimeSelector timeSelector1 = new TimeSelector();
+        timeSelector1.setShowSec(true);
         System.out.println(timeSelector1.getTime());
         timeSelector1.timeProperty().addListener((observableValue, localTime, t1) -> System.out.println(t1));
         children.add(timeSelector1);
         Scene scene = new Scene(hBox);
+        JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                timeSelector1.setTime("12:30");
-            }
-        }, 1000);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                timeSelector1.setTime(null);
-            }
-        }, 3000);
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                timeSelector1.setTime("12:30");
+//            }
+//        }, 1000);
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                timeSelector1.setTime(null);
+//            }
+//        }, 3000);
     }
 }

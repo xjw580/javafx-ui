@@ -2,15 +2,18 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.HBox?>
 <?import club.xiaojiawei.controls.ico.TimeIco?>
-<fx:root type="AnchorPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/time.css">
+<?import javafx.scene.layout.AnchorPane?>
+<fx:root type="StackPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/time.css">
     <Label fx:id="timeBG" styleClass="timeBackground"/>
-    <HBox AnchorPane.leftAnchor="5">
+    <HBox AnchorPane.leftAnchor="6" alignment="CENTER">
         <TextField fx:id="hour" promptText="时" styleClass="text-field"/>
         <Label text=":" styleClass="timeSeparator"/>
         <TextField fx:id="min" promptText="分" styleClass="text-field"/>
+        <Label fx:id="minWithSecSeparator" text=":" styleClass="timeSeparator" visible="false" managed="false"/>
+        <TextField fx:id="sec" promptText="秒" styleClass="text-field" visible="false" managed="false"/>
         <TimeIco fx:id="timeIco"/>
     </HBox>
 </fx:root>
