@@ -1,6 +1,6 @@
 ## JavaFX-UI
-
-基于javafx的ui组件库（Javafx-based ui component library）
+![favicon.ico](src/main/resources/club/xiaojiawei/readme/readme.png)
+> 适用于javafx的ui组件库（Javafx-based ui component library）
 
 
 
