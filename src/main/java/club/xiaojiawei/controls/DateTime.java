@@ -9,6 +9,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 import lombok.Getter;
@@ -25,7 +26,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/26 8:34
  */
-public class DateTime extends AnchorPane {
+public class DateTime extends StackPane {
     /**
      * 日期时间
      */

@@ -4,9 +4,13 @@ import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.Date;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -25,17 +29,19 @@ public class DateTest extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FlowPane vBox = new FlowPane();
+        HBox hBox = new HBox();
+        VBox vBox = new VBox(hBox);
+        vBox.setAlignment(Pos.CENTER);
+        hBox.setPrefHeight(100);
+        hBox.setAlignment(Pos.CENTER);
         Date date = new Date();
 //        date.setDateInterceptor(localDate -> LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
         System.out.println(date.getDate());
         date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
-        date.setTranslateX(50);
-        date.setTranslateY(50);
         Button refresh = new Button("refresh");
         refresh.setOnMouseClicked(mouseEvent -> date.refresh());
-        vBox.getChildren().addAll(date, refresh);
-        Scene scene = new Scene(vBox, 200, 200);
+        hBox.getChildren().addAll(new Label("test"), date, refresh);
+        Scene scene = new Scene(vBox, 400, 400);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();

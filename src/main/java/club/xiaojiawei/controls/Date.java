@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 import lombok.Getter;
@@ -23,7 +23,6 @@ import java.util.function.Predicate;
 
 import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.controls.DateSelector.calcMaxDayForMonth;
-import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
@@ -31,7 +30,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @author 肖嘉威 580@qq.com
  * @date 2023/10/23 14:38
  */
-public class Date extends AnchorPane {
+public class Date extends StackPane {
     /**
      * 默认当前日期
      */
@@ -74,6 +73,7 @@ public class Date extends AnchorPane {
         if (showSelector){
             dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND);
         }else {
+            dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND);
             dateBG.getStyleClass().add(HIDE_ICO_DATE_BACKGROUND);
         }
     }

@@ -75,10 +75,11 @@ public class Time extends StackPane {
     }
     public void setShowSelector(boolean showSelector) {
         timeIco.setVisible(this.showSelector = showSelector);
-        timeIco.setManaged(false);
+        timeIco.setManaged(this.showSelector);
         if (showSelector){
-            timeBG.getStyleClass().remove(showSec? HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS : HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
+            timeBG.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }else {
+            timeBG.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
             timeBG.getStyleClass().add(showSec? HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS : HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }
     }
@@ -108,6 +109,7 @@ public class Time extends StackPane {
             minWithSecSeparator.setManaged(false);
             timeSelector.setShowSec(false);
         }
+        setShowSelector(this.showSelector);
     }
 
     @FXML

@@ -7,10 +7,11 @@
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
-        <Label text="可通过showCount属性调整展示行数" styleClass="title-three"/>
+        <Label text="可通过showCount、showSec属性调整展示行数、显示秒" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <TilePane hgap="20">
                 <TimeSelector showRowCount="4"/>
+                <TimeSelector showRowCount="4" showSec="true"/>
                 <TimeSelector/>
                 <TimeSelector showRowCount="8"/>
             </TilePane>

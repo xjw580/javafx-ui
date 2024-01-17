@@ -6,12 +6,10 @@
 }
 .dateSeparator{
     -fx-font-size: 17;
+    -fx-translate-y: -1;
 }
 .dateSeparator *{
     -fx-fill: grey;
-}
-.text-field{
-    -fx-translate-y: 3.5;
 }
 .dateBackground{
     -fx-border-color: main-color;

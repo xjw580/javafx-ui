@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.HBox?>
 <?import club.xiaojiawei.controls.ico.TimeIco?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <fx:root type="StackPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/time.css">
     <Label fx:id="timeBG" styleClass="timeBackground"/>
-    <HBox AnchorPane.leftAnchor="6" alignment="CENTER">
+    <HBox alignment="CENTER">
         <TextField fx:id="hour" promptText="时" styleClass="text-field"/>
         <Label text=":" styleClass="timeSeparator"/>
         <TextField fx:id="min" promptText="分" styleClass="text-field"/>

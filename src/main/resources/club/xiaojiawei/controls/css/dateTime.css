@@ -1,19 +1,13 @@
-.text-field{
-    -fx-pref-width: 17;
-    -fx-padding: 0;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-}
 .dateTimeBackground{
     -fx-border-color: main-color;
     -fx-pref-height: 24;
-    -fx-pref-width: 158;
+    -fx-pref-width: 170;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
     -fx-background-color: white;
 }
 .hideIcoDateTimeBackground{
-    -fx-pref-width: 139!important;
+    -fx-pref-width: 151!important;
 }
 .dateTimeBackgroundFocus{
     -fx-border-color: main-color!important;
@@ -22,17 +16,17 @@
 #dateTimeIco{
     -fx-pref-width: 23;
     -fx-pref-height: 23;
+    -fx-translate-x: -5;
 }
 .dateTimeSeparator{
-    -fx-translate-x: 87;
     -fx-font-size: 17;
 }
 .dateTimeSeparator *{
     -fx-fill: grey;
 }
-#timeControls{
-    -fx-translate-x: 89;
+#dateControls{
+    -fx-translate-x: 3;
 }
-#dateTimeIco{
-    -fx-translate-x: 132;
+#timeControls{
+    -fx-translate-x: -4;
 }
