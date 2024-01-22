@@ -1,7 +1,10 @@
 package club.xiaojiawei.utils;
 
 import club.xiaojiawei.JavaFXUI;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -14,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -36,13 +40,13 @@ public class DialogUtil {
         double height = window.getHeight() - 8;
         double width = parent.getScene().getWidth();
         VBox vBox = new VBox(){{setSpacing(20);setAlignment(Pos.CENTER);}};
-        vBox.setStyle("-fx-background-color: white;-fx-padding: 18 13 13 18;-fx-background-radius: 3;-fx-spacing: 15");
+        vBox.setStyle("-fx-background-color: white;-fx-padding: 18 13 13 18;-fx-background-radius: 3;-fx-spacing: 15;-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3)");
         vBox.setPrefWidth(350);
         Group group = new Group(vBox);
         vBox.getChildren().addAll(buildHead(headText), buildBody(bodyText), buildBtnGroup(stage, group, btnHandler));
         StackPane stackPane = new StackPane(group);
         stackPane.setClip(new Rectangle(width, height){{setArcHeight(20);setArcWidth(20);}});
-        stackPane.setStyle("-fx-background-color: rgba(0,0,0,0.05);");
+        stackPane.setStyle("-fx-background-color: rgba(0,0,0,0.1);");
         Scene scene = new Scene(stackPane, width, height);
         scene.getStylesheets().addAll(JavaFXUI.stylesheet("common.css"), JavaFXUI.stylesheet("button.css"));
         scene.setFill(null);
@@ -60,25 +64,44 @@ public class DialogUtil {
                 hideByTransition(stage, group);
             }
         });
+        stage.showingProperty().addListener((observableValue, aBoolean, t1) -> {
+            if (t1){
+                stage.setX(window.getX() + 8);
+                stage.setY(window.getY());
+            }
+        });
+        stage.setResizable(false);
         stage.show();
-        buildShowTransition(group).play();
+        buildShowTransition(stackPane, group).play();
     }
 
-    private static ScaleTransition buildShowTransition(Node node){
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(250), node);
+    private static Transition buildShowTransition(Node root, Node content){
+        double duration = 250D;
+        ParallelTransition parallelTransition = new ParallelTransition();
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration), root);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration), content);
         scaleTransition.setFromX(0);
         scaleTransition.setToX(1);
         scaleTransition.setFromY(0);
         scaleTransition.setToY(1);
-        return scaleTransition;
+        parallelTransition.getChildren().addAll(fadeTransition, scaleTransition);
+        return parallelTransition;
     }
-    private static ScaleTransition buildHideTransition(Node node){
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(250), node);
+    private static Transition buildHideTransition(Node root, Node content){
+        double duration = 250D;
+        ParallelTransition parallelTransition = new ParallelTransition();
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration), root);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(duration), content);
         scaleTransition.setFromX(1);
         scaleTransition.setToX(0);
         scaleTransition.setFromY(1);
         scaleTransition.setToY(0);
-        return scaleTransition;
+        parallelTransition.getChildren().addAll(fadeTransition, scaleTransition);
+        return parallelTransition;
     }
 
     private static HBox buildHead(String headText){
@@ -128,9 +151,9 @@ public class DialogUtil {
     }
 
     private static void hideByTransition(Stage stage, Node node){
-        ScaleTransition scaleTransition = buildHideTransition(node);
-        scaleTransition.setOnFinished(actionEvent -> stage.close());
-        scaleTransition.play();
+        Transition transition = buildHideTransition(stage.getScene().getRoot(), node);
+        transition.setOnFinished(actionEvent -> stage.close());
+        transition.play();
     }
 
 }

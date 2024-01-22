@@ -31,7 +31,7 @@ public class DialogPaneTest extends Application {
         hBox.getChildren().add(click);
         Scene scene = new Scene(hBox, 400, 400);
         primaryStage.setScene(scene);
-        primaryStage.show();
+
         click.setOnMouseClicked(event -> {
             DialogUtil.showDialog(hBox, "你好", "你也好你也好你也好你也好你也好你也好你也好", actionEvent -> {
                 System.out.println("ok");
@@ -39,5 +39,6 @@ public class DialogPaneTest extends Application {
                 System.out.println("cancel");
             });
         });
+        primaryStage.show();
     }
 }
