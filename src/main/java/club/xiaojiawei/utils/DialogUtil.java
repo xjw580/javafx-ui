@@ -40,12 +40,12 @@ public class DialogUtil {
         double height = window.getHeight() - 8;
         double width = parent.getScene().getWidth();
         VBox vBox = new VBox(){{setSpacing(20);setAlignment(Pos.CENTER);}};
-        vBox.setStyle("-fx-background-color: white;-fx-padding: 18 13 13 18;-fx-background-radius: 3;-fx-spacing: 15;-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3)");
+        vBox.setStyle("-fx-background-color: white;-fx-padding: 20 15 15 20;-fx-background-radius: 3;-fx-spacing: 15;-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3)");
         vBox.setPrefWidth(350);
         Group group = new Group(vBox);
         vBox.getChildren().addAll(buildHead(headText), buildBody(bodyText), buildBtnGroup(stage, group, btnHandler));
         StackPane stackPane = new StackPane(group);
-        stackPane.setClip(new Rectangle(width, height){{setArcHeight(20);setArcWidth(20);}});
+        stackPane.setClip(new Rectangle(width, height){{setArcHeight(10);setArcWidth(10);}});
         stackPane.setStyle("-fx-background-color: rgba(0,0,0,0.1);");
         Scene scene = new Scene(stackPane, width, height);
         scene.getStylesheets().addAll(JavaFXUI.stylesheet("common.css"), JavaFXUI.stylesheet("button.css"));
