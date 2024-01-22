@@ -11,7 +11,7 @@
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Switch size="15"/>
             <Switch/>
-            <Switch size="30"/>
+            <Switch size="30" status="false"/>
         </HBox>
     </VBox>
 </ScrollPane>
