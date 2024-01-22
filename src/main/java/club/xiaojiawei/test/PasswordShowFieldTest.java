@@ -1,6 +1,6 @@
 package club.xiaojiawei.test;
 
-import club.xiaojiawei.controls.PasswordShowField;
+import club.xiaojiawei.controls.PasswordTextField;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -18,12 +18,12 @@ public class PasswordShowFieldTest extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        PasswordShowField passwordShowField = new PasswordShowField();
-        passwordShowField.textProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        PasswordTextField passwordTextField = new PasswordTextField();
+        passwordTextField.textProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         AnchorPane anchorPane = new AnchorPane();
-        passwordShowField.setTranslateX(50);
-        passwordShowField.setTranslateY(50);
-        anchorPane.getChildren().add(passwordShowField);
+        passwordTextField.setTranslateX(50);
+        passwordTextField.setTranslateY(50);
+        anchorPane.getChildren().add(passwordTextField);
         Scene scene = new Scene(anchorPane, 400, 200);
         primaryStage.setScene(scene);
         primaryStage.show();

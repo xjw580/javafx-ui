@@ -9,10 +9,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
+import lombok.Getter;
 
 import java.io.IOException;
 
@@ -21,11 +23,14 @@ import java.io.IOException;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/31 14:25
  */
-public class PasswordShowField extends ProxyAnchorPaneRegion<TextField> {
+public class PasswordTextField extends ProxyAnchorPaneRegion<TextField> {
+
     /**
      * 密码框文本
      */
     private final StringProperty text = new SimpleStringProperty("");
+    @Getter
+    private boolean hideForever;
     private final ObjectProperty<TextFormatter<?>> textFormatter = new SimpleObjectProperty<>();
     public String getText() {
         return text.get();
@@ -34,22 +39,35 @@ public class PasswordShowField extends ProxyAnchorPaneRegion<TextField> {
         return text;
     }
     public void setText(String text) {
-        this.textField.setText(text);
+        this.pswTextField.setText(text);
     }
+
+    public void setHideForever(boolean hideForever) {
+        icoPane.setVisible(!hideForever);
+        icoPane.setManaged(!hideForever);
+        Insets padding = pswTextField.getPadding();
+        if (hideForever){
+            pswTextField.setPadding(new Insets(padding.getTop(), padding.getLeft(), padding.getBottom(), padding.getLeft()));
+        }else {
+            pswTextField.setPadding(new Insets(padding.getTop(), 27D, padding.getBottom(), padding.getLeft()));
+        }
+        this.hideForever = hideForever;
+    }
+
     public Tooltip getTooltip() {
-        return textField.getTooltip();
+        return pswTextField.getTooltip();
     }
     public void setTooltip(Tooltip tooltip) {
-        textField.setTooltip(tooltip);
+        pswTextField.setTooltip(tooltip);
     }
     public String getPromptText() {
-        return textField.getPromptText();
+        return pswTextField.getPromptText();
     }
     public StringProperty promptTextProperty() {
-        return textField.promptTextProperty();
+        return pswTextField.promptTextProperty();
     }
     public void setPromptText(String promptText) {
-        textField.setPromptText(promptText);
+        pswTextField.setPromptText(promptText);
     }
     public TextFormatter<?> getTextFormatter() {
         return textFormatter.get();
@@ -64,15 +82,14 @@ public class PasswordShowField extends ProxyAnchorPaneRegion<TextField> {
     @FXML private StackPane icoPane;
     @FXML private InvisibleIco inVisibleIco;
     @FXML private VisibleIco visibleIco;
-    @FXML private TextField textField;
+    @FXML private TextField pswTextField;
 
     @Override
     public TextField getRegion() {
-        return textField;
+        return pswTextField;
     }
 
-
-    public PasswordShowField() {
+    public PasswordTextField() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);
@@ -89,14 +106,14 @@ public class PasswordShowField extends ProxyAnchorPaneRegion<TextField> {
             if (inVisibleIco.isVisible()){
                 inVisibleIco.setVisible(false);
                 visibleIco.setVisible(true);
-                textField.setText(text.get());
+                pswTextField.setText(text.get());
             }else {
                 visibleIco.setVisible(false);
                 inVisibleIco.setVisible(true);
-                textField.setText(text.get());
+                pswTextField.setText(text.get());
             }
         });
-        textField.setTextFormatter(new TextFormatter<>(change -> {
+        pswTextField.setTextFormatter(new TextFormatter<>(change -> {
             if (textFormatter.get() != null){
                 change = textFormatter.get().getFilter().apply(change);
             }
@@ -108,8 +125,8 @@ public class PasswordShowField extends ProxyAnchorPaneRegion<TextField> {
             }
             return change;
         }));
-        icoPane.translateXProperty().bind(textField.widthProperty().subtract(22));
-        icoPane.translateYProperty().bind(textField.heightProperty().subtract(20).divide(2));
+        icoPane.translateXProperty().bind(pswTextField.widthProperty().subtract(22));
+        icoPane.translateYProperty().bind(pswTextField.heightProperty().subtract(20).divide(2));
     }
 
 }
