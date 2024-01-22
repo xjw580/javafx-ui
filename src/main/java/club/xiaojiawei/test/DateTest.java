@@ -44,6 +44,7 @@ public class DateTest extends Application {
         Scene scene = new Scene(vBox, 400, 400);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("hello");
         primaryStage.show();
 //        new Timer().schedule(new TimerTask() {
 //            @Override

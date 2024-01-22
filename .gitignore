@@ -38,5 +38,4 @@ build/
 
 ### Custom ###
 *.exe
-embedded_*
-config.json
+/easy-release_static/
