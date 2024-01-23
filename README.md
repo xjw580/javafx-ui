@@ -4,7 +4,7 @@
 
 
 
-## 部分组件展示（全部组件和样式需要启动Readme类查看）
+## 部分组件展示（全部组件和样式需要启动 [ReadmeApplication.java](src\main\java\club\xiaojiawei\readme\ReadmeApplication.java) 类查看）
 
 #### `Switch`
 

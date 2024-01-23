@@ -185,7 +185,6 @@ public class Date extends StackPane {
     private void initDateIco(){
         dateIco.setOnMouseClicked(e -> {
             Bounds bounds = dateIco.localToScreen(dateIco.getBoundsInLocal());
-            System.out.println(bounds.getMaxX());
             dateSelectorPopup.setAnchorX(bounds.getMaxX() - 100);
             dateSelectorPopup.setAnchorY(bounds.getMaxY() - 5);
             dateSelectorPopup.show(this.getScene().getWindow());
