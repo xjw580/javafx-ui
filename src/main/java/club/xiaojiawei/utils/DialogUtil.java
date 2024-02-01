@@ -33,22 +33,33 @@ import javafx.util.Duration;
  */
 public class DialogUtil {
 
+    public static Stage showDialog(Parent parent, Node node){
+        return showDialog(parent, new Stage(), node);
+    }
+
     @SafeVarargs
-    public static void showDialog(Parent parent, String headText, String bodyText, EventHandler<ActionEvent>... btnHandler){
-        Window window = parent.getScene().getWindow();
+    public static Stage showDialog(Parent parent, String headText, String bodyText, EventHandler<ActionEvent>... btnHandler){
         Stage stage = new Stage();
-        double height = window.getHeight() - 8;
-        double width = parent.getScene().getWidth();
         VBox vBox = new VBox(){{setSpacing(20);setAlignment(Pos.CENTER);}};
-        vBox.setStyle("-fx-background-color: white;-fx-padding: 20 15 15 20;-fx-background-radius: 3;-fx-spacing: 15;-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3)");
+        vBox.setStyle("-fx-padding: 20 15 15 20;-fx-spacing: 15;");
         vBox.setPrefWidth(350);
         Group group = new Group(vBox);
         vBox.getChildren().addAll(buildHead(headText), buildBody(bodyText), buildBtnGroup(stage, group, btnHandler));
+        showDialog(parent, stage, vBox, btnHandler);
+        return stage;
+    }
+
+    @SafeVarargs
+    private static Stage showDialog(Parent parent, Stage stage, Node node, EventHandler<ActionEvent>... btnHandler){
+        Window window = parent.getScene().getWindow();
+        double height = parent.getScene().getHeight();
+        double width = parent.getScene().getWidth();
+        Group group = new Group(new StackPane(node){{setStyle("-fx-background-color: rgba(251, 251, 251);-fx-background-radius: 3;-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3)");}});
         StackPane stackPane = new StackPane(group);
         stackPane.setClip(new Rectangle(width, height){{setArcHeight(10);setArcWidth(10);}});
-        stackPane.setStyle("-fx-background-color: rgba(0,0,0,0.1);");
+        stackPane.setStyle("-fx-background-color: rgba(0,0,0,0.05);");
         Scene scene = new Scene(stackPane, width, height);
-        scene.getStylesheets().addAll(JavaFXUI.stylesheet("common.css"), JavaFXUI.stylesheet("button.css"));
+        JavaFXUI.addjavafxUIStylesheet(scene);
         scene.setFill(null);
         stage.setScene(scene);
         stage.initOwner(window);
@@ -72,7 +83,9 @@ public class DialogUtil {
         });
         stage.setResizable(false);
         stage.show();
+        stage.setY(parent.getScene().getWindow().getY() + parent.getScene().getY());
         buildShowTransition(stackPane, group).play();
+        return stage;
     }
 
     private static Transition buildShowTransition(Node root, Node content){

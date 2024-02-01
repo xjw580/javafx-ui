@@ -4,8 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             fx:controller="club.xiaojiawei.readme.tab.style.TabViewController"
             style="-fx-padding: 20 0 0 0"
