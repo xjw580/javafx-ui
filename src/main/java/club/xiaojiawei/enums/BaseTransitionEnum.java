@@ -27,6 +27,7 @@ public enum BaseTransitionEnum {
         commonBuild(transition, cycleCount, autoReverse);
         return transition;
     }),
+
     /**
      * 滑动
      */
@@ -39,6 +40,7 @@ public enum BaseTransitionEnum {
         commonBuild(transition, cycleCount, autoReverse);
         return transition;
     }),
+
     SLIDE_Y((node, from, to, duration, cycleCount, autoReverse) -> {
         TranslateTransition transition = new TranslateTransition(duration, node);
         if (from != -1){
@@ -48,6 +50,7 @@ public enum BaseTransitionEnum {
         commonBuild(transition, cycleCount, autoReverse);
         return transition;
     }),
+
     SCALE((node, from, to, duration, cycleCount, autoReverse) -> {
         ScaleTransition transition = new ScaleTransition(duration, node);
         if (from != -1){
@@ -59,6 +62,7 @@ public enum BaseTransitionEnum {
         commonBuild(transition, cycleCount, autoReverse);
         return transition;
     }),
+
     /**
      * Y轴缩放
      */
@@ -71,13 +75,16 @@ public enum BaseTransitionEnum {
         commonBuild(transition, cycleCount, autoReverse);
         return transition;
     }),
+
     NONE((node, from, to, duration, cycleCount, autoReverse) -> null),
     ;
+
     private final BaseTransitionFunc transition;
 
     BaseTransitionEnum(BaseTransitionFunc transition) {
         this.transition = transition;
     }
+
     public void play(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse){
         get(node, from, to, duration, cycleCount, autoReverse).play();
     }
@@ -87,16 +94,17 @@ public enum BaseTransitionEnum {
     public void play(Node node, double from, double to, Duration duration){
         get(node, from, to, duration).play();
     }
+
     public Transition get(Node node, double to, Duration duration){
         return get(node, -1, to, duration, 0 ,false);
     }
     public Transition get(Node node, double from, double to, Duration duration){
         return get(node, from, to, duration, 0 ,false);
     }
-
     public Transition get(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse){
         return this.transition.build(node, from, to, duration, cycleCount, autoReverse);
     }
+
     private static void commonBuild(Transition transition, int cycleCount, boolean autoReverse) {
         transition.setCycleCount(cycleCount);
         transition.setAutoReverse(autoReverse);

@@ -2,16 +2,20 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.enums.BaseTransitionEnum;
+import javafx.animation.ParallelTransition;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -29,8 +33,6 @@ import lombok.Setter;
  */
 public class Modal {
 
-    private Runnable cancelRunnable;
-
     /**
      * 点击遮罩是否关闭
      */
@@ -38,72 +40,143 @@ public class Modal {
     @Setter
     private boolean maskClosable;
 
+    private final ReadOnlyBooleanProperty showing;
 
-    public Modal(Parent parent) {
-//        if (parent == null){
-//            throw new NullPointerException("parent不能为null");
-//        }
-//        Stage stage = new Stage();
-//
-//        stage.initStyle(StageStyle.TRANSPARENT);
-//        stage.initModality(Modality.APPLICATION_MODAL);
-//        stage.initOwner(parent.getScene().getWindow());
-//        dialogPaneProperty().addListener((observableValue, dialogPane, t1) -> {
-//            JavaFXUI.addjavafxUIStylesheet(this.getDialogPane().getScene());
-//            double height = parent.getScene().getHeight();
-//            double width = parent.getScene().getWidth();
-//            t1.setPrefWidth(width);
-//            t1.setPrefHeight(height);
-//            t1.setStyle("-fx-background-color: #00000011;");
-//            t1.getScene().addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
-//                if (keyEvent.getCode() == KeyCode.ESCAPE){
-//                    close();
-//                    if (cancelRunnable != null){
-//                        cancelRunnable.run();
-//                    }
-//                }
-//            });
-//            t1.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//                if (event.getTarget() instanceof StackPane stackPane && stackPane.getStyleClass().contains("content")){
-//                    if (maskClosable){
-//                        close();
-//                        if (cancelRunnable != null){
-//                            cancelRunnable.run();
-//                        }
-//                        event.consume();
-//                    }
-//                }
-//            });
-//        });
-//        showingProperty().addListener((observableValue, aBoolean, t1) -> {
-//            if (t1){
-//                getDialogPane().setOpacity(0);
-//                this.setY(parent.getScene().getWindow().getY() + parent.getScene().getY());
-//                this.setX(parent.getScene().getWindow().getX() + parent.getScene().getX());
-//                this.getDialogPane().getScene().setFill(Color.TRANSPARENT);
-//                int duration = 250;
-//                BaseTransitionEnum.FADE.play(getDialogPane(), 0, 1, Duration.millis(duration));
-//            }
-//        });
+    private final Stage stage;
 
+    private Pane rootPane;
+
+    private Parent parent;
+
+    private Node content;
+
+    private Runnable cancelRunnable;
+
+    public boolean isShowing() {
+        return showing.get();
     }
 
-    public Node initRootPane(Node content){
-        return new StackPane(new Group(new AnchorPane(content){{setStyle("-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 3);-fx-background-color: white;");}}));
+    public ReadOnlyBooleanProperty showingProperty() {
+        return showing;
     }
 
-    public void initDialog(String heading, String content, Runnable[] btnHandler){
-        if (btnHandler != null && btnHandler.length > 1){
-            cancelRunnable = btnHandler[1];
+    {
+        stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        showing = stage.showingProperty();
+    }
+
+    /**
+     * 根据传入的content构建模态框
+     * @param parent
+     * @param content
+     */
+    public Modal(Parent parent, Node content) {
+        if (parent == null){
+            throw new NullPointerException("parent不能为null");
         }
-        initRootPane(new StackPane(new VBox(createHeading(heading), createContent(content), createBtnGroup(btnHandler)){{setStyle("-fx-spacing: 15;-fx-alignment: CENTER");}}){{setStyle("-fx-pref-width: 300;-fx-padding: 15;");}});
+        buildRootPane(content);
+        init(parent);
+    }
+
+    /**
+     * 构建确认模态框
+     * @param parent
+     * @param heading
+     * @param content
+     * @param btnHandler
+     */
+    public Modal(Parent parent, String heading, String content, Runnable... btnHandler) {
+        if (parent == null){
+            throw new NullPointerException("parent不能为null");
+        }
+        VBox vBox = new VBox(){{
+            setStyle("-fx-padding: 20;-fx-spacing: 20;-fx-pref-width: 350");
+        }};
+        if (heading != null && !heading.isBlank()){
+            vBox.getChildren().add(createHeading(heading));
+        }
+        if (content != null && !content.isBlank()){
+            vBox.getChildren().add(createContent(content));
+        }
+        vBox.getChildren().add(createBtnGroup(btnHandler));
+        buildRootPane(vBox);
+        init(parent);
+    }
+
+    private void init(Parent parent){
+        this.parent = parent;
+        this.stage.initOwner(parent.getScene().getWindow());
+        initScene();
+        initSize();
+        addSizeListener();
+        addClosingListener();
+    }
+
+    private void addClosingListener(){
+        this.stage.getScene().addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ESCAPE){
+                close();
+                if (cancelRunnable != null){
+                    cancelRunnable.run();
+                }
+            }
+        });
+        this.stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (event.getTarget() instanceof StackPane stackPane && stackPane.getStyleClass().contains("root") && maskClosable){
+                close();
+                if (cancelRunnable != null){
+                    cancelRunnable.run();
+                }
+                event.consume();
+            }
+        });
+    }
+
+    private void initScene(){
+        Scene scene = new Scene(rootPane);
+        scene.setFill(Color.TRANSPARENT);
+        JavaFXUI.addjavafxUIStylesheet(scene);
+        this.stage.setScene(scene);
+    }
+
+    private void addSizeListener(){
+        this.parent.getScene().widthProperty().addListener((observableValue, number, t1) -> {
+            stage.setWidth(t1.doubleValue());
+        });
+        this.parent.getScene().heightProperty().addListener((observableValue, number, t1) -> {
+            stage.setHeight(t1.doubleValue());
+        });
+        this.parent.getScene().getWindow().yProperty().addListener((observableValue, number, t1) -> {
+            stage.setY(t1.doubleValue() + this.parent.getScene().getY());
+        });
+        this.parent.getScene().getWindow().xProperty().addListener((observableValue, number, t1) -> {
+            stage.setX(t1.doubleValue() + this.parent.getScene().getX());
+        });
+    }
+
+    private void initSize(){
+        double width = parent.getScene().getWidth();
+        double height = parent.getScene().getHeight();
+        stage.setWidth(width);
+        stage.setHeight(height);
+        stage.setY(parent.getScene().getWindow().getY() + parent.getScene().getY());
+        stage.setX(parent.getScene().getWindow().getX() + parent.getScene().getX());
+    }
+
+    public void buildRootPane(Node content){
+        rootPane = new StackPane(this.content = new Group(new StackPane(content) {{
+            setStyle("-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 3);-fx-background-color: white;");
+        }}));
+        rootPane.setStyle("-fx-background-color: #00000011");
     }
 
     private Node createHeading(String heading){
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         Label label = new Label(heading);
-        label.setStyle("-fx-font-weight: bold;-fx-font-size: 12");
+        label.setStyle("-fx-font-weight: bold;-fx-font-size: 12;-fx-wrap-text: true");
         hBox.getChildren().add(label);
         return hBox;
     }
@@ -112,12 +185,12 @@ public class Modal {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         Label label = new Label(content);
-        label.setStyle("-fx-font-size: 14;-fx-padding: 0 0 0 10");
+        label.setStyle("-fx-font-size: 14;-fx-padding: 0 0 0 10;-fx-wrap-text: true");
         hBox.getChildren().add(label);
         return hBox;
     }
 
-    private Node createBtnGroup(Runnable[] btnHandler){
+    private Node createBtnGroup(Runnable... btnHandler){
         HBox hBox = new HBox();
         Button ok = new Button("确认");
         ok.setOnAction(actionEvent -> {
@@ -129,6 +202,7 @@ public class Modal {
         ok.getStyleClass().addAll("btn-ui", "btn-ui-success");
         hBox.getChildren().add(ok);
         if (btnHandler != null && btnHandler.length > 1 && btnHandler[1] != null){
+            this.cancelRunnable = btnHandler[1];
             Button cancel = new Button("取消");
             cancel.setOnAction(actionEvent -> {
                 close();
@@ -142,7 +216,25 @@ public class Modal {
     }
 
     public void close(){
+        Duration duration = Duration.millis(150);
+        ParallelTransition parallelTransition = new ParallelTransition(
+                BaseTransitionEnum.FADE.get(this.rootPane, 1, 0, duration),
+                BaseTransitionEnum.SLIDE_Y.get(this.content, 0, -25, duration)
+        );
+        parallelTransition.play();
+        parallelTransition.setOnFinished(actionEvent -> {
+            stage.close();
+        });
+    }
 
+    public void show(){
+        stage.show();
+        Duration duration = Duration.millis(200);
+        ParallelTransition parallelTransition = new ParallelTransition(
+                BaseTransitionEnum.FADE.get(this.rootPane, 0, 1, duration),
+                BaseTransitionEnum.SLIDE_Y.get(this.content, 25, 0, duration)
+        );
+        parallelTransition.play();
     }
 
 }

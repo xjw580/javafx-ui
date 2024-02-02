@@ -27,7 +27,14 @@ public class DialogPaneTest extends Application {
         Scene scene = new Scene(hBox, 400, 400);
         primaryStage.setScene(scene);
 
+        Modal modal = new Modal(hBox, "heading", "content", () -> {
+            System.out.println("ok");
+        }, () -> {
+            System.out.println("cancel");
+        });
+        modal.setMaskClosable(true);
         click.setOnMouseClicked(event -> {
+            modal.show();
         });
         primaryStage.show();
     }
