@@ -26,6 +26,8 @@ import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Arrays;
+
 /**
  * 模态框
  * @author 肖嘉威 xjw580@qq.com
@@ -34,11 +36,18 @@ import lombok.Setter;
 public class Modal {
 
     /**
-     * 点击遮罩是否关闭
+     * 点击遮罩是否关闭Modal
      */
     @Getter
     @Setter
     private boolean maskClosable;
+
+    /**
+     * 按下esc键是否关闭Modal
+     */
+    @Getter
+    @Setter
+    private boolean escClosable = true;
 
     private final ReadOnlyBooleanProperty showing;
 
@@ -63,34 +72,106 @@ public class Modal {
     {
         stage = new Stage();
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.APPLICATION_MODAL);
+//        会导致关闭Modal时闪现依附窗口的内容
+//        stage.initModality(Modality.APPLICATION_MODAL);
         showing = stage.showingProperty();
     }
 
     /**
-     * 根据传入的content构建模态框
-     * @param parent
+     * 构建自定义模态框
+     * @param baseParent
      * @param content
      */
-    public Modal(Parent parent, Node content) {
-        if (parent == null){
+    public Modal(Parent baseParent, Node content) {
+        if (baseParent == null){
             throw new NullPointerException("parent不能为null");
         }
         buildRootPane(content);
-        init(parent);
+        init(baseParent);
     }
 
     /**
      * 构建确认模态框
-     * @param parent
+     * @param baseParent
      * @param heading
      * @param content
      * @param btnHandler
      */
-    public Modal(Parent parent, String heading, String content, Runnable... btnHandler) {
-        if (parent == null){
+    public Modal(Parent baseParent, String heading, String content, Runnable... btnHandler) {
+        if (baseParent == null){
             throw new NullPointerException("parent不能为null");
         }
+        VBox vBox = buildConfirmBody(heading, content);
+        vBox.getChildren().add(createBtnGroup(btnHandler));
+        buildRootPane(vBox);
+        init(baseParent);
+    }
+
+    /**
+     * 构建确认模态框
+     * @param baseParent
+     * @param heading
+     * @param content
+     * @param btn
+     */
+    public Modal(Parent baseParent, String heading, String content, Button... btn) {
+        if (baseParent == null){
+            throw new NullPointerException("parent不能为null");
+        }
+        VBox vBox = buildConfirmBody(heading, content);
+        if (btn != null){
+            HBox hBox = new HBox();
+            hBox.setStyle("-fx-spacing: 15;-fx-alignment: CENTER_RIGHT");
+            hBox.getChildren().addAll(Arrays.stream(btn).toList());
+        }
+        buildRootPane(vBox);
+        init(baseParent);
+    }
+
+    /**
+     * 构建自定义模态框
+     * @param baseParent
+     * @param heading
+     * @param content
+     * @param btn
+     */
+    public Modal(Parent baseParent, Node heading, Node content, Button... btn){
+        if (baseParent == null){
+            throw new NullPointerException("parent不能为null");
+        }
+        VBox vBox = new VBox(heading, content);
+        HBox hBox = new HBox();
+        hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15");
+        hBox.getChildren().addAll(Arrays.stream(btn).toList());
+        vBox.getChildren().add(hBox);
+        buildRootPane(vBox);
+        init(baseParent);
+    }
+
+    /**
+     * 构建自定义模态框
+     * @param baseParent
+     * @param heading
+     * @param content
+     * @param style The inline CSS style to use for this {@code Node}.
+     *         {@code null} is implicitly converted to an empty String.
+     * @param btn
+     */
+    public Modal(Parent baseParent, Node heading, Node content, String style, Button... btn){
+        if (baseParent == null){
+            throw new NullPointerException("parent不能为null");
+        }
+        VBox vBox = new VBox(heading, content);
+        vBox.setStyle(style);
+        HBox hBox = new HBox();
+        hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15");
+        hBox.getChildren().addAll(Arrays.stream(btn).toList());
+        vBox.getChildren().add(hBox);
+        buildRootPane(vBox);
+        init(baseParent);
+    }
+
+    private VBox buildConfirmBody(String heading, String content){
         VBox vBox = new VBox(){{
             setStyle("-fx-padding: 20;-fx-spacing: 20;-fx-pref-width: 350");
         }};
@@ -100,14 +181,12 @@ public class Modal {
         if (content != null && !content.isBlank()){
             vBox.getChildren().add(createContent(content));
         }
-        vBox.getChildren().add(createBtnGroup(btnHandler));
-        buildRootPane(vBox);
-        init(parent);
+        return vBox;
     }
 
-    private void init(Parent parent){
-        this.parent = parent;
-        this.stage.initOwner(parent.getScene().getWindow());
+    private void init(Parent baseParent){
+        this.parent = baseParent;
+        this.stage.initOwner(baseParent.getScene().getWindow());
         initScene();
         initSize();
         addSizeListener();
@@ -116,7 +195,7 @@ public class Modal {
 
     private void addClosingListener(){
         this.stage.getScene().addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ESCAPE){
+            if (escClosable && keyEvent.getCode() == KeyCode.ESCAPE){
                 close();
                 if (cancelRunnable != null){
                     cancelRunnable.run();
@@ -124,7 +203,7 @@ public class Modal {
             }
         });
         this.stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getTarget() instanceof StackPane stackPane && stackPane.getStyleClass().contains("root") && maskClosable){
+            if (maskClosable && event.getTarget() instanceof StackPane stackPane && stackPane.getStyleClass().contains("root")){
                 close();
                 if (cancelRunnable != null){
                     cancelRunnable.run();
@@ -165,7 +244,7 @@ public class Modal {
         stage.setX(parent.getScene().getWindow().getX() + parent.getScene().getX());
     }
 
-    public void buildRootPane(Node content){
+    private void buildRootPane(Node content){
         rootPane = new StackPane(this.content = new Group(new StackPane(content) {{
             setStyle("-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 3);-fx-background-color: white;");
         }}));
@@ -201,12 +280,14 @@ public class Modal {
         });
         ok.getStyleClass().addAll("btn-ui", "btn-ui-success");
         hBox.getChildren().add(ok);
-        if (btnHandler != null && btnHandler.length > 1 && btnHandler[1] != null){
+        if (btnHandler != null && btnHandler.length > 1){
             this.cancelRunnable = btnHandler[1];
             Button cancel = new Button("取消");
             cancel.setOnAction(actionEvent -> {
                 close();
-                btnHandler[1].run();
+                if (btnHandler[1] != null){
+                    btnHandler[1].run();
+                }
             });
             cancel.getStyleClass().addAll("btn-ui");
             hBox.getChildren().add(cancel);
@@ -215,6 +296,9 @@ public class Modal {
         return hBox;
     }
 
+    /**
+     * 关闭Modal
+     */
     public void close(){
         Duration duration = Duration.millis(150);
         ParallelTransition parallelTransition = new ParallelTransition(
@@ -222,11 +306,12 @@ public class Modal {
                 BaseTransitionEnum.SLIDE_Y.get(this.content, 0, -25, duration)
         );
         parallelTransition.play();
-        parallelTransition.setOnFinished(actionEvent -> {
-            stage.close();
-        });
+        parallelTransition.setOnFinished(actionEvent -> stage.close());
     }
 
+    /**
+     * 显示Modal
+     */
     public void show(){
         stage.show();
         Duration duration = Duration.millis(200);
