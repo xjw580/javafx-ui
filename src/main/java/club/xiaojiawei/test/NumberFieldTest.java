@@ -1,5 +1,6 @@
 package club.xiaojiawei.test;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.NumberField;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -20,7 +21,9 @@ public class NumberFieldTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         NumberField numberField = new NumberField();
+        numberField.getStyleClass().addAll("text-field-ui", "text-field-ui-small");
         Scene scene = new Scene(new StackPane(new Group(numberField)), 500, 500);
+        JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

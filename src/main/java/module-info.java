@@ -31,4 +31,6 @@ module club.xiaojiawei.javafx_ui {
     opens club.xiaojiawei.readme.tab.component to javafx.fxml;
     opens club.xiaojiawei.bean to javafx.fxml;
     opens club.xiaojiawei.factory to javafx.fxml;
+    exports club.xiaojiawei.skin;
+    opens club.xiaojiawei.skin to javafx.fxml;
 }
