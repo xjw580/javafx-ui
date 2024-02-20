@@ -100,7 +100,7 @@ public class Modal {
         if (baseParent == null){
             throw new NullPointerException("parent不能为null");
         }
-        VBox vBox = buildConfirmBody(heading, content);
+        VBox vBox = buildConfirmBody(baseParent, heading, content);
         vBox.getChildren().add(createBtnGroup(btnHandler));
         buildRootPane(vBox);
         init(baseParent);
@@ -117,7 +117,7 @@ public class Modal {
         if (baseParent == null){
             throw new NullPointerException("parent不能为null");
         }
-        VBox vBox = buildConfirmBody(heading, content);
+        VBox vBox = buildConfirmBody(baseParent, heading, content);
         if (btn != null){
             HBox hBox = new HBox();
             hBox.setStyle("-fx-spacing: 15;-fx-alignment: CENTER_RIGHT");
@@ -170,10 +170,12 @@ public class Modal {
         init(baseParent);
     }
 
-    private VBox buildConfirmBody(String heading, String content){
+    private VBox buildConfirmBody(Parent baseParent, String heading, String content){
         VBox vBox = new VBox(){{
-            setStyle("-fx-padding: 20;-fx-spacing: 20;-fx-pref-width: 350");
+            setStyle("-fx-padding: 20;-fx-spacing: 20;");
         }};
+        vBox.setPrefWidth(Math.min(350, baseParent.getScene().getWidth() - 10));
+        vBox.setMaxHeight(baseParent.getScene().getHeight() - 10);
         if (heading != null && !heading.isBlank()){
             vBox.getChildren().add(createHeading(heading));
         }
