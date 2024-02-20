@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import club.xiaojiawei.controls.NumberField?>
+<?import club.xiaojiawei.controls.NumberField?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="club.xiaojiawei.readme.tab.controls.NumberFieldController">
+    <VBox styleClass="hv-box">
+        <Label text="不使用样式" styleClass="title-two"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <NumberField/>
+        </VBox>
+        <Label text="使用样式（通用TextField的样式）" styleClass="title-two"/>
+        <Label text="基类：text-field-ui" styleClass="title-three"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <NumberField styleClass="text-field-ui"/>
+        </VBox>
+        <Label text="大小类：text-field-ui-small、text-field-ui-big" styleClass="title-three"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <NumberField styleClass="text-field-ui, text-field-ui-small"/>
+            <NumberField styleClass="text-field-ui, text-field-ui-big"/>
+        </VBox>
+        <Label text="decimalCount属性限制小数的数量" styleClass="title-three"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <NumberField styleClass="text-field-ui"/>
+            <NumberField styleClass="text-field-ui" decimalCount="1"/>
+            <NumberField styleClass="text-field-ui" decimalCount="2"/>
+        </VBox>
+        <Label text="数值增长动画，调用increment方法，playTransition形参为true" styleClass="title-three"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <HBox spacing="15">
+                <NumberField fx:id="incrementNumberField" styleClass="text-field-ui"/>
+                <Button styleClass="btn-ui, btn-ui-success-3d" text="+10" onAction="#incrementTenNumber"/>
+                <Button styleClass="btn-ui, btn-ui-warn-3d" text="+100" onAction="#incrementHundredNumber"/>
+                <Button styleClass="btn-ui, btn-ui-error-3d" text="+1000" onAction="#incrementThousandNumber"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</ScrollPane>

@@ -29,7 +29,7 @@ public class ReadmeController implements Initializable {
 
     @FXML private TabPane rightTabPane;
     @FXML private TitledPane style;
-    @FXML private TitledPane component;
+    @FXML private TitledPane controls;
     @FXML private ScrollPane leftScrollPane;
     @FXML private Accordion accordion;
     /**
@@ -40,7 +40,7 @@ public class ReadmeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTab(style, "style");
-        initTab(component, "component");
+        initTab(controls, "controls");
         rightTabPane.getSelectionModel().selectedItemProperty().addListener(selectionModelListener());
         toggleGroup.selectedToggleProperty().addListener(selectedToggleListener());
         if (toggleGroup.getSelectedToggle() != null){

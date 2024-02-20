@@ -7,6 +7,7 @@
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
+        <VBox prefHeight="10"/>
         <Calendar/>
     </VBox>
 </ScrollPane>

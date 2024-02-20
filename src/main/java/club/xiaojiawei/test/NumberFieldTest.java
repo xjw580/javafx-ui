@@ -3,10 +3,14 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.NumberField;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -26,5 +30,12 @@ public class NumberFieldTest extends Application {
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("start");
+                Platform.runLater(() -> numberField.increment(500, true));
+            }
+        }, 2000);
     }
 }

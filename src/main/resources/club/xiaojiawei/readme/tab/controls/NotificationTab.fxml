@@ -6,7 +6,7 @@
 <?import club.xiaojiawei.factory.NotificationFactory?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0;"
-            fx:controller="club.xiaojiawei.readme.tab.component.NotificationController"
+            fx:controller="club.xiaojiawei.readme.tab.controls.NotificationController"
             xmlns:fx="http://javafx.com/fxml">
     <StackPane>
         <VBox styleClass="hv-box">

@@ -10,6 +10,7 @@
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox alignment="CENTER" translateY="50" translateX="25">
+        <VBox prefHeight="10"/>
         <HBox alignment="CENTER">
             <Carousel autoPlay="true">
                 <imagesURL>

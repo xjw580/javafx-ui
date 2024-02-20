@@ -6,7 +6,7 @@
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             fx:id="rootPane"
-            fx:controller="club.xiaojiawei.readme.tab.component.ModalController"
+            fx:controller="club.xiaojiawei.readme.tab.controls.ModalController"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
         <Button styleClass="btn-ui, btn-ui-success-3d" text="卸载360安全卫士" onAction="#showModal"/>

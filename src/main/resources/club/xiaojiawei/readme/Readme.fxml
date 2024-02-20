@@ -11,7 +11,7 @@
         <Accordion fx:id="accordion" styleClass="accordion-ui, accordion-ui-big">
             <panes>
                 <TitledPane fx:id="style" text="样式类" />
-                <TitledPane fx:id="component" text="自定义组件" />
+                <TitledPane fx:id="controls" text="组件" />
             </panes>
         </Accordion>
     </ScrollPane>
