@@ -12,9 +12,9 @@
 
 ## 使用
 
-> javafx-ui在maven中央仓库不可用，在此之前你仍然可以使用一个版本作为maven或gradle的依赖项将jitpack添加到您的存储库列表中，即在' <repositories> '部分添加:
-
-1. ```xml
+1. javafx-ui在maven中央仓库不可用，但可以添加jitpack存储库使用
+   
+   ```xml
    <repository>
        <id>jitpack.io</id>
        <url>https://jitpack.io</url>
