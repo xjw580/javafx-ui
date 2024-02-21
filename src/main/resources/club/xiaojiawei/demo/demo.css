@@ -1,4 +1,10 @@
+#demoTitle{
+    -fx-background-color: white;
+    -fx-alignment: CENTER;
+    -fx-padding: 10 0 10 0;
+}
 #leftScrollPane{
+    -fx-border-color: white;
     -fx-background: white
 }
 .hv-box{
