@@ -19,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -71,8 +72,7 @@ public class Modal {
     {
         stage = new Stage();
         stage.initStyle(StageStyle.TRANSPARENT);
-//        会导致关闭Modal时闪现依附窗口的内容
-//        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.WINDOW_MODAL);
         showing = stage.showingProperty();
     }
 

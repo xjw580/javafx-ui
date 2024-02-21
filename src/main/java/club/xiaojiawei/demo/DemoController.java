@@ -172,4 +172,10 @@ public class DemoController implements Initializable {
         rightTabPane.getTabs().add(tab);
         rightTabPane.getSelectionModel().select(tab);
     }
+
+    public void closeCurrentTab(){
+        if (rightTabPane.getSelectionModel().getSelectedItem() != null){
+            rightTabPane.getTabs().remove(rightTabPane.getSelectionModel().getSelectedItem());
+        }
+    }
 }

@@ -7,20 +7,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.StackPane?>
+<?import java.lang.Double?>
 <SplitPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            stylesheets="@demo.css"
            fx:controller="club.xiaojiawei.demo.DemoController"
            fx:id="rootPane"
            prefHeight="750.0" prefWidth="1100.0">
-    <VBox maxWidth="150" minWidth="150" prefWidth="150">
+    <fx:define>
+        <Double fx:value="150" fx:id="leftWidth"/>
+        <Double fx:value="50" fx:id="titleIconSize"/>
+    </fx:define>
+    <VBox maxWidth="${leftWidth}" minWidth="${leftWidth}" prefWidth="${leftWidth}">
         <HBox fx:id="demoTitle">
-            <ImageView translateX="-6" fitWidth="50" fitHeight="50">
+            <ImageView translateX="-6" fitWidth="${titleIconSize}" fitHeight="${titleIconSize}">
                 <Image url="@demo.png"/>
             </ImageView>
             <Text  text="javafx-ui" style="-fx-font-size: 18;-fx-font-weight: bold;-fx-translate-x: -3"/>
         </HBox>
-        <ScrollPane fx:id="leftScrollPane" maxWidth="150" minWidth="150" prefWidth="150" prefHeight="${rootPane.height}" hbarPolicy="NEVER">
+        <ScrollPane fx:id="leftScrollPane" maxWidth="${leftWidth}" minWidth="${leftWidth}" prefWidth="${leftWidth}" prefHeight="${rootPane.height}" hbarPolicy="NEVER">
             <Accordion fx:id="accordion" styleClass="accordion-ui, accordion-ui-big">
                 <panes>
                     <TitledPane fx:id="style" text="样式类" />
