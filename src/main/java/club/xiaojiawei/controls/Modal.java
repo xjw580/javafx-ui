@@ -224,17 +224,17 @@ public class Modal {
     }
 
     private void addSizeListener(){
-        this.parent.getScene().widthProperty().addListener((observableValue, number, t1) -> {
-            stage.setWidth(t1.doubleValue());
-        });
-        this.parent.getScene().heightProperty().addListener((observableValue, number, t1) -> {
-            stage.setHeight(t1.doubleValue());
-        });
+        this.parent.getScene().widthProperty().addListener((observableValue, number, t1) -> stage.setWidth(t1.doubleValue()));
+        this.parent.getScene().heightProperty().addListener((observableValue, number, t1) -> stage.setHeight(t1.doubleValue()));
         this.parent.getScene().getWindow().yProperty().addListener((observableValue, number, t1) -> {
-            stage.setY(t1.doubleValue() + this.parent.getScene().getY());
+            if (this.parent.getScene() != null){
+                stage.setY(t1.doubleValue() + this.parent.getScene().getY());
+            }
         });
         this.parent.getScene().getWindow().xProperty().addListener((observableValue, number, t1) -> {
-            stage.setX(t1.doubleValue() + this.parent.getScene().getX());
+            if (this.parent.getScene() != null){
+                stage.setX(t1.doubleValue() + this.parent.getScene().getX());
+            }
         });
     }
 
