@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/xjw580/javafx-ui.svg)](https://jitpack.io/#xjw580/javafx-ui)![GitHub](https://img.shields.io/github/license/xjw580/javafx-ui?style=flat-square)
+[![](https://jitpack.io/v/xjw580/javafx-ui.svg)](https://jitpack.io/#xjw580/javafx-ui) ![GitHub](https://img.shields.io/github/license/xjw580/javafx-ui?style=flat-square)
 
 ## JavaFX-UI
 
@@ -37,7 +37,7 @@
 
 ## 组件和样式查看
 
-- 拉取项目到本地启动 [DemoApplication](src\main\java\club\xiaojiawei\demo\DemoApplication.java) 类
+- 拉取项目到本地启动 [DemoApplication.java](src\main\java\club\xiaojiawei\demo\DemoApplication.java) 类
 -  查看 [Wiki](https://github.com/xjw580/javafx-ui/wiki)
 
 
