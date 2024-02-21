@@ -37,7 +37,7 @@
 
 ## 组件和样式查看
 
-- 拉取项目到本地启动 [DemoApplication.java](src\main\java\club\xiaojiawei\demo\DemoApplication.java) 类
+- 拉取项目到本地启动 [DemoApplication](src/main/java/club/xiaojiawei/demo/DemoApplication.java) 类
 -  查看 [Wiki](https://github.com/xjw580/javafx-ui/wiki)
 
 
