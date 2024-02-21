@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <SplitPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
-           stylesheets="@readme.css"
-           fx:controller="club.xiaojiawei.readme.ReadmeController"
+           stylesheets="@demo.css"
+           fx:controller="club.xiaojiawei.demo.DemoController"
            fx:id="rootPane"
            prefHeight="750.0" prefWidth="1100.0">
     <ScrollPane fx:id="leftScrollPane" maxWidth="150" minWidth="150" prefWidth="150" prefHeight="${rootPane.height}">

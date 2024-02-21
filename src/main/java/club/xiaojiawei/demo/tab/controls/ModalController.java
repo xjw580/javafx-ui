@@ -1,4 +1,4 @@
-package club.xiaojiawei.readme.tab.controls;
+package club.xiaojiawei.demo.tab.controls;
 
 import club.xiaojiawei.controls.Modal;
 import javafx.event.ActionEvent;

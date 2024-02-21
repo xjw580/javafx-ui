@@ -1,4 +1,4 @@
-package club.xiaojiawei.readme;
+package club.xiaojiawei.demo;
 
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.utils.SystemUtil;
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/28 9:13
  */
-public class ReadmeController implements Initializable {
+public class DemoController implements Initializable {
 
     @FXML private TabPane rightTabPane;
     @FXML private TitledPane style;
@@ -49,7 +49,7 @@ public class ReadmeController implements Initializable {
     }
     private void initTab(TitledPane tab, String suffixPath){
         VBox vBox = new VBox();
-        File files = new File(Objects.requireNonNull(JavaFXUI.class.getResource("/club/xiaojiawei/readme/tab/" + suffixPath)).getPath());
+        File files = new File(Objects.requireNonNull(JavaFXUI.class.getResource("/club/xiaojiawei/demo/tab/" + suffixPath)).getPath());
         for (File file : Objects.requireNonNull(files.listFiles())) {
             if (file.getName().contains(".fxml")){
                 String name = file.getName().split("Tab.fxml")[0];

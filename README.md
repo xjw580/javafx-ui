@@ -1,5 +1,5 @@
 ## JavaFX-UI
-![favicon.ico](src/main/resources/club/xiaojiawei/readme/readme.png)
+![favicon.ico](src/main/resources/club/xiaojiawei/demo/demo.png)
 > 适用于javafx的ui组件库（Javafx-based ui component library）
 
 
@@ -31,7 +31,7 @@
 
 
 
-## 部分组件展示（全部组件和样式需要启动 [ReadmeApplication.java](src\main\java\club\xiaojiawei\readme\ReadmeApplication.java) 类查看）
+## 部分组件展示（全部组件和样式需要启动 [DemoApplication.java](src\main\java\club\xiaojiawei\demo\DemoApplication.java) 类查看）
 
 #### `Switch`
 

@@ -68,7 +68,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-<!--                    <exclude>**/readme/**</exclude>-->
+<!--                    <exclude>**/demo/**</exclude>-->
 <!--                    <exclude>**/test/**</exclude>-->
                 </excludes>
             </resource>
@@ -87,7 +87,7 @@
                         </annotationProcessorPath>
                     </annotationProcessorPaths>
                     <excludes>
-<!--                        <exclude>**/readme/**</exclude>-->
+<!--                        <exclude>**/demo/**</exclude>-->
 <!--                        <exclude>**/test/**</exclude>-->
                     </excludes>
                     <source>17</source>

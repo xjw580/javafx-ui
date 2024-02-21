@@ -7,7 +7,7 @@
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="club.xiaojiawei.readme.tab.controls.NumberFieldController">
+            fx:controller="club.xiaojiawei.demo.tab.controls.NumberFieldController">
     <VBox styleClass="hv-box">
         <Label text="不使用样式" styleClass="title-two"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">

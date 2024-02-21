@@ -3,7 +3,6 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.Carousel;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,9 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -43,10 +39,10 @@ public class CarouselTest extends Application {
 //                "C:\\Users\\Administrator\\Downloads\\carousel7.jpg",
 //                "C:\\Users\\Administrator\\Downloads\\carousel7.jpg",
 //                "C:\\Users\\Administrator\\Downloads\\carousel7.jpg"
-                "/club/xiaojiawei/readme/tab/images/carousel6.jpg",
-                "/club/xiaojiawei/readme/tab/images/carousel7.jpg",
-                "/club/xiaojiawei/readme/tab/images/carousel2.jpg",
-                "/club/xiaojiawei/readme/tab/images/carousel4.jpg"
+                "/club/xiaojiawei/demo/tab/images/carousel6.jpg",
+                "/club/xiaojiawei/demo/tab/images/carousel7.jpg",
+                "/club/xiaojiawei/demo/tab/images/carousel2.jpg",
+                "/club/xiaojiawei/demo/tab/images/carousel4.jpg"
 //                "https://zergqueen.gitee.io/images/javafx-ui/carousel6.jpg"
         ));
         System.out.println(carousel.getImageChildren());
