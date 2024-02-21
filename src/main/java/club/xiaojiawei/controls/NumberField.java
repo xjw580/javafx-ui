@@ -66,24 +66,20 @@ public class NumberField extends TextField {
                 int step = totalTime / count;
                 step = Math.max(step, 1);
                 step = Math.min(step, 25);
-                if (value > 0){
-                    for (int i = 0; i < count; i++) {
-                        try {
+                try {
+                    if (value > 0){
+                        for (int i = 0; i < count; i++) {
                             Thread.sleep(step);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+                            Platform.runLater(this::increment);
                         }
-                        Platform.runLater(this::increment);
-                    }
-                }else {
-                    for (int i = 0; i < count; i++) {
-                        try {
+                    }else {
+                        for (int i = 0; i < count; i++) {
                             Thread.sleep(step);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
+                            Platform.runLater(this::decrement);
                         }
-                        Platform.runLater(this::decrement);
                     }
+                }catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }).start();
             return;
