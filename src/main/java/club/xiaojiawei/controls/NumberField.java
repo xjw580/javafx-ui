@@ -2,13 +2,13 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.skin.NumberFieldSkin;
 import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,31 +17,21 @@ import java.math.RoundingMode;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/2/19 14:57
  */
+@Setter
+@Getter
 public class NumberField extends TextField {
 
     /**
      * 小数数量
      */
-    private final IntegerProperty decimalCount = new SimpleIntegerProperty();
-
-    public int getDecimalCount() {
-        return decimalCount.get();
-    }
-
-    public IntegerProperty decimalCountProperty() {
-        return decimalCount;
-    }
-
-    public void setDecimalCount(int decimalCount) {
-        this.decimalCount.set(decimalCount);
-    }
+    private int decimalCount = 0;
 
     public NumberField() {
         setTextFormatter(new TextFormatter<>(change -> {
             String text = getText().substring(0, change.getRangeStart()) + change.getText() + getText().substring(change.getRangeEnd());
-            if (decimalCount.get() > 0 && text.matches("^-?\\d*(\\.\\d{0," + decimalCount.get() + "})?$")){
+            if (decimalCount > 0 && text.matches("^-?\\d*(\\.\\d{0," + decimalCount + "})?$")){
                 return change;
-            }else if (decimalCount.get() <= 0 && text.matches("^-?\\d*$")){
+            }else if (decimalCount <= 0 && text.matches("^-?\\d*$")){
                 return change;
             }
             return null;
@@ -63,16 +53,15 @@ public class NumberField extends TextField {
     public void increment(){
         increment(calcStep(),false);
     }
-
     /**
      * 数值增加
      * @param value
-     * @param playTransition 是否播放数值增加动画（注意：value值过大时动画时间很长，(value * Math.pow(10, decimalCount.get()))不要超过500太多）
+     * @param playTransition 是否播放数值增加动画（注意：value值过大时动画时间很长，(value * Math.pow(10, decimalCount))不要超过500太多）
      */
     public void increment(double value, boolean playTransition){
         if (playTransition){
             new Thread(() -> {
-                int count = (int) (value * Math.pow(10, decimalCount.get()));
+                int count = (int) (value * Math.pow(10, decimalCount));
                 int totalTime = 500;
                 int step = totalTime / count;
                 step = Math.max(step, 1);
@@ -100,8 +89,8 @@ public class NumberField extends TextField {
             return;
         }
         String temp;
-        if (decimalCount.get() > 0){
-            temp = new BigDecimal(getTextNotBlank()).add(BigDecimal.valueOf(value)).setScale(decimalCount.get(), RoundingMode.DOWN).toString();
+        if (decimalCount > 0){
+            temp = new BigDecimal(getTextNotBlank()).add(BigDecimal.valueOf(value)).setScale(decimalCount, RoundingMode.DOWN).toString();
         }else {
             temp = String.valueOf(Integer.parseInt(getTextNotBlank()) + (int) value);
         }
@@ -124,7 +113,7 @@ public class NumberField extends TextField {
     }
 
     private double calcStep(){
-        return 1 / Math.pow(10, decimalCount.get());
+        return 1 / Math.pow(10, decimalCount);
     }
 
     @Override

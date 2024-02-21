@@ -1,9 +1,7 @@
 package club.xiaojiawei.controls;
 
-import club.xiaojiawei.bean.LogRunnable;
 import club.xiaojiawei.enums.NotificationPosEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
-import club.xiaojiawei.enums.SizeEnum;
 import club.xiaojiawei.factory.NotificationFactory;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyDoubleProperty;
@@ -17,7 +15,8 @@ import javafx.scene.layout.VBox;
 import lombok.*;
 
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
+
+import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -39,18 +38,11 @@ public class NotificationManager extends HBox {
 
     public void setNotificationPos(NotificationPosEnum notificationPos) {
         this.notificationPos = notificationPos;
-        changePos();
+        changeNotificationPos();
     }
 
     private ChangeListener<Scene> sceneListener;
     private final VBox notificationVBox = new VBox();
-    private static final ScheduledExecutorService NOTIFICATION_POOL = new ScheduledThreadPoolExecutor(4, new ThreadFactory() {
-        private final AtomicInteger num = new AtomicInteger(0);
-        @Override
-        public Thread newThread(Runnable r) {
-            return new Thread(new LogRunnable(r), "NotificationPool Thread-" + num.getAndIncrement());
-        }
-    }, new ThreadPoolExecutor.AbortPolicy());
     @Getter
     @Setter
     private NotificationFactory notificationFactory = new NotificationFactory();
@@ -62,12 +54,12 @@ public class NotificationManager extends HBox {
             if (t1 != null){
                 sceneProperty().removeListener(sceneListener);
                 sceneListener = null;
-                changePos();
+                changeNotificationPos();
             }
         });
     }
 
-    private void changePos(){
+    private void changeNotificationPos(){
         if (getScene() == null){
             return;
         }
@@ -79,8 +71,10 @@ public class NotificationManager extends HBox {
                 rootPane = pane;
             }
         }
+
         layoutXProperty().unbind();
         layoutYProperty().unbind();
+
         ReadOnlyDoubleProperty widthProperty;
         ReadOnlyDoubleProperty heightProperty;
         if (rootPane == null){
@@ -94,6 +88,7 @@ public class NotificationManager extends HBox {
             widthProperty = rootPane.widthProperty();
             heightProperty = rootPane.heightProperty();
         }
+
         switch (notificationPos){
             case TOP_LEFT -> {
                 setLayoutX(0);
@@ -199,7 +194,7 @@ public class NotificationManager extends HBox {
     public void show(Notification notification, long closeTime, TimeUnit timeUnit){
         show(notification);
         if (closeTime > 0){
-            NOTIFICATION_POOL.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);
+            SCHEDULED_POOL.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);
         }
     }
 

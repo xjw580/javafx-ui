@@ -18,4 +18,5 @@ public class JavaFXUIThreadPoolConfig {
             return new Thread(r, "ExtraPool Thread-" + num.getAndIncrement());
         }
     }, new ThreadPoolExecutor.AbortPolicy());
+
 }
