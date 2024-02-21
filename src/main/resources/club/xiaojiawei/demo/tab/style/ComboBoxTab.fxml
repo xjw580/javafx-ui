@@ -47,7 +47,7 @@
                 </items>
             </ComboBox>
         </HBox>
-        <Label text="颜色类：combo-box-ui-normal、combo-box-ui-success、combo-box-ui-warn、combo-box-ui-error、" styleClass="title-three"/>
+        <Label text="颜色类：combo-box-ui-normal、combo-box-ui-success、combo-box-ui-warn、combo-box-ui-error" styleClass="title-three"/>
         <HBox styleClass="hv-box">
             <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal" value="杀死那只知更鸟">
                 <items>
