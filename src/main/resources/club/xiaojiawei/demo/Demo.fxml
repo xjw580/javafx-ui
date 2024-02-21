@@ -38,8 +38,9 @@
     <StackPane>
         <HBox alignment="CENTER">
             <VBox alignment="CENTER" spacing="10">
-                <Text text="javafx-ui 演示程序" style="-fx-font-weight: bold;-fx-font-size: 22"/>
-                <Text text="\@作者：肖嘉威"/>
+                <Text text="javafx-ui 演示程序" style="-fx-font-weight: bold;-fx-font-size: 25"/>
+                <Text text="\@作者：肖嘉威" style="-fx-font-size: 14"/>
+                <Text text="邮箱：xjw580@qq.com" style="-fx-font-size: 14"/>
             </VBox>
         </HBox>
         <TabPane fx:id="rightTabPane" prefHeight="${rootPane.height}" styleClass="tab-pane-ui"/>

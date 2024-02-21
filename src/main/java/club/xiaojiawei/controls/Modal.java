@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -180,7 +182,7 @@ public class Modal {
             vBox.getChildren().add(createHeading(heading));
         }
         if (content != null && !content.isBlank()){
-            vBox.getChildren().add(createContent(content));
+            vBox.getChildren().add(createContent(content, vBox.getPrefWidth() - 40, vBox.getMaxHeight()));
         }
         return vBox;
     }
@@ -261,13 +263,18 @@ public class Modal {
         return hBox;
     }
 
-    private Node createContent(String content){
-        HBox hBox = new HBox();
-        hBox.setAlignment(Pos.CENTER_LEFT);
-        Label label = new Label(content);
-        label.setStyle("-fx-font-size: 14;-fx-padding: 0 0 0 10;-fx-wrap-text: true");
-        hBox.getChildren().add(label);
-        return hBox;
+    private Node createContent(String content, double maxWidth, double maxHeight){
+        ScrollPane scrollPane = new ScrollPane();
+//        edge-to-edge样式类：去除默认的灰色边框和获得焦点时的蓝色边框
+        scrollPane.getStyleClass().add("edge-to-edge");
+        scrollPane.setStyle("-fx-background: white;-fx-hbar-policy: NEVER;-fx-padding: 0 0 0 5");
+        scrollPane.setMaxWidth(maxWidth);
+        scrollPane.setMaxHeight(Math.min(maxHeight, 200));
+        Text text = new Text(content);
+        text.setWrappingWidth(maxWidth - 15);
+        text.setStyle("-fx-font-size: 14;");
+        scrollPane.setContent(text);
+        return scrollPane;
     }
 
     private Node createBtnGroup(Runnable... btnHandler){

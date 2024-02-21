@@ -1,11 +1,8 @@
 package club.xiaojiawei.skin;
 
 import club.xiaojiawei.controls.FilterComboBox;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
