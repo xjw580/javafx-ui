@@ -2,7 +2,7 @@
     -fx-background-size: cover ;
 }
 #left, #right{
-    -fx-opacity: 0;
+    visibility: false;
     -fx-alignment: CENTER;
     -fx-cursor: hand;
     -fx-padding: 9 0 9 0;
@@ -10,16 +10,17 @@
     -fx-background-radius: 15;
     -fx-background-color: rgba(128, 128, 128, 0.5);
 }
-.root:hover > #left{
-    -fx-opacity: 1;
+#rootPane:hover > #left{
+    visibility: true;
 }
-.root:hover > #right{
-    -fx-opacity: 1;
+#rootPane:hover > #right{
+    visibility: true;
 }
-.root{
-    -fx-padding: 0 0 45 0;
+#rootPane{
+    -fx-pref-height: 265;
 }
 .dot{
+    -fx-cursor: hand;
     -fx-fill: #e5e5e5;
 }
 .dot:hover{

@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import club.xiaojiawei.controls.Carousel?>
+<?import club.xiaojiawei.controls.NumberField?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import java.lang.String?>
-<?import javafx.scene.control.Label?>
+<?import java.lang.*?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox alignment="CENTER" translateY="50" translateX="25">
-        <Label text="基类：accordion-ui" styleClass="title-three"/>
-        <HBox alignment="CENTER">
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="club.xiaojiawei.demo.tab.controls.CarouselController">
+    <VBox styleClass="hv-box">
+        <Label text="修改autoPlay属性控制自动播放，默认false" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Carousel autoPlay="true">
+                <imagesURL>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="/club/xiaojiawei/demo/tab/images/carousel6.jpg"/>
+                        <String fx:value="/club/xiaojiawei/demo/tab/images/carousel7.jpg"/>
+                        <String fx:value="/club/xiaojiawei/demo/tab/images/carousel2.jpg"/>
+                        <String fx:value="/club/xiaojiawei/demo/tab/images/carousel4.jpg"/>
+                    </FXCollections>
+                </imagesURL>
+            </Carousel>
+        </HBox>
+        <Label text="修改nudeScale属性控制两侧图片裸露程度，默认0.375" styleClass="title-three"/>
+        <HBox styleClass="hv-box">
+            <NumberField fx:id="nudeScaleField" styleClass="text-field-ui" decimalCount="1" text="0.5"/>
+            <Button styleClass="btn-ui, btn-ui-success-3d" text="改变nudeScale" onAction="#changeNudeScale"/>
+        </HBox>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Carousel fx:id="carouselDemo">
                 <imagesURL>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="/club/xiaojiawei/demo/tab/images/carousel6.jpg"/>

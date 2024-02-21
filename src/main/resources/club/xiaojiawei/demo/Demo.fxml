@@ -36,7 +36,12 @@
     </VBox>
 
     <StackPane>
-        <Text text="hello" style="-fx-font-size: 20"/>
+        <HBox alignment="CENTER">
+            <VBox alignment="CENTER" spacing="10">
+                <Text text="javafx-ui 演示程序" style="-fx-font-weight: bold;-fx-font-size: 22"/>
+                <Text text="\@作者：肖嘉威"/>
+            </VBox>
+        </HBox>
         <TabPane fx:id="rightTabPane" prefHeight="${rootPane.height}" styleClass="tab-pane-ui"/>
     </StackPane>
 </SplitPane>

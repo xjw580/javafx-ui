@@ -35,7 +35,7 @@ public class DemoController implements Initializable {
     /**
      * 初始选择tab的名字
      */
-    private final static String INIT_SELECTED_TAB_NAME = "Notification";
+    private final static String INIT_SELECTED_TAB_NAME = "Carousel";
     private final ToggleGroup toggleGroup = new ToggleGroup();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -52,6 +52,7 @@ public class DemoApplication extends Application{
             }
         });
         primaryStage.setTitle("Demo");
+//        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 }
