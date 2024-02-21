@@ -31,6 +31,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_X;
  */
 @SuppressWarnings("unused")
 public class Carousel extends AnchorPane {
+
     private final IntegerProperty currentIndex = new SimpleIntegerProperty(0);
     /**
      * 图片url

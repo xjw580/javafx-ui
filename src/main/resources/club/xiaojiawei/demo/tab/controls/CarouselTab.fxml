@@ -6,11 +6,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import java.lang.String?>
+<?import javafx.scene.control.Label?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox alignment="CENTER" translateY="50" translateX="25">
-        <VBox prefHeight="10"/>
+        <Label text="基类：accordion-ui" styleClass="title-three"/>
         <HBox alignment="CENTER">
             <Carousel autoPlay="true">
                 <imagesURL>
