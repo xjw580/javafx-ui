@@ -1,16 +1,17 @@
 package club.xiaojiawei;
 
+import javafx.scene.Scene;
+
+import java.util.Objects;
+
 /**
  * 获取样式表路径
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/30 0:03
  */
-
-import javafx.scene.Scene;
-
-import java.util.Objects;
 @SuppressWarnings("all")
 public class JavaFXUI {
+
     public static void addjavafxUIStylesheet(Scene scene){
         scene.getStylesheets().add(JavaFXUI.javafxUIStylesheet());
     }

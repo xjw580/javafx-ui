@@ -37,7 +37,7 @@ public class SystemUtil {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("", e);
         }
         return classNames;
     }

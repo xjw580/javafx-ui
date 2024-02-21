@@ -15,7 +15,6 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei.test;
     exports club.xiaojiawei.controls.ico;
     exports club.xiaojiawei.demo;
-    exports club.xiaojiawei.proxy;
     exports club.xiaojiawei;
     exports club.xiaojiawei.demo.tab.style;
     exports club.xiaojiawei.config;
@@ -26,7 +25,6 @@ module club.xiaojiawei.javafx_ui {
     opens club.xiaojiawei.test to javafx.fxml;
     opens club.xiaojiawei.controls.ico to javafx.fxml;
     opens club.xiaojiawei.demo to javafx.fxml;
-    opens club.xiaojiawei.proxy to javafx.fxml;
     opens club.xiaojiawei.demo.tab.style to javafx.fxml;
     opens club.xiaojiawei.demo.tab.controls to javafx.fxml;
     opens club.xiaojiawei.bean to javafx.fxml;
