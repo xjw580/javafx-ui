@@ -1,6 +1,7 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.skin.FilterComboBoxListViewSkin;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Skin;
 
@@ -10,9 +11,9 @@ import javafx.scene.control.Skin;
  */
 public class FilterComboBox<T> extends ComboBox<T> {
 
-
     @Override
     protected Skin<?> createDefaultSkin() {
-        return new FilterComboBoxListViewSkin(this);
+        return new FilterComboBoxListViewSkin<>(this);
     }
+
 }

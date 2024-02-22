@@ -15,7 +15,7 @@
            fx:id="rootPane"
            prefHeight="750.0" prefWidth="1100.0">
     <fx:define>
-        <Double fx:value="150" fx:id="leftWidth"/>
+        <Double fx:value="170" fx:id="leftWidth"/>
         <Double fx:value="50" fx:id="titleIconSize"/>
     </fx:define>
     <VBox maxWidth="${leftWidth}" minWidth="${leftWidth}" prefWidth="${leftWidth}">

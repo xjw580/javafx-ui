@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.FilterField?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="club.xiaojiawei.demo.tab.controls.NumberFieldController">
+    <VBox styleClass="hv-box">
+        <Label text="不使用样式" styleClass="title-two"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <FilterField/>
+        </VBox>
+        <Label text="使用样式（通用TextField的样式）" styleClass="title-two"/>
+        <Label text="基类：text-field-ui" styleClass="title-three"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <FilterField styleClass="text-field-ui"/>
+        </VBox>
+        <Label text="大小类：text-field-ui-small、text-field-ui-big" styleClass="title-three"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <FilterField styleClass="text-field-ui, text-field-ui-small"/>
+            <FilterField styleClass="text-field-ui, text-field-ui-big"/>
+        </VBox>
+        <Label text="点击图标或按回车触发过滤事件，setOnFilterAction方法设置处理过滤事件" styleClass="title-three"/>
+    </VBox>
+</ScrollPane>

@@ -1,13 +1,8 @@
 package club.xiaojiawei.skin;
 
 import club.xiaojiawei.controls.PasswordTextField;
-import club.xiaojiawei.utils.TextFieldSkinUtil;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.skin.TextFieldSkin;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
@@ -18,10 +13,10 @@ import lombok.Getter;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/2/19 16:25
  */
-public class PasswordTextFieldSkin extends TextFieldSkin {
+public class PasswordTextFieldSkin extends IconTextFieldSkin {
 
     private final SVGPath actionIcon = new SVGPath();
-    private final Button actionButton = TextFieldSkinUtil.buildButton();
+    private final Button actionButton = buildIconButton();
 
     private boolean mask = true;
 
@@ -47,13 +42,7 @@ public class PasswordTextFieldSkin extends TextFieldSkin {
         actionIcon.setContent(Icons.SHOW.getContent());
         actionButton.setGraphic(actionIcon);
 
-        HBox hBox = new HBox(actionButton);
-        hBox.setAlignment(Pos.CENTER_RIGHT);
-
-        StackPane stackPane = new StackPane(hBox);
-        stackPane.toFront();
-
-        getChildren().add(stackPane);
+        addIconButton(actionButton);
 
         passwordTextField.textProperty().addListener((observable, oldValue, newValue) -> actionButton.setVisible(!passwordTextField.isHideForever() && !newValue.isEmpty()));
     }
