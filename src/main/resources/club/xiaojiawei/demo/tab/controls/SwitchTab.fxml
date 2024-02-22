@@ -13,5 +13,10 @@
             <Switch/>
             <Switch size="30" status="false"/>
         </HBox>
+        <Label text="可通过transitionType属性调整动画效果（FADE、SLIDE_X、NONE）" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Switch transitionType="SLIDE_X"/>
+            <Switch transitionType="NONE"/>
+        </HBox>
     </VBox>
 </ScrollPane>
