@@ -27,7 +27,20 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
 
     private final StackPane filterStackPane = new StackPane(filterField);
 
-    private final ListView<Object> rootListView = new ListView<>();
+    private final ListView<Object> rootListView = new ListView<>(){
+        @Override
+        protected double computePrefWidth(double height) {
+            return filterComboBox.getWidth();
+        }
+
+        @Override
+        protected double computePrefHeight(double width) {
+            double v = popupHeight * (FilterComboBoxListViewSkin.this.filterComboBox.getVisibleRowCount() + 1) + 5;
+            System.out.println("h:" + v);
+            System.out.println("pouh:" + popupHeight);
+            return v;
+        }
+    };
 
     private final ListView<T> realListView;
 
@@ -126,24 +139,24 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
     }
 
     private void syncPopupSize(){
-        realListView.setMaxWidth(filterComboBox.getWidth());
-        realListView.setMinWidth(filterComboBox.getWidth());
-
-        rootListView.setMaxWidth(filterComboBox.getWidth());
-        rootListView.setPrefWidth(filterComboBox.getWidth());
-        rootListView.setMinWidth(filterComboBox.getWidth());
-
-        double rootHeight = popupHeight * rootListView.getItems().size() + 5;
-        rootListView.setMaxHeight(rootHeight);
-        rootListView.setPrefHeight(rootHeight);
-        rootListView.setMinHeight(rootHeight);
+//        realListView.setMaxWidth(filterComboBox.getWidth());
+//        realListView.setMinWidth(filterComboBox.getWidth());
+//
+//        rootListView.setMaxWidth(filterComboBox.getWidth());
+//        rootListView.setPrefWidth(filterComboBox.getWidth());
+//        rootListView.setMinWidth(filterComboBox.getWidth());
+//
+//        double rootHeight = popupHeight * rootListView.getItems().size() + 5;
+//        rootListView.setMaxHeight(rootHeight);
+//        rootListView.setPrefHeight(rootHeight);
+//        rootListView.setMinHeight(rootHeight);
 
 //        System.out.println("real:" + height * this.filterComboBox.getVisibleRowCount());
 //        realListView.setMaxHeight(height * this.filterComboBox.getVisibleRowCount());
 //        realListView.setMinHeight(height * this.filterComboBox.getVisibleRowCount());
 //        realListView.setPrefHeight(height * this.filterComboBox.getVisibleRowCount());
 
-        double insect = 16D;
+        double insect = 25D;
         filterField.setMaxWidth(filterComboBox.getWidth() - insect);
         filterField.setMinWidth(filterComboBox.getWidth() - insect);
     }

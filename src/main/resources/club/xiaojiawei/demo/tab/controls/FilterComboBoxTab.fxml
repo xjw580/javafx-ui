@@ -25,7 +25,7 @@
         </VBox>
         <Label text="使用样式（通用ComboBox的样式）" styleClass="title-two"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <FilterComboBox styleClass="combo-box-ui, combo-box-ui-normal">
+            <FilterComboBox styleClass="combo-box-ui, combo-box-ui-normal" visibleRowCount="1">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="male" />

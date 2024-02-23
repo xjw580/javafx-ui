@@ -124,6 +124,7 @@ public class Modal {
             HBox hBox = new HBox();
             hBox.setStyle("-fx-spacing: 15;-fx-alignment: CENTER_RIGHT");
             hBox.getChildren().addAll(Arrays.stream(btn).toList());
+            vBox.getChildren().add(hBox);
         }
         buildRootPane(vBox);
         init(baseParent);

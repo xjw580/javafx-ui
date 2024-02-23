@@ -5,6 +5,8 @@ import club.xiaojiawei.controls.Modal;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -22,7 +24,8 @@ public class ModalTest extends Application {
     public void start(Stage primaryStage) {
         Button button = new Button("click");
         button.setOnAction(actionEvent -> {
-            new Modal(primaryStage.getScene().getRoot(), "hello", "11111111111111111111111111111111111111", () ->{}).show();
+//            new Modal(primaryStage.getScene().getRoot(), new Label("head"), new HBox(new Label("body")){{setPrefWidth(200);}}, "-fx-padding: 15", new Button("click")).show();
+            new Modal(primaryStage.getScene().getRoot(), "head", "body", new Button("cancel"), new Button("ok")).show();
         });
         StackPane stackPane = new StackPane(button);
         Scene scene = new Scene(stackPane, 300, 300);
