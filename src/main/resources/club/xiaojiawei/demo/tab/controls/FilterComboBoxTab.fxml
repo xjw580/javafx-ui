@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import club.xiaojiawei.controls.FilterField?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
 <?import club.xiaojiawei.controls.FilterComboBox?>
 <?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.*?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml"
@@ -25,7 +25,7 @@
         </VBox>
         <Label text="使用样式（通用ComboBox的样式）" styleClass="title-two"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <FilterComboBox styleClass="combo-box-ui, combo-box-ui-normal" visibleRowCount="1">
+            <FilterComboBox styleClass="combo-box-ui, combo-box-ui-normal">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="male" />

@@ -27,7 +27,7 @@ public class FilterComboBoxTest extends Application {
     public void start(Stage primaryStage) {
         FilterComboBox<Object> comboBox = new FilterComboBox<>();
 //        comboBox.setEditable(true);
-        comboBox.getStyleClass().addAll("combo-box-ui", "combo-box-ui-normal", "combo-box-ui-big");
+        comboBox.getStyleClass().addAll("combo-box-ui", "combo-box-ui-normal");
         comboBox.getItems().add("111");
         comboBox.getItems().add("122");
         comboBox.getItems().add("2222");
