@@ -259,7 +259,7 @@ public class Modal {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         Label label = new Label(heading);
-        label.setStyle("-fx-font-weight: bold;-fx-font-size: 12;-fx-wrap-text: true");
+        label.setStyle("-fx-font-weight: bold;-fx-font-size: 14;-fx-wrap-text: true");
         hBox.getChildren().add(label);
         return hBox;
     }

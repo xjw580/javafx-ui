@@ -34,6 +34,7 @@ public class FilterComboBoxTest extends Application {
         comboBox.getItems().add("333");
         comboBox.getItems().add("3244");
         comboBox.getItems().add("4444444444");
+        comboBox.getSelectionModel().select(1);
         StackPane stackPane = new StackPane(comboBox);
         Scene scene = new Scene(stackPane, 500, 500);
         primaryStage.setScene(scene);
@@ -52,6 +53,6 @@ public class FilterComboBoxTest extends Application {
 //                    System.out.println(11);
                 });
             }
-        }, 3000);
+        }, 1000);
     }
 }
