@@ -89,7 +89,7 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
                 rootListViewItems.remove(1, rootListViewItems.size());
                 rootListViewItems.addAll(realListView.getItems());
                 for (int i = rootListViewItems.size() - 1; i > 0; i--) {
-                    if (!rootListViewItems.get(i).toString().contains(text)){
+                    if (!rootListViewItems.get(i).toString().contains(text) && (!control.isIgnoreCase() || !rootListViewItems.get(i).toString().toLowerCase().contains(text.toLowerCase()))){
                         rootListViewItems.remove(i);
                     }
                 }
@@ -119,7 +119,7 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
     @Override
     public void show() {
         super.show();
-        double insect = 25D;
+        double insect = 22D;
         filterField.setMaxWidth(filterComboBox.getWidth() - insect);
         filterField.setMinWidth(filterComboBox.getWidth() - insect);
         filterField.requestFocus();

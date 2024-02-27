@@ -4,6 +4,8 @@ import club.xiaojiawei.skin.FilterComboBoxListViewSkin;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Skin;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -13,6 +15,10 @@ import javafx.scene.control.Skin;
  * 2. 必须要界面显示后再select指定item，否则popup里不会有选中效果
  */
 public class FilterComboBox<T> extends ComboBox<T> {
+
+    @Getter
+    @Setter
+    private boolean ignoreCase;
 
     @Override
     protected Skin<?> createDefaultSkin() {
