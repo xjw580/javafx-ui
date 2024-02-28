@@ -3,6 +3,7 @@ package club.xiaojiawei.controls;
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.animation.ParallelTransition;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -29,6 +30,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * 模态框
@@ -174,16 +177,22 @@ public class Modal {
     }
 
     private VBox buildConfirmBody(Parent baseParent, String heading, String content){
-        VBox vBox = new VBox(){{
-            setStyle("-fx-padding: 20;-fx-spacing: 20;");
-        }};
+        VBox vBox = new VBox();
         vBox.setPrefWidth(Math.min(350, baseParent.getScene().getWidth() - 10));
         vBox.setMaxHeight(baseParent.getScene().getHeight() - 10);
+        int headHeight = 0, btnHeight = 29, inset = 20;
+        if (vBox.getMaxHeight() < 140){
+            inset = 15;
+            vBox.setStyle("-fx-padding: 15;-fx-spacing: 15;");
+        }else {
+            vBox.setStyle("-fx-padding: 20;-fx-spacing: 20;");
+        }
         if (heading != null && !heading.isBlank()){
             vBox.getChildren().add(createHeading(heading));
+            headHeight = 14;
         }
         if (content != null && !content.isBlank()){
-            vBox.getChildren().add(createContent(content, vBox.getPrefWidth() - 40, vBox.getMaxHeight()));
+            vBox.getChildren().add(createContent(content, vBox.getPrefWidth() - 40, vBox.getMaxHeight() - btnHeight - headHeight - inset * 3));
         }
         return vBox;
     }
@@ -240,12 +249,13 @@ public class Modal {
     }
 
     private void initSize(){
-        double width = parent.getScene().getWidth();
-        double height = parent.getScene().getHeight();
+        Scene scene = parent.getScene();
+        double width = scene.getWidth();
+        double height = scene.getHeight();
         stage.setWidth(width);
         stage.setHeight(height);
-        stage.setY(parent.getScene().getWindow().getY() + parent.getScene().getY());
-        stage.setX(parent.getScene().getWindow().getX() + parent.getScene().getX());
+        stage.setY(scene.getWindow().getY() + scene.getY());
+        stage.setX(scene.getWindow().getX() + scene.getX());
     }
 
     private void buildRootPane(Node content){
@@ -270,7 +280,13 @@ public class Modal {
         scrollPane.getStyleClass().add("edge-to-edge");
         scrollPane.setStyle("-fx-background: white;-fx-hbar-policy: NEVER;-fx-padding: 0 0 0 5");
         scrollPane.setMaxWidth(maxWidth);
-        scrollPane.setMaxHeight(Math.min(maxHeight, 200));
+        if (maxHeight < 25){
+            scrollPane.setMaxHeight(maxHeight);
+            scrollPane.setMinHeight(maxHeight);
+            scrollPane.setPrefHeight(maxHeight);
+        }else {
+            scrollPane.setMaxHeight(Math.min(maxHeight, 200));
+        }
         Text text = new Text(content);
         text.setWrappingWidth(maxWidth - 15);
         text.setStyle("-fx-font-size: 14;");
