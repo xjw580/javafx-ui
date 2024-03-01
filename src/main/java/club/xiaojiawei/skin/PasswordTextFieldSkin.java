@@ -1,6 +1,8 @@
 package club.xiaojiawei.skin;
 
 import club.xiaojiawei.controls.PasswordTextField;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.paint.Color;
@@ -18,22 +20,21 @@ public class PasswordTextFieldSkin extends IconTextFieldSkin {
     private final SVGPath actionIcon = new SVGPath();
     private final Button actionButton = buildIconButton();
 
-    private boolean mask = true;
+    private final BooleanProperty mask = new SimpleBooleanProperty(true);
 
     public PasswordTextFieldSkin(PasswordTextField passwordTextField) {
         super(passwordTextField);
-
         actionButton.setId("action-btn");
         actionButton.setVisible(false);
         actionButton.setOnMouseClicked(event -> {
-            if(mask) {
+            if(mask.get()) {
                 actionIcon.setContent(Icons.HIDE.getContent());
                 actionIcon.setFill(Paint.valueOf("#0075FF"));
-                mask = false;
+                mask.set(false);
             } else {
                 actionIcon.setContent(Icons.SHOW.getContent());
                 actionIcon.setFill(Color.BLACK);
-                mask = true;
+                mask.set(true);
             }
             passwordTextField.setText(passwordTextField.getText());
             passwordTextField.end();
@@ -49,7 +50,7 @@ public class PasswordTextFieldSkin extends IconTextFieldSkin {
 
     @Override
     protected String maskText(String txt) {
-        if (getSkinnable() instanceof PasswordField && mask) {
+        if (getSkinnable() instanceof PasswordField && (mask == null || mask.get())) {
             return "●".repeat(txt.length());
         } else {
             return txt;
