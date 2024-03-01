@@ -122,6 +122,11 @@ public class Date extends StackPane {
         initDateTextField(month, MAX_MONTH, 2);
         initDateTextField(day, MAX_DAY, 2);
         initDateIco();
+        focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
+            year.setFocusTraversable(t1);
+            month.setFocusTraversable(t1);
+            day.setFocusTraversable(t1);
+        });
     }
 
     /**

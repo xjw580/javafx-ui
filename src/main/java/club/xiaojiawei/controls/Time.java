@@ -154,6 +154,11 @@ public class Time extends StackPane {
         initTimeTextField(min, MAX_MIN);
         initTimeTextField(sec, MAX_SEC);
         initTimeIco();
+        focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
+            hour.setFocusTraversable(t1);
+            min.setFocusTraversable(t1);
+            sec.setFocusTraversable(t1);
+        });
     }
 
     /**
