@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Polygon;
@@ -18,8 +19,12 @@ import java.io.IOException;
  */
 @Slf4j
 public class MessageBox extends Group {
+
     private final StringProperty text;
+
     private final StringProperty color;
+
+    private final Insets padding;
 
     public String getText() {
         return text.get();
@@ -47,6 +52,7 @@ public class MessageBox extends Group {
 
     {
         color = new SimpleStringProperty();
+        padding = new Insets(8, 8, 8, 8);
     }
     @FXML
     private Polygon triangle;
