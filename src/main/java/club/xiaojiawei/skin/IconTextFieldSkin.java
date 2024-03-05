@@ -1,13 +1,14 @@
 package club.xiaojiawei.skin;
 
 import javafx.geometry.Insets;
-import javafx.scene.Cursor;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TextField;
 import javafx.scene.control.skin.TextFieldSkin;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
@@ -29,7 +30,7 @@ public class IconTextFieldSkin extends TextFieldSkin {
 
         Group group = new Group(btnGroup);
         HBox hBox = new HBox(group);
-        hBox.setStyle("-fx-translate-y: -1;-fx-alignment: CENTER_RIGHT;");
+        hBox.setAlignment(Pos.CENTER_RIGHT);
 
         StackPane stackPane = new StackPane(hBox);
         btnGroup.widthProperty().addListener((observableValue, number, t1) -> {
