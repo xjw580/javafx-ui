@@ -1,0 +1,13 @@
+.context-menu-ui .menu-item{
+    -fx-background-radius: 5;
+}
+.context-menu-ui .menu-item:focused{
+    -fx-background-color: #b3d5ff!important;
+}
+.context-menu-ui{
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 15, 0, 3, 3);
+    -fx-padding: 5 3 5 3;
+    -fx-background-color: background-color!important;
+    -fx-border-color: transparent;
+    -fx-background-radius: 5;
+}

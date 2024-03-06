@@ -7,6 +7,7 @@
     effect-color: #b3d5ff;
     hover-color: #cae1ff;
     shallow-color: #e0f0fd;
+    background-color: rgba(251, 251, 251);
     /*Color*/
     normal-color: #c7e3fa;
     normal-deep-color: #aad6fc;
@@ -22,7 +23,7 @@
     default-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
 }
 .bg-hover-ui:hover{
-    -fx-background-color: effect-color;
+    -fx-background-color: effect-color!important;
 }
 .bg-ui{
     -fx-background-color: main-color!important;
