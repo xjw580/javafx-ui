@@ -1,3 +1,4 @@
+@import "common.css";
 .context-menu-ui .menu-item{
     -fx-background-radius: 5;
 }

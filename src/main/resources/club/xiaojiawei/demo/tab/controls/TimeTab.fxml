@@ -10,15 +10,15 @@
         <Label text="通过showSelector、showBg、showSec调整选择器、背景可见性、显示秒" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Time/>
-            <Time showSelector="false"/>
+            <Time showIcon="false"/>
             <Time showBg="false"/>
-            <Time showBg="false" showSelector="false"/>
+            <Time showBg="false" showIcon="false"/>
         </HBox>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Time showSec="true"/>
-            <Time showSelector="false" showSec="true"/>
+            <Time showIcon="false" showSec="true"/>
             <Time showBg="false" showSec="true"/>
-            <Time showBg="false" showSelector="false" showSec="true"/>
+            <Time showBg="false" showIcon="false" showSec="true"/>
         </HBox>
     </VBox>
 </ScrollPane>

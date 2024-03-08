@@ -1,3 +1,4 @@
+@import "common.css";
 .progress-bar-ui {
     -fx-accent: main-color!important;
     -fx-pref-height: 4;

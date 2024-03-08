@@ -1,15 +1,16 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.DateIco;
+import javafx.animation.PauseTransition;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
 import javafx.util.Duration;
 import lombok.Getter;
@@ -19,42 +20,77 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
-import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
+import java.util.function.Predicate;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/26 8:34
  */
-public class DateTime extends StackPane {
+public class DateTime extends AbstractTimeField<LocalDateTime> {
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 日期时间
      */
-    private final ObjectProperty<LocalDateTime> dateTime = new SimpleObjectProperty<>();
+    private ObjectProperty<LocalDateTime> dateTime;
+
     /**
      * 显示日期时间选择器
      */
     @Getter
-    private boolean showSelector = true;
+    private boolean showIcon = true;
     /**
      * 默认显示背景
      */
     @Getter
     private boolean showBg = true;
+
+    private final ObjectProperty<Predicate<LocalDateTime>> dateTimeInterceptor = new SimpleObjectProperty<>();
+
     public String getDateTime() {
         return dateTime.get() == null? null : DATE_TIME_FORMATTER.format(dateTime.get());
     }
-    public ObjectProperty<LocalDateTime> dateTimeProperty() {
+
+    public LocalDateTime getLocalDateTime(){
+        return dateTime.get();
+    }
+
+    /**
+     * @param dateTime 格式：yyyy/MM/dd-HH:mm
+     */
+    public void setDateTime(String dateTime) {
+        LocalDateTime localDateTime = LocalDateTime.from(DATE_TIME_FORMATTER.parse(dateTime));
+        if (getInterceptor() == null || getInterceptor().test(localDateTime)){
+            this.dateTime.set(localDateTime);
+        }
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime){
+        this.dateTime.set(localDateTime);
+    }
+
+    protected ObjectProperty<LocalDateTime> dateTimeProperty() {
         return dateTime;
     }
 
-    public void setShowSelector(boolean showSelector) {
-        dateTimeIco.setVisible(this.showSelector = showSelector);
+    public ReadOnlyObjectProperty<LocalDateTime> dateTimeRealOnlyProperty() {
+        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalDateTime>();
+        readOnlyObjectWrapper.bind(dateTime);
+        return readOnlyObjectWrapper.getReadOnlyProperty();
+    }
+
+    public void setShowIcon(boolean showIcon) {
+        dateTimeIco.setVisible(this.showIcon = showIcon);
         dateTimeIco.setManaged(false);
-        if (showSelector){
-            dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND);
+        if (showIcon){
+            dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS);
         }else {
-            dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND);
+            dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS);
         }
     }
 
@@ -62,14 +98,27 @@ public class DateTime extends StackPane {
         dateTimeBg.setVisible(this.showBg = showBg);
     }
 
-    /**
-     * @param dateTime 格式：yyyy/MM/dd-HH:mm
-     */
-    public void setDateTime(String dateTime) {
-        this.dateTime.set(LocalDateTime.from(DATE_TIME_FORMATTER.parse(dateTime)));
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    public DateTime() {}
+
+    @Override
+    public Predicate<LocalDateTime> getInterceptor() {
+        return dateTimeInterceptor.get();
     }
-    public void setLocalDateTime(LocalDateTime localDateTime){
-        this.dateTime.set(localDateTime);
+
+    @Override
+    public ObjectProperty<Predicate<LocalDateTime>> interceptorProperty() {
+        return dateTimeInterceptor;
+    }
+
+    @Override
+    public void setInterceptor(Predicate<LocalDateTime> dateInterceptor) {
+        this.dateTimeInterceptor.set(dateInterceptor);
     }
 
     @FXML
@@ -80,42 +129,45 @@ public class DateTime extends StackPane {
     private Date dateControls;
     @FXML
     private Time timeControls;
-    private Popup dateTimeSelectorPopup;
+
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm");
-    public static final String HIDE_ICO_DATE_TIME_BACKGROUND = "hideIcoDateTimeBackground";
+    public static final String HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS = "hideIcoDateTimeBackground";
+    private static final String DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS = "dateTimeBackgroundFocus";
+
     private boolean isFromDateTime;
-    private static final String DATE_TIME_BACKGROUND_FOCUS = "dateTimeBackgroundFocus";
-    public DateTime() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-            afterFXMLLoaded();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private void afterFXMLLoaded(){
-        dateControls.setOnFocusChangeListener((observable, oldValue, newValue) -> dealFocusChange(newValue));
-        timeControls.setOnFocusChangeListener((observable, oldValue, newValue) -> dealFocusChange(newValue));
-        dateControls.dateProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
-        timeControls.timeProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
-        dateTime.addListener((observable, oldValue, newValue) -> updateCompleteDateTime(newValue));
-        initDateTimeSelectorPopup();
-        initDateTimeIco();
-    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     private void afterDateTimeChange(){
         if (!isFromDateTime){
             LocalDate localDate = dateControls.dateProperty().get();
             LocalTime localTime = timeControls.timeProperty().get();
             if (localDate != null && localTime != null){
-                dateTime.set(LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+                LocalDateTime localDateTime = LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute());
+                if (getInterceptor() == null || getInterceptor().test(localDateTime)){
+                    dateTime.set(localDateTime);
+                }else {
+                    LocalDateTime dateTime = getLocalDateTime();
+                    if (dateTime == null){
+                      dateControls.setDate(null);
+                        PauseTransition pauseTransition = new PauseTransition(Duration.millis(200));
+                        pauseTransition.setOnFinished(e -> timeControls.setTime(null));
+                        pauseTransition.play();
+                    }else {
+                        dateControls.setLocalDate(LocalDate.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth()));
+                        timeControls.setLocalTime(LocalTime.of(dateTime.getHour(), dateTime.getMinute()));
+                    }
+                }
             }else if (localDate == null && localTime == null){
                 dateTime.set(null);
             }
         }
     }
+
     private void updateCompleteDateTime(LocalDateTime newDateTime){
         isFromDateTime = true;
         if (newDateTime != null){
@@ -124,48 +176,98 @@ public class DateTime extends StackPane {
         }
         isFromDateTime = false;
     }
-    /**
-     * 初始化日期时间选择器弹窗
-     */
-    private void initDateTimeSelectorPopup(){
-        dateTimeSelectorPopup = new Popup();
+
+    private void dealFocusChange(boolean isFocus) {
+        if (isFocus){
+            dateTimeBg.getStyleClass().add(DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+        }else {
+            dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+        }
+    }
+
+    @Override
+    protected Popup createPopup() {
+        Popup dateTimeSelectorPopup = new Popup();
         HBox hBox = new HBox();
-        hBox.setSpacing(2);
-        TimeSelector timeSelector = (TimeSelector) timeControls.getTimeSelectorPopup().getContent().get(0);
-        timeSelector.setShowRowCount(9.7);
-        Calendar calendar = (Calendar) dateControls.getDateSelectorPopup().getContent().get(0);
+        hBox.setStyle("-fx-effect: dropshadow(gaussian, effect-color, 10, 0, 0, 0)!important;");
+        TimeSelector timeSelector = (TimeSelector) timeControls.getPopup().getContent().get(0);
+        timeSelector.setStyle("-fx-background-radius: 0 10 10 0;-fx-effect: none!important;");
+        timeSelector.setShowRowCount(9.55);
+        Calendar calendar = (Calendar) dateControls.getPopup().getContent().get(0);
+        calendar.setStyle("-fx-background-radius: 10 0 0 10;-fx-effect: none!important;");
         hBox.getChildren().add(calendar);
         hBox.getChildren().add(timeSelector);
         dateTimeSelectorPopup.getContent().add(hBox);
         dateTimeSelectorPopup.setAutoHide(true);
+        return dateTimeSelectorPopup;
     }
 
-    /**
-     * 初始化日期时间图标
-     */
-    private void initDateTimeIco(){
-        dateTimeIco.setOnMouseClicked(e -> {
-            Bounds bounds = dateTimeIco.localToScreen(dateTimeIco.getBoundsInLocal());
-            dateTimeSelectorPopup.setAnchorX(bounds.getMaxX() - 100);
-            dateTimeSelectorPopup.setAnchorY(bounds.getMaxY() - 5);
-            dateTimeSelectorPopup.show(this.getScene().getWindow());
-            FADE.play(dateTimeSelectorPopup.getContent().get(0), 0.5D, 1D, Duration.millis(200));
-        });
-    }
-
-    private void dealFocusChange(boolean isFocus) {
-        if (isFocus){
-            dateTimeBg.getStyleClass().add(DATE_TIME_BACKGROUND_FOCUS);
-        }else {
-            dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_FOCUS);
+    @Override
+    protected void loadPage() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    /**
-     * 刷新显示的时间，和真正存储的时间同步
-     */
+    @Override
+    protected void afterPageLoaded() {
+        dateControls.focusedReadOnlyProperty().addListener((observableValue, aBoolean, t1) -> dealFocusChange(t1));
+        dateControls.dateProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
+        dateControls.setInterceptor(localDate -> {
+            if (localDate != null && getInterceptor() != null){
+                LocalTime localTime = timeControls.getLocalTime();
+                if (localTime == null){
+                    return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), LocalTime.MIN.getHour(), LocalTime.MIN.getMinute()))
+                            || getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), LocalTime.MAX.getHour(), LocalTime.MAX.getMinute()));
+                }else {
+                    return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+                }
+            }
+            return true;
+        });
+        timeControls.timeProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
+        timeControls.focusedReadOnlyProperty().addListener((observableValue, aBoolean, t1) -> dealFocusChange(t1));
+        timeControls.setInterceptor(localTime -> {
+            if (localTime != null && getInterceptor() != null){
+                LocalDate localDate = dateControls.getLocalDate();
+                if (localDate == null){
+                    LocalDate min = LocalDate.MIN, max = LocalDate.MAX;
+                    return getInterceptor().test(LocalDateTime.of(min.getYear(), min.getMonth(), min.getDayOfMonth(), localTime.getHour(), localTime.getMinute()))
+                            || getInterceptor().test(LocalDateTime.of(max.getYear(), max.getMonth(), max.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+                }else {
+                    return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+                }
+            }
+            return true;
+        });
+        dateTime = new SimpleObjectProperty<>();
+        dateTime.addListener((observable, oldValue, newValue) -> updateCompleteDateTime(newValue));
+        focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
+            dateControls.setFocusTraversable(t1);
+            timeControls.setFocusTraversable(t1);
+        });
+    }
+
+    @Override
+    protected Node createIconNode() {
+        return dateTimeIco;
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    @Override
     public void refresh(){
         dateControls.refresh();
         timeControls.refresh();
     }
+
 }

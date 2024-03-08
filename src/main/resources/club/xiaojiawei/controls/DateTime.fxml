@@ -5,14 +5,17 @@
 <?import club.xiaojiawei.controls.Time?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.layout.HBox?>
-<fx:root type="StackPane" xmlns="http://javafx.com/javafx"
+<fx:root type="Group" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateTime.css">
-    <Label fx:id="dateTimeBg" styleClass="dateTimeBackground"/>
-    <HBox alignment="CENTER">
-        <Date fx:id="dateControls" showSelector="false" showBg="false"/>
-        <Label styleClass="dateTimeSeparator" text="-"/>
-        <Time fx:id="timeControls" showBg="false" showSelector="false"/>
-        <DateIco fx:id="dateTimeIco"/>
-    </HBox>
+    <StackPane fx:id="dateTimeOuterUI" style="-fx-padding: 10">
+        <Label fx:id="dateTimeBg" styleClass="dateTimeBackground"/>
+        <HBox alignment="CENTER">
+            <Date fx:id="dateControls" showIcon="false" showBg="false"/>
+            <Label styleClass="dateTimeSeparator" text="-"/>
+            <Time fx:id="timeControls" showBg="false" showIcon="false"/>
+            <DateIco fx:id="dateTimeIco"/>
+        </HBox>
+    </StackPane>
 </fx:root>

@@ -3,10 +3,36 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import club.xiaojiawei.controls.FileUploader?>
+<?import javafx.collections.FXCollections?>
+<?import club.xiaojiawei.enums.MimeEnum?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
-        <FileUploader/>
+        <Label text="通过maxColumns属性设置最大列数，默认3" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <FileUploader maxColumns="3"/>
+        </HBox>
+        <Label text="通过fileTypes属性设置允许的文件类型" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <FileUploader tip="只允许上传文本格式">
+                <fileTypes>
+                    <FXCollections fx:factory="observableArrayList">
+                        <MimeEnum fx:constant="TEXT_ALL"/>
+                    </FXCollections>
+                </fileTypes>
+            </FileUploader>
+            <FileUploader tip="只允许上传图片格式">
+                <fileTypes>
+                    <FXCollections fx:factory="observableArrayList">
+                        <MimeEnum fx:constant="IMAGE_ALL"/>
+                    </FXCollections>
+                </fileTypes>
+            </FileUploader>
+        </HBox>
+        <Label text="通过maxFileQuantity属性设置最大文件数" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <FileUploader maxFileQuantity="1" tip="最多选择一个文件"/>
+        </HBox>
     </VBox>
 </ScrollPane>

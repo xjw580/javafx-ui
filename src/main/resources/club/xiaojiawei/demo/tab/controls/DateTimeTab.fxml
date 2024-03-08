@@ -10,9 +10,9 @@
         <Label text="通过showSelector、showBg、背景可见性" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <DateTime/>
-            <DateTime showSelector="false"/>
+            <DateTime showIcon="false"/>
             <DateTime showBg="false"/>
-            <DateTime showBg="false" showSelector="false"/>
+            <DateTime showBg="false" showIcon="false"/>
         </HBox>
     </VBox>
 </ScrollPane>

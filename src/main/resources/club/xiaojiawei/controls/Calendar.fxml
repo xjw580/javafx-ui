@@ -6,7 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <fx:root type="VBox" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-         fx:id="calendar" maxHeight="295" maxWidth="220" minHeight="295" minWidth="220" alignment="CENTER" spacing="18" stylesheets="@css/calendar.css">
+         fx:id="calendar" maxHeight="295" maxWidth="220" minHeight="295" minWidth="220" alignment="CENTER"
+         stylesheets="@css/calendar.css">
     <HBox spacing="65" alignment="CENTER">
         <Label fx:id="dateMsg" contentDisplay="RIGHT">
             <graphic>

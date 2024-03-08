@@ -1,9 +1,12 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.func.Interceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,56 +20,79 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Predicate;
 
 /**
  * 年月选择器
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/24 23:15
  */
-public class DateSelector extends HBox {
+public class DateSelector extends HBox implements Interceptor<LocalDate> {
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
 
     /**
      * 日期：包含年月,格式：yyyy/MM/dd
      */
     private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
+
+    /**
+     * 日期拦截器
+     */
+    private final ObjectProperty<Predicate<LocalDate>> dateInterceptor = new SimpleObjectProperty<>();
+
     public String getDate() {
-        return SHORT_DATE_FORMATTER.format(date.get());
+        return getLocalDate() == null? "" : SHORT_DATE_FORMATTER.format(getLocalDate());
     }
-    public ObjectProperty<LocalDate> dateProperty() {
+
+    public LocalDate getLocalDate(){
+        return date.get();
+    }
+
+    protected ObjectProperty<LocalDate> dateProperty(){
         return date;
     }
+
     /**
      * @param date 格式：yyyy/MM/dd 或 yyyy/MM
      */
     public void setDate(String date) {
         if (date == null || date.isBlank()){
-            this.date.set(null);
+            setLocalDate(null);
         }else {
             if (date.length() == 6){
-                this.date.set(LocalDate.from(DATE_FORMATTER.parse(date)));
+                setLocalDate(LocalDate.from(DATE_FORMATTER.parse(date)));
+
             }else {
-                this.date.set(LocalDate.from(SHORT_DATE_FORMATTER.parse(date)));
+                setLocalDate(LocalDate.from(SHORT_DATE_FORMATTER.parse(date)));
             }
         }
     }
+
     public void setLocalDate(LocalDate localDate){
-        date.set(localDate);
+        if (getInterceptor() == null || getInterceptor().test(localDate)){
+            date.set(localDate);
+        }
     }
-    @FXML
-    private Accordion yearsPane;
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private ScrollBar scrollBar;
-    private Label selectedLabel;
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    public static final DateTimeFormatter SHORT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM");
-    private static final String SELECTED_LABEL = "selectedLabel";
-    private boolean allowExec = true;
-    private final static String TITLED_PANE_UI = "titled-pane-ui";
+
+    public ReadOnlyObjectProperty<LocalDate> dateReadOnlyProperty() {
+        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalDate>();
+        readOnlyObjectWrapper.bind(date);
+        return readOnlyObjectWrapper.getReadOnlyProperty();
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     public DateSelector() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -78,6 +104,28 @@ public class DateSelector extends HBox {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    private Accordion yearsPane;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private ScrollBar scrollBar;
+
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    public static final DateTimeFormatter SHORT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM");
+    private static final String SELECTED_LABEL_STYLE_CLASS = "selectedLabel";
+    private static final String TITLED_PANE_UI_STYLE_CLASS = "titled-pane-ui";
+
+    private Label selectedLabel;
+    private boolean allowExec = true;
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     private void afterFXMLLoaded(){
         loadYearPane(LocalDate.now());
         date.addListener((observable, oldDate, newDate) -> {
@@ -159,46 +207,6 @@ public class DateSelector extends HBox {
     }
 
     /**
-     * 计算指定日期的月份的最大天
-     * @param date
-     * @return
-     */
-    public static int calcMaxDayForMonth(LocalDate date){
-        int days = 30;
-        int month = date.getMonth().getValue();
-        if (month == 2){
-            if (date.getYear() % 4 == 0 && (date.getYear() % 100 != 0 || date.getYear() % 400 == 0)){
-                days = 29;
-            }else {
-                days = 28;
-            }
-        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
-            days = 31;
-        }
-        return days;
-    }
-
-    /**
-     * 计算指定日期的月份的最大天
-     * @param year
-     * @param month
-     * @return
-     */
-    public static int calcMaxDayForMonth(int year, int month){
-        int days = 30;
-        if (month == 2){
-            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)){
-                days = 29;
-            }else {
-                days = 28;
-            }
-        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
-            days = 31;
-        }
-        return days;
-    }
-
-    /**
      * 创建年面板
      * @param nowDate
      * @return
@@ -215,7 +223,7 @@ public class DateSelector extends HBox {
      */
     private TitledPane buildYearTitledPane(LocalDate nowDate, int buildYear){
         TitledPane newYearPane = new TitledPane();
-        newYearPane.getStyleClass().add(TITLED_PANE_UI);
+        newYearPane.getStyleClass().add(TITLED_PANE_UI_STYLE_CLASS);
         newYearPane.expandedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue){
                 ObservableList<TitledPane> panes = this.yearsPane.getPanes();
@@ -272,18 +280,81 @@ public class DateSelector extends HBox {
         for (int m = 1; m <= 12; m++) {
             Label label = new Label();
             if (nowDate.getYear() == buildYear && nowDate.getMonthValue() == m){
-                (selectedLabel = label).getStyleClass().add(SELECTED_LABEL);
+                (selectedLabel = label).getStyleClass().add(SELECTED_LABEL_STYLE_CLASS);
             }
             label.setText(String.valueOf(m));
             int finalM = m;
             label.setOnMouseClicked(event -> {
-                selectedLabel.getStyleClass().remove(SELECTED_LABEL);
-                (selectedLabel = label).getStyleClass().add(SELECTED_LABEL);
-                date.set(LocalDate.of(buildYear, Month.of(finalM), Math.min((date.get() == null? LocalDate.now().getDayOfMonth() : date.get().getDayOfMonth()), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1)))));
+                LocalDate localDate = LocalDate.of(buildYear, Month.of(finalM), Math.min((getLocalDate() == null ? LocalDate.now().getDayOfMonth() : getLocalDate().getDayOfMonth()), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1))));
+                if (getInterceptor() == null || getInterceptor().test(localDate)){
+                    selectedLabel.getStyleClass().remove(SELECTED_LABEL_STYLE_CLASS);
+                    (selectedLabel = label).getStyleClass().add(SELECTED_LABEL_STYLE_CLASS);
+                    setLocalDate(localDate);
+                }
             });
             newMonthPane.getChildren().add(label);
         }
         return newMonthPane;
     }
 
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    @Override
+    public Predicate<LocalDate> getInterceptor() {
+        return dateInterceptor.get();
+    }
+
+    @Override
+    public ObjectProperty<Predicate<LocalDate>> interceptorProperty() {
+        return dateInterceptor;
+    }
+
+    @Override
+    public void setInterceptor(Predicate<LocalDate> dateInterceptor) {
+        this.dateInterceptor.set(dateInterceptor);
+    }
+
+    /**
+     * 计算指定日期的月份的最大天
+     * @param date
+     * @return
+     */
+    public static int calcMaxDayForMonth(LocalDate date){
+        int days = 30;
+        int month = date.getMonth().getValue();
+        if (month == 2){
+            if (date.getYear() % 4 == 0 && (date.getYear() % 100 != 0 || date.getYear() % 400 == 0)){
+                days = 29;
+            }else {
+                days = 28;
+            }
+        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
+            days = 31;
+        }
+        return days;
+    }
+
+    /**
+     * 计算指定日期的月份的最大天
+     * @param year
+     * @param month
+     * @return
+     */
+    public static int calcMaxDayForMonth(int year, int month){
+        int days = 30;
+        if (month == 2){
+            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)){
+                days = 29;
+            }else {
+                days = 28;
+            }
+        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
+            days = 31;
+        }
+        return days;
+    }
 }

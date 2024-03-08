@@ -1,85 +1,124 @@
 package club.xiaojiawei.controls;
 
-import club.xiaojiawei.controls.ico.FailIco;
+import club.xiaojiawei.component.FileUploaderItem;
 import club.xiaojiawei.enums.MimeEnum;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.Tooltip;
-import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.tika.Tika;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
+import java.util.function.Consumer;
 
-import static club.xiaojiawei.enums.MimeEnum.*;
+import static club.xiaojiawei.enums.MimeEnum.IMAGE_ALL;
 
 /**
+ * 文件上传
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/11/9 15:58
  */
-public class FileUploader extends AnchorPane {
-    private final IntegerProperty columns = new SimpleIntegerProperty(1);
+public class FileUploader extends TilePane {
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
+    /**
+     * 每行最多展示几个文件
+     */
+    @Getter
+    @Setter
+    private int maxColumns = 3;
+    /**
+     * 允许的文件类型，通过后缀名判断。自行通过文件头等方式判断真实文件类型
+     */
+    @Setter
+    @Getter
     private ObservableList<MimeEnum> fileTypes = FXCollections.observableArrayList(MimeEnum.ALL);
-    private int maxFileSize = Integer.MAX_VALUE;
+    /**
+     * 允许的最大文件数量
+     */
+    @Setter
+    @Getter
+    private int maxFileQuantity = Integer.MAX_VALUE;
+    /**
+     * 文件添加失败事件处理器
+     */
+    private final ObjectProperty<Consumer<FailEvent>> onAddFileFailEventHandler = new SimpleObjectProperty<>();
+    /**
+     * 提示词
+     */
+    private final StringProperty tip;
+
+    public String getTip() {
+        return tip.get();
+    }
+
+    public StringProperty tipProperty() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip.set(tip);
+    }
+
+    public Consumer<FailEvent> getOnAddFileFailEventHandler() {
+        return onAddFileFailEventHandler.get();
+    }
+
+    public ObjectProperty<Consumer<FailEvent>> onAddFileFailEventHandlerProperty() {
+        return onAddFileFailEventHandler;
+    }
+
+    public void setOnAddFileFailEventHandler(Consumer<FailEvent> onAddFileFailEventHandler) {
+        this.onAddFileFailEventHandler.set(onAddFileFailEventHandler);
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 数据                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
+    /**
+     * 存储上传文件的路径
+     */
+    @Getter
     private final ObservableList<String> fileURLs = FXCollections.observableArrayList();
+    /**
+     * 每个文件上传进度指示器，进度大于0时自动显示
+     */
+    @Getter
     private final ObservableList<ProgressIndicator> indicators = FXCollections.observableArrayList();
 
-    public ObservableList<String> getFileURLs() {
-        return fileURLs;
-    }
+    @Getter
+    private String lastChooseDir;
 
-    public ObservableList<ProgressIndicator> getIndicators() {
-        return indicators;
-    }
-
-    public int getMaxFileSize() {
-        return maxFileSize;
-    }
-
-    public void setMaxFileSize(int maxFileSize) {
-        this.maxFileSize = maxFileSize;
-    }
-
-    public int getColumns() {
-        return columns.get();
-    }
-
-    public IntegerProperty columnsProperty() {
-        return columns;
-    }
-
-    public void setColumns(int columns) {
-        this.columns.set(columns);
-    }
-
-    public ObservableList<MimeEnum> getFileTypes() {
-        return fileTypes;
-    }
-
-    public void setFileTypes(ObservableList<MimeEnum> fileTypes) {
-        this.fileTypes = fileTypes;
-    }
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
 
     public FileUploader() {
         try {
@@ -87,127 +126,121 @@ public class FileUploader extends AnchorPane {
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
-
             addListener();
+            tip = tipLabel.textProperty();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    @FXML private Text tip;
-    @FXML private TilePane content;
-    private final Tika tika = new Tika();
+
+    @FXML private Label tipLabel;
+
+    private static final Tika tika = new Tika();
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     private void addListener(){
-        content.setOnDragOver(event -> {
-            if (event.getGestureSource() != content) {
+        this.setOnDragOver(event -> {
+            if (event.getGestureSource() != this) {
                 event.acceptTransferModes(TransferMode.ANY);
             }
         });
-        content.setOnDragDropped(event -> {
+        this.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             if (db.hasFiles()) {
                 for (File file : db.getFiles()) {
-                    if (content.getChildren().size() > maxFileSize){
-                        return;
-                    }
-                    String mimeType = tika.detect(file.getName());
-                    if (containsFileType(mimeType)){
-                        content.getChildren().add(buildFilePane(file.getPath(), mimeType));
+                    if (!addFile(file)){
+                        break;
                     }
                 }
             }
             event.setDropCompleted(true);
         });
-        content.getChildren().addListener((ListChangeListener<Node>) c -> {
-            if (content.getChildren().size() == 1){
-                tip.setManaged(true);
-                tip.setVisible(true);
+        this.getChildren().addListener((ListChangeListener<Node>) c -> {
+            if (this.getChildren().size() == 1){
+                tipLabel.setManaged(true);
+                tipLabel.setVisible(true);
             }else {
-                tip.setVisible(false);
-                tip.setManaged(false);
+                tipLabel.setVisible(false);
+                tipLabel.setManaged(false);
             }
+            int size = Math.min(this.getChildren().size() - 1, maxColumns);
+            this.setMaxWidth(30 + 2 + size * 100 + (size == 0? 0 : (size - 1) * 17));
         });
-        content.setOnMouseClicked(event -> {
-            if (event.getTarget() == content || event.getTarget() == tip){
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (this.getChildren().size() <= maxFileQuantity){
                 FileChooser fileChooser = new FileChooser();
-                File chooseFile = fileChooser.showOpenDialog(new Stage());
-                if (chooseFile != null){
-                    String mimeType;
-                    mimeType = tika.detect(chooseFile.getName());
-                    if (containsFileType(mimeType)){
-                        content.getChildren().add(buildFilePane(chooseFile.getPath(), mimeType));
-                    }
+                if (lastChooseDir != null){
+                    fileChooser.setInitialDirectory(new File(lastChooseDir));
                 }
+                addFile(fileChooser.showOpenDialog(new Stage()));
             }
         });
-        content.setOnDragEntered(event -> content.setStyle("-fx-border-style: solid"));
-        content.setOnDragExited(event -> content.setStyle("-fx-border-style: dashed"));
-        columns.addListener((observable, oldValue, newValue) -> content.setPrefWidth(30 + newValue.intValue() * 115));
+        this.setOnDragEntered(event -> this.setStyle("-fx-border-style: solid"));
+        this.setOnDragExited(event -> this.setStyle("-fx-border-style: dashed"));
     }
-    private boolean containsFileType(String fileType){
+
+    private boolean addFile(File file){
+        if (file == null){
+            return false;
+        }
+        if (this.getChildren().size() > maxFileQuantity){
+            if (this.onAddFileFailEventHandler.get() != null){
+                this.onAddFileFailEventHandler.get().accept(FailEvent.MAX_QUANTITY_LIMIT);
+            }
+            return false;
+        }
+        lastChooseDir = file.getParent();
+        String mimeType = tika.detect(file.getName());
+        if (isAllowFileType(mimeType)){
+            this.getChildren().add(buildFilePane(file.getPath(), mimeType));
+        }else {
+            if (this.onAddFileFailEventHandler.get() != null){
+                this.onAddFileFailEventHandler.get().accept(FailEvent.FILE_TYPE_LIMIT);
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isAllowFileType(String fileType){
+        if (fileType == null || fileType.isBlank()){
+            return false;
+        }
         for (MimeEnum type : fileTypes) {
-            if (type == MimeEnum.ALL || Objects.equals(fileType, type.getMimeType())){
+            if (type == MimeEnum.ALL || fileType.startsWith(type.getMimeType())){
                 return true;
             }
         }
         return false;
     }
-    @SuppressWarnings("all")
-    private AnchorPane buildFilePane(String url, String fileType){
-        FailIco failIco = new FailIco();
-        failIco.setScaleY(1.5D);
-        failIco.setScaleX(1.5D);
-        VBox ico = new VBox(){{setAlignment(Pos.CENTER);}};
-        ico.getChildren().add(failIco);
-        ico.getStyleClass().add("close");
-        ico.setPrefHeight(18);
-        ico.setPrefWidth(18);
-        ico.setTranslateX(91);
-        ico.setTranslateY(-9);
-        ProgressIndicator progressIndicator = new ProgressIndicator(0) {{
-            getStyleClass().add("progress-indicator-ui");
-        }};
-        progressIndicator.progressProperty().addListener((observable, oldValue, newValue) -> {
-            progressIndicator.setVisible(newValue.doubleValue() != 0D);
+
+    private AnchorPane buildFilePane(String filePath, String fileType){
+        FileUploaderItem fileUploaderItem = new FileUploaderItem();
+        ProgressIndicator uploadProgressIndicator = fileUploaderItem.getUploadProgressIndicator();
+        uploadProgressIndicator.progressProperty().addListener((observable, oldValue, newValue) -> {
+            uploadProgressIndicator.setVisible(newValue.doubleValue() != 0D);
         });
-        progressIndicator.setVisible(false);
-        indicators.add(progressIndicator);
-        AnchorPane imagePane = new AnchorPane();
-        imagePane.setPrefHeight(100);
-        imagePane.setPrefWidth(100);
-        imagePane.getStyleClass().add("image");
-        fileURLs.add(url);
-        File file = new File(url);
-        String size;
-        if (file.length() > 1024 * 1024 * 1024){
-            size = String.format("%.2f%s", file.length() / (1024D * 1024 * 1024), "GB");
-        }else if (file.length() > 1024 * 1024){
-            size = String.format("%.2f%s", file.length() / (1024D * 1024), "MB");
-        }else if (file.length() > 1024){
-            size = String.format("%.2f%s", file.length() / 1024D, "KB");
-        }else {
-            size = String.format("%d%s", file.length(), "B");
+        indicators.add(uploadProgressIndicator);
+
+        fileURLs.add(filePath);
+        File file = new File(filePath);
+        fileUploaderItem.setFileSize(file.length());
+        fileUploaderItem.setFileName(file.getName());
+
+        if (fileType != null && fileType.startsWith(IMAGE_ALL.getMimeType())){
+            fileUploaderItem.setBackgroundImage(filePath);
         }
-        Label fileSize = new Label(size);
-        fileSize.getStyleClass().add("text");
-        Label fileName = new Label(file.getName());
-        fileName.setTooltip(new Tooltip(file.getName()));
-        fileName.getStyleClass().add("text");
-        VBox vBox = new VBox(){{setAlignment(Pos.CENTER);setPrefWidth(100);setSpacing(8);setPadding(new Insets(8, 0, 0, 0));}};
-        vBox.getChildren().addAll(fileName, fileSize, progressIndicator);
-        url = encodePath(url.replace("\\", "/"));
-        if (Objects.equals(fileType, IMAGE_JPEG.getMimeType()) || Objects.equals(fileType, IMAGE_PNG.getMimeType())){
-            imagePane.setStyle("-fx-background-image: url(\"file:/"+ url +"\");");
-        }else {
-            imagePane.setStyle("-fx-background-color: #e0e0e0");
-        }
-        imagePane.getChildren().addAll(
-                vBox,
-                ico
-        );
-        ico.setOnMouseClicked(event -> {
-            ObservableList<Node> children = content.getChildren();
+
+        fileUploaderItem.getCloseIcoGroup().addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            event.consume();
+            ObservableList<Node> children = this.getChildren();
             for (int i = 1; i < children.size(); i++) {
-                if (children.get(i) == imagePane){
+                if (children.get(i) == fileUploaderItem){
                     children.remove(i);
                     fileURLs.remove(i - 1);
                     indicators.remove(i - 1);
@@ -215,11 +248,22 @@ public class FileUploader extends AnchorPane {
                 }
             }
         });
-        return imagePane;
+
+        return fileUploaderItem;
     }
 
-    private String encodePath(String path) {
-        return URLEncoder.encode(path, StandardCharsets.UTF_8).replace("+", "%20");
+    public enum FailEvent{
+
+        /**
+         * 超过最大文件数量
+         */
+        MAX_QUANTITY_LIMIT,
+
+        /**
+         * 非法文件类型
+         */
+        FILE_TYPE_LIMIT
+
     }
 
 }

@@ -36,10 +36,19 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 @SuppressWarnings("unused")
 public class Carousel extends AnchorPane {
 
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
+    /**
+     * 当前最顶层的图片下标
+     */
     private final IntegerProperty currentIndex = new SimpleIntegerProperty();
     /**
      * 图片url
-     * 支持格式：网络http url、本地路径
+     * 支持格式：http(s)、相对路径、绝对路径
      * 例：https://zergqueen.gitee.io/images/javafx-ui/carousel7.jpg 或 /club/xiaojiawei/readme/tab/images/carousel2.jpg 或 C:\Users\Administrator\Downloads\carousel7.jpg
      */
     @Getter
@@ -56,9 +65,11 @@ public class Carousel extends AnchorPane {
     public int getCurrentIndex() {
         return currentIndex.get();
     }
+
     public IntegerProperty currentIndexProperty() {
         return currentIndex;
     }
+
     public void setCurrentIndex(int currentIndex) {
         this.currentIndex.set(currentIndex);
     }
@@ -117,6 +128,87 @@ public class Carousel extends AnchorPane {
         }
     }
 
+    public boolean isAutoPlay() {
+        return autoPlay.get();
+    }
+
+    public BooleanProperty autoPlayProperty() {
+        return autoPlay;
+    }
+
+    public void setAutoPlay(boolean autoPlay) {
+        this.autoPlay.set(autoPlay);
+    }
+
+    public double getNudeScale() {
+        return nudeScale.get();
+    }
+
+    public DoubleProperty nudeScaleProperty() {
+        return nudeScale;
+    }
+
+    public void setNudeScale(double nudeScale) {
+        this.nudeScale.set(nudeScale);
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    public Carousel() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+            imageChildren = imagesPane.getChildren();
+            afterFXMLLoaded();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private HBox left;
+    @FXML
+    private HBox right;
+    @FXML
+    private AnchorPane imagesPane;
+    @FXML
+    private HBox dots;
+
+    private static final long DURATION_TIME = 400L;
+    private static final Duration DURATION = Duration.millis(DURATION_TIME);
+    private static final double DOWN_SCALE = 0.8D;
+    private static final double IMAGE_WIDTH = 500D;
+    private static final double IMAGE_HEIGHT = 250D;
+    private static final double SCALE_GAP = (1 - DOWN_SCALE) * IMAGE_WIDTH / 2;
+    private static final String CURRENT_DOT_STYLE_CLASS = "currentDot";
+
+    private final ObservableList<Node> imageChildren;
+    private ScheduledFuture<?> autoPlaySchedule;
+    private double imageNudeWidth = calcImageNudeWidth(this.nudeScale.get());
+    private boolean isHoverImage;
+    private boolean isPlaying;
+    private int skipCount;
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    private void afterFXMLLoaded(){
+        addListener();
+        initIco();
+        addBind();
+    }
+
     @SuppressWarnings("all")
     private AnchorPane buildImage(String url, int index){
         AnchorPane image = new AnchorPane(){{
@@ -141,69 +233,6 @@ public class Carousel extends AnchorPane {
         }});
         image.setOnMouseClicked(event -> currentIndex.set(index));
         return image;
-    }
-
-    public boolean isAutoPlay() {
-        return autoPlay.get();
-    }
-    public BooleanProperty autoPlayProperty() {
-        return autoPlay;
-    }
-    public void setAutoPlay(boolean autoPlay) {
-        this.autoPlay.set(autoPlay);
-    }
-
-    public double getNudeScale() {
-        return nudeScale.get();
-    }
-    public DoubleProperty nudeScaleProperty() {
-        return nudeScale;
-    }
-    public void setNudeScale(double nudeScale) {
-        this.nudeScale.set(nudeScale);
-    }
-
-    @FXML
-    private AnchorPane rootPane;
-    @FXML
-    private HBox left;
-    @FXML
-    private HBox right;
-    @FXML
-    private AnchorPane imagesPane;
-    @FXML
-    private HBox dots;
-    private final ObservableList<Node> imageChildren;
-    private static final long DURATION_TIME = 400L;
-    private static final Duration DURATION = Duration.millis(DURATION_TIME);
-    private ScheduledFuture<?> autoPlaySchedule;
-    private double imageNudeWidth = calcImageNudeWidth(this.nudeScale.get());
-    private boolean isHoverImage;
-    private boolean isPlaying;
-    private int skipCount;
-    private static final double DOWN_SCALE = 0.8D;
-    private static final double IMAGE_WIDTH = 500D;
-    private static final double IMAGE_HEIGHT = 250D;
-    private static final double SCALE_GAP = (1 - DOWN_SCALE) * IMAGE_WIDTH / 2;
-    private static final String CURRENT_DOT_STYLE_CLASS = "currentDot";
-
-    public Carousel() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-            imageChildren = imagesPane.getChildren();
-            afterFXMLLoaded();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void afterFXMLLoaded(){
-        addListener();
-        initIco();
-        addBind();
     }
 
     private void initIco(){

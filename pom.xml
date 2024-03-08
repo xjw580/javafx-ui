@@ -6,7 +6,7 @@
 
     <groupId>club.xiaojiawei</groupId>
     <artifactId>javafx-ui</artifactId>
-    <version>0.2.19</version>
+    <version>0.3.0</version>
     <name>javafx-ui</name>
 
     <repositories>

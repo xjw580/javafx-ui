@@ -26,6 +26,12 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 @DefaultProperty("notificationFactory")
 public class NotificationManager extends HBox {
 
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 通知位置
      */
@@ -37,17 +43,23 @@ public class NotificationManager extends HBox {
     @Getter
     @Setter
     private int maxCount = Integer.MAX_VALUE;
+    /**
+     * 通知工厂
+     */
+    @Getter
+    @Setter
+    private NotificationFactory notificationFactory = new NotificationFactory();
 
     public void setNotificationPos(NotificationPosEnum notificationPos) {
         this.notificationPos = notificationPos;
         changeNotificationPos();
     }
 
-    private ChangeListener<Scene> sceneListener;
-    private final VBox notificationVBox = new VBox();
-    @Getter
-    @Setter
-    private NotificationFactory notificationFactory = new NotificationFactory();
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
 
     public NotificationManager() {
         setManaged(false);
@@ -60,6 +72,16 @@ public class NotificationManager extends HBox {
             }
         });
     }
+
+    private ChangeListener<Scene> sceneListener;
+
+    private final VBox notificationVBox = new VBox();
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
 
     private void changeNotificationPos(){
         if (getScene() == null){
@@ -129,6 +151,12 @@ public class NotificationManager extends HBox {
             }
         }
     }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
 
     public void showInfo(String title, String content, long closeTime){
         show(notificationFactory.ofNew(title, content), closeTime);

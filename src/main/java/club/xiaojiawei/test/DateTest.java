@@ -3,19 +3,15 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.Date;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -35,9 +31,9 @@ public class DateTest extends Application {
         hBox.setPrefHeight(100);
         hBox.setAlignment(Pos.CENTER);
         Date date = new Date();
-//        date.setDateInterceptor(localDate -> LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
+        date.setInterceptor(localDate -> LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
         System.out.println(date.getDate());
-        date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        date.dateReadOnlyProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         Button refresh = new Button("refresh");
         refresh.setOnMouseClicked(mouseEvent -> date.refresh());
         hBox.getChildren().addAll(new Label("test"), date, refresh);

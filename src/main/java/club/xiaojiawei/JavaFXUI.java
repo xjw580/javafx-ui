@@ -1,37 +1,59 @@
 package club.xiaojiawei;
 
+import club.xiaojiawei.enums.StylesheetEnum;
 import javafx.scene.Scene;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * 获取样式表路径
+ * 获取或添加样式表路径
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/30 0:03
  */
 @SuppressWarnings("all")
 public class JavaFXUI {
 
+    /**
+     * 向Scene添加主样式表（主样式javafx-ui.css包含所有样式）
+     * @param scene
+     */
     public static void addjavafxUIStylesheet(Scene scene){
-        scene.getStylesheets().add(JavaFXUI.javafxUIStylesheet());
+        scene.getStylesheets().add(javafxUIStylesheet());
     }
 
     /**
-     * 加载主样式表（javafx-ui.css包含所有样式）
-     * @return
+     * 获取主样式表路径（主样式javafx-ui.css包含所有样式）
+     * @return String 主样式表路径
      */
     public static String javafxUIStylesheet(){
-        return Objects.requireNonNull(JavaFXUI.class.getResource("controls/css/common/javafx-ui.css")).toExternalForm();
+        return stylesheet(StylesheetEnum.JAVAFX_UI).get(0);
     }
 
     /**
-     * 加载指定样式表
-     * @param stylesheetName
+     * 获取指定样式表路径
+     * @param stylesheetEnums
      * @return
      */
-    public static String stylesheet(String stylesheetName){
-        return Objects.requireNonNull(JavaFXUI.class.getResource("controls/css/common/" + stylesheetName)).toExternalForm();
+    public static List<String> stylesheet(StylesheetEnum... stylesheetEnums){
+        List<String> styleSheetList = new ArrayList<>();
+        if (stylesheetEnums != null){
+            for (StylesheetEnum stylesheetEnum : stylesheetEnums) {
+                String styleSheetName = stylesheetEnum.name().toLowerCase().replace("_", "-") + ".css";
+                styleSheetList.add(Objects.requireNonNull(JavaFXUI.class.getResource("controls/css/common/" + styleSheetName), styleSheetName).toExternalForm());
+            }
+        }
+        return styleSheetList;
     }
-//    TODO ADD ENUMS
+
+    /**
+     * 向Scene添加指定样式表
+     * @param scene
+     * @param stylesheetEnums
+     */
+    public static void addStylesheet(Scene scene, StylesheetEnum... stylesheetEnums){
+        scene.getStylesheets().addAll(stylesheet(stylesheetEnums));
+    }
 
 }

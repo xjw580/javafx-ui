@@ -1,3 +1,4 @@
+@import "common.css";
 /*Base*/
 .check-box-ui .box {
     -fx-background-color: white;

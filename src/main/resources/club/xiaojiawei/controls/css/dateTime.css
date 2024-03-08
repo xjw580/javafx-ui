@@ -30,3 +30,6 @@
 #timeControls{
     -fx-translate-x: -4;
 }
+#dateOuterUI, #timeOuterUI{
+    -fx-padding: 0!important;
+}

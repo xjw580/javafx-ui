@@ -1,3 +1,4 @@
+@import "common.css";
 .text-field-ui{
     -fx-effect: default-press-effect;
     -fx-background-insets: 0;

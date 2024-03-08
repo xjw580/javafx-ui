@@ -1,3 +1,4 @@
+@import "common.css";
 .text-area-ui{
     -fx-effect: default-press-effect;
     -fx-background-radius: 3;

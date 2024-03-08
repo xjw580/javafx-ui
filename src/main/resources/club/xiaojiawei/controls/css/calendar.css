@@ -1,4 +1,5 @@
 #calendar{
+    -fx-spacing: 18;
     -fx-background-color: white;
     -fx-background-radius:10;
     -fx-effect: dropshadow(gaussian, effect-color, 10, 0, 0, 0)!important;

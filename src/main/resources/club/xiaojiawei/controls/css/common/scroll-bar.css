@@ -1,3 +1,4 @@
+@import "common.css";
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     -fx-background-color :transparent;

@@ -1,28 +1,26 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.TimeIco;
-import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
-import javafx.util.Duration;
 import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.function.Predicate;
 
 import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
 import static club.xiaojiawei.controls.TimeSelector.TIME_FULL_FORMATTER;
-import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
  * 时间选择器-完整版
@@ -30,7 +28,14 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @date 2023/7/3 12:21
  */
 @SuppressWarnings("unused")
-public class Time extends StackPane {
+public class Time extends AbstractTimeField<LocalTime> {
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 时间
      */
@@ -39,7 +44,7 @@ public class Time extends StackPane {
      * 默认显示时间选择器图标
      */
     @Getter
-    private boolean showSelector = true;
+    private boolean showIcon = true;
     /**
      * 默认显示背景
      */
@@ -50,33 +55,55 @@ public class Time extends StackPane {
      */
     @Getter
     private boolean showSec;
+    /**
+     * 文本框是否有焦点
+     */
+    private final BooleanProperty focusedField = new SimpleBooleanProperty();
+
     public String getTime() {
         if (showSec){
-            return TIME_FULL_FORMATTER.format(time.get());
+            return getLocalTime() == null? "" : TIME_FULL_FORMATTER.format(getLocalTime());
         }else {
-            return TIME_FORMATTER.format(time.get());
+            return getLocalTime() == null? "" : TIME_FORMATTER.format(getLocalTime());
         }
     }
-    public ObjectProperty<LocalTime> timeProperty() {
-        return time;
+
+    public LocalTime getLocalTime(){
+        return time.get();
     }
+
     /**
      * @param time 格式：HH:mm，showSec=true时HH:mm:ss
      */
     public void setTime(String time) {
         if (time == null || time.isBlank()){
-            this.time.set(null);
+            this.setLocalTime(null);
         }else {
-            this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+            LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(time));
+            if (getInterceptor() == null || getInterceptor().test(localTime)){
+                this.setLocalTime(localTime);
+            }
         }
     }
+
     public void setLocalTime(LocalTime localTime){
         time.set(localTime);
     }
-    public void setShowSelector(boolean showSelector) {
-        timeIco.setVisible(this.showSelector = showSelector);
-        timeIco.setManaged(this.showSelector);
-        if (showSelector){
+
+    protected ObjectProperty<LocalTime> timeProperty(){
+        return time;
+    }
+
+    public ReadOnlyObjectProperty<LocalTime> timeReadOnlyProperty() {
+        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalTime>();
+        readOnlyObjectWrapper.bind(time);
+        return readOnlyObjectWrapper.getReadOnlyProperty();
+    }
+
+    public void setShowIcon(boolean showIcon) {
+        timeIco.setVisible(this.showIcon = showIcon);
+        timeIco.setManaged(this.showIcon);
+        if (showIcon){
             timeBG.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }else {
             timeBG.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
@@ -91,26 +118,48 @@ public class Time extends StackPane {
     public void setShowSec(boolean showSec) {
         this.showSec = showSec;
         if (showSec){
-            timeBG.getStyleClass().remove(TIME_BACKGROUND);
-            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND);
-            timeBG.getStyleClass().add(TIME_FULL_BACKGROUND);
+            timeBG.getStyleClass().remove(TIME_BACKGROUND_STYLE_CLASS);
+            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND_STYLE_CLASS);
+            timeBG.getStyleClass().add(TIME_FULL_BACKGROUND_STYLE_CLASS);
             sec.setVisible(true);
             sec.setManaged(true);
             minWithSecSeparator.setVisible(true);
             minWithSecSeparator.setManaged(true);
             timeSelector.setShowSec(true);
         }else {
-            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND);
-            timeBG.getStyleClass().remove(TIME_BACKGROUND);
-            timeBG.getStyleClass().add(TIME_BACKGROUND);
+            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND_STYLE_CLASS);
+            timeBG.getStyleClass().remove(TIME_BACKGROUND_STYLE_CLASS);
+            timeBG.getStyleClass().add(TIME_BACKGROUND_STYLE_CLASS);
             sec.setVisible(false);
             sec.setManaged(false);
             minWithSecSeparator.setVisible(false);
             minWithSecSeparator.setManaged(false);
             timeSelector.setShowSec(false);
         }
-        setShowSelector(this.showSelector);
+        setShowIcon(this.showIcon);
     }
+
+    public boolean isFocusedField() {
+        return focusedField.get();
+    }
+
+    public void setFocusedField(boolean focusedField) {
+        this.focusedField.set(focusedField);
+    }
+
+    public ReadOnlyBooleanProperty focusedReadOnlyProperty() {
+        ReadOnlyBooleanWrapper booleanWrapper = new ReadOnlyBooleanWrapper();
+        booleanWrapper.bind(focusedField);
+        return booleanWrapper.getReadOnlyProperty();
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    public Time() {}
 
     @FXML
     private Label timeBG;
@@ -124,54 +173,25 @@ public class Time extends StackPane {
     private TimeIco timeIco;
     @FXML
     private Label minWithSecSeparator;
+
     private static final int MAX_HOUR = 23;
     private static final int MAX_MIN = 59;
     private static final int MAX_SEC = 59;
-    @Getter
-    private Popup timeSelectorPopup;
-    private static final String TIME_BACKGROUND = "timeBackground";
-    private static final String TIME_FULL_BACKGROUND = "timeFullBackground";
+    private static final String TIME_BACKGROUND_STYLE_CLASS = "timeBackground";
+    private static final String TIME_FULL_BACKGROUND_STYLE_CLASS = "timeFullBackground";
     private static final String TIME_BACKGROUND_FOCUS_STYLE_CLASS = "timeBackgroundFocus";
     private static final String HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS = "hideIcoTimeBackground";
     private static final String HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS = "hideIcoTimeFullBackground";
+
     private boolean isFromTime;
     private TimeSelector timeSelector;
-    private ChangeListener<Boolean> focusChangeListener;
-    public Time() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-            afterFXMLLoaded();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private void afterFXMLLoaded(){
-        initTimeSelectorPopup();
-        initTimeTextField(hour, MAX_HOUR);
-        initTimeTextField(min, MAX_MIN);
-        initTimeTextField(sec, MAX_SEC);
-        initTimeIco();
-        focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
-            hour.setFocusTraversable(t1);
-            min.setFocusTraversable(t1);
-            sec.setFocusTraversable(t1);
-        });
-    }
 
-    /**
-     * 初始化时间选择器
-     */
-    private void initTimeSelectorPopup(){
-        timeSelectorPopup = new Popup();
-        timeSelector = new TimeSelector();
-        time = timeSelector.timeProperty();
-        time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
-        timeSelectorPopup.getContent().add(timeSelector);
-        timeSelectorPopup.setAutoHide(true);
-    }
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     private void updateCompleteTimeTextField(LocalTime newTime){
         isFromTime = true;
         if (newTime == null){
@@ -190,17 +210,6 @@ public class Time extends StackPane {
         isFromTime = false;
     }
 
-    private void initTimeIco(){
-        timeIco.setOnMouseClicked(e -> {
-            Bounds bounds = timeIco.localToScreen(timeIco.getBoundsInLocal());
-            timeSelectorPopup.setAnchorX(bounds.getMaxX() - 50);
-            timeSelectorPopup.setAnchorY(bounds.getMaxY() - 5);
-            timeSelectorPopup.show(this.getScene().getWindow());
-            FADE.play(timeSelectorPopup.getContent().get(0), 0.5D, 1D, Duration.millis(200));
-        });
-    }
-
-
     /**
      * 初始化时间文本框
      * @param textField
@@ -212,15 +221,25 @@ public class Time extends StackPane {
         textField.setOnKeyPressed(keyPressedEventHandler(textField, maxValue));
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank()) && (!showSec || sec.getText() == null || sec.getText().isBlank())){
-                time.set(null);
+                setLocalTime(null);
             }else if (!isFromTime && newValue.length() == 2){
                 if ((hour.getText() == null || hour.getText().isBlank()) && (min.getText() == null || min.getText().isBlank()) && (!showSec || sec.getText() == null || sec.getText().isBlank())){
-                    time.set(null);
+                    setLocalTime(null);
                 }else if (hour.getText() != null && !hour.getText().isBlank() && min.getText() != null && !min.getText().isBlank()){
                     if (showSec && sec.getText() != null && !sec.getText().isBlank()){
-                        time.set(LocalTime.from(TIME_FULL_FORMATTER.parse(hour.getText() + ":" + min.getText() + ":" + sec.getText())));
+                        LocalTime localTime = LocalTime.from(TIME_FULL_FORMATTER.parse(hour.getText() + ":" + min.getText() + ":" + sec.getText()));
+                        if (getInterceptor() == null || getInterceptor().test(localTime)){
+                            setLocalTime(localTime);
+                        }else {
+                            updateCompleteTimeTextField(getLocalTime());
+                        }
                     }else {
-                        time.set(LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText())));
+                        LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText()));
+                        if (getInterceptor() == null || getInterceptor().test(localTime)){
+                            setLocalTime(localTime);
+                        }else {
+                            updateCompleteTimeTextField(getLocalTime());
+                        }
                     }
                 }
             }
@@ -277,9 +296,7 @@ public class Time extends StackPane {
             }else {
                 timeBG.getStyleClass().add(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
             }
-            if (focusChangeListener != null){
-                focusChangeListener.changed(observableValue, aBoolean, isFocus);
-            }
+            setFocusedField(hour.isFocused() || min.isFocused() || sec.isFocused());
         };
     }
 
@@ -294,29 +311,79 @@ public class Time extends StackPane {
         }
     }
 
-    private int parseInt(String s){
-        if (s == null || s.isBlank()){
-            return 0;
-        }
-        return Integer.parseInt(s);
-    }
-    public void setOnFocusChangeListener(ChangeListener<Boolean> changeListener){
-        focusChangeListener = changeListener;
+    @Override
+    protected Popup createPopup() {
+        Popup timeSelectorPopup = new Popup();
+        timeSelector = new TimeSelector();
+        time = timeSelector.timeProperty();
+        time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
+        timeSelectorPopup.getContent().add(timeSelector);
+        timeSelectorPopup.setAutoHide(true);
+        return timeSelectorPopup;
     }
 
-    /**
-     * 刷新显示的时间，和真正存储的时间同步
-     */
+    @Override
+    protected void loadPage() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void afterPageLoaded() {
+        initTimeTextField(hour, MAX_HOUR);
+        initTimeTextField(min, MAX_MIN);
+        initTimeTextField(sec, MAX_SEC);
+        focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
+            hour.setFocusTraversable(t1);
+            min.setFocusTraversable(t1);
+            sec.setFocusTraversable(t1);
+        });
+    }
+
+    @Override
+    protected Node createIconNode() {
+        return timeIco;
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    @Override
+    public Predicate<LocalTime> getInterceptor() {
+        return this.timeSelector.getInterceptor();
+    }
+
+    @Override
+    public ObjectProperty<Predicate<LocalTime>> interceptorProperty() {
+        return this.timeSelector.interceptorProperty();
+    }
+
+    @Override
+    public void setInterceptor(Predicate<LocalTime> timeInterceptor) {
+        this.timeSelector.setInterceptor(timeInterceptor);
+    }
+
+    @Override
     public void refresh(){
-        if (time.get() == null){
+        if (getLocalTime() == null){
             isFromTime = true;
             hour.setText("");
             min.setText("");
             isFromTime = false;
         }else {
-            String[] times = TIME_FORMATTER.format(time.get()).split(":");
+            String[] times = TIME_FORMATTER.format(getLocalTime()).split(":");
             hour.setText(times[0]);
             min.setText(times[1]);
         }
     }
+
 }

@@ -54,10 +54,7 @@ public class MessageBox extends Group {
         color = new SimpleStringProperty();
         padding = new Insets(8, 8, 8, 8);
     }
-    @FXML
-    private Polygon triangle;
-    @FXML
-    private Label msg;
+
     public MessageBox() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -70,6 +67,12 @@ public class MessageBox extends Group {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    private Polygon triangle;
+    @FXML
+    private Label msg;
+
     private void afterFXMLLoaded(){
         color.addListener((observableValue, s, t1) -> {
             msg.setStyle(String.format("-fx-background-color: %s", t1));

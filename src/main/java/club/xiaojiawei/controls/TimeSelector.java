@@ -1,7 +1,10 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.func.Interceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +20,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 
@@ -25,7 +29,14 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
  * @date 2023/10/25 17:33
  */
 @SuppressWarnings("unused")
-public class TimeSelector extends FlowPane {
+public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 时间
      */
@@ -38,27 +49,49 @@ public class TimeSelector extends FlowPane {
      * 显示秒
      */
     @Getter private boolean showSec;
+
+    /**
+     * 时间拦截器，点击日期时拦截是否应用
+     */
+    private final ObjectProperty<Predicate<LocalTime>> timeInterceptor = new SimpleObjectProperty<>();
+
     /**
      * @param time 格式：HH:mm，showSec=true时HH:mm:ss
      */
     public void setTime(String time) {
         if (time == null || time.isBlank()){
-            this.time.set(null);
+            setLocalTime(null);
         }else if (showSec){
-            this.time.set(LocalTime.from(TIME_FULL_FORMATTER.parse(time)));
+            setLocalTime(LocalTime.from(TIME_FULL_FORMATTER.parse(time)));
         }else {
-            this.time.set(LocalTime.from(TIME_FORMATTER.parse(time)));
+            setLocalTime(LocalTime.from(TIME_FORMATTER.parse(time)));
         }
     }
+
     public void setLocalTime(LocalTime localTime){
-        time.set(localTime);
+        if (getInterceptor() == null || getInterceptor().test(localTime)){
+            time.set(localTime);
+        }
     }
+
     public String getTime() {
-        return time.get() == null? null : (showSec? TIME_FULL_FORMATTER.format(time.get()) : TIME_FORMATTER.format(time.get()));
+        return getLocalTime() == null? null : (showSec? TIME_FULL_FORMATTER.format(getLocalTime()) : TIME_FORMATTER.format(getLocalTime()));
     }
-    public ObjectProperty<LocalTime> timeProperty() {
+
+    public LocalTime getLocalTime(){
+        return time.get();
+    }
+
+    protected ObjectProperty<LocalTime> timeProperty(){
         return time;
     }
+
+    public ReadOnlyObjectProperty<LocalTime> timeReadOnlyProperty() {
+        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalTime>();
+        readOnlyObjectWrapper.bind(time);
+        return readOnlyObjectWrapper.getReadOnlyProperty();
+    }
+
     public void setShowRowCount(double showRowCount) {
         this.showRowCount = showRowCount;
         double height = showRowCount * ROW_HEIGHT;
@@ -71,35 +104,24 @@ public class TimeSelector extends FlowPane {
     public void setShowSec(boolean showSec) {
         this.showSec = showSec;
         if (showSec){
-            this.setMinWidth(128);
-            this.setMaxWidth(128);
+            this.setMinWidth(132);
+            this.setMaxWidth(132);
             secSelector.setVisible(true);
             secSelector.setManaged(true);
         }else {
-            this.setMinWidth(86);
-            this.setMaxWidth(86);
+            this.setMinWidth(90);
+            this.setMaxWidth(90);
             secSelector.setVisible(false);
             secSelector.setManaged(false);
         }
     }
 
-    @FXML private ScrollPane hourSelector;
-    @FXML private ScrollPane minSelector;
-    @FXML private ScrollPane secSelector;
-    @FXML private VBox hourVbox;
-    @FXML private VBox minVbox;
-    @FXML private VBox secVbox;
-    private static final String SELECTED_TIME_LABEL_STYLE_CLASS = "selectedTimeLabel";
-    private static final String TIME_LABEL_STYLE_CLASS = "timeLabel";
-    private static final int MAX_HOUR = 23;
-    private static final int MAX_MIN = 59;
-    private static final int MAX_SEC = 59;
-    private static final double ROW_HEIGHT = 30D;
-    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
-    public static final DateTimeFormatter TIME_FULL_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
-    private final ToggleGroup hourGroup = new ToggleGroup();
-    private final ToggleGroup minGroup = new ToggleGroup();
-    private final ToggleGroup secGroup = new ToggleGroup();
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     public TimeSelector() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -111,6 +133,33 @@ public class TimeSelector extends FlowPane {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML private ScrollPane hourSelector;
+    @FXML private ScrollPane minSelector;
+    @FXML private ScrollPane secSelector;
+    @FXML private VBox hourVbox;
+    @FXML private VBox minVbox;
+    @FXML private VBox secVbox;
+
+    private static final String SELECTED_TIME_LABEL_STYLE_CLASS = "selectedTimeLabel";
+    private static final String TIME_LABEL_STYLE_CLASS = "timeLabel";
+    private static final int MAX_HOUR = 23;
+    private static final int MAX_MIN = 59;
+    private static final int MAX_SEC = 59;
+    private static final double ROW_HEIGHT = 30D;
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    public static final DateTimeFormatter TIME_FULL_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    private final ToggleGroup hourGroup = new ToggleGroup();
+    private final ToggleGroup minGroup = new ToggleGroup();
+    private final ToggleGroup secGroup = new ToggleGroup();
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     private void afterFXMLLoaded(){
         addTimePropertyChangedListener();
         buildTimeSelector(hourVbox.getChildren(), MAX_HOUR, hourGroup);
@@ -215,13 +264,32 @@ public class TimeSelector extends FlowPane {
                 ((ToggleButton)newToggle).getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
             }
 //            设置时间
-            if (hourGroup.getSelectedToggle() != null && minGroup.getSelectedToggle() != null){
+            if (hourGroup.getSelectedToggle() != null){
+                if (minGroup.getSelectedToggle() == null){
+                    if (getInterceptor() != null
+                            && (!getInterceptor().test(LocalTime.of(Integer.parseInt(((ToggleButton) hourGroup.getSelectedToggle()).getText()), LocalTime.MIN.getMinute()))
+                                || !getInterceptor().test(LocalTime.of(Integer.parseInt(((ToggleButton) hourGroup.getSelectedToggle()).getText()), LocalTime.MAX.getMinute())))
+                    ){
+                        timeToggleGroup.selectToggle(oldToggle);
+                    }
+                    return;
+                }
                 if (showSec){
                     if (secGroup.getSelectedToggle() != null){
-                        setTime(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) secGroup.getSelectedToggle()).getText());
+                        LocalTime localTime = LocalTime.from(TIME_FULL_FORMATTER.parse(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) secGroup.getSelectedToggle()).getText()));
+                        if (getInterceptor() == null || getInterceptor().test(localTime)){
+                            setLocalTime(localTime);
+                        }else {
+                            timeToggleGroup.selectToggle(oldToggle);
+                        }
                     }
                 }else {
-                    setTime(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText());
+                    LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText()));
+                    if (getInterceptor() == null || getInterceptor().test(localTime)){
+                        setLocalTime(localTime);
+                    }else {
+                        timeToggleGroup.selectToggle(oldToggle);
+                    }
                 }
             }
         });
@@ -233,21 +301,42 @@ public class TimeSelector extends FlowPane {
     private void addTimeSelectorKeyPressedListener(){
         hourSelector.setOnKeyPressed(event -> {
             switch (event.getCode()){
-                case UP -> time.set(time.get().plusHours(1));
-                case DOWN -> time.set(time.get().minusHours(1));
+                case UP -> setLocalTime(getLocalTime().plusHours(1));
+                case DOWN -> setLocalTime(getLocalTime().minusHours(1));
             }
         });
         minSelector.setOnKeyPressed(event -> {
             switch (event.getCode()){
-                case UP -> time.set(time.get().plusMinutes(1));
-                case DOWN -> time.set(time.get().minusMinutes(1));
+                case UP -> setLocalTime(getLocalTime().plusMinutes(1));
+                case DOWN -> setLocalTime(getLocalTime().minusMinutes(1));
             }
         });
         secSelector.setOnKeyPressed(event -> {
             switch (event.getCode()){
-                case UP -> time.set(time.get().plusSeconds(1));
-                case DOWN -> time.set(time.get().minusSeconds(1));
+                case UP -> setLocalTime(getLocalTime().plusSeconds(1));
+                case DOWN -> setLocalTime(getLocalTime().minusSeconds(1));
             }
         });
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    @Override
+    public Predicate<LocalTime> getInterceptor() {
+        return timeInterceptor.get();
+    }
+
+    @Override
+    public ObjectProperty<Predicate<LocalTime>> interceptorProperty() {
+        return timeInterceptor;
+    }
+
+    @Override
+    public void setInterceptor(Predicate<LocalTime> dateInterceptor) {
+        this.timeInterceptor.set(dateInterceptor);
     }
 }

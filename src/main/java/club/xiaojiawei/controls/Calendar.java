@@ -1,10 +1,14 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.func.Interceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,33 +44,108 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_Y;
  */
 @Slf4j
 @SuppressWarnings("unused")
-public class Calendar extends VBox {
+public class Calendar extends VBox implements Interceptor<LocalDate> {
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 日期
      */
-    private ObjectProperty<LocalDate> date;
+    protected ObjectProperty<LocalDate> date;
+    /**
+     * 点击清除按钮事件处理器
+     */
+    private final ObjectProperty<EventHandler<MouseEvent>> onClearEventHandler = new SimpleObjectProperty<>();
+    /**
+     * 点击今天按钮事件处理器
+     */
+    private final ObjectProperty<EventHandler<MouseEvent>> onTodayEventHandler = new SimpleObjectProperty<>();
+    /**
+     * 日期拦截器，点击日期时拦截是否应用
+     */
+    private final ObjectProperty<Predicate<LocalDate>> dateInterceptor = new SimpleObjectProperty<>();
+
     public String getDate() {
-        return date.get() == null? "" : DATE_FORMATTER.format(date.get());
+        return getLocalDate() == null? "" : DATE_FORMATTER.format(getLocalDate());
     }
-    public ObjectProperty<LocalDate> dateProperty() {
+
+    public LocalDate getLocalDate(){
+        return date.get();
+    }
+
+    protected ObjectProperty<LocalDate> dateProperty(){
         return date;
     }
+
     /**
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
         if (date == null || date.isBlank()){
-            this.date.set(null);
+            setLocalDate(null);
         }else {
-            LocalDate localDate = LocalDate.from(DATE_FORMATTER.parse(date));
-            if (dateInterceptor == null || dateInterceptor.test(localDate)){
-                this.date.set(localDate);
-            }
+            setLocalDate(LocalDate.from(DATE_FORMATTER.parse(date)));
         }
     }
+
     public void setLocalDate(LocalDate localDate){
-        date.set(localDate);
+        if (getInterceptor() == null || getInterceptor().test(localDate)){
+            date.set(localDate);
+        }
     }
+
+    public ReadOnlyObjectProperty<LocalDate> dateReadOnlyProperty() {
+        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalDate>();
+        readOnlyObjectWrapper.bind(date);
+        return readOnlyObjectWrapper.getReadOnlyProperty();
+    }
+
+    public EventHandler<MouseEvent> getOnClearEventHandler() {
+        return onClearEventHandler.get();
+    }
+
+    public ObjectProperty<EventHandler<MouseEvent>> onClearEventHandlerProperty() {
+        return onClearEventHandler;
+    }
+
+    public void setOnClearEventHandler(EventHandler<MouseEvent> onClearEventHandler) {
+        this.onClearEventHandler.set(onClearEventHandler);
+    }
+
+    public EventHandler<MouseEvent> getOnTodayEventHandler() {
+        return onTodayEventHandler.get();
+    }
+
+    public ObjectProperty<EventHandler<MouseEvent>> onTodayEventHandlerProperty() {
+        return onTodayEventHandler;
+    }
+
+    public void setOnTodayEventHandler(EventHandler<MouseEvent> onTodayEventHandler) {
+        this.onTodayEventHandler.set(onTodayEventHandler);
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    public Calendar() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+            afterFXMLLoaded();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     private Label dateMsg;
     @FXML
@@ -87,46 +166,37 @@ public class Calendar extends VBox {
     private VBox monthPane;
     @FXML
     private HBox bottomMsg;
-    private TilePane showMonthPane;
+
     private static final DateTimeFormatter SHORT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy年MM月");
-    private EventHandler<MouseEvent> clearEventHandler;
-    private EventHandler<MouseEvent> todayEventHandler;
-    private static final String SELECTED_DAY_LABEL = "selectedDayLabel";
-    private static final String DAY_LABEL = "dayLabel";
-    private static final String DAY_PANE = "dayPane";
-    private static final String BLACK_FONT = "blackFont";
+    private static final String SELECTED_DAY_LABEL_STYLE_CLASS = "selectedDayLabel";
+    private static final String DAY_LABEL_STYLE_CLASS = "dayLabel";
+    private static final String DAY_PANE_STYLE_CLASS = "dayPane";
+    private static final String BLACK_FONT_STYLE_CLASS = "blackFont";
+
+    private TilePane showMonthPane;
     private Node selectedLabel;
+    private DateSelector dateSelector;
     private Popup popup;
-    /**
-     * 日期拦截器，点击日期时拦截是否应用
-     */
-    private Predicate<LocalDate> dateInterceptor;
-    public Calendar() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-            afterFXMLLoaded();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     private void afterFXMLLoaded(){
         lastMonth.setOnMouseClicked(event -> beforeDate());
         nextMonth.setOnMouseClicked(event -> laterDate());
         today.setOnMouseClicked(event -> {
             LocalDate nowLocalDate = LocalDate.now();
-            if (dateInterceptor == null || dateInterceptor.test(nowLocalDate)){
-                if (Objects.equals(nowLocalDate, date.get())){
+            if (Objects.equals(nowLocalDate, getLocalDate())){
 //                可能不在当前日期面板，需要跳转
-                    skipToPointDate(nowLocalDate);
-                }else {
-                    date.set(nowLocalDate);
-                }
+                skipToPointDate(nowLocalDate);
+            }else {
+                setLocalDate(nowLocalDate);
             }
         });
-        clear.setOnMouseClicked(mouseEvent -> date.set(null));
+        clear.setOnMouseClicked(mouseEvent -> setLocalDate(null));
         initDateSelectorPopup();
         addDatePropertyListener();
         LocalDate now = LocalDate.now();
@@ -137,7 +207,7 @@ public class Calendar extends VBox {
 
     private void initDateSelectorPopup(){
         popup = new Popup();
-        DateSelector dateSelector = new DateSelector();
+        dateSelector = new DateSelector();
         date = dateSelector.dateProperty();
         dateMsg.setText(SHORT_DATE_FORMATTER.format(LocalDate.now()));
         popup.getContent().add(dateSelector);
@@ -172,15 +242,15 @@ public class Calendar extends VBox {
     private void skipToPointDate(LocalDate newDate){
         if (newDate == null){
             if (selectedLabel != null){
-                selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
             }
             return;
         }
         if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) == newDate.getYear() * 100 + newDate.getMonthValue()){
             if (selectedLabel != null){
-                selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
             }
-            (selectedLabel = findPointDay(newDate)).getStyleClass().add(SELECTED_DAY_LABEL);
+            (selectedLabel = findPointDay(newDate)).getStyleClass().add(SELECTED_DAY_LABEL_STYLE_CLASS);
         }else if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) < newDate.getYear() * 100 + newDate.getMonthValue()){
             laterDate(newDate);
         }else {
@@ -195,12 +265,8 @@ public class Calendar extends VBox {
      */
     private Label addDay(TilePane tilePane, LocalDate selfDate){
         Label label = new Label(String.valueOf(selfDate.getDayOfMonth()));
-        label.getStyleClass().add(DAY_LABEL);
-        label.setOnMouseClicked(event -> {
-            if (dateInterceptor == null || dateInterceptor.test(selfDate)){
-                date.set(selfDate);
-            }
-        });
+        label.getStyleClass().add(DAY_LABEL_STYLE_CLASS);
+        label.setOnMouseClicked(event -> setLocalDate(selfDate));
         tilePane.getChildren().add(label);
         return label;
     }
@@ -227,17 +293,18 @@ public class Calendar extends VBox {
                 timeline.play();
                 if (selectedLabel != null){
                     try {
-                        selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                        selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
                     }catch (NullPointerException e){
                         log.warn("方向键按太快导致，不影响正常使用", e);
                     }
                 }
                 if ((selectedLabel = findPointDay()) != null){
-                    selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL);
+                    selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL_STYLE_CLASS);
                 }
             }
         }, 50);
     }
+
     private void laterDate(){
         LocalDate tempDate = LocalDate.from(DateTimeFormatter.ofPattern("yyyy年MM月dd").parse(dateMsg.getText() + "01"));
         if (tempDate.getMonthValue() < 12){
@@ -275,14 +342,15 @@ public class Calendar extends VBox {
                 });
                 parallelTransition.play();
                 if (selectedLabel != null){
-                    selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL);
+                    selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
                 }
                 if ((selectedLabel = findPointDay()) != null){
-                    selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL);
+                    selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL_STYLE_CLASS);
                 }
             }
         }, 50);
     }
+
     private void beforeDate(){
         LocalDate tempDate = LocalDate.from(DateTimeFormatter.ofPattern("yyyy年MM月dd").parse(dateMsg.getText() + "01"));
         if (tempDate.getMonthValue() > 1){
@@ -313,8 +381,9 @@ public class Calendar extends VBox {
         }
         return new Label();
     }
+
     private Node findPointDay(){
-        return findPointDay(date.get());
+        return findPointDay(getLocalDate());
     }
 
     /**
@@ -340,7 +409,7 @@ public class Calendar extends VBox {
 //            添加当月所有天数
         int currentMonthMaxDay = DateSelector.calcMaxDayForMonth(buildDate);
         for (int i = 1; i <= currentMonthMaxDay; i++) {
-            addDay(tilePane, buildDate.withDayOfMonth(i)).getStyleClass().add(BLACK_FONT);
+            addDay(tilePane, buildDate.withDayOfMonth(i)).getStyleClass().add(BLACK_FONT_STYLE_CLASS);
         }
 //            添加下月剩余天数
         tempDate = buildDate.plusMonths(1);
@@ -350,26 +419,30 @@ public class Calendar extends VBox {
         for (int i = 1; i <= 42 - lastMonthDays - currentMonthMaxDay; i++){
             addDay(tilePane, tempDate.withDayOfMonth(i));
         }
-        tilePane.getStyleClass().add(DAY_PANE);
+        tilePane.getStyleClass().add(DAY_PANE_STYLE_CLASS);
         monthsPane.getChildren().add(tilePane);
         return tilePane;
     }
-    public void addClearMouseClickedListener(EventHandler<MouseEvent> eventHandler){
-        clear.addEventHandler(MouseEvent.MOUSE_CLICKED, clearEventHandler = eventHandler);
+
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    @Override
+    public Predicate<LocalDate> getInterceptor() {
+        return this.dateSelector.getInterceptor();
     }
-    public void removeClearMouseClickedListener(){
-        clear.removeEventHandler(MouseEvent.MOUSE_CLICKED, clearEventHandler);
+
+    @Override
+    public ObjectProperty<Predicate<LocalDate>> interceptorProperty() {
+        return this.dateInterceptor;
     }
-    public void addTodayMouseClickedListener(EventHandler<MouseEvent> eventHandler){
-        today.addEventHandler(MouseEvent.MOUSE_CLICKED, todayEventHandler = eventHandler);
+
+    @Override
+    public void setInterceptor(Predicate<LocalDate> dateInterceptor) {
+        this.dateSelector.setInterceptor(dateInterceptor);
     }
-    public void removeTodayMouseClickedListener(){
-        today.removeEventHandler(MouseEvent.MOUSE_CLICKED, todayEventHandler);
-    }
-    public void setDateInterceptor(Predicate<LocalDate> dateInterceptor){
-        this.dateInterceptor = dateInterceptor;
-    }
-    public void removeDateInterceptor(){
-        this.dateInterceptor = null;
-    }
+
 }

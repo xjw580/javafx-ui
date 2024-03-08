@@ -1,4 +1,4 @@
-#content{
+#FileUploader{
     -fx-padding: 15;
     -fx-border-radius: 3;
     -fx-cursor: hand;
@@ -8,18 +8,4 @@
     -fx-alignment: CENTER;
     -fx-hgap: 15;
     -fx-vgap: 15;
-}
-.image{
-    -fx-background-size: cover;
-    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 3, 0, 3, 3);
-}
-.close{
-    -fx-background-color: white;
-    -fx-background-radius: 9;
-}
-.text{
-    -fx-background-color: rgba(255, 255, 255, 0.8);
-    -fx-effect: default-effect;
-    -fx-background-radius: 10;
-    -fx-padding: 1 5 1 5;
 }

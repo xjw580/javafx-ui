@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.ico.FailIco?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.Group?>
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+         stylesheets="@css/fileUploaderItem.css"
+         fx:id="fileUploaderItem"
+         maxHeight="100" minHeight="100" maxWidth="100" minWidth="100">
+    <VBox fx:id="msgOuter" prefWidth="100" alignment="CENTER">
+        <Label fx:id="fileNameLabel"/>
+        <Label fx:id="fileSizeLabel"/>
+        <ProgressIndicator visible="false" fx:id="uploadProgressIndicator" styleClass="progress-indicator-ui"/>
+    </VBox>
+    <Group fx:id="closeIcoGroup">
+        <StackPane fx:id="closeIcoOuter" translateX="91" translateY="-9">
+            <FailIco scaleY="1.5" scaleX="1.5"/>
+        </StackPane>
+    </Group>
+</fx:root>

@@ -25,9 +25,9 @@
         </VBox>
         <Label text="decimalCount属性限制小数的数量" styleClass="title-three"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <NumberField styleClass="text-field-ui"/>
-            <NumberField styleClass="text-field-ui" decimalCount="1"/>
-            <NumberField styleClass="text-field-ui" decimalCount="2"/>
+            <NumberField styleClass="text-field-ui" promptText="小数数量=0"/>
+            <NumberField styleClass="text-field-ui" decimalCount="1" promptText="小数数量=1"/>
+            <NumberField styleClass="text-field-ui" decimalCount="2" promptText="小数数量=2"/>
         </VBox>
         <Label text="数值增长动画，调用increment方法，playTransition形参为true" styleClass="title-three"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">

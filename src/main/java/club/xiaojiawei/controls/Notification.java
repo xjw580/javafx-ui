@@ -30,6 +30,33 @@ import java.util.Iterator;
 @Slf4j
 public class Notification extends Group {
 
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
+    /**
+     * 通知类型
+     */
+    @Getter
+    private NotificationTypeEnum type = NotificationTypeEnum.INFO;
+    /**
+     * 是否显示关闭通知按钮
+     */
+    @Getter
+    private boolean showingCloseBtn = true;
+    /**
+     * 动画时间
+     */
+    @Getter
+    @Setter
+    private double transitionTime = 200D;
+    /**
+     * 通知的尺寸
+     */
+    @Getter
+    private SizeEnum size;
     /**
      * 内容最大宽度，超过此宽度将换行
      */
@@ -43,27 +70,34 @@ public class Notification extends Group {
      */
     private final StringProperty content;
     /**
-     * 通知类型
-     */
-    @Getter
-    private NotificationTypeEnum type = NotificationTypeEnum.INFO;
-    /**
      * 是否显示通知
      */
     private final BooleanProperty showing = new SimpleBooleanProperty(false);
-    /**
-     * 是否显示关闭通知按钮
-     */
-    @Getter
-    private boolean showingCloseBtn = true;
-    /**
-     * 动画时间
-     */
-    @Getter
-    @Setter
-    private double transitionTime = 200D;
-    @Getter
-    private SizeEnum size;
+
+    public void setShowingCloseBtn(boolean showingCloseBtn) {
+        this.showingCloseBtn = showingCloseBtn;
+        closeIcoPane.setManaged(showingCloseBtn);
+        closeIcoPane.setVisible(showingCloseBtn);
+    }
+
+    public void setSize(SizeEnum size) {
+        this.size = size;
+        switch (size){
+            case BIG -> {
+                removeSizeStyleClass();
+                notificationVBox.getStyleClass().add("notificationVBox-big");
+            }
+            case MEDDLE, DEFAULT -> removeSizeStyleClass();
+            case SMALL -> {
+                removeSizeStyleClass();
+                notificationVBox.getStyleClass().add("notificationVBox-small");
+            }
+            case TINY -> {
+                removeSizeStyleClass();
+                notificationVBox.getStyleClass().add("notificationVBox-tiny");
+            }
+        }
+    }
 
     public double getContentMaxWidth() {
         return contentMaxWidth.get();
@@ -111,50 +145,11 @@ public class Notification extends Group {
         this.showing.set(showing);
     }
 
-    public void setShowingCloseBtn(boolean showingCloseBtn) {
-        this.showingCloseBtn = showingCloseBtn;
-        closeIcoPane.setManaged(showingCloseBtn);
-        closeIcoPane.setVisible(showingCloseBtn);
-    }
-
-    public void setSize(SizeEnum size) {
-        this.size = size;
-        switch (size){
-            case BIG -> {
-                removeSizeStyleClass();
-                notificationVBox.getStyleClass().add("notificationVBox-big");
-            }
-            case MEDDLE, DEFAULT -> removeSizeStyleClass();
-            case SMALL -> {
-                removeSizeStyleClass();
-                notificationVBox.getStyleClass().add("notificationVBox-small");
-            }
-            case TINY -> {
-                removeSizeStyleClass();
-                notificationVBox.getStyleClass().add("notificationVBox-tiny");
-            }
-        }
-    }
-    private void removeSizeStyleClass(){
-        notificationVBox.getStyleClass().removeIf(s -> s.startsWith("notificationVBox-"));
-    }
-
-    @FXML
-    private Label titleLabel;
-    @FXML
-    private Label contentLabel;
-    @FXML
-    private HBox bottomHBox;
-    @FXML
-    private StackPane closeIcoPane;
-    @FXML
-    private StackPane tipIcoPane;
-    @FXML
-    private VBox notificationVBox;
-
-    private ParallelTransition parallelTransition;
-    private Runnable transitionFinishedRunnable;
-    private Runnable closeRunnable;
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
 
     public Notification() {
         try {
@@ -186,12 +181,37 @@ public class Notification extends Group {
         this(title, content);
         setType(type);
     }
+
+    @FXML
+    private Label titleLabel;
+    @FXML
+    private Label contentLabel;
+    @FXML
+    private HBox bottomHBox;
+    @FXML
+    private StackPane closeIcoPane;
+    @FXML
+    private StackPane tipIcoPane;
+    @FXML
+    private VBox notificationVBox;
+
+    private ParallelTransition parallelTransition;
+    private Runnable transitionFinishedRunnable;
+    private Runnable closeRunnable;
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     private void afterFXMLLoaded(){
         this.setVisible(false);
         this.setManaged(false);
         this.setOpacity(0D);
         addListener();
     }
+
     private void addListener(){
         showing.addListener((observableValue, aBoolean, t1) -> {
             parallelTransition = new ParallelTransition();
@@ -237,12 +257,24 @@ public class Notification extends Group {
         });
     }
 
+    private void removeSizeStyleClass(){
+        notificationVBox.getStyleClass().removeIf(s -> s.startsWith("notificationVBox-"));
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     public void show(){
         showing.set(true);
     }
+
     public void hide(){
         showing.set(false);
     }
+
     public void hide(Runnable transitionFinishedRunnable){
         this.transitionFinishedRunnable = transitionFinishedRunnable;
         hide();

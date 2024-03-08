@@ -26,7 +26,13 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.*;
  * @date 2023/7/3 12:21
  */
 @SuppressWarnings("unused")
-public class Switch extends StackPane implements Initializable {
+public class Switch extends StackPane{
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
     /**
      * 默认动画时间为200ms
      */
@@ -102,14 +108,13 @@ public class Switch extends StackPane implements Initializable {
 //        switchCircle.setLayoutY(size / 2);
         switchCircle.setRadius(size / 4);
     }
-    @FXML
-    private Circle switchCircle;
-    @FXML
-    private Rectangle switchRectangle;
-    @FXML
-    private Rectangle switchClipRectangle;
-    @FXML
-    private Rectangle bgRectangle;
+
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     public Switch() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -122,11 +127,26 @@ public class Switch extends StackPane implements Initializable {
         this.setOnMouseClicked(this::onMouseClicked);
     }
 
+    @FXML
+    private Circle switchCircle;
+    @FXML
+    private Rectangle switchRectangle;
+    @FXML
+    private Rectangle switchClipRectangle;
+    @FXML
+    private Rectangle bgRectangle;
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 开关被点击后触发事件
      * @param event
      */
-    protected void onMouseClicked(MouseEvent event) {
+    private void onMouseClicked(MouseEvent event) {
         switch (transitionType) {
             case FADE -> {
                 fadeTranslation();
@@ -175,6 +195,7 @@ public class Switch extends StackPane implements Initializable {
             FADE.play(switchRectangle, fadeFrom, fadeTo, transitionDuration);
         }
     }
+
     /**
      * 开关中的背景动画：平移
      */
@@ -194,6 +215,7 @@ public class Switch extends StackPane implements Initializable {
     private void scaleTranslation(){
 
     }
+
     /**
      * 开关中的背景动画：无
      */
@@ -205,8 +227,8 @@ public class Switch extends StackPane implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML void initialize() {
         setSize(size);
     }
+
 }

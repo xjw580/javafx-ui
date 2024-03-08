@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.layout.HBox?>
 <?import club.xiaojiawei.controls.ico.DateIco?>
-<fx:root type="StackPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.layout.StackPane?>
+<fx:root type="Group" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          stylesheets="@css/date.css">
-    <Label fx:id="dateBG" styleClass="dateBackground"/>
-    <HBox alignment="CENTER">
-        <TextField fx:id="year" promptText="年" styleClass="text-field" style="-fx-pref-width: 32!important;"/>
-        <Label text="/" styleClass="dateSeparator"/>
-        <TextField fx:id="month" promptText="月" styleClass="text-field"/>
-        <Label text="/" styleClass="dateSeparator" />
-        <TextField fx:id="day" promptText="日" styleClass="text-field"/>
-        <DateIco fx:id="dateIco"/>
-    </HBox>
+    <StackPane fx:id="dateOuterUI" style="-fx-padding: 10">
+        <Label fx:id="dateBG" styleClass="dateBackground"/>
+        <HBox alignment="CENTER">
+            <TextField fx:id="year" promptText="年" styleClass="text-field" style="-fx-pref-width: 32!important;"/>
+            <Label text="/" styleClass="dateSeparator"/>
+            <TextField fx:id="month" promptText="月" styleClass="text-field"/>
+            <Label text="/" styleClass="dateSeparator" />
+            <TextField fx:id="day" promptText="日" styleClass="text-field"/>
+            <DateIco fx:id="dateIco"/>
+        </HBox>
+    </StackPane>
 </fx:root>

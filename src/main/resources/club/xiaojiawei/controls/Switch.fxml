@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
-<fx:root type="StackPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/switch.css" style="-fx-cursor: hand">
+<fx:root type="StackPane"  xmlns:fx="http://javafx.com/fxml" stylesheets="@css/switch.css" style="-fx-cursor: hand">
     <!--灰底背景-->
     <Rectangle fx:id="bgRectangle"/>
     <!--蓝底背景-->

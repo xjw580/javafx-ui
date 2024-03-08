@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.text.Text?>
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/fileUploader.css, @css/common/progress.css">
-    <TilePane fx:id="content" minHeight="130" prefWidth="130">
-        <Text fx:id="tip" text="拖拽文件或点击此处上传文件"/>
-    </TilePane>
+<fx:root type="TilePane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+         fx:id="FileUploader"
+         minHeight="132" maxWidth="132" minWidth="132"
+         stylesheets="@css/fileUploader.css, @css/common/progress.css">
+    <Label fx:id="tipLabel" text="拖拽文件或点击此处上传文件" prefHeight="40" style="-fx-wrap-text: true;-fx-text-alignment: center"/>
 </fx:root>

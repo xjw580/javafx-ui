@@ -10,15 +10,27 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.time.LocalTime;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Predicate;
 
 public class TimeTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Time time = new Time();
 //        time.setShowSelector(false);
-        time.timeProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        time.timeReadOnlyProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        time.setInterceptor(new Predicate<LocalTime>() {
+            @Override
+            public boolean test(LocalTime localTime) {
+                if (localTime.isAfter(LocalTime.now())){
+                    return false;
+                }
+                System.out.println("true");
+                return true;
+            }
+        });
         FlowPane flowPane = new FlowPane();
 //        flowPane.getChildren().add(new Text("hello"));
 //        time.setTranslateX(50);

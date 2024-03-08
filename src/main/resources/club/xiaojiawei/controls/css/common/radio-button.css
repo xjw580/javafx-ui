@@ -1,3 +1,4 @@
+@import "common.css";
 /*Base*/
 .radio-button-ui .radio {
     -fx-border-width: 0;

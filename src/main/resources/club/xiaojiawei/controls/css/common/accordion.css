@@ -1,3 +1,4 @@
+@import "common.css";
 .accordion-ui .titled-pane > .title {
     -fx-background-color: white;
     -fx-alignment: CENTER_LEFT;

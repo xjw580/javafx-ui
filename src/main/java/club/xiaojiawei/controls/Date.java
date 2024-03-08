@@ -2,19 +2,18 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.DateIco;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
-import javafx.util.Duration;
-import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -23,64 +22,102 @@ import java.util.function.Predicate;
 
 import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.controls.DateSelector.calcMaxDayForMonth;
-import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
  * 日期选择器-完整版
  * @author 肖嘉威 580@qq.com
  * @date 2023/10/23 14:38
  */
-public class Date extends StackPane {
+public class Date extends AbstractTimeField<LocalDate> {
+
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 默认当前日期
      */
     private ObjectProperty<LocalDate> date;
-    /**
-     * 默认显示时间选择器图标
-     */
-    @Getter
-    private boolean showSelector = true;
-    /**
-     * 默认显示背景
-     */
-    @Getter
-    private boolean showBg = true;
+
     public String getDate() {
-        return date.get() == null? null : DATE_FORMATTER.format(date.get());
+        return getLocalDate() == null? null : DATE_FORMATTER.format(getLocalDate());
     }
-    public ObjectProperty<LocalDate> dateProperty() {
-        return date;
+
+    public LocalDate getLocalDate(){
+        return date.get();
     }
+
     /**
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
         if (date == null || date.isBlank()){
-            this.date.set(null);
+            setLocalDate(null);
         }else {
-            LocalDate localDate = LocalDate.from(DATE_FORMATTER.parse(date));
-            if (dateInterceptor == null || dateInterceptor.test(localDate)){
-                this.date.set(localDate);
-            }
-        }
-    }
-    public void setLocalDate(LocalDate localDate){
-        date.set(localDate);
-    }
-    public void setShowSelector(boolean showSelector) {
-        dateIco.setVisible(this.showSelector = showSelector);
-        dateIco.setManaged(false);
-        if (showSelector){
-            dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND);
-        }else {
-            dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND);
-            dateBG.getStyleClass().add(HIDE_ICO_DATE_BACKGROUND);
+            setLocalDate(LocalDate.from(DATE_FORMATTER.parse(date)));
         }
     }
 
-    public void setShowBg(boolean showBg) {
-        dateBG.setVisible(this.showBg = showBg);
+    public void setLocalDate(LocalDate localDate){
+        if (getInterceptor() == null || getInterceptor().test(localDate)){
+            date.set(localDate);
+        }
     }
+
+    protected ObjectProperty<LocalDate> dateProperty(){
+        return date;
+    }
+
+    public ReadOnlyObjectProperty<LocalDate> dateReadOnlyProperty() {
+        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalDate>();
+        readOnlyObjectWrapper.bind(date);
+        return readOnlyObjectWrapper.getReadOnlyProperty();
+    }
+
+    @Override
+    public void setShowIcon(boolean showIcon) {
+        super.setShowIcon(showIcon);
+        dateIco.setVisible(showIcon);
+        dateIco.setManaged(false);
+        if (showIcon){
+            dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
+        }else {
+            dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
+            dateBG.getStyleClass().add(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
+        }
+    }
+
+    @Override
+    public void setShowBg(boolean showBg) {
+        super.setShowBg(showBg);
+        dateBG.setVisible(showBg);
+    }
+
+    @Override
+    public Predicate<LocalDate> getInterceptor() {
+        return this.calendar.getInterceptor();
+    }
+
+    @Override
+    public ObjectProperty<Predicate<LocalDate>> interceptorProperty() {
+        return this.calendar.interceptorProperty();
+    }
+
+    @Override
+    public void setInterceptor(Predicate<LocalDate> dateInterceptor) {
+        this.calendar.setInterceptor(dateInterceptor);
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    public Date() {}
+
     @FXML
     private Label dateBG;
     @FXML
@@ -91,37 +128,24 @@ public class Date extends StackPane {
     private TextField day;
     @FXML
     private DateIco dateIco;
+
     private static final int MAX_YEAR = 9999;
     private static final int MAX_MONTH = 12;
     private static final int MAX_DAY = 31;
-    @Getter
-    private Popup dateSelectorPopup;
-    private static final String HIDE_ICO_DATE_BACKGROUND = "hideIcoDateBackground";
-    private static final String DATE_BACKGROUND_FOCUS = "dateBackgroundFocus";
-    private final static DateTimeFormatter YEAR_FORMATTER = DateTimeFormatter.ofPattern("yyyy");
-    private final static DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("MM");
-    private final static DateTimeFormatter DAY_FORMATTER = DateTimeFormatter.ofPattern("dd");
+    private static final String HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS = "hideIcoDateBackground";
+    private static final String DATE_BACKGROUND_FOCUS_STYLE_CLASS = "dateBackgroundFocus";
+    private static final DateTimeFormatter YEAR_FORMATTER = DateTimeFormatter.ofPattern("yyyy");
+    private static final DateTimeFormatter MONTH_FORMATTER = DateTimeFormatter.ofPattern("MM");
+    private static final DateTimeFormatter DAY_FORMATTER = DateTimeFormatter.ofPattern("dd");
+
     private boolean isFromDate;
-    private ChangeListener<Boolean> focusChangeListener;
-    private Predicate<LocalDate> dateInterceptor;
     private Calendar calendar;
-    public Date() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-            afterFXMLLoaded();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private void afterFXMLLoaded(){
-        initDateSelectorPopup();
+
+    @Override
+    protected void afterPageLoaded(){
         initDateTextField(year, MAX_YEAR, 4);
         initDateTextField(month, MAX_MONTH, 2);
         initDateTextField(day, MAX_DAY, 2);
-        initDateIco();
         focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
             year.setFocusTraversable(t1);
             month.setFocusTraversable(t1);
@@ -129,16 +153,20 @@ public class Date extends StackPane {
         });
     }
 
-    /**
-     * 初始化时间选择器弹窗
-     */
-    private void initDateSelectorPopup(){
-        dateSelectorPopup = new Popup();
+    @Override
+    protected Node createIconNode() {
+        return dateIco;
+    }
+
+    @Override
+    public Popup createPopup() {
+        Popup popup = new Popup();
         calendar = new Calendar();
         date = calendar.dateProperty();
         date.addListener((observable, oldValue, newValue) -> updateCompleteDateTextField(newValue));
-        dateSelectorPopup.getContent().add(calendar);
-        dateSelectorPopup.setAutoHide(true);
+        popup.getContent().add(calendar);
+        popup.setAutoHide(true);
+        return popup;
     }
 
     private void updateCompleteDateTextField(LocalDate newDate){
@@ -170,32 +198,20 @@ public class Date extends StackPane {
             int yearInt = parseInt(year.getText()), monthInt = parseInt(month.getText()), dayInt = Math.min(calcMaxDayForMonth(yearInt, monthInt), parseInt(day.getText()));
 //            year、month、day三项全空时，日期设置为null
             if (yearInt == 0 && monthInt == 0 && dayInt == 0){
-                date.set(null);
+                setLocalDate(null);
             } else if (!isFromDate && newValue.length() == maxLength){
                 if (yearInt != 0 && monthInt != 0 && dayInt != 0){
                     LocalDate newLocalDate = LocalDate.of(yearInt, monthInt, dayInt);
-                    if (dateInterceptor == null || dateInterceptor.test(newLocalDate)){
-                        date.set(newLocalDate);
+                    if (getInterceptor() == null || getInterceptor().test(newLocalDate)){
+                        setLocalDate(newLocalDate);
                     }else {
-                        updateCompleteDateTextField(date.get());
+                        updateCompleteDateTextField(getLocalDate());
                     }
                 }
             }
         });
     }
 
-    /**
-     * 初始化日期图标
-     */
-    private void initDateIco(){
-        dateIco.setOnMouseClicked(e -> {
-            Bounds bounds = dateIco.localToScreen(dateIco.getBoundsInLocal());
-            dateSelectorPopup.setAnchorX(bounds.getMaxX() - 100);
-            dateSelectorPopup.setAnchorY(bounds.getMaxY() - 5);
-            dateSelectorPopup.show(this.getScene().getWindow());
-            FADE.play(dateSelectorPopup.getContent().get(0), 0.5D, 1D, Duration.millis(200));
-        });
-    }
     /**
      * 日期文本框焦点监听器
      * @param textField
@@ -204,14 +220,12 @@ public class Date extends StackPane {
     private ChangeListener<Boolean> dateTextFieldFocusListener(TextField textField) {
         return (observableValue, aBoolean, isFocus) -> {
             if (isFocus){
-                dateBG.getStyleClass().add(DATE_BACKGROUND_FOCUS);
+                dateBG.getStyleClass().add(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
             }else {
                 textField.setText(standardizationDateText(textField, textField.getText()));
-                dateBG.getStyleClass().remove(DATE_BACKGROUND_FOCUS);
+                dateBG.getStyleClass().remove(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
             }
-            if (focusChangeListener != null){
-                focusChangeListener.changed(observableValue, aBoolean, isFocus);
-            }
+            setFocusedField(year.isFocused() || month.isFocused() || day.isFocused());
         };
     }
 
@@ -278,35 +292,32 @@ public class Date extends StackPane {
         };
     }
 
-    private int parseInt(String s){
-        if (s == null || s.isBlank()){
-            return 0;
+    @Override
+    protected void loadPage() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return Integer.parseInt(s);
     }
 
-    public void setOnFocusChangeListener(ChangeListener<Boolean> changeListener){
-        focusChangeListener = changeListener;
-    }
+    /* *************************************************************************
+     *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
 
-    public void setDateInterceptor(Predicate<LocalDate> dateInterceptor){
-        calendar.setDateInterceptor(this.dateInterceptor = dateInterceptor);
-    }
-    public void removeDateInterceptor(){
-        this.dateInterceptor = null;
-        calendar.removeDateInterceptor();
-    }
-
-    /**
-     * 刷新显示的时间，和真正存储的时间同步
-     */
+    @Override
     public void refresh(){
-        if (date.get() == null){
+        if (getLocalDate() == null){
             year.setText("");
             month.setText("");
             day.setText("");
         }else {
-            String[] dates = DATE_FORMATTER.format(date.get()).split("/");
+            String[] dates = DATE_FORMATTER.format(getLocalDate()).split("/");
             year.setText(dates[0]);
             month.setText(dates[1]);
             day.setText(dates[2]);

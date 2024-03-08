@@ -4,6 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 
 /**
+ * 标题
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/11/23 17:04
  */
@@ -16,14 +17,5 @@ public class Title extends Label {
     public Title(String s) {
         super(s);
         getStyleClass().add(DEFAULT_STYLE_CLASS);
-//        Rectangle rectangle = new Rectangle();
-//        setClip(rectangle);
-//        heightProperty().addListener((observableValue, number, t1) -> {
-//            rectangle.setArcHeight(this.getHeight());
-//            rectangle.setArcWidth(this.getHeight());
-//            rectangle.setHeight(this.getHeight());
-//            rectangle.setTranslateX(-this.getHeight());
-//        });
-//        widthProperty().addListener((observableValue, number, t1) -> rectangle.setWidth(this.getWidth()));
     }
 }
