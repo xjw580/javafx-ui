@@ -37,7 +37,7 @@ public class Date extends AbstractTimeField<LocalDate> {
      **************************************************************************/
 
     /**
-     * 默认当前日期
+     * 日期
      */
     private ObjectProperty<LocalDate> date;
 
