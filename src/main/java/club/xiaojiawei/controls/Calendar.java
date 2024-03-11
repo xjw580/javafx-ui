@@ -31,7 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.function.*;
+import java.util.function.Predicate;
 
 import static club.xiaojiawei.controls.DateSelector.DATE_FORMATTER;
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
@@ -55,7 +55,7 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
     /**
      * 日期
      */
-    protected ObjectProperty<LocalDate> date;
+    protected ReadOnlyObjectWrapper<LocalDate> date;
     /**
      * 点击清除按钮事件处理器
      */
@@ -79,6 +79,10 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
 
     public ObjectProperty<LocalDate> dateProperty(){
         return dateSelector.dateProperty();
+    }
+
+    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty(){
+        return date.getReadOnlyProperty();
     }
 
     /**
@@ -202,7 +206,7 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
     private void initDateSelectorPopup(){
         popup = new Popup();
         dateSelector = new DateSelector();
-        date = dateSelector.dateProperty();
+        date = dateSelector.date;
         dateMsg.setText(SHORT_DATE_FORMATTER.format(LocalDate.now()));
         popup.getContent().add(dateSelector);
         popup.setAutoHide(true);

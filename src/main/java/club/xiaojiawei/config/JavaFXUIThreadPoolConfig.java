@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class JavaFXUIThreadPoolConfig {
 
-    public static final ScheduledThreadPoolExecutor SCHEDULED_POOL = new ScheduledThreadPoolExecutor(8, new ThreadFactory() {
+    public static final ScheduledThreadPoolExecutor SCHEDULED_POOL = new ScheduledThreadPoolExecutor(10, new ThreadFactory() {
         private final AtomicInteger num = new AtomicInteger(0);
         @Override
         public Thread newThread(Runnable r) {

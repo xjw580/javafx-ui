@@ -4,7 +4,6 @@ import club.xiaojiawei.controls.ico.DateIco;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,7 +28,7 @@ import static club.xiaojiawei.controls.DateSelector.calcMaxDayForMonth;
  * @author 肖嘉威 580@qq.com
  * @date 2023/10/23 14:38
  */
-public class Date extends AbstractTimeField<LocalDate> {
+public class Date extends AbstractDateTimeField<LocalDate> {
 
     /* *************************************************************************
      *                                                                         *
@@ -40,7 +39,7 @@ public class Date extends AbstractTimeField<LocalDate> {
     /**
      * 日期
      */
-    private ObjectProperty<LocalDate> date;
+    protected ReadOnlyObjectWrapper<LocalDate> date;
 
     public String getDate() {
         return getLocalDate() == null? null : DATE_FORMATTER.format(getLocalDate());
@@ -69,6 +68,10 @@ public class Date extends AbstractTimeField<LocalDate> {
 
     public ObjectProperty<LocalDate> dateProperty(){
         return calendar.dateProperty();
+    }
+
+    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty(){
+        return date.getReadOnlyProperty();
     }
 
     @Override
@@ -154,7 +157,7 @@ public class Date extends AbstractTimeField<LocalDate> {
     protected Popup createPopup() {
         Popup popup = new Popup();
         calendar = new Calendar();
-        date = calendar.dateProperty();
+        date = calendar.date;
         date.addListener((observable, oldValue, newValue) -> updateCompleteDateTextField(newValue));
         popup.getContent().add(calendar);
         popup.setAutoHide(true);

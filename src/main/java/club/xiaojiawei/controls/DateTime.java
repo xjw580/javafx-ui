@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Popup;
 import javafx.util.Duration;
-import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -26,7 +25,7 @@ import java.util.function.Predicate;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/26 8:34
  */
-public class DateTime extends AbstractTimeField<LocalDateTime> {
+public class DateTime extends AbstractDateTimeField<LocalDateTime> {
 
     /* *************************************************************************
      *                                                                         *
@@ -37,18 +36,7 @@ public class DateTime extends AbstractTimeField<LocalDateTime> {
     /**
      * 日期时间
      */
-    private ObjectProperty<LocalDateTime> dateTime;
-
-    /**
-     * 显示日期时间选择器
-     */
-    @Getter
-    private boolean showIcon = true;
-    /**
-     * 默认显示背景
-     */
-    @Getter
-    private boolean showBg = true;
+    private ReadOnlyObjectWrapper<LocalDateTime> dateTime;
 
     private final ObjectProperty<Predicate<LocalDateTime>> dateTimeInterceptor = new SimpleObjectProperty<>();
 
@@ -91,8 +79,14 @@ public class DateTime extends AbstractTimeField<LocalDateTime> {
         return virtualDateTime;
     }
 
+    public ReadOnlyObjectProperty<LocalDateTime> readOnlyObjectProperty(){
+        return dateTime.getReadOnlyProperty();
+    }
+
+    @Override
     public void setShowIcon(boolean showIcon) {
-        dateTimeIco.setVisible(this.showIcon = showIcon);
+        super.setShowIcon(showIcon);
+        dateTimeIco.setVisible(showIcon);
         dateTimeIco.setManaged(false);
         if (showIcon){
             dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS);
@@ -101,8 +95,10 @@ public class DateTime extends AbstractTimeField<LocalDateTime> {
         }
     }
 
+    @Override
     public void setShowBg(boolean showBg) {
-        dateTimeBg.setVisible(this.showBg = showBg);
+        super.setShowBg(showBg);
+        dateTimeBg.setVisible(showBg);
     }
 
     /* *************************************************************************
@@ -189,7 +185,7 @@ public class DateTime extends AbstractTimeField<LocalDateTime> {
             }
             return true;
         });
-        dateTime = new SimpleObjectProperty<>();
+        dateTime = new ReadOnlyObjectWrapper<>();
         dateTime.addListener((observable, oldValue, newValue) -> {
             if (virtualDateTime != null){
                 virtualDateTime.set(newValue);
@@ -254,6 +250,7 @@ public class DateTime extends AbstractTimeField<LocalDateTime> {
         }else {
             dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS);
         }
+        setFocusedField(dateControls.isFocused() || timeControls.isFocused());
     }
 
     /* *************************************************************************

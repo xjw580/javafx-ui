@@ -32,7 +32,7 @@ public class ScrollUtil {
     public static Timeline buildSlideTimeLine(double start, double end, ScrollPane scrollPane){
         return new Timeline(
                 new KeyFrame(Duration.millis(0), new KeyValue(scrollPane.vvalueProperty(), start)),
-                new KeyFrame(Duration.millis(((Region)scrollPane.getContent()).getHeight() * Math.abs(end - start) * 0.8), new KeyValue(scrollPane.vvalueProperty(), end))
+                new KeyFrame(Duration.millis(((Region) scrollPane.getContent()).getHeight() * Math.abs(end - start) * 0.8), new KeyValue(scrollPane.vvalueProperty(), end))
         );
     }
 

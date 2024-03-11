@@ -17,18 +17,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/3/8 9:56
  */
-public abstract class AbstractTimeField<T> extends Group implements Interceptor<T> {
-
-    public AbstractTimeField() {
-        loadPage();
-        afterPageLoaded();
-        initPopup();
-        Node iconNode = createIconNode();
-        iconNode.setOnMouseClicked(event -> {
-            Bounds bounds = this.localToScreen(this.getBoundsInLocal());
-            showPopup(this.getScene().getWindow(), bounds.getMinX(), bounds.getMaxY() - 10);
-        });
-    }
+public abstract class AbstractDateTimeField<T> extends Group implements Interceptor<T> {
 
     /**
      * 默认显示时间选择器图标
@@ -45,7 +34,7 @@ public abstract class AbstractTimeField<T> extends Group implements Interceptor<
     /**
      * 文本框是否有焦点
      */
-    private final BooleanProperty focusedField = new SimpleBooleanProperty();
+    private final ReadOnlyBooleanWrapper focusedField = new ReadOnlyBooleanWrapper();
     /**
      * 点击图标展示的弹出页
      */
@@ -60,9 +49,18 @@ public abstract class AbstractTimeField<T> extends Group implements Interceptor<
     }
 
     public ReadOnlyBooleanProperty focusedReadOnlyProperty() {
-        ReadOnlyBooleanWrapper booleanWrapper = new ReadOnlyBooleanWrapper();
-        booleanWrapper.bind(focusedField);
-        return booleanWrapper.getReadOnlyProperty();
+        return focusedField.getReadOnlyProperty();
+    }
+
+    public AbstractDateTimeField() {
+        loadPage();
+        afterPageLoaded();
+        initPopup();
+        Node iconNode = createIconNode();
+        iconNode.setOnMouseClicked(event -> {
+            Bounds bounds = this.localToScreen(this.getBoundsInLocal());
+            showPopup(this.getScene().getWindow(), bounds.getMinX(), bounds.getMaxY() - 10);
+        });
     }
 
     protected void initPopup() {

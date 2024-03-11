@@ -40,7 +40,7 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
     /**
      * 日期：包含年月,格式：yyyy/MM/dd
      */
-    private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
+    protected final ReadOnlyObjectWrapper<LocalDate> date = new ReadOnlyObjectWrapper<>();
 
     /**
      * 日期拦截器
@@ -67,6 +67,10 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
             });
         }
         return virtualDate;
+    }
+
+    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty(){
+        return date.getReadOnlyProperty();
     }
 
     /**

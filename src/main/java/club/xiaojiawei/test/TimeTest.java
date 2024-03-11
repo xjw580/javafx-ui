@@ -3,6 +3,8 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.Time;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
@@ -19,16 +21,18 @@ public class TimeTest extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Time time = new Time();
+        time.setShowSec(true);
+        time.focusedReadOnlyProperty().addListener((observableValue, aBoolean, t1) -> {
+            System.out.println("focus:" + t1);
+        });
 //        time.setShowSelector(false);
-        time.timeProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        time.readOnlyTimeProperty().addListener((observable, oldValue, newValue) -> System.out.println("time:" + newValue));
         time.setInterceptor(new Predicate<LocalTime>() {
             @Override
             public boolean test(LocalTime localTime) {
                 if (localTime != null && localTime.isAfter(LocalTime.now())){
-                    System.out.println("false");
                     return false;
                 }
-                System.out.println("true");
                 return true;
             }
         });
@@ -42,8 +46,16 @@ public class TimeTest extends Application {
         Scene scene = new Scene(flowPane, 200, 200);
         JavaFXUI.addjavafxUIStylesheet(scene);
         stage.setScene(scene);
+
         stage.show();
-        time.timeProperty().set(LocalTime.now().plusHours(1));
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    time.timeProperty().set(LocalTime.now().minusHours(5));
+                });
+            }
+        }, 1500);
 //        new Timer().schedule(new TimerTask() {
 //            @Override
 //            public void run() {

@@ -15,7 +15,6 @@ import javafx.stage.Popup;
 import lombok.Getter;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
@@ -29,7 +28,7 @@ import static club.xiaojiawei.controls.TimeSelector.TIME_FULL_FORMATTER;
  * @date 2023/7/3 12:21
  */
 @SuppressWarnings("unused")
-public class Time extends AbstractTimeField<LocalTime> {
+public class Time extends AbstractDateTimeField<LocalTime> {
 
     /* *************************************************************************
      *                                                                         *
@@ -40,26 +39,12 @@ public class Time extends AbstractTimeField<LocalTime> {
     /**
      * 时间
      */
-    private ObjectProperty<LocalTime> time;
-    /**
-     * 默认显示时间选择器图标
-     */
-    @Getter
-    private boolean showIcon = true;
-    /**
-     * 默认显示背景
-     */
-    @Getter
-    private boolean showBg = true;
+    protected ReadOnlyObjectWrapper<LocalTime> time;
     /**
      * 显示秒
      */
     @Getter
     private boolean showSec;
-    /**
-     * 文本框是否有焦点
-     */
-    private final BooleanProperty focusedField = new SimpleBooleanProperty();
 
     public String getTime() {
         if (showSec){
@@ -94,9 +79,15 @@ public class Time extends AbstractTimeField<LocalTime> {
         return timeSelector.timeProperty();
     }
 
+    public ReadOnlyObjectProperty<LocalTime> readOnlyTimeProperty(){
+        return time.getReadOnlyProperty();
+    }
+
+    @Override
     public void setShowIcon(boolean showIcon) {
-        timeIco.setVisible(this.showIcon = showIcon);
-        timeIco.setManaged(this.showIcon);
+        super.setShowIcon(showIcon);
+        timeIco.setVisible(showIcon);
+        timeIco.setManaged(showIcon);
         if (showIcon){
             timeBG.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }else {
@@ -105,8 +96,10 @@ public class Time extends AbstractTimeField<LocalTime> {
         }
     }
 
+    @Override
     public void setShowBg(boolean showBg) {
-        timeBG.setVisible(this.showBg = showBg);
+        super.setShowBg(showBg);
+        timeBG.setVisible(showBg);
     }
 
     public void setShowSec(boolean showSec) {
@@ -130,21 +123,7 @@ public class Time extends AbstractTimeField<LocalTime> {
             minWithSecSeparator.setManaged(false);
             timeSelector.setShowSec(false);
         }
-        setShowIcon(this.showIcon);
-    }
-
-    public boolean isFocusedField() {
-        return focusedField.get();
-    }
-
-    public void setFocusedField(boolean focusedField) {
-        this.focusedField.set(focusedField);
-    }
-
-    public ReadOnlyBooleanProperty focusedReadOnlyProperty() {
-        ReadOnlyBooleanWrapper booleanWrapper = new ReadOnlyBooleanWrapper();
-        booleanWrapper.bind(focusedField);
-        return booleanWrapper.getReadOnlyProperty();
+        setShowIcon(isShowIcon());
     }
 
     /* *************************************************************************
@@ -184,7 +163,7 @@ public class Time extends AbstractTimeField<LocalTime> {
     protected Popup createPopup() {
         Popup timeSelectorPopup = new Popup();
         timeSelector = new TimeSelector();
-        time = timeSelector.timeProperty();
+        time = timeSelector.time;
         time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
         timeSelectorPopup.getContent().add(timeSelector);
         timeSelectorPopup.setAutoHide(true);

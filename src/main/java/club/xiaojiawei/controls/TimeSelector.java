@@ -41,7 +41,7 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
     /**
      * 时间
      */
-    private final ObjectProperty<LocalTime> time = new SimpleObjectProperty<>();
+    protected final ReadOnlyObjectWrapper<LocalTime> time = new ReadOnlyObjectWrapper<>();
     /**
      * 展示行数
      */
@@ -95,6 +95,10 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
             });
         }
         return virtualTime;
+    }
+
+    public ReadOnlyObjectProperty<LocalTime> readOnlyTimeProperty(){
+        return time.getReadOnlyProperty();
     }
 
     public void setShowRowCount(double showRowCount) {
@@ -193,12 +197,10 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
                 String[] timeArr;
                 if (showSec){
                     timeArr = TIME_FULL_FORMATTER.format(newTime).split(":");
-                    if (showSec){
-                        for (Toggle toggle : secGroup.getToggles()) {
-                            if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[2])){
-                                secGroup.selectToggle(toggle);
-                                break;
-                            }
+                    for (Toggle toggle : secGroup.getToggles()) {
+                        if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[2])){
+                            secGroup.selectToggle(toggle);
+                            break;
                         }
                     }
                 }else {
@@ -240,7 +242,7 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
             child.getStyleClass().remove(SELECTED_TIME_LABEL_STYLE_CLASS);
             if (i == pointTime){
                 child.getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
-                SCHEDULED_POOL.schedule(() -> ScrollUtil.buildSlideTimeLine(pointTime, maxValue + 1, showRowCount, timeScroll).play(), 50, TimeUnit.MILLISECONDS);
+                ScrollUtil.buildSlideTimeLine(pointTime, maxValue + 1, showRowCount, timeScroll).play();
             }
         }
     }
@@ -272,35 +274,67 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
             if (newToggle != null){
                 ((ToggleButton)newToggle).getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
             }
+            ToggleButton hourSelected = (ToggleButton) hourGroup.getSelectedToggle();
 //            设置时间
-            if (hourGroup.getSelectedToggle() != null){
-                if (minGroup.getSelectedToggle() == null){
-                    if (getInterceptor() != null
-                            && (!getInterceptor().test(LocalTime.of(Integer.parseInt(((ToggleButton) hourGroup.getSelectedToggle()).getText()), LocalTime.MIN.getMinute()))
-                                || !getInterceptor().test(LocalTime.of(Integer.parseInt(((ToggleButton) hourGroup.getSelectedToggle()).getText()), LocalTime.MAX.getMinute())))
-                    ){
-                        timeToggleGroup.selectToggle(oldToggle);
-                    }
-                    return;
-                }
-                if (showSec){
-                    if (secGroup.getSelectedToggle() != null){
-                        LocalTime localTime = LocalTime.from(TIME_FULL_FORMATTER.parse(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) secGroup.getSelectedToggle()).getText()));
-                        if (test(localTime)){
-                            setLocalTime(localTime);
-                        }else {
-                            timeToggleGroup.selectToggle(oldToggle);
+            if (hourSelected == null){
+                return;
+            }
+            ToggleButton minSelected = (ToggleButton) minGroup.getSelectedToggle();
+            ToggleButton secSelected = (ToggleButton) secGroup.getSelectedToggle();
+            if (getInterceptor() == null){
+                if (minSelected != null){
+                    if (showSec){
+                        if (secSelected != null){
+                            setLocalTime(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":" + secSelected.getText())));
                         }
+                    }else {
+                        setLocalTime(LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText())));
+                    }
+                }
+                return;
+            }
+            if (showSec){
+                if (minSelected == null && secSelected == null){
+                    if (getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":59:59")))
+                            || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":00:00")))
+                    ){
+                        return;
+                    }
+                }else if (minSelected != null && secSelected != null){
+                    LocalTime localTime = LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":" + secSelected.getText()));
+                    if (getInterceptor().test(localTime)){
+                        setLocalTime(localTime);
+                        return;
+                    }
+                }else if (minSelected == null){
+                    if (getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":59:" + secSelected.getText())))
+                            || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":00:" + secSelected.getText())))
+                    ){
+                        return;
                     }
                 }else {
-                    LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText()));
-                    if (test(localTime)){
+                    if (getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":59")))
+                            || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":00")))
+                    ){
+                        return;
+                    }
+                }
+            }else {
+                if (minSelected == null){
+                    if (getInterceptor().test(LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":59")))
+                            || getInterceptor().test(LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":00")))
+                    ){
+                        return;
+                    }
+                }else {
+                    LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText()));
+                    if (getInterceptor().test(localTime)){
                         setLocalTime(localTime);
-                    }else {
-                        timeToggleGroup.selectToggle(oldToggle);
+                        return;
                     }
                 }
             }
+            timeToggleGroup.selectToggle(oldToggle);
         });
     }
 
