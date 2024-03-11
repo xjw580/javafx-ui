@@ -142,6 +142,9 @@ public class NumberField extends TextField {
      * @param playTransition 是否播放数值增加动画（注意：value值过大时动画时间很长，(value * Math.pow(10, decimalCount))不要超过500太多）
      */
     public void increment(double value, boolean playTransition){
+        if (!isEditable()){
+            return;
+        }
         if (playTransition){
             new Thread(() -> {
                 long count = (long) (value * Math.pow(10, decimalCount));
