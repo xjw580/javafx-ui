@@ -15,6 +15,7 @@ import javafx.stage.Popup;
 import lombok.Getter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
@@ -79,25 +80,18 @@ public class Time extends AbstractTimeField<LocalTime> {
         if (time == null || time.isBlank()){
             this.setLocalTime(null);
         }else {
-            LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(time));
-            if (getInterceptor() == null || getInterceptor().test(localTime)){
-                this.setLocalTime(localTime);
-            }
+            setLocalTime(LocalTime.from(TIME_FORMATTER.parse(time)));
         }
     }
 
     public void setLocalTime(LocalTime localTime){
-        time.set(localTime);
+        if (test(localTime)){
+            time.set(localTime);
+        }
     }
 
-    protected ObjectProperty<LocalTime> timeProperty(){
-        return time;
-    }
-
-    public ReadOnlyObjectProperty<LocalTime> timeReadOnlyProperty() {
-        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalTime>();
-        readOnlyObjectWrapper.bind(time);
-        return readOnlyObjectWrapper.getReadOnlyProperty();
+    public ObjectProperty<LocalTime> timeProperty(){
+        return timeSelector.timeProperty();
     }
 
     public void setShowIcon(boolean showIcon) {
@@ -186,6 +180,46 @@ public class Time extends AbstractTimeField<LocalTime> {
     private boolean isFromTime;
     private TimeSelector timeSelector;
 
+    @Override
+    protected Popup createPopup() {
+        Popup timeSelectorPopup = new Popup();
+        timeSelector = new TimeSelector();
+        time = timeSelector.timeProperty();
+        time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
+        timeSelectorPopup.getContent().add(timeSelector);
+        timeSelectorPopup.setAutoHide(true);
+        return timeSelectorPopup;
+    }
+
+    @Override
+    protected void loadPage() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void afterPageLoaded() {
+        initTimeTextField(hour, MAX_HOUR);
+        initTimeTextField(min, MAX_MIN);
+        initTimeTextField(sec, MAX_SEC);
+        focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
+            hour.setFocusTraversable(t1);
+            min.setFocusTraversable(t1);
+            sec.setFocusTraversable(t1);
+        });
+    }
+
+    @Override
+    protected Node createIconNode() {
+        return timeIco;
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 私有方法                                                                 *
@@ -228,14 +262,14 @@ public class Time extends AbstractTimeField<LocalTime> {
                 }else if (hour.getText() != null && !hour.getText().isBlank() && min.getText() != null && !min.getText().isBlank()){
                     if (showSec && sec.getText() != null && !sec.getText().isBlank()){
                         LocalTime localTime = LocalTime.from(TIME_FULL_FORMATTER.parse(hour.getText() + ":" + min.getText() + ":" + sec.getText()));
-                        if (getInterceptor() == null || getInterceptor().test(localTime)){
+                        if (test(localTime)){
                             setLocalTime(localTime);
                         }else {
                             updateCompleteTimeTextField(getLocalTime());
                         }
                     }else {
                         LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(hour.getText() + ":" + min.getText()));
-                        if (getInterceptor() == null || getInterceptor().test(localTime)){
+                        if (test(localTime)){
                             setLocalTime(localTime);
                         }else {
                             updateCompleteTimeTextField(getLocalTime());
@@ -309,46 +343,6 @@ public class Time extends AbstractTimeField<LocalTime> {
         if (time != null && !time.isBlank()){
             textField.setText("0".repeat(2 - time.length()) + time);
         }
-    }
-
-    @Override
-    protected Popup createPopup() {
-        Popup timeSelectorPopup = new Popup();
-        timeSelector = new TimeSelector();
-        time = timeSelector.timeProperty();
-        time.addListener((observable, oldValue, newValue) -> updateCompleteTimeTextField(newValue));
-        timeSelectorPopup.getContent().add(timeSelector);
-        timeSelectorPopup.setAutoHide(true);
-        return timeSelectorPopup;
-    }
-
-    @Override
-    protected void loadPage() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    protected void afterPageLoaded() {
-        initTimeTextField(hour, MAX_HOUR);
-        initTimeTextField(min, MAX_MIN);
-        initTimeTextField(sec, MAX_SEC);
-        focusTraversableProperty().addListener((observableValue, aBoolean, t1) -> {
-            hour.setFocusTraversable(t1);
-            min.setFocusTraversable(t1);
-            sec.setFocusTraversable(t1);
-        });
-    }
-
-    @Override
-    protected Node createIconNode() {
-        return timeIco;
     }
 
     /* *************************************************************************

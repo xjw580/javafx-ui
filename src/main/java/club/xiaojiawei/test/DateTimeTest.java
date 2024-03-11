@@ -23,12 +23,9 @@ public class DateTimeTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         DateTime dateTime = new DateTime();
-        System.out.println(dateTime.getDateTime());
-        dateTime.dateTimeRealOnlyProperty().addListener((observableValue, localDateTime, t1) -> System.out.println(t1));
-        dateTime.setInterceptor(localDateTime1 -> {
-            LocalDateTime localDateTime = LocalDateTime.of(2024, 3, 8, 14, 40);
-            return localDateTime1.isAfter(localDateTime);
-        });
+//        System.out.println(dateTime.getDateTime());
+//        dateTime.readOnlyObjectProperty().addListener((observableValue, localDateTime, t1) -> System.out.println("vDateTime:" + t1));
+        dateTime.setInterceptor(localDateTime1 -> localDateTime1 == null || localDateTime1.isAfter(LocalDateTime.now()));
         dateTime.setTranslateX(50);
         dateTime.setTranslateY(50);
         Button refresh = new Button("refresh");
@@ -37,5 +34,8 @@ public class DateTimeTest extends Application {
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
+//        dateTime.dateTimeProperty().set(LocalDateTime.now().plusHours(1));
+        System.out.println("---------");
+//        dateTime.dateTimeProperty().set(LocalDateTime.now().minusHours(1));
     }
 }

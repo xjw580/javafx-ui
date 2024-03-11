@@ -55,8 +55,18 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
         return date.get();
     }
 
-    protected ObjectProperty<LocalDate> dateProperty(){
-        return date;
+    public ObjectProperty<LocalDate> dateProperty(){
+        if (virtualDate == null){
+            virtualDate = new SimpleObjectProperty<>(getLocalDate());
+            virtualDate.addListener((observableValue, localDate, t1) -> {
+                if (test(t1)){
+                    date.set(t1);
+                }else {
+                    virtualDate.set(localDate);
+                }
+            });
+        }
+        return virtualDate;
     }
 
     /**
@@ -68,7 +78,6 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
         }else {
             if (date.length() == 6){
                 setLocalDate(LocalDate.from(DATE_FORMATTER.parse(date)));
-
             }else {
                 setLocalDate(LocalDate.from(SHORT_DATE_FORMATTER.parse(date)));
             }
@@ -76,15 +85,9 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
     }
 
     public void setLocalDate(LocalDate localDate){
-        if (getInterceptor() == null || getInterceptor().test(localDate)){
+        if (test(localDate)){
             date.set(localDate);
         }
-    }
-
-    public ReadOnlyObjectProperty<LocalDate> dateReadOnlyProperty() {
-        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalDate>();
-        readOnlyObjectWrapper.bind(date);
-        return readOnlyObjectWrapper.getReadOnlyProperty();
     }
 
     /* *************************************************************************
@@ -119,6 +122,7 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
 
     private Label selectedLabel;
     private boolean allowExec = true;
+    private ObjectProperty<LocalDate> virtualDate;
 
     /* *************************************************************************
      *                                                                         *
@@ -129,6 +133,9 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
     private void afterFXMLLoaded(){
         loadYearPane(LocalDate.now());
         date.addListener((observable, oldDate, newDate) -> {
+            if (virtualDate != null){
+                virtualDate.set(newDate);
+            }
             if (newDate != null){
                 yearsPane.getPanes().clear();
                 selectedLabel = null;
@@ -286,7 +293,7 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
             int finalM = m;
             label.setOnMouseClicked(event -> {
                 LocalDate localDate = LocalDate.of(buildYear, Month.of(finalM), Math.min((getLocalDate() == null ? LocalDate.now().getDayOfMonth() : getLocalDate().getDayOfMonth()), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1))));
-                if (getInterceptor() == null || getInterceptor().test(localDate)){
+                if (test(localDate)){
                     selectedLabel.getStyleClass().remove(SELECTED_LABEL_STYLE_CLASS);
                     (selectedLabel = label).getStyleClass().add(SELECTED_LABEL_STYLE_CLASS);
                     setLocalDate(localDate);

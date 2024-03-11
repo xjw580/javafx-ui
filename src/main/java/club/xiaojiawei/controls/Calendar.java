@@ -77,8 +77,8 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
         return date.get();
     }
 
-    protected ObjectProperty<LocalDate> dateProperty(){
-        return date;
+    public ObjectProperty<LocalDate> dateProperty(){
+        return dateSelector.dateProperty();
     }
 
     /**
@@ -93,15 +93,9 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
     }
 
     public void setLocalDate(LocalDate localDate){
-        if (getInterceptor() == null || getInterceptor().test(localDate)){
+        if (test(localDate)){
             date.set(localDate);
         }
-    }
-
-    public ReadOnlyObjectProperty<LocalDate> dateReadOnlyProperty() {
-        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalDate>();
-        readOnlyObjectWrapper.bind(date);
-        return readOnlyObjectWrapper.getReadOnlyProperty();
     }
 
     public EventHandler<MouseEvent> getOnClearEventHandler() {

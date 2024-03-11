@@ -16,4 +16,8 @@ public interface Interceptor<T> {
 
     public abstract void setInterceptor(Predicate<T> dateInterceptor);
 
+    default boolean test(T t){
+        return getInterceptor() == null || getInterceptor().test(t);
+    }
+
 }

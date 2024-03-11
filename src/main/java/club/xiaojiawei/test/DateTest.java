@@ -31,9 +31,9 @@ public class DateTest extends Application {
         hBox.setPrefHeight(100);
         hBox.setAlignment(Pos.CENTER);
         Date date = new Date();
-        date.setInterceptor(localDate -> LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
+        date.setInterceptor(localDate -> localDate == null || LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
         System.out.println(date.getDate());
-        date.dateReadOnlyProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println("date:" + newValue));
         Button refresh = new Button("refresh");
         refresh.setOnMouseClicked(mouseEvent -> date.refresh());
         hBox.getChildren().addAll(new Label("test"), date, refresh);
@@ -42,6 +42,8 @@ public class DateTest extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("hello");
         primaryStage.show();
+        date.dateProperty().set(LocalDate.now().plusYears(1));
+        System.out.println(date.getDate());
 //        new Timer().schedule(new TimerTask() {
 //            @Override
 //            public void run() {

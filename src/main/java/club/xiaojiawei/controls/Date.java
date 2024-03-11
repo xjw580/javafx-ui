@@ -4,6 +4,7 @@ import club.xiaojiawei.controls.ico.DateIco;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -61,19 +62,13 @@ public class Date extends AbstractTimeField<LocalDate> {
     }
 
     public void setLocalDate(LocalDate localDate){
-        if (getInterceptor() == null || getInterceptor().test(localDate)){
+        if (test(localDate)){
             date.set(localDate);
         }
     }
 
-    protected ObjectProperty<LocalDate> dateProperty(){
-        return date;
-    }
-
-    public ReadOnlyObjectProperty<LocalDate> dateReadOnlyProperty() {
-        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalDate>();
-        readOnlyObjectWrapper.bind(date);
-        return readOnlyObjectWrapper.getReadOnlyProperty();
+    public ObjectProperty<LocalDate> dateProperty(){
+        return calendar.dateProperty();
     }
 
     @Override
@@ -93,21 +88,6 @@ public class Date extends AbstractTimeField<LocalDate> {
     public void setShowBg(boolean showBg) {
         super.setShowBg(showBg);
         dateBG.setVisible(showBg);
-    }
-
-    @Override
-    public Predicate<LocalDate> getInterceptor() {
-        return this.calendar.getInterceptor();
-    }
-
-    @Override
-    public ObjectProperty<Predicate<LocalDate>> interceptorProperty() {
-        return this.calendar.interceptorProperty();
-    }
-
-    @Override
-    public void setInterceptor(Predicate<LocalDate> dateInterceptor) {
-        this.calendar.setInterceptor(dateInterceptor);
     }
 
     /* *************************************************************************
@@ -142,6 +122,18 @@ public class Date extends AbstractTimeField<LocalDate> {
     private Calendar calendar;
 
     @Override
+    protected void loadPage() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     protected void afterPageLoaded(){
         initDateTextField(year, MAX_YEAR, 4);
         initDateTextField(month, MAX_MONTH, 2);
@@ -159,7 +151,7 @@ public class Date extends AbstractTimeField<LocalDate> {
     }
 
     @Override
-    public Popup createPopup() {
+    protected Popup createPopup() {
         Popup popup = new Popup();
         calendar = new Calendar();
         date = calendar.dateProperty();
@@ -168,6 +160,12 @@ public class Date extends AbstractTimeField<LocalDate> {
         popup.setAutoHide(true);
         return popup;
     }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 私有方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
 
     private void updateCompleteDateTextField(LocalDate newDate){
         isFromDate = true;
@@ -202,7 +200,7 @@ public class Date extends AbstractTimeField<LocalDate> {
             } else if (!isFromDate && newValue.length() == maxLength){
                 if (yearInt != 0 && monthInt != 0 && dayInt != 0){
                     LocalDate newLocalDate = LocalDate.of(yearInt, monthInt, dayInt);
-                    if (getInterceptor() == null || getInterceptor().test(newLocalDate)){
+                    if (test(newLocalDate)){
                         setLocalDate(newLocalDate);
                     }else {
                         updateCompleteDateTextField(getLocalDate());
@@ -292,18 +290,6 @@ public class Date extends AbstractTimeField<LocalDate> {
         };
     }
 
-    @Override
-    protected void loadPage() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
-            fxmlLoader.setRoot(this);
-            fxmlLoader.setController(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     /* *************************************************************************
      *                                                                         *
      * 公共方法                                                                 *
@@ -322,5 +308,20 @@ public class Date extends AbstractTimeField<LocalDate> {
             month.setText(dates[1]);
             day.setText(dates[2]);
         }
+    }
+
+    @Override
+    public Predicate<LocalDate> getInterceptor() {
+        return this.calendar.getInterceptor();
+    }
+
+    @Override
+    public ObjectProperty<Predicate<LocalDate>> interceptorProperty() {
+        return this.calendar.interceptorProperty();
+    }
+
+    @Override
+    public void setInterceptor(Predicate<LocalDate> dateInterceptor) {
+        this.calendar.setInterceptor(dateInterceptor);
     }
 }

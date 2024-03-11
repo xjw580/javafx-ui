@@ -100,11 +100,6 @@ public abstract class AbstractTimeField<T> extends Group implements Interceptor<
      */
     public abstract void refresh();
     /**
-     * 创建弹窗页，点击组件图标后弹出
-     * @return
-     */
-    protected abstract Popup createPopup();
-    /**
      * 加载页面
      */
     protected abstract void loadPage();
@@ -112,6 +107,11 @@ public abstract class AbstractTimeField<T> extends Group implements Interceptor<
      * 页面加载完毕
      */
     protected abstract void afterPageLoaded();
+    /**
+     * 创建弹窗页，点击组件图标后弹出
+     * @return
+     */
+    protected abstract Popup createPopup();
 
     /**
      * 创建组件图标

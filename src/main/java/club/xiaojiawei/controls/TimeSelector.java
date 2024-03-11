@@ -16,6 +16,7 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -69,7 +70,7 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
     }
 
     public void setLocalTime(LocalTime localTime){
-        if (getInterceptor() == null || getInterceptor().test(localTime)){
+        if (test(localTime)){
             time.set(localTime);
         }
     }
@@ -82,14 +83,18 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
         return time.get();
     }
 
-    protected ObjectProperty<LocalTime> timeProperty(){
-        return time;
-    }
-
-    public ReadOnlyObjectProperty<LocalTime> timeReadOnlyProperty() {
-        var readOnlyObjectWrapper = new ReadOnlyObjectWrapper<LocalTime>();
-        readOnlyObjectWrapper.bind(time);
-        return readOnlyObjectWrapper.getReadOnlyProperty();
+    public ObjectProperty<LocalTime> timeProperty(){
+        if (virtualTime == null){
+            virtualTime = new SimpleObjectProperty<>(getLocalTime());
+            virtualTime.addListener((observableValue, localDate, t1) -> {
+                if (test(t1)){
+                    time.set(t1);
+                }else {
+                    virtualTime.set(localDate);
+                }
+            });
+        }
+        return virtualTime;
     }
 
     public void setShowRowCount(double showRowCount) {
@@ -153,6 +158,7 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
     private final ToggleGroup hourGroup = new ToggleGroup();
     private final ToggleGroup minGroup = new ToggleGroup();
     private final ToggleGroup secGroup = new ToggleGroup();
+    private ObjectProperty<LocalTime> virtualTime;
 
     /* *************************************************************************
      *                                                                         *
@@ -174,6 +180,9 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
      */
     private void addTimePropertyChangedListener(){
         time.addListener((observable, oldTime, newTime) -> {
+            if (virtualTime != null){
+                virtualTime.set(newTime);
+            }
             if (newTime == null){
                 hourGroup.selectToggle(null);
                 minGroup.selectToggle(null);
@@ -277,7 +286,7 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
                 if (showSec){
                     if (secGroup.getSelectedToggle() != null){
                         LocalTime localTime = LocalTime.from(TIME_FULL_FORMATTER.parse(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) secGroup.getSelectedToggle()).getText()));
-                        if (getInterceptor() == null || getInterceptor().test(localTime)){
+                        if (test(localTime)){
                             setLocalTime(localTime);
                         }else {
                             timeToggleGroup.selectToggle(oldToggle);
@@ -285,7 +294,7 @@ public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
                     }
                 }else {
                     LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(((ToggleButton) hourGroup.getSelectedToggle()).getText() + ":" + ((ToggleButton) minGroup.getSelectedToggle()).getText()));
-                    if (getInterceptor() == null || getInterceptor().test(localTime)){
+                    if (test(localTime)){
                         setLocalTime(localTime);
                     }else {
                         timeToggleGroup.selectToggle(oldToggle);

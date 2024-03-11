@@ -20,11 +20,12 @@ public class TimeTest extends Application {
     public void start(Stage stage) throws Exception {
         Time time = new Time();
 //        time.setShowSelector(false);
-        time.timeReadOnlyProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        time.timeProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         time.setInterceptor(new Predicate<LocalTime>() {
             @Override
             public boolean test(LocalTime localTime) {
-                if (localTime.isAfter(LocalTime.now())){
+                if (localTime != null && localTime.isAfter(LocalTime.now())){
+                    System.out.println("false");
                     return false;
                 }
                 System.out.println("true");
@@ -42,6 +43,7 @@ public class TimeTest extends Application {
         JavaFXUI.addjavafxUIStylesheet(scene);
         stage.setScene(scene);
         stage.show();
+        time.timeProperty().set(LocalTime.now().plusHours(1));
 //        new Timer().schedule(new TimerTask() {
 //            @Override
 //            public void run() {
