@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
@@ -15,8 +14,12 @@
                 <tooltip>
                     <Tooltip text="tab-pane-ui"/>
                 </tooltip>
-                <Tab text="DJW" />
-                <Tab text="AMS" />
+                <Tab text="DJW" >
+                    <Text text="hello"/>
+                </Tab>
+                <Tab text="AMS">
+                    <Text text="hello"/>
+                </Tab>
             </TabPane>
         </HBox>
         <Label text="大小类：tab-pane-ui-small" styleClass="title-three"/>
