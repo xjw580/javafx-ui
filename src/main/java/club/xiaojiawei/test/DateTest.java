@@ -29,14 +29,15 @@ public class DateTest extends Application {
         VBox vBox = new VBox(hBox);
         vBox.setAlignment(Pos.CENTER);
         hBox.setPrefHeight(100);
-        hBox.setAlignment(Pos.CENTER);
+        hBox.setStyle("-fx-background-color: yellow");
+//        hBox.setAlignment(Pos.CENTER);
         Date date = new Date();
         date.setInterceptor(localDate -> localDate == null || LocalDate.now().isAfter(localDate) || LocalDate.now().equals(localDate));
         System.out.println(date.getDate());
         date.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println("date:" + newValue));
         Button refresh = new Button("refresh");
         refresh.setOnMouseClicked(mouseEvent -> date.refresh());
-        hBox.getChildren().addAll(new Label("test"), date, refresh);
+        hBox.getChildren().addAll(date, refresh);
         Scene scene = new Scene(vBox, 400, 400);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);

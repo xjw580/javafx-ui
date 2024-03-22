@@ -1,7 +1,7 @@
 #fileUploaderItem{
     -fx-background-size: cover;
-    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.8), 10, 0, 0, 0);
-    -fx-background-color: #e0e0e0
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 1), 5, 0, 0, 0);
+    -fx-background-color: white;
 }
 #fileUploaderItem #msgOuter{
     -fx-spacing: 8;
@@ -9,10 +9,9 @@
 }
 #fileUploaderItem #closeIcoOuter{
     -fx-padding: 3;
-    -fx-background-color: white;
+    -fx-background-color: rgba(255, 255, 255, 0.8);
     -fx-background-radius: 9;
     -fx-alignment: CENTER;
-
 }
 #fileUploaderItem #fileNameLabel, #fileUploaderItem #fileSizeLabel{
     -fx-background-color: rgba(255, 255, 255, 0.8);

@@ -16,8 +16,9 @@
         <Label fx:id="fileSizeLabel"/>
         <ProgressIndicator visible="false" fx:id="uploadProgressIndicator" styleClass="progress-indicator-ui"/>
     </VBox>
-    <Group fx:id="closeIcoGroup">
-        <StackPane fx:id="closeIcoOuter" translateX="91" translateY="-9">
+
+    <Group fx:id="closeIcoGroup" translateX="91" translateY="-9">
+        <StackPane fx:id="closeIcoOuter">
             <FailIco scaleY="1.5" scaleX="1.5"/>
         </StackPane>
     </Group>
