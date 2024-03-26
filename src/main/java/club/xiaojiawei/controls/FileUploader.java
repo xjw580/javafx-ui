@@ -253,6 +253,9 @@ public class FileUploader extends TilePane {
         return fileUploaderItem;
     }
 
+    /**
+     * 上传失败事件
+     */
     public enum FailEvent{
 
         /**

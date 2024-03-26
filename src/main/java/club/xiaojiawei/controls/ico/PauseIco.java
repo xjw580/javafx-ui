@@ -9,7 +9,7 @@ import org.girod.javafx.svgimage.SVGLoader;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/31 0:05
  */
-public class PauseIco extends StackPane {
+public class PauseIco extends AbstractIco {
 
     public PauseIco() {
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));

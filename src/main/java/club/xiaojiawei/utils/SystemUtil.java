@@ -1,13 +1,18 @@
 package club.xiaojiawei.utils;
 
+import club.xiaojiawei.JavaFXUI;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarFile;
 
 /**
  * 系统工具类
@@ -17,13 +22,21 @@ import java.util.List;
 @Slf4j
 public class SystemUtil {
 
+    /**
+     * 获取当前jar包文件
+     */
+    public static JarFile getJarFile() throws URISyntaxException, IOException {
+        ProtectionDomain protectionDomain = JavaFXUI.class.getProtectionDomain();
+        CodeSource codeSource = protectionDomain.getCodeSource();
+        return new JarFile(codeSource.getLocation().toURI().getPath());
+    }
 
     /**
-     * 获取指定包名下的所有类名
+     * 获取指定包名下的所有类名（非jar包启动）
      * @param packageName 例：club.xiaojiawei.controls.ico
-     * @return
+     * @return 全路径类名
      */
-    public static List<String> getClassesInPackage(String packageName) {
+    public static List<String> getClassesNameInPackage(String packageName) {
         List<String> classNames = new ArrayList<>();
         String packagePath = packageName.replace('.', '/');
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();

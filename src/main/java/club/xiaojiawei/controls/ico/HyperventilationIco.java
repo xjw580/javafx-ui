@@ -9,7 +9,7 @@ import org.girod.javafx.svgimage.SVGLoader;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/31 22:28
  */
-public class HyperventilationIco extends StackPane {
+public class HyperventilationIco extends AbstractIco {
 
     public HyperventilationIco() {
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));

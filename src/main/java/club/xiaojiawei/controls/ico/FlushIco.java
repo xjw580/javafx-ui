@@ -9,7 +9,7 @@ import org.girod.javafx.svgimage.SVGLoader;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/11/5 14:29
  */
-public class FlushIco extends StackPane {
+public class FlushIco extends AbstractIco {
 
     public FlushIco() {
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));

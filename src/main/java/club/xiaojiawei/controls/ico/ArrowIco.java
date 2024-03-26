@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/23 23:06
  */
-public class ArrowIco extends StackPane {
+public class ArrowIco extends AbstractIco {
 
     public ArrowIco() {
         try {

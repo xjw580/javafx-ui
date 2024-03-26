@@ -9,7 +9,7 @@ import org.girod.javafx.svgimage.SVGLoader;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/31 14:36
  */
-public class InvisibleIco extends StackPane {
+public class InvisibleIco extends AbstractIco {
 
     public InvisibleIco() {
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));

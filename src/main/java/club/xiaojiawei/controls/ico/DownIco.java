@@ -9,7 +9,7 @@ import java.io.IOException;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/23 23:18
  */
-public class DownIco extends StackPane {
+public class DownIco extends AbstractIco {
 
     public DownIco() {
         try {
@@ -21,4 +21,12 @@ public class DownIco extends StackPane {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String getColorStyle(String color) {
+        return String.format("* { " +
+                "-fx-stroke: %s!important;;" +
+                "}", color);
+    }
+
 }

@@ -20,6 +20,7 @@ import java.util.concurrent.*;
 import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 
 /**
+ * 通知管理器
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/1/2 10:00
  */

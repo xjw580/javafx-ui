@@ -26,6 +26,7 @@ import java.util.function.Predicate;
 import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 
 /**
+ * 事件选择器
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/25 17:33
  */

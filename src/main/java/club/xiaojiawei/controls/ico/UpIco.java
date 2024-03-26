@@ -1,6 +1,7 @@
 package club.xiaojiawei.controls.ico;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.io.IOException;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/23 23:13
  */
-public class UpIco extends StackPane {
+public class UpIco extends AbstractIco {
 
     public UpIco() {
         try {
@@ -21,4 +22,12 @@ public class UpIco extends StackPane {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String getColorStyle(String color) {
+        return String.format("* { " +
+                "-fx-stroke: %s!important;;" +
+                "}", color);
+    }
+
 }

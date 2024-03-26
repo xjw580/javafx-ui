@@ -4,13 +4,17 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Polygon?>
-<?import java.lang.Double?>
+<?import javafx.scene.layout.HBox?>
+<?import club.xiaojiawei.controls.FilterField?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
+            fx:controller="club.xiaojiawei.demo.tab.controls.IconsController"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
-        <Label text="所有图标：2倍放大后" styleClass="title-three"/>
-        <TilePane styleClass="hv-box" vgap="10" hgap="10"/>
+        <HBox spacing="25">
+            <Label text="所有图标：2倍放大后" styleClass="title-three"/>
+            <FilterField fx:id="filterField" styleClass="text-field-ui, text-field-ui-small" promptText="搜索图标"/>
+        </HBox>
+        <TilePane fx:id="iconPane" styleClass="hv-box" vgap="10" hgap="10"/>
     </VBox>
 </ScrollPane>
