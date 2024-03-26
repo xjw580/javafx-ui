@@ -23,14 +23,6 @@
         <lombok-version>1.18.30</lombok-version>
     </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>https://foisonrich.com/:3011/repository/nexus-releases/</url>
-        </repository>
-    </distributionManagement>
-
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
