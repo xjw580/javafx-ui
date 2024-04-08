@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <fx:root type="Group" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          stylesheets="@css/date.css">
-    <StackPane fx:id="dateOuterUI" style="-fx-padding: 10">
+    <StackPane fx:id="dateOuterUI">
         <Label fx:id="dateBG" styleClass="dateBackground"/>
         <HBox alignment="CENTER">
             <TextField fx:id="year" promptText="年" styleClass="text-field" style="-fx-pref-width: 32!important;"/>
@@ -15,7 +15,7 @@
             <TextField fx:id="month" promptText="月" styleClass="text-field"/>
             <Label text="/" styleClass="dateSeparator" />
             <TextField fx:id="day" promptText="日" styleClass="text-field"/>
-            <DateIco fx:id="dateIco"/>
+            <DateIco fx:id="dateIco" color="main-shallow-color"/>
         </HBox>
     </StackPane>
 </fx:root>

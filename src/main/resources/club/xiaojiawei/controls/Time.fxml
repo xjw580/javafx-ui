@@ -7,7 +7,7 @@
 <?import javafx.scene.Group?>
 <fx:root type="Group" xmlns:fx="http://javafx.com/fxml"
          stylesheets="@css/time.css">
-    <StackPane fx:id="timeOuterUI" style="-fx-padding: 10">
+    <StackPane fx:id="timeOuterUI">
         <Label fx:id="timeBG" styleClass="timeBackground"/>
         <HBox alignment="CENTER">
             <TextField fx:id="hour" promptText="时" styleClass="text-field"/>
@@ -15,7 +15,7 @@
             <TextField fx:id="min" promptText="分" styleClass="text-field"/>
             <Label fx:id="minWithSecSeparator" text=":" styleClass="timeSeparator" visible="false" managed="false"/>
             <TextField fx:id="sec" promptText="秒" styleClass="text-field" visible="false" managed="false"/>
-            <TimeIco fx:id="timeIco"/>
+            <TimeIco fx:id="timeIco" color="main-shallow-color"/>
         </HBox>
     </StackPane>
 </fx:root>

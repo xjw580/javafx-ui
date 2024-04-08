@@ -16,4 +16,5 @@ public class DateIco extends AbstractIco {
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

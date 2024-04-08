@@ -1,5 +1,5 @@
 .dateTimeBackground{
-    -fx-border-color: main-color;
+    -fx-border-color: main-shallow-color;
     -fx-pref-height: 24;
     -fx-pref-width: 170;
     -fx-border-radius: 10;
@@ -11,12 +11,11 @@
 }
 .dateTimeBackgroundFocus{
     -fx-border-color: main-color!important;
-    -fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;
+    /*-fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;*/
 }
 #dateTimeIco{
     -fx-pref-width: 23;
     -fx-pref-height: 23;
-    -fx-translate-x: -5;
 }
 .dateTimeSeparator{
     -fx-font-size: 17;

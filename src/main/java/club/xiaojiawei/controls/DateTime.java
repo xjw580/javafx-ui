@@ -2,10 +2,7 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.DateIco;
 import javafx.animation.PauseTransition;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -40,6 +37,10 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
     private ReadOnlyObjectWrapper<LocalDateTime> dateTime;
 
     private final ObjectProperty<Predicate<LocalDateTime>> dateTimeInterceptor = new SimpleObjectProperty<>();
+    /**
+     * 直角背景
+     */
+    private final BooleanProperty rightAngleBackground = new SimpleBooleanProperty(false);
 
     public String getDateTime() {
         return dateTime.get() == null? null : DATE_TIME_FORMATTER.format(dateTime.get());
@@ -100,6 +101,23 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
     public void setShowBg(boolean showBg) {
         super.setShowBg(showBg);
         dateTimeBg.setVisible(showBg);
+    }
+
+    public void setRightAngleBackground(boolean rightAngleBackground) {
+        this.rightAngleBackground.set(rightAngleBackground);
+        if (rightAngleBackground){
+            dateTimeBg.getStyleClass().add("rightAngleBackground");
+        }else {
+            dateTimeBg.getStyleClass().removeAll("rightAngleBackground");
+        }
+    }
+
+    public boolean isRightAngleBackground() {
+        return rightAngleBackground.get();
+    }
+
+    public BooleanProperty rightAngleBackgroundProperty() {
+        return rightAngleBackground;
     }
 
     /* *************************************************************************
@@ -248,8 +266,10 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
     private void dealFocusChange(boolean isFocus) {
         if (isFocus){
             dateTimeBg.getStyleClass().add(DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+            dateTimeIco.setColor("main-color");
         }else {
             dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+            dateTimeIco.setColor("main-shallow-color");
         }
         setFocusedField(dateControls.isFocused() || timeControls.isFocused());
     }

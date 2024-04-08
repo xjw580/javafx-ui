@@ -45,6 +45,10 @@ public class Time extends AbstractDateTimeField<LocalTime> {
      */
     @Getter
     private boolean showSec;
+    /**
+     * 直角背景
+     */
+    private final BooleanProperty rightAngleBackground = new SimpleBooleanProperty(true);
 
     public String getTime() {
         if (showSec){
@@ -124,6 +128,23 @@ public class Time extends AbstractDateTimeField<LocalTime> {
             timeSelector.setShowSec(false);
         }
         setShowIcon(isShowIcon());
+    }
+
+    public void setRightAngleBackground(boolean rightAngleBackground) {
+        this.rightAngleBackground.set(rightAngleBackground);
+        if (rightAngleBackground){
+            timeBG.getStyleClass().add("rightAngleBackground");
+        }else {
+            timeBG.getStyleClass().removeAll("rightAngleBackground");
+        }
+    }
+
+    public boolean isRightAngleBackground() {
+        return rightAngleBackground.get();
+    }
+
+    public BooleanProperty rightAngleBackgroundProperty() {
+        return rightAngleBackground;
     }
 
     /* *************************************************************************
@@ -306,8 +327,10 @@ public class Time extends AbstractDateTimeField<LocalTime> {
             if (!isFocus){
                 standardizationTime(textField, textField.getText());
                 timeBG.getStyleClass().remove(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+                timeIco.setColor("main-shallow-color");
             }else {
                 timeBG.getStyleClass().add(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+                timeIco.setColor("main-color");
             }
             setFocusedField(hour.isFocused() || min.isFocused() || sec.isFocused());
         };

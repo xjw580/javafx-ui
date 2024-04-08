@@ -1,9 +1,7 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.DateIco;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,6 +38,10 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      * 日期
      */
     protected ReadOnlyObjectWrapper<LocalDate> date;
+    /**
+     * 直角背景
+     */
+    private final BooleanProperty rightAngleBackground = new SimpleBooleanProperty(true);
 
     public String getDate() {
         return getLocalDate() == null? null : DATE_FORMATTER.format(getLocalDate());
@@ -91,6 +93,23 @@ public class Date extends AbstractDateTimeField<LocalDate> {
     public void setShowBg(boolean showBg) {
         super.setShowBg(showBg);
         dateBG.setVisible(showBg);
+    }
+
+    public void setRightAngleBackground(boolean rightAngleBackground) {
+        this.rightAngleBackground.set(rightAngleBackground);
+        if (rightAngleBackground){
+            dateBG.getStyleClass().add("rightAngleBackground");
+        }else {
+            dateBG.getStyleClass().removeAll("rightAngleBackground");
+        }
+    }
+
+    public boolean isRightAngleBackground() {
+        return rightAngleBackground.get();
+    }
+
+    public BooleanProperty rightAngleBackgroundProperty() {
+        return rightAngleBackground;
     }
 
     /* *************************************************************************
@@ -222,9 +241,11 @@ public class Date extends AbstractDateTimeField<LocalDate> {
         return (observableValue, aBoolean, isFocus) -> {
             if (isFocus){
                 dateBG.getStyleClass().add(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
+                dateIco.setColor("main-color");
             }else {
                 textField.setText(standardizationDateText(textField, textField.getText()));
                 dateBG.getStyleClass().remove(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
+                dateIco.setColor("main-shallow-color");
             }
             setFocusedField(year.isFocused() || month.isFocused() || day.isFocused());
         };

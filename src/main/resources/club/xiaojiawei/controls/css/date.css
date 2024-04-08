@@ -12,7 +12,7 @@
     -fx-fill: grey;
 }
 .dateBackground{
-    -fx-border-color: main-color;
+    -fx-border-color: main-shallow-color;
     -fx-pref-height: 24;
     -fx-pref-width: 115;
     -fx-border-radius: 10;
@@ -24,7 +24,7 @@
 }
 .dateBackgroundFocus{
     -fx-border-color: main-color!important;
-    -fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;
+    /*-fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;*/
 }
 #dateIco{
     -fx-pref-width: 23;

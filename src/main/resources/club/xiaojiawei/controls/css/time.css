@@ -18,7 +18,7 @@
     -fx-background-color: white;
 }
 .timeFullBackground{
-    -fx-border-color: main-color;
+    -fx-border-color: main-shallow-color;
     -fx-pref-height: 24;
     -fx-pref-width: 90;
     -fx-border-radius: 10;
@@ -34,7 +34,7 @@
 
 .timeBackgroundFocus{
     -fx-border-color: main-color!important;
-    -fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;
+    /*-fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;*/
 }
 #timeIco{
     -fx-pref-width: 23;
