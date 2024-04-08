@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.annotations.ValidSizeRange;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.enums.SizeEnum;
@@ -10,17 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 /**
  * 通知
@@ -56,6 +54,7 @@ public class Notification extends Group {
      * 通知的尺寸
      */
     @Getter
+    @ValidSizeRange({SizeEnum.TINY, SizeEnum.SMALL, SizeEnum.MEDDLE, SizeEnum.DEFAULT, SizeEnum.BIG})
     private SizeEnum size;
     /**
      * 内容最大宽度，超过此宽度将换行

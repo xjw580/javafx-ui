@@ -1,0 +1,14 @@
+.rightAngleBackground{
+    -fx-border-radius: 4!important;
+    -fx-background-radius: 4!important;
+}
+.time-small-background{
+    -fx-pref-height: 24!important;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+.time-big-background{
+    -fx-pref-height: 37!important;
+    -fx-border-radius: 18;
+    -fx-background-radius: 18;
+}

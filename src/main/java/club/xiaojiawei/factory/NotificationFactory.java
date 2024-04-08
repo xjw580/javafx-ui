@@ -1,5 +1,6 @@
 package club.xiaojiawei.factory;
 
+import club.xiaojiawei.annotations.ValidSizeRange;
 import club.xiaojiawei.controls.Notification;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.enums.SizeEnum;
@@ -26,6 +27,7 @@ public class NotificationFactory {
 
     private double transitionTime = 200D;
 
+    @ValidSizeRange({SizeEnum.TINY, SizeEnum.SMALL, SizeEnum.MEDDLE, SizeEnum.DEFAULT, SizeEnum.BIG})
     private SizeEnum size = SizeEnum.DEFAULT;
 
     public Notification ofNew(){

@@ -8,7 +8,7 @@
 <fx:root type="Group" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          stylesheets="@css/date.css">
     <StackPane fx:id="dateOuterUI">
-        <Label fx:id="dateBG" styleClass="dateBackground"/>
+        <Label fx:id="dateTimeBg" styleClass="dateBackground, rightAngleBackground"/>
         <HBox alignment="CENTER">
             <TextField fx:id="year" promptText="年" styleClass="text-field" style="-fx-pref-width: 32!important;"/>
             <Label text="/" styleClass="dateSeparator"/>

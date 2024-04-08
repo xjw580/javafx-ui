@@ -1,9 +1,11 @@
+@import "common/date-time-common.css";
+
 .dateTimeBackground{
     -fx-border-color: main-shallow-color;
-    -fx-pref-height: 24;
+    -fx-pref-height: 30;
     -fx-pref-width: 170;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
     -fx-background-color: white;
 }
 .hideIcoDateTimeBackground{

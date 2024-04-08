@@ -40,8 +40,3 @@
 * {
     -fx-accent: main-color;
 }
-/*时间类组件公共样式*/
-.rightAngleBackground{
-    -fx-border-radius: 4!important;
-    -fx-background-radius: 4!important;
-}

@@ -14,5 +14,16 @@
             <DateTime showBg="false"/>
             <DateTime showBg="false" showIcon="false"/>
         </HBox>
+        <Label text="通过size属性修改组件尺寸" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <DateTime size="SMALL"/>
+            <DateTime/>
+            <DateTime size="BIG"/>
+        </HBox>
+        <Label text="通过rightAngleBackground属性修改组件圆角" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <DateTime/>
+            <DateTime rightAngleBackground="false"/>
+        </HBox>
     </VBox>
 </ScrollPane>

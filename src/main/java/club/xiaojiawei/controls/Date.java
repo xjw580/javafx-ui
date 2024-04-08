@@ -82,25 +82,25 @@ public class Date extends AbstractDateTimeField<LocalDate> {
         dateIco.setVisible(showIcon);
         dateIco.setManaged(false);
         if (showIcon){
-            dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
         }else {
-            dateBG.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
-            dateBG.getStyleClass().add(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
         }
     }
 
     @Override
     public void setShowBg(boolean showBg) {
         super.setShowBg(showBg);
-        dateBG.setVisible(showBg);
+        dateTimeBg.setVisible(showBg);
     }
 
     public void setRightAngleBackground(boolean rightAngleBackground) {
         this.rightAngleBackground.set(rightAngleBackground);
         if (rightAngleBackground){
-            dateBG.getStyleClass().add("rightAngleBackground");
+            dateTimeBg.getStyleClass().add("rightAngleBackground");
         }else {
-            dateBG.getStyleClass().removeAll("rightAngleBackground");
+            dateTimeBg.getStyleClass().removeAll("rightAngleBackground");
         }
     }
 
@@ -120,8 +120,6 @@ public class Date extends AbstractDateTimeField<LocalDate> {
 
     public Date() {}
 
-    @FXML
-    private Label dateBG;
     @FXML
     private TextField year;
     @FXML
@@ -240,11 +238,11 @@ public class Date extends AbstractDateTimeField<LocalDate> {
     private ChangeListener<Boolean> dateTextFieldFocusListener(TextField textField) {
         return (observableValue, aBoolean, isFocus) -> {
             if (isFocus){
-                dateBG.getStyleClass().add(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
+                dateTimeBg.getStyleClass().add(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
                 dateIco.setColor("main-color");
             }else {
                 textField.setText(standardizationDateText(textField, textField.getText()));
-                dateBG.getStyleClass().remove(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
+                dateTimeBg.getStyleClass().remove(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
                 dateIco.setColor("main-shallow-color");
             }
             setFocusedField(year.isFocused() || month.isFocused() || day.isFocused());

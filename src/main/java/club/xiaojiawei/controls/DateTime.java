@@ -129,8 +129,6 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
     public DateTime() {}
 
     @FXML
-    private Label dateTimeBg;
-    @FXML
     private DateIco dateTimeIco;
     @FXML
     private Date dateControls;

@@ -93,34 +93,34 @@ public class Time extends AbstractDateTimeField<LocalTime> {
         timeIco.setVisible(showIcon);
         timeIco.setManaged(showIcon);
         if (showIcon){
-            timeBG.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }else {
-            timeBG.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
-            timeBG.getStyleClass().add(showSec? HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS : HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().removeAll(HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS, HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().add(showSec? HIDE_ICO_TIME_FULL_BACKGROUND_STYLE_CLASS : HIDE_ICO_TIME_BACKGROUND_STYLE_CLASS);
         }
     }
 
     @Override
     public void setShowBg(boolean showBg) {
         super.setShowBg(showBg);
-        timeBG.setVisible(showBg);
+        dateTimeBg.setVisible(showBg);
     }
 
     public void setShowSec(boolean showSec) {
         this.showSec = showSec;
         if (showSec){
-            timeBG.getStyleClass().remove(TIME_BACKGROUND_STYLE_CLASS);
-            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND_STYLE_CLASS);
-            timeBG.getStyleClass().add(TIME_FULL_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(TIME_FULL_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().add(TIME_FULL_BACKGROUND_STYLE_CLASS);
             sec.setVisible(true);
             sec.setManaged(true);
             minWithSecSeparator.setVisible(true);
             minWithSecSeparator.setManaged(true);
             timeSelector.setShowSec(true);
         }else {
-            timeBG.getStyleClass().remove(TIME_FULL_BACKGROUND_STYLE_CLASS);
-            timeBG.getStyleClass().remove(TIME_BACKGROUND_STYLE_CLASS);
-            timeBG.getStyleClass().add(TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(TIME_FULL_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().add(TIME_BACKGROUND_STYLE_CLASS);
             sec.setVisible(false);
             sec.setManaged(false);
             minWithSecSeparator.setVisible(false);
@@ -133,9 +133,9 @@ public class Time extends AbstractDateTimeField<LocalTime> {
     public void setRightAngleBackground(boolean rightAngleBackground) {
         this.rightAngleBackground.set(rightAngleBackground);
         if (rightAngleBackground){
-            timeBG.getStyleClass().add("rightAngleBackground");
+            dateTimeBg.getStyleClass().add("rightAngleBackground");
         }else {
-            timeBG.getStyleClass().removeAll("rightAngleBackground");
+            dateTimeBg.getStyleClass().removeAll("rightAngleBackground");
         }
     }
 
@@ -155,8 +155,6 @@ public class Time extends AbstractDateTimeField<LocalTime> {
 
     public Time() {}
 
-    @FXML
-    private Label timeBG;
     @FXML
     private TextField hour;
     @FXML
@@ -326,10 +324,10 @@ public class Time extends AbstractDateTimeField<LocalTime> {
         return (observableValue, aBoolean, isFocus) -> {
             if (!isFocus){
                 standardizationTime(textField, textField.getText());
-                timeBG.getStyleClass().remove(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+                dateTimeBg.getStyleClass().remove(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
                 timeIco.setColor("main-shallow-color");
             }else {
-                timeBG.getStyleClass().add(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
+                dateTimeBg.getStyleClass().add(TIME_BACKGROUND_FOCUS_STYLE_CLASS);
                 timeIco.setColor("main-color");
             }
             setFocusedField(hour.isFocused() || min.isFocused() || sec.isFocused());

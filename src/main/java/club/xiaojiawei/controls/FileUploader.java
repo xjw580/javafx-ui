@@ -172,7 +172,6 @@ public class FileUploader extends TilePane {
             this.setMaxWidth(30 + 2 + size * 100 + (size == 0? 0 : (size - 1) * 17));
         });
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            System.out.println("target:" + event.getTarget());
             if (this.getChildren().size() <= maxFileQuantity){
                 FileChooser fileChooser = new FileChooser();
                 if (lastChooseDir != null){

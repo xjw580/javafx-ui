@@ -8,7 +8,7 @@
 <fx:root type="Group" xmlns:fx="http://javafx.com/fxml"
          stylesheets="@css/time.css">
     <StackPane fx:id="timeOuterUI">
-        <Label fx:id="timeBG" styleClass="timeBackground"/>
+        <Label fx:id="dateTimeBg" styleClass="timeBackground, rightAngleBackground"/>
         <HBox alignment="CENTER">
             <TextField fx:id="hour" promptText="时" styleClass="text-field"/>
             <Label text=":" styleClass="timeSeparator"/>

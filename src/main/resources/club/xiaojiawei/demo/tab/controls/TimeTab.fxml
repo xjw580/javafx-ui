@@ -20,5 +20,16 @@
             <Time showBg="false" showSec="true"/>
             <Time showBg="false" showIcon="false" showSec="true"/>
         </HBox>
+        <Label text="通过size属性修改组件尺寸" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Time size="SMALL"/>
+            <Time/>
+            <Time size="BIG"/>
+        </HBox>
+        <Label text="通过rightAngleBackground属性修改组件圆角" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Time/>
+            <Time rightAngleBackground="false"/>
+        </HBox>
     </VBox>
 </ScrollPane>

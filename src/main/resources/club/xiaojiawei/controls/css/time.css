@@ -1,3 +1,5 @@
+@import "common/date-time-common.css";
+
 .text-field{
     -fx-pref-width: 18;
     -fx-padding: 0;
@@ -11,15 +13,15 @@
 }
 .timeBackground{
     -fx-border-color: main-color;
-    -fx-pref-height: 24;
+    -fx-pref-height: 30;
     -fx-pref-width: 70;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
     -fx-background-color: white;
 }
 .timeFullBackground{
     -fx-border-color: main-shallow-color;
-    -fx-pref-height: 24;
+    -fx-pref-height: 30;
     -fx-pref-width: 90;
     -fx-border-radius: 10;
     -fx-background-radius: 10;

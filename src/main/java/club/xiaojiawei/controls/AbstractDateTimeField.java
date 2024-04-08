@@ -1,15 +1,20 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.annotations.ValidSizeRange;
+import club.xiaojiawei.enums.SizeEnum;
 import club.xiaojiawei.func.Interceptor;
 import javafx.beans.property.*;
+import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.stage.Popup;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
@@ -17,6 +22,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/3/8 9:56
  */
+@Slf4j
 public abstract class AbstractDateTimeField<T> extends Group implements Interceptor<T> {
 
     /**
@@ -39,6 +45,12 @@ public abstract class AbstractDateTimeField<T> extends Group implements Intercep
      * 点击图标展示的弹出页
      */
     private Popup popup;
+    /**
+     * 控件大小
+     */
+    @Getter
+    @ValidSizeRange({SizeEnum.SMALL, SizeEnum.MEDDLE, SizeEnum.DEFAULT, SizeEnum.BIG})
+    private SizeEnum size;
 
     public boolean isFocusedField() {
         return focusedField.get();
@@ -52,6 +64,23 @@ public abstract class AbstractDateTimeField<T> extends Group implements Intercep
         return focusedField.getReadOnlyProperty();
     }
 
+    public void setSize(SizeEnum size) {
+        this.size = size;
+        String smallStyleClass = "time-small-background", bigStyleClass = "time-big-background";
+        switch (size){
+            case BIG -> {
+                dateTimeBg.getStyleClass().removeAll(smallStyleClass, bigStyleClass);
+                dateTimeBg.getStyleClass().add(bigStyleClass);
+            }
+            case MEDDLE, DEFAULT -> dateTimeBg.getStyleClass().removeAll(smallStyleClass, bigStyleClass);
+            case SMALL -> {
+                dateTimeBg.getStyleClass().removeAll(smallStyleClass, bigStyleClass);
+                dateTimeBg.getStyleClass().add(smallStyleClass);
+            }
+            default -> log.warn("未实现的尺寸: {}", size);
+        }
+    }
+
     public AbstractDateTimeField() {
         loadPage();
         afterPageLoaded();
@@ -62,6 +91,10 @@ public abstract class AbstractDateTimeField<T> extends Group implements Intercep
             showPopup(this.getScene().getWindow(), bounds.getMinX(), bounds.getMaxY() - 10);
         });
     }
+
+    @FXML
+    protected Label dateTimeBg;
+
 
     protected void initPopup() {
         this.popup = createPopup();

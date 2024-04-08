@@ -10,7 +10,7 @@
 <fx:root type="Group" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateTime.css">
     <StackPane fx:id="dateTimeOuterUI">
-        <Label fx:id="dateTimeBg" styleClass="dateTimeBackground"/>
+        <Label fx:id="dateTimeBg" styleClass="dateTimeBackground, rightAngleBackground"/>
         <HBox alignment="CENTER">
             <Date fx:id="dateControls" showIcon="false" showBg="false"/>
             <Label styleClass="dateTimeSeparator" text="-"/>
