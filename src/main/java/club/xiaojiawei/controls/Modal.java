@@ -136,8 +136,7 @@ public class Modal {
         }
         VBox vBox = buildConfirmBody(baseParent, heading, content);
         if (btn != null){
-            HBox hBox = new HBox();
-            hBox.setStyle("-fx-spacing: 15;-fx-alignment: CENTER_RIGHT");
+            HBox hBox = buildBtnHBox();
             hBox.getChildren().addAll(Arrays.stream(btn).toList());
             vBox.getChildren().add(hBox);
         }
@@ -157,8 +156,7 @@ public class Modal {
             throw new NullPointerException("parent不能为null");
         }
         VBox vBox = new VBox(heading, content);
-        HBox hBox = new HBox();
-        hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15");
+        HBox hBox = buildBtnHBox();
         hBox.getChildren().addAll(Arrays.stream(btn).toList());
         vBox.getChildren().add(hBox);
         buildRootPane(vBox);
@@ -180,8 +178,7 @@ public class Modal {
         }
         VBox vBox = new VBox(heading, content);
         vBox.setStyle(style);
-        HBox hBox = new HBox();
-        hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15");
+        HBox hBox = buildBtnHBox();
         hBox.getChildren().addAll(Arrays.stream(btn).toList());
         vBox.getChildren().add(hBox);
         buildRootPane(vBox);
@@ -193,6 +190,12 @@ public class Modal {
      * 私有方法                                                                 *
      *                                                                         *
      **************************************************************************/
+
+    private HBox buildBtnHBox(){
+        HBox hBox = new HBox();
+        hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15");
+        return hBox;
+    }
 
     private VBox buildConfirmBody(Parent baseParent, String heading, String content){
         VBox vBox = new VBox();

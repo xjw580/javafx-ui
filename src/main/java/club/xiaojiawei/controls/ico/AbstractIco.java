@@ -25,6 +25,12 @@ public abstract class AbstractIco extends StackPane{
         });
     }
 
+    public AbstractIco(String color) {
+        this();
+        setColor(color);
+    }
+
+
     private final StringProperty color = new SimpleStringProperty();
 
     public String getColor() {
