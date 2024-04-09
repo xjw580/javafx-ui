@@ -212,7 +212,7 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
                     return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), LocalTime.MIN.getHour(), LocalTime.MIN.getMinute()))
                             || getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), LocalTime.MAX.getHour(), LocalTime.MAX.getMinute()));
                 }else {
-                    return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+                    return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute(), localTime.getSecond()));
                 }
             }
             return true;
@@ -227,7 +227,7 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
                     return getInterceptor().test(LocalDateTime.of(min.getYear(), min.getMonth(), min.getDayOfMonth(), localTime.getHour(), localTime.getMinute()))
                             || getInterceptor().test(LocalDateTime.of(max.getYear(), max.getMonth(), max.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
                 }else {
-                    return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+                    return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute(), localTime.getSecond()));
                 }
             }
             return true;
@@ -261,7 +261,7 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
             LocalDate localDate = dateControls.dateProperty().get();
             LocalTime localTime = timeControls.timeProperty().get();
             if (localDate != null && localTime != null){
-                LocalDateTime localDateTime = LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute());
+                LocalDateTime localDateTime = LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute(), localTime.getSecond());
                 if (test(localDateTime)){
                     dateTime.set(localDateTime);
                 }else {
@@ -273,7 +273,7 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
                         pauseTransition.play();
                     }else {
                         dateControls.setLocalDate(LocalDate.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth()));
-                        timeControls.setLocalTime(LocalTime.of(dateTime.getHour(), dateTime.getMinute()));
+                        timeControls.setLocalTime(LocalTime.of(dateTime.getHour(), dateTime.getMinute(), dateTime.getSecond()));
                     }
                 }
             }else if (localDate == null && localTime == null){
@@ -286,7 +286,7 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         isFromDateTime = true;
         if (newDateTime != null){
             dateControls.setLocalDate(LocalDate.of(newDateTime.getYear(), newDateTime.getMonthValue(), newDateTime.getDayOfMonth()));
-            timeControls.setLocalTime(LocalTime.of(newDateTime.getHour(), newDateTime.getMinute()));
+            timeControls.setLocalTime(LocalTime.of(newDateTime.getHour(), newDateTime.getMinute(), newDateTime.getSecond()));
         }
         isFromDateTime = false;
     }
