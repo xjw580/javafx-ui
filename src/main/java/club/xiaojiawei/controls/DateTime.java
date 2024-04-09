@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Popup;
 import javafx.util.Duration;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,6 +18,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
+
+import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
+import static club.xiaojiawei.controls.TimeSelector.TIME_FULL_FORMATTER;
 
 /**
  * 日期时间
@@ -35,6 +39,11 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
      * 日期时间
      */
     private ReadOnlyObjectWrapper<LocalDateTime> dateTime;
+    /**
+     * 显示秒
+     */
+    @Getter
+    private boolean showSec;
 
     private final ObjectProperty<Predicate<LocalDateTime>> dateTimeInterceptor = new SimpleObjectProperty<>();
     /**
@@ -81,17 +90,35 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         return virtualDateTime;
     }
 
-    public ReadOnlyObjectProperty<LocalDateTime> readOnlyObjectProperty(){
+    public ReadOnlyObjectProperty<LocalDateTime> readOnlyDateTimeProperty(){
         return dateTime.getReadOnlyProperty();
+    }
+
+    public void setShowSec(boolean showSec) {
+        this.showSec = showSec;
+        timeControls.setShowSec(showSec);
+        if (showSec){
+            dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().add(DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
+        }else {
+            dateTimeBg.getStyleClass().remove(DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().add(DATE_TIME_BACKGROUND_STYLE_CLASS);
+        }
+        setShowIcon(isShowIcon());
     }
 
     @Override
     public void setShowIcon(boolean showIcon) {
         super.setShowIcon(showIcon);
         dateTimeIco.setVisible(showIcon);
-        dateTimeIco.setManaged(false);
+        dateTimeIco.setManaged(showIcon);
         if (showIcon){
             dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS);
+            dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
+        }else if (showSec){
+            dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
         }else {
             dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS);
         }
@@ -137,7 +164,10 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
 
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd-HH:mm");
     public static final String HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS = "hideIcoDateTimeBackground";
+    public static final String HIDE_ICO_DATE_TIME_FULL_BACKGROUND_STYLE_CLASS = "hideIcoDateTimeFullBackground";
     private static final String DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS = "dateTimeBackgroundFocus";
+    private static final String DATE_TIME_FULL_BACKGROUND_STYLE_CLASS = "dateTimeFullBackground";
+    private static final String DATE_TIME_BACKGROUND_STYLE_CLASS = "dateTimeBackground";
 
     private boolean isFromDateTime;
     private ObjectProperty<LocalDateTime> virtualDateTime;

@@ -9,8 +9,8 @@
     <VBox styleClass="hv-box">
         <Label text="通过showSelector、showBg、背景可见性" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <DateTime/>
-            <DateTime showIcon="false"/>
+            <DateTime showSec="true"/>
+            <DateTime showIcon="false" showSec="true"/>
             <DateTime showBg="false"/>
             <DateTime showBg="false" showIcon="false"/>
         </HBox>

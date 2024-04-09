@@ -12,7 +12,7 @@
     -fx-translate-y: -1;
 }
 .timeBackground{
-    -fx-border-color: main-color;
+    -fx-border-color: main-shallow-color;
     -fx-pref-height: 30;
     -fx-pref-width: 70;
     -fx-border-radius: 15;

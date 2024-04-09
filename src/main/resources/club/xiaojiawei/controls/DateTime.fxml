@@ -11,7 +11,7 @@
          xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateTime.css">
     <StackPane fx:id="dateTimeOuterUI">
         <Label fx:id="dateTimeBg" styleClass="dateTimeBackground, rightAngleBackground"/>
-        <HBox alignment="CENTER">
+        <HBox alignment="CENTER" minWidth="150">
             <Date fx:id="dateControls" showIcon="false" showBg="false"/>
             <Label styleClass="dateTimeSeparator" text="-"/>
             <Time fx:id="timeControls" showBg="false" showIcon="false"/>
