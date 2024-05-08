@@ -1,3 +1,12 @@
+.root{
+    -fx-focus-color: transparent;
+    /*去除获得焦点时的蓝色阴影*/
+    -fx-faint-focus-color: transparent;
+}
+.scroll-pane{
+    -fx-background-insets: 0!important;
+    -fx-border-width: 0!important;
+}
 #demoTitle{
     -fx-background-color: white;
     -fx-alignment: CENTER;
@@ -5,7 +14,10 @@
 }
 #leftScrollPane{
     -fx-border-color: white;
-    -fx-background: white
+    -fx-background: white;
+}
+#accordion{
+    -fx-padding: 0 2 0 0;
 }
 .hv-box{
     -fx-padding: 0 0 0 20;

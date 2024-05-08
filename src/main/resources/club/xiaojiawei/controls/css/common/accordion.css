@@ -1,8 +1,19 @@
 @import "common.css";
+/*
+titled-pane - titled-pane-ui
+    title — HBox
+        text — Label
+        arrow-button — StackPane
+          arrow — StackPane
+    content — StackPane
+*/
 .accordion-ui .titled-pane > .title {
-    -fx-background-color: white;
+    -fx-background-color: shallow-color;
     -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #bce1ff;
+    -fx-border-width: 1;
 }
+/*去除内容的边距*/
 .accordion-ui .titled-pane > .content > * {
     -fx-padding: 0;
 }
@@ -14,9 +25,13 @@
     -fx-effect: null;
     -fx-background-insets: 0;
 }
-.accordion-ui .titled-pane:expanded > .title > .arrow-button > .arrow{
-    -fx-background-color: main-color;
+.accordion-ui .titled-pane > .title > .arrow-button > .arrow{
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
 }
+/*.accordion-ui .titled-pane:expanded > .title > .arrow-button > .arrow{*/
+/*    -fx-background-color: main-color;*/
+/*}*/
 .accordion-ui .titled-pane > .title > .arrow-button > .arrow{
     -fx-background-insets: 0;
 }
@@ -26,4 +41,7 @@
 }
 .accordion-ui-big .titled-pane > .title > .text{
     -fx-translate-y: -6!important;
+}
+.accordion-ui-big .titled-pane > .title > .arrow-button > .arrow{
+    -fx-shape: "M2.24,2.62H9.76a1.28,1.28,0,0,1,.78,2.13L6.84,9A1.09,1.09,0,0,1,5.16,9L1.46,4.76A1.28,1.28,0,0,1,2.24,2.62Z" !important;
 }

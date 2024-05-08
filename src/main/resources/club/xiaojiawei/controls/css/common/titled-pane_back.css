@@ -8,10 +8,12 @@ titled-pane - titled-pane-ui
     content — StackPane
 */
 .titled-pane-ui > .title {
-    -fx-background-color: #e9f5ff;
+    -fx-background-color: white;
     -fx-alignment: CENTER_LEFT;
-    -fx-border-color: #d7ecfd;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
     -fx-border-width: 1;
+    -fx-border-color: transparent;
 }
 /*去除内容的边距*/
 .titled-pane-ui > .content > * {
@@ -25,13 +27,12 @@ titled-pane - titled-pane-ui
     -fx-effect: null;
     -fx-background-insets: 0;
 }
-.titled-pane-ui > .title > .arrow-button > .arrow{
-    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
-    -fx-scale-shape: false;
+.titled-pane-ui:expanded > .title > .arrow-button > .arrow{
+    -fx-background-color: main-color;
 }
-/*.titled-pane-ui:expanded > .title > .arrow-button > .arrow{*/
-/*    -fx-background-color: main-color;*/
-/*}*/
+.titled-pane-ui:expanded > .title{
+    -fx-border-color: #89caff;
+}
 .titled-pane-ui > .title > .arrow-button > .arrow{
     -fx-background-insets: 0;
 }
@@ -41,7 +42,4 @@ titled-pane - titled-pane-ui
 }
 .titled-pane-ui-big > .title > .text{
     -fx-translate-y: -6!important;
-}
-.titled-pane-ui-big > .title > .arrow-button > .arrow{
-    -fx-shape: "M2.24,2.62H9.76a1.28,1.28,0,0,1,.78,2.13L6.84,9A1.09,1.09,0,0,1,5.16,9L1.46,4.76A1.28,1.28,0,0,1,2.24,2.62Z" !important;
 }
