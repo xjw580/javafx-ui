@@ -274,7 +274,7 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
      * @param laterDate
      */
     private void laterDate(LocalDate laterDate){
-        icoBox.setDisable(true);
+//        icoBox.setDisable(true);
         if (laterDate.getYear() > 9999){
             laterDate = laterDate.withYear(1);
         }
@@ -286,7 +286,7 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
                 Timeline timeline = ScrollUtil.buildSlideTimeLine(monthPaneScroll.getVvalue(), 1D, monthPaneScroll);
                 timeline.setOnFinished(event -> {
                     Platform.runLater(() -> monthsPane.getChildren().remove(0));
-                    icoBox.setDisable(false);
+//                    icoBox.setDisable(false);
                 });
                 timeline.play();
                 if (selectedLabel != null){
@@ -318,7 +318,7 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
      * @param beforeDate
      */
     private void beforeDate(LocalDate beforeDate){
-        icoBox.setDisable(true);
+//        icoBox.setDisable(true);
         if (beforeDate.getYear() <= 0){
             beforeDate = beforeDate.withYear(9999);
         }
@@ -336,7 +336,7 @@ public class Calendar extends VBox implements Interceptor<LocalDate> {
                 parallelTransition.setOnFinished(event -> {
                     monthsPane.getChildren().remove(0);
                     showMonthPane.setTranslateY(0);
-                    icoBox.setDisable(false);
+//                    icoBox.setDisable(false);
                 });
                 parallelTransition.play();
                 if (selectedLabel != null){
