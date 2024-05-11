@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 14 14">
-  <defs>
-    <style>
-      .cls-1 {
-        clip-path: url(#clippath);
-      }
-
-      .cls-2 {
-        fill: none;
-      }
-    </style>
-    <clipPath id="clippath">
-      <rect class="cls-2" width="14" height="14"/>
-    </clipPath>
-  </defs>
-  <g class="cls-1">
-    <path d="M7.81,6.99L13.83,.98c.22-.22,.22-.59,0-.81-.22-.22-.59-.22-.81,0L7,6.18,.98,.17C.75-.05,.39-.05,.17,.17-.06,.4-.06,.76,.17,.98L6.19,6.99,.17,13c-.14,.14-.2,.35-.15,.55,.05,.2,.21,.35,.4,.4,.2,.05,.41,0,.55-.15L7,7.8l6.02,6.01c.14,.14,.36,.2,.55,.15,.2-.05,.35-.21,.4-.4,.05-.2,0-.41-.15-.55L7.81,6.99Zm0,0"/>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="_图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 14 14" style="enable-background:new 0 0 14 14;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+</style>
+<g>
+	<defs>
+		<rect id="SVGID_1_" width="14" height="14"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st0">
+		<path d="M7.8,7l6-6c0.2-0.2,0.2-0.6,0-0.8S13.2,0,13,0.2l-6,6l-6-6c-0.2-0.2-0.6-0.2-0.8,0c-0.2,0.2-0.2,0.6,0,0.8l6,6l-6,6
+			C0,13.1,0,13.4,0,13.6s0.2,0.4,0.4,0.4c0.2,0.1,0.4,0,0.6-0.1l6-6l6,6c0.1,0.1,0.4,0.2,0.6,0.1c0.2-0.1,0.4-0.2,0.4-0.4
+			c0.1-0.2,0-0.4-0.1-0.6L7.8,7z"/>
+	</g>
+</g>
 </svg>
