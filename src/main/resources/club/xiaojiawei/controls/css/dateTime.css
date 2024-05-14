@@ -1,5 +1,8 @@
 @import "common/date-time-common.css";
 
+.date-time-root-pane:disabled .javafx-ui-ico{
+    -fx-opacity: 0.5;
+}
 .dateTimeBackground{
     -fx-border-color: main-shallow-color;
     -fx-pref-height: 30;

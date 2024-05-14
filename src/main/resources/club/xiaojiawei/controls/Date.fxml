@@ -6,6 +6,7 @@
 <?import club.xiaojiawei.controls.ico.DateIco?>
 <?import javafx.scene.layout.StackPane?>
 <fx:root type="Group" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+         styleClass="date-root-pane"
          stylesheets="@css/date.css">
     <StackPane fx:id="dateOuterUI">
         <Label fx:id="dateTimeBg" styleClass="dateBackground, rightAngleBackground"/>

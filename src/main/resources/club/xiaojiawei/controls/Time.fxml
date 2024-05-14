@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.Group?>
 <fx:root type="Group" xmlns:fx="http://javafx.com/fxml"
+         styleClass="time-root-pane"
          stylesheets="@css/time.css">
     <StackPane fx:id="timeOuterUI">
         <Label fx:id="dateTimeBg" styleClass="timeBackground, rightAngleBackground"/>

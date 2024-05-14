@@ -8,6 +8,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.layout.HBox?>
 <fx:root type="Group" xmlns="http://javafx.com/javafx"
+         styleClass="date-time-root-pane"
          xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateTime.css">
     <StackPane fx:id="dateTimeOuterUI">
         <Label fx:id="dateTimeBg" styleClass="dateTimeBackground, rightAngleBackground"/>

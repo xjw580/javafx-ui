@@ -1,5 +1,8 @@
 @import "common/date-time-common.css";
 
+.time-root-pane:disabled .javafx-ui-ico{
+    -fx-opacity: 0.5;
+}
 .text-field{
     -fx-pref-width: 18;
     -fx-padding: 0;
