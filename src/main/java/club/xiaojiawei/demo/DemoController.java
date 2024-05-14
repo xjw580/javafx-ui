@@ -196,16 +196,16 @@ public class DemoController implements Initializable {
                 for (String aClass : classes) {
                     Class<?> aClass1 = Class.forName(aClass);
                     if (!Modifier.isAbstract(aClass1.getModifiers()) && aClass1.getConstructor().newInstance() instanceof AbstractIco ico) {
-                        double scale = 2D;
+                        double scale = 1.5D;
                         ico.setScaleX(scale);
                         ico.setScaleY(scale);
                         VBox group = new VBox();
                         group.setStyle("""
                                 -fx-background-color: white;
-                                -fx-padding: 20 5 5 5;
+                                -fx-padding: 15 5 5 5;
                                 -fx-alignment: CENTER;
                                 -fx-background-radius: 5;
-                                -fx-min-height: 63;
+                                -fx-min-height: 58;
                                 -fx-min-width: 123;
                                 """);
                         VBox box = new VBox();

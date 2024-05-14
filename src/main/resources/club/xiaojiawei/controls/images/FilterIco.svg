@@ -1,1 +1,9 @@
-<svg id="图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 14"><title>FilterIco</title><path d="M9.1,7.51v4.08a1.7,1.7,0,0,1-.93,1.49l-1.89.82a1,1,0,0,1-1.38-1V7.51L1.31,2a1.21,1.21,0,0,1,1-2h9.46c1.15,0,1.63,1.05,1,2L9.1,7.51Zm-3,5.09,1.61-.7a.42.42,0,0,0,.19-.31V7.31A.63.63,0,0,1,8,7l3.71-5.67s-9.44,0-9.44,0L6,7a.64.64,0,0,1,.11.36Z" transform="translate(-1 0.01)"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 12 14" style="enable-background:new 0 0 12 14;" xml:space="preserve">
+<title>FilterIco</title>
+<path d="M8.1,7.5v4.1c0,0.6-0.4,1.2-0.9,1.5l-1.9,0.8c-0.5,0.2-1.1,0-1.3-0.5c-0.1-0.1-0.1-0.3-0.1-0.5V7.5L0.3,2
+	c-0.4-0.5-0.4-1.3,0.1-1.7C0.7,0.1,1,0,1.3,0h9.5c1.1,0,1.6,1.1,1,2L8.1,7.5z M5.1,12.6l1.6-0.7c0.1-0.1,0.2-0.2,0.2-0.3V7.3
+	c0-0.1,0-0.2,0.1-0.3l3.7-5.7H1.3L5,7c0.1,0.1,0.1,0.2,0.1,0.4L5.1,12.6z"/>
+</svg>

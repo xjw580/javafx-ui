@@ -42,6 +42,6 @@
     /*-fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;*/
 }
 #timeIco{
-    -fx-pref-width: 23;
-    -fx-pref-height: 23;
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
 }

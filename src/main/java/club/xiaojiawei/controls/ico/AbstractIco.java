@@ -30,7 +30,6 @@ public abstract class AbstractIco extends StackPane{
         setColor(color);
     }
 
-
     private final StringProperty color = new SimpleStringProperty();
 
     public String getColor() {

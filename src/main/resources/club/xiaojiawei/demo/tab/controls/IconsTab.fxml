@@ -12,7 +12,7 @@
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
         <HBox spacing="25">
-            <Label text="所有图标：2倍放大后" styleClass="title-three"/>
+            <Label text="所有图标：1.5倍放大后" styleClass="title-three"/>
             <FilterField fx:id="filterField" styleClass="text-field-ui, text-field-ui-small" promptText="搜索图标"/>
         </HBox>
         <TilePane fx:id="iconPane" styleClass="hv-box" vgap="10" hgap="10"/>

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import club.xiaojiawei.controls.ico.LeftIco?>
-<?import club.xiaojiawei.controls.ico.RightIco?>
+<?import club.xiaojiawei.controls.ico.NextIco?>
 <?import javafx.scene.layout.*?>
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          fx:id="rootPane"
          stylesheets="@css/carousel.css">
     <AnchorPane fx:id="imagesPane"/>
-    <HBox fx:id="left" AnchorPane.leftAnchor="5">
-        <LeftIco/>
+    <HBox fx:id="left" AnchorPane.leftAnchor="5" rotate="180">
+        <NextIco color="#ECEBEB"/>
     </HBox>
     <HBox fx:id="right" AnchorPane.rightAnchor="5">
-        <RightIco/>
+        <NextIco color="#ECEBEB"/>
     </HBox>
     <HBox fx:id="dots" AnchorPane.bottomAnchor="0" alignment="CENTER" spacing="10"/>
 </fx:root>

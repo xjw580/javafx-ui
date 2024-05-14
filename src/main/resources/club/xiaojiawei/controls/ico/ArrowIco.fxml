@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.SVGPath?>
-<fx:root type="StackPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" styleClass="arrow-ico">
-    <SVGPath styleClass="arrow" content="M0,0 6,0 3,4Z"/>
-</fx:root>
