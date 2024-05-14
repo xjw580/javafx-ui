@@ -55,7 +55,7 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
         return date.get();
     }
 
-    public ObjectProperty<LocalDate> dateProperty(){
+    protected ObjectProperty<LocalDate> dateProperty(){
         if (virtualDate == null){
             virtualDate = new SimpleObjectProperty<>(getLocalDate());
             virtualDate.addListener((observableValue, localDate, t1) -> {
@@ -119,7 +119,8 @@ public class DateSelector extends HBox implements Interceptor<LocalDate> {
     @FXML
     private ScrollBar scrollBar;
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    public static final String DATE_FORMATTER_STRING = "yyyy/MM/dd";
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMATTER_STRING);
     public static final DateTimeFormatter SHORT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM");
     private static final String SELECTED_LABEL_STYLE_CLASS = "selectedLabel";
     private static final String TITLED_PANE_UI_STYLE_CLASS = "titled-pane-ui";
