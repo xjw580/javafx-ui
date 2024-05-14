@@ -12,8 +12,10 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class CloseIco extends AbstractIco {
 
     public CloseIco() {
+        getStyleClass().add("close-ico");
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

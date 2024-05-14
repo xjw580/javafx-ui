@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.ico.FilterIco?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.StackPane?>
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         styleClass="table-filter-manager-root-pane"
+         stylesheets="@css/tableFilterManager.css">
+    <Button fx:id="filterBtn" styleClass="filterBtn">
+        <graphic>
+            <FilterIco color="gray"/>
+        </graphic>
+        <tooltip>
+            <Tooltip text="过滤"/>
+        </tooltip>
+    </Button>
+</fx:root>

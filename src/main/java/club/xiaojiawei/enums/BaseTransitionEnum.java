@@ -1,6 +1,6 @@
 package club.xiaojiawei.enums;
 
-import club.xiaojiawei.func.BaseTransitionFunc;
+import club.xiaojiawei.func.BaseTransition;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
@@ -79,9 +79,9 @@ public enum BaseTransitionEnum {
     NONE((node, from, to, duration, cycleCount, autoReverse) -> null),
     ;
 
-    private final BaseTransitionFunc transition;
+    private final BaseTransition transition;
 
-    BaseTransitionEnum(BaseTransitionFunc transition) {
+    BaseTransitionEnum(BaseTransition transition) {
         this.transition = transition;
     }
 

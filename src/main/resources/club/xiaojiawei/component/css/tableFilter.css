@@ -1,0 +1,16 @@
+.table-filter-root-pane{
+    -fx-pref-width: 220;
+}
+#contentPane{
+    -fx-spacing: 10;
+    -fx-padding: 0 2 0 2;
+}
+.table-view-ui *{
+    -fx-font-size: 12;
+    -fx-font-weight: none;
+}
+.table-view-ui .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-width: 0!important;
+    -fx-pref-height: 0!important;
+}

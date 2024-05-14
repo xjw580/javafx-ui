@@ -1,0 +1,10 @@
+.table-date-filter-root-pane{
+    -fx-alignment: CENTER;
+    -fx-pref-width: 275;
+}
+.contentHBox{
+    -fx-spacing: 5;
+}
+.timeFlowPane{
+    -fx-padding: 10;
+}

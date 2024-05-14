@@ -23,7 +23,7 @@ public class CalendarTest extends Application {
     public void start(Stage primaryStage) throws IOException {
         Calendar calendar = new Calendar();
         calendar.setLocalDate(LocalDate.of(9999, 12, 1));
-        calendar.dateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
+        calendar.readOnlyDateProperty().addListener((observable, oldValue, newValue) -> System.out.println(newValue));
         System.out.println(calendar.getDate());
         calendar.setTranslateX(50);
         calendar.setTranslateY(50);

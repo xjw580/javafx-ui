@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import club.xiaojiawei.controls.TableFilterManager?>
+<?import club.xiaojiawei.controls.TableDateFilterManager?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             fx:controller="club.xiaojiawei.demo.tab.style.TabViewController"
             style="-fx-padding: 20 0 0 0"
@@ -33,9 +35,9 @@
                             <PropertyValueFactory property="age"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="院系">
+                    <TableColumn text="日期">
                         <cellValueFactory>
-                            <PropertyValueFactory property="college"/>
+                            <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -50,12 +52,15 @@
                             <PropertyValueFactory property="id"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="姓名">
+                    <TableColumn text="姓名" fx:id="nameTableColumn">
                         <cellValueFactory>
                             <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="性别">
+                    <TableColumn text="性别" fx:id="sexTableColumn">
+                        <graphic>
+                            <TableFilterManager tableView="$tableViewDemo" tableColumn="$sexTableColumn"/>
+                        </graphic>
                         <cellValueFactory>
                             <PropertyValueFactory property="sex"/>
                         </cellValueFactory>
@@ -65,9 +70,12 @@
                             <PropertyValueFactory property="age"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="院系">
+                    <TableColumn text="日期" fx:id="dateTableColumn">
+                        <graphic>
+                            <TableDateFilterManager tableView="$tableViewDemo" tableColumn="$dateTableColumn"/>
+                        </graphic>
                         <cellValueFactory>
-                            <PropertyValueFactory property="college"/>
+                            <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -94,9 +102,9 @@
                             <PropertyValueFactory property="age"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="院系">
+                    <TableColumn text="日期">
                         <cellValueFactory>
-                            <PropertyValueFactory property="college"/>
+                            <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
@@ -127,9 +135,9 @@
                             <PropertyValueFactory property="age"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="院系">
+                    <TableColumn text="日期">
                         <cellValueFactory>
-                            <PropertyValueFactory property="college"/>
+                            <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>

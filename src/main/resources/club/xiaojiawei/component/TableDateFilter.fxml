@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.component.WindowBar?>
+<?import club.xiaojiawei.controls.Date?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<fx:root type="VBox" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         styleClass="table-date-filter-root-pane"
+         stylesheets="@css/tableDateFilter.css">
+    <WindowBar fx:id="windowBar"/>
+    <fx:define>
+        <ToggleGroup fx:id="radioBtnGroup"/>
+    </fx:define>
+    <FlowPane styleClass="timeFlowPane" hgap="8" vgap="8">
+        <RadioButton fx:id="allRadio" text="全部" styleClass="radio-button-ui, radio-button-ui-main" toggleGroup="$radioBtnGroup" selected="true"/>
+        <RadioButton fx:id="todayRadio" text="今天" styleClass="radio-button-ui, radio-button-ui-main" toggleGroup="$radioBtnGroup"/>
+        <RadioButton fx:id="oneWeekRadio" text="最近一周" styleClass="radio-button-ui, radio-button-ui-main" toggleGroup="$radioBtnGroup"/>
+        <RadioButton fx:id="oneMonthRadio" text="最近一月" styleClass="radio-button-ui, radio-button-ui-main" toggleGroup="$radioBtnGroup"/>
+        <HBox styleClass="contentHBox">
+            <RadioButton fx:id="customRadio" text="自定义" styleClass="radio-button-ui, radio-button-ui-main" toggleGroup="$radioBtnGroup"/>
+            <VBox>
+                <Date fx:id="startCustomTime" size="SMALL" disable="true"/>
+                <Text text="至"/>
+                <Date fx:id="endCustomTime" size="SMALL" disable="true"/>
+            </VBox>
+            <VBox fx:id="confirmCustomTimePane" alignment="CENTER" managed="false" visible="false">
+                <Button text="确定" onAction="#confirmCustomTime" styleClass="btn-ui, btn-ui-small, btn-ui-normal"/>
+            </VBox>
+        </HBox>
+    </FlowPane>
+</fx:root>

@@ -8,7 +8,8 @@
 }
 .table-view-ui{
     /*解决在width够的情况下还出现水平滚动条的问题*/
-    -fx-padding: 0 5 0 0;
+    /*-fx-padding: 0 5 0 0;*/
+    -fx-padding: 0;
     -fx-table-cell-border-color: -my-custom-table-cell-border-color;
 }
 .table-view-ui:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:selected {
@@ -100,6 +101,12 @@
 }
 .table-view-ui-small .table-cell{
     -fx-pref-height: 30!important;
+}
+.table-view-ui-tiny .column-header-background .label{
+    -fx-pref-height: 25!important;
+}
+.table-view-ui-tiny .table-cell{
+    -fx-pref-height: 25!important;
 }
 /*Style*/
 .table-view-ui-upright .filler{

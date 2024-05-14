@@ -52,7 +52,7 @@ public class TimeTest extends Application {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    time.timeProperty().set(LocalTime.now().minusHours(5));
+                    time.setLocalTime(LocalTime.now().minusHours(5));
                 });
             }
         }, 1500);

@@ -34,7 +34,7 @@ public class TimeSelectorTest extends Application {
         TimeSelector timeSelector1 = new TimeSelector();
         timeSelector1.setShowSec(true);
         System.out.println(timeSelector1.getTime());
-        timeSelector1.timeProperty().addListener((observableValue, localTime, t1) -> System.out.println(t1));
+        timeSelector1.readOnlyTimeProperty().addListener((observableValue, localTime, t1) -> System.out.println(t1));
         children.add(timeSelector1);
         Scene scene = new Scene(hBox);
         JavaFXUI.addjavafxUIStylesheet(scene);

@@ -14,7 +14,7 @@ import java.util.Base64;
 public abstract class AbstractIco extends StackPane{
 
     public AbstractIco() {
-        setId("javafx-ui-ico");
+        getStyleClass().add("javafx-ui-ico");
         color.addListener((observableValue, s, t1) -> {
             if (!this.getStylesheets().isEmpty()){
                 this.getStylesheets().remove(0);

@@ -9,6 +9,6 @@ import javafx.util.Duration;
  * @date 2023/10/23 10:05
  */
 @FunctionalInterface
-public interface BaseTransitionFunc {
+public interface BaseTransition {
     Transition build(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse);
 }

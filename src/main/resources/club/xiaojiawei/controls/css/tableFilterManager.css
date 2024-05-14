@@ -1,0 +1,12 @@
+.filterBtn{
+    -fx-padding: 1;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+.filterBtn:hover .javafx-ui-ico *{
+    -fx-fill: black;
+}
+.filteringBtn .javafx-ui-ico *{
+    -fx-fill: #56a86b!important;
+}

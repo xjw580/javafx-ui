@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.component.WindowBar?>
+<?import club.xiaojiawei.controls.FilterField?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<fx:root type="VBox" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         styleClass="table-filter-root-pane"
+         stylesheets="@css/tableFilter.css">
+    <WindowBar fx:id="windowBar"/>
+    <VBox fx:id="contentPane">
+        <HBox alignment="CENTER" style="-fx-padding: 10 5 0 5">
+            <FilterField HBox.hgrow="ALWAYS" fx:id="filterField" styleClass="text-field-ui, text-field-ui-small"/>
+        </HBox>
+        <TableView fx:id="tableView" styleClass="table-view-ui, table-view-ui-tiny, table-view-ui-upright" minWidth="120" maxHeight="275">
+            <columns>
+                <TableColumn fx:id="valueColumn" minWidth="70">
+                    <graphic>
+                        <HBox style="-fx-padding: 0 8 0 8;-fx-spacing: 5;-fx-alignment: CENTER">
+                            <CheckBox fx:id="allCheckBox" styleClass="check-box-ui, check-box-ui-main"/>
+                            <HBox HBox.hgrow="ALWAYS"/>
+                            <Label text="值"/>
+                        </HBox>
+                    </graphic>
+                </TableColumn>
+                <TableColumn fx:id="countColumn" text="数量" maxWidth="50" minWidth="50"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+        <HBox style="-fx-padding: 0 0 0 5">
+            <Text text="选择复选框以筛选行"/>
+        </HBox>
+    </VBox>
+</fx:root>
