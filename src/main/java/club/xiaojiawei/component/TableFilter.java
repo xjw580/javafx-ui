@@ -1,6 +1,7 @@
 package club.xiaojiawei.component;
 
 import club.xiaojiawei.controls.FilterField;
+import club.xiaojiawei.controls.TableFilterManagerGroup;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,6 +17,7 @@ import lombok.Data;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.UnaryOperator;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -29,8 +31,8 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
      *                                                                         *
      **************************************************************************/
 
-    public TableFilter(ObservableList<S> items, TableColumn<S, T> tableColumn) {
-        super(items, tableColumn);
+    public TableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
+        super(tableColumn, managerGroup);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);
@@ -57,6 +59,12 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
 
     private final List<TableFilter.Statistics<T>> hideItems = new ArrayList<>();
 
+    private int selectedCount;
+
+    private final Set<T> selectedValues = new HashSet<>();
+
+    private boolean disableRequestFiltering;
+
     /* *************************************************************************
      *                                                                         *
      * 私有方法                                                                 *
@@ -64,10 +72,9 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
      **************************************************************************/
 
     private void afterFXMLLoaded() {
-        windowBar.setTitle(outerTableColumn.getText() + "的本地过滤器");
+        windowBar.setTitle(tableColumn.getText() + "的本地过滤器");
         filterField.setPromptText("输入关键字以过滤值");
         initTableStructure();
-        updateTableItems();
         addListener();
     }
 
@@ -96,10 +103,29 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
             refresh();
         });
         allCheckBox.selectedProperty().addListener((observableValue, aBoolean, t1) -> {
+            disableRequestFiltering = true;
             for (Statistics<T> item : tableView.getItems()) {
                 item.setSelected(t1);
             }
+            requestFiltering(selectedCount > 0);
+            disableRequestFiltering = false;
         });
+    }
+
+    @Override
+    public UnaryOperator<List<S>> getFilter() {
+        return list -> {
+            if (selectedCount <= 0){
+                return null;
+            }
+            ArrayList<S> result = new ArrayList<>();
+            for (S s : list) {
+                if (selectedValues.contains(tableColumn.getCellObservableValue(s).getValue())){
+                    result.add(s);
+                }
+            }
+            return result;
+        };
     }
 
     private void initTableStructure(){
@@ -137,42 +163,69 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
     }
 
     @Override
-    protected void reset(){
+    protected void resetInit(){
+        selectedCount = 0;
         filterField.setText("");
+        disableRequestFiltering = true;
+        for (Statistics<T> item : tableView.getItems()) {
+            item.setSelected(false);
+        }
+        for (Statistics<T> hideItem : hideItems) {
+            tableView.getItems().add(hideItem);
+            hideItem.setSelected(false);
+        }
+        disableRequestFiltering = false;
         hideItems.clear();
-        super.reset();
     }
 
     @Override
-    protected void updateTableItems() {
+    protected boolean updateTableItems(List<S> newItems) {
+//        获取原先被勾选的的item
+        ObservableList<Statistics<T>> items = tableView.getItems();
+        Set<T> selectedValueSet = new HashSet<>();
+        for (Statistics<T> item : items) {
+            if (item.isSelected()){
+                selectedValueSet.add(item.getValue());
+            }
+        }
+        items.clear();
+        selectedValues.clear();
+//        1.统计新items的value种类和对应的数量
+//        2.根据原先被勾选的的item筛选出新items中的需要被勾选的item
         Map<T, Integer> map = new HashMap<>();
-        for (int i = 0; i < outerTableItems.size(); i++) {
-            T k = outerTableColumn.getCellObservableValue(i).getValue();
+        for (S newItem : newItems) {
+            T k = tableColumn.getCellObservableValue(newItem).getValue();
             Integer value = map.getOrDefault(k, 0);
             map.put(k ,++value);
         }
-        ObservableList<Statistics<T>> items = tableView.getItems();
-        items.clear();
-        map.forEach((k, v) -> {
+//        将统计出来的结果初始化后插入表中
+        int newSelectedCount = 0;
+        for (Map.Entry<T, Integer> entry : map.entrySet()) {
+            T k = entry.getKey();
+            Integer v = entry.getValue();
             Statistics<T> statistics = new Statistics<>(k, v);
+//            恢复item勾选
+            if (selectedValueSet.contains(k)) {
+                statistics.setSelected(true);
+                selectedValues.add(statistics.getValue());
+                newSelectedCount++;
+            }
             statistics.getSelectedProperty().addListener((observableValue, aBoolean, t1) -> {
-                ArrayList<S> list = new ArrayList<>();
-                for (S item : this.outerTableItems) {
-                    if (Objects.equals(outerTableColumn.getCellObservableValue(item).getValue(), statistics.getValue())){
-                        list.add(item);
-                    }
+                if (t1) {
+                    selectedCount++;
+                    selectedValues.add(statistics.getValue());
+                } else {
+                    selectedCount--;
+                    selectedValues.remove(statistics.getValue());
                 }
-                if (t1){
-                    selectedCount.set(selectedCount.get() + 1);
-                    showItems.addAll(list);
-                }else {
-                    selectedCount.set(selectedCount.get() - 1);
-                    showItems.removeAll(list);
+                if (!disableRequestFiltering){
+                    requestFiltering(selectedCount > 0);
                 }
-                attemptStopFilter();
             });
             items.add(statistics);
-        });
+        }
+        selectedCount = newSelectedCount;
+        return selectedCount > 0;
     }
 
     @Data
@@ -201,6 +254,18 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
             this.count = count;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Statistics<?> that = (Statistics<?>) o;
+            return Objects.equals(value, that.value);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(value);
+        }
     }
 
     /* *************************************************************************

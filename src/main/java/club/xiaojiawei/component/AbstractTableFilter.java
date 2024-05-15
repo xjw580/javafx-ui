@@ -1,18 +1,14 @@
 package club.xiaojiawei.component;
 
 import club.xiaojiawei.controls.TableFilterManager;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import club.xiaojiawei.controls.TableFilterManagerGroup;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.VBox;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.List;
+import java.util.function.UnaryOperator;
 
 /**
  * 表格过滤器
@@ -22,82 +18,74 @@ import java.util.function.Consumer;
  */
 abstract public class AbstractTableFilter<S, T> extends VBox {
 
-    protected final ObservableList<S> outerTableItems;
-
-    protected final TableColumn<S, T> outerTableColumn;
-
     /**
-     * 过滤后的结果
+     * 需要过滤的表格列
      */
-    protected final ObservableList<S> showItems = FXCollections.observableArrayList();
+    protected final TableColumn<S, T> tableColumn;
 
-    /**
-     * 过滤条件数量
-     */
-    protected final IntegerProperty selectedCount = new SimpleIntegerProperty();
+    private final TableFilterManagerGroup<S, T> managerGroup;
 
-    /**
-     * 过滤回调，参数为null表示没有过滤条件，否则表示过滤后的结果
-     */
-    @Getter
-    @Setter
-    protected Consumer<List<S>> filterCallback;
-
-    public AbstractTableFilter(ObservableList<S> outerTableItems, TableColumn<S, T> outerTableColumn) {
+    public AbstractTableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
         setStyle("""
                     -fx-background-color: #F7F8FAFF;
                     -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 0);;
                     -fx-background-radius: 5;
                 """);
-        this.outerTableItems = outerTableItems;
-        this.outerTableColumn = outerTableColumn;
-        addListener();
-    }
-
-    private void addListener(){
-        outerTableItems.addListener((ListChangeListener<? super S>) change -> tableItemsChanged());
-        showItems.addListener((ListChangeListener<? super S>) change -> {
-            if (filterCallback != null && selectedCount.get() != 0){
-                filterCallback.accept(new ArrayList<>(showItems));
-            }
-        });
+        this.tableColumn = tableColumn;
+        this.managerGroup = managerGroup;
     }
 
     /**
-     * 尝试停止过滤，如果没有过滤条件则能成功停止过滤<br>
-     * 需要手动调用!!!，建议每次设置showItems的值时调用
-     * @return boolean 是否停止过滤成功
+     * 是否在过滤
      */
-    protected boolean attemptStopFilter(){
-        if (filterCallback != null && selectedCount.get() == 0){
-            filterCallback.accept(null);
-            return true;
-        }
-        return false;
+    private final ReadOnlyBooleanWrapper isFiltering = new ReadOnlyBooleanWrapper();
+
+    public boolean isIsFiltering() {
+        return isFiltering.get();
+    }
+
+    public ReadOnlyBooleanProperty isFilteringReadOnlyProperty() {
+        return isFiltering.getReadOnlyProperty();
     }
 
     /**
-     * 重置为一开始的模样
+     * 请求过滤
      */
-    protected void reset(){
-        selectedCount.set(0);
-        showItems.clear();
-        attemptStopFilter();
-        refresh();
-    };
-
-    private void tableItemsChanged(){
-        updateTableItems();
-        reset();
+    protected final void requestFiltering(boolean isFiltering){
+        this.isFiltering.set(isFiltering);
+        managerGroup.filtration(this);
     }
+
+    abstract protected void resetInit();
 
     /**
      * table的items发生改成时自动调用此方法，供子类重写
      */
-    protected void updateTableItems(){};
+    abstract protected boolean updateTableItems(List<S> newItems);
 
+    /**
+     * 获取过滤器
+     * @return List 为null表示没有过滤，否则表示过滤结果
+     */
+    abstract public UnaryOperator<List<S>> getFilter();
     /**
      * 刷新显示，防止数据和显示不同步的情况
      */
-    abstract public void refresh();
+    public void refresh(){}
+
+    /**
+     * 重置为一开始的模样
+     */
+    public void reset(){
+        resetInit();
+        isFiltering.set(false);
+        managerGroup.filtration(null);
+        refresh();
+    }
+
+    public void changeTableItems(List<S> newItems){
+        isFiltering.set(updateTableItems(newItems));
+        refresh();
+    }
+
 }

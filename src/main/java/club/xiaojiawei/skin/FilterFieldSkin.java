@@ -1,10 +1,7 @@
 package club.xiaojiawei.skin;
 
 import club.xiaojiawei.controls.FilterField;
-import club.xiaojiawei.controls.NumberField;
-import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.animation.FillTransition;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;

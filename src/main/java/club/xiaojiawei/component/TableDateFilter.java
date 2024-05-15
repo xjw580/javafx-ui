@@ -2,13 +2,14 @@ package club.xiaojiawei.component;
 
 import club.xiaojiawei.controls.Date;
 import club.xiaojiawei.controls.DateSelector;
+import club.xiaojiawei.controls.TableFilterManagerGroup;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 
@@ -16,7 +17,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -53,8 +56,8 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
      *                                                                         *
      **************************************************************************/
 
-    public TableDateFilter(ObservableList<S> items, TableColumn<S, T> tableColumn) {
-        super(items, tableColumn);
+    public TableDateFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
+        super(tableColumn, managerGroup);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);
@@ -95,7 +98,7 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
 
     private void afterFXMLLoaded() {
         addListener();
-        windowBar.setTitle(outerTableColumn.getText() + "的本地过滤器");
+        windowBar.setTitle(tableColumn.getText() + "的本地过滤器");
     }
 
     private void addListener(){
@@ -112,69 +115,73 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
             }
         });
 
-        radioBtnGroup.selectedToggleProperty().addListener((observableValue, toggle, t1) -> {
+        radioBtnGroup.selectedToggleProperty().addListener((observableValue, toggle, newToggle) -> {
+            requestFiltering(newToggle != allRadio);
+        });
+    }
+
+    @Override
+    public UnaryOperator<List<S>> getFilter() {
+        return list -> {
+            Toggle selectedToggle = radioBtnGroup.getSelectedToggle();
             LocalDate today = LocalDate.now();
             LocalDate end = today;
             LocalDate start = null;
-            selectedCount.set(1);
-            if (t1 == customRadio){
+            if (selectedToggle == customRadio){
                 startCustomTime.setDisable(false);
                 endCustomTime.setDisable(false);
                 start = startCustomTime.getLocalDate();
                 end = endCustomTime.getLocalDate();
-                if (start == null && end == null){
-                    selectedCount.set(0);
-                }
             }else {
                 confirmCustomTimePane.setVisible(false);
                 confirmCustomTimePane.setManaged(false);
                 startCustomTime.setDisable(true);
                 endCustomTime.setDisable(true);
-                if (t1 == allRadio){
-                    selectedCount.set(0);
-                }else if (t1 == todayRadio){
+                if (selectedToggle == allRadio){
+                    return null;
+                }else if (selectedToggle == todayRadio){
                     start = today;
-                }else if (t1 == oneWeekRadio){
+                }else if (selectedToggle == oneWeekRadio){
                     start = today.minusWeeks(1);
-                }else if (t1 == oneMonthRadio){
+                }else if (selectedToggle == oneMonthRadio){
                     start = today.minusMonths(1);
                 }
             }
-            filterTime(start, end);
-        });
+            return filterTime(start, end, list);
+        };
     }
 
-    private void filterTime(LocalDate start, LocalDate end){
-        if (attemptStopFilter()){
-            return;
-        }
+    @Override
+    protected void resetInit() {
+        radioBtnGroup.selectToggle(allRadio);
+    }
+
+    private List<S> filterTime(LocalDate start, LocalDate end, List<S> list){
         start = Objects.requireNonNullElse(start, LocalDate.MIN);
         end = Objects.requireNonNullElse(end, LocalDate.MAX);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat.get());
-        ArrayList<S> list = new ArrayList<>();
-        for (S tableItem : outerTableItems) {
-            String value = outerTableColumn.getCellObservableValue(tableItem).getValue().toString();
+        ArrayList<S> result = new ArrayList<>();
+        for (S tableItem : list) {
+            String value = tableColumn.getCellObservableValue(tableItem).getValue().toString();
             LocalDate localDate = LocalDate.from(formatter.parse(value));
             if (!localDate.isBefore(start) && !localDate.isAfter(end)){
-                list.add(tableItem);
+                result.add(tableItem);
             }
         }
-        showItems.setAll(list);
+        return result;
     }
 
     @FXML
     protected void confirmCustomTime(){
-        LocalDate start = startCustomTime.getLocalDate();
-        LocalDate end = endCustomTime.getLocalDate();
-        if (start == null && end == null){
-            selectedCount.set(0);
-        }else {
-            selectedCount.set(1);
-        }
-        filterTime(start, end);
+        requestFiltering(radioBtnGroup.getSelectedToggle() != allRadio);
         confirmCustomTimePane.setManaged(false);
         confirmCustomTimePane.setVisible(false);
+    }
+
+    @Override
+    protected boolean updateTableItems(List<S> newItems) {
+        return radioBtnGroup.getSelectedToggle() != allRadio;
     }
 
     /* *************************************************************************
@@ -182,10 +189,4 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
      * 公共方法                                                                 *
      *                                                                         *
      **************************************************************************/
-
-    @Override
-    public void refresh() {
-        allRadio.setSelected(true);
-    }
-
 }

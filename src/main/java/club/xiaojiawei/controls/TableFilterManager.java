@@ -1,26 +1,26 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.OnlyOnce;
 import club.xiaojiawei.component.AbstractTableFilter;
 import club.xiaojiawei.component.TableFilter;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import club.xiaojiawei.config.JavaFXUIThreadPoolConfig;
+import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
+import lombok.Getter;
 
 import java.io.IOException;
 
 /**
- * 表格字符串过滤器，T最好是String类型，或者其toString方法返回的字符串和表格中显示的字符串是一样的
+ * 表格字符串过滤管理器，T最好是String类型，或者其toString方法返回的字符串和表格中显示的字符串是一样的
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/10 17:54
  */
@@ -32,14 +32,12 @@ public class TableFilterManager<S, T> extends StackPane {
      *                                                                         *
      **************************************************************************/
 
-    /**
-     * 是否处于过滤状态
-     */
-    private final ReadOnlyObjectWrapper<Boolean> isFilter = new ReadOnlyObjectWrapper<>();
-
+    @NotNull
     private TableColumn<S, T> outerTableColumn;
 
-    private TableView<S> outerTableView;
+    @NotNull
+    @Getter
+    private TableFilterManagerGroup<S, T> tableFilterManagerGroup;
 
     public TableColumn<S, T> getTableColumn() {
         return outerTableColumn;
@@ -47,28 +45,22 @@ public class TableFilterManager<S, T> extends StackPane {
 
     @OnlyOnce
     public void setTableColumn(TableColumn<S, T> tableColumn) {
+        if (tableColumn == null){
+            throw new NullPointerException("tableColumn");
+        }
         if (outerTableColumn == null){
             outerTableColumn = tableColumn;
         }
     }
 
-    public TableView<S> getTableView() {
-        return outerTableView;
-    }
-
     @OnlyOnce
-    public void setTableView(TableView<S> tableView) {
-        if (outerTableView == null){
-            outerTableView = tableView;
+    public void setTableFilterManagerGroup(TableFilterManagerGroup<S, T> tableFilterManagerGroup) {
+        if (tableFilterManagerGroup == null){
+            throw new NullPointerException("tableFilterManagerGroup");
         }
-    }
-
-    public Boolean getIsFilter() {
-        return isFilter.get();
-    }
-
-    public ReadOnlyObjectProperty<Boolean> isFilterProperty() {
-        return isFilter.getReadOnlyProperty();
+        if (this.tableFilterManagerGroup == null){
+            this.tableFilterManagerGroup = tableFilterManagerGroup;
+        }
     }
 
     /* *************************************************************************
@@ -76,6 +68,9 @@ public class TableFilterManager<S, T> extends StackPane {
      * 构造方法                                                                 *
      *                                                                         *
      **************************************************************************/
+
+    @FXML
+    protected Button filterBtn;
 
     public TableFilterManager() {
         try {
@@ -89,17 +84,22 @@ public class TableFilterManager<S, T> extends StackPane {
         }
     }
 
-    @FXML
-    protected Button filterBtn;
-
     private Popup popup;
 
     private AbstractTableFilter<S, T> tableFilter;
 
     /**
-     * 是否纯为外部tableView的item发生改变，而不是因内部过滤导致的外部改变
+     * 是否处于过滤状态
      */
-    private boolean isOuterChange = true;
+    private final ReadOnlyBooleanWrapper isFilter = new ReadOnlyBooleanWrapper();
+
+    public Boolean getIsFilter() {
+        return isFilter.get();
+    }
+
+    public ReadOnlyBooleanProperty isFilterReadOnlyProperty() {
+        return isFilter.getReadOnlyProperty();
+    }
 
     /* *************************************************************************
      *                                                                         *
@@ -113,51 +113,58 @@ public class TableFilterManager<S, T> extends StackPane {
 
     private void addListener(){
         filterBtn.setOnAction(actionEvent -> {
-            if (outerTableColumn == null || outerTableView == null){
-                return;
+            if (outerTableColumn == null || tableFilterManagerGroup == null){
+                throw new NullPointerException();
             }
-            if (popup == null){
-                popup = getPopup();
+            initPopup();
+            if (popup.isShowing()){
+                JavaFXUIThreadPoolConfig.SCHEDULED_POOL.submit(() -> {
+                    for (int i = 6; i > 0; i--) {
+                        try {
+                            if (popup.getOpacity() == 1){
+                                Platform.runLater(() -> popup.setOpacity(0.4));
+                                Thread.sleep(100);
+                            }else {
+                                Platform.runLater(() -> popup.setOpacity(1));
+                                Thread.sleep(100);
+                            }
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                });
+            }else {
+                popup.show(this.getScene().getWindow());
             }
-            popup.show(outerTableView.getScene().getWindow());
         });
     }
 
-    private Popup getPopup(){
-        ObservableList<S> copyItems = FXCollections.observableArrayList(outerTableView.getItems());
-        outerTableView.getItems().addListener((ListChangeListener<? super S>) change -> {
-            if (isOuterChange && change.next() && !change.wasPermutated()){
-                copyItems.setAll(outerTableView.getItems());
-            }
-        });
+    @OnlyOnce
+    private void initPopup(){
+        if (popup != null){
+            return;
+        }
         String filteringStyleClass = "filteringBtn";
-        tableFilter = getTableFilter(copyItems, outerTableColumn);
-        tableFilter.setFilterCallback(list -> {
-            isOuterChange = false;
+        tableFilter = getTableFilter(outerTableColumn, tableFilterManagerGroup);
+        tableFilter.isFilteringReadOnlyProperty().addListener((observableValue, aBoolean, t1) -> {
             filterBtn.getStyleClass().remove(filteringStyleClass);
-            if (list == null){
-                isFilter.set(false);
-                outerTableView.getItems().setAll(copyItems);
-            }else {
-                isFilter.set(true);
+            if (t1){
                 filterBtn.getStyleClass().add(filteringStyleClass);
-                outerTableView.getItems().setAll(list);
             }
-            outerTableView.refresh();
-            isOuterChange = true;
+            isFilter.set(t1);
         });
-
+        tableFilterManagerGroup.register(tableFilter);
         Popup newPopup = new Popup();
         newPopup.getContent().add(tableFilter);
         newPopup.setAutoHide(true);
         Bounds bounds = this.localToScreen(this.getBoundsInLocal());
         newPopup.setX(bounds.getMinX() + 5);
         newPopup.setY(bounds.getMinY() + 10);
-        return newPopup;
+        popup = newPopup;
     }
 
-    protected AbstractTableFilter<S, T> getTableFilter(ObservableList<S> copyTableItems, TableColumn<S, T> tableColumn){
-        return new TableFilter<>(copyTableItems, tableColumn);
+    protected AbstractTableFilter<S, T> getTableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> tableFilterManagerGroup){
+        return new TableFilter<>(tableColumn, tableFilterManagerGroup);
     }
 
     /* *************************************************************************

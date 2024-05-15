@@ -8,9 +8,6 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 /**
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/3/26 14:50
