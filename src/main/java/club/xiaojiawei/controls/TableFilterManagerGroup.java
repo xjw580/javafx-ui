@@ -144,17 +144,27 @@ public class TableFilterManagerGroup<S, T> {
                 if (Objects.equals(data, "disable")){
                     continue;
                 }
-                TableFilterManager<S, T> tableFilterManager;
-                if (Objects.equals(data, "date")) {
-                    tableFilterManager = new TableDateFilterManager<>();
-                }else {
-                    tableFilterManager = new TableFilterManager<>();
-                }
+                TableFilterManager<S, T> tableFilterManager = getStTableFilterManager(data);
                 tableFilterManager.setTableColumn((TableColumn<S, T>) column);
                 tableFilterManager.setTableFilterManagerGroup(this);
                 column.setGraphic(tableFilterManager);
             }
         }
+    }
+
+    private static <S, T> TableFilterManager<S, T> getStTableFilterManager(Object data) {
+        TableFilterManager<S, T> tableFilterManager;
+        if (data instanceof String s && s.startsWith("date")) {
+            String[] split = s.split("=");
+            TableDateFilterManager<S, T> manager = new TableDateFilterManager<>();
+            tableFilterManager = manager;
+            if (split.length > 1){
+                manager.setDateFormat(split[1]);
+            }
+        }else {
+            tableFilterManager = new TableFilterManager<>();
+        }
+        return tableFilterManager;
     }
 
     /**
@@ -283,6 +293,27 @@ public class TableFilterManagerGroup<S, T> {
         for (AbstractTableFilter<S, T> filter : registerFilterSet) {
             filter.reset();
         }
+    }
+
+    /**
+     * 建议用调用此方法代替tableView.getItems().clear();
+     */
+    public void clear(){
+        isOuterChange = false;
+        tableView.getItems().clear();
+        updateRawItems(true);
+        isOuterChange = true;
+    }
+
+    /**
+     * 建议用调用此方法代替tableView.getItems().setAll();
+     * @param items
+     */
+    public void setAll(Collection<S> items){
+        isOuterChange = false;
+        tableView.getItems().setAll(items);
+        updateRawItems(true);
+        isOuterChange = true;
     }
 
 }

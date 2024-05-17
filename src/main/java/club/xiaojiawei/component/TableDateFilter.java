@@ -12,6 +12,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -26,6 +28,7 @@ import java.util.function.UnaryOperator;
  * @date 2024/5/13 10:50
  */
 public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
+    private static final Logger log = LoggerFactory.getLogger(TableDateFilter.class);
 
     /* *************************************************************************
      *                                                                         *
@@ -164,9 +167,16 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
         ArrayList<S> result = new ArrayList<>();
         for (S tableItem : list) {
             String value = tableColumn.getCellObservableValue(tableItem).getValue().toString();
-            LocalDate localDate = LocalDate.from(formatter.parse(value));
-            if (!localDate.isBefore(start) && !localDate.isAfter(end)){
-                result.add(tableItem);
+            if (value == null || value.isBlank()){
+                continue;
+            }
+            try {
+                LocalDate localDate = LocalDate.from(formatter.parse(value));
+                if (!localDate.isBefore(start) && !localDate.isAfter(end)){
+                    result.add(tableItem);
+                }
+            }catch (Exception e){
+                log.warn(value, e);
             }
         }
         return result;
