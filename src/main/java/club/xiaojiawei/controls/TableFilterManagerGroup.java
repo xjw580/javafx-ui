@@ -235,6 +235,7 @@ public class TableFilterManagerGroup<S, T> {
         Platform.runLater(() -> {
             isOuterChange = false;
             tableView.getItems().setAll(enableItemsStack.peek());
+            tableView.refresh();
             isOuterChange = true;
         });
     }
@@ -302,6 +303,7 @@ public class TableFilterManagerGroup<S, T> {
         isOuterChange = false;
         tableView.getItems().clear();
         updateRawItems(true);
+        tableView.refresh();
         isOuterChange = true;
     }
 
@@ -313,6 +315,7 @@ public class TableFilterManagerGroup<S, T> {
         isOuterChange = false;
         tableView.getItems().setAll(items);
         updateRawItems(true);
+        tableView.refresh();
         isOuterChange = true;
     }
 

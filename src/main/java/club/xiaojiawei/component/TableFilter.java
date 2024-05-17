@@ -164,7 +164,6 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
 
     @Override
     protected void resetInit(){
-        selectedCount = 0;
         filterField.setText("");
         disableRequestFiltering = true;
         for (Statistics<T> item : tableView.getItems()) {
@@ -175,7 +174,9 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
             hideItem.setSelected(false);
         }
         disableRequestFiltering = false;
+        selectedValues.clear();
         hideItems.clear();
+        selectedCount = 0;
     }
 
     @Override
