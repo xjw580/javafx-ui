@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -63,15 +64,15 @@ public class TabViewController implements Initializable {
 
     @FXML
     protected void refresh(){
-        tableViewSmallDemo.getItems().setAll( new Student(1, "张三", "女", 20, "2024/10/22"),
+        filterGroup.setAll(List.of(new Student(1, "张三", "女", 20, "2024/10/22"),
                 new Student(6, "赵六6", "女", 21, "2024/04/16"),
                 new Student(6, "赵六8", "女", 21, "2024/03/26"),
                 new Student(6, "赵六9", "女", 21, "2024/04/13"),
-                new Student(6, "赵六10", "女", 21, "2024/04/14"));
+                new Student(6, "赵六10", "女", 21, "2024/04/14")));
     }
     @FXML
     protected void refresh1(){
-        tableViewSmallDemo.getItems().setAll( students);
+        filterGroup.setAll(students);
     }
 
     public void reset(ActionEvent actionEvent) {

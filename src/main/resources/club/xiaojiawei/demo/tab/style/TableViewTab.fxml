@@ -42,14 +42,15 @@
             </TableView>
         </HBox>
         <Label text="大小类：table-view-ui-small、table-view-ui-big" styleClass="title-three"/>
-        <HBox>
-            <Button text="refresh" onAction="#refresh"/>
-            <Button text="refresh1" onAction="#refresh1"/>
-            <Button text="reset" onAction="#reset"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT" spacing="10">
+            <Button text="重置数据1" onAction="#refresh" styleClass="btn-ui, btn-ui-small"/>
+            <Button text="重置数据2" onAction="#refresh1" styleClass="btn-ui, btn-ui-small"/>
+            <Button text="重置过滤" onAction="#reset" styleClass="btn-ui, btn-ui-small, btn-ui-warn"/>
         </HBox>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <TableView fx:id="tableViewSmallDemo" styleClass="table-view-ui, table-view-ui-small" prefHeight="200" >
                 <columns>
+                    <!--userData="disable"表示禁用自动启用过滤-->
                     <TableColumn text="学号" userData="disable">
                         <cellValueFactory>
                             <PropertyValueFactory property="id"/>
@@ -70,6 +71,7 @@
                             <PropertyValueFactory property="age"/>
                         </cellValueFactory>
                     </TableColumn>
+                    <!--userData="date"表示使用日期过滤器，如要设置格式，在date后添加等号，等号后跟格式，userData="date=yyyy-MM-dd"，这是默认格式-->
                     <TableColumn text="日期" fx:id="dateTableColumn" userData="date">
                         <cellValueFactory>
                             <PropertyValueFactory property="date"/>
