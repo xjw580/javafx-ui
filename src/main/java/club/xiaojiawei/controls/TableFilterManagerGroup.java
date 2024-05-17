@@ -5,6 +5,7 @@ import club.xiaojiawei.component.AbstractTableFilter;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import lombok.Getter;
 
@@ -34,6 +35,12 @@ public class TableFilterManagerGroup<S, T> {
      */
     private List<S> rawItems;
 
+    /**
+     * 自动注册表格列的过滤器，为true时如果在fxml中构造，需要放到column之后
+     */
+    @Getter
+    private boolean autoRegisterColFilter;
+
     @OnlyOnce
     public void setTableView(TableView<S> tableView) {
         if (tableView == null){
@@ -46,8 +53,14 @@ public class TableFilterManagerGroup<S, T> {
                 updateRawItems(true);
                 addItemsListener();
             });
-           addItemsListener();
+            addItemsListener();
+            execAutoRegister();
         }
+    }
+
+    public void setAutoRegisterColFilter(boolean autoRegisterColFilter) {
+        this.autoRegisterColFilter = autoRegisterColFilter;
+        execAutoRegister();
     }
 
     /**
@@ -74,6 +87,11 @@ public class TableFilterManagerGroup<S, T> {
      * 是否为外部更改表数据
      */
     private boolean isOuterChange = true;
+
+    /**
+     * 是否自动注册了过滤器
+     */
+    private boolean isAutoRegister;
 
     /* *************************************************************************
      *                                                                         *
@@ -116,6 +134,27 @@ public class TableFilterManagerGroup<S, T> {
             rawItems.addAll(tableView.getItems());
         }
         filtration(null);
+    }
+
+    private void execAutoRegister(){
+        if (!isAutoRegister && autoRegisterColFilter && tableView != null) {
+            isAutoRegister = true;
+            for (TableColumn<S, ?> column : tableView.getColumns()) {
+                Object data = column.getUserData();
+                if (Objects.equals(data, "disable")){
+                    continue;
+                }
+                TableFilterManager<S, T> tableFilterManager;
+                if (Objects.equals(data, "date")) {
+                    tableFilterManager = new TableDateFilterManager<>();
+                }else {
+                    tableFilterManager = new TableFilterManager<>();
+                }
+                tableFilterManager.setTableColumn((TableColumn<S, T>) column);
+                tableFilterManager.setTableFilterManagerGroup(this);
+                column.setGraphic(tableFilterManager);
+            }
+        }
     }
 
     /**

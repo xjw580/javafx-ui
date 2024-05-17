@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.cell.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import club.xiaojiawei.controls.TableFilterManager?>
-<?import club.xiaojiawei.controls.TableDateFilterManager?>
 <?import club.xiaojiawei.controls.TableFilterManagerGroup?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             fx:controller="club.xiaojiawei.demo.tab.style.TabViewController"
             style="-fx-padding: 20 0 0 0"
@@ -52,48 +49,36 @@
         </HBox>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <TableView fx:id="tableViewSmallDemo" styleClass="table-view-ui, table-view-ui-small" prefHeight="200" >
-                <fx:define>
-                    <TableFilterManagerGroup fx:id="filterGroup" tableView="$tableViewSmallDemo"/>
-                </fx:define>
                 <columns>
-                    <TableColumn text="学号">
+                    <TableColumn text="学号" userData="disable">
                         <cellValueFactory>
                             <PropertyValueFactory property="id"/>
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="姓名" fx:id="nameTableColumn">
-                        <graphic>
-                            <TableFilterManager tableColumn="$nameTableColumn" tableFilterManagerGroup="$filterGroup"/>
-                        </graphic>
                         <cellValueFactory>
                             <PropertyValueFactory property="name"/>
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="性别" fx:id="sexTableColumn">
-                        <graphic>
-                            <TableFilterManager tableColumn="$sexTableColumn" tableFilterManagerGroup="$filterGroup"/>
-                        </graphic>
                         <cellValueFactory>
                             <PropertyValueFactory property="sex"/>
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="年龄" fx:id="ageTableColumn">
-                        <graphic>
-                            <TableFilterManager tableColumn="$ageTableColumn" tableFilterManagerGroup="$filterGroup"/>
-                        </graphic>
                         <cellValueFactory>
                             <PropertyValueFactory property="age"/>
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn text="日期" fx:id="dateTableColumn">
-                        <graphic>
-                            <TableDateFilterManager tableColumn="$dateTableColumn" tableFilterManagerGroup="$filterGroup"/>
-                        </graphic>
+                    <TableColumn text="日期" fx:id="dateTableColumn" userData="date">
                         <cellValueFactory>
                             <PropertyValueFactory property="date"/>
                         </cellValueFactory>
                     </TableColumn>
                 </columns>
+                <fx:define>
+                    <TableFilterManagerGroup fx:id="filterGroup" tableView="$tableViewSmallDemo" autoRegisterColFilter="true"/>
+                </fx:define>
             </TableView>
             <TableView fx:id="tableViewBigDemo" styleClass="table-view-ui, table-view-ui-big" prefHeight="200">
                 <columns>

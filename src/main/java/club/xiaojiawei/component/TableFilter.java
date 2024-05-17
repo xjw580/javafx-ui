@@ -115,7 +115,7 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
     @Override
     public UnaryOperator<List<S>> getFilter() {
         return list -> {
-            if (selectedCount <= 0){
+            if (selectedCount <= 0 || list == null || list.isEmpty()){
                 return null;
             }
             ArrayList<S> result = new ArrayList<>();
