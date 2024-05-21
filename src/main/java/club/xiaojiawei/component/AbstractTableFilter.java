@@ -28,7 +28,7 @@ abstract public class AbstractTableFilter<S, T> extends VBox {
     public AbstractTableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
         setStyle("""
                     -fx-background-color: #F7F8FAFF;
-                    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 0);;
+                    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 0);
                     -fx-background-radius: 5;
                 """);
         this.tableColumn = tableColumn;

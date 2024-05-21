@@ -8,7 +8,8 @@
     -fx-effect: default-effect;
 }
 .combo-box-ui:disabled {
-    -fx-opacity: 1;
+    -fx-effect: none!important;
+    -fx-opacity: 0.7;
 }
 .combo-box-ui:hover {
     -fx-effect: default-hover-effect;
