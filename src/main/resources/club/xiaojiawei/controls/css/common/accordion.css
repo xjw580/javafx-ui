@@ -47,6 +47,6 @@ titled-pane - titled-pane-ui
 }
 /*Style*/
 .accordion-ui-pure .titled-pane > .title {
-    -fx-background-color: transparent!important;
-    -fx-border-color: transparent!important;
+    -fx-background-color: white!important;
+    -fx-border-color: white!important;
 }

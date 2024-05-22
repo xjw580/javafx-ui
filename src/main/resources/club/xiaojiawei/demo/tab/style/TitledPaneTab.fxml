@@ -32,5 +32,18 @@
                 </VBox>
             </TitledPane>
         </HBox>
+        <Label text="样式类：titled-pane-ui-pure" styleClass="title-three"/>
+        <HBox styleClass="hv-box">
+            <TitledPane text="TitledPane" styleClass="titled-pane-ui, titled-pane-ui-big, titled-pane-ui-pure">
+                <VBox>
+                    <Label text="Hello"/>
+                    <Label text="太空漫游2001"/>
+                    <Label text="许三观卖血记"/>
+                    <Label text="杀死那只知更鸟"/>
+                    <Label text="无人生还"/>
+                    <Label text="白夜行"/>
+                </VBox>
+            </TitledPane>
+        </HBox>
     </VBox>
 </ScrollPane>

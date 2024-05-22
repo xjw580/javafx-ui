@@ -14,5 +14,9 @@
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <Label text="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui-big样式"/>
         </HBox>
+        <Label text="样式类：accordion-ui-pure" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Label text="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui-pure样式"/>
+        </HBox>
     </VBox>
 </ScrollPane>
