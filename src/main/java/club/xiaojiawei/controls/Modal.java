@@ -84,6 +84,7 @@ public class Modal {
         stage = new Stage();
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initModality(Modality.WINDOW_MODAL);
+        stage.setResizable(false);
         showing = stage.showingProperty();
     }
 
