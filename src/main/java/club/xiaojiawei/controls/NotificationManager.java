@@ -25,7 +25,7 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
  * @date 2024/1/2 10:00
  */
 @DefaultProperty("notificationFactory")
-public class NotificationManager extends HBox {
+public class NotificationManager<T> extends HBox {
 
     /* *************************************************************************
      *                                                                         *
@@ -49,7 +49,7 @@ public class NotificationManager extends HBox {
      */
     @Getter
     @Setter
-    private NotificationFactory notificationFactory = new NotificationFactory();
+    private NotificationFactory<T> notificationFactory = new NotificationFactory<>();
 
     public void setNotificationPos(NotificationPosEnum notificationPos) {
         this.notificationPos = notificationPos;
@@ -159,10 +159,10 @@ public class NotificationManager extends HBox {
      *                                                                         *
      **************************************************************************/
 
-    public void showInfo(String title, String content, long closeTime){
+    public void showInfo(String title, T content, long closeTime){
         show(notificationFactory.ofNew(title, content), closeTime);
     }
-    public void showInfo(String title, String content){
+    public void showInfo(String title, T content){
         showInfo(title, content, -1L);
     }
     public void showInfo(String title, long closeTime){
@@ -172,10 +172,10 @@ public class NotificationManager extends HBox {
         showInfo(title, null);
     }
 
-    public void showSuccess(String title, String content, long closeTime){
+    public void showSuccess(String title, T content, long closeTime){
         show(notificationFactory.ofNew(NotificationTypeEnum.SUCCESS, title, content), closeTime);
     }
-    public void showSuccess(String title, String content){
+    public void showSuccess(String title, T content){
         showSuccess(title, content, -1L);
     }
     public void showSuccess(String title, long closeTime){
@@ -185,10 +185,10 @@ public class NotificationManager extends HBox {
         showSuccess(title, null);
     }
 
-    public void showWarn(String title, String content, long closeTime){
+    public void showWarn(String title, T content, long closeTime){
         show(notificationFactory.ofNew(NotificationTypeEnum.WARN, title, content), closeTime);
     }
-    public void showWarn(String title, String content){
+    public void showWarn(String title, T content){
         showWarn(title, content, -1L);
     }
     public void showWarn(String title, long closeTime){
@@ -198,10 +198,10 @@ public class NotificationManager extends HBox {
         showWarn(title ,null);
     }
 
-    public void showError(String title, String content, long closeTime){
+    public void showError(String title, T content, long closeTime){
         show(notificationFactory.ofNew(NotificationTypeEnum.ERROR, title, content), closeTime);
     }
-    public void showError(String title, String content){
+    public void showError(String title, T content){
         showError(title, content, -1L);
     }
     public void showError(String title, long closeTime){
@@ -211,7 +211,7 @@ public class NotificationManager extends HBox {
         showError(title, null);
     }
 
-    public void show(Notification notification){
+    public void show(Notification<T> notification){
         if (notificationVBox.getChildren().size() >= maxCount){
             return;
         }
@@ -219,10 +219,10 @@ public class NotificationManager extends HBox {
         notification.setOnCloseEvent(() -> notificationVBox.getChildren().remove(notification));
         notification.show();
     }
-    public void show(Notification notification, long closeSecTime){
+    public void show(Notification<T> notification, long closeSecTime){
         show(notification, closeSecTime, TimeUnit.SECONDS);
     }
-    public void show(Notification notification, long closeTime, TimeUnit timeUnit){
+    public void show(Notification<T> notification, long closeTime, TimeUnit timeUnit){
         show(notification);
         if (closeTime > 0){
             SCHEDULED_POOL.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);

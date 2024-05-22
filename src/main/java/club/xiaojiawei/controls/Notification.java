@@ -9,6 +9,7 @@ import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -26,7 +27,7 @@ import java.io.IOException;
  * @date 2023/10/23 22:54
  */
 @Slf4j
-public class Notification extends Group {
+public class Notification<T> extends Group {
 
     /* *************************************************************************
      *                                                                         *
@@ -67,7 +68,7 @@ public class Notification extends Group {
     /**
      * 通知内容
      */
-    private final StringProperty content;
+    private final ObjectProperty<T> content = new SimpleObjectProperty<>();
     /**
      * 是否显示通知
      */
@@ -118,13 +119,13 @@ public class Notification extends Group {
         this.title.set(title);
     }
 
-    public String getContent() {
+    public T getContent() {
         return content.get();
     }
-    public StringProperty contentProperty() {
+    public ObjectProperty<T> contentProperty() {
         return content;
     }
-    public void setContent(String content) {
+    public void setContent(T content) {
         this.content.set(content);
     }
 
@@ -158,7 +159,15 @@ public class Notification extends Group {
             fxmlLoader.load();
             contentMaxWidth = bottomHBox.maxWidthProperty();
             title = titleLabel.textProperty();
-            content = contentLabel.textProperty();
+            content.addListener((observable, oldValue, newValue) -> {
+                if (newValue instanceof Node node) {
+                    contentLabel.setGraphic(node);
+                    contentLabel.setText("");
+                }else {
+                    contentLabel.setGraphic(null);
+                    contentLabel.setText(newValue == null? "" : newValue.toString());
+                }
+            });
             afterFXMLLoaded();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -172,11 +181,11 @@ public class Notification extends Group {
         this(title);
         setType(type);
     }
-    public Notification(String title, String content){
+    public Notification(String title, T content){
         this(title);
         setContent(content);
     }
-    public Notification(NotificationTypeEnum type, String title, String content){
+    public Notification(NotificationTypeEnum type, String title, T content){
         this(title, content);
         setType(type);
     }
@@ -242,11 +251,9 @@ public class Notification extends Group {
             }
             parallelTransition.play();
         });
-        closeIcoPane.setOnMouseClicked(mouseEvent -> {
-            showing.set(false);
-        });
+        closeIcoPane.setOnMouseClicked(mouseEvent -> showing.set(false));
         content.addListener((observableValue, s, t1) -> {
-            if (t1 == null || t1.isBlank()){
+            if (t1 == null || t1.toString().isBlank()){
                 bottomHBox.setManaged(false);
                 bottomHBox.setVisible(false);
             }else {

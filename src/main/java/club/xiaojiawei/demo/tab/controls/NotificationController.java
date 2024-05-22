@@ -1,8 +1,14 @@
 package club.xiaojiawei.demo.tab.controls;
 
+import club.xiaojiawei.controls.Date;
 import club.xiaojiawei.controls.NotificationManager;
+import club.xiaojiawei.controls.ico.ClearIco;
+import club.xiaojiawei.controls.ico.FileIco;
 import club.xiaojiawei.enums.NotificationPosEnum;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -11,12 +17,15 @@ import javafx.fxml.FXML;
 public class NotificationController {
 
     @FXML
-    private NotificationManager notificationManager;
+    private NotificationManager<Object> notificationManager;
 
     @FXML
     protected void topLeft(){
         notificationManager.setNotificationPos(NotificationPosEnum.TOP_LEFT);
-        notificationManager.showInfo("我在这捏", 1);
+        Label label = new Label("我在这捏");
+        label.setGraphic(new FileIco());
+        VBox hBox = new VBox(label, new Date());
+        notificationManager.showInfo("我在这捏", hBox, 2);
     }
     @FXML
     protected void topCenter(){

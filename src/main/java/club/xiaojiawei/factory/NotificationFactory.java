@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NotificationFactory {
+public class NotificationFactory<T> {
 
     private double contentMaxWidth = -1;
 
@@ -30,8 +30,8 @@ public class NotificationFactory {
     @ValidSizeRange({SizeEnum.TINY, SizeEnum.SMALL, SizeEnum.MEDDLE, SizeEnum.DEFAULT, SizeEnum.BIG})
     private SizeEnum size = SizeEnum.DEFAULT;
 
-    public Notification ofNew(){
-        Notification notification = new Notification();
+    public Notification<T> ofNew(){
+        Notification<T> notification = new Notification<>();
         notification.setContentMaxWidth(contentMaxWidth);
         notification.setShowingCloseBtn(showingCloseBtn);
         notification.setTransitionTime(transitionTime);
@@ -39,19 +39,19 @@ public class NotificationFactory {
         return notification;
     }
 
-    public Notification ofNew(NotificationTypeEnum notificationTypeEnum, String title, String content){
-        Notification notification = ofNew();
+    public Notification<T> ofNew(NotificationTypeEnum notificationTypeEnum, String title, T content){
+        Notification<T> notification = ofNew();
         notification.setType(notificationTypeEnum);
         notification.setTitle(title);
         notification.setContent(content);
         return notification;
     }
 
-    public Notification ofNew(NotificationTypeEnum notificationTypeEnum, String title){
+    public Notification<T> ofNew(NotificationTypeEnum notificationTypeEnum, String title){
         return ofNew(notificationTypeEnum, title, null);
     }
 
-    public Notification ofNew(String title, String content){
+    public Notification<T> ofNew(String title, T content){
         return ofNew(NotificationTypeEnum.INFO, title, content);
     }
 }
