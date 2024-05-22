@@ -17,10 +17,11 @@
 /*Size*/
 .btn-ui-small{
     -fx-padding: 4 8 4 8!important;
-    -fx-background-radius: 3!important;
+    -fx-background-radius: 4!important;
 }
 .btn-ui-big{
     -fx-padding: 10 20 10 20!important;
+    -fx-background-radius: 6!important;
 }
 /*style*/
 .btn-ui-normal{
