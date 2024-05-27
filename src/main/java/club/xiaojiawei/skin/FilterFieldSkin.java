@@ -32,7 +32,7 @@ public class FilterFieldSkin extends IconTextFieldSkin {
             });
         }
         button.setOnAction(actionEvent -> {
-            if (filterField.getOnFilterAction() != null){
+            if (filterField.getOnFilterAction() != null && !filterField.isRealTime()){
                 filterField.getOnFilterAction().handle(filterField.getText());
             }
         });

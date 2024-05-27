@@ -50,6 +50,7 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
         super(control);
 
         this.filterComboBox = control;
+        this.filterField.setRealTime(true);
 
         if (control.getStyleClass().contains("combo-box-ui")){
             if (control.getStyleClass().contains("combo-box-ui-small")){

@@ -2,7 +2,9 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.func.FilterAction;
 import club.xiaojiawei.skin.FilterFieldSkin;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
@@ -15,26 +17,61 @@ import javafx.scene.input.KeyCode;
  */
 public class FilterField extends TextField {
 
+    /* *************************************************************************
+     *                                                                         *
+     * 属性                                                                    *
+     *                                                                         *
+     **************************************************************************/
+
     /**
      * 搜索/过滤事件
      */
-    private final ObjectProperty<FilterAction> OnFilterAction = new SimpleObjectProperty<>();
+    private final ObjectProperty<FilterAction> onFilterAction = new SimpleObjectProperty<>();
+
+    /**
+     * 实时过滤
+     */
+    private final BooleanProperty realTime = new SimpleBooleanProperty();
 
     public FilterAction getOnFilterAction() {
-        return OnFilterAction.get();
+        return onFilterAction.get();
     }
 
     public ObjectProperty<FilterAction> onFilterActionProperty() {
-        return OnFilterAction;
+        return onFilterAction;
     }
 
     public void setOnFilterAction(FilterAction onFilterAction) {
-        this.OnFilterAction.set(onFilterAction);
+        this.onFilterAction.set(onFilterAction);
     }
 
+    public boolean isRealTime() {
+        return realTime.get();
+    }
+
+    public BooleanProperty realTimeProperty() {
+        return realTime;
+    }
+
+    public void setRealTime(boolean realTime) {
+        this.realTime.set(realTime);
+    }
+
+    /* *************************************************************************
+     *                                                                         *
+     * 构造方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+
     public FilterField() {
+        this.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (isRealTime() && getOnFilterAction() != null) {
+                getOnFilterAction().handle(newValue);
+            }
+        });
         this.setOnKeyReleased(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ENTER && getOnFilterAction() != null){
+            if (keyEvent.getCode() == KeyCode.ENTER && getOnFilterAction() != null && !isRealTime()){
                 getOnFilterAction().handle(getText());
                 keyEvent.consume();
             }
