@@ -153,15 +153,20 @@ public class TableFilterManagerGroup<S, T> {
     }
 
     private static <S, T> TableFilterManager<S, T> getStTableFilterManager(Object data) {
-        TableFilterManager<S, T> tableFilterManager;
-        if (data instanceof String s && s.startsWith("date")) {
-            String[] split = s.split("=");
-            TableDateFilterManager<S, T> manager = new TableDateFilterManager<>();
-            tableFilterManager = manager;
-            if (split.length > 1){
-                manager.setDateFormat(split[1]);
+        TableFilterManager<S, T> tableFilterManager = null;
+        if (data instanceof String s) {
+            if (s.startsWith("date")) {
+                String[] split = s.split("=");
+                TableDateFilterManager<S, T> manager = new TableDateFilterManager<>();
+                tableFilterManager = manager;
+                if (split.length > 1){
+                    manager.setDateFormat(split[1]);
+                }
+            }else if (s.startsWith("checkBox")) {
+                tableFilterManager = new TableCheckFilterManager<>();
             }
-        }else {
+        }
+        if (tableFilterManager == null){
             tableFilterManager = new TableFilterManager<>();
         }
         return tableFilterManager;

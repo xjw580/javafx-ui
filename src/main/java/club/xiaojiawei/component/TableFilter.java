@@ -34,7 +34,7 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
     public TableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
         super(tableColumn, managerGroup);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("TableFilter.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
@@ -44,6 +44,8 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
         }
     }
 
+    @FXML
+    private HBox filterPane;
     @FXML
     private FilterField filterField;
     @FXML
@@ -72,6 +74,10 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
      **************************************************************************/
 
     private void afterFXMLLoaded() {
+        if (disableFilter()) {
+            this.filterPane.setManaged(false);
+            this.filterPane.setVisible(false);
+        }
         windowBar.setTitle(tableColumn.getText() + "的本地过滤器");
         filterField.setPromptText("输入关键字以过滤值");
         initTableStructure();
@@ -112,22 +118,6 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
         });
     }
 
-    @Override
-    public UnaryOperator<List<S>> getFilter() {
-        return list -> {
-            if (selectedCount <= 0 || list == null || list.isEmpty()){
-                return null;
-            }
-            ArrayList<S> result = new ArrayList<>();
-            for (S s : list) {
-                if (selectedValues.contains(tableColumn.getCellObservableValue(s).getValue())){
-                    result.add(s);
-                }
-            }
-            return result;
-        };
-    }
-
     private void initTableStructure(){
         valueColumn.setCellValueFactory(observable -> new SimpleObjectProperty<>(observable.getValue()));
         valueColumn.setCellFactory(new Callback<>() {
@@ -145,7 +135,7 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
                             HBox space = new HBox();
                             HBox.setHgrow(space, Priority.ALWAYS);
 
-                            Label label = new Label(item.getValue().toString());
+                            Label label = createShowGraphic(item);
 
                             HBox rootHBox = new HBox(checkBox, space, label);
                             rootHBox.setStyle("-fx-padding: 0 5 0 5");
@@ -160,6 +150,10 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
             }
         });
         countColumn.setCellValueFactory(observable -> new SimpleObjectProperty<>(observable.getValue().getCount()));
+    }
+
+    protected Label createShowGraphic(Statistics<T> item){
+        return new Label(item.getValue().toString());
     }
 
     @Override
@@ -230,7 +224,7 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
     }
 
     @Data
-    private static class Statistics<T>{
+    protected static class Statistics<T>{
 
         private T value;
 
@@ -269,6 +263,10 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
         }
     }
 
+    protected boolean disableFilter(){
+        return false;
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 公共方法                                                                 *
@@ -280,4 +278,19 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
         tableView.refresh();
     }
 
+    @Override
+    public UnaryOperator<List<S>> getFilter() {
+        return list -> {
+            if (selectedCount <= 0 || list == null || list.isEmpty()){
+                return null;
+            }
+            ArrayList<S> result = new ArrayList<>();
+            for (S s : list) {
+                if (selectedValues.contains(tableColumn.getCellObservableValue(s).getValue())){
+                    result.add(s);
+                }
+            }
+            return result;
+        };
+    }
 }

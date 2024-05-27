@@ -11,7 +11,7 @@
          stylesheets="@css/tableFilter.css">
     <WindowBar fx:id="windowBar"/>
     <VBox fx:id="contentPane">
-        <HBox alignment="CENTER" style="-fx-padding: 10 5 0 5">
+        <HBox fx:id="filterPane" alignment="CENTER" style="-fx-padding: 10 5 0 5">
             <FilterField HBox.hgrow="ALWAYS" fx:id="filterField" styleClass="text-field-ui, text-field-ui-small"/>
         </HBox>
         <TableView fx:id="tableView" styleClass="table-view-ui, table-view-ui-tiny, table-view-ui-upright" minWidth="120" maxHeight="275">
