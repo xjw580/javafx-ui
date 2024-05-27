@@ -1,10 +1,14 @@
 package club.xiaojiawei.component;
 
 import club.xiaojiawei.controls.ico.AbstractIco;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -12,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -28,6 +33,27 @@ public class WindowBar extends AnchorPane {
      * 属性                                                                    *
      *                                                                         *
      **************************************************************************/
+
+    /**
+     * 初始时窗口是否置顶
+     */
+    @Getter
+    private boolean initTopStatus;
+
+    public void setInitTopStatus(boolean initTopStatus) {
+        this.initTopStatus = initTopStatus;
+        if (initTopStatus) {
+            if (this.getScene() != null) {
+                if (this.getScene().getWindow() != null) {
+                    pinMouseClicked();
+                }else {
+                    addWindowListener();
+                }
+            }else {
+                addSceneListener();
+            }
+        }
+    }
 
     public void setTitle(String title) {
         titleText.setText(title);
@@ -74,6 +100,10 @@ public class WindowBar extends AnchorPane {
 
     private double startY;
 
+    private ChangeListener<Scene> sceneChangeListener = null;
+
+    private ChangeListener<Window> windowChangeListener = null;
+
     private void afterFXMLLoaded() {
         addListener();
     }
@@ -90,6 +120,36 @@ public class WindowBar extends AnchorPane {
             this.getScene().getWindow().setX(event.getScreenX() - startX);
             this.getScene().getWindow().setY(event.getScreenY() - startY);
         });
+    }
+
+    private void addSceneListener(){
+        if (sceneChangeListener != null) {
+            this.sceneProperty().removeListener(sceneChangeListener);
+        }
+        sceneChangeListener = (observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                this.sceneProperty().removeListener(sceneChangeListener);
+                if (newValue.getWindow() == null) {
+                    addWindowListener();
+                }else {
+                    pinMouseClicked();
+                }
+            }
+        };
+        this.sceneProperty().addListener(sceneChangeListener);
+    }
+
+    private void addWindowListener(){
+        if (windowChangeListener != null) {
+            this.getScene().windowProperty().removeListener(windowChangeListener);
+        }
+        windowChangeListener = (observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                pinMouseClicked();
+                this.getScene().windowProperty().removeListener(windowChangeListener);
+            }
+        };
+        this.getScene().windowProperty().addListener(windowChangeListener);
     }
 
     /**

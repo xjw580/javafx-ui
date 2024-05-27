@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls.ico;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.layout.StackPane;
@@ -27,7 +28,9 @@ public abstract class AbstractIco extends StackPane{
 
     public AbstractIco(String color) {
         this();
-        setColor(color);
+        if (color != null && !color.isEmpty()){
+            setColor(color);
+        }
     }
 
     private final StringProperty color = new SimpleStringProperty();
