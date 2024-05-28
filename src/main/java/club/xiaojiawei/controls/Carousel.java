@@ -21,8 +21,7 @@ import lombok.Getter;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -51,8 +50,7 @@ public class Carousel extends AnchorPane {
      * 支持格式：http(s)、相对路径、绝对路径
      * 例：https://zergqueen.gitee.io/images/javafx-ui/carousel7.jpg 或 /club/xiaojiawei/readme/tab/images/carousel2.jpg 或 C:\Users\Administrator\Downloads\carousel7.jpg
      */
-    @Getter
-    private ObservableList<String> imagesURL;
+    private final List<String> imagesURL = new ArrayList<>();
     /**
      * 是否自动播放
      */
@@ -77,20 +75,29 @@ public class Carousel extends AnchorPane {
     /**
      * @return ObservableList<AnchorPane> AnchorPane的背景为图片
      */
-    public ObservableList<Node> getImageChildren() {
+    public List<Node> getImageChildren() {
         return imagesPane.getChildren();
+    }
+
+    public void setImagesURL(String... imagesURL) {
+        if (imagesURL == null) {
+            setImagesURL(Collections.emptyList());
+        }else {
+            setImagesURL(List.of(imagesURL));
+        }
     }
     /**
      * @param imagesURL 图片最少3张
      */
-    public void setImagesURL(ObservableList<String> imagesURL) {
+    public void setImagesURL(List<String> imagesURL) {
         if (imagesURL.size() < 3){
             throw new IllegalArgumentException("imagesURL.size()必须处于[3,+∞)区间");
         }
 
         imageChildren.clear();
         refreshImagesPaneWidth();
-        this.imagesURL = imagesURL;
+        this.imagesURL.clear();
+        this.imagesURL.addAll(imagesURL);
         for (int i = imagesURL.size() - 2; i > 1; i--) {
             AnchorPane image = buildImage(imagesURL.get(i), i);
             image.setTranslateX(calcMiddleImageTranslateX());
@@ -126,6 +133,10 @@ public class Carousel extends AnchorPane {
             int finalI = i;
             dot.setOnMouseClicked(event -> currentIndex.set(finalI));
         }
+    }
+
+    public List<String> getImagesURL() {
+        return new ArrayList<>(imagesURL);
     }
 
     public boolean isAutoPlay() {
