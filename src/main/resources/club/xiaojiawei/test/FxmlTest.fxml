@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.test.MyPoint?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Text?>
+<?import java.lang.String?>
+<?import java.util.HashMap?>
+<?import club.xiaojiawei.test.MyCollections?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Button?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="club.xiaojiawei.test.FxmlTest"
+            prefHeight="400.0" prefWidth="400">
+
+<!--    <StackPane>-->
+<!--        <children></children>-->
+<!--    </StackPane>-->
+
+<!--    <Label text="%version"/>-->
+<!--    <Text text="hello" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10"/>-->
+<!--    <fx:define>-->
+<!--        <HashMap fx:id="testMap" k1="v1"/>-->
+<!--        <Color>-->
+<!--            <red>1.0</red>-->
+<!--            <green>1.0</green>-->
+<!--            <blue>1.0</blue>-->
+<!--        </Color>-->
+<!--&lt;!&ndash;        <MyPoint fx:id="myPoint" x="1" y="2" z="2" value="dfs">&ndash;&gt;-->
+<!--&lt;!&ndash;            <children>&ndash;&gt;-->
+<!--&lt;!&ndash;                <String fx:value="B"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <String fx:value="A"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                <String fx:value="C"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            </children>&ndash;&gt;-->
+<!--&lt;!&ndash;        </MyPoint>&ndash;&gt;-->
+
+<!--        <MyCollections fx:id="myCollection" fx:factory="buildList">-->
+<!--            <String fx:value="A"/>-->
+<!--            <String fx:value="B"/>-->
+<!--            <String fx:value="C"/>-->
+<!--        </MyCollections>-->
+
+<!--        <FXCollections fx:factory="observableArrayList">-->
+<!--            <String fx:value="A"/>-->
+<!--            <String fx:value="B"/>-->
+<!--            <String fx:value="C"/>-->
+<!--        </FXCollections>-->
+<!--    </fx:define>-->
+    <fx:define>
+        <MyPoint fx:id="point" x="10" y="30"/>
+    </fx:define>
+</AnchorPane>
