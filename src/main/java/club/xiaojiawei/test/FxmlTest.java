@@ -29,12 +29,12 @@ public class FxmlTest extends Application {
     }
 
     @FXML
-    private MyPoint point;
+    private MyPoint myPoint;
     @FXML void initialize(){
-//        System.out.println("items:" + point.getChildren());
+        System.out.println("items:" + myPoint.getChildren());
 //        System.out.println(point.getX());
 //        System.out.println(point.getY());
-        System.out.println(point);
+//        System.out.println(point);
     }
 
     @Override

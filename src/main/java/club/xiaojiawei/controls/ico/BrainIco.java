@@ -12,8 +12,14 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class BrainIco extends AbstractIco {
 
     public BrainIco() {
+        this(null);
+    }
+
+    public BrainIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

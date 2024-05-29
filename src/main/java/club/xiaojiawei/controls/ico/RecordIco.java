@@ -12,8 +12,14 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class RecordIco extends AbstractIco {
 
     public RecordIco() {
+        this(null);
+    }
+
+    public RecordIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

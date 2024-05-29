@@ -11,6 +11,11 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class EnlargeIco extends AbstractIco {
 
     public EnlargeIco() {
+        this(null);
+    }
+
+    public EnlargeIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);

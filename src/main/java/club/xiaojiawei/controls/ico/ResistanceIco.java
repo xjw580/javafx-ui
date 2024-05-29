@@ -12,8 +12,14 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class ResistanceIco extends AbstractIco {
 
     public ResistanceIco() {
+        this(null);
+    }
+
+    public ResistanceIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

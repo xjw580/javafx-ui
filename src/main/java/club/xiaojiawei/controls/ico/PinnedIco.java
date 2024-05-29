@@ -12,9 +12,14 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class PinnedIco extends AbstractIco {
 
     public PinnedIco() {
-        getStyleClass().add("pinned-ico");
+        this(null);
+    }
+
+    public PinnedIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

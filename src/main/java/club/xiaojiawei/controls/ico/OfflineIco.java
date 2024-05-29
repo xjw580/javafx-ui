@@ -12,8 +12,14 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class OfflineIco extends AbstractIco {
 
     public OfflineIco() {
+        this(null);
+    }
+
+    public OfflineIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

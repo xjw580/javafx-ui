@@ -22,12 +22,11 @@ import java.util.*;
 @DefaultProperty("children")
 public class MyPoint{
 
-    private final ObservableList<String> children = FXCollections.observableList(new LinkedList<>());
+    private final ObservableList<String> children = FXCollections.observableArrayList();
 
     public ObservableList<String> getChildren() {
         return children;
     }
-
 
     private  int x;
 
@@ -54,11 +53,10 @@ public class MyPoint{
 //    public MyPoint() {
 //        System.out.println("无餐");
 //    }
-////
-    public MyPoint(@NamedArg("x") int x, @NamedArg("y") int y) {
-        System.out.println("有参");
-        this.x = x;
-        this.y = y;
-    }
+//    public MyPoint(@NamedArg("x") int x, @NamedArg("y") int y) {
+//        System.out.println("有参");
+//        this.x = x;
+//        this.y = y;
+//    }
 
 }

@@ -12,8 +12,14 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class InvisibleIco extends AbstractIco {
 
     public InvisibleIco() {
+        this(null);
+    }
+
+    public InvisibleIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }

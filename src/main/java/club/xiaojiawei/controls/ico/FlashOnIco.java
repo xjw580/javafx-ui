@@ -12,8 +12,14 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class FlashOnIco extends AbstractIco {
 
     public FlashOnIco() {
+        this(null);
+    }
+
+    public FlashOnIco(String color) {
+        super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
         this.setMaxWidth(svgImage.getWidth());
         this.getChildren().add(svgImage);
     }
+
 }
