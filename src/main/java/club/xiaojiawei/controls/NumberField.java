@@ -66,6 +66,9 @@ public class NumberField extends TextField {
 
     public NumberField() {
         setTextFormatter(new TextFormatter<>(change -> {
+            if (getText() == null) {
+                return change;
+            }
             String text = getText().substring(0, change.getRangeStart()) + change.getText() + getText().substring(change.getRangeEnd());
             if (decimalCount > 0
                     && text.matches("^-?\\d*(\\.\\d{0," + decimalCount + "})?$")
