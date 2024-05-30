@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import club.xiaojiawei.component.WindowBar?>
+<?import club.xiaojiawei.controls.WindowBar?>
 <?import club.xiaojiawei.controls.Date?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>

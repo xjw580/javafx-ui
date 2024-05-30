@@ -1,10 +1,8 @@
-package club.xiaojiawei.component;
+package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.AbstractIco;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;

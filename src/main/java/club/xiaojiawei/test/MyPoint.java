@@ -19,7 +19,6 @@ import java.util.*;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/28 9:26
  */
-@DefaultProperty("children")
 public class MyPoint{
 
     private final ObservableList<String> children = FXCollections.observableArrayList();
@@ -38,7 +37,6 @@ public class MyPoint{
 
     public void setX(int x) {
         this.x = x;
-        System.out.println("setx");
     }
 
     public int getY() {
@@ -47,16 +45,11 @@ public class MyPoint{
 
     public void setY(int y) {
         this.y = y;
-        System.out.println("sety");
     }
 
-//    public MyPoint() {
-//        System.out.println("无餐");
-//    }
-//    public MyPoint(@NamedArg("x") int x, @NamedArg("y") int y) {
-//        System.out.println("有参");
-//        this.x = x;
-//        this.y = y;
-//    }
+    public MyPoint(@NamedArg("x") int x, @NamedArg("y") int y) {
+        this.x = x;
+        this.y = y;
+    }
 
 }

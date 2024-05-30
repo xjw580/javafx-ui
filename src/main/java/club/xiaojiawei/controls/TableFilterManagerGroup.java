@@ -2,6 +2,7 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.annotations.OnlyOnce;
 import club.xiaojiawei.component.AbstractTableFilter;
+import club.xiaojiawei.factory.TableFilterManagerFactory;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -140,36 +141,21 @@ public class TableFilterManagerGroup<S, T> {
         if (!isAutoRegister && autoRegisterColFilter && tableView != null) {
             isAutoRegister = true;
             for (TableColumn<S, ?> column : tableView.getColumns()) {
-                Object data = column.getUserData();
-                if (Objects.equals(data, "disable")){
-                    continue;
+                Object userData = column.getUserData();
+                if (userData == null || userData instanceof String) {
+                    String data = (String) userData;
+                    if (Objects.equals(data, "disable")){
+                        continue;
+                    }
+                    AbstractTableFilterManager<S, T> tableFilterManager = TableFilterManagerFactory.build(data);
+                    if (tableFilterManager != null) {
+                        tableFilterManager.setTableColumn((TableColumn<S, T>) column);
+                        tableFilterManager.setTableFilterManagerGroup(this);
+                        column.setGraphic(tableFilterManager);
+                    }
                 }
-                TableFilterManager<S, T> tableFilterManager = getStTableFilterManager(data);
-                tableFilterManager.setTableColumn((TableColumn<S, T>) column);
-                tableFilterManager.setTableFilterManagerGroup(this);
-                column.setGraphic(tableFilterManager);
             }
         }
-    }
-
-    private static <S, T> TableFilterManager<S, T> getStTableFilterManager(Object data) {
-        TableFilterManager<S, T> tableFilterManager = null;
-        if (data instanceof String s) {
-            if (s.startsWith("date")) {
-                String[] split = s.split("=");
-                TableDateFilterManager<S, T> manager = new TableDateFilterManager<>();
-                tableFilterManager = manager;
-                if (split.length > 1){
-                    manager.setDateFormat(split[1]);
-                }
-            }else if (s.startsWith("checkBox")) {
-                tableFilterManager = new TableCheckFilterManager<>();
-            }
-        }
-        if (tableFilterManager == null){
-            tableFilterManager = new TableFilterManager<>();
-        }
-        return tableFilterManager;
     }
 
     /**

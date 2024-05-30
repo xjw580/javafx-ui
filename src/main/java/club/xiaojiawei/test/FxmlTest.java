@@ -1,22 +1,13 @@
 package club.xiaojiawei.test;
 
-import club.xiaojiawei.controls.Calendar;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.ResourceBundle;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -29,12 +20,9 @@ public class FxmlTest extends Application {
     }
 
     @FXML
-    private MyPoint myPoint;
+    private MyPoint point;
     @FXML void initialize(){
-        System.out.println("items:" + myPoint.getChildren());
-//        System.out.println(point.getX());
-//        System.out.println(point.getY());
-//        System.out.println(point);
+        System.out.println("items:" + point.getChildren());
     }
 
     @Override

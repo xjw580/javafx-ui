@@ -1,6 +1,6 @@
 package club.xiaojiawei.component;
 
-import club.xiaojiawei.controls.TableFilterManager;
+import club.xiaojiawei.controls.TableValueFilterManager;
 import club.xiaojiawei.controls.TableFilterManagerGroup;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
@@ -12,7 +12,7 @@ import java.util.function.UnaryOperator;
 
 /**
  * 表格过滤器
- * {@link TableFilterManager}
+ * {@link TableValueFilterManager}
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/10 17:54
  */

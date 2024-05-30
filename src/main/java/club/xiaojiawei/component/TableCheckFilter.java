@@ -8,7 +8,7 @@ import javafx.scene.control.TableColumn;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/13 15:55
  */
-public class TableCheckFilter<S, T> extends TableFilter<S, T> {
+public class TableCheckFilter<S, T> extends TableValueFilter<S, T> {
 
     public TableCheckFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
         super(tableColumn, managerGroup);

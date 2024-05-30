@@ -2,6 +2,7 @@ package club.xiaojiawei.component;
 
 import club.xiaojiawei.controls.FilterField;
 import club.xiaojiawei.controls.TableFilterManagerGroup;
+import club.xiaojiawei.controls.WindowBar;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,7 +24,7 @@ import java.util.function.UnaryOperator;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/13 15:55
  */
-public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
+public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
 
     /* *************************************************************************
      *                                                                         *
@@ -31,10 +32,10 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
      *                                                                         *
      **************************************************************************/
 
-    public TableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
+    public TableValueFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
         super(tableColumn, managerGroup);
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("TableFilter.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("TableValueFilter.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
@@ -59,7 +60,7 @@ public class TableFilter<S, T> extends AbstractTableFilter<S, T> {
     @FXML
     private WindowBar windowBar;
 
-    private final List<TableFilter.Statistics<T>> hideItems = new ArrayList<>();
+    private final List<TableValueFilter.Statistics<T>> hideItems = new ArrayList<>();
 
     private int selectedCount;
 

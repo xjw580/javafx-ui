@@ -11,7 +11,7 @@ import javafx.scene.control.TableColumn;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/11 18:12
  */
-public class TableDateFilterManager<S, T> extends TableFilterManager<S, T> {
+public class TableDateFilterManager<S, T> extends AbstractTableFilterManager<S, T> {
 
     /* *************************************************************************
      *                                                                         *
@@ -38,6 +38,18 @@ public class TableDateFilterManager<S, T> extends TableFilterManager<S, T> {
         TableDateFilter<S, T> filter = new TableDateFilter<>(tableColumn, group);
         filter.dateFormatProperty().bind(dateFormat);
         return filter;
+    }
+
+    @Override
+    public boolean needHandle(String userData) {
+        boolean isNeed = userData != null && userData.startsWith("date");
+        if (isNeed) {
+            String[] split = userData.split("=", 2);
+            if (split.length > 1){
+                setDateFormat(split[1]);
+            }
+        }
+        return isNeed;
     }
 
 }

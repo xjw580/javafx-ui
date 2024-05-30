@@ -3,6 +3,7 @@ package club.xiaojiawei.component;
 import club.xiaojiawei.controls.Date;
 import club.xiaojiawei.controls.DateSelector;
 import club.xiaojiawei.controls.TableFilterManagerGroup;
+import club.xiaojiawei.controls.WindowBar;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,8 +29,8 @@ import java.util.function.UnaryOperator;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/13 10:50
  */
+@Slf4j
 public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
-    private static final Logger log = LoggerFactory.getLogger(TableDateFilter.class);
 
     /* *************************************************************************
      *                                                                         *
@@ -124,37 +126,6 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
     }
 
     @Override
-    public UnaryOperator<List<S>> getFilter() {
-        return list -> {
-            Toggle selectedToggle = radioBtnGroup.getSelectedToggle();
-            LocalDate today = LocalDate.now();
-            LocalDate end = today;
-            LocalDate start = null;
-            if (selectedToggle == customRadio){
-                startCustomTime.setDisable(false);
-                endCustomTime.setDisable(false);
-                start = startCustomTime.getLocalDate();
-                end = endCustomTime.getLocalDate();
-            }else {
-                confirmCustomTimePane.setVisible(false);
-                confirmCustomTimePane.setManaged(false);
-                startCustomTime.setDisable(true);
-                endCustomTime.setDisable(true);
-                if (selectedToggle == allRadio){
-                    return null;
-                }else if (selectedToggle == todayRadio){
-                    start = today;
-                }else if (selectedToggle == oneWeekRadio){
-                    start = today.minusWeeks(1);
-                }else if (selectedToggle == oneMonthRadio){
-                    start = today.minusMonths(1);
-                }
-            }
-            return filterTime(start, end, list);
-        };
-    }
-
-    @Override
     protected void resetInit() {
         radioBtnGroup.selectToggle(allRadio);
     }
@@ -199,4 +170,36 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
      * 公共方法                                                                 *
      *                                                                         *
      **************************************************************************/
+
+    @Override
+    public UnaryOperator<List<S>> getFilter() {
+        return list -> {
+            Toggle selectedToggle = radioBtnGroup.getSelectedToggle();
+            LocalDate today = LocalDate.now();
+            LocalDate end = today;
+            LocalDate start = null;
+            if (selectedToggle == customRadio){
+                startCustomTime.setDisable(false);
+                endCustomTime.setDisable(false);
+                start = startCustomTime.getLocalDate();
+                end = endCustomTime.getLocalDate();
+            }else {
+                confirmCustomTimePane.setVisible(false);
+                confirmCustomTimePane.setManaged(false);
+                startCustomTime.setDisable(true);
+                endCustomTime.setDisable(true);
+                if (selectedToggle == allRadio){
+                    return null;
+                }else if (selectedToggle == todayRadio){
+                    start = today;
+                }else if (selectedToggle == oneWeekRadio){
+                    start = today.minusWeeks(1);
+                }else if (selectedToggle == oneMonthRadio){
+                    start = today.minusMonths(1);
+                }
+            }
+            return filterTime(start, end, list);
+        };
+    }
+
 }

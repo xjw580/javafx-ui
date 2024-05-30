@@ -15,41 +15,12 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="club.xiaojiawei.test.FxmlTest"
             prefHeight="400.0" prefWidth="400">
-
-<!--    <StackPane>-->
-<!--        <children></children>-->
-<!--    </StackPane>-->
-
-<!--    <Label text="%version"/>-->
-<!--    <Text text="hello" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10"/>-->
     <fx:define>
-        <MyPoint fx:id="myPoint" x="10" y="20">
+        <MyPoint fx:id="point">
             <children>
                 <String fx:value="B"/>
                 <String fx:value="A"/>
-                <String fx:value="C"/>
             </children>
         </MyPoint>
-        <HashMap fx:id="testMap" k1="v1"/>
-        <Color>
-            <red>1.0</red>
-            <green>1.0</green>
-            <blue>1.0</blue>
-        </Color>
-
-        <MyCollections fx:id="myCollection" fx:factory="buildList">
-            <String fx:value="A"/>
-            <String fx:value="B"/>
-            <String fx:value="C"/>
-        </MyCollections>
-
-        <FXCollections fx:factory="observableArrayList">
-            <String fx:value="A"/>
-            <String fx:value="B"/>
-            <String fx:value="C"/>
-        </FXCollections>
-    </fx:define>
-    <fx:define>
-        <MyPoint fx:id="point" x="10" y="30"/>
     </fx:define>
 </AnchorPane>

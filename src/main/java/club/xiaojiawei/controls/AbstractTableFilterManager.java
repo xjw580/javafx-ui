@@ -3,7 +3,6 @@ package club.xiaojiawei.controls;
 import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.OnlyOnce;
 import club.xiaojiawei.component.AbstractTableFilter;
-import club.xiaojiawei.component.TableFilter;
 import club.xiaojiawei.config.JavaFXUIThreadPoolConfig;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -20,11 +19,10 @@ import lombok.Getter;
 import java.io.IOException;
 
 /**
- * 表格字符串过滤管理器，T最好是String类型，或者其toString方法返回的字符串和表格中显示的字符串是一样的
  * @author 肖嘉威 xjw580@qq.com
- * @date 2024/5/10 17:54
+ * @date 2024/5/29 15:07
  */
-public class TableFilterManager<S, T> extends StackPane {
+public abstract class AbstractTableFilterManager<S, T> extends StackPane {
 
     /* *************************************************************************
      *                                                                         *
@@ -72,9 +70,9 @@ public class TableFilterManager<S, T> extends StackPane {
     @FXML
     protected Button filterBtn;
 
-    public TableFilterManager() {
+    public AbstractTableFilterManager() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(TableFilterManager.class.getResource(TableFilterManager.class.getSimpleName() + ".fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(AbstractTableFilterManager.class.getResource("TableFilterManager.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
@@ -163,9 +161,7 @@ public class TableFilterManager<S, T> extends StackPane {
         popup = newPopup;
     }
 
-    protected AbstractTableFilter<S, T> getTableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> tableFilterManagerGroup){
-        return new TableFilter<>(tableColumn, tableFilterManagerGroup);
-    }
+    protected abstract AbstractTableFilter<S, T> getTableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> tableFilterManagerGroup);
 
     /* *************************************************************************
      *                                                                         *
@@ -178,5 +174,7 @@ public class TableFilterManager<S, T> extends StackPane {
             tableFilter.refresh();
         }
     }
+
+    public abstract boolean needHandle(String userData);
 
 }
