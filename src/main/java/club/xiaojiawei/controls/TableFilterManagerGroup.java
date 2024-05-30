@@ -190,7 +190,7 @@ public class TableFilterManagerGroup<S, T> {
         }
         while (!tempEnableFilterStack.empty()){
             AbstractTableFilter<S, T> popFilter = tempEnableFilterStack.pop();
-            finalFilerResult = popFilter.getFilter().apply(List.copyOf(enableItemsStack.peek()));
+            finalFilerResult = popFilter.filtering(List.copyOf(enableItemsStack.peek()));
             if (finalFilerResult == null){
                 existDisableFilter = true;
                 disableFilterSet.add(popFilter);

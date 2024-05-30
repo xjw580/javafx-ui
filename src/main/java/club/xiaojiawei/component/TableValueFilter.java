@@ -280,18 +280,16 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
     }
 
     @Override
-    public UnaryOperator<List<S>> getFilter() {
-        return list -> {
-            if (selectedCount <= 0 || list == null || list.isEmpty()){
-                return null;
+    public List<S> filtering(List<S> items) {
+        if (selectedCount <= 0 || items == null || items.isEmpty()){
+            return null;
+        }
+        ArrayList<S> result = new ArrayList<>();
+        for (S s : items) {
+            if (selectedValues.contains(tableColumn.getCellObservableValue(s).getValue())){
+                result.add(s);
             }
-            ArrayList<S> result = new ArrayList<>();
-            for (S s : list) {
-                if (selectedValues.contains(tableColumn.getCellObservableValue(s).getValue())){
-                    result.add(s);
-                }
-            }
-            return result;
-        };
+        }
+        return result;
     }
 }

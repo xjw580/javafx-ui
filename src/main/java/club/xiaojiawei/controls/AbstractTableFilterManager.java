@@ -175,6 +175,11 @@ public abstract class AbstractTableFilterManager<S, T> extends StackPane {
         }
     }
 
-    public abstract boolean needHandle(String userData);
+    /**
+     * 能否过滤指定格式的数据
+     * @param userData
+     * @return
+     */
+    public abstract boolean canFilter(String userData);
 
 }

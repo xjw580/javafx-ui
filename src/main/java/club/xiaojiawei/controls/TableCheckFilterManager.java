@@ -19,7 +19,7 @@ public class TableCheckFilterManager<S, T> extends AbstractTableFilterManager<S,
     }
 
     @Override
-    public boolean needHandle(String userData) {
+    public boolean canFilter(String userData) {
         return userData != null && Objects.equals(userData, "checkBox");
     }
 

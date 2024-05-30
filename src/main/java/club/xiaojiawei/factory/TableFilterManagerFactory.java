@@ -4,6 +4,7 @@ import club.xiaojiawei.controls.AbstractTableFilterManager;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ServiceLoader;
 import java.util.stream.StreamSupport;
@@ -19,7 +20,7 @@ public class TableFilterManagerFactory {
 
     static {
         ServiceLoader<AbstractTableFilterManager> tableFilterManagers = ServiceLoader.load(AbstractTableFilterManager.class);
-        LIST = StreamSupport.stream(tableFilterManagers.spliterator(), false).toList();
+        LIST = new ArrayList<>(StreamSupport.stream(tableFilterManagers.spliterator(), false).toList());
         LIST.forEach(i -> log.info("AbstractTableFilterManager SPI load: {}", i.getClass()));
     }
 
@@ -27,14 +28,17 @@ public class TableFilterManagerFactory {
         if (LIST == null) {
             return null;
         }
-        for (AbstractTableFilterManager<S, T> abstractTableFilterManager : LIST) {
-            boolean isNeed = abstractTableFilterManager.needHandle(userData);
+        for (int i = 0; i < LIST.size(); i++) {
+            AbstractTableFilterManager<S, T> manager = LIST.get(i);
+            boolean isNeed = manager.canFilter(userData);
             if (isNeed) {
                 try {
-                    return abstractTableFilterManager.getClass().getConstructor().newInstance();
+                    AbstractTableFilterManager<S, T> newManager = manager.getClass().getConstructor().newInstance();
+                    LIST.set(i, newManager);
+                    return manager;
                 } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
                          IllegalAccessException e) {
-                    log.error("创建{}失败",abstractTableFilterManager.getClass(), e);
+                    log.error("创建{}失败",manager.getClass(), e);
                 }
                 return null;
             }

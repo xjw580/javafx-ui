@@ -8,7 +8,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.function.UnaryOperator;
 
 /**
  * 表格过滤器
@@ -40,7 +39,7 @@ abstract public class AbstractTableFilter<S, T> extends VBox {
      */
     private final ReadOnlyBooleanWrapper isFiltering = new ReadOnlyBooleanWrapper();
 
-    public boolean isIsFiltering() {
+    public boolean isFiltering() {
         return isFiltering.get();
     }
 
@@ -64,10 +63,11 @@ abstract public class AbstractTableFilter<S, T> extends VBox {
     abstract protected boolean updateTableItems(List<S> newItems);
 
     /**
-     * 获取过滤器
+     * 过滤，筛选出需要的元素
      * @return List 为null表示没有过滤，否则表示过滤结果
      */
-    abstract public UnaryOperator<List<S>> getFilter();
+    abstract public List<S> filtering(List<S> items);
+
     /**
      * 刷新显示，防止数据和显示不同步的情况
      */

@@ -36,17 +36,20 @@ public class TableDateFilterManager<S, T> extends AbstractTableFilterManager<S, 
     @Override
     protected AbstractTableFilter<S, T> getTableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> group) {
         TableDateFilter<S, T> filter = new TableDateFilter<>(tableColumn, group);
+        System.out.println( tableColumn.getText() + " 获取date:" + getDateFormat());
+        filter.setDateFormat(getDateFormat());
         filter.dateFormatProperty().bind(dateFormat);
         return filter;
     }
 
     @Override
-    public boolean needHandle(String userData) {
+    public boolean canFilter(String userData) {
         boolean isNeed = userData != null && userData.startsWith("date");
         if (isNeed) {
             String[] split = userData.split("=", 2);
             if (split.length > 1){
                 setDateFormat(split[1]);
+                System.out.println(getTableColumn() + " 设置date:" + split[1]);
             }
         }
         return isNeed;

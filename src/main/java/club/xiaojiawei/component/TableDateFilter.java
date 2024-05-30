@@ -172,34 +172,32 @@ public class TableDateFilter<S, T> extends AbstractTableFilter<S, T> {
      **************************************************************************/
 
     @Override
-    public UnaryOperator<List<S>> getFilter() {
-        return list -> {
-            Toggle selectedToggle = radioBtnGroup.getSelectedToggle();
-            LocalDate today = LocalDate.now();
-            LocalDate end = today;
-            LocalDate start = null;
-            if (selectedToggle == customRadio){
-                startCustomTime.setDisable(false);
-                endCustomTime.setDisable(false);
-                start = startCustomTime.getLocalDate();
-                end = endCustomTime.getLocalDate();
-            }else {
-                confirmCustomTimePane.setVisible(false);
-                confirmCustomTimePane.setManaged(false);
-                startCustomTime.setDisable(true);
-                endCustomTime.setDisable(true);
-                if (selectedToggle == allRadio){
-                    return null;
-                }else if (selectedToggle == todayRadio){
-                    start = today;
-                }else if (selectedToggle == oneWeekRadio){
-                    start = today.minusWeeks(1);
-                }else if (selectedToggle == oneMonthRadio){
-                    start = today.minusMonths(1);
-                }
+    public List<S> filtering(List<S> items) {
+        Toggle selectedToggle = radioBtnGroup.getSelectedToggle();
+        LocalDate today = LocalDate.now();
+        LocalDate end = today;
+        LocalDate start = null;
+        if (selectedToggle == customRadio){
+            startCustomTime.setDisable(false);
+            endCustomTime.setDisable(false);
+            start = startCustomTime.getLocalDate();
+            end = endCustomTime.getLocalDate();
+        }else {
+            confirmCustomTimePane.setVisible(false);
+            confirmCustomTimePane.setManaged(false);
+            startCustomTime.setDisable(true);
+            endCustomTime.setDisable(true);
+            if (selectedToggle == allRadio){
+                return null;
+            }else if (selectedToggle == todayRadio){
+                start = today;
+            }else if (selectedToggle == oneWeekRadio){
+                start = today.minusWeeks(1);
+            }else if (selectedToggle == oneMonthRadio){
+                start = today.minusMonths(1);
             }
-            return filterTime(start, end, list);
-        };
+        }
+        return filterTime(start, end, items);
     }
 
 }
