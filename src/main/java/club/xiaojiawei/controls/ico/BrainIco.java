@@ -12,7 +12,7 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class BrainIco extends AbstractIco {
 
     public BrainIco() {
-        this(null);
+        this("black");
     }
 
     public BrainIco(String color) {

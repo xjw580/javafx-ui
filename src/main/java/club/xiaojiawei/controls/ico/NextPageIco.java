@@ -12,7 +12,7 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class NextPageIco extends AbstractIco {
 
     public NextPageIco() {
-        this(null);
+        this("black");
     }
 
     public NextPageIco(String color) {

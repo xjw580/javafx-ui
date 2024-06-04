@@ -12,7 +12,7 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class ScreenshotIco extends AbstractIco {
 
     public ScreenshotIco() {
-        this(null);
+        this("black");
     }
 
     public ScreenshotIco(String color) {

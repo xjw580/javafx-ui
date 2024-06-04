@@ -12,7 +12,7 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class PinterIco extends AbstractIco {
 
     public PinterIco() {
-        this(null);
+        this("black");
     }
 
     public PinterIco(String color) {

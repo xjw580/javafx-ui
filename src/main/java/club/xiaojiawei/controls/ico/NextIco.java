@@ -11,7 +11,7 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class NextIco extends AbstractIco {
 
     public NextIco() {
-        this(null);
+        this("black");
     }
 
     public NextIco(String color) {

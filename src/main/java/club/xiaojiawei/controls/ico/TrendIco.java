@@ -12,7 +12,7 @@ import org.girod.javafx.svgimage.SVGLoader;
 public class TrendIco extends AbstractIco {
 
     public TrendIco() {
-        this(null);
+        this("black");
     }
 
     public TrendIco(String color) {
