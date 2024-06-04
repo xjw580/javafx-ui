@@ -45,6 +45,17 @@ public class NotificationManager<T> extends HBox {
     @Setter
     private int maxCount = Integer.MAX_VALUE;
     /**
+     * 自动将本组件移至最父级pane的子元素中
+     */
+    @Getter
+    private boolean autoTop = true;
+
+    public void setAutoTop(boolean autoTop) {
+        this.autoTop = autoTop;
+        changeNotificationPos();
+    }
+
+    /**
      * 通知工厂
      */
     @Getter
@@ -64,6 +75,8 @@ public class NotificationManager<T> extends HBox {
 
     public NotificationManager() {
         setManaged(false);
+        setPickOnBounds(false);
+        notificationVBox.setPickOnBounds(false);
         getChildren().add(notificationVBox);
         sceneProperty().addListener(sceneListener = (observableValue, aBoolean, t1) -> {
             if (t1 != null){
@@ -92,6 +105,9 @@ public class NotificationManager<T> extends HBox {
         Parent rootParent = this;
         while (rootParent.getParent() != null){
             rootParent = rootParent.getParent();
+            if (!autoTop) {
+                break;
+            }
             if (rootParent instanceof Pane pane){
                 rootPane = pane;
             }
@@ -103,8 +119,13 @@ public class NotificationManager<T> extends HBox {
         ReadOnlyDoubleProperty widthProperty;
         ReadOnlyDoubleProperty heightProperty;
         if (rootPane == null){
-            widthProperty = getScene().widthProperty();
-            heightProperty = getScene().heightProperty();
+            if (rootParent instanceof Pane pane) {
+                widthProperty = pane.widthProperty();
+                heightProperty = pane.heightProperty();
+            }else {
+                widthProperty = getScene().widthProperty();
+                heightProperty = getScene().heightProperty();
+            }
         }else {
             if (this.getParent() instanceof Pane pane){
                 pane.getChildren().remove(this);
@@ -113,7 +134,6 @@ public class NotificationManager<T> extends HBox {
             widthProperty = rootPane.widthProperty();
             heightProperty = rootPane.heightProperty();
         }
-
         switch (notificationPos){
             case TOP_LEFT -> {
                 setLayoutX(0);
