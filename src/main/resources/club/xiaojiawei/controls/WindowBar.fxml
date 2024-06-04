@@ -13,10 +13,10 @@
     </HBox>
     <HBox AnchorPane.rightAnchor="3" AnchorPane.topAnchor="3" spacing="2">
         <StackPane onMouseClicked="#pinMouseClicked" style="-fx-padding: 2;-fx-cursor: hand">
-            <PinnedIco fx:id="pinIco" color="gray"/>
+            <PinnedIco fx:id="pinIco" color="gray" styleClass="pinned-ico"/>
         </StackPane>
         <StackPane onMouseClicked="#closeMouseClicked" style="-fx-padding: 2;-fx-cursor: hand">
-            <CloseIco color="gray"/>
+            <CloseIco color="gray" styleClass="close-ico"/>
         </StackPane>
     </HBox>
 </fx:root>
