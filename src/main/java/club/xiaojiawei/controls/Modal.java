@@ -1,6 +1,7 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.config.JavaFXUIThreadPoolConfig;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.animation.ParallelTransition;
 import javafx.application.Platform;
@@ -353,25 +354,43 @@ public class Modal {
      * 关闭Modal
      */
     public void close(){
+        close(null);
+    }
+
+    public void close(Runnable closedRunnable){
         Duration duration = Duration.millis(150);
         ParallelTransition parallelTransition = new ParallelTransition(
                 BaseTransitionEnum.FADE.get(this.rootPane, 1, 0, duration),
                 BaseTransitionEnum.SLIDE_Y.get(this.content, 0, -25, duration)
         );
+        parallelTransition.setOnFinished(actionEvent -> {
+            stage.close();
+            if (closedRunnable != null) {
+                JavaFXUIThreadPoolConfig.SCHEDULED_POOL.submit(closedRunnable);
+            }
+        });
         parallelTransition.play();
-        parallelTransition.setOnFinished(actionEvent -> stage.close());
     }
 
     /**
      * 显示Modal
      */
     public void show(){
+        show(null);
+    }
+
+    public void show(Runnable shownRunnable){
         stage.show();
         Duration duration = Duration.millis(200);
         ParallelTransition parallelTransition = new ParallelTransition(
                 BaseTransitionEnum.FADE.get(this.rootPane, 0, 1, duration),
                 BaseTransitionEnum.SLIDE_Y.get(this.content, 25, 0, duration)
         );
+        if (shownRunnable != null) {
+            parallelTransition.setOnFinished(event -> {
+                JavaFXUIThreadPoolConfig.SCHEDULED_POOL.submit(shownRunnable);
+            });
+        }
         parallelTransition.play();
     }
 
