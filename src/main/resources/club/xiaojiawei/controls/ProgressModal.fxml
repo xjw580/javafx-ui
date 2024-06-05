@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+<fx:root type="HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+         styleClass="progress-modal-root-pane"
+         alignment="CENTER" style="-fx-background-color: rgba(0,0,0,.15)" visible="false"
+         stylesheets="@css/progressModal.css">
+    <VBox alignment="CENTER" spacing="10">
+        <StackPane>
+            <ProgressIndicator styleClass="progress-indicator-ui"/>
+            <Label fx:id="progressLabel"/>
+        </StackPane>
+        <Text fx:id="tip" style="-fx-fill: white;-fx-font-size: 14;-fx-font-weight:bold;-fx-effect: default-common-effect"/>
+    </VBox>
+</fx:root>

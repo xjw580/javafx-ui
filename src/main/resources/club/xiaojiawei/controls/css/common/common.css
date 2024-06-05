@@ -20,6 +20,7 @@
     /*Effect*/
     default-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
     default-hover-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
+    default-common-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 1, 1);
     default-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
 }
 .bg-hover-ui:hover{
