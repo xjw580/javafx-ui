@@ -133,6 +133,7 @@ public class Notification<T> extends Group {
         this.type = type;
         tipIcoPane.getChildren().clear();
         tipIcoPane.getChildren().add(type.getBuilder().get());
+        notificationVBox.setStyle("-fx-border-color: " + type.getColor());
     }
 
     public boolean getShowing() {

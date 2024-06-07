@@ -16,15 +16,18 @@ import java.util.function.Supplier;
 @Getter
 public enum NotificationTypeEnum {
 
-    SUCCESS(OKIco::new),
-    INFO(MessageIco::new),
-    WARN(WarnIco::new),
-    ERROR(FailIco::new),
+    SUCCESS(OKIco::new, "#389751"),
+    INFO(MessageIco::new, "#2281F0"),
+    WARN(WarnIco::new, "#FF8000"),
+    ERROR(FailIco::new, "#FF0000"),
     ;
     private final Supplier<Pane> builder;
 
-    NotificationTypeEnum(Supplier<Pane> builder) {
+    private final String color;
+
+    NotificationTypeEnum(Supplier<Pane> builder, String color) {
         this.builder = builder;
+        this.color = color;
     }
 
 }

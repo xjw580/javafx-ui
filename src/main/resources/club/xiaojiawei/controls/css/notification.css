@@ -5,6 +5,8 @@
     -fx-alignment: CENTER;
     -fx-padding: 15 10 15 15;
     -fx-spacing: 20;
+    -fx-border-width: 0 0 0 2;
+    -fx-border-radius: 3;
 }
 .notificationVBox-small{
     -fx-padding: 10 5 10 15!important;
