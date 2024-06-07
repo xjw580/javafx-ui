@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ProgressIndicator?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.StackPane?>
+<?import club.xiaojiawei.controls.ico.LoadingIco?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 <fx:root type="HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          styleClass="progress-modal-root-pane"
          alignment="CENTER" style="-fx-background-color: rgba(0,0,0,.15)" visible="false"
          stylesheets="@css/progressModal.css">
     <VBox alignment="CENTER" spacing="10">
-        <StackPane>
-            <ProgressIndicator styleClass="progress-indicator-ui"/>
+        <StackPane  prefWidth="42" prefHeight="42">
+            <LoadingIco scaleY="3" scaleX="3" color="main-color"/>
             <Label fx:id="progressLabel"/>
         </StackPane>
         <Text fx:id="tip" style="-fx-fill: white;-fx-font-size: 14;-fx-font-weight:bold;-fx-effect: default-common-effect"/>
