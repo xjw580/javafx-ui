@@ -25,15 +25,19 @@ public class FilterComboBoxTest extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FilterComboBox<Object> comboBox = new FilterComboBox<>();
+        FilterComboBox<Student> comboBox = new FilterComboBox<>();
 //        comboBox.setEditable(true);
         comboBox.getStyleClass().addAll("combo-box-ui", "combo-box-ui-normal");
-        comboBox.getItems().add("111");
-        comboBox.getItems().add("122");
-        comboBox.getItems().add("2222");
-        comboBox.getItems().add("333");
-        comboBox.getItems().add("3244");
-        comboBox.getItems().add("4444444444");
+        comboBox.setPrefWidth(150);
+        comboBox.getItems().add(new Student("dfs", 121));
+        comboBox.getItems().add(new Student("dfs1", 122));
+        comboBox.getItems().add(new Student("dfs2", 123));
+        comboBox.getItems().add(new Student("dfs3", 124));
+//        comboBox.getItems().add("122");
+//        comboBox.getItems().add("2222");
+//        comboBox.getItems().add("333");
+//        comboBox.getItems().add("3244");
+//        comboBox.getItems().add("4444444444");
         comboBox.getSelectionModel().select(1);
         StackPane stackPane = new StackPane(comboBox);
         Scene scene = new Scene(stackPane, 500, 500);
@@ -41,6 +45,7 @@ public class FilterComboBoxTest extends Application {
         JavaFXUI.addjavafxUIStylesheet(scene);
         comboBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, t1) -> {
             System.out.println("index:" + t1);
+            System.out.println(comboBox.getSelectionModel().getSelectedItem().age);
         });
         primaryStage.show();
         new Timer().schedule(new TimerTask() {
@@ -54,5 +59,20 @@ public class FilterComboBoxTest extends Application {
                 });
             }
         }, 1000);
+    }
+
+    static class Student{
+        String name;
+        int age;
+        public Student(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+        public Student() {}
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 }

@@ -4,6 +4,7 @@ import club.xiaojiawei.skin.FilterComboBoxListViewSkin;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Skin;
+import javafx.util.StringConverter;
 import lombok.Getter;
 import lombok.Setter;
 

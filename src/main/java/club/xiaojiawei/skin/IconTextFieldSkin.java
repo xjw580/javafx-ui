@@ -34,6 +34,9 @@ public class IconTextFieldSkin extends TextFieldSkin {
 
         StackPane stackPane = new StackPane(hBox);
         btnGroup.widthProperty().addListener((observableValue, number, t1) -> {
+            if (t1.intValue() == number.intValue()) {
+                return;
+            }
             Insets insets = control.getPadding();
             control.setStyle(String.format("-fx-padding: %s %s %s %s!important;", insets.getTop(), insets.getRight() + t1.doubleValue() , insets.getBottom(), insets.getLeft()));
             group.setTranslateX(t1.doubleValue());
