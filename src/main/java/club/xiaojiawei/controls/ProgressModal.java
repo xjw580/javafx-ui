@@ -116,8 +116,10 @@ public class ProgressModal extends HBox {
             v = Math.min(v, 100);
             if (v == 100) {
                 this.setVisible(false);
+                progressLabel.setText("0%");
+            }else {
+                progressLabel.setText(v + "%");
             }
-            progressLabel.setText(String.valueOf(v));
         }else {
             Platform.runLater(() -> changeProgress(progress));
         }
@@ -142,6 +144,7 @@ public class ProgressModal extends HBox {
         if (progress >= 1) {
             return this.progress;
         } else progressLabel.setVisible(!(progress < 0));
+        progressLabel.setText("0%");
         setTip(tip);
         progress = Math.min(progress, 1D);
         progress = Math.max(0D, progress);

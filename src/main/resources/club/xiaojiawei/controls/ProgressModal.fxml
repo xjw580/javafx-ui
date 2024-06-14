@@ -4,14 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
+<?import java.lang.Double?>
 <fx:root type="HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          styleClass="progress-modal-root-pane"
          alignment="CENTER" style="-fx-background-color: rgba(0,0,0,.15)" visible="false"
          stylesheets="@css/progressModal.css">
     <VBox alignment="CENTER" spacing="10">
+        <fx:define>
+            <Double fx:id="scale" fx:value="4"/>
+        </fx:define>
         <StackPane  prefWidth="42" prefHeight="42">
-            <LoadingIco scaleY="3" scaleX="3" color="main-color"/>
-            <Label fx:id="progressLabel"/>
+            <LoadingIco scaleY="${scale}" scaleX="${scale}" color="main-color"/>
+            <Label fx:id="progressLabel" style="-fx-text-fill: white;-fx-effect: default-common-effect"/>
         </StackPane>
         <Text fx:id="tip" style="-fx-fill: white;-fx-font-size: 14;-fx-font-weight:bold;-fx-effect: default-common-effect"/>
     </VBox>
