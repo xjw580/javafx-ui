@@ -13,6 +13,9 @@
 }
 
 /*Size*/
+.text-field-ui-tiny{
+    -fx-padding: 0!important;
+}
 .text-field-ui-small{
     -fx-padding: 4!important;
 }

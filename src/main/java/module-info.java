@@ -17,6 +17,7 @@ module club.xiaojiawei.javafx_ui {
     requires org.apache.tika.core;
     requires org.slf4j;
     requires jdk.jsobject;
+    requires jdk.unsupported.desktop;
 
     exports club.xiaojiawei;
     exports club.xiaojiawei.utils;
