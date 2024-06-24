@@ -43,7 +43,8 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
 
         @Override
         protected double computePrefHeight(double height) {
-            return 5 + popupHeight * (Math.min(FilterComboBoxListViewSkin.this.filterComboBox.getItems().size() + 1, FilterComboBoxListViewSkin.this.filterComboBox.getVisibleRowCount()));
+            double h = popupHeight == -1? filterComboBox.getHeight() : popupHeight;
+            return 5 + h * (Math.min(FilterComboBoxListViewSkin.this.filterComboBox.getItems().size() + 1, FilterComboBoxListViewSkin.this.filterComboBox.getVisibleRowCount()));
         }
     };
 
@@ -51,7 +52,7 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
 
     private boolean isOuter = true;
 
-    private double popupHeight;
+    private double popupHeight = -1;
 
     @SuppressWarnings("all")
     public FilterComboBoxListViewSkin(FilterComboBox<T> control) {
@@ -61,13 +62,12 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
         this.filterField.setRealTime(true);
 
         if (control.getStyleClass().contains("combo-box-ui")){
-            if (control.getStyleClass().contains("combo-box-ui-small")){
-                double height = 20D;
-                filterField.setPrefHeight(height);
-                filterField.setMaxHeight(height);
-                filterField.setMinHeight(height);
+            filterField.getStyleClass().add("text-field-ui");
+            if (control.getStyleClass().contains("combo-box-ui-small")) {
+                filterField.getStyleClass().addAll("text-field-ui-tiny");
+            } else if (!control.getStyleClass().contains("combo-box-ui-big") && !control.getStyleClass().contains("combo-box-ui-tiny")){
+                filterField.getStyleClass().addAll("text-field-ui-small");
             }
-            filterField.getStyleClass().addAll("text-field-ui", "text-field-ui-small");
         }
 
         realListView = (ListView) super.getPopupContent();
