@@ -5,6 +5,8 @@
     -fx-background-insets: 0;
     -fx-background-radius: 3;
     -fx-effect: default-press-effect;
+    -fx-border-color: border-color;
+    -fx-border-radius: 3;
 }
 /*Shape*/
 .check-box-ui-circle .box {
@@ -19,6 +21,7 @@
 .check-box-ui:selected .box {
     -fx-background-color: system-color;
     -fx-effect: dropshadow(two-pass-box, grey, 5, 0, 1, 1);
+    -fx-border-color: transparent;
 }
 /*main*/
 .check-box-ui-main:hover .box{

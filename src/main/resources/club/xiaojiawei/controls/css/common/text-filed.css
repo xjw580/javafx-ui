@@ -4,11 +4,14 @@
     -fx-background-insets: 0;
     -fx-background-radius: 3;
     -fx-background-color: white;
+    -fx-padding: 7;
+    -fx-border-color: border-color;
+    -fx-border-radius: 3;
     /*选中文本的颜色*/
     -fx-accent: main-color;
-    -fx-padding: 7;
 }
 .text-field-ui:focused{
+    -fx-border-color: transparent;
     -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1)!important;
 }
 

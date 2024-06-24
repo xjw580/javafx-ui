@@ -1,8 +1,7 @@
 @import "common.css";
 /*Base*/
 .radio-button-ui .radio {
-    -fx-border-width: 0;
-    -fx-border-color: transparent;
+    -fx-border-color: border-color;
     -fx-background-color: white;
     -fx-border-radius: 15px;
     -fx-background-insets: 0;
@@ -15,7 +14,7 @@
 /*Color*/
 /*default*/
 .radio-button-ui:selected .radio{
-    -fx-border-color: system-color;
+    -fx-border-color: transparent;
     -fx-effect: dropshadow(two-pass-box, grey, 5, 0, 1, 1)!important;
 }
 .radio-button-ui:hover .radio{
@@ -26,7 +25,6 @@
 }
 /*main*/
 .radio-button-ui-main:selected .radio{
-    -fx-border-color: main-color;
     -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1)!important;
 }
 .radio-button-ui-main:hover .radio{
@@ -37,7 +35,6 @@
 }
 /*normal*/
 .radio-button-ui-normal:selected .radio{
-    -fx-border-color: normal-deep-color;
     -fx-effect: dropshadow(two-pass-box, normal-deep-color, 5, 0, 1, 1)!important;
 }
 .radio-button-ui-normal:hover .radio{
@@ -48,7 +45,6 @@
 }
 /*success*/
 .radio-button-ui-success:selected .radio{
-    -fx-border-color: success-deep-color;
     -fx-effect: dropshadow(two-pass-box, success-deep-color, 5, 0, 1, 1)!important;
 }
 .radio-button-ui-success:hover .radio{
@@ -59,7 +55,6 @@
 }
 /*warn*/
 .radio-button-ui-warn:selected .radio{
-    -fx-border-color: warn-deep-color;
     -fx-effect: dropshadow(two-pass-box, warn-deep-color, 5, 0, 1, 1)!important;
 }
 .radio-button-ui-warn:hover .radio{
@@ -70,7 +65,6 @@
 }
 /*error*/
 .radio-button-ui-error:selected .radio{
-    -fx-border-color: error-deep-color;
     -fx-effect: dropshadow(two-pass-box, error-deep-color, 5, 0, 1, 1)!important;
 }
 .radio-button-ui-error:hover .radio{

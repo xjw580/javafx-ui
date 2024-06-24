@@ -15,7 +15,7 @@
         </HBox>
         <Label text="形状类：check-box-ui-circle" styleClass="title-three"/>
         <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="C罗" />
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="C罗"/>
         </HBox>
         <Label text="颜色类：check-box-ui-main、check-box-ui-normal、check-box-ui-success、check-box-ui-warn、check-box-ui-error" styleClass="title-three"/>
         <HBox styleClass="hv-box">
