@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import club.xiaojiawei.controls.ico.LoadingIco?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import java.lang.Double?>
 <fx:root type="HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
@@ -14,7 +16,8 @@
             <Double fx:id="scale" fx:value="4"/>
         </fx:define>
         <StackPane  prefWidth="42" prefHeight="42">
-            <LoadingIco scaleY="${scale}" scaleX="${scale}" color="main-color"/>
+<!--            <LoadingIco scaleY="${scale}" scaleX="${scale}" color="main-color"/>-->
+            <ProgressIndicator styleClass="progress-indicator-ui"/>
             <Label fx:id="progressLabel" style="-fx-text-fill: white;-fx-effect: default-common-effect"/>
         </StackPane>
         <Text fx:id="tip" style="-fx-fill: white;-fx-font-size: 14;-fx-font-weight:bold;-fx-effect: default-common-effect"/>

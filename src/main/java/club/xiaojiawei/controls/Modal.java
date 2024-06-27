@@ -4,7 +4,6 @@ import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.config.JavaFXUIThreadPoolConfig;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.animation.ParallelTransition;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -31,8 +30,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * 模态框

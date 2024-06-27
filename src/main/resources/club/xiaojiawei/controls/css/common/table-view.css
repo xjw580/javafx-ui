@@ -7,8 +7,6 @@
     -my-custom-table-cell-border-color: #c5c4c4;
 }
 .table-view-ui{
-    /*解决在width够的情况下还出现水平滚动条的问题*/
-    /*-fx-padding: 0 5 0 0;*/
     -fx-padding: 0;
     -fx-table-cell-border-color: -my-custom-table-cell-border-color;
 }
