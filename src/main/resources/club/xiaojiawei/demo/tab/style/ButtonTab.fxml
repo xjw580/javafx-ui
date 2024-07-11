@@ -1,64 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import club.xiaojiawei.demo.component.StylePage?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：btn-ui（ToggleButton也可以用）" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Button text="Hello" styleClass="btn-ui"><tooltip><Tooltip text="btn-ui"/></tooltip></Button>
-        </HBox>
-        <Label text="大小类：btn-ui-small、btn-ui-big" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Button text="Hello" styleClass="btn-ui, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-big"/></tooltip></Button>
-        </HBox>
-        <Label text="颜色类：btn-ui-normal、btn-ui-success、btn-ui-warn、btn-ui-error、btn-ui-normal-3d、..." styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal"><tooltip><Tooltip text="btn-ui, btn-ui-normal"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-success"><tooltip><Tooltip text="btn-ui, btn-ui-success"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-warn"><tooltip><Tooltip text="btn-ui, btn-ui-warn"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-error"><tooltip><Tooltip text="btn-ui, btn-ui-error"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d"><tooltip><Tooltip text="btn-ui, btn-ui-normal-3d"/></tooltip></Button>
-        </HBox>
-        <Label text="所有" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Button text="Hello" styleClass="btn-ui, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-normal, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-success, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-success, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-warn, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-warn, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-error, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-error, btn-ui-small"/></tooltip></Button>
-            <Separator orientation="VERTICAL"/>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-normal-3d, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-success-3d, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-warn-3d, btn-ui-small"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-small"><tooltip><Tooltip text="btn-ui, btn-ui-error-3d, btn-ui-small"/></tooltip></Button>
-        </HBox>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Button text="Hello" styleClass="btn-ui"><tooltip><Tooltip text="btn-ui"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal"><tooltip><Tooltip text="btn-ui, btn-ui-normal"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-success"><tooltip><Tooltip text="btn-ui, btn-ui-success"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-warn"><tooltip><Tooltip text="btn-ui, btn-ui-warn"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-error"><tooltip><Tooltip text="btn-ui, btn-ui-error"/></tooltip></Button>
-            <Separator orientation="VERTICAL"/>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d"><tooltip><Tooltip text="btn-ui, btn-ui-normal-3d"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d"><tooltip><Tooltip text="btn-ui, btn-ui-success-3d"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d"><tooltip><Tooltip text="btn-ui, btn-ui-warn-3d"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d"><tooltip><Tooltip text="btn-ui, btn-ui-error-3d"/></tooltip></Button>
-        </HBox>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Button text="Hello" styleClass="btn-ui, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-big"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-normal, btn-ui-big"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-success, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-success, btn-ui-big"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-warn, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-warn, btn-ui-big"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-error, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-error, btn-ui-big"/></tooltip></Button>
-            <Separator orientation="VERTICAL"/>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-normal-3d, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-normal-3d, btn-ui-big"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-success-3d, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-success-3d, btn-ui-big"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-warn-3d, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-warn-3d, btn-ui-big"/></tooltip></Button>
-            <Button text="Hello" styleClass="btn-ui, btn-ui-error-3d, btn-ui-big"><tooltip><Tooltip text="btn-ui, btn-ui-error-3d, btn-ui-big"/></tooltip></Button>
-        </HBox>
-    </VBox>
-</ScrollPane>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.layout.StackPane?>
+<?import club.xiaojiawei.controls.CopyLabel?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="btn-ui" baseIntroduce="ToggleButton也可以用"
+            sizeStyleClasses="btn-ui-small,btn-ui-big"
+            colorStyleClasses="btn-ui-normal,btn-ui-success,btn-ui-warn,btn-ui-error,btn-ui-normal-3d,btn-ui-warn-3d,btn-ui-error-3d">
+        <baseShowChildren>
+            <Button styleClass="btn-ui">
+                <tooltip><Tooltip text="btn-ui"/></tooltip>
+                <graphic><CopyLabel text="恐妻家" copyText="btn-ui" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+        </baseShowChildren>
+        <sizeShowChildren>
+            <Button styleClass="btn-ui, btn-ui-small">
+                <tooltip><Tooltip text="btn-ui, btn-ui-small"/></tooltip>
+                <graphic><CopyLabel text="挽救计划" copyText="btn-ui, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-big">
+                <tooltip><Tooltip text="btn-ui, btn-ui-big"/></tooltip>
+                <graphic><CopyLabel text="惨败" copyText="btn-ui, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+        </sizeShowChildren>
+        <colorShowChildren>
+            <Button styleClass="btn-ui, btn-ui-normal">
+                <tooltip><Tooltip text="btn-ui, btn-ui-normal"/></tooltip>
+                <graphic><CopyLabel text="克莱因壶" copyText="btn-ui, btn-ui-normal" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-success">
+                <tooltip><Tooltip text="btn-ui, btn-ui-success"/></tooltip>
+                <graphic><CopyLabel text="星之继承者" copyText="btn-ui, btn-ui-success" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-warn">
+                <tooltip><Tooltip text="btn-ui, btn-ui-warn"/></tooltip>
+                <graphic><CopyLabel text="异能研究所" copyText="btn-ui, btn-ui-warn" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-error">
+                <tooltip><Tooltip text="btn-ui, btn-ui-error"/></tooltip>
+                <graphic><CopyLabel text="牧羊少年奇幻之旅" copyText="btn-ui, btn-ui-error" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-normal-3d">
+                <tooltip><Tooltip text="btn-ui, btn-ui-normal-3d"/></tooltip>
+                <graphic><CopyLabel text="发条橙" copyText="btn-ui, btn-ui-normal-3d" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-success-3d">
+                <tooltip><Tooltip text="btn-ui, btn-ui-success-3d"/></tooltip>
+                <graphic><CopyLabel text="罗杰疑案" copyText="btn-ui, btn-ui-success-3d" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-warn-3d">
+                <tooltip><Tooltip text="btn-ui, btn-ui-warn-3d"/></tooltip>
+                <graphic><CopyLabel text="醉步男" copyText="btn-ui, btn-ui-warn-3d" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-error-3d">
+                <tooltip><Tooltip text="btn-ui, btn-ui-error-3d"/></tooltip>
+                <graphic><CopyLabel text="动物农场" copyText="btn-ui, btn-ui-error-3d" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+        </colorShowChildren>
+        <allShowChildren>
+            <VBox styleClass="show-hv-box">
+                <HBox styleClass="show-hv-box" alignment="CENTER_LEFT">
+                    <Button styleClass="btn-ui, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="神们自己" copyText="btn-ui, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-normal, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-normal, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="安德的游戏" copyText="btn-ui, btn-ui-normal, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-success, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-success, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="海伯利安" copyText="btn-ui, btn-ui-success, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-warn, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-warn, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="万历十五年" copyText="btn-ui, btn-ui-warn, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-error, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-error, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="天堂的喷泉" copyText="btn-ui, btn-ui-error, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Separator orientation="VERTICAL"/>
+                    <Button styleClass="btn-ui, btn-ui-normal-3d, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-normal-3d, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="东方快车谋杀案" copyText="btn-ui, btn-ui-normal-3d, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-success-3d, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-success-3d, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="嫌疑人X的献身" copyText="btn-ui, btn-ui-success-3d, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-warn-3d, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-warn-3d, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="与罗摩相会" copyText="btn-ui, btn-ui-warn-3d, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-error-3d, btn-ui-small">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-error-3d, btn-ui-small"/></tooltip>
+                        <graphic><CopyLabel text="解忧杂货店" copyText="btn-ui, btn-ui-error-3d, btn-ui-small" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                </HBox>
+                <HBox styleClass="show-hv-box" alignment="CENTER_LEFT">
+                    <Button styleClass="btn-ui">
+                        <tooltip><Tooltip text="btn-ui"/></tooltip>
+                        <graphic><CopyLabel text="时间回旋" copyText="btn-ui" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-normal">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-normal"/></tooltip>
+                        <graphic><CopyLabel text="童年的终结" copyText="btn-ui, btn-ui-normal" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-success">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-success"/></tooltip>
+                        <graphic><CopyLabel text="死者代言人" copyText="btn-ui, btn-ui-success" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-warn">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-warn"/></tooltip>
+                        <graphic><CopyLabel text="三体" copyText="btn-ui, btn-ui-warn" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-error">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-error"/></tooltip>
+                        <graphic><CopyLabel text="祈祷落幕时" copyText="btn-ui, btn-ui-error" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Separator orientation="VERTICAL"/>
+                    <Button styleClass="btn-ui, btn-ui-normal-3d">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-normal-3d"/></tooltip>
+                        <graphic><CopyLabel text="永恒的终结" copyText="btn-ui, btn-ui-normal-3d" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-success-3d">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-success-3d"/></tooltip>
+                        <graphic><CopyLabel text="爱的教育" copyText="btn-ui, btn-ui-success-3d" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-warn-3d">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-warn-3d"/></tooltip>
+                        <graphic><CopyLabel text="城市与群星" copyText="btn-ui, btn-ui-warn-3d" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-error-3d">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-error-3d"/></tooltip>
+                        <graphic><CopyLabel text="月海沉船" copyText="btn-ui, btn-ui-error-3d" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                </HBox>
+                <HBox styleClass="show-hv-box" alignment="CENTER_LEFT">
+                    <Button styleClass="btn-ui, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="恶意" copyText="btn-ui, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-normal, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-normal, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="人生" copyText="btn-ui, btn-ui-normal, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-success, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-success, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="围城" copyText="btn-ui, btn-ui-success, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-warn, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-warn, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="红手指" copyText="btn-ui, btn-ui-warn, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-error, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-error, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="帷幕" copyText="btn-ui, btn-ui-error, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Separator orientation="VERTICAL"/>
+                    <Button styleClass="btn-ui, btn-ui-normal-3d, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-normal-3d, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="洗澡" copyText="btn-ui, btn-ui-normal-3d, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-success-3d, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-success-3d, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="活着" copyText="btn-ui, btn-ui-success-3d, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-warn-3d, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-warn-3d, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="时生" copyText="btn-ui, btn-ui-warn-3d, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                    <Button styleClass="btn-ui, btn-ui-error-3d, btn-ui-big">
+                        <tooltip><Tooltip text="btn-ui, btn-ui-error-3d, btn-ui-big"/></tooltip>
+                        <graphic><CopyLabel text="秘密" copyText="btn-ui, btn-ui-error-3d, btn-ui-big" notificationManager="${notificationManager}"/></graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </allShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

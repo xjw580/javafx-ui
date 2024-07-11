@@ -2,7 +2,7 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.annotations.ValidSizeRange;
 import club.xiaojiawei.enums.SizeEnum;
-import club.xiaojiawei.func.Interceptor;
+import club.xiaojiawei.func.DateTimeInterceptor;
 import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -16,6 +16,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.function.Predicate;
+
 import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
 
 /**
@@ -23,7 +25,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.FADE;
  * @date 2024/3/8 9:56
  */
 @Slf4j
-public abstract class AbstractDateTimeField<T> extends Group implements Interceptor<T> {
+public abstract class AbstractDateTimeField<T> extends Group implements DateTimeInterceptor<T> {
 
     /**
      * 默认显示时间选择器图标

@@ -351,6 +351,10 @@ public class Time extends AbstractDateTimeField<LocalTime> {
      *                                                                         *
      **************************************************************************/
 
+    /**
+     * 日期拦截器
+     * @return
+     */
     @Override
     public Predicate<LocalTime> getInterceptor() {
         return this.timeSelector.getInterceptor();

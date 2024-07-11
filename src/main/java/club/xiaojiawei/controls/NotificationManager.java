@@ -5,6 +5,7 @@ import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.factory.NotificationFactory;
 import javafx.application.Platform;
 import javafx.beans.DefaultProperty;
+import javafx.beans.NamedArg;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;

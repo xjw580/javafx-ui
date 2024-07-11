@@ -1,46 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：check-box-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui" text="梅西" />
-        </HBox>
-        <Label text="形状类：check-box-ui-circle" styleClass="title-three"/>
-        <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="C罗"/>
-        </HBox>
-        <Label text="颜色类：check-box-ui-main、check-box-ui-normal、check-box-ui-success、check-box-ui-warn、check-box-ui-error" styleClass="title-three"/>
-        <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main" text="乔峰" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal" text="张无忌" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success" text="郭靖" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn" text="张三丰" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error" text="杨过" />
-        </HBox>
-        <Label text="所有" styleClass="title-three"/>
-        <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui" text="虚竹" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main" text="乔峰" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal" text="张无忌" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success" text="郭靖" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn" text="张三丰" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error" text="杨过" />
-        </HBox>
-        <HBox styleClass="hv-box">
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" text="天山童姥" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main, check-box-ui-circle" text="无崖子" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal, check-box-ui-circle" text="扫地僧" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success, check-box-ui-circle" text="李秋水" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn, check-box-ui-circle" text="韦小宝" />
-            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error, check-box-ui-circle" text="段誉" />
-        </HBox>
-    </VBox>
-</ScrollPane>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.demo.component.StylePage?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="check-box-ui"
+            colorStyleClasses="check-box-ui-main,check-box-ui-normal,check-box-ui-success,check-box-ui-warn,check-box-ui-error"
+            styleStyleClasses="check-box-ui-circle">
+        <baseShowChildren>
+            <CheckBox selected="true" styleClass="check-box-ui" >
+                <graphic><CopyLabel text="韦小宝" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui"/></graphic>
+            </CheckBox>
+        </baseShowChildren>
+        <colorShowChildren>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main" >
+                <graphic><CopyLabel text="张无忌" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-main"/></graphic>
+            </CheckBox>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal" >
+                <graphic><CopyLabel text="赵敏" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-normal"/></graphic>
+            </CheckBox>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success" >
+                <graphic><CopyLabel text="周芷柔" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-success"/></graphic>
+            </CheckBox>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn" >
+                <graphic><CopyLabel text="殷离" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-warn"/></graphic>
+            </CheckBox>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error" >
+                <graphic><CopyLabel text="小昭" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-error"/></graphic>
+            </CheckBox>
+        </colorShowChildren>
+        <styleShowChildren>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" >
+                <graphic><CopyLabel text="段正淳" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-circle"/></graphic>
+            </CheckBox>
+        </styleShowChildren>
+        <allShowChildren>
+            <VBox styleClass="show-hv-box">
+                <HBox styleClass="show-hv-box">
+                    <CheckBox selected="true" styleClass="check-box-ui" >
+                        <graphic><CopyLabel text="康敏" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main" >
+                        <graphic><CopyLabel text="钟宝宝" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-main"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal" >
+                        <graphic><CopyLabel text="王青萝" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-normal"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success" >
+                        <graphic><CopyLabel text="秦红棉" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-success"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn" >
+                        <graphic><CopyLabel text="阮星竹" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-warn"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error" >
+                        <graphic><CopyLabel text="刀白凤" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-error"/></graphic>
+                    </CheckBox>
+                </HBox>
+                <HBox styleClass="show-hv-box">
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" >
+                        <graphic><CopyLabel text="康敏" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-circle"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-main, check-box-ui-circle" >
+                        <graphic><CopyLabel text="钟宝宝" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-main, check-box-ui-circle"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-normal, check-box-ui-circle" >
+                        <graphic><CopyLabel text="王青萝" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-normal, check-box-ui-circle"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-success, check-box-ui-circle" >
+                        <graphic><CopyLabel text="秦红棉" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-success, check-box-ui-circle"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-warn, check-box-ui-circle" >
+                        <graphic><CopyLabel text="阮星竹" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-warn, check-box-ui-circle"/></graphic>
+                    </CheckBox>
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error, check-box-ui-circle" >
+                        <graphic><CopyLabel text="刀白凤" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-error, check-box-ui-circle"/></graphic>
+                    </CheckBox>
+                </HBox>
+            </VBox>
+        </allShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

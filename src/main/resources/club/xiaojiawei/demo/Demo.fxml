@@ -8,12 +8,13 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.StackPane?>
 <?import java.lang.Double?>
+<?import club.xiaojiawei.controls.FilterField?>
 <SplitPane xmlns="http://javafx.com/javafx"
            xmlns:fx="http://javafx.com/fxml"
            stylesheets="@demo.css"
            fx:controller="club.xiaojiawei.demo.DemoController"
            fx:id="rootPane"
-           prefHeight="750.0" prefWidth="1100.0">
+           prefHeight="800.0" prefWidth="1200.0">
     <fx:define>
         <Double fx:value="170" fx:id="leftWidth"/>
         <Double fx:value="50" fx:id="titleIconSize"/>
@@ -25,11 +26,18 @@
             </ImageView>
             <Text  text="javafx-ui" style="-fx-font-size: 18;-fx-font-weight: bold;-fx-translate-x: -3"/>
         </HBox>
+        <VBox style="-fx-padding: 8;-fx-background-color: white">
+            <HBox>
+                <Label text="过滤结果数量："/>
+                <Label fx:id="resultCount"/>
+            </HBox>
+            <FilterField fx:id="search" styleClass="text-field-ui, text-field-ui-small" promptText="搜索，Ctrl+F获取焦点" realTime="true"/>
+        </VBox>
         <ScrollPane fx:id="leftScrollPane" maxWidth="${leftWidth}" minWidth="${leftWidth}" prefWidth="${leftWidth}" prefHeight="${rootPane.height}" hbarPolicy="NEVER">
             <Accordion fx:id="accordion" styleClass="accordion-ui, accordion-ui-big">
                 <panes>
-                    <TitledPane fx:id="style" text="样式类" />
-                    <TitledPane fx:id="controls" text="组件" />
+                    <TitledPane fx:id="style" text="样式类" prefWidth="${leftWidth}"/>
+                    <TitledPane fx:id="controls" text="组件" prefWidth="${leftWidth}"/>
                 </panes>
             </Accordion>
         </ScrollPane>
@@ -41,8 +49,9 @@
                 <Text text="javafx-ui 演示程序" style="-fx-font-weight: bold;-fx-font-size: 25"/>
                 <Text text="\@作者：肖嘉威" style="-fx-font-size: 14"/>
                 <Text text="邮箱：xjw580@qq.com" style="-fx-font-size: 14"/>
+                <Hyperlink style="-fx-font-size: 15" underline="true" onMouseClicked="#gotoWeb">项目文档（内部访问）</Hyperlink>
             </VBox>
         </HBox>
-        <TabPane fx:id="rightTabPane" prefHeight="${rootPane.height}" styleClass="tab-pane-ui"/>
+        <TabPane fx:id="rightTabPane" prefHeight="${rootPane.height}" styleClass="tab-pane-ui" pickOnBounds="false"/>
     </StackPane>
 </SplitPane>

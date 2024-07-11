@@ -314,6 +314,10 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         timeControls.refresh();
     }
 
+    /**
+     * 日期拦截器
+     * @return
+     */
     @Override
     public Predicate<LocalDateTime> getInterceptor() {
         return dateTimeInterceptor.get();

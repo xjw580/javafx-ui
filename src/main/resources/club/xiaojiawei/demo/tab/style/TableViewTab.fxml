@@ -4,13 +4,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            fx:controller="club.xiaojiawei.demo.tab.style.TabViewController"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：table-view-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<StackPane xmlns="http://javafx.com/javafx"
+           fx:controller="club.xiaojiawei.demo.tab.style.TabViewController"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="table-view-ui"
+            sizeStyleClasses="table-view-ui-small,table-view-ui-big"
+            styleStyleClasses="table-view-ui-upright">
+        <baseShowChildren>
             <TableView fx:id="tableViewDemo" styleClass="table-view-ui" prefHeight="200">
                 <columns>
                     <TableColumn text="学号">
@@ -40,81 +44,82 @@
                     </TableColumn>
                 </columns>
             </TableView>
-        </HBox>
-        <Label text="大小类：table-view-ui-small、table-view-ui-big" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT" spacing="10">
-            <Button text="重置数据1" onAction="#refresh" styleClass="btn-ui, btn-ui-small"/>
-            <Button text="重置数据2" onAction="#refresh1" styleClass="btn-ui, btn-ui-small"/>
-            <Button text="重置过滤" onAction="#reset" styleClass="btn-ui, btn-ui-small, btn-ui-warn"/>
-        </HBox>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <TableView fx:id="tableViewSmallDemo" styleClass="table-view-ui, table-view-ui-small" prefHeight="200" >
-                <columns>
-                    <!--userData="disable"表示禁用自动启用过滤-->
-                    <TableColumn text="学号" userData="disable">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="id"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="姓名" fx:id="nameTableColumn">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="name"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="性别" fx:id="sexTableColumn">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="sex"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="年龄" fx:id="ageTableColumn">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="age"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <!--userData="date"表示使用日期过滤器，如要设置格式，在date后添加等号，等号后跟格式，userData="date=yyyy-MM-dd"，这是默认格式-->
-                    <TableColumn text="日期" fx:id="dateTableColumn" userData="date">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="date"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                </columns>
-                <fx:define>
-                    <TableFilterManagerGroup fx:id="filterGroup" tableView="$tableViewSmallDemo" autoRegisterColFilter="true"/>
-                </fx:define>
-            </TableView>
-            <TableView fx:id="tableViewBigDemo" styleClass="table-view-ui, table-view-ui-big" prefHeight="200">
-                <columns>
-                    <TableColumn text="学号">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="id"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="姓名">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="name"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="性别">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="sex"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="年龄">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="age"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                    <TableColumn text="日期">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="date"/>
-                        </cellValueFactory>
-                    </TableColumn>
-                </columns>
-            </TableView>
-        </HBox>
-
-        <Label text="样式类：table-view-ui-upright" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        </baseShowChildren>
+        <sizeShowChildren>
+            <VBox styleClass="show-hv-box">
+                <HBox styleClass="show-hv-box" alignment="CENTER_LEFT" spacing="10">
+                    <Button text="重置数据1" onAction="#refresh" styleClass="btn-ui, btn-ui-small"/>
+                    <Button text="重置数据2" onAction="#refresh1" styleClass="btn-ui, btn-ui-small"/>
+                    <Button text="重置过滤" onAction="#reset" styleClass="btn-ui, btn-ui-small, btn-ui-warn"/>
+                </HBox>
+                <HBox styleClass="show-hv-box">
+                    <TableView fx:id="tableViewSmallDemo" styleClass="table-view-ui, table-view-ui-small" prefHeight="200" >
+                        <columns>
+                            <!--userData="disable"表示禁用自动启用过滤-->
+                            <TableColumn text="学号" userData="disable">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="id"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="姓名" fx:id="nameTableColumn">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="name"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="性别" fx:id="sexTableColumn">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="sex"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="年龄" fx:id="ageTableColumn">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="age"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <!--userData="date"表示使用日期过滤器，如要设置格式，在date后添加等号，等号后跟格式，userData="date=yyyy-MM-dd"，这是默认格式-->
+                            <TableColumn text="日期" fx:id="dateTableColumn" userData="date">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="date"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                        </columns>
+                        <fx:define>
+                            <TableFilterManagerGroup fx:id="filterGroup" tableView="$tableViewSmallDemo" autoRegisterColFilter="true"/>
+                        </fx:define>
+                    </TableView>
+                    <TableView fx:id="tableViewBigDemo" styleClass="table-view-ui, table-view-ui-big" prefHeight="200">
+                        <columns>
+                            <TableColumn text="学号">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="id"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="姓名">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="name"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="性别">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="sex"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="年龄">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="age"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="日期">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="date"/>
+                                </cellValueFactory>
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+                </HBox>
+            </VBox>
+        </sizeShowChildren>
+        <styleShowChildren>
             <TableView fx:id="tableViewUprightDemo" styleClass="table-view-ui, table-view-ui-upright" prefHeight="200">
                 <columns>
                     <TableColumn text="学号">
@@ -144,6 +149,7 @@
                     </TableColumn>
                 </columns>
             </TableView>
-        </HBox>
-    </VBox>
-</ScrollPane>
+        </styleShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

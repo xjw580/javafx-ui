@@ -2,17 +2,30 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            fx:controller="club.xiaojiawei.demo.tab.style.ProgressController"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：progress-bar-ui、progress-indicator-ui" styleClass="title-three"/>
+<?import javafx.scene.layout.StackPane?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.layout.HBox?>
+<?import club.xiaojiawei.controls.CopyLabel?>
+<StackPane xmlns="http://javafx.com/javafx"
+           fx:controller="club.xiaojiawei.demo.tab.style.ProgressController"
+           xmlns:fx="http://javafx.com/fxml">
+    <ScrollPane style="-fx-padding: 20 0 0 0">
         <VBox styleClass="hv-box">
-            <ProgressBar fx:id="progressBarUI" progress="0" styleClass="progress-bar-ui" prefWidth="800"/>
-            <ProgressBar styleClass="progress-bar-ui" prefWidth="800"/>
-            <ProgressIndicator fx:id="progressIndicatorUI" progress="0" styleClass="progress-indicator-ui"/>
-            <ProgressIndicator styleClass="progress-indicator-ui"/>
+            <Label text="基类：" styleClass="title-three" contentDisplay="RIGHT">
+                <graphic>
+                    <HBox>
+                        <CopyLabel notificationManager="${notificationManager}" text="progress-bar-ui、" copyText="progress-bar-ui"/>
+                        <CopyLabel notificationManager="${notificationManager}" text="progress-indicator-ui"/>
+                    </HBox>
+                </graphic>
+            </Label>
+            <VBox styleClass="hv-box">
+                <ProgressBar fx:id="progressBarUI" progress="0" styleClass="progress-bar-ui" prefWidth="800"/>
+                <ProgressBar styleClass="progress-bar-ui" prefWidth="800"/>
+                <ProgressIndicator fx:id="progressIndicatorUI" progress="0" styleClass="progress-indicator-ui"/>
+                <ProgressIndicator styleClass="progress-indicator-ui"/>
+            </VBox>
         </VBox>
-    </VBox>
-</ScrollPane>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

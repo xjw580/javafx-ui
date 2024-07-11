@@ -24,7 +24,7 @@ public class NotificationController {
         notificationManager.setNotificationPos(NotificationPosEnum.TOP_LEFT);
         Label label = new Label("我在这捏");
         label.setGraphic(new FileIco());
-        VBox hBox = new VBox(label, new Date());
+        VBox hBox = new VBox(label);
         notificationManager.showInfo("我在这捏", hBox, 2);
     }
     @FXML

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：text-field-ui（PasswordField也可以用）" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="text-field-ui" baseIntroduce="PasswordField也可以用"
+            sizeStyleClasses="text-field-ui-small,text-field-ui-big">
+        <baseShowChildren>
             <TextField styleClass="text-field-ui"/>
-        </HBox>
-        <Label text="大小类：text-field-ui-small、text-field-ui-big" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        </baseShowChildren>
+        <sizeShowChildren>
             <TextField styleClass="text-field-ui, text-field-ui-small"/>
             <TextField styleClass="text-field-ui, text-field-ui-big"/>
-        </HBox>
-    </VBox>
-</ScrollPane>
+        </sizeShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

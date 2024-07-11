@@ -7,6 +7,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 /**
@@ -16,7 +17,9 @@ import javafx.scene.text.Text;
 public class ContextMenuController {
 
     @FXML
-    private ScrollPane rootPane;
+    private ScrollPane scrollPane;
+    @FXML
+    private StackPane rootPane;
 
     @FXML void initialize(){
         ContextMenu contextMenu = new ContextMenu();
@@ -25,6 +28,6 @@ public class ContextMenuController {
                 new MenuItem(){{setGraphic(new HBox(new HelpIco(), new Text("帮助")){{setStyle("-fx-spacing: 5;-fx-alignment: CENTER");}});}},
                 new MenuItem(){{setGraphic(new HBox(new ClearIco(), new Text("删除")){{setStyle("-fx-spacing: 5;-fx-alignment: CENTER");}});}}
         );
-        rootPane.setContextMenu(contextMenu);
+        scrollPane.setContextMenu(contextMenu);
     }
 }

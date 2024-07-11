@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-      xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：accordion-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Label text="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui样式"/>
-        </HBox>
-        <Label text="大小类：accordion-ui-big" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Label text="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui-big样式"/>
-        </HBox>
-        <Label text="样式类：accordion-ui-pure" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Label text="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui-pure样式"/>
-        </HBox>
-    </VBox>
-</ScrollPane>
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import javafx.scene.layout.StackPane?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="accordion-ui" baseIntroduce="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui样式"
+            sizeStyleClasses="accordion-ui-big" sizeIntroduce="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui-big样式"
+            styleStyleClasses="accordion-ui-pure" styleIntroduce="为添加accordion-ui类的Accordion下的所有TitledPane应用titled-pane-ui-pure样式"
+    />
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

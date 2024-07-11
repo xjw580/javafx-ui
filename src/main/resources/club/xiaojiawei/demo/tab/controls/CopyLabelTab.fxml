@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <ScrollPane style="-fx-padding: 20 0 0 0">
+        <VBox styleClass="hv-box">
+            <Label text="点击CopyLabel复制设置的文本到系统剪切板" styleClass="title-four"/>
+            <Label text="copyText设置要复制的文本，如果copyText为空则复制text" styleClass="title-four"/>
+            <Label text="设置notificationManager属性可以在复制成功后弹出通知" styleClass="title-four"/>
+            <CopyLabel text="点我复制" notificationManager="${notificationManager}"/>
+        </VBox>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" notificationPos="TOP_RIGHT"/>
+</StackPane>

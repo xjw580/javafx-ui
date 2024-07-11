@@ -1,6 +1,6 @@
 package club.xiaojiawei.controls;
 
-import club.xiaojiawei.func.Interceptor;
+import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
@@ -44,7 +44,7 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_Y;
  */
 @Slf4j
 @SuppressWarnings("unused")
-public class Calendar extends VBox implements Interceptor<LocalDate> {
+public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
 
     /* *************************************************************************
      *                                                                         *

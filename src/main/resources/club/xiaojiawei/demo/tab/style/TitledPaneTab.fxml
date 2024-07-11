@@ -2,48 +2,50 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：titled-pane-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box">
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.controls.ico.CopyIco?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="titled-pane-ui"
+            sizeStyleClasses="titled-pane-ui-big"
+            styleStyleClasses="titled-pane-ui-pure">
+        <baseShowChildren>
             <TitledPane text="TitledPane" styleClass="titled-pane-ui">
-                <VBox>
-                    <Label text="Hello"/>
-                    <Label text="太空漫游2001"/>
-                    <Label text="许三观卖血记"/>
-                    <Label text="杀死那只知更鸟"/>
-                    <Label text="无人生还"/>
-                    <Label text="白夜行"/>
-                </VBox>
+                <StackPane prefHeight="100" prefWidth="100">
+                    <CopyLabel notificationManager="${notificationManager}" copyText="titled-pane-ui">
+                        <graphic>
+                            <CopyIco color="gray"/>
+                        </graphic>
+                    </CopyLabel>
+                </StackPane>
             </TitledPane>
-        </HBox>
-        <Label text="大小类：titled-pane-ui-big" styleClass="title-three"/>
-        <HBox styleClass="hv-box">
+        </baseShowChildren>
+        <sizeShowChildren>
             <TitledPane text="TitledPane" styleClass="titled-pane-ui, titled-pane-ui-big">
-                <VBox>
-                    <Label text="Hello"/>
-                    <Label text="太空漫游2001"/>
-                    <Label text="许三观卖血记"/>
-                    <Label text="杀死那只知更鸟"/>
-                    <Label text="无人生还"/>
-                    <Label text="白夜行"/>
-                </VBox>
+                <StackPane prefHeight="100" prefWidth="100">
+                    <CopyLabel notificationManager="${notificationManager}" copyText="titled-pane-ui, titled-pane-ui-big">
+                        <graphic>
+                            <CopyIco color="gray"/>
+                        </graphic>
+                    </CopyLabel>
+                </StackPane>
             </TitledPane>
-        </HBox>
-        <Label text="样式类：titled-pane-ui-pure" styleClass="title-three"/>
-        <HBox styleClass="hv-box">
-            <TitledPane text="TitledPane" styleClass="titled-pane-ui, titled-pane-ui-big, titled-pane-ui-pure">
-                <VBox>
-                    <Label text="Hello"/>
-                    <Label text="太空漫游2001"/>
-                    <Label text="许三观卖血记"/>
-                    <Label text="杀死那只知更鸟"/>
-                    <Label text="无人生还"/>
-                    <Label text="白夜行"/>
-                </VBox>
+        </sizeShowChildren>
+        <styleShowChildren>
+            <TitledPane text="TitledPane" styleClass="titled-pane-ui, titled-pane-ui-pure">
+                <StackPane prefHeight="100" prefWidth="100">
+                    <CopyLabel notificationManager="${notificationManager}" copyText="titled-pane-ui, titled-pane-ui-pure">
+                        <graphic>
+                            <CopyIco color="gray"/>
+                        </graphic>
+                    </CopyLabel>
+                </StackPane>
             </TitledPane>
-        </HBox>
-    </VBox>
-</ScrollPane>
+        </styleShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

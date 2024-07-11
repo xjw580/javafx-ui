@@ -7,7 +7,7 @@
             style="-fx-padding: 20 0 0 0"
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
-        <Label text="通过showSelector、showBg、背景可见性" styleClass="title-three"/>
+        <Label text="通过showSelector、showBg、showSec调整选择器、背景可见性、显示秒" styleClass="title-three"/>
         <HBox styleClass="hv-box" alignment="CENTER_LEFT">
             <DateTime showSec="true"/>
             <DateTime showIcon="false" showSec="true"/>

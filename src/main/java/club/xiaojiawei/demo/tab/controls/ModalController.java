@@ -15,7 +15,7 @@ public class ModalController {
     private ScrollPane rootPane;
 
     @FXML protected void showModal(ActionEvent actionEvent) {
-        new Modal(rootPane, "卸载360安全卫士", "你确定要不卸载360安全助手吗？", () -> System.out.println("卸载失败"), () -> {System.out.println("卸载失败");}).show();
+        new Modal(rootPane, "卸载360安全卫士", "你确定要不卸载360安全助手吗？", () -> System.out.println("确认"), () -> {System.out.println("取消");}).show();
     }
 
 }

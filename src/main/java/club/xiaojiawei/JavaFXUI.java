@@ -18,6 +18,13 @@ import java.util.Objects;
 public class JavaFXUI {
 
     /**
+     * 启动演示程序
+     */
+    public static void launchDemoProgram(){
+        Application.launch(DemoApplication.class);
+    }
+
+    /**
      * 向Scene添加主样式表（主样式javafx-ui.css包含所有样式）
      * @param scene
      */

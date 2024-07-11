@@ -125,14 +125,29 @@ public class ProgressModal extends HBox {
         }
     }
 
+    /**
+     * 显示加载模态，隐藏进度
+     * @return 进度控制器
+     */
     public DoubleProperty show(){
         return show(tip.getText(), -1D);
     }
 
+    /**
+     * 显示加载模态，隐藏进度
+     * @param tip 提示信息
+     * @return 进度控制器
+     */
     public DoubleProperty show(String tip){
         return show(tip, -1D);
     }
 
+    /**
+     * 显示加载模态
+     * @param tip
+     * @param progress [0, 1] 小于0时隐藏进度
+     * @return 进度控制器
+     */
     public DoubleProperty show(String tip, double progress){
         if (this.progress != null) {
             this.progress.removeListener(progressListener);
@@ -154,14 +169,27 @@ public class ProgressModal extends HBox {
         return this.progress;
     }
 
+    /**
+     * 显示加载模态
+     * @return 进度控制器
+     */
     public DoubleProperty showByZero(){
         return show(tip.getText(), 0D);
     }
 
+    /**
+     * 显示加载模态
+     * @param tip
+     * @return 进度控制器
+     */
     public DoubleProperty showByZero(String tip){
         return show(tip, 0D);
     }
 
+    /**
+     * 隐藏加载模态
+     * @param progress 进度控制器
+     */
     public void hide(DoubleProperty progress){
         if (progress == null) {
             return;

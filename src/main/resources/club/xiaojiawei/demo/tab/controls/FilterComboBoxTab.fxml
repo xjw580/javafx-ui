@@ -35,8 +35,8 @@
                 </items>
             </FilterComboBox>
         </VBox>
-        <Label text="已知问题：" styleClass="title-two"/>
-        <Label text="1. 数据只能增加String类型，不能通过设置cellFactory的方式添加其他类型" styleClass="title-three"/>
+        <Label text="注意：" styleClass="title-two"/>
+        <Label text="1. 数据显示，调用数据的toString方法返回的值" styleClass="title-three"/>
         <Label text="2. 必须要界面显示后再select指定item，否则popup里不会有选中效果" styleClass="title-three"/>
     </VBox>
 </ScrollPane>

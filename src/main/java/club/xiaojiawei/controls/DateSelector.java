@@ -1,6 +1,6 @@
 package club.xiaojiawei.controls;
 
-import club.xiaojiawei.func.Interceptor;
+import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -29,7 +29,7 @@ import java.util.function.Predicate;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/24 23:15
  */
-public class DateSelector extends HBox implements Interceptor<LocalDate> {
+public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate> {
 
     /* *************************************************************************
      *                                                                         *

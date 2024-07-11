@@ -2,25 +2,37 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="hover背景色类：bg-hover-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Label styleClass="bg-hover-ui" text="hover me"><tooltip><Tooltip text="bg-hover-ui"/></tooltip></Label>
-        </HBox>
-        <Label text="背景色类：bg-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Label styleClass="bg-ui" text="me"><tooltip><Tooltip text="bg-ui"/></tooltip></Label>
-        </HBox>
-        <Label text="圆角类：radius-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Label styleClass="bg-ui, radius-ui" text="me"><tooltip><Tooltip text="radius-ui"/></tooltip></Label>
-        </HBox>
-        <Label text="大圆角类：radius-ui-big" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Label styleClass="bg-ui, radius-ui-big" text="me"><tooltip><Tooltip text="radius-ui-big"/></tooltip></Label>
-        </HBox>
-    </VBox>
-</ScrollPane>
+    <ScrollPane style="-fx-padding: 20 0 0 0">
+        <VBox styleClass="hv-box">
+            <Label text="hover背景色类：" styleClass="title-three" contentDisplay="RIGHT">
+                <graphic><CopyLabel notificationManager="${notificationManager}" text="bg-hover-ui"/></graphic>
+            </Label>
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                <Label styleClass="bg-hover-ui" text="hover me"><tooltip><Tooltip text="bg-hover-ui"/></tooltip></Label>
+            </HBox>
+            <Label text="背景色类：" styleClass="title-three" contentDisplay="RIGHT">
+                <graphic><CopyLabel notificationManager="${notificationManager}" text="bg-ui"/></graphic>
+            </Label>
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                <Label styleClass="bg-ui" text="me"><tooltip><Tooltip text="bg-ui"/></tooltip></Label>
+            </HBox>
+            <Label text="圆角类：" styleClass="title-three" contentDisplay="RIGHT">
+                <graphic><CopyLabel notificationManager="${notificationManager}" text="radius-uii"/></graphic>
+            </Label>
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                <Label styleClass="bg-ui, radius-ui" text="me"><tooltip><Tooltip text="radius-ui"/></tooltip></Label>
+            </HBox>
+            <Label text="大圆角类：" styleClass="title-three" contentDisplay="RIGHT">
+                <graphic><CopyLabel notificationManager="${notificationManager}" text="radius-ui-big"/></graphic>
+            </Label>
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                <Label styleClass="bg-ui, radius-ui-big" text="me"><tooltip><Tooltip text="radius-ui-big"/></tooltip></Label>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

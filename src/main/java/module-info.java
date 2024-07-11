@@ -20,29 +20,24 @@ module club.xiaojiawei.javafx_ui {
     requires jdk.unsupported.desktop;
 
     exports club.xiaojiawei;
-    exports club.xiaojiawei.utils;
     exports club.xiaojiawei.func;
     exports club.xiaojiawei.enums;
-    exports club.xiaojiawei.component;
     exports club.xiaojiawei.controls;
     exports club.xiaojiawei.controls.ico;
-    exports club.xiaojiawei.demo;
-    exports club.xiaojiawei.demo.tab.style;
-    exports club.xiaojiawei.test;
-    exports club.xiaojiawei.bean;
-    exports club.xiaojiawei.skin;
     exports club.xiaojiawei.factory;
     exports club.xiaojiawei.annotations;
+    exports club.xiaojiawei.component;
 
     opens club.xiaojiawei.component to javafx.fxml;
     opens club.xiaojiawei.controls to javafx.fxml;
     opens club.xiaojiawei.controls.ico to javafx.fxml;
-    opens club.xiaojiawei.demo to javafx.fxml;
-    opens club.xiaojiawei.demo.tab.style to javafx.fxml;
-    opens club.xiaojiawei.demo.tab.controls to javafx.fxml;
+    opens club.xiaojiawei.demo to javafx.fxml, javafx.base, javafx.graphics;
+    opens club.xiaojiawei.demo.component to javafx.fxml;
+    opens club.xiaojiawei.demo.tab.style to javafx.fxml, javafx.base;
+    opens club.xiaojiawei.demo.tab.controls to javafx.fxml, javafx.base;
     opens club.xiaojiawei.bean to javafx.fxml;
     opens club.xiaojiawei.factory to javafx.fxml;
     opens club.xiaojiawei.skin to javafx.fxml;
     opens club.xiaojiawei.func to javafx.fxml;
-    opens club.xiaojiawei.test to javafx.fxml;
+    opens club.xiaojiawei.test to javafx.fxml, javafx.base, javafx.graphics;
 }

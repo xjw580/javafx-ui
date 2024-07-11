@@ -346,4 +346,5 @@ public class Date extends AbstractDateTimeField<LocalDate> {
     public void setInterceptor(Predicate<LocalDate> dateInterceptor) {
         this.calendar.setInterceptor(dateInterceptor);
     }
+
 }

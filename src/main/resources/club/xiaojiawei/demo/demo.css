@@ -16,11 +16,18 @@
     -fx-border-color: white;
     -fx-background: white;
 }
+.alignment-box{
+    -fx-alignment: center_left;
+    -fx-spacing: 8;
+}
 #accordion{
     -fx-padding: 0 2 0 0;
 }
 .hv-box{
     -fx-padding: 0 0 0 20;
+    -fx-spacing: 25;
+}
+.show-hv-box{
     -fx-spacing: 25;
 }
 .title-one{
@@ -32,6 +39,16 @@
     -fx-font-size: 16;
 }
 .title-three{
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+}
+.title-three-base{
+    -fx-text-fill: main-color;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+}
+.title-three-extra{
+    -fx-text-fill: #ffb000;
     -fx-font-weight: bold;
     -fx-font-size: 13;
 }

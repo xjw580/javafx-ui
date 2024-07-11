@@ -2,17 +2,20 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：toggle-btn-ui（可以使用Button的样式）" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="toggle-btn-ui" baseIntroduce="可以使用Button的样式">
+        <baseShowChildren>
             <fx:define>
                 <ToggleGroup fx:id="toggleGroup"/>
             </fx:define>
-            <ToggleButton toggleGroup="$toggleGroup" styleClass="toggle-btn-ui" text="梅西" selected="true"/>
-            <ToggleButton toggleGroup="$toggleGroup" styleClass="toggle-btn-ui" text="C罗"/>
-        </HBox>
-    </VBox>
-</ScrollPane>
+            <ToggleButton toggleGroup="$toggleGroup" styleClass="toggle-btn-ui" text="金庸" selected="true"/>
+            <ToggleButton toggleGroup="$toggleGroup" styleClass="toggle-btn-ui" text="古龙"/>
+        </baseShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

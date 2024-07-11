@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<fx:root type="ScrollPane" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         style="-fx-padding: 20 0 0 0">
+    <VBox styleClass="show-hv-box">
+        <VBox fx:id="basePane" styleClass="hv-box" visible="false" managed="false">
+            <HBox>
+                <Label text="基类：" styleClass="title-three-base"/>
+                <HBox fx:id="baseStyleClasses"/>
+            </HBox>
+
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label fx:id="baseIntroduce"/>
+            </HBox>
+            <HBox fx:id="baseShow" styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false" style="-fx-padding: 0 0 15 20"/>
+        </VBox>
+        <VBox fx:id="sizePane" styleClass="hv-box" visible="false" managed="false">
+            <HBox>
+                <Label text="大小类：" styleClass="title-three-extra"/>
+                <HBox fx:id="sizeStyleClasses"/>
+            </HBox>
+
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label fx:id="sizeIntroduce"/>
+            </HBox>
+            <HBox fx:id="sizeShow" styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false" style="-fx-padding: 0 0 15 20"/>
+        </VBox>
+        <VBox fx:id="colorPane" styleClass="hv-box" visible="false" managed="false">
+            <HBox>
+                <Label text="颜色类：" styleClass="title-three-extra"/>
+                <HBox fx:id="colorStyleClasses"/>
+            </HBox>
+
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label fx:id="colorIntroduce"/>
+            </HBox>
+            <HBox fx:id="colorShow" styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false" style="-fx-padding: 0 0 15 20"/>
+        </VBox>
+        <VBox fx:id="stylePane" styleClass="hv-box" visible="false" managed="false">
+            <HBox>
+                <Label text="样式类：" styleClass="title-three-extra"/>
+                <HBox fx:id="styleStyleClasses"/>
+            </HBox>
+
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label fx:id="styleIntroduce"/>
+            </HBox>
+            <HBox fx:id="styleShow" styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false" style="-fx-padding: 0 0 15 20"/>
+        </VBox>
+        <VBox fx:id="allPane" styleClass="hv-box" visible="false" managed="false">
+            <HBox>
+                <Label text="所有：" styleClass="title-three-extra"/>
+                <HBox fx:id="allStyleClasses"/>
+            </HBox>
+
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false">
+                <Label fx:id="allIntroduce"/>
+            </HBox>
+            <HBox fx:id="allShow" styleClass="hv-box" alignment="CENTER_LEFT" visible="false" managed="false" style="-fx-padding: 0 0 15 20"/>
+        </VBox>
+    </VBox>
+</fx:root>

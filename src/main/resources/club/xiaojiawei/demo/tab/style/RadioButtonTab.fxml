@@ -3,28 +3,53 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：radio-button-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <RadioButton text="段正淳" styleClass="radio-button-ui" selected="true">
-                <tooltip>
-                    <Tooltip text="radio-button-ui"/>
-                </tooltip>
+<?import javafx.scene.layout.StackPane?>
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.controls.CopyLabel?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="radio-button-ui"
+            styleStyleClasses="radio-button-ui-main、radio-button-ui-normal、radio-button-ui-success、radio-button-ui-warn、radio-button-ui-error">
+        <baseShowChildren>
+            <RadioButton styleClass="radio-button-ui" selected="true">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="windows程序设计" copyText="radio-button-ui" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
             </RadioButton>
-        </HBox>
-        <Label text="颜色类：radio-button-ui-main、radio-button-ui-normal、radio-button-ui-success、radio-button-ui-warn、radio-button-ui-error" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        </baseShowChildren>
+        <styleShowChildren>
             <fx:define>
                 <ToggleGroup fx:id="toggleGroup1"/>
             </fx:define>
-            <RadioButton text="康敏" styleClass="radio-button-ui, radio-button-ui-main" selected="true" toggleGroup="$toggleGroup1"/>
-            <RadioButton text="甘宝宝" styleClass="radio-button-ui, radio-button-ui-normal" toggleGroup="$toggleGroup1"/>
-            <RadioButton text="秦红棉" styleClass="radio-button-ui, radio-button-ui-success" toggleGroup="$toggleGroup1"/>
-            <RadioButton text="王青萝" styleClass="radio-button-ui, radio-button-ui-warn" toggleGroup="$toggleGroup1"/>
-            <RadioButton text="刀白凤" styleClass="radio-button-ui, radio-button-ui-error" toggleGroup="$toggleGroup1"/>
-        </HBox>
-    </VBox>
-</ScrollPane>
+            <RadioButton styleClass="radio-button-ui, radio-button-ui-main" selected="true" toggleGroup="$toggleGroup1">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java核心技术" copyText="radio-button-ui, radio-button-ui-main" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton styleClass="radio-button-ui, radio-button-ui-normal" toggleGroup="$toggleGroup1">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java网络编程" copyText="radio-button-ui, radio-button-ui-normal" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton styleClass="radio-button-ui, radio-button-ui-success" toggleGroup="$toggleGroup1">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java编程思想" copyText="radio-button-ui, radio-button-ui-success" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton styleClass="radio-button-ui, radio-button-ui-warn" toggleGroup="$toggleGroup1">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="深入理解Java虚拟机" copyText="radio-button-ui, radio-button-ui-warn" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton styleClass="radio-button-ui, radio-button-ui-error" toggleGroup="$toggleGroup1">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java并发编程实战" copyText="radio-button-ui, radio-button-ui-error" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
+            </RadioButton>
+        </styleShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

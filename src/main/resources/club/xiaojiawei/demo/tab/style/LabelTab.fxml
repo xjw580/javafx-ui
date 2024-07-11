@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import club.xiaojiawei.controls.*?>
+<?import club.xiaojiawei.demo.component.StylePage?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.*?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：label-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="label-ui"
+            sizeStyleClasses="label-ui-small,label-ui-big"
+            colorStyleClasses="label-ui-normal,label-ui-success,label-ui-warn,label-ui-error">
+        <baseShowChildren>
             <Label styleClass="label-ui">
                 <graphic>
-                    <Text text="韦爵爷"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="韦爵爷" copyText="label-ui"/>
                 </graphic>
             </Label>
-        </HBox>
-        <Label text="大小类：label-ui-small、label-ui-big" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        </baseShowChildren>
+        <sizeShowChildren>
             <Label styleClass="label-ui, label-ui-small">
                 <graphic>
-                    <Text text="高深莫测"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="高深莫测" copyText="label-ui, label-ui-small"/>
                 </graphic>
             </Label>
             <Label styleClass="label-ui, label-ui-big">
                 <graphic>
-                    <Text text="深不可测"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="深不可测" copyText="label-ui, label-ui-big"/>
                 </graphic>
             </Label>
-        </HBox>
-        <Label text="颜色类：label-ui-normal、label-ui-success、label-ui-warn、label-ui-error" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        </sizeShowChildren>
+        <colorShowChildren>
             <Label styleClass="label-ui, label-ui-normal">
                 <graphic>
-                    <Text text="地振高冈"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="地振高冈" copyText="label-ui, label-ui-normal"/>
                 </graphic>
             </Label>
             <Label styleClass="label-ui, label-ui-success">
                 <graphic>
-                    <Text text="一派西山千古秀"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="一派西山千古秀" copyText="label-ui, label-ui-success"/>
                 </graphic>
             </Label>
             <Label styleClass="label-ui, label-ui-warn">
                 <graphic>
-                    <Text text="门朝大海"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="门朝大海" copyText="label-ui, label-ui-warn"/>
                 </graphic>
             </Label>
             <Label styleClass="label-ui, label-ui-error">
                 <graphic>
-                    <Text text="三河合水万年流"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="三河合水万年流" copyText="label-ui, label-ui-error"/>
                 </graphic>
             </Label>
-        </HBox>
-    </VBox>
-</ScrollPane>
+        </colorShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

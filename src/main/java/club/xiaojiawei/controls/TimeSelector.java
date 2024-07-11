@@ -1,6 +1,6 @@
 package club.xiaojiawei.controls;
 
-import club.xiaojiawei.func.Interceptor;
+import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import lombok.Getter;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -31,7 +30,7 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
  * @date 2023/10/25 17:33
  */
 @SuppressWarnings("unused")
-public class TimeSelector extends FlowPane implements Interceptor<LocalTime> {
+public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalTime> {
 
     /* *************************************************************************
      *                                                                         *

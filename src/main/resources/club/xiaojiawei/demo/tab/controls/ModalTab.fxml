@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextArea?>
 <ScrollPane xmlns="http://javafx.com/javafx"
             style="-fx-padding: 20 0 0 0"
             fx:id="rootPane"
@@ -10,5 +11,8 @@
             xmlns:fx="http://javafx.com/fxml">
     <VBox styleClass="hv-box">
         <Button styleClass="btn-ui, btn-ui-success-3d" text="卸载360安全卫士" onAction="#showModal"/>
+        <TextArea styleClass="text-area-ui" prefWidth="950" editable="false">
+            new Modal(rootPane, "卸载360安全卫士", "你确定要不卸载360安全助手吗？", () -> System.out.println("确认"), () -> {System.out.println("取消");}).show();
+        </TextArea>
     </VBox>
 </ScrollPane>

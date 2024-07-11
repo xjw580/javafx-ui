@@ -4,33 +4,41 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            style="-fx-padding: 20 0 0 0"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：tab-pane-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.layout.StackPane?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="tab-pane-ui"
+            sizeStyleClasses="tab-pane-ui-small">
+        <baseShowChildren>
             <TabPane styleClass="tab-pane-ui">
                 <tooltip>
                     <Tooltip text="tab-pane-ui"/>
                 </tooltip>
-                <Tab text="DJW" >
-                    <Text text="hello"/>
+                <Tab text="工作" >
+                    <Text text="假装工作中"/>
                 </Tab>
-                <Tab text="AMS">
-                    <Text text="hello"/>
+                <Tab text="摸鱼">
+                    <Text text="认真摸鱼中"/>
                 </Tab>
             </TabPane>
-        </HBox>
-        <Label text="大小类：tab-pane-ui-small" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+        </baseShowChildren>
+        <sizeShowChildren>
             <TabPane styleClass="tab-pane-ui, tab-pane-ui-small">
                 <tooltip>
                     <Tooltip text="tab-pane-ui, tab-pane-ui-small"/>
                 </tooltip>
-                <Tab text="DJW" />
-                <Tab text="AMS" />
+                <Tab text="工作" >
+                    <Text text="假装工作中"/>
+                </Tab>
+                <Tab text="摸鱼">
+                    <Text text="认真摸鱼中"/>
+                </Tab>
             </TabPane>
-        </HBox>
-    </VBox>
-</ScrollPane>
+        </sizeShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

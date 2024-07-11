@@ -5,16 +5,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<ScrollPane xmlns="http://javafx.com/javafx"
-            fx:controller="club.xiaojiawei.demo.tab.style.ContextMenuController"
-            style="-fx-padding: 20 0 0 0"
-            fx:id="rootPane"
-            xmlns:fx="http://javafx.com/fxml">
-    <VBox styleClass="hv-box">
-        <Label text="基类：context-menu-ui" styleClass="title-three"/>
-        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <Text text="右击查看效果"/>
-        </HBox>
-
-    </VBox>
-</ScrollPane>
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import javafx.scene.layout.StackPane?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<StackPane xmlns="http://javafx.com/javafx"
+           fx:controller="club.xiaojiawei.demo.tab.style.ContextMenuController"
+           fx:id="rootPane"
+           xmlns:fx="http://javafx.com/fxml">
+    <ScrollPane fx:id="scrollPane" style="-fx-padding: 20 0 0 0">
+        <VBox styleClass="hv-box">
+            <Label text="基类：" styleClass="title-three" contentDisplay="RIGHT">
+                <graphic><CopyLabel notificationManager="${notificationManager}" text="context-menu-ui"/></graphic>
+            </Label>
+            <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+                <Text text="右击查看效果"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>
