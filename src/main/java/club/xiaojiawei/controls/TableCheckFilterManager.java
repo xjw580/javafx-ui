@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import java.util.Objects;
 
 /**
- * 表格时间过滤管理器，T最好是String类型，或者其toString方法返回的字符串和表格中显示的字符串是一样的
+ * 表格单选框过滤管理器，T最好是String类型，或者其toString方法返回的字符串和表格中显示的字符串是一样的
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/11 18:12
  */
