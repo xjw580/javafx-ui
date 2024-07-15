@@ -4,8 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import club.xiaojiawei.controls.CopyLabel?>
 <?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.shape.Rectangle?>
+<?import java.lang.Double?>
 <StackPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml">
+           xmlns:fx="http://javafx.com/fxml">
     <ScrollPane style="-fx-padding: 20 0 0 0">
         <VBox styleClass="hv-box">
             <Label text="hover背景色类：" styleClass="title-three" contentDisplay="RIGHT">
@@ -32,6 +34,127 @@
             <HBox styleClass="hv-box" alignment="CENTER_LEFT">
                 <Label styleClass="bg-ui, radius-ui-big" text="me"><tooltip><Tooltip text="radius-ui-big"/></tooltip></Label>
             </HBox>
+
+            <Label text="全局颜色：" styleClass="title-three"/>
+            <fx:define>
+                <Double fx:id="colorSize" fx:value="15"/>
+            </fx:define>
+            <HBox style="-fx-background-color: white;-fx-padding: 20">
+                <FlowPane hgap="25" vgap="25">
+                    <CopyLabel text="system-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: system-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="system-hover-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: system-hover-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="main-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: main-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="main-shallow-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: main-shallow-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="border-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: border-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="effect-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: effect-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="hover-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: hover-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="shallow-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: shallow-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="background-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: background-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                </FlowPane>
+                <HBox HBox.hgrow="ALWAYS"/>
+                <FlowPane hgap="25" vgap="25">
+                    <CopyLabel text="normal-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: normal-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="normal-deep-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: normal-deep-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="success-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: success-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="success-deep-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: success-deep-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="warn-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: warn-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="warn-deep-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: warn-deep-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="error-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill:error-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                    <CopyLabel text="error-deep-color" notificationManager="${notificationManager}">
+                        <graphic>
+                            <Rectangle style="-fx-fill: error-deep-color" width="${colorSize}" height="${colorSize}"/>
+                        </graphic>
+                    </CopyLabel>
+                </FlowPane>
+            </HBox>
+
+            <Label text="全局阴影：" styleClass="title-three"/>
+            <FlowPane hgap="25" vgap="25" style="-fx-background-color: white;-fx-padding: 20">
+                <CopyLabel text="default-effect" notificationManager="${notificationManager}">
+                    <graphic>
+                        <Rectangle style="-fx-fill: white;-fx-effect: default-effect" width="${colorSize}" height="${colorSize}"/>
+                    </graphic>
+                </CopyLabel>
+                <CopyLabel text="default-hover-effect" notificationManager="${notificationManager}">
+                    <graphic>
+                        <Rectangle style="-fx-fill: white;-fx-effect: default-hover-effect" width="${colorSize}" height="${colorSize}"/>
+                    </graphic>
+                </CopyLabel>
+                <CopyLabel text="default-common-effect" notificationManager="${notificationManager}">
+                    <graphic>
+                        <Rectangle style="-fx-fill: white;-fx-effect: default-common-effect" width="${colorSize}" height="${colorSize}"/>
+                    </graphic>
+                </CopyLabel>
+                <CopyLabel text="default-press-effect" notificationManager="${notificationManager}">
+                    <graphic>
+                        <Rectangle style="-fx-fill: white;-fx-effect: default-press-effect" width="${colorSize}" height="${colorSize}"/>
+                    </graphic>
+                </CopyLabel>
+            </FlowPane>
         </VBox>
     </ScrollPane>
     <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>

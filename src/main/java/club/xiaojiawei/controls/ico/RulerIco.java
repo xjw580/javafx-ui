@@ -17,7 +17,9 @@ public class RulerIco extends AbstractIco {
     public RulerIco(String color) {
         super(color);
         SVGImage svgImage = SVGLoader.load(ImagesLoader.class.getResource(this.getClass().getSimpleName() + ".svg"));
-        this.setMaxWidth(svgImage.getWidth());
-        this.getChildren().add(svgImage);
+        if (svgImage != null) {
+            this.setMaxWidth(svgImage.getWidth());
+            this.getChildren().add(svgImage);
+        }
     }
 }
