@@ -4,6 +4,7 @@ import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.config.JavaFXUIThreadPoolConfig;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.animation.ParallelTransition;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -30,6 +31,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * 模态框
@@ -112,7 +114,7 @@ public class Modal {
      * @param content
      * @param btnHandler
      */
-    public Modal(Parent baseParent, String heading, String content, Runnable... btnHandler) {
+    public Modal(Parent baseParent, String heading, Object content, Runnable... btnHandler) {
         if (baseParent == null){
             throw new NullPointerException("parent不能为null");
         }
@@ -129,7 +131,7 @@ public class Modal {
      * @param content
      * @param btn
      */
-    public Modal(Parent baseParent, String heading, String content, Button... btn) {
+    public Modal(Parent baseParent, String heading, Object content, Button... btn) {
         if (baseParent == null){
             throw new NullPointerException("parent不能为null");
         }
@@ -144,7 +146,7 @@ public class Modal {
     }
 
     /**
-     * 构建自定义模态框
+     * 构建自定义确认模态框
      * @param baseParent
      * @param heading
      * @param content
@@ -163,7 +165,7 @@ public class Modal {
     }
 
     /**
-     * 构建自定义模态框
+     * 构建自定义确认模态框
      * @param baseParent
      * @param heading
      * @param content
@@ -196,7 +198,7 @@ public class Modal {
         return hBox;
     }
 
-    private VBox buildConfirmBody(Parent baseParent, String heading, String content){
+    private VBox buildConfirmBody(Parent baseParent, String heading, Object content){
         VBox vBox = new VBox();
         vBox.setPrefWidth(Math.min(350, baseParent.getScene().getWidth() - 10));
         vBox.setMaxHeight(baseParent.getScene().getHeight() - 10);
@@ -211,8 +213,14 @@ public class Modal {
             vBox.getChildren().add(createHeading(heading));
             headHeight = 14;
         }
-        if (content != null && !content.isBlank()){
-            vBox.getChildren().add(createContent(content, vBox.getPrefWidth() - 40, vBox.getMaxHeight() - btnHeight - headHeight - inset * 3));
+        double maxWidth = vBox.getPrefWidth() - 40;
+        double maxHeight = vBox.getMaxHeight() - btnHeight - headHeight - inset * 3;
+        if (content instanceof String contentStr) {
+            if (!contentStr.isBlank()){
+                vBox.getChildren().add(createContent(contentStr, maxWidth, maxHeight));
+            }
+        } else if (content instanceof Node node) {
+            vBox.getChildren().add(node);
         }
         return vBox;
     }
@@ -295,6 +303,15 @@ public class Modal {
     }
 
     private Node createContent(String content, double maxWidth, double maxHeight){
+        ScrollPane scrollPane = createContentPane(maxWidth, maxHeight);
+        Text text = new Text(content);
+        text.setWrappingWidth(maxWidth - 15);
+        text.setStyle("-fx-font-size: 14;");
+        scrollPane.setContent(text);
+        return scrollPane;
+    }
+
+    private ScrollPane createContentPane(double maxWidth, double maxHeight){
         ScrollPane scrollPane = new ScrollPane();
 //        edge-to-edge样式类：去除默认的灰色边框和获得焦点时的蓝色边框
         scrollPane.getStyleClass().add("edge-to-edge");
@@ -307,10 +324,6 @@ public class Modal {
         }else {
             scrollPane.setMaxHeight(Math.min(maxHeight, 200));
         }
-        Text text = new Text(content);
-        text.setWrappingWidth(maxWidth - 15);
-        text.setStyle("-fx-font-size: 14;");
-        scrollPane.setContent(text);
         return scrollPane;
     }
 
@@ -377,6 +390,10 @@ public class Modal {
     }
 
     public void show(Runnable shownRunnable){
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(() -> show(shownRunnable));
+            return;
+        }
         stage.show();
         Duration duration = Duration.millis(200);
         ParallelTransition parallelTransition = new ParallelTransition(
