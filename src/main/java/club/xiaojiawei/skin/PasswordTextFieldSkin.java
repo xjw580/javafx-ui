@@ -43,7 +43,7 @@ public class PasswordTextFieldSkin extends IconTextFieldSkin {
         actionIcon.setContent(Icons.SHOW.getContent());
         actionButton.setGraphic(actionIcon);
 
-        addIconButton(actionButton);
+        addTipButton(actionButton);
 
         passwordTextField.textProperty().addListener((observable, oldValue, newValue) -> actionButton.setVisible(!passwordTextField.isHideForever() && !newValue.isEmpty()));
     }

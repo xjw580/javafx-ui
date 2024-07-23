@@ -3,6 +3,7 @@ package club.xiaojiawei.skin;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TextField;
@@ -20,38 +21,47 @@ import javafx.scene.shape.SVGPath;
  */
 public class IconTextFieldSkin extends TextFieldSkin {
 
-    private final HBox btnGroup = new HBox();
+    private final HBox nodePane = new HBox();
+
+    private Insets initInsets = null;
 
     public IconTextFieldSkin(TextField control) {
+        this(control, true);
+    }
+    public IconTextFieldSkin(TextField control, boolean placeholder) {
         super(control);
 
-        btnGroup.setId("btn-group");
-        btnGroup.setStyle("-fx-spacing: 5;-fx-alignment: CENTER");
+        nodePane.setId("btn-pane");
+        nodePane.setStyle("-fx-spacing: 5;-fx-alignment: CENTER");
 
-        Group group = new Group(btnGroup);
+        Group group = new Group(nodePane);
         HBox hBox = new HBox(group);
         hBox.setAlignment(Pos.CENTER_RIGHT);
 
         StackPane stackPane = new StackPane(hBox);
-        btnGroup.widthProperty().addListener((observableValue, number, t1) -> {
+
+        nodePane.widthProperty().addListener((observableValue, number, t1) -> {
             if (t1.intValue() == number.intValue()) {
                 return;
             }
-            Insets insets = control.getPadding();
-            control.setStyle(String.format("-fx-padding: %s %s %s %s!important;", insets.getTop(), insets.getRight() + t1.doubleValue() , insets.getBottom(), insets.getLeft()));
-            group.setTranslateX(t1.doubleValue());
+            if (initInsets == null) {
+                initInsets = control.getPadding();
+            }
+
+            control.setStyle(String.format("-fx-padding: %s %s %s %s!important;", initInsets.getTop(), initInsets.getRight() + (placeholder? t1.doubleValue() : 0) , initInsets.getBottom(), initInsets.getLeft()));
+            group.setTranslateX(placeholder? t1.doubleValue() : 0);
         });
         stackPane.setId("btn-stack-pane");
         stackPane.toFront();
-        getChildren().add(stackPane);
+        getChildren().add(hBox);
     }
 
-    protected void addIconButton(Button ...button){
-        btnGroup.getChildren().addAll(button);
+    protected void addTipButton(Node...nodes){
+        nodePane.getChildren().addAll(nodes);
     }
 
-    protected void removeIconButton(Button ...button){
-        btnGroup.getChildren().removeAll(button);
+    protected void removeTipButton(Node ...nodes){
+        nodePane.getChildren().removeAll(nodes);
     }
 
     protected Button buildIconButton(){

@@ -20,7 +20,7 @@ public class NumberFieldSkin extends IconTextFieldSkin {
         addBtn.setId("add-btn");
         addBtn.setOnAction(actionEvent -> numberField.increment());
 
-        addIconButton(subBtn, addBtn);
+        addTipButton(subBtn, addBtn);
     }
 
 }

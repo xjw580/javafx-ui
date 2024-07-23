@@ -36,7 +36,7 @@ public class FilterFieldSkin extends IconTextFieldSkin {
                 filterField.getOnFilterAction().handle(filterField.getText());
             }
         });
-        addIconButton(button);
+        addTipButton(button);
     }
 
 }
