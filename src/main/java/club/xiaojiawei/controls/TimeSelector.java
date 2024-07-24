@@ -113,13 +113,13 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
     public void setShowSec(boolean showSec) {
         this.showSec = showSec;
         if (showSec){
-            this.setMinWidth(132);
-            this.setMaxWidth(132);
+            this.setMinWidth(133);
+            this.setMaxWidth(133);
             secSelector.setVisible(true);
             secSelector.setManaged(true);
         }else {
-            this.setMinWidth(90);
-            this.setMaxWidth(90);
+            this.setMinWidth(91);
+            this.setMaxWidth(91);
             secSelector.setVisible(false);
             secSelector.setManaged(false);
         }

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.*?>
 <fx:root type="FlowPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/timeSelector.css"
-         fx:id="root" minWidth="90" maxWidth="90" hgap="1.5">
+         fx:id="root" minWidth="91" maxWidth="91" hgap="1.5">
     <ScrollPane fx:id="hourSelector" styleClass="timeSelector">
         <VBox fx:id="hourVbox" styleClass="v-box"/>
     </ScrollPane>
