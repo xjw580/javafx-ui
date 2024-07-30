@@ -3,6 +3,7 @@ package club.xiaojiawei.controls;
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.config.JavaFXUIThreadPoolConfig;
 import club.xiaojiawei.enums.BaseTransitionEnum;
+import club.xiaojiawei.func.MarkLogging;
 import javafx.animation.ParallelTransition;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -29,16 +30,18 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * 模态框
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/1/31 10:38
  */
-public class Modal {
+public class Modal implements MarkLogging {
+    private static final Logger log = LoggerFactory.getLogger(Modal.class);
 
     /* *************************************************************************
      *                                                                         *
@@ -136,7 +139,8 @@ public class Modal {
             throw new NullPointerException("parent不能为null");
         }
         VBox vBox = buildConfirmBody(baseParent, heading, content);
-        if (btn != null){
+        if (btn != null) {
+            addBtnClickLogListen(btn);
             HBox hBox = buildBtnHBox();
             hBox.getChildren().addAll(Arrays.stream(btn).toList());
             vBox.getChildren().add(hBox);
@@ -157,9 +161,12 @@ public class Modal {
             throw new NullPointerException("parent不能为null");
         }
         VBox vBox = new VBox(heading, content);
-        HBox hBox = buildBtnHBox();
-        hBox.getChildren().addAll(Arrays.stream(btn).toList());
-        vBox.getChildren().add(hBox);
+        if (btn != null) {
+            addBtnClickLogListen(btn);
+            HBox hBox = buildBtnHBox();
+            hBox.getChildren().addAll(Arrays.stream(btn).toList());
+            vBox.getChildren().add(hBox);
+        }
         buildRootPane(vBox);
         init(baseParent);
     }
@@ -179,18 +186,42 @@ public class Modal {
         }
         VBox vBox = new VBox(heading, content);
         vBox.setStyle(style);
-        HBox hBox = buildBtnHBox();
-        hBox.getChildren().addAll(Arrays.stream(btn).toList());
-        vBox.getChildren().add(hBox);
+        if (btn != null) {
+            HBox hBox = buildBtnHBox();
+            hBox.getChildren().addAll(Arrays.stream(btn).toList());
+            vBox.getChildren().add(hBox);
+        }
         buildRootPane(vBox);
         init(baseParent);
     }
+
+    private String headingStr;
+
+    private Object contentObj;
+
+    public static final String CN_NAME = "弹窗";
 
     /* *************************************************************************
      *                                                                         *
      * 私有方法                                                                 *
      *                                                                         *
      **************************************************************************/
+
+    private void addBtnClickLogListen(Button... btn){
+        if (JavaFXUI.getLogMark() != null) {
+            for (Button button : btn) {
+                button.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+                    recordBtnClickLog(button.getText());
+                });
+            }
+        }
+    }
+
+    private void recordBtnClickLog(String text){
+        if (JavaFXUI.getLogMark() != null) {
+            log.info(JavaFXUI.getLogMark(), "{}:点击了【{}】", CN_NAME, text);
+        }
+    }
 
     private HBox buildBtnHBox(){
         HBox hBox = new HBox();
@@ -209,6 +240,8 @@ public class Modal {
         }else {
             vBox.setStyle("-fx-padding: 20;-fx-spacing: 20;");
         }
+        headingStr = heading;
+        contentObj = content;
         if (heading != null && !heading.isBlank()){
             vBox.getChildren().add(createHeading(heading));
             headHeight = 14;
@@ -332,6 +365,7 @@ public class Modal {
         Button ok = new Button("确认");
         ok.setOnAction(actionEvent -> {
             close();
+            recordBtnClickLog(ok.getText());
             if (btnHandler != null && btnHandler.length > 0 && btnHandler[0] != null){
                 btnHandler[0].run();
             }
@@ -343,6 +377,7 @@ public class Modal {
             Button cancel = new Button("取消");
             cancel.setOnAction(actionEvent -> {
                 close();
+                recordBtnClickLog(cancel.getText());
                 if (btnHandler[1] != null){
                     btnHandler[1].run();
                 }
@@ -395,6 +430,11 @@ public class Modal {
             return;
         }
         stage.show();
+        if (JavaFXUI.getLogMark() != null) {
+            if (contentObj instanceof String || (headingStr != null && !headingStr.isBlank())) {
+                log.info(JavaFXUI.getLogMark(), "{}:{ heading: {}, content: {} }", CN_NAME, headingStr, contentObj);
+            }
+        }
         Duration duration = Duration.millis(200);
         ParallelTransition parallelTransition = new ParallelTransition(
                 BaseTransitionEnum.FADE.get(this.rootPane, 0, 1, duration),

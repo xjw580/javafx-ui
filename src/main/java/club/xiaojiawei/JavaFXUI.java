@@ -4,6 +4,9 @@ import club.xiaojiawei.demo.DemoApplication;
 import club.xiaojiawei.enums.StylesheetEnum;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import lombok.Getter;
+import lombok.Setter;
+import org.slf4j.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,10 @@ import java.util.Objects;
  */
 @SuppressWarnings("all")
 public class JavaFXUI {
+
+    @Getter
+    @Setter
+    private static Marker logMark;
 
     /**
      * 启动演示程序

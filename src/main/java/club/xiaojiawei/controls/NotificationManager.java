@@ -1,8 +1,10 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.enums.NotificationPosEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.factory.NotificationFactory;
+import club.xiaojiawei.func.MarkLogging;
 import javafx.application.Platform;
 import javafx.beans.DefaultProperty;
 import javafx.beans.NamedArg;
@@ -15,6 +17,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import lombok.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.*;
 
@@ -26,7 +30,8 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
  * @date 2024/1/2 10:00
  */
 @DefaultProperty("notificationFactory")
-public class NotificationManager<T> extends HBox {
+public class NotificationManager<T> extends HBox implements MarkLogging {
+    private static final Logger log = LoggerFactory.getLogger(NotificationManager.class);
 
     /* *************************************************************************
      *                                                                         *
@@ -239,6 +244,13 @@ public class NotificationManager<T> extends HBox {
         notificationVBox.getChildren().add(notification);
         notification.setOnCloseEvent(() -> notificationVBox.getChildren().remove(notification));
         notification.show();
+        if (JavaFXUI.getLogMark() != null) {
+            switch (notification.getType()){
+                case INFO, SUCCESS -> log.info(JavaFXUI.getLogMark(), "通知:{ title: {}, content: {}}", notification.getTitle(), notification.getContent());
+                case WARN -> log.warn(JavaFXUI.getLogMark(), "通知:{ title: {}, content: {}}", notification.getTitle(), notification.getContent());
+                case ERROR -> log.error(JavaFXUI.getLogMark(), "通知:{ title: {}, content: {}}", notification.getTitle(), notification.getContent());
+            }
+        }
     }
     public void show(Notification<T> notification, long closeSecTime){
         show(notification, closeSecTime, TimeUnit.SECONDS);
