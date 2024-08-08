@@ -38,8 +38,6 @@ public class IconTextFieldSkin extends TextFieldSkin {
         HBox hBox = new HBox(group);
         hBox.setAlignment(Pos.CENTER_RIGHT);
 
-        StackPane stackPane = new StackPane(hBox);
-
         nodePane.widthProperty().addListener((observableValue, number, t1) -> {
             if (t1.intValue() == number.intValue()) {
                 return;
@@ -51,8 +49,6 @@ public class IconTextFieldSkin extends TextFieldSkin {
             control.setStyle(String.format("-fx-padding: %s %s %s %s!important;", initInsets.getTop(), initInsets.getRight() + (placeholder? t1.doubleValue() : 0) , initInsets.getBottom(), initInsets.getLeft()));
             group.setTranslateX(placeholder? t1.doubleValue() : 0);
         });
-        stackPane.setId("btn-stack-pane");
-        stackPane.toFront();
         getChildren().add(hBox);
     }
 
