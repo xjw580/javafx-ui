@@ -4,7 +4,6 @@ import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.controls.FilterComboBox;
 import club.xiaojiawei.controls.FilterField;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -12,12 +11,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import lombok.Getter;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -27,96 +23,122 @@ public class FilterComboBoxListViewSkin<T> extends ComboBoxListViewSkin<T> {
 
     private final FilterComboBox<T> filterComboBox;
 
-    @Getter
-    private final FilterField filterField = new FilterField();
+    private final FilterField filterField;
 
-    private final StackPane filterPane = new StackPane(filterField);
+    private final StackPane filterPane;
 
-    private VBox vBox;
+    private final VBox vBox;
 
-    private final ListView<T> realListView;
+    private final ListView<T> rawListView;
 
-    private final ObservableList<T> rawItems;
+    private final ListView<T> showListView;
 
-    private boolean isOuter = true;
-
+    private final ObservableList<T> showItems;
 
     @SuppressWarnings("all")
     public FilterComboBoxListViewSkin(FilterComboBox<T> control) {
         super(control);
-        this.filterComboBox = control;
+
+        this.filterField = new FilterField();
         this.filterField.setRealTime(true);
-        realListView = (ListView) super.getPopupContent();
-        vBox = new VBox(){
+        this.filterPane = new StackPane(filterField);
+        filterPane.setStyle("-fx-padding: 5");
+
+        rawListView = (ListView) super.getPopupContent();
+//        rawListView.setManaged(true);
+
+        showListView = new ListView<>(){
             @Override
             protected double computePrefWidth(double height) {
-                return realListView.prefWidth(height);
+                return rawListView.prefWidth(height);
             }
 
             @Override
             protected double computePrefHeight(double width) {
-                return realListView.prefHeight(width) + filterPane.prefHeight(width);
+                return rawListView.prefHeight(width) * Math.min(showItems.size(), filterComboBox.getVisibleRowCount()) / Math.min(rawListView.getItems().size(), filterComboBox.getVisibleRowCount()) + 4;
             }
         };
-        filterPane.setStyle("-fx-padding: 5");
-        vBox.getChildren().addAll(filterPane, realListView);
+        showItems = showListView.getItems();
+        showItems.setAll(rawListView.getItems());
+        showListView.getSelectionModel().select(rawListView.getSelectionModel().getSelectedItem());
+        showListView.cellFactoryProperty().bind(rawListView.cellFactoryProperty());
+        showListView.onEditCancelProperty().bind(rawListView.onEditCancelProperty());
+        showListView.onEditCommitProperty().bind(rawListView.onEditCommitProperty());
+        showListView.onEditStartProperty().bind(rawListView.onEditStartProperty());
+        showListView.onScrollToProperty().bind(rawListView.onScrollToProperty());
+        showListView.onScrollProperty().bind(rawListView.onScrollProperty());
+
+        vBox = new VBox(){
+            @Override
+            protected double computePrefWidth(double height) {
+                return showListView.prefWidth(height);
+            }
+
+            @Override
+            protected double computePrefHeight(double width) {
+                return showListView.prefHeight(width) + filterPane.prefHeight(width);
+            }
+        };
+        vBox.getStyleClass().add("filter-v-box");
         vBox.setStyle("-fx-background-color: white");
-        realListView.setManaged(true);
-        if (control.getStyleClass().contains("combo-box-ui")){
+        vBox.getChildren().addAll(filterPane, showListView);
+
+        this.filterComboBox = control;
+        if (filterComboBox.getStyleClass().contains("combo-box-ui")){
             filterField.getStyleClass().add("text-field-ui");
-            if (control.getStyleClass().contains("combo-box-ui-small")) {
+            if (filterComboBox.getStyleClass().contains("combo-box-ui-small")) {
                 filterField.getStyleClass().addAll("text-field-ui-tiny");
-            } else if (!control.getStyleClass().contains("combo-box-ui-big") && !control.getStyleClass().contains("combo-box-ui-tiny")){
+            } else if (!filterComboBox.getStyleClass().contains("combo-box-ui-big") && !filterComboBox.getStyleClass().contains("combo-box-ui-tiny")){
                 filterField.getStyleClass().addAll("text-field-ui-small");
             }
         }
-        rawItems = FXCollections.observableArrayList(realListView.getItems());
 
-        realListView.itemsProperty().addListener((observable, oldValue, newValue) -> {
-            rawItems.setAll(newValue);
-            newValue.addListener((ListChangeListener<? super T>) observable1 -> {
-                if (isOuter) {
-                    rawItems.setAll(realListView.getItems());
-                }
-            });
+        rawListView.itemsProperty().addListener((observable, oldValue, newValue) -> {
+            activeRawFilter();
+            addRawItemsListener(newValue);
         });
-        realListView.getItems().addListener((ListChangeListener<? super T>) observable -> {
-            if (isOuter) {
-                rawItems.setAll(realListView.getItems());
-            }
+        addRawItemsListener(rawListView.getItems());
+
+        rawListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            showListView.getSelectionModel().select(newValue);
         });
 
-        filterField.setOnFilterAction(text -> {
-            isOuter = false;
-            if (text == null || text.isBlank()){
-                System.out.println("raw");
-//                realListView.getItems().setAll(rawItems);
-                T selectedItem = realListView.getSelectionModel().getSelectedItem();
-                List<T> resullt = rawItems
-                        .stream()
-                        .filter(item -> !Objects.equals(selectedItem, item) && (getShowText(item).contains(text) || (control.isIgnoreCase() && getShowText(item).toLowerCase().contains(text.toLowerCase()))))
-                        .toList();
-                realListView.getItems().removeIf(item -> !Objects.equals(selectedItem, item));
-                realListView.getItems().addAll(resullt);
-            }else {
-                System.out.println("filter:" + text);
-                T selectedItem = realListView.getSelectionModel().getSelectedItem();
-                Set<T> resullt = rawItems
-                        .stream()
-                        .filter(item -> (getShowText(item).contains(text) || (control.isIgnoreCase() && getShowText(item).toLowerCase().contains(text.toLowerCase()))))
-                        .collect(Collectors.toSet());
-                if (resullt.isEmpty()) {
-                } else  if (resullt.contains(selectedItem)){
-                    List<T> list = resullt.stream().filter(item -> !Objects.equals(selectedItem, item)).toList();
-                    realListView.getItems().removeIf(item -> !Objects.equals(selectedItem, item));
-                    realListView.getItems().addAll(list);
-                }else {
-                    realListView.getItems().setAll(resullt);
+        showListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                if (!Objects.equals(newValue, rawListView.getSelectionModel().getSelectedItem())) {
+                    rawListView.getSelectionModel().select(newValue);
+                    filterComboBox.hide();
                 }
             }
-
-            isOuter = true;
         });
+
+        filterField.setOnFilterAction(text -> activeRawFilter());
+    }
+
+    private void addRawItemsListener(ObservableList<T> items){
+        items.addListener((ListChangeListener<? super T>) observable -> activeRawFilter());
+    }
+
+    private void activeRawFilter(){
+        T selectedItem = rawListView.getSelectionModel().getSelectedItem();
+        ObservableList<T> items = rawListView.getItems();
+        List<T> filter = filter(items);
+        showItems.setAll(filter);
+        showListView.getSelectionModel().select(selectedItem);
+    }
+
+    private List<T> filter(List<T> data){
+        String key = filterField.getText();
+        boolean ignoreCase = filterComboBox.isIgnoreCase();
+        if (key == null || key.isBlank()) {
+            return data.stream().toList();
+        }else {
+            String newKey = key.strip();
+            return data
+                    .stream()
+                    .filter(item -> getShowText(item).contains(newKey) || (ignoreCase && getShowText(item).toLowerCase().contains(newKey.toLowerCase())))
+                    .toList();
+        }
     }
 
     @NotNull
