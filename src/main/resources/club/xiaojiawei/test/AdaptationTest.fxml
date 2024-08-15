@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="club.xiaojiawei.test.AdaptationTest"
+           stylesheets="@AdaptationTest.css"
+           prefHeight="400.0" prefWidth="600.0">
+    <BorderPane fx:id="rootPane">
+        <top>
+            <VBox style="-fx-background-color: #ffdbe1">
+                <MenuBar>
+                    <Menu text="test">
+                        <MenuItem text="teset1"/>
+                        <MenuItem text="teset2"/>
+                        <MenuItem text="teset3"/>
+                    </Menu>
+                </MenuBar>
+                <HBox spacing="10" style="-fx-padding: 5">
+                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                    <ComboBox styleClass="combo-box-ui, combo-box-ui-normal" value="dfs">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="dfs"/>
+                                <String fx:value="df1"/>
+                                <String fx:value="dfs2"/>
+                                <String fx:value="dfs2"/>
+                                <String fx:value="dfs3"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
+            </VBox>
+        </top>
+
+        <center>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+                <VBox fx:id="centerVBox" style="-fx-background-color: yellow;-fx-padding: 5">
+                    <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS" prefHeight="${centerVBox.height}" style="-fx-background-color: #89caff;-fx-padding: 5">
+                        <StackPane>
+                            <VBox>
+                                <HBox spacing="10" style="-fx-padding: 5">
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <ComboBox styleClass="combo-box-ui, combo-box-ui-normal" value="dfs">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="dfs"/>
+                                                <String fx:value="df1"/>
+                                                <String fx:value="dfs2"/>
+                                                <String fx:value="dfs2"/>
+                                                <String fx:value="dfs3"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
+                                </HBox>
+                                <HBox spacing="50" style="-fx-border-color: black;-fx-padding: 5" VBox.vgrow="ALWAYS">
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                </HBox>
+                            </VBox>
+                        </StackPane>
+                        <StackPane>
+                            <VBox>
+                                <HBox spacing="10" style="-fx-padding: 5">
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <Button text="test1" styleClass="btn-ui, btn-ui-normal"/>
+                                    <ComboBox styleClass="combo-box-ui, combo-box-ui-normal" value="dfs">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value="dfs"/>
+                                                <String fx:value="df1"/>
+                                                <String fx:value="dfs2"/>
+                                                <String fx:value="dfs2"/>
+                                                <String fx:value="dfs3"/>
+                                            </FXCollections>
+                                        </items>
+                                    </ComboBox>
+                                </HBox>
+                            </VBox>
+                        </StackPane>
+                    </SplitPane>
+                </VBox>
+            </ScrollPane>
+        </center>
+
+        <right>
+            <VBox style="-fx-background-color: #e5ffe5" minWidth="250">
+                <StackPane>
+                    <ImageView>
+                        <Image url="@../demo/demo.png"/>
+                    </ImageView>
+                </StackPane>
+                <TableView styleClass="table-view-ui">
+                    <columns>
+                        <TableColumn text="id"/>
+                        <TableColumn text="name"/>
+                    </columns>
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="dfs"/>
+                            <String fx:value="df1"/>
+                            <String fx:value="dfs2"/>
+                            <String fx:value="dfs2"/>
+                            <String fx:value="dfs3"/>
+                        </FXCollections>
+                    </items>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+        </right>
+    </BorderPane>
+</StackPane>
