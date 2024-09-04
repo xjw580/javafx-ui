@@ -42,3 +42,9 @@
 * {
     -fx-accent: main-color;
 }
+.split-pane *.split-pane-divider {
+    -fx-padding: 1;
+    /*-fx-background-color: transparent;*/
+    /*-fx-border-color: gray;*/
+    /*-fx-border-width: 0 0 1 0;*/
+}

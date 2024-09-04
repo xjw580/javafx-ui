@@ -75,7 +75,7 @@
         </sizeShowChildren>
         <colorShowChildren>
             <HBox styleClass="alignment-box">
-                <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal" value="杀死一只知更鸟">
+                <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal" value="杀死一只知更鸟" disable="true">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="太空漫游2001"/>
@@ -261,7 +261,7 @@
                         </CopyLabel>
                     </HBox>
                     <HBox styleClass="alignment-box">
-                        <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal, combo-box-ui-small" value="杀死一只知更鸟" editable="true">
+                        <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-normal, combo-box-ui-small" value="杀死一只知更鸟" editable="true" disable="true">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="太空漫游2001"/>

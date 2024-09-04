@@ -8,8 +8,14 @@
     -fx-effect: default-effect;
 }
 .combo-box-ui:disabled {
-    -fx-effect: none!important;
-    -fx-opacity: 0.7;
+    /*-fx-effect: none!important;*/
+    -fx-opacity: 1;
+}
+.combo-box-ui:disabled .list-cell {
+    -fx-text-fill: black;
+}
+.combo-box-ui:disabled > .arrow-button > .arrow {
+    -fx-background-color: transparent!important;
 }
 .combo-box-ui:hover {
     -fx-effect: default-hover-effect;
