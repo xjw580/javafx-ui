@@ -4,6 +4,12 @@
     -fx-background-radius: 5;
     -fx-background-insets: 0 2 5 2;
     -fx-background-color: transparent;
+
+}
+.tab-pane-ui .tab:disabled *, .tab-pane-ui .tab:disabled{
+    -fx-text-fill: transparent!important;
+    -fx-fill: transparent!important;
+    -fx-background-color: transparent!important;
 }
 .tab-pane-ui > .tab-header-area{
     -fx-padding: 2 2 -2 2;
@@ -52,6 +58,14 @@
 .tab-down-button .context-menu .menu-item:hover{
     -fx-background-color: rgb(0, 0, 0, 0.1);
 }
+
+.tab-down-button .context-menu .menu-item:disabled{
+    -fx-background-color: transparent!important;
+}
+.tab-down-button .context-menu .menu-item:disabled .label{
+    -fx-text-fill: transparent!important;
+}
+
 .tab-down-button .context-menu .menu-item .label{
     -fx-text-fill: black;
 }
