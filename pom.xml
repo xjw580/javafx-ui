@@ -20,7 +20,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javafx-version>17.0.2</javafx-version>
-        <lombok-version>1.18.30</lombok-version>
+        <lombok-version>1.18.34</lombok-version>
     </properties>
 
     <distributionManagement>
