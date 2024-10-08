@@ -1,9 +1,9 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.component.IconTextField;
+import club.xiaojiawei.skin.IconTextFieldSkin;
 import club.xiaojiawei.skin.NumberFieldSkin;
 import javafx.application.Platform;
-import javafx.scene.control.Skin;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -24,7 +24,7 @@ import java.util.Objects;
 @Getter
 @Slf4j
 @SuppressWarnings("all")
-public class NumberField extends TextField {
+public class NumberField extends IconTextField {
 
     /* *************************************************************************
      *                                                                         *
@@ -125,7 +125,7 @@ public class NumberField extends TextField {
     }
 
     @Override
-    protected Skin<?> createDefaultSkin() {
+    protected IconTextFieldSkin createDefaultSkin() {
         return new NumberFieldSkin(this);
     }
 

@@ -1,8 +1,6 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.enums.BaseTransitionEnum;
-import javafx.animation.FadeTransition;
-import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
 import javafx.beans.property.DoubleProperty;
@@ -12,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
@@ -52,8 +49,12 @@ public class ProgressModal extends HBox {
                 if (parent instanceof Region region) {
                     this.prefWidthProperty().bind(region.widthProperty());
                     this.prefHeightProperty().bind(region.heightProperty());
-                    break;
+                    return;
                 }
+            }
+            if (this.getScene() != null && this.getScene().getWindow() != null) {
+                this.prefWidthProperty().bind(this.getScene().widthProperty());
+                this.prefHeightProperty().bind(this.getScene().heightProperty());
             }
         }else {
             this.prefWidthProperty().bind(parentRegion.widthProperty());

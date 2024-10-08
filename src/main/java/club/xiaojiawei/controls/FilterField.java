@@ -1,7 +1,9 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.component.IconTextField;
 import club.xiaojiawei.func.FilterAction;
 import club.xiaojiawei.skin.FilterFieldSkin;
+import club.xiaojiawei.skin.IconTextFieldSkin;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -15,7 +17,7 @@ import javafx.scene.input.KeyCode;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/2/22 15:55
  */
-public class FilterField extends TextField {
+public class FilterField extends IconTextField {
 
     /* *************************************************************************
      *                                                                         *
@@ -79,7 +81,7 @@ public class FilterField extends TextField {
     }
 
     @Override
-    protected Skin<?> createDefaultSkin() {
+    protected IconTextFieldSkin createDefaultSkin() {
         return new FilterFieldSkin(this);
     }
 }

@@ -1,5 +1,7 @@
 package club.xiaojiawei.skin;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -25,13 +27,27 @@ public class IconTextFieldSkin extends TextFieldSkin {
 
     private Insets initInsets = null;
 
+    private final BooleanProperty hideIcon = new SimpleBooleanProperty(false);
+
+    public boolean isHideIcon() {
+        return hideIcon.get();
+    }
+
+    public void setHideIcon(boolean hideIcon) {
+        this.hideIcon.set(hideIcon);
+    }
+
+    public BooleanProperty hideIconProperty() {
+        return hideIcon;
+    }
+
     public IconTextFieldSkin(TextField control) {
         this(control, true);
     }
     public IconTextFieldSkin(TextField control, boolean placeholder) {
         super(control);
 
-        nodePane.setId("btn-pane");
+        nodePane.setId("icon-pane");
         nodePane.setStyle("-fx-spacing: 5;-fx-alignment: CENTER");
 
         Group group = new Group(nodePane);
@@ -46,9 +62,24 @@ public class IconTextFieldSkin extends TextFieldSkin {
                 initInsets = control.getPadding();
             }
 
-            control.setStyle(String.format("-fx-padding: %s %s %s %s!important;", initInsets.getTop(), initInsets.getRight() + (placeholder? t1.doubleValue() : 0) , initInsets.getBottom(), initInsets.getLeft()));
+            if (!hideIcon.get()) {
+                control.setStyle(String.format("-fx-padding: %s %s %s %s!important;", initInsets.getTop(), initInsets.getRight() + (placeholder? t1.doubleValue() : 0) , initInsets.getBottom(), initInsets.getLeft()));
+            }
             group.setTranslateX(placeholder? t1.doubleValue() : 0);
         });
+
+        hideIcon.addListener((observableValue, aBoolean, t1) -> {
+            if (t1) {
+                group.setVisible(false);
+                group.setManaged(false);
+                control.setStyle("");
+            }else {
+                group.setVisible(true);
+                group.setManaged(true);
+                control.setStyle(String.format("-fx-padding: %s %s %s %s!important;", initInsets.getTop(), initInsets.getRight() + (placeholder? nodePane.getWidth() : 0) , initInsets.getBottom(), initInsets.getLeft()));
+            }
+        });
+
         getChildren().add(hBox);
     }
 
