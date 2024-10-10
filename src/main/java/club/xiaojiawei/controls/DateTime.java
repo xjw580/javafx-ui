@@ -147,6 +147,18 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         return rightAngleBackground;
     }
 
+    public boolean getShowControls() {
+        return dateControls.getShowControls();
+    }
+
+    public BooleanProperty showControlsProperty() {
+        return dateControls.showControlsProperty();
+    }
+
+    public void setShowControls(boolean showControls) {
+        this.dateControls.setShowControls(showControls);
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 构造方法                                                                 *

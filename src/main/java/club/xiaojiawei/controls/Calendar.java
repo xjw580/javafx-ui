@@ -5,10 +5,7 @@ import club.xiaojiawei.utils.ScrollUtil;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -68,6 +65,10 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      * 日期拦截器，点击日期时拦截是否应用
      */
     private final ObjectProperty<Predicate<LocalDate>> dateInterceptor = new SimpleObjectProperty<>();
+    /**
+     * 显示功能控件：例如今天，清除按钮
+     */
+    private final BooleanProperty showControls = new SimpleBooleanProperty(true);
 
     public String getDate() {
         return getLocalDate() == null? "" : DATE_FORMATTER.format(getLocalDate());
@@ -124,6 +125,18 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
 
     public void setOnTodayEventHandler(EventHandler<MouseEvent> onTodayEventHandler) {
         this.onTodayEventHandler.set(onTodayEventHandler);
+    }
+
+    public boolean getShowControls() {
+        return showControls.get();
+    }
+
+    public BooleanProperty showControlsProperty() {
+        return showControls;
+    }
+
+    public void setShowControls(boolean showControls) {
+        this.showControls.set(showControls);
     }
 
     /* *************************************************************************
@@ -195,6 +208,9 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
             }
         });
         clear.setOnMouseClicked(mouseEvent -> setLocalDate(null));
+        showControlsProperty().addListener((observableValue, aBoolean, t1) -> {
+            bottomMsg.setVisible(t1);
+        });
         initDateSelectorPopup();
         addDatePropertyListener();
         LocalDate now = LocalDate.now();
@@ -213,7 +229,9 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
         popup.setOnHidden(event -> {
             monthPane.setVisible(true);
             icoBox.setVisible(true);
-            bottomMsg.setVisible(true);
+            if (showControls.get()) {
+                bottomMsg.setVisible(true);
+            }
         });
         dateMsg.setOnMouseClicked(event -> {
             Bounds bounds = this.localToScreen(this.getBoundsInLocal());

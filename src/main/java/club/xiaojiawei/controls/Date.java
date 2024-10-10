@@ -112,6 +112,18 @@ public class Date extends AbstractDateTimeField<LocalDate> {
         return rightAngleBackground;
     }
 
+    public boolean getShowControls() {
+        return calendar.getShowControls();
+    }
+
+    public BooleanProperty showControlsProperty() {
+        return calendar.showControlsProperty();
+    }
+
+    public void setShowControls(boolean showControls) {
+        this.calendar.setShowControls(showControls);
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 构造方法                                                                 *
@@ -174,6 +186,7 @@ public class Date extends AbstractDateTimeField<LocalDate> {
     protected Popup createPopup() {
         Popup popup = new Popup();
         calendar = new Calendar();
+//        calendar.showControlsProperty().bindBidirectional(showControls);
         date = calendar.date;
         date.addListener((observable, oldValue, newValue) -> updateCompleteDateTextField(newValue));
         popup.getContent().add(calendar);
