@@ -263,7 +263,7 @@ public class Modal implements MarkLogging {
         this.stage.initOwner(baseParent.getScene().getWindow());
         initScene();
         initSize();
-        addSizeListener();
+//        addSizeListener();
         addClosingListener();
     }
 
