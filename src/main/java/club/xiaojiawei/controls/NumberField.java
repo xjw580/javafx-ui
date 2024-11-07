@@ -74,11 +74,17 @@ public class NumberField extends IconTextField {
                     && text.matches("^-?\\d*(\\.\\d{0," + decimalCount + "})?$")
                     && isInTheInterval(text)
             ){
+                if (Objects.equals(text, "-")){
+                    change.setText("0");
+                }
                 return change;
             }else if (decimalCount <= 0
                     && text.matches("^-?\\d*$")
                     && isInTheInterval(text)
             ){
+                if (Objects.equals(text, "-")){
+                    change.setText("0");
+                }
                 return change;
             }
             return null;
