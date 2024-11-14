@@ -7,10 +7,12 @@ import javafx.beans.property.StringProperty;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
+import java.util.Objects;
 
 /**
  * 具有复制功能的Label，点击此组件将复制到剪切板
@@ -83,6 +85,7 @@ public class CopyLabel extends Label {
 
     public EventHandler<MouseEvent> createEventHandler() {
         return event -> {
+            if (!Objects.equals(event.getButton(), MouseButton.PRIMARY))return;
             if (getCopyText() == null || getCopyText().isEmpty()) {
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(getText()), null);
             }else {
