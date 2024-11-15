@@ -23,7 +23,7 @@
                 <Label styleClass="bg-ui" text="me"><tooltip><Tooltip text="bg-ui"/></tooltip></Label>
             </HBox>
             <Label text="圆角类：" styleClass="title-three" contentDisplay="RIGHT">
-                <graphic><CopyLabel notificationManager="${notificationManager}" text="radius-uii"/></graphic>
+                <graphic><CopyLabel notificationManager="${notificationManager}" text="radius-ui"/></graphic>
             </Label>
             <HBox styleClass="hv-box" alignment="CENTER_LEFT">
                 <Label styleClass="bg-ui, radius-ui" text="me"><tooltip><Tooltip text="radius-ui"/></tooltip></Label>

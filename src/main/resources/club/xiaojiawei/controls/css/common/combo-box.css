@@ -51,6 +51,12 @@
     -fx-background-radius: 0 0 5 5;
     -fx-effect: dropshadow( three-pass-box , hover-color , 10, 0 , 0 , 0 );
 }
+.combo-box-ui .combo-box-popup .grid-pane {
+     -fx-padding: 2;
+     -fx-background-color: white, white;
+     -fx-background-radius: 0 0 5 5;
+     -fx-effect: dropshadow( three-pass-box , hover-color , 10, 0 , 0 , 0 );
+ }
 .combo-box-ui .combo-box-popup .list-view .list-cell {
     -fx-alignment: CENTER;
     -fx-background-color: white;

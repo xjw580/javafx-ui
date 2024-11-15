@@ -25,9 +25,9 @@
     default-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
 }
 .bg-hover-ui:hover{
-    -fx-background-color: effect-color!important;
+    -fx-background-color: effect-color;
 }
-.bg-ui{
+.bg-ui, .bg-ui *{
     -fx-background-color: main-color!important;
     -fx-text-fill: white!important;
 }
