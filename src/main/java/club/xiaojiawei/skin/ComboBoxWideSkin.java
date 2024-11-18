@@ -46,6 +46,8 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
         outerComboBox = comboBoxBase;
     }
 
+    private double prevWidth;
+
     @Override
     public Node getDisplayNode() {
         if (!displayLabel.getStyleClass().contains("list-cell")) {
@@ -63,7 +65,6 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
                         child.getStyleClass().remove("bg-ui");
                     }
                 }
-                locatePopup();
             });
             displayLabel.setText(outerComboBox.getConverter().toString(outerComboBox.getValue()));
         }
@@ -73,6 +74,7 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
     private GridPane getPopupContent() {
         if (popupNode == null) {
             popupNode = new GridPane();
+            popupNode.setStyle("-fx-background-color: white;-fx-effect: default-effect");
             popupNode.getStyleClass().add("grid-pane");
             outerComboBox.getItems().addListener(itemChangeListener);
             outerComboBox.itemsProperty().addListener((observable, oldValue, newValue) -> {
@@ -96,7 +98,7 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
         int maxCol = outerComboBox.getMaxColumCount(), col = 0, row = 0;
         int l = maxCol;
         for (int i = 1; i < l; i++) {
-            if ((double)size / i < 5){
+            if (Math.ceil((double) size / i) < 6) {
                 maxCol = i;
                 break;
             }
@@ -108,6 +110,7 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
         }
         boolean isFind = false;
         StringConverter<T> converter = outerComboBox.getConverter();
+        int maxRow = (int)Math.ceil(items.size() / (double) maxCol);
         for (T item : items) {
             if (item == null) continue;
             Label label = new Label(converter.toString(item));
@@ -115,26 +118,40 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
             stackPane.setUserData(item);
             stackPane.getStyleClass().addAll("bg-hover-ui", "radius-ui");
             stackPane.setPrefHeight(displayLabel.getHeight());
-            if (maxCol == 1){
-                stackPane.setMinWidth(Math.max(outerComboBox.getWidth(), displayLabel.getWidth()));
+            if (maxCol == 1) {
+                stackPane.setMinWidth(prevWidth = calcRealWidth());
             }
             double v = displayLabel.getHeight() / 3D;
             stackPane.setPadding(new Insets(0, v, 0, v));
             stackPane.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     outerComboBox.getSelectionModel().select(item);
+                    hide();
                 }
             });
             if (!isFind && Objects.equals(value, item)) {
                 stackPane.getStyleClass().add("bg-ui");
                 isFind = true;
             }
-            gridPane.add(stackPane, col++, row);
-            if (col >= maxCol) {
-                col = 0;
-                row++;
+//            gridPane.add(stackPane, col++, row);
+//            if (col >= maxCol) {
+//                col = 0;
+//                row++;
+//            }
+            gridPane.add(stackPane, col, row++);
+            if (row >= maxRow) {
+                row = 0;
+                col++;
             }
         }
+    }
+
+    private double calcRealWidth() {
+        double offsetX = 0;
+        if (outerComboBox.getEffect() instanceof DropShadow shadow) {
+            offsetX = shadow.getRadius() - shadow.getOffsetX();
+        }
+        return outerComboBox.getWidth() - offsetX;
     }
 
     private PopupControl getPopup() {
@@ -174,23 +191,27 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
 
     private void locatePopup() {
         if (!outerComboBox.isShowing()) return;
-        Bounds bounds = displayLabel.localToScreen(outerComboBox.getBoundsInLocal());
+        if (calcRealWidth() != prevWidth) {
+            draw();
+        }
+        Bounds bounds = displayLabel.localToScreen(displayLabel.getBoundsInLocal());
         PopupControl popupControl = getPopup();
         double offsetX = 0, offsetY = 0;
         double popupOffsetX = 0, popupOffsetY = 0;
-        if (outerComboBox.getEffect() instanceof DropShadow shadow) {
-            offsetX = shadow.getOffsetX() - shadow.getRadius();
-            offsetY = shadow.getOffsetY() + shadow.getRadius();
-        }
+//        if (outerComboBox.getEffect() instanceof DropShadow shadow) {
+//            offsetX = shadow.getOffsetX() - shadow.getRadius();
+//            offsetY = shadow.getOffsetY() + shadow.getRadius();
+//        }
         if (getPopupContent().getEffect() instanceof DropShadow shadow) {
             popupOffsetX = -shadow.getOffsetX() + shadow.getRadius();
             popupOffsetY = -shadow.getOffsetY() + shadow.getRadius();
         }
         popupControl.setX(bounds.getMinX() - offsetX - popupOffsetX);
-        popupControl.setY(bounds.getMaxY() - offsetY - popupOffsetY + 2);
+        popupControl.setY(bounds.getMaxY() - offsetY - popupOffsetY + 1);
     }
 
     private void showPopup() {
+        if (getPopupContent().getChildren().isEmpty()) return;
         locatePopup();
         getPopup().show(outerComboBox.getScene().getWindow());
     }
