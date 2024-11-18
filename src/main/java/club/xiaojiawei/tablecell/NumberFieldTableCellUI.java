@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -15,6 +16,13 @@ import java.util.concurrent.atomic.AtomicReference;
 public class NumberFieldTableCellUI<S, T> extends TextFieldTableCell<S, T> {
 
     private TextField node;
+
+    public NumberFieldTableCellUI() {
+    }
+
+    public NumberFieldTableCellUI(StringConverter<T> stringConverter) {
+        super(stringConverter);
+    }
 
     {
         AtomicReference<ChangeListener<Node>> changeListenerAtomicReference = new AtomicReference<>();
