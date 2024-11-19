@@ -7,6 +7,7 @@ import javafx.css.Styleable;
 import javafx.geometry.Bounds;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PopupControl;
@@ -66,6 +67,9 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
                     }
                 }
             });
+            outerComboBox.nodeOrientationProperty().addListener((observableValue, nodeOrientation, t1) -> {
+                draw();
+            });
             displayLabel.setText(outerComboBox.getConverter().toString(outerComboBox.getValue()));
         }
         return displayLabel;
@@ -110,11 +114,14 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
         }
         boolean isFind = false;
         StringConverter<T> converter = outerComboBox.getConverter();
-        int maxRow = (int)Math.ceil(items.size() / (double) maxCol);
+        int maxRow = (int) Math.ceil(items.size() / (double) maxCol);
         for (T item : items) {
             if (item == null) continue;
             Label label = new Label(converter.toString(item));
             StackPane stackPane = new StackPane(label);
+            if (outerComboBox.isEnlargeEnabled()) {
+                stackPane.setStyle("-fx-padding: 10 15 10 15");
+            }
             stackPane.setUserData(item);
             stackPane.getStyleClass().addAll("bg-hover-ui", "radius-ui");
             stackPane.setPrefHeight(displayLabel.getHeight());
@@ -133,15 +140,18 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
                 stackPane.getStyleClass().add("bg-ui");
                 isFind = true;
             }
-//            gridPane.add(stackPane, col++, row);
-//            if (col >= maxCol) {
-//                col = 0;
-//                row++;
-//            }
-            gridPane.add(stackPane, col, row++);
-            if (row >= maxRow) {
-                row = 0;
-                col++;
+            if (Objects.equals(outerComboBox.getOrientation(), Orientation.HORIZONTAL)) {
+                gridPane.add(stackPane, col++, row);
+                if (col >= maxCol) {
+                    col = 0;
+                    row++;
+                }
+            } else {
+                gridPane.add(stackPane, col, row++);
+                if (row >= maxRow) {
+                    row = 0;
+                    col++;
+                }
             }
         }
     }

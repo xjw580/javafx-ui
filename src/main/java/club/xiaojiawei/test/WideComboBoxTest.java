@@ -34,7 +34,10 @@ public class WideComboBoxTest extends Application {
                 "1",
                 "2",
                 "3",
-                "4"
+                "4",
+                "5",
+                "6",
+                "7"
         );
         Scene scene = new Scene(new HBox(wideComboBox, new ComboBox<>(){{setValue("hh");}}){{setAlignment(Pos.CENTER);setSpacing(50);}}, 400, 500);
         JavaFXUI.addjavafxUIStylesheet(scene);

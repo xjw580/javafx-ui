@@ -1,12 +1,10 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.skin.ComboBoxWideSkin;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Orientation;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Skin;
 import javafx.scene.input.MouseEvent;
@@ -18,12 +16,16 @@ import javafx.scene.input.ScrollEvent;
  */
 public class WideComboBox<T> extends ComboBox<T> {
 
-    private final IntegerProperty maxColumCount = new SimpleIntegerProperty(this, "maxColumCount", 3);
+    private final IntegerProperty maxColumCount = new SimpleIntegerProperty(this, "maxColumCount", 4);
 
     /**
      * 鼠标悬浮在此控件上时滚动鼠标以改变值
      */
     private final BooleanProperty scrollValueEnabled = new SimpleBooleanProperty(this, "scrollEnabled", true);
+
+    private final ObjectProperty<Orientation> orientation = new SimpleObjectProperty<>(this, "orientation", Orientation.HORIZONTAL);
+
+    private final BooleanProperty enlargeEnabled = new SimpleBooleanProperty(this, "enlargeEnabled", true);
 
     public int getMaxColumCount() {
         return maxColumCount.get();
@@ -49,6 +51,30 @@ public class WideComboBox<T> extends ComboBox<T> {
         this.scrollValueEnabled.set(scrollValueEnabled);
     }
 
+    public Orientation getOrientation() {
+        return orientation.get();
+    }
+
+    public ObjectProperty<Orientation> orientationProperty() {
+        return orientation;
+    }
+
+    public void setOrientation(Orientation orientation) {
+        this.orientation.set(orientation);
+    }
+
+    public boolean isEnlargeEnabled() {
+        return enlargeEnabled.get();
+    }
+
+    public BooleanProperty enlargeEnabledProperty() {
+        return enlargeEnabled;
+    }
+
+    public void setEnlargeEnabled(boolean enlargeEnabled) {
+        this.enlargeEnabled.set(enlargeEnabled);
+    }
+
     public WideComboBox() {
         this(FXCollections.observableArrayList());
     }
@@ -59,12 +85,12 @@ public class WideComboBox<T> extends ComboBox<T> {
             show();
         });
         addEventFilter(ScrollEvent.SCROLL, event -> {
-            if (getScrollValueEnabled()){
+            if (getScrollValueEnabled()) {
                 int index = getSelectionModel().getSelectedIndex();
-                if (event.getDeltaY() > 0){
+                if (event.getDeltaY() > 0) {
                     index++;
-                }else if (event.getDeltaY() < 0){
-                    if (index > 0){
+                } else if (event.getDeltaY() < 0) {
+                    if (index > 0) {
                         index--;
                     }
                 }
