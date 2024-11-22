@@ -36,6 +36,10 @@ public class TableFilterManagerGroup<S, T> {
      */
     private List<S> rawItems;
 
+    public List<S> getRawItems() {
+        return new ArrayList<>(rawItems);
+    }
+
     /**
      * 自动注册表格列的过滤器，为true时如果在fxml中构造，需要放到column之后
      */
