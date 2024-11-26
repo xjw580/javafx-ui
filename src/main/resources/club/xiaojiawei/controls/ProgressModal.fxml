@@ -15,9 +15,9 @@
         <fx:define>
             <Double fx:id="scale" fx:value="4"/>
         </fx:define>
-        <StackPane  prefWidth="42" prefHeight="42">
+        <StackPane fx:id="progressPane">
 <!--            <LoadingIco scaleY="${scale}" scaleX="${scale}" color="main-color"/>-->
-            <ProgressIndicator styleClass="progress-indicator-ui"/>
+            <ProgressIndicator minWidth="${progressPane.width}" minHeight="${progressPane.height}" styleClass="progress-indicator-ui"/>
             <Label fx:id="progressLabel" style="-fx-text-fill: white;-fx-effect: default-common-effect"/>
         </StackPane>
         <Text fx:id="tip" style="-fx-fill: white;-fx-font-size: 14;-fx-font-weight:bold;-fx-effect: default-common-effect"/>

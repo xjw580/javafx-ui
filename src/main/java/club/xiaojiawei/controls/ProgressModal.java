@@ -4,7 +4,9 @@ import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import lombok.Getter;
@@ -32,12 +35,17 @@ public class ProgressModal extends HBox {
      *                                                                         *
      **************************************************************************/
 
+    private final IntegerProperty decimalCount = new SimpleIntegerProperty(1);
+
+    private final DoubleProperty size = new SimpleDoubleProperty(50);
+
     @Getter
     private Region parentRegion;
 
     @Getter
     @Setter
     private int transitionDuration = 200;
+
 
     public void setParentRegion(Region parentRegion) {
         this.parentRegion = parentRegion;
@@ -56,19 +64,44 @@ public class ProgressModal extends HBox {
                 this.prefWidthProperty().bind(this.getScene().widthProperty());
                 this.prefHeightProperty().bind(this.getScene().heightProperty());
             }
-        }else {
+        } else {
             this.prefWidthProperty().bind(parentRegion.widthProperty());
             this.prefHeightProperty().bind(parentRegion.heightProperty());
         }
     }
 
-    public String getTip(){
+    public String getTip() {
         return tip.getText();
     }
 
-    public void setTip(String tip){
+    public void setTip(String tip) {
         this.tip.setText(tip);
     }
+
+    public int getDecimalCount() {
+        return decimalCount.get();
+    }
+
+    public IntegerProperty decimalCountProperty() {
+        return decimalCount;
+    }
+
+    public void setDecimalCount(int decimalCount) {
+        this.decimalCount.set(decimalCount);
+    }
+
+    public double getSize() {
+        return size.get();
+    }
+
+    public DoubleProperty sizeProperty() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size.set(size);
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 构造方法                                                                 *
@@ -83,12 +116,14 @@ public class ProgressModal extends HBox {
     private Label progressLabel;
     @FXML
     private Text tip;
+    @FXML
+    private StackPane progressPane;
 
     private DoubleProperty progress;
 
     private ChangeListener<Number> progressListener;
 
-    public ProgressModal(@NamedArg("parent") Region parentRegion, @NamedArg("tip") String tip){
+    public ProgressModal(@NamedArg("parent") Region parentRegion, @NamedArg("tip") String tip) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);
@@ -109,19 +144,21 @@ public class ProgressModal extends HBox {
                 setParentRegion(null);
             }
         });
+        progressPane.prefHeightProperty().bind(size);
+        progressPane.prefWidthProperty().bind(size);
     }
 
     private void changeProgress(Number progress) {
         if (Platform.isFxApplicationThread()) {
-            int v = (int) (progress.doubleValue() * 100);
+            double v = (progress.doubleValue() * 100);
             v = Math.min(v, 100);
             if (v == 100) {
                 this.setVisible(false);
                 progressLabel.setText("0%");
-            }else {
-                progressLabel.setText(v + "%");
+            } else {
+                progressLabel.setText(String.format("%." + decimalCount.get() + "f", v) + "%");
             }
-        }else {
+        } else {
             Platform.runLater(() -> changeProgress(progress));
         }
     }
@@ -130,7 +167,7 @@ public class ProgressModal extends HBox {
      * 显示加载模态，隐藏进度
      * @return 进度控制器
      */
-    public DoubleProperty show(){
+    public DoubleProperty show() {
         return show(tip.getText(), -1D);
     }
 
@@ -139,7 +176,7 @@ public class ProgressModal extends HBox {
      * @param tip 提示信息
      * @return 进度控制器
      */
-    public DoubleProperty show(String tip){
+    public DoubleProperty show(String tip) {
         return show(tip, -1D);
     }
 
@@ -149,7 +186,7 @@ public class ProgressModal extends HBox {
      * @param progress [0, 1] 小于0时隐藏进度
      * @return 进度控制器
      */
-    public DoubleProperty show(String tip, double progress){
+    public DoubleProperty show(String tip, double progress) {
         if (this.progress != null) {
             this.progress.removeListener(progressListener);
         }
@@ -174,7 +211,7 @@ public class ProgressModal extends HBox {
      * 显示加载模态
      * @return 进度控制器
      */
-    public DoubleProperty showByZero(){
+    public DoubleProperty showByZero() {
         return show(tip.getText(), 0D);
     }
 
@@ -183,7 +220,7 @@ public class ProgressModal extends HBox {
      * @param tip
      * @return 进度控制器
      */
-    public DoubleProperty showByZero(String tip){
+    public DoubleProperty showByZero(String tip) {
         return show(tip, 0D);
     }
 
@@ -191,7 +228,7 @@ public class ProgressModal extends HBox {
      * 隐藏加载模态
      * @param progress 进度控制器
      */
-    public void hide(DoubleProperty progress){
+    public void hide(DoubleProperty progress) {
         if (progress == null) {
             return;
         }
