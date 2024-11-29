@@ -11,7 +11,7 @@
     <VBox styleClass="hv-box">
         <Label text="不使用样式" styleClass="title-two"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">
-            <NumberField/>
+            <NumberField minValue="0"/>
         </VBox>
         <Label text="使用样式（通用TextField的样式）" styleClass="title-two"/>
         <Label text="基类：text-field-ui" styleClass="title-three"/>

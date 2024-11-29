@@ -74,16 +74,16 @@ public class NumberField extends IconTextField {
                     && text.matches("^-?\\d*(\\.\\d{0," + decimalCount + "})?$")
                     && isInTheInterval(text)
             ){
-                if (Objects.equals(text, "-")){
-                    change.setText("0");
+                if (text.matches("-0+")){
+                    return null;
                 }
                 return change;
             }else if (decimalCount <= 0
                     && text.matches("^-?\\d*$")
                     && isInTheInterval(text)
             ){
-                if (Objects.equals(text, "-")){
-                    change.setText("0");
+                if (text.matches("-0+")){
+                    return null;
                 }
                 return change;
             }
@@ -111,6 +111,9 @@ public class NumberField extends IconTextField {
 
     private boolean isInTheInterval(String text){
         if (Objects.equals(text, "-")){
+            if (minValue.compareTo(new BigDecimal("0")) >= 0){
+                return false;
+            }
             text = "0";
         }
         BigDecimal temp;
