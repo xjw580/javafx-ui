@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.controls.ico.LoadingIco;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -14,6 +15,7 @@ import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +35,11 @@ public class Switch extends StackPane{
      * 属性                                                                    *
      *                                                                         *
      **************************************************************************/
+
+    /**
+     * 加载中
+     */
+    private final BooleanProperty loading = new SimpleBooleanProperty(false);
     /**
      * 默认动画时间为200ms
      */
@@ -53,6 +60,18 @@ public class Switch extends StackPane{
      */
     @Getter
     private double size = 20D;
+
+    public boolean isLoading() {
+        return loading.get();
+    }
+
+    public BooleanProperty loadingProperty() {
+        return loading;
+    }
+
+    public void setLoading(boolean loading) {
+        this.loading.set(loading);
+    }
 
     public void setTransitionDuration(Duration transitionDuration) {
 //        动画效果为NONE时动画持续时间自然为0
@@ -125,6 +144,17 @@ public class Switch extends StackPane{
             throw new RuntimeException(e);
         }
         this.setOnMouseClicked(this::onMouseClicked);
+        this.disabledProperty().addListener((observableValue, aBoolean, t1) -> {
+            if (t1) {
+                contentPane.setOpacity(0.4);
+            }else {
+                contentPane.setOpacity(1);
+            }
+        });
+        loading.addListener((observableValue, aBoolean, t1) -> {
+            loadingIco.setVisible(t1);
+            setDisable(t1);
+        });
     }
 
     @FXML
@@ -135,6 +165,10 @@ public class Switch extends StackPane{
     private Rectangle switchClipRectangle;
     @FXML
     private Rectangle bgRectangle;
+    @FXML
+    private LoadingIco loadingIco;
+    @FXML
+    private StackPane contentPane;
 
     /* *************************************************************************
      *                                                                         *

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.FilterField?>
+<?import club.xiaojiawei.controls.ico.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.Double?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         prefHeight="500.0" prefWidth="300.0">
+    <VBox style="-fx-padding: 10;-fx-spacing: 6">
+        <fx:define>
+            <Double fx:id="icoScale" fx:value="0.85"/>
+        </fx:define>
+        <HBox style="-fx-padding: 0 0 20 0;" alignment="CENTER_LEFT">
+            <Label fx:id="title">
+                <graphic>
+                    <ImageView fx:id="icon"/>
+                </graphic>
+            </Label>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Label>
+                <graphic>
+                    <CloseIco scaleX="${icoScale}" scaleY="${icoScale}"/>
+                </graphic>
+            </Label>
+        </HBox>
+        <HBox spacing="10">
+            <Label onMouseClicked="#homeDir">
+                <graphic>
+                    <HomeIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="主目录"/>
+                </tooltip>
+            </Label>
+            <Label onMouseClicked="#desktopDir">
+                <graphic>
+                    <DesktopIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="桌面目录"/>
+                </tooltip>
+            </Label>
+            <Separator orientation="VERTICAL"/>
+            <Label onMouseClicked="#newDir">
+                <graphic>
+                    <NewDirIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="新建目录"/>
+                </tooltip>
+            </Label>
+            <Label onMouseClicked="#delFile">
+                <graphic>
+                    <CloseIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="删除"/>
+                </tooltip>
+            </Label>
+            <Separator orientation="VERTICAL"/>
+            <Label onMouseClicked="#changeHiddenFileStatus">
+                <graphic>
+                    <StackPane>
+                        <InvisibleIco fx:id="hideHiddenFile" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                        <VisibleIco fx:id="showHiddenFile" scaleX="${icoScale}" scaleY="${icoScale}" color="gray" visible="false"/>
+                    </StackPane>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="显示隐藏文件和目录"/>
+                </tooltip>
+            </Label>
+        </HBox>
+        <FilterField fx:id="url" styleClass="text-field-ui, text-field-ui-small"/>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <TreeView fx:id="fileTreeView"/>
+        </ScrollPane>
+        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 6 10 5 10;-fx-spacing: 20">
+            <Button text="确认" styleClass="btn-ui, btn-ui-success" onAction="#ok"/>
+            <Button text="取消" styleClass="btn-ui" onAction="#cancel"/>
+        </HBox>
+    </VBox>
+    <NotificationManager fx:id="notificationManager"/>
+</fx:root>

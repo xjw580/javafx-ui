@@ -9,7 +9,6 @@ module club.xiaojiawei.javafx_ui {
             club.xiaojiawei.controls.TableDateFilterManager;
 
     requires static lombok;
-    requires java.base;
     requires javafx.controls;
     requires javafx.fxml;
     requires org.girod.javafx.svgimage;
@@ -18,6 +17,7 @@ module club.xiaojiawei.javafx_ui {
     requires org.slf4j;
     requires jdk.jsobject;
     requires jdk.unsupported.desktop;
+    requires org.apache.commons.io;
 
     exports club.xiaojiawei;
     exports club.xiaojiawei.func;

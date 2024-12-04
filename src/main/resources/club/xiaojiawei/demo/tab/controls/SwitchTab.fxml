@@ -18,5 +18,13 @@
             <Switch transitionType="SLIDE_X"/>
             <Switch transitionType="NONE"/>
         </HBox>
+        <Label text="禁用样式" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Switch disable="true"/>
+        </HBox>
+        <Label text="记载样式" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <Switch loading="true"/>
+        </HBox>
     </VBox>
 </ScrollPane>

@@ -3,15 +3,20 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
-<fx:root type="StackPane"  xmlns:fx="http://javafx.com/fxml" stylesheets="@css/switch.css" style="-fx-cursor: hand">
-    <!--灰底背景-->
-    <Rectangle fx:id="bgRectangle"/>
-    <!--蓝底背景-->
-    <Rectangle fx:id="switchRectangle" nodeOrientation="RIGHT_TO_LEFT">
-        <clip>
-            <Rectangle fx:id="switchClipRectangle"/>
-        </clip>
-    </Rectangle>
-    <!--白圆-->
-    <Circle fx:id="switchCircle"/>
+<?import club.xiaojiawei.controls.ico.LoadingIco?>
+<?import javafx.scene.layout.HBox?>
+<fx:root type="StackPane" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/switch.css" style="-fx-cursor: hand">
+    <StackPane fx:id="contentPane">
+        <!--灰底背景-->
+        <Rectangle fx:id="bgRectangle"/>
+        <!--蓝底背景-->
+        <Rectangle fx:id="switchRectangle" nodeOrientation="RIGHT_TO_LEFT">
+            <clip>
+                <Rectangle fx:id="switchClipRectangle"/>
+            </clip>
+        </Rectangle>
+        <!--白圆-->
+        <Circle fx:id="switchCircle"/>
+    </StackPane>
+    <LoadingIco fx:id="loadingIco" visible="false"/>
 </fx:root>
