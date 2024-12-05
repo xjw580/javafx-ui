@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,9 +27,10 @@ public class MultiFileChooserTest extends Application {
     public void start(Stage primaryStage) throws IOException {
         MultiFileChooser multiFileChooser = new MultiFileChooser();
         multiFileChooser.setTitle("多选文件夹");
+        multiFileChooser.setInitialDirectory(new File("S:\\fs data"));
         Scene scene = new Scene(new AnchorPane(new Button("click"){{
             setOnAction(event -> {
-                multiFileChooser.showMultiFileDialog(primaryStage, files -> {
+                multiFileChooser.showMultiDirDialog(primaryStage, files -> {
                     System.out.println("files:" + files);
                 });
             });

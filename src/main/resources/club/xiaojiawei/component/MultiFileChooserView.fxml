@@ -18,7 +18,7 @@
         <fx:define>
             <Double fx:id="icoScale" fx:value="0.9"/>
         </fx:define>
-        <HBox style="-fx-padding: 0 0 5 0;" alignment="CENTER_LEFT">
+        <HBox style="-fx-padding: 0 0 5 0;" alignment="CENTER_LEFT" visible="false" managed="false">
             <Label fx:id="title">
                 <graphic>
                     <ImageView fx:id="icon"/>
@@ -83,10 +83,14 @@
         <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" minHeight="200">
             <TreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
         </ScrollPane>
-        <HBox spacing="5">
-            <Text text="已选："/>
-            <TextFlow fx:id="selectedFilePane" HBox.hgrow="ALWAYS"/>
-        </HBox>
+        <VBox>
+            <HBox>
+                <Text text="已选 "/>
+                <Text text="0" fx:id="selectedCount" style="-fx-font-size: 13;-fx-font-weight: bold;"/>
+                <Text text=" 个："/>
+            </HBox>
+            <TextFlow fx:id="selectedFilePane" VBox.vgrow="ALWAYS" style="-fx-padding: 5"/>
+        </VBox>
         <HBox alignment="CENTER_RIGHT" style="-fx-padding: 6 10 5 10;-fx-spacing: 20">
             <Button text="确认" styleClass="btn-ui, btn-ui-success" onAction="#ok"/>
             <Button text="取消" styleClass="btn-ui" onAction="#cancel"/>

@@ -61,6 +61,8 @@ public class MultiFileChooserView extends StackPane {
     private ProgressModal progressModal;
     @FXML
     private TextFlow selectedFilePane;
+    @FXML
+    private Text selectedCount;
 
     private final ObjectProperty<SelectionMode> selectionMode;
     /**
@@ -203,6 +205,7 @@ public class MultiFileChooserView extends StackPane {
             if (event.getCode() == KeyCode.CONTROL) {
                 ctrlDown = false;
             }
+            updateSelectedFile();
         });
         fileTreeView.setOnMouseClicked(event -> {
             updateSelectedFile();
@@ -275,6 +278,7 @@ public class MultiFileChooserView extends StackPane {
                 selectedFilePane.getChildren().add(new Separator(Orientation.VERTICAL));
             }
         }
+        selectedCount.setText(list.size() + "");
     }
 
     private String getFileName(File file) {
@@ -573,6 +577,7 @@ public class MultiFileChooserView extends StackPane {
     public void refresh() {
         File initialDirectory = multiFileChooser.getInitialDirectory();
         DoubleProperty progress = progressModal.show("加载文件中...");
+        fileTreeView.getSelectionModel().clearSelection();
         Thread.ofVirtual().start(() -> {
             List<TreeItem<File>> treeItems = loadFiles(null, true);
             Platform.runLater(() -> {
@@ -592,6 +597,7 @@ public class MultiFileChooserView extends StackPane {
                 } else {
                     selectFileItem(lastSelectedFile);
                 }
+                updateSelectedFile();
                 progressModal.hide(progress);
             });
         });
