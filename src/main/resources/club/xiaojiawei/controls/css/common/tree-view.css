@@ -1,0 +1,19 @@
+.tree-view-ui{
+    -fx-border-width: 0;
+    -fx-background-insets: 0!important;
+}
+.tree-view-ui:focused .tree-cell:selected {
+    -fx-background-color: #a7d2ff!important;
+}
+.tree-view-ui:focused .tree-cell:hover {
+    -fx-background-color: #f5f8fe;
+}
+.tree-view-ui .arrow {
+    -fx-rotate: -90;
+    -fx-background-color: #353535;
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+.tree-view-ui .tree-cell:expanded .arrow{
+    -fx-rotate: 0!important;
+}

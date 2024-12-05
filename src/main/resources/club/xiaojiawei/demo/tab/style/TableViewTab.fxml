@@ -13,7 +13,7 @@
             notificationManager="${notificationManager}"
             baseStyleClasses="table-view-ui"
             sizeStyleClasses="table-view-ui-small,table-view-ui-big"
-            styleStyleClasses="table-view-ui-upright">
+            styleStyleClasses="table-view-ui-upright, table-view-ui-idea">
         <baseShowChildren>
             <TableView fx:id="tableViewDemo" styleClass="table-view-ui" prefHeight="200">
                 <columns>
@@ -121,6 +121,35 @@
         </sizeShowChildren>
         <styleShowChildren>
             <TableView fx:id="tableViewUprightDemo" styleClass="table-view-ui, table-view-ui-upright" prefHeight="200">
+                <columns>
+                    <TableColumn text="学号">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="id"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="姓名">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="性别">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="sex"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="年龄">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="age"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="日期">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="date"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                </columns>
+            </TableView>
+            <TableView fx:id="tableViewIdeaDemo" styleClass="table-view-ui, table-view-ui-idea, table-view-ui-upright" prefHeight="200">
                 <columns>
                     <TableColumn text="学号">
                         <cellValueFactory>

@@ -28,6 +28,8 @@ public class TabViewController implements Initializable {
     @FXML
     private TableView<Student> tableViewUprightDemo;
     @FXML
+    private TableView<Student> tableViewIdeaDemo;
+    @FXML
     private TableFilterManagerGroup<Student, String> filterGroup;
 
     ObservableList<Student> students = FXCollections.observableArrayList(
@@ -60,6 +62,8 @@ public class TabViewController implements Initializable {
         tableViewBigDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableViewUprightDemo.setItems(FXCollections.observableArrayList(students));
         tableViewUprightDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableViewIdeaDemo.setItems(FXCollections.observableArrayList(students));
+        tableViewIdeaDemo.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     @FXML

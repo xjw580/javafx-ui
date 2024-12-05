@@ -7,28 +7,30 @@
 <?import javafx.scene.layout.*?>
 <?import java.lang.Double?>
 <?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.controls.ProgressModal?>
 <fx:root type="StackPane" xmlns="http://javafx.com/javafx"
+         stylesheets="@css/multiFileChooserView.css"
          xmlns:fx="http://javafx.com/fxml"
-         prefHeight="500.0" prefWidth="300.0">
+         prefHeight="500.0" prefWidth="400.0">
     <VBox style="-fx-padding: 10;-fx-spacing: 6">
         <fx:define>
-            <Double fx:id="icoScale" fx:value="0.85"/>
+            <Double fx:id="icoScale" fx:value="0.9"/>
         </fx:define>
-        <HBox style="-fx-padding: 0 0 20 0;" alignment="CENTER_LEFT">
+        <HBox style="-fx-padding: 0 0 5 0;" alignment="CENTER_LEFT">
             <Label fx:id="title">
                 <graphic>
                     <ImageView fx:id="icon"/>
                 </graphic>
             </Label>
             <HBox HBox.hgrow="ALWAYS"/>
-            <Label>
+            <Label onMouseClicked="#closePage" styleClass="ico-btn, close-ico">
                 <graphic>
                     <CloseIco scaleX="${icoScale}" scaleY="${icoScale}"/>
                 </graphic>
             </Label>
         </HBox>
         <HBox spacing="10">
-            <Label onMouseClicked="#homeDir">
+            <Label onMouseClicked="#homeDir" styleClass="ico-btn">
                 <graphic>
                     <HomeIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
                 </graphic>
@@ -36,7 +38,7 @@
                     <Tooltip text="主目录"/>
                 </tooltip>
             </Label>
-            <Label onMouseClicked="#desktopDir">
+            <Label onMouseClicked="#desktopDir" styleClass="ico-btn">
                 <graphic>
                     <DesktopIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
                 </graphic>
@@ -45,7 +47,7 @@
                 </tooltip>
             </Label>
             <Separator orientation="VERTICAL"/>
-            <Label onMouseClicked="#newDir">
+            <Label onMouseClicked="#newDir" styleClass="ico-btn">
                 <graphic>
                     <NewDirIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
                 </graphic>
@@ -53,7 +55,7 @@
                     <Tooltip text="新建目录"/>
                 </tooltip>
             </Label>
-            <Label onMouseClicked="#delFile">
+            <Label onMouseClicked="#delFile" styleClass="ico-btn">
                 <graphic>
                     <CloseIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
                 </graphic>
@@ -62,11 +64,11 @@
                 </tooltip>
             </Label>
             <Separator orientation="VERTICAL"/>
-            <Label onMouseClicked="#changeHiddenFileStatus">
+            <Label onMouseClicked="#changeHiddenFileStatus" styleClass="ico-btn">
                 <graphic>
                     <StackPane>
-                        <InvisibleIco fx:id="hideHiddenFile" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
-                        <VisibleIco fx:id="showHiddenFile" scaleX="${icoScale}" scaleY="${icoScale}" color="gray" visible="false"/>
+                        <InvisibleIco fx:id="hideHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                        <VisibleIco fx:id="showHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray" visible="false"/>
                     </StackPane>
                 </graphic>
                 <tooltip>
@@ -74,14 +76,15 @@
                 </tooltip>
             </Label>
         </HBox>
-        <FilterField fx:id="url" styleClass="text-field-ui, text-field-ui-small"/>
+        <FilterField fx:id="url" styleClass="text-field-ui"/>
         <ScrollPane fitToWidth="true" fitToHeight="true">
-            <TreeView fx:id="fileTreeView"/>
+            <TreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
         </ScrollPane>
         <HBox alignment="CENTER_RIGHT" style="-fx-padding: 6 10 5 10;-fx-spacing: 20">
             <Button text="确认" styleClass="btn-ui, btn-ui-success" onAction="#ok"/>
             <Button text="取消" styleClass="btn-ui" onAction="#cancel"/>
         </HBox>
     </VBox>
-    <NotificationManager fx:id="notificationManager"/>
+    <ProgressModal fx:id="progressModal"/>
+    <NotificationManager fx:id="notificationManager" notificationPos="CENTER"/>
 </fx:root>

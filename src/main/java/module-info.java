@@ -27,6 +27,7 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei.factory;
     exports club.xiaojiawei.annotations;
     exports club.xiaojiawei.component;
+    exports club.xiaojiawei.bean;
 
     opens club.xiaojiawei.component to javafx.fxml;
     opens club.xiaojiawei.controls to javafx.fxml;

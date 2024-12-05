@@ -1,0 +1,11 @@
+.ico-btn{
+    -fx-padding: 2;
+    -fx-background-radius: 4;
+    -fx-border-width: 0;
+}
+.ico-btn:hover{
+    -fx-background-color: rgba(128, 128, 128, 0.25);
+}
+.close-ico:hover *{
+    -fx-fill: red;
+}

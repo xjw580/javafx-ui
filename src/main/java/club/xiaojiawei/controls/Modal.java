@@ -263,7 +263,7 @@ public class Modal implements MarkLogging {
         this.stage.initOwner(baseParent.getScene().getWindow());
 //        this.stage.initModality(Modality.APPLICATION_MODAL);
         initScene();
-        initSize();
+//        initSize();
 //        addSizeListener();
         addClosingListener();
     }
@@ -430,6 +430,7 @@ public class Modal implements MarkLogging {
             Platform.runLater(() -> show(shownRunnable));
             return;
         }
+        initSize();
         stage.show();
         if (JavaFXUI.getLogMark() != null) {
             if (contentObj instanceof String || (headingStr != null && !headingStr.isBlank())) {

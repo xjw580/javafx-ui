@@ -1,23 +1,22 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
-import club.xiaojiawei.controls.Calendar;
-import club.xiaojiawei.controls.MultiDirectoryChooser;
+import club.xiaojiawei.controls.MultiFileChooser;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
+import java.nio.file.Files;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/23 21:14
  */
-public class MultiDirectoryChooserTest extends Application {
+public class MultiFileChooserTest extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -25,11 +24,11 @@ public class MultiDirectoryChooserTest extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        MultiDirectoryChooser multiDirectoryChooser = new MultiDirectoryChooser();
-        multiDirectoryChooser.setTitle("多选文件夹");
+        MultiFileChooser multiFileChooser = new MultiFileChooser();
+        multiFileChooser.setTitle("多选文件夹");
         Scene scene = new Scene(new AnchorPane(new Button("click"){{
             setOnAction(event -> {
-                multiDirectoryChooser.showDialog(primaryStage, files -> {
+                multiFileChooser.showMultiFileDialog(primaryStage, files -> {
                     System.out.println("files:" + files);
                 });
             });

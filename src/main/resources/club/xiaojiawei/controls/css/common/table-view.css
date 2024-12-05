@@ -4,17 +4,18 @@
     table-view-bg-color: shallow-color;
     table-view-selected-color: hover-color;
     table-view-hover-color: shallow-color;
-    -my-custom-table-cell-border-color: #c5c4c4;
+    my-custom-table-cell-border-color: #c5c4c4;
+    table-view-ui-idea-bg-color: #efefef;
 }
 .table-view-ui{
     -fx-padding: 0;
-    -fx-table-cell-border-color: -my-custom-table-cell-border-color;
+    -fx-table-cell-border-color: my-custom-table-cell-border-color;
 }
 .table-view-ui:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:selected {
-    /*-fx-table-cell-border-color: -my-custom-table-cell-border-color;*/
+    /*-fx-table-cell-border-color: my-custom-table-cell-border-color;*/
 }
 .table-view-ui .table-row-cell:filled:selected {
-    /*-fx-table-cell-border-color: -my-custom-table-cell-border-color;*/
+    /*-fx-table-cell-border-color: my-custom-table-cell-border-color;*/
 }
 /*空闲列列头*/
 .table-view-ui .filler{
@@ -46,7 +47,7 @@
 .table-view-ui .table-row-cell .table-cell{
     -fx-pref-height: 40;
     -fx-alignment: CENTER;
-    -fx-border-width: 1 0 0 1;
+    -fx-border-width: 0.5 0 0 0.5;
     -fx-border-color: #bebebe;
 }
 /*单元格文本颜色*/
@@ -121,4 +122,46 @@
 }
 .table-view-ui-upright:constrained-resize .nested-column-header{
     -fx-background-radius: 0!important;
+}
+
+/*idea*/
+
+/*空闲列列头*/
+.table-view-ui-idea .filler {
+    -fx-background-color: table-view-ui-idea-bg-color;
+}
+
+.table-view-ui-idea .nested-column-header {
+    -fx-background-color: table-view-ui-idea-bg-color;
+}
+
+/*每一列的头头，也就是顶栏*/
+.table-view-ui-idea .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/*顶栏内的label*/
+.table-view-ui-idea .column-header-background .label {
+    -fx-font-weight: normal;
+    -fx-font-size: 11;
+}
+
+/*选中*/
+.table-view-ui-idea .table-row-cell:selected, .table-view-ui-idea:focused .table-row-cell:selected {
+    -fx-background-color: #a7d2ff !important;
+}
+
+/*悬浮*/
+.table-view-ui-idea .table-row-cell:hover {
+    -fx-background-color: #f5f8fe;
+}
+
+/*Style*/
+.table-view-ui-idea.table-view-ui-upright .filler {
+    -fx-background-color: table-view-ui-idea-bg-color;
+}
+
+.table-view-ui-idea.table-view-ui-upright .nested-column-header {
+    -fx-background-color: table-view-ui-idea-bg-color;
 }
