@@ -5,6 +5,9 @@
 .tree-view-ui:focused .tree-cell:selected {
     -fx-background-color: #a7d2ff!important;
 }
+.tree-view-ui .tree-cell:selected .filter-ico {
+    -fx-background-color: success-color;
+}
 .tree-view-ui:focused .tree-cell:hover {
     -fx-background-color: #f5f8fe;
 }

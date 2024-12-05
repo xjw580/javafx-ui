@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
@@ -20,6 +21,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.util.Callback;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,6 +59,8 @@ public class MultiFileChooserView extends StackPane {
     private VisibleIco showHiddenFileIco;
     @FXML
     private ProgressModal progressModal;
+    @FXML
+    private TextFlow selectedFilePane;
 
     private final ObjectProperty<SelectionMode> selectionMode;
     /**
@@ -199,6 +204,9 @@ public class MultiFileChooserView extends StackPane {
                 ctrlDown = false;
             }
         });
+        fileTreeView.setOnMouseClicked(event -> {
+            updateSelectedFile();
+        });
         fileTreeView.setCellFactory(new Callback<>() {
             @Override
             public TreeCell<File> call(TreeView<File> param) {
@@ -227,6 +235,10 @@ public class MultiFileChooserView extends StackPane {
                         } else {
                             fileIcon = new UnknowFileIco();
                         }
+                        if (testFileResultFilter(item)) {
+                            fileIcon.getStyleClass().add("filter-ico");
+                        }
+                        fileIcon.getStyleClass().add("file-icon");
                         if (isHideFile(item)) {
                             fileIcon.setColor("gray");
                             setStyle("-fx-text-fill: rgb(113,113,165)");
@@ -251,6 +263,18 @@ public class MultiFileChooserView extends StackPane {
                 url.setText(newValue.getValue().getAbsolutePath());
             }
         });
+    }
+
+    private void updateSelectedFile() {
+        selectedFilePane.getChildren().clear();
+        List<File> list = getSelectedFiles().stream().filter(this::testFileResultFilter).toList();
+        for (int i = 0; i < list.size(); i++) {
+            File file = list.get(i);
+            selectedFilePane.getChildren().add(new Text(getFileName(file)));
+            if (i < list.size() - 1) {
+                selectedFilePane.getChildren().add(new Separator(Orientation.VERTICAL));
+            }
+        }
     }
 
     private String getFileName(File file) {

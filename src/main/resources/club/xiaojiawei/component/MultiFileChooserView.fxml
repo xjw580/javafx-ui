@@ -2,16 +2,18 @@
 
 <?import club.xiaojiawei.controls.FilterField?>
 <?import club.xiaojiawei.controls.ico.*?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.controls.ProgressModal?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
 <?import java.lang.Double?>
-<?import club.xiaojiawei.controls.NotificationManager?>
-<?import club.xiaojiawei.controls.ProgressModal?>
+<?import javafx.scene.text.Text?>
 <fx:root type="StackPane" xmlns="http://javafx.com/javafx"
          stylesheets="@css/multiFileChooserView.css"
          xmlns:fx="http://javafx.com/fxml"
-         prefHeight="500.0" prefWidth="400.0">
+         prefHeight="520.0" prefWidth="400.0">
     <VBox style="-fx-padding: 10;-fx-spacing: 6">
         <fx:define>
             <Double fx:id="icoScale" fx:value="0.9"/>
@@ -68,7 +70,8 @@
                 <graphic>
                     <StackPane>
                         <InvisibleIco fx:id="hideHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
-                        <VisibleIco fx:id="showHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray" visible="false"/>
+                        <VisibleIco fx:id="showHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"
+                                    visible="false"/>
                     </StackPane>
                 </graphic>
                 <tooltip>
@@ -76,10 +79,14 @@
                 </tooltip>
             </Label>
         </HBox>
-        <FilterField fx:id="url" styleClass="text-field-ui"/>
-        <ScrollPane fitToWidth="true" fitToHeight="true">
+        <FilterField fx:id="url" promptText="输入路径回车搜索" styleClass="text-field-ui"/>
+        <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" minHeight="200">
             <TreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
         </ScrollPane>
+        <HBox spacing="5">
+            <Text text="已选："/>
+            <TextFlow fx:id="selectedFilePane" HBox.hgrow="ALWAYS"/>
+        </HBox>
         <HBox alignment="CENTER_RIGHT" style="-fx-padding: 6 10 5 10;-fx-spacing: 20">
             <Button text="确认" styleClass="btn-ui, btn-ui-success" onAction="#ok"/>
             <Button text="取消" styleClass="btn-ui" onAction="#cancel"/>
