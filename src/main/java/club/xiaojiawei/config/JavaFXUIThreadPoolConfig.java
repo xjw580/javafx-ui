@@ -1,8 +1,6 @@
 package club.xiaojiawei.config;
 
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -19,4 +17,5 @@ public class JavaFXUIThreadPoolConfig {
         }
     }, new ThreadPoolExecutor.AbortPolicy());
 
+    public static final ExecutorService V_THREAD_POOL = Executors.newThreadPerTaskExecutor(Thread.ofVirtual().name("ExtraPool VThread-", 0).factory());
 }

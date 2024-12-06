@@ -169,7 +169,9 @@ public class MultiFileChooserView extends StackPane {
                 clipboard.setContent(content);
             } else if (code == KeyCode.DELETE) {
                 delFile();
-            } else if (code.getCode() >= KeyCode.A.getCode() && code.getCode() <= KeyCode.Z.getCode()) {
+            } else if (code.getCode() >= KeyCode.A.getCode() && code.getCode() <= KeyCode.Z.getCode()
+                       || code.getCode() >= KeyCode.DIGIT0.getCode() && code.getCode() <= KeyCode.DIGIT9.getCode()
+            ) {
                 int expandedItemCount = fileTreeView.getExpandedItemCount();
                 int selectIndex = 0;
                 TreeItem<File> selectedItem = fileTreeView.getSelectionModel().getSelectedItem();
