@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import club.xiaojiawei.controls.FilterField?>
 <?import club.xiaojiawei.controls.ico.*?>
 <?import club.xiaojiawei.controls.NotificationManager?>
 <?import club.xiaojiawei.controls.ProgressModal?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.TextFlow?>
 <?import java.lang.Double?>
-<?import javafx.scene.text.Text?>
 <fx:root type="StackPane" xmlns="http://javafx.com/javafx"
          stylesheets="@css/multiFileChooserView.css"
+         fx:id="rootPane"
          xmlns:fx="http://javafx.com/fxml"
          prefHeight="520.0" prefWidth="400.0">
     <VBox style="-fx-padding: 10;-fx-spacing: 6">
@@ -79,17 +77,18 @@
                 </tooltip>
             </Label>
         </HBox>
-        <FilterField fx:id="url" promptText="输入路径回车搜索" styleClass="text-field-ui"/>
+<!--        <FilterField fx:id="url" promptText="输入路径回车搜索" styleClass="text-field-ui"/>-->
+        <ComboBox fx:id="url" styleClass="combo-box-idea" editable="true" prefWidth="${rootPane.width}" promptText="输入路径回车搜索"/>
         <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" minHeight="200">
             <TreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
         </ScrollPane>
         <VBox>
-            <HBox>
-                <Text text="已选 "/>
-                <Text text="0" fx:id="selectedCount" style="-fx-font-size: 13;-fx-font-weight: bold;"/>
-                <Text text=" 个："/>
+            <HBox alignment="CENTER_LEFT">
+                <Label text="已选 "/>
+                <Label text="0" fx:id="selectedCount" style="-fx-font-size: 13;-fx-font-weight: bold;"/>
+                <Label text=" 个："/>
             </HBox>
-            <TextFlow fx:id="selectedFilePane" VBox.vgrow="ALWAYS" style="-fx-padding: 5"/>
+            <FlowPane fx:id="selectedFilePane" VBox.vgrow="ALWAYS" style="-fx-padding: 5" hgap="3"/>
         </VBox>
         <HBox alignment="CENTER_RIGHT" style="-fx-padding: 6 10 5 10;-fx-spacing: 20">
             <Button text="确认" styleClass="btn-ui, btn-ui-success" onAction="#ok"/>

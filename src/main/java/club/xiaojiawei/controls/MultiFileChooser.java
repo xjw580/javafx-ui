@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.File;
@@ -125,6 +124,10 @@ public class MultiFileChooser {
         if (stage != null) {
             stage.close();
         }
+    }
+
+    public static void clearHistory() {
+        MultiFileChooserView.clearHistory();
     }
 
 }

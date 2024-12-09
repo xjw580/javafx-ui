@@ -30,7 +30,7 @@ public class MultiFileChooserTest extends Application {
         multiFileChooser.setInitialDirectory(new File("S:\\fs data"));
         Scene scene = new Scene(new AnchorPane(new Button("click"){{
             setOnAction(event -> {
-                multiFileChooser.showMultiDirDialog(primaryStage, files -> {
+                multiFileChooser.showMultiFileDialog(primaryStage, files -> {
                     System.out.println("files:" + files);
                 });
             });
