@@ -20,6 +20,9 @@
             <ProgressIndicator minWidth="${progressPane.width}" minHeight="${progressPane.height}" styleClass="progress-indicator-ui"/>
             <Label fx:id="progressLabel" style="-fx-text-fill: white;-fx-effect: default-common-effect"/>
         </StackPane>
-        <Text fx:id="tip" style="-fx-fill: white;-fx-font-size: 14;-fx-font-weight:bold;-fx-effect: default-common-effect"/>
+        <VBox spacing="5" alignment="CENTER">
+            <Text fx:id="title" style="-fx-fill: white;-fx-font-size: 16;-fx-font-weight:bold;-fx-effect: default-common-effect"/>
+            <Text fx:id="content" style="-fx-fill: white;-fx-font-size: 14;-fx-effect: default-common-effect"/>
+        </VBox>
     </VBox>
 </fx:root>

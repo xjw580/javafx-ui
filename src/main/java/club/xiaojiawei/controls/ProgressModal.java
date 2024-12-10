@@ -70,12 +70,20 @@ public class ProgressModal extends HBox {
         }
     }
 
-    public String getTip() {
-        return tip.getText();
+    public String getTitle() {
+        return title.getText();
     }
 
-    public void setTip(String tip) {
-        this.tip.setText(tip);
+    public void setTitle(String title) {
+        this.title.setText(title);
+    }
+
+    public String getContent() {
+        return content.getText();
+    }
+
+    public void setContent(String content) {
+        this.content.setText(content);
     }
 
     public int getDecimalCount() {
@@ -115,7 +123,9 @@ public class ProgressModal extends HBox {
     @FXML
     private Label progressLabel;
     @FXML
-    private Text tip;
+    private Text title;
+    @FXML
+    private Text content;
     @FXML
     private StackPane progressPane;
 
@@ -123,14 +133,14 @@ public class ProgressModal extends HBox {
 
     private ChangeListener<Number> progressListener;
 
-    public ProgressModal(@NamedArg("parent") Region parentRegion, @NamedArg("tip") String tip) {
+    public ProgressModal(@NamedArg("parent") Region parentRegion, @NamedArg("tip") String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
             setParentRegion(parentRegion);
-            setTip(tip);
+            setTitle(title);
             afterFXMLLoaded();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -168,7 +178,7 @@ public class ProgressModal extends HBox {
      * @return 进度控制器
      */
     public DoubleProperty show() {
-        return show(tip.getText(), -1D);
+        return show(title.getText(), -1D);
     }
 
     /**
@@ -180,17 +190,11 @@ public class ProgressModal extends HBox {
         return show(tip, -1D);
     }
 
-    /**
-     * 显示加载模态
-     * @param tip
-     * @param progress [0, 1] 小于0时隐藏进度
-     * @return 进度控制器
-     */
-    public DoubleProperty show(String tip, double progress) {
-        if (this.progress != null) {
-            this.progress.removeListener(progressListener);
+    public DoubleProperty show(String title, String content, double progress) {
+        if (this.progress != null && this.progress.get() < 1) {
+            return new SimpleDoubleProperty(progress);
         }
-        this.progress = new SimpleDoubleProperty();
+        this.progress = new SimpleDoubleProperty(this, "progress");
         this.progress.addListener(progressListener = (observable, oldValue, newValue) -> {
             changeProgress(newValue);
         });
@@ -198,7 +202,10 @@ public class ProgressModal extends HBox {
             return this.progress;
         } else progressLabel.setVisible(!(progress < 0));
         progressLabel.setText("0%");
-        setTip(tip);
+
+        setTitle(title);
+        setContent(content);
+
         progress = Math.min(progress, 1D);
         progress = Math.max(0D, progress);
         this.progress.set(progress);
@@ -209,19 +216,37 @@ public class ProgressModal extends HBox {
 
     /**
      * 显示加载模态
+     * @param title
+     * @param progress [0, 1] 小于0时隐藏进度
      * @return 进度控制器
      */
-    public DoubleProperty showByZero() {
-        return show(tip.getText(), 0D);
+    public DoubleProperty show(String title, double progress) {
+        return show(title, null, progress);
+    }
+
+    public DoubleProperty show(String title, String content) {
+        return show(title, content, 0D);
     }
 
     /**
      * 显示加载模态
-     * @param tip
      * @return 进度控制器
      */
-    public DoubleProperty showByZero(String tip) {
-        return show(tip, 0D);
+    public DoubleProperty showByZero() {
+        return show(title.getText(), 0D);
+    }
+
+    /**
+     * 显示加载模态
+     * @param title
+     * @return 进度控制器
+     */
+    public DoubleProperty showByZero(String title) {
+        return show(title, 0D);
+    }
+
+    public DoubleProperty showByZero(String title, String content) {
+        return show(title, content, 0D);
     }
 
     /**
@@ -234,6 +259,10 @@ public class ProgressModal extends HBox {
         }
         progress.set(1D);
         progress.removeListener(progressListener);
+        if (progress == this.progress) {
+            this.progress = null;
+            progressListener = null;
+        }
     }
 
 }

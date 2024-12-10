@@ -145,6 +145,9 @@ public class MultiFileChooserView extends StackPane {
     private boolean isSelecting = false;
 
     private void afterFXMLLoaded() {
+        if (historyQueue != null) {
+            url.getItems().setAll(historyQueue);
+        }
         if (hideHiddenFileIco.isVisible()) {
             fileFilters.addFirst(HIDDEN_FILE_FILTER);
         }
@@ -192,6 +195,7 @@ public class MultiFileChooserView extends StackPane {
                     historyQueue.removeLast();
                 }
                 url.getItems().setAll(historyQueue);
+                updateSelectedFile();
             }
         });
         url.setCellFactory(new Callback<>() {
