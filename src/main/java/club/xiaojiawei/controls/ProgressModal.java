@@ -265,4 +265,8 @@ public class ProgressModal extends HBox {
         }
     }
 
+    public boolean isShowing() {
+        return isVisible();
+    }
+
 }

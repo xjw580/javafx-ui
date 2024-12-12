@@ -11,9 +11,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.File;
 import java.util.List;
@@ -30,6 +34,10 @@ public class MultiFileChooser {
     private final ObjectProperty<File> initialDirectory;
 
     private MultiFileChooserView multiFileChooserView;
+
+    @Setter
+    @Getter
+    private boolean escHide = true;
 
 //    private Modal modal;
 
@@ -107,6 +115,11 @@ public class MultiFileChooser {
 //            modal.setEscClosable(false);
             stage = new Stage();
             Scene scene = new Scene(multiFileChooserView);
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+                if (escHide && event.getCode() == KeyCode.ESCAPE) {
+                    stage.hide();
+                }
+            });
             stage.setScene(scene);
             JavaFXUI.addjavafxUIStylesheet(scene);
             stage.initOwner(parentWindows);

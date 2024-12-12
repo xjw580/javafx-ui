@@ -3,6 +3,7 @@
 <?import club.xiaojiawei.controls.ico.*?>
 <?import club.xiaojiawei.controls.NotificationManager?>
 <?import club.xiaojiawei.controls.ProgressModal?>
+<?import club.xiaojiawei.controls.VisibleTreeView?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -80,7 +81,7 @@
 <!--        <FilterField fx:id="url" promptText="输入路径回车搜索" styleClass="text-field-ui"/>-->
         <ComboBox fx:id="url" styleClass="combo-box-idea" editable="true" prefWidth="${rootPane.width}" promptText="输入路径回车搜索"/>
         <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" minHeight="200">
-            <TreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
+            <VisibleTreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
         </ScrollPane>
         <VBox>
             <HBox alignment="CENTER_LEFT">

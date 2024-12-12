@@ -3,10 +3,7 @@ package club.xiaojiawei.component;
 import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.Nullable;
 import club.xiaojiawei.bean.FileChooserFilter;
-import club.xiaojiawei.controls.Modal;
-import club.xiaojiawei.controls.MultiFileChooser;
-import club.xiaojiawei.controls.NotificationManager;
-import club.xiaojiawei.controls.ProgressModal;
+import club.xiaojiawei.controls.*;
 import club.xiaojiawei.controls.ico.*;
 import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
@@ -50,7 +47,7 @@ public class MultiFileChooserView extends StackPane {
     @FXML
     private Label title;
     @FXML
-    private TreeView<File> fileTreeView;
+    private VisibleTreeView<File> fileTreeView;
     @FXML
     private ComboBox<File> url;
     @FXML
@@ -178,11 +175,12 @@ public class MultiFileChooserView extends StackPane {
         url.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 String text = url.getEditor().getText();
+                if (text == null || text.isBlank()) return;
                 File file = new File(text);
                 TreeItem<File> selectedItem = fileTreeView.getSelectionModel().getSelectedItem();
                 if (selectedItem != null && Objects.equals(selectedItem.getValue(), file)) {
                     selectedItem.setExpanded(!selectedItem.isExpanded());
-                    fileTreeView.scrollTo(fileTreeView.getRow(selectedItem));
+                    scrollTo(fileTreeView.getRow(selectedItem));
                 } else if (!selectFileItem(file, true)) {
                     notificationManager.showWarn("未找到" + file.getAbsolutePath(), 2);
                 }
@@ -195,6 +193,7 @@ public class MultiFileChooserView extends StackPane {
                     historyQueue.removeLast();
                 }
                 url.getItems().setAll(historyQueue);
+                url.getEditor().setText(text);
                 updateSelectedFile();
             }
         });
@@ -238,7 +237,7 @@ public class MultiFileChooserView extends StackPane {
             } else if (ctrlDown && code == KeyCode.F) {
                 url.requestFocus();
             } else if (!ctrlDown && (code.getCode() >= KeyCode.A.getCode() && code.getCode() <= KeyCode.Z.getCode()
-                       || code.getCode() >= KeyCode.DIGIT0.getCode() && code.getCode() <= KeyCode.DIGIT9.getCode())
+                                     || code.getCode() >= KeyCode.DIGIT0.getCode() && code.getCode() <= KeyCode.DIGIT9.getCode())
             ) {
                 int expandedItemCount = fileTreeView.getExpandedItemCount();
                 int selectIndex = 0;
@@ -258,7 +257,7 @@ public class MultiFileChooserView extends StackPane {
                         if (fileName.toUpperCase().startsWith(String.valueOf((char) code.getCode()))) {
                             fileTreeView.getSelectionModel().clearSelection();
                             fileTreeView.getSelectionModel().select(treeItem);
-                            fileTreeView.scrollTo(i);
+                            scrollTo(i);
                             return;
                         }
                     }
@@ -308,7 +307,7 @@ public class MultiFileChooserView extends StackPane {
                         } else {
                             fileIcon = new UnknowFileIco();
                         }
-                        if (testFileResultFilter(item)) {
+                        if (isSelected() && testFileResultFilter(item)) {
                             fileIcon.getStyleClass().add("filter-ico");
                         }
                         fileIcon.getStyleClass().add("file-icon");
@@ -336,6 +335,12 @@ public class MultiFileChooserView extends StackPane {
                 url.setValue(newValue.getValue());
             }
         });
+    }
+
+    private void scrollTo(int index) {
+        if (!fileTreeView.isIndexVisible(index)) {
+            fileTreeView.scrollTo(Math.max(0, index - 1));
+        }
     }
 
     private void updateSelectedFile() {
@@ -459,8 +464,7 @@ public class MultiFileChooserView extends StackPane {
                 }
                 lastTreeItem.setExpanded(false);
                 fileTreeView.getSelectionModel().select(lastTreeItem);
-                int row = fileTreeView.getRow(lastTreeItem);
-                fileTreeView.scrollTo(row);
+                scrollTo(fileTreeView.getRow(lastTreeItem));
                 return true;
             }
         } finally {
