@@ -258,7 +258,9 @@ public class ProgressModal extends HBox {
             return;
         }
         progress.set(1D);
-        progress.removeListener(progressListener);
+        if (progressListener != null) {
+            progress.removeListener(progressListener);
+        }
         if (progress == this.progress) {
             this.progress = null;
             progressListener = null;

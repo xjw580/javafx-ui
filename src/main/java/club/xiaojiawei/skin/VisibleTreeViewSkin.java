@@ -20,7 +20,7 @@ public class VisibleTreeViewSkin<T> extends TreeViewSkin<T> {
         VirtualFlow<TreeCell<T>> flow = getVirtualFlow();
         return flow.getFirstVisibleCell() != null &&
                flow.getLastVisibleCell() != null &&
-               flow.getFirstVisibleCell().getIndex() <= index &&
-               flow.getLastVisibleCell().getIndex() >= index;
+               flow.getFirstVisibleCell().getIndex() < index &&
+               flow.getLastVisibleCell().getIndex() > index;
     }
 }
