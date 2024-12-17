@@ -3,6 +3,7 @@ package club.xiaojiawei.controls;
 import club.xiaojiawei.skin.ComboBoxWideSkin;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ComboBox;

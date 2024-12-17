@@ -16,10 +16,7 @@ import javafx.scene.control.Skinnable;
 import javafx.scene.control.skin.ComboBoxBaseSkin;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.util.StringConverter;
 
 import java.util.Objects;
@@ -99,6 +96,14 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
         int size = items.size();
         GridPane gridPane = getPopupContent();
         gridPane.getChildren().clear();
+        if (size == 0) {
+            double w = calcRealWidth();
+            gridPane.setPrefWidth(w);
+            gridPane.setPrefHeight(15);
+            return;
+        }else {
+            gridPane.setPrefWidth(-1);
+        }
         int maxCol = outerComboBox.getMaxColumCount(), col = 0, row = 0;
         int l = maxCol;
         for (int i = 1; i < l; i++) {
@@ -221,7 +226,6 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
     }
 
     private void showPopup() {
-        if (getPopupContent().getChildren().isEmpty()) return;
         locatePopup();
         getPopup().show(outerComboBox.getScene().getWindow());
     }

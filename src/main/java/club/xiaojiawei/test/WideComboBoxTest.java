@@ -30,15 +30,15 @@ public class WideComboBoxTest extends Application {
     public void start(Stage primaryStage) throws IOException {
         WideComboBox<String> wideComboBox = new WideComboBox<>();
 //        wideComboBox.getStyleClass().addAll("combo-box-ui", "combo-box-ui-small", "combo-box-ui-normal");
-        wideComboBox.getItems().addAll(
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7"
-        );
+//        wideComboBox.getItems().addAll(
+//                "1",
+//                "2",
+//                "3",
+//                "4",
+//                "5",
+//                "6",
+//                "7"
+//        );
         Scene scene = new Scene(new HBox(wideComboBox, new ComboBox<>(){{setValue("hh");}}){{setAlignment(Pos.CENTER);setSpacing(50);}}, 400, 500);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
