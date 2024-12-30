@@ -18,7 +18,6 @@ import lombok.Data;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.function.UnaryOperator;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -85,24 +84,24 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
         addListener();
     }
 
-    private void addListener(){
+    private void addListener() {
         tableView.setOnMouseClicked(event -> {
             Statistics<T> statistics = tableView.getSelectionModel().getSelectedItem();
-            if (statistics != null){
+            if (statistics != null) {
                 statistics.setSelected(!statistics.isSelected());
             }
         });
         filterField.setOnFilterAction(text -> {
             Iterator<Statistics<T>> hideIterator = hideItems.iterator();
-            while (hideIterator.hasNext()){
+            while (hideIterator.hasNext()) {
                 Statistics<T> next = hideIterator.next();
                 tableView.getItems().add(next);
                 hideIterator.remove();
             }
             Iterator<Statistics<T>> showIterator = tableView.getItems().iterator();
-            while (showIterator.hasNext()){
+            while (showIterator.hasNext()) {
                 Statistics<T> next = showIterator.next();
-                if (!next.getValue().toString().contains(text)){
+                if (!next.getValue().toString().contains(text)) {
                     hideItems.add(next);
                     showIterator.remove();
                 }
@@ -119,12 +118,12 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
         });
     }
 
-    private void initTableStructure(){
+    private void initTableStructure() {
         valueColumn.setCellValueFactory(observable -> new SimpleObjectProperty<>(observable.getValue()));
         valueColumn.setCellFactory(new Callback<>() {
             @Override
             public TableCell<Statistics<T>, Statistics<T>> call(TableColumn<Statistics<T>, Statistics<T>> statisticsTTableColumn) {
-                TableCell<Statistics<T>, Statistics<T>> cell = new TableCell<>(){
+                TableCell<Statistics<T>, Statistics<T>> cell = new TableCell<>() {
                     @Override
                     protected void updateItem(Statistics<T> item, boolean empty) {
                         super.updateItem(item, empty);
@@ -153,12 +152,12 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
         countColumn.setCellValueFactory(observable -> new SimpleObjectProperty<>(observable.getValue().getCount()));
     }
 
-    protected Label createShowGraphic(Statistics<T> item){
-        return new Label(item.getValue().toString());
+    protected Label createShowGraphic(Statistics<T> item) {
+        return new Label((item == null || item.getValue() == null) ? "" : item.getValue().toString());
     }
 
     @Override
-    protected void resetInit(){
+    protected void resetInit() {
         filterField.setText("");
         disableRequestFiltering = true;
         for (Statistics<T> item : tableView.getItems()) {
@@ -180,7 +179,7 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
         ObservableList<Statistics<T>> items = tableView.getItems();
         Set<T> selectedValueSet = new HashSet<>();
         for (Statistics<T> item : items) {
-            if (item.isSelected()){
+            if (item.isSelected()) {
                 selectedValueSet.add(item.getValue());
             }
         }
@@ -192,7 +191,7 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
         for (S newItem : newItems) {
             T k = tableColumn.getCellObservableValue(newItem).getValue();
             Integer value = map.getOrDefault(k, 0);
-            map.put(k ,++value);
+            map.put(k, ++value);
         }
 //        将统计出来的结果初始化后插入表中
         int newSelectedCount = 0;
@@ -214,7 +213,7 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
                     selectedCount--;
                     selectedValues.remove(statistics.getValue());
                 }
-                if (!disableRequestFiltering){
+                if (!disableRequestFiltering) {
                     requestFiltering(selectedCount > 0);
                 }
             });
@@ -225,7 +224,7 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
     }
 
     @Data
-    protected static class Statistics<T>{
+    protected static class Statistics<T> {
 
         private T value;
 
@@ -237,7 +236,7 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
             return selectedProperty.get();
         }
 
-        public void setSelected(boolean selected){
+        public void setSelected(boolean selected) {
             selectedProperty.set(selected);
         }
 
@@ -264,7 +263,7 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
         }
     }
 
-    protected boolean disableFilter(){
+    protected boolean disableFilter() {
         return false;
     }
 
@@ -281,12 +280,12 @@ public class TableValueFilter<S, T> extends AbstractTableFilter<S, T> {
 
     @Override
     public List<S> filtering(List<S> items) {
-        if (selectedCount <= 0 || items == null || items.isEmpty()){
+        if (selectedCount <= 0 || items == null || items.isEmpty()) {
             return null;
         }
         ArrayList<S> result = new ArrayList<>();
         for (S s : items) {
-            if (selectedValues.contains(tableColumn.getCellObservableValue(s).getValue())){
+            if (selectedValues.contains(tableColumn.getCellObservableValue(s).getValue())) {
                 result.add(s);
             }
         }
