@@ -9,6 +9,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
@@ -22,6 +23,7 @@ import lombok.Setter;
 import java.io.File;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * @author 肖嘉威
@@ -73,8 +75,12 @@ public class MultiFileChooser {
     }
 
     private void loadMultiFileChooserView() {
+        loadMultiFileChooserView(null, null);
+    }
+
+    private void loadMultiFileChooserView(@Nullable Consumer<List<File>> callback, @Nullable Function<File, Node> fileCommentHandler) {
         if (multiFileChooserView == null) {
-            multiFileChooserView = new MultiFileChooserView(this);
+            multiFileChooserView = new MultiFileChooserView(this, callback, fileCommentHandler);
         }
     }
 
@@ -104,8 +110,19 @@ public class MultiFileChooser {
             @NotNull SelectionMode selectionMode,
             @Nullable List<@NotNull FileChooserFilter> fileFilters
     ) {
+        showDialog(parentWindows, callback, null, selectionMode, fileFilters);
+    }
+
+    public void showDialog(
+            @NotNull Window parentWindows,
+            @Nullable Consumer<@NotNull List<File>> callback,
+            @Nullable Function<File, Node> fileCommentHandler,
+            @NotNull SelectionMode selectionMode,
+            @Nullable List<@NotNull FileChooserFilter> fileFilters
+    ) {
         loadMultiFileChooserView();
         multiFileChooserView.setCallback(callback);
+        multiFileChooserView.setFileCommentHandler(fileCommentHandler);
         multiFileChooserView.clearFileFilter();
         multiFileChooserView.addFileFilters(fileFilters);
         multiFileChooserView.setSelectionMode(selectionMode);

@@ -68,13 +68,24 @@
             <Label onMouseClicked="#changeHiddenFileStatus" styleClass="ico-btn">
                 <graphic>
                     <StackPane>
-                        <InvisibleIco fx:id="hideHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
-                        <VisibleIco fx:id="showHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"
+                        <VisibleIco fx:id="hideHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                        <VisibleIco fx:id="showHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="main-color"
                                     visible="false"/>
                     </StackPane>
                 </graphic>
                 <tooltip>
-                    <Tooltip text="显示隐藏文件和目录"/>
+                    <Tooltip text="显示文件和目录"/>
+                </tooltip>
+            </Label>
+            <Label onMouseClicked="#changeRemoveDriverStatus" styleClass="ico-btn" visible="false" managed="false">
+                <graphic>
+                    <StackPane>
+                        <NetIco fx:id="hideNetIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray" visible="false"/>
+                        <NetIco fx:id="showNetIco" scaleX="${icoScale}" scaleY="${icoScale}" color="main-color"/>
+                    </StackPane>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="显示网络磁盘"/>
                 </tooltip>
             </Label>
         </HBox>

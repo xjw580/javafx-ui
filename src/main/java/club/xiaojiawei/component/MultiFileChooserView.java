@@ -13,16 +13,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import lombok.Getter;
@@ -31,10 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 
 import javax.swing.filechooser.FileSystemView;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -55,9 +57,13 @@ public class MultiFileChooserView extends StackPane {
     @FXML
     private NotificationManager<Object> notificationManager;
     @FXML
-    private InvisibleIco hideHiddenFileIco;
+    private VisibleIco hideHiddenFileIco;
     @FXML
     private VisibleIco showHiddenFileIco;
+    @FXML
+    private NetIco hideNetIco;
+    @FXML
+    private NetIco showNetIco;
     @FXML
     private ProgressModal progressModal;
     @FXML
@@ -65,11 +71,22 @@ public class MultiFileChooserView extends StackPane {
     @FXML
     private Label selectedCount;
 
+    /**
+     * 文件注释处理器
+     */
+    @Getter
+    private Function<@NotNull File, @Nullable Node> fileCommentHandler;
+
     private final ObjectProperty<SelectionMode> selectionMode;
     /**
      * 文件过滤器
      */
     private final ObservableList<FileChooserFilter> fileFilters = FXCollections.observableArrayList();
+
+    public void setFileCommentHandler(Function<File, Node> fileCommentHandler) {
+        this.fileCommentHandler = fileCommentHandler;
+        updateFileCellFactory();
+    }
 
     public SelectionMode getSelectionMode() {
         return selectionMode.get();
@@ -105,10 +122,11 @@ public class MultiFileChooserView extends StackPane {
     }
 
     public MultiFileChooserView(MultiFileChooser multiFileChooser) {
-        this(multiFileChooser, null);
+        this(multiFileChooser, null, null);
     }
 
-    public MultiFileChooserView(MultiFileChooser multiFileChooser, @Nullable Consumer<List<File>> callback) {
+    public MultiFileChooserView(MultiFileChooser multiFileChooser, @Nullable Consumer<List<File>> callback, @Nullable Function<File, Node> fileCommentHandler) {
+        this.fileCommentHandler = fileCommentHandler;
         this.callback = callback;
         this.multiFileChooser = multiFileChooser;
         try {
@@ -279,6 +297,19 @@ public class MultiFileChooserView extends StackPane {
         fileTreeView.setOnMouseClicked(event -> {
             updateSelectedFile();
         });
+        updateFileCellFactory();
+        fileTreeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        fileTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == null || newValue.getValue() == null) {
+                url.setValue(null);
+            } else {
+                lastSelectedFile = newValue.getValue();
+                url.setValue(newValue.getValue());
+            }
+        });
+    }
+
+    private void updateFileCellFactory() {
         fileTreeView.setCellFactory(new Callback<>() {
             @Override
             public TreeCell<File> call(TreeView<File> param) {
@@ -288,29 +319,29 @@ public class MultiFileChooserView extends StackPane {
                     protected void updateItem(File item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty || item == null) {
-                            setText(null);
+//                            setText(null);
                             setGraphic(null);
                         } else {
                             String name = item.getName();
                             if (name.isBlank()) {
                                 name = item.getAbsolutePath();
                             }
-                            setText(name);
-                            setFileItemStyle(item);
+//                            setText(name);
+                            setFileItemStyle(item, name);
                         }
                     }
 
-                    private void setFileItemStyle(File item) {
+                    private void setFileItemStyle(File item, String name) {
                         AbstractIco fileIcon;
                         if (item.isDirectory()) {
                             fileIcon = new DirIco();
                         } else {
                             fileIcon = new UnknowFileIco();
                         }
+                        fileIcon.getStyleClass().add("file-icon");
                         if (isSelected() && testFileResultFilter(item)) {
                             fileIcon.getStyleClass().add("filter-ico");
                         }
-                        fileIcon.getStyleClass().add("file-icon");
                         if (isHideFile(item)) {
                             fileIcon.setColor("gray");
                             setStyle("-fx-text-fill: rgb(113,113,165)");
@@ -321,18 +352,20 @@ public class MultiFileChooserView extends StackPane {
                         double scale = 0.85;
                         fileIcon.setScaleX(scale);
                         fileIcon.setScaleY(scale);
-                        setGraphic(fileIcon);
+                        HBox space = new HBox();
+                        HBox.setHgrow(space, Priority.ALWAYS);
+                        var itemRoot = new HBox(fileIcon, new Text(name), space) {{
+                            setSpacing(2);
+                        }};
+                        if (fileCommentHandler != null) {
+                            Node fileComment = fileCommentHandler.apply(item);
+                            if (fileComment != null) {
+                                itemRoot.getChildren().add(fileComment);
+                            }
+                        }
+                        setGraphic(itemRoot);
                     }
                 };
-            }
-        });
-        fileTreeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        fileTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue.getValue() == null) {
-                url.setValue(null);
-            } else {
-                lastSelectedFile = newValue.getValue();
-                url.setValue(newValue.getValue());
             }
         });
     }
@@ -399,31 +432,72 @@ public class MultiFileChooserView extends StackPane {
         }
     }
 
+    public static boolean isNetworkDrive(String driveLetter) {
+        try {
+            // 规范化盘符格式，例如 "D:" 或 "D"
+            String normalizedDrive = driveLetter.endsWith(":") ? driveLetter : driveLetter + ":";
+
+            // 使用 PowerShell 获取驱动器类型
+            String command = "powershell -Command \"(Get-PSDrive -Name '" + normalizedDrive.charAt(0) + "').Provider.Name -eq 'FileSystem' -and (Get-WmiObject -Class Win32_LogicalDisk -Filter \\\"DeviceID='" + normalizedDrive + "'\\\").DriveType -eq 4\"";
+            Process process = Runtime.getRuntime().exec(command);
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));){
+
+                StringBuilder output = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line);
+                }
+                process.waitFor();
+
+                return "True".equals(output.toString().trim());
+            }
+        } catch (Exception e) {
+            System.out.println("无法检查盘符 " + driveLetter + ": " + e.getMessage());
+            return false;
+        }
+    }
+
     @NotNull
     private List<TreeItem<File>> loadFiles(@Nullable File dir, boolean loadChildren) {
         File[] files;
         if (dir == null) {
-            files = File.listRoots();
+            if (showNetIco.isVisible()) {
+                files = File.listRoots();
+            } else {
+                File[] tempFiles = File.listRoots();
+                ArrayList<File> noRemoteDrive = new ArrayList<>();
+                if (tempFiles != null) {
+                    for (File file : tempFiles) {
+                        if (!isNetworkDrive(file.getAbsolutePath().replace(File.separator, ""))){
+                            noRemoteDrive.add(file);
+                        }
+                    }
+                }
+                files = noRemoteDrive.toArray(new File[0]);
+            }
         } else {
             files = dir.listFiles();
         }
         if (files == null) {
             return Collections.emptyList();
         } else {
-            ArrayList<TreeItem<File>> result = new ArrayList<>();
-            for (File file : files) {
-                if (!testFileShowFilter(file)) continue;
+            List<TreeItem<File>> result = new ArrayList<>();
+//            为了性能考量
+            if (!loadChildren && files.length > 0) {
+                result.add(new TreeItem<>());
+            } else {
+                for (File file : files) {
+                    if (!testFileShowFilter(file)) continue;
 
-                TreeItem<File> treeItem = new TreeItem<>(file);
-                if (loadChildren) {
+                    TreeItem<File> treeItem = new TreeItem<>(file);
                     treeItem.expandedProperty().addListener((observable, oldValue, newValue) -> {
                         if (newValue) {
                             treeItem.getChildren().setAll(loadFiles(file, true));
                         }
                     });
                     treeItem.getChildren().setAll(loadFiles(file, false));
+                    result.add(treeItem);
                 }
-                result.add(treeItem);
             }
             return result;
         }
@@ -653,11 +727,23 @@ public class MultiFileChooserView extends StackPane {
         refresh();
     }
 
+    @FXML
+    protected void changeRemoveDriverStatus() {
+        if (hideNetIco.isVisible()) {
+            hideNetIco.setVisible(false);
+            showNetIco.setVisible(true);
+        } else {
+            hideNetIco.setVisible(true);
+            showNetIco.setVisible(false);
+        }
+        refresh();
+    }
+
     public void refresh() {
         File initialDirectory = multiFileChooser.getInitialDirectory();
         DoubleProperty progress = progressModal.show("加载文件中...");
         fileTreeView.getSelectionModel().clearSelection();
-        Thread.ofVirtual().start(() -> {
+        new Thread(() -> {
             List<TreeItem<File>> treeItems = loadFiles(null, true);
             Platform.runLater(() -> {
                 TreeItem<File> root = fileTreeView.getRoot();
@@ -679,7 +765,7 @@ public class MultiFileChooserView extends StackPane {
                 updateSelectedFile();
                 progressModal.hide(progress);
             });
-        });
+        }).start();
     }
 
     public static void clearHistory() {

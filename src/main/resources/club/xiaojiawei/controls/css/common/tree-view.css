@@ -8,6 +8,9 @@
 .tree-view-ui .tree-cell:selected .filter-ico {
     -fx-background-color: success-color;
 }
+.tree-view-ui .tree-cell .file-icon {
+    -fx-background-color: rgb(230, 234, 241);
+}
 .tree-view-ui:focused .tree-cell:hover {
     -fx-background-color: #f5f8fe;
 }
