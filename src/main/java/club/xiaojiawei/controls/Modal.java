@@ -75,6 +75,14 @@ public class Modal implements MarkLogging {
 
     private Runnable cancelRunnable;
 
+    public void setAlwaysOnTop(boolean alwaysOnTop) {
+        stage.setAlwaysOnTop(alwaysOnTop);
+    }
+
+    public boolean isAlwaysOnTop() {
+        return stage.isAlwaysOnTop();
+    }
+
     public boolean isShowing() {
         return showing.get();
     }
