@@ -12,7 +12,7 @@
          stylesheets="@css/multiFileChooserView.css"
          fx:id="rootPane"
          xmlns:fx="http://javafx.com/fxml"
-         prefHeight="520.0" prefWidth="400.0">
+         prefHeight="700.0" prefWidth="600.0">
     <VBox style="-fx-padding: 10;-fx-spacing: 6">
         <fx:define>
             <Double fx:id="icoScale" fx:value="0.9"/>
@@ -69,7 +69,8 @@
                 <graphic>
                     <StackPane>
                         <VisibleIco fx:id="hideHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
-                        <VisibleIco fx:id="showHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}" color="main-color"
+                        <VisibleIco fx:id="showHiddenFileIco" scaleX="${icoScale}" scaleY="${icoScale}"
+                                    color="main-color"
                                     visible="false"/>
                     </StackPane>
                 </graphic>
@@ -80,7 +81,8 @@
             <Label onMouseClicked="#changeRemoveDriverStatus" styleClass="ico-btn" visible="false" managed="false">
                 <graphic>
                     <StackPane>
-                        <NetIco fx:id="hideNetIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray" visible="false"/>
+                        <NetIco fx:id="hideNetIco" scaleX="${icoScale}" scaleY="${icoScale}" color="gray"
+                                visible="false"/>
                         <NetIco fx:id="showNetIco" scaleX="${icoScale}" scaleY="${icoScale}" color="main-color"/>
                     </StackPane>
                 </graphic>
@@ -89,24 +91,30 @@
                 </tooltip>
             </Label>
         </HBox>
-<!--        <FilterField fx:id="url" promptText="输入路径回车搜索" styleClass="text-field-ui"/>-->
-        <ComboBox fx:id="url" styleClass="combo-box-idea" editable="true" prefWidth="${rootPane.width}" promptText="输入路径回车搜索"/>
-        <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" minHeight="200">
-            <VisibleTreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
-        </ScrollPane>
-        <VBox>
-            <HBox alignment="CENTER_LEFT">
-                <Label text="已选 "/>
-                <Label text="0" fx:id="selectedCount" style="-fx-font-size: 13;-fx-font-weight: bold;"/>
-                <Label text=" 个："/>
-            </HBox>
-            <FlowPane fx:id="selectedFilePane" VBox.vgrow="ALWAYS" style="-fx-padding: 5" hgap="3"/>
-        </VBox>
-        <HBox alignment="CENTER_RIGHT" style="-fx-padding: 6 10 5 10;-fx-spacing: 20">
-            <Button text="确认" styleClass="btn-ui, btn-ui-success" onAction="#ok"/>
-            <Button text="取消" styleClass="btn-ui" onAction="#cancel"/>
-        </HBox>
+        <!--        <FilterField fx:id="url" promptText="输入路径回车搜索" styleClass="text-field-ui"/>-->
+        <ComboBox fx:id="url" styleClass="combo-box-idea" editable="true" prefWidth="${rootPane.width}"
+                  promptText="输入路径回车搜索"/>
+        <SplitPane dividerPositions="0.85" orientation="VERTICAL" VBox.vgrow="ALWAYS"
+                   style="-fx-background-insets: none">
+            <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" minHeight="200">
+                <VisibleTreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
+            </ScrollPane>
+            <VBox>
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="已选 "/>
+                    <Label text="0" fx:id="selectedCount" style="-fx-font-size: 13;-fx-font-weight: bold;"/>
+                    <Label text=" 个："/>
+                </HBox>
+                <ScrollPane VBox.vgrow="ALWAYS" fitToHeight="true" style="-fx-background-insets: none">
+                    <FlowPane fx:id="selectedFilePane" style="-fx-padding: 5 5 30 5" hgap="3"/>
+                </ScrollPane>
+            </VBox>
+        </SplitPane>
     </VBox>
+    <HBox alignment="BOTTOM_RIGHT" style="-fx-padding: 15;-fx-spacing: 20" pickOnBounds="false">
+        <Button text="确认" styleClass="btn-ui, btn-ui-success" onAction="#ok"/>
+        <Button text="取消" styleClass="btn-ui" onAction="#cancel"/>
+    </HBox>
     <ProgressModal fx:id="progressModal"/>
     <NotificationManager fx:id="notificationManager" notificationPos="CENTER"/>
 </fx:root>
