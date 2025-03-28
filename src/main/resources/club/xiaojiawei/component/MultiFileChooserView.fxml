@@ -8,6 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.Double?>
+<?import javafx.scene.text.Text?>
 <fx:root type="StackPane" xmlns="http://javafx.com/javafx"
          stylesheets="@css/multiFileChooserView.css"
          fx:id="rootPane"
@@ -94,21 +95,36 @@
         <!--        <FilterField fx:id="url" promptText="输入路径回车搜索" styleClass="text-field-ui"/>-->
         <ComboBox fx:id="url" styleClass="combo-box-idea" editable="true" prefWidth="${rootPane.width}"
                   promptText="输入路径回车搜索"/>
-        <SplitPane dividerPositions="0.85" orientation="VERTICAL" VBox.vgrow="ALWAYS"
+        <SplitPane dividerPositions="0.8" orientation="VERTICAL" VBox.vgrow="ALWAYS"
                    style="-fx-background-insets: none">
             <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" minHeight="200">
                 <VisibleTreeView fx:id="fileTreeView" styleClass="tree-view-ui"/>
             </ScrollPane>
-            <VBox>
-                <HBox alignment="CENTER_LEFT">
-                    <Label text="已选 "/>
-                    <Label text="0" fx:id="selectedCount" style="-fx-font-size: 13;-fx-font-weight: bold;"/>
-                    <Label text=" 个："/>
-                </HBox>
-                <ScrollPane VBox.vgrow="ALWAYS" fitToHeight="true" style="-fx-background-insets: none">
-                    <FlowPane fx:id="selectedFilePane" style="-fx-padding: 5 5 30 5" hgap="3"/>
-                </ScrollPane>
-            </VBox>
+            <StackPane>
+                <VBox fx:id="chooseFilePane">
+                    <HBox alignment="CENTER_LEFT">
+                        <Label text="已选 "/>
+                        <Label text="0" fx:id="selectedCount" style="-fx-font-size: 13;-fx-font-weight: bold;"/>
+                        <Label text=" 个："/>
+                    </HBox>
+                    <ScrollPane VBox.vgrow="ALWAYS" fitToHeight="true" style="-fx-background-insets: none">
+                        <FlowPane fx:id="selectedFilePane" style="-fx-padding: 5 5 30 5" hgap="3"/>
+                    </ScrollPane>
+                </VBox>
+                <VBox fx:id="saveFilePane" spacing="5" style="-fx-padding: 5" visible="false" managed="false">
+                    <fx:define>
+                        <Double fx:id="tagNameWidth" fx:value="55"/>
+                    </fx:define>
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="文件名:" minWidth="${tagNameWidth}" alignment="CENTER_RIGHT"/>
+                        <ComboBox fx:id="saveFileName" styleClass="combo-box-idea" editable="true" prefWidth="${rootPane.width}"/>
+                    </HBox>
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="保存类型:" minWidth="${tagNameWidth}" alignment="CENTER_RIGHT"/>
+                        <ComboBox fx:id="saveFileType" styleClass="combo-box-idea" prefWidth="${rootPane.width}"/>
+                    </HBox>
+                </VBox>
+            </StackPane>
         </SplitPane>
     </VBox>
     <HBox alignment="BOTTOM_RIGHT" style="-fx-padding: 15;-fx-spacing: 20" pickOnBounds="false">

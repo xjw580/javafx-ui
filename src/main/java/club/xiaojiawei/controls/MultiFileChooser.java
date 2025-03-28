@@ -5,15 +5,13 @@ import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.Nullable;
 import club.xiaojiawei.bean.FileChooserFilter;
 import club.xiaojiawei.component.MultiFileChooserView;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -44,6 +42,20 @@ public class MultiFileChooser {
 //    private Modal modal;
 
     private Stage stage;
+
+    private final BooleanProperty alwaysOnTop = new SimpleBooleanProperty(false);
+
+    public boolean isAlwaysOnTop() {
+        return alwaysOnTop.get();
+    }
+
+    public BooleanProperty alwaysOnTopProperty() {
+        return alwaysOnTop;
+    }
+
+    public void setAlwaysOnTop(boolean alwaysOnTop) {
+        this.alwaysOnTop.set(alwaysOnTop);
+    }
 
     public String getTitle() {
         return title.get();
@@ -104,13 +116,21 @@ public class MultiFileChooser {
         showDialog(parentWindows, callback, SelectionMode.MULTIPLE, List.of(FileChooserFilter.FILE_CHOOSER_FILTER));
     }
 
+    public void showSaveFileDialog(
+            @NotNull Window parentWindows,
+            @Nullable Consumer<@NotNull List<File>> callback,
+            @Nullable List<FileChooser.ExtensionFilter> fileTypeFilter
+    ) {
+        showDialog(parentWindows, callback, null, SelectionMode.SINGLE, List.of(FileChooserFilter.FILE_CHOOSER_FILTER), fileTypeFilter);
+    }
+
     public void showDialog(
             @NotNull Window parentWindows,
             @Nullable Consumer<@NotNull List<File>> callback,
             @NotNull SelectionMode selectionMode,
             @Nullable List<@NotNull FileChooserFilter> fileFilters
     ) {
-        showDialog(parentWindows, callback, null, selectionMode, fileFilters);
+        showDialog(parentWindows, callback, null, selectionMode, fileFilters, null);
     }
 
     public void showDialog(
@@ -118,14 +138,16 @@ public class MultiFileChooser {
             @Nullable Consumer<@NotNull List<File>> callback,
             @Nullable Function<File, Node> fileCommentHandler,
             @NotNull SelectionMode selectionMode,
-            @Nullable List<@NotNull FileChooserFilter> fileFilters
+            @Nullable List<@NotNull FileChooserFilter> fileFilters,
+            @Nullable List<FileChooser.ExtensionFilter> fileTypeFilter
     ) {
         loadMultiFileChooserView();
-        multiFileChooserView.setCallback(callback);
+        multiFileChooserView.setSelectedCallback(callback);
         multiFileChooserView.setFileCommentHandler(fileCommentHandler);
         multiFileChooserView.clearFileFilter();
         multiFileChooserView.addFileFilters(fileFilters);
         multiFileChooserView.setSelectionMode(selectionMode);
+        multiFileChooserView.setFileTypeFilter(fileTypeFilter);
         multiFileChooserView.refresh();
         if (stage == null) {
 //            modal = new Modal(parentWindows.getScene().getRoot(), multiFileChooserView);
@@ -147,6 +169,7 @@ public class MultiFileChooser {
                 stage.getIcons().addAll(parentStage.getIcons());
             }
         }
+        stage.setAlwaysOnTop(isAlwaysOnTop());
         stage.show();
     }
 

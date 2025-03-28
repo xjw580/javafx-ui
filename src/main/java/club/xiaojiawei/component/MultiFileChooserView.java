@@ -9,6 +9,7 @@ import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 import lombok.Getter;
@@ -38,6 +40,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 
 /**
  * @author 肖嘉威
@@ -70,12 +73,38 @@ public class MultiFileChooserView extends StackPane {
     private FlowPane selectedFilePane;
     @FXML
     private Label selectedCount;
+    @FXML
+    private ComboBox<String> saveFileName;
+    @FXML
+    private ComboBox<FileChooser.ExtensionFilter> saveFileType;
+    @FXML
+    private Pane chooseFilePane;
+    @FXML
+    private Pane saveFilePane;
 
     /**
      * 文件注释处理器
      */
     @Getter
     private Function<@NotNull File, @Nullable Node> fileCommentHandler;
+
+    private final ObservableList<FileChooser.ExtensionFilter> fileTypeFilter = FXCollections.observableArrayList();
+
+    public ObservableList<FileChooser.ExtensionFilter> getFileTypeFilter() {
+        return fileTypeFilter;
+    }
+
+    public void setFileTypeFilter(List<FileChooser.ExtensionFilter> fileTypeFilter) {
+        if (fileTypeFilter == null) {
+            this.fileTypeFilter.clear();
+        } else {
+            this.fileTypeFilter.setAll(fileTypeFilter);
+        }
+    }
+
+    public ObservableList<FileChooser.ExtensionFilter> fileTypeFilter() {
+        return fileTypeFilter;
+    }
 
     private final ObjectProperty<SelectionMode> selectionMode;
     /**
@@ -125,9 +154,9 @@ public class MultiFileChooserView extends StackPane {
         this(multiFileChooser, null, null);
     }
 
-    public MultiFileChooserView(MultiFileChooser multiFileChooser, @Nullable Consumer<List<File>> callback, @Nullable Function<File, Node> fileCommentHandler) {
+    public MultiFileChooserView(MultiFileChooser multiFileChooser, @Nullable Consumer<List<File>> selectedCallback, @Nullable Function<File, Node> fileCommentHandler) {
         this.fileCommentHandler = fileCommentHandler;
-        this.callback = callback;
+        this.selectedCallback = selectedCallback;
         this.multiFileChooser = multiFileChooser;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -147,21 +176,76 @@ public class MultiFileChooserView extends StackPane {
 
     @Setter
     @Getter
-    private Consumer<@NotNull List<File>> callback;
+    private Consumer<@NotNull List<File>> selectedCallback;
 
     private final MultiFileChooser multiFileChooser;
 
     private boolean ctrlDown;
 
-    private static LinkedHashSet<File> historyQueue;
+    private static LinkedHashSet<File> historySearchQueue;
+
+    private static LinkedHashSet<String> historySaveQueue;
 
     private final static int MAX_HISTORY_COUNT = 20;
 
     private boolean isSelecting = false;
 
+    private String formatFileTypeList(List<String> fileTypes) {
+        StringBuilder builder = new StringBuilder();
+        for (String fileType : fileTypes) {
+            builder.append("*.").append(fileType).append(",");
+        }
+        if (!builder.isEmpty()) {
+            builder.deleteCharAt(builder.length() - 1);
+        }
+        return builder.toString();
+    }
+
+    private String formatFileType(FileChooser.ExtensionFilter extensionFilter) {
+        return extensionFilter == null ? "" : String.format("%s (%s)", extensionFilter.getDescription(), formatFileTypeList(extensionFilter.getExtensions()));
+    }
+
     private void afterFXMLLoaded() {
-        if (historyQueue != null) {
-            url.getItems().setAll(historyQueue);
+        saveFileName.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                ok();
+            }
+        });
+        fileTypeFilter.addListener((ListChangeListener<FileChooser.ExtensionFilter>) change -> {
+            if (fileTypeFilter.isEmpty()) {
+                saveFilePane.setVisible(false);
+                saveFilePane.setManaged(false);
+                chooseFilePane.setVisible(true);
+                chooseFilePane.setManaged(true);
+            } else {
+                chooseFilePane.setVisible(false);
+                chooseFilePane.setManaged(false);
+                saveFilePane.setVisible(true);
+                saveFilePane.setManaged(true);
+            }
+            saveFileType.getItems().clear();
+            saveFileType.getItems().addAll(fileTypeFilter);
+            if (saveFileType.getValue() == null && !saveFileType.getItems().isEmpty()) {
+                saveFileType.getSelectionModel().selectFirst();
+            }
+        });
+        saveFileType.setConverter(new StringConverter<>() {
+
+            @Override
+            public String toString(FileChooser.ExtensionFilter extensionFilter) {
+                return formatFileType(extensionFilter);
+            }
+
+            @Override
+            public FileChooser.ExtensionFilter fromString(String s) {
+                return null;
+            }
+        });
+        if (historySearchQueue != null) {
+            url.getItems().setAll(historySearchQueue);
+        }
+        if (historySaveQueue != null) {
+            saveFileName.getItems().setAll(historySaveQueue);
         }
         if (hideHiddenFileIco.isVisible()) {
             fileFilters.addFirst(HIDDEN_FILE_FILTER);
@@ -202,15 +286,7 @@ public class MultiFileChooserView extends StackPane {
                 } else if (!selectFileItem(file, true)) {
                     notificationManager.showWarn("未找到" + file.getAbsolutePath(), 2);
                 }
-                if (historyQueue == null) {
-                    historyQueue = new LinkedHashSet<>(MAX_HISTORY_COUNT);
-                }
-                historyQueue.remove(file);
-                historyQueue.addFirst(file);
-                if (historyQueue.size() > MAX_HISTORY_COUNT) {
-                    historyQueue.removeLast();
-                }
-                url.getItems().setAll(historyQueue);
+                updateSearchHistory(file);
                 url.getEditor().setText(text);
                 updateSelectedFile();
             }
@@ -303,8 +379,10 @@ public class MultiFileChooserView extends StackPane {
             if (newValue == null || newValue.getValue() == null) {
                 url.setValue(null);
             } else {
-                lastSelectedFile = newValue.getValue();
                 url.setValue(newValue.getValue());
+                if (testFileSaveFilter(newValue.getValue())) {
+                    saveFileName.setValue(newValue.getValue().getName());
+                }
             }
         });
     }
@@ -398,6 +476,22 @@ public class MultiFileChooserView extends StackPane {
         return file.isHidden() && !file.getName().isBlank();
     }
 
+    private boolean testFileSaveFilter(@NotNull File file) {
+        boolean filter = true;
+        FileChooser.ExtensionFilter value = saveFileType.getValue();
+        if (value != null) {
+            String name = file.getName();
+            for (String extension : value.getExtensions()) {
+                extension = ".*\\." + extension;
+                if (!Pattern.matches(extension, name)) {
+                    filter = false;
+                    break;
+                }
+            }
+        }
+        return filter;
+    }
+
     private boolean testFileShowFilter(@NotNull File file) {
         boolean filter = true;
         for (FileChooserFilter fileFilter : fileFilters) {
@@ -407,7 +501,14 @@ public class MultiFileChooserView extends StackPane {
                 break;
             }
         }
+        if (filter && file.isFile() && !isDiskFile(file)) {
+            filter = testFileSaveFilter(file);
+        }
         return filter;
+    }
+
+    private boolean isDiskFile(@NotNull File file) {
+        return file.getName().isEmpty();
     }
 
     private boolean testFileResultFilter(@NotNull File file) {
@@ -419,15 +520,76 @@ public class MultiFileChooserView extends StackPane {
                 break;
             }
         }
+        if (filter) {
+            filter = testFileSaveFilter(file);
+        }
         return filter;
     }
 
-    private void invokeCallback(boolean valid) {
-        if (callback != null) {
+    private void updateSaveHistory(String fileName) {
+        if (historySaveQueue == null) {
+            historySaveQueue = new LinkedHashSet<>(MAX_HISTORY_COUNT);
+        }
+        historySaveQueue.remove(fileName);
+        historySaveQueue.addFirst(fileName);
+        if (historySaveQueue.size() > MAX_HISTORY_COUNT) {
+            historySaveQueue.removeLast();
+        }
+        saveFileName.getItems().setAll(historySaveQueue);
+    }
+
+    private void updateSearchHistory(File file) {
+        if (historySearchQueue == null) {
+            historySearchQueue = new LinkedHashSet<>(MAX_HISTORY_COUNT);
+        }
+        historySearchQueue.remove(file);
+        historySearchQueue.addFirst(file);
+        if (historySearchQueue.size() > MAX_HISTORY_COUNT) {
+            historySearchQueue.removeLast();
+        }
+        lastSelectedFile = file;
+        url.getItems().setAll(historySearchQueue);
+    }
+
+    private void invokeCallback(boolean valid, Consumer<Boolean> callback) {
+        if (selectedCallback != null) {
             if (valid) {
-                callback.accept(getSelectedFiles().stream().filter(this::testFileResultFilter).toList());
+                List<File> res = Collections.emptyList();
+                if (saveFileType.getValue() != null) {
+                    if (!saveFileType.getValue().getExtensions().isEmpty()) {
+                        String fileName = saveFileName.getValue();
+                        List<String> suffix = saveFileType.getValue().getExtensions();
+                        if (fileName != null && !fileName.isBlank()) {
+                            if (!fileName.endsWith(suffix.getFirst())) {
+                                fileName += "." + suffix.getFirst();
+                            }
+                            File file = url.getValue();
+                            if (file.isFile()) {
+                                file = file.getParentFile();
+                            }
+                            File saveFile = file.toPath().resolve(fileName).toFile();
+                            res = List.of(saveFile);
+                            updateSaveHistory(fileName);
+                        }
+                    }
+                } else {
+                    res = getSelectedFiles().stream().filter(this::testFileResultFilter).toList();
+                }
+                if (res.isEmpty()) {
+                    callback.accept(false);
+                } else {
+                    File urlFile = url.getValue();
+                    if (urlFile != null) {
+                        updateSearchHistory(urlFile);
+                    }
+                    callback.accept(true);
+                    selectedCallback.accept(res);
+                }
             } else {
-                callback.accept(Collections.emptyList());
+                if (callback != null) {
+                    callback.accept(true);
+                }
+                selectedCallback.accept(Collections.emptyList());
             }
         }
     }
@@ -440,7 +602,7 @@ public class MultiFileChooserView extends StackPane {
             // 使用 PowerShell 获取驱动器类型
             String command = "powershell -Command \"(Get-PSDrive -Name '" + normalizedDrive.charAt(0) + "').Provider.Name -eq 'FileSystem' -and (Get-WmiObject -Class Win32_LogicalDisk -Filter \\\"DeviceID='" + normalizedDrive + "'\\\").DriveType -eq 4\"";
             Process process = Runtime.getRuntime().exec(command);
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));){
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));) {
 
                 StringBuilder output = new StringBuilder();
                 String line;
@@ -459,7 +621,7 @@ public class MultiFileChooserView extends StackPane {
 
     @NotNull
     private List<TreeItem<File>> loadFiles(@Nullable File dir, boolean loadChildren) {
-        File[] files;
+        File[] files = null;
         if (dir == null) {
             if (showNetIco.isVisible()) {
                 files = File.listRoots();
@@ -468,7 +630,7 @@ public class MultiFileChooserView extends StackPane {
                 ArrayList<File> noRemoteDrive = new ArrayList<>();
                 if (tempFiles != null) {
                     for (File file : tempFiles) {
-                        if (!isNetworkDrive(file.getAbsolutePath().replace(File.separator, ""))){
+                        if (!isNetworkDrive(file.getAbsolutePath().replace(File.separator, ""))) {
                             noRemoteDrive.add(file);
                         }
                     }
@@ -476,7 +638,10 @@ public class MultiFileChooserView extends StackPane {
                 files = noRemoteDrive.toArray(new File[0]);
             }
         } else {
-            files = dir.listFiles();
+            File[] tempFiles = dir.listFiles();
+            if (tempFiles != null) {
+                files = Arrays.stream(tempFiles).filter(this::testFileShowFilter).toArray(File[]::new);
+            }
         }
         if (files == null) {
             return Collections.emptyList();
@@ -487,8 +652,6 @@ public class MultiFileChooserView extends StackPane {
                 result.add(new TreeItem<>());
             } else {
                 for (File file : files) {
-                    if (!testFileShowFilter(file)) continue;
-
                     TreeItem<File> treeItem = new TreeItem<>(file);
                     treeItem.expandedProperty().addListener((observable, oldValue, newValue) -> {
                         if (newValue) {
@@ -588,20 +751,29 @@ public class MultiFileChooserView extends StackPane {
 
     @FXML
     protected void ok() {
-        multiFileChooser.hideDialog();
-        invokeCallback(true);
+        invokeCallback(true, res -> {
+            if (res) {
+                multiFileChooser.hideDialog();
+            }
+        });
     }
 
     @FXML
     protected void cancel() {
-        multiFileChooser.hideDialog();
-        invokeCallback(false);
+        invokeCallback(false, res -> {
+            if (res) {
+                multiFileChooser.hideDialog();
+            }
+        });
     }
 
     @FXML
     protected void closePage() {
-        multiFileChooser.hideDialog();
-        invokeCallback(false);
+        invokeCallback(false, res -> {
+            if (res) {
+                multiFileChooser.hideDialog();
+            }
+        });
     }
 
 
@@ -756,7 +928,11 @@ public class MultiFileChooserView extends StackPane {
                 root.getChildren().setAll(treeItems);
                 fileTreeView.refresh();
                 if (lastSelectedFile == null) {
-                    if (initialDirectory != null) {
+                    if (initialDirectory == null) {
+                        if (historySearchQueue != null && !historySearchQueue.isEmpty()) {
+                            selectFileItem(historySearchQueue.getFirst());
+                        }
+                    }else {
                         selectFileItem(initialDirectory);
                     }
                 } else {
@@ -769,6 +945,7 @@ public class MultiFileChooserView extends StackPane {
     }
 
     public static void clearHistory() {
-        historyQueue.clear();
+        historySearchQueue.clear();
+        historySaveQueue.clear();
     }
 }

@@ -12,18 +12,18 @@
     -fx-fill: red;
 }
 
-.combo-box-idea:editable {
+.combo-box-idea {
     -fx-border-color: #bababa;
     -fx-border-width: 1.5;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
 }
 
-.combo-box-idea:editable:focused {
+.combo-box-idea:focused {
     -fx-border-color: main-color;
 }
 
-.combo-box-idea:editable > .text-input {
+.combo-box-idea:editable > .text-input, .combo-box-idea .list-cell {
     -fx-font-size: 13;
     /*约束大小，防止过宽*/
     -fx-pref-width: 1;
@@ -37,7 +37,7 @@
     -fx-border-color: main-color;
 }
 
-.combo-box-idea:editable > .arrow-button {
+.combo-box-idea > .arrow-button {
     -fx-background-color: white;
     -fx-border-width: 0 0 0 1;
     -fx-border-color: #bababa;
@@ -45,7 +45,7 @@
     -fx-border-insets: 0;
 }
 
-.combo-box-idea:editable > .arrow-button .arrow {
+.combo-box-idea > .arrow-button .arrow {
     -fx-shape: "M5,5.9L5,5.9C5.3,6.1,5.6,6,5.8,5.8l4.8-4.7c0.2-0.2,0.2-0.6,0-0.9l0,0c-0.2-0.2-0.7-0.2-0.9,0L5.5,4.4L1.1,0.2 c-0.2-0.2-0.7-0.2-0.9,0s-0.2,0.6,0,0.8l0,0l4.8,4.7l0,0l0,0C4.8,5.8,4.9,5.8,5,5.9L5,5.9z";
     -fx-scale-shape: false;
 }
