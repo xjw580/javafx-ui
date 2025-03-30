@@ -2,11 +2,11 @@ package club.xiaojiawei.controls;
 
 import club.xiaojiawei.controls.ico.LoadingIco;
 import club.xiaojiawei.enums.BaseTransitionEnum;
+import javafx.animation.RotateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
@@ -14,21 +14,20 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 
-import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import static club.xiaojiawei.enums.BaseTransitionEnum.*;
 
 /**
  * 开关组件
+ *
  * @author 肖嘉威
  * @date 2023/7/3 12:21
  */
 @SuppressWarnings("unused")
-public class Switch extends StackPane{
+public class Switch extends StackPane {
 
     /* *************************************************************************
      *                                                                         *
@@ -75,16 +74,16 @@ public class Switch extends StackPane{
 
     public void setTransitionDuration(Duration transitionDuration) {
 //        动画效果为NONE时动画持续时间自然为0
-        if (transitionType == NONE){
+        if (transitionType == NONE) {
             this.transitionDuration = Duration.valueOf("1ms");
-        }else {
+        } else {
             this.transitionDuration = transitionDuration;
         }
     }
 
     public void setTranslationType(BaseTransitionEnum baseTransitionEnum) {
         this.transitionType = baseTransitionEnum;
-        if (transitionType == NONE){
+        if (transitionType == NONE) {
             this.transitionDuration = Duration.valueOf("1ms");
         }
     }
@@ -96,11 +95,13 @@ public class Switch extends StackPane{
     public boolean getInitStatus() {
         return this.status.get();
     }
+
     public BooleanProperty statusProperty() {
         return this.status;
     }
+
     public void setStatus(boolean status) {
-        if (status != this.status.get()){
+        if (status != this.status.get()) {
             noneTranslation();
             circleTranslate(false);
             this.status.set(status);
@@ -134,9 +135,12 @@ public class Switch extends StackPane{
      *                                                                         *
      **************************************************************************/
 
+    private RotateTransition loadingRotateTransition;
+
     public Switch() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
+            var aClass = Switch.class;
+            FXMLLoader fxmlLoader = new FXMLLoader(aClass.getResource(aClass.getSimpleName() + ".fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
@@ -147,12 +151,20 @@ public class Switch extends StackPane{
         this.disabledProperty().addListener((observableValue, aBoolean, t1) -> {
             if (t1) {
                 contentPane.setOpacity(0.4);
-            }else {
+            } else {
                 contentPane.setOpacity(1);
             }
         });
         loading.addListener((observableValue, aBoolean, t1) -> {
             loadingIco.setVisible(t1);
+            if (t1) {
+                loadingRotateTransition = new RotateTransition(Duration.seconds(2), loadingIco);
+                loadingRotateTransition.setByAngle(360);
+                loadingRotateTransition.setCycleCount(RotateTransition.INDEFINITE);
+                loadingRotateTransition.play();
+            } else if (loadingRotateTransition != null) {
+                loadingRotateTransition.stop();
+            }
             setDisable(t1);
         });
     }
@@ -178,6 +190,7 @@ public class Switch extends StackPane{
 
     /**
      * 开关被点击后触发事件
+     *
      * @param event
      */
     private void onMouseClicked(MouseEvent event) {
@@ -196,7 +209,7 @@ public class Switch extends StackPane{
             }
         }
         status.set(!status.get());
-        if (event != null){
+        if (event != null) {
             event.consume();
         }
     }
@@ -205,15 +218,15 @@ public class Switch extends StackPane{
      * 开关中的圆平移
      */
     private void circleTranslate(boolean playTransition) {
-        double translateFrom = - size / 2, translateTo = -translateFrom;
+        double translateFrom = -size / 2, translateTo = -translateFrom;
         if (status.get()) {
             final double temp = translateFrom;
             translateFrom = translateTo;
             translateTo = temp;
         }
-        if (playTransition){
+        if (playTransition) {
             SLIDE_X.play(switchCircle, translateFrom, translateTo, transitionDuration);
-        }else {
+        } else {
             switchCircle.setTranslateX(translateTo);
         }
     }
@@ -246,7 +259,7 @@ public class Switch extends StackPane{
     /**
      * 开关中的背景动画：缩放
      */
-    private void scaleTranslation(){
+    private void scaleTranslation() {
 
     }
 
@@ -261,7 +274,8 @@ public class Switch extends StackPane{
         }
     }
 
-    @FXML void initialize() {
+    @FXML
+    void initialize() {
         setSize(size);
     }
 
