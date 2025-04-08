@@ -3,7 +3,6 @@ package club.xiaojiawei.tablecell;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
 
@@ -15,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class TextFieldTableCellUI<S, T> extends TextFieldTableCell<S, T> {
 
-    private TextField node;
+    protected TextField node;
 
     public TextFieldTableCellUI() {
     }
@@ -38,15 +37,15 @@ public class TextFieldTableCellUI<S, T> extends TextFieldTableCell<S, T> {
         graphicProperty().addListener(changeListenerAtomicReference.get());
     }
 
-    protected String[] styleClass(){
+    protected String[] styleClass() {
         return new String[]{"text-field-ui", "text-field-ui-tiny"};
     }
 
     @Override
     public void startEdit() {
         if (node != null) {
-            node.setPrefWidth(getWidth());
-            node.setPrefHeight(getHeight());
+            node.setPrefWidth(getWidth() - 1);
+            node.setPrefHeight(getHeight() - 1);
         }
         super.startEdit();
     }
