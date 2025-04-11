@@ -18,6 +18,7 @@ module club.xiaojiawei.javafx_ui {
     requires jdk.jsobject;
     requires jdk.unsupported.desktop;
     requires org.apache.commons.io;
+    requires java.management;
 
     exports club.xiaojiawei;
     exports club.xiaojiawei.func;

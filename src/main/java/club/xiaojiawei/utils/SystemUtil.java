@@ -3,6 +3,8 @@ package club.xiaojiawei.utils;
 import club.xiaojiawei.JavaFXUI;
 import lombok.extern.slf4j.Slf4j;
 
+import java.awt.*;
+import java.awt.datatransfer.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -69,5 +71,30 @@ public class SystemUtil {
             }
         }
         return classNames;
+    }
+
+    public static String getClipboardText() {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable contents = clipboard.getContents(null);
+
+        if (contents == null) {
+            return null;
+        }
+
+        try {
+            if (contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+                return (String) contents.getTransferData(DataFlavor.stringFlavor);
+            }
+        } catch (UnsupportedFlavorException e) {
+            System.err.println("不支持的数据类型: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("读取剪切板数据出错: " + e.getMessage());
+        }
+
+        return null;
+    }
+
+    public static void copyTextToClipboard(String text) {
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(text), null);
     }
 }

@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
 
+import javax.management.ConstructorParameters;
 import java.io.IOException;
 
 import static club.xiaojiawei.enums.BaseTransitionEnum.*;
