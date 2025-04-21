@@ -25,6 +25,7 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei.enums;
     exports club.xiaojiawei.controls;
     exports club.xiaojiawei.controls.ico;
+    exports club.xiaojiawei.controls.images;
     exports club.xiaojiawei.factory;
     exports club.xiaojiawei.annotations;
     exports club.xiaojiawei.component;

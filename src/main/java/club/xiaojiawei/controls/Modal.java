@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
@@ -431,6 +432,10 @@ public class Modal implements MarkLogging {
      */
     public void show(){
         show(null);
+    }
+
+    public Window getWindow(){
+        return stage;
     }
 
     public void show(Runnable shownRunnable){
