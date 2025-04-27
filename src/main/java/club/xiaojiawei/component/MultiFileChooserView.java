@@ -583,8 +583,8 @@ public class MultiFileChooserView extends StackPane {
                         updateSearchHistory(urlFile);
                     }
                     callback.accept(true);
-                    selectedCallback.accept(res);
                 }
+                selectedCallback.accept(res);
             } else {
                 if (callback != null) {
                     callback.accept(true);
