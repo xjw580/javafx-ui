@@ -589,7 +589,6 @@ public class MultiFileChooserView extends StackPane {
                 if (callback != null) {
                     callback.accept(true);
                 }
-                selectedCallback.accept(Collections.emptyList());
             }
         }
     }
