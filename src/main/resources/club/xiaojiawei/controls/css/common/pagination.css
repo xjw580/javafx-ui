@@ -1,0 +1,169 @@
+@import "common.css";
+
+.root {
+    btn-background-color: #f5f5f5;
+}
+
+/* 基础 Pagination 样式 */
+.pagination-ui {
+    -fx-page-information-visible: false; /* 隐藏页码文本 */
+    -fx-background-color: transparent;
+}
+
+/* 分页按钮容器 */
+.pagination-ui > .pagination-control {
+    -fx-background-color: transparent;
+}
+
+/* 单个页码按钮 */
+.pagination-ui > .pagination-control > .control-box {
+    -fx-spacing: 10;
+}
+
+/* 页码按钮 */
+.pagination-ui > .pagination-control > .control-box > .number-button {
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-border-width: 0;
+    -fx-effect: default-effect;
+    -fx-background-color: btn-background-color;
+
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+    -fx-font-size: 12;
+}
+
+.pagination-ui > .pagination-control > .control-box > .number-button:pressed {
+    -fx-effect: default-press-effect !important;
+}
+
+/* 选中的页码按钮 */
+.pagination-ui > .pagination-control > .control-box > .number-button:selected {
+    -fx-background-color: system-hover-color;
+    -fx-text-fill: black;
+    -fx-effect: default-press-effect !important;
+}
+
+/*Size*/
+.pagination-ui-small > .pagination-control > .control-box > .number-button {
+    -fx-min-width: 22 !important;
+    -fx-min-height: 22 !important;;
+    -fx-font-size: 11 !important;;
+}
+
+.pagination-ui-small > .pagination-control > .control-box {
+    -fx-spacing: 6 !important;
+}
+
+.pagination-ui-small > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui-small > .pagination-control > .control-box > .left-arrow-button > .left-arrow {
+    -fx-scale-y: 1 !important;
+    -fx-scale-x: 1 !important;
+}
+
+.pagination-ui-small > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui-small > .pagination-control > .control-box > .right-arrow-button {
+    -fx-min-width: 27 !important;
+    -fx-min-height: 22 !important;
+}
+
+.pagination-ui-big > .pagination-control > .control-box > .number-button {
+    -fx-min-width: 38 !important;
+    -fx-min-height: 38 !important;;
+    -fx-font-size: 16 !important;;
+}
+
+.pagination-ui-big > .pagination-control > .control-box {
+    -fx-spacing: 15 !important;
+}
+
+.pagination-ui-big > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui-big > .pagination-control > .control-box > .left-arrow-button > .left-arrow {
+    -fx-scale-y: 1.5 !important;
+    -fx-scale-x: 1.5 !important;
+}
+
+.pagination-ui-big > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui-big > .pagination-control > .control-box > .right-arrow-button {
+    -fx-min-width: 43 !important;
+    -fx-min-height: 38 !important;
+}
+
+/*Color*/
+.pagination-ui-normal > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: normal-deep-color !important;
+}
+
+.pagination-ui-success > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: success-deep-color !important;
+}
+
+.pagination-ui-warn > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: warn-deep-color !important;
+}
+
+.pagination-ui-error > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: error-deep-color !important;
+}
+
+/* 悬停效果 */
+.pagination-ui > .pagination-control > .control-box > .number-button:hover {
+    -fx-background-color: system-hover-color;
+    -fx-effect: default-hover-effect;
+}
+
+/* 导航图标（上一页/下一页） */
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button > .left-arrow {
+    -fx-background-color: black;
+    -fx-scale-shape: false;
+    -fx-scale-y: 1.15;
+    -fx-scale-x: 1.15;
+}
+
+/* 导航图标（上一页） */
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button > .left-arrow {
+    -fx-shape: "M0.1,6.5L0.1,6.5C-0.1,6.9,0,7.3,0.3,7.6l6.1,6.2c0.3,0.3,0.8,0.3,1.2,0l0,0c0.3-0.3,0.3-0.9,0-1.2L2.1,7.1l5.5-5.7 c0.3-0.3,0.3-0.9,0-1.2s-0.8-0.3-1.1,0l0,0L0.4,6.4l0,0l0,0C0.2,6.3,0.2,6.4,0.1,6.5L0.1,6.5z";
+}
+
+/* 导航图标（下一页） */
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button > .right-arrow {
+    /*-fx-rotate: 270;*/
+    -fx-shape: "M7.7,7.5L7.7,7.5c0.2-0.4,0.1-0.8-0.2-1.1L1.4,0.2c-0.3-0.3-0.8-0.3-1.2,0l0,0c-0.3,0.3-0.3,0.9,0,1.2l5.5,5.5l-5.5,5.7 c-0.3,0.3-0.3,0.9,0,1.2s0.8,0.3,1.1,0l0,0l6.1-6.2l0,0l0,0C7.6,7.7,7.6,7.6,7.7,7.5L7.7,7.5z";
+}
+
+/* 导航按钮（上一页/下一页） */
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button {
+    -fx-background-radius: 50%;
+    -fx-border-width: 0;
+    -fx-min-width: 35;
+    -fx-min-height: 30;
+    -fx-effect: default-effect;
+    -fx-background-color: transparent;
+    -fx-border-radius: 50%;
+}
+
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button:pressed,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button:pressed {
+    -fx-effect: default-press-effect !important;
+}
+
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button:hover,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button:hover {
+    -fx-background-color: system-hover-color;
+    -fx-effect: default-hover-effect;
+}
+
+/* 禁用状态按钮 */
+.pagination-ui > .pagination-control > .control-box > .number-button:disabled,
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button:disabled {
+    -fx-opacity: 0.5;
+    /*-fx-effect: none !important;*/
+}
+

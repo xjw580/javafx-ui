@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="pagination-ui" baseIntroduce="ToggleButton也可以用"
+            sizeStyleClasses="pagination-ui-small,pagination-ui-big"
+            colorStyleClasses="pagination-ui-normal,pagination-ui-success,pagination-ui-warn,pagination-ui-error">
+        <baseShowChildren>
+            <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui" minWidth="250">
+                <tooltip>
+                    <Tooltip text="pagination"/>
+                </tooltip>
+            </Pagination>
+        </baseShowChildren>
+        <sizeShowChildren>
+            <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-small">
+                <tooltip>
+                    <Tooltip text="pagination-ui, pagination-ui-small"/>
+                </tooltip>
+            </Pagination>
+            <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-big">
+                <tooltip>
+                    <Tooltip text="pagination-ui, pagination-ui-big"/>
+                </tooltip>
+            </Pagination>
+        </sizeShowChildren>
+        <colorShowChildren>
+            <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-normal" minWidth="250">
+                <tooltip>
+                    <Tooltip text="pagination-ui, pagination-ui-normal"/>
+                </tooltip>
+            </Pagination>
+            <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-success" minWidth="250">
+                <tooltip>
+                    <Tooltip text="pagination-ui, pagination-ui-success"/>
+                </tooltip>
+            </Pagination>
+            <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-warn" minWidth="250">
+                <tooltip>
+                    <Tooltip text="pagination-ui, pagination-ui-warn"/>
+                </tooltip>
+            </Pagination>
+            <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-error" minWidth="250">
+                <tooltip>
+                    <Tooltip text="pagination-ui, pagination-ui-error"/>
+                </tooltip>
+            </Pagination>
+        </colorShowChildren>
+        <allShowChildren>
+            <VBox styleClass="show-hv-box">
+                <HBox styleClass="show-hv-box" alignment="CENTER_LEFT">
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-small">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-small"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-normal, pagination-ui-small">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-normal, pagination-ui-small"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-success, pagination-ui-small">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-success, pagination-ui-small"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-warn, pagination-ui-small">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-warn, pagination-ui-small"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-error, pagination-ui-small">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-error, pagination-ui-small"/>
+                        </tooltip>
+                    </Pagination>
+                </HBox>
+                <HBox styleClass="show-hv-box" alignment="CENTER_LEFT">
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui" minWidth="250">
+                        <tooltip>
+                            <Tooltip text="pagination-ui"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-normal" minWidth="250">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-normal"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-success" minWidth="250">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-success"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-warn" minWidth="250">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-warn"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-error" minWidth="250">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-error"/>
+                        </tooltip>
+                    </Pagination>
+                </HBox>
+                <HBox styleClass="show-hv-box" alignment="CENTER_LEFT">
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-big">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-big"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-normal, pagination-ui-big">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-normal, pagination-ui-big"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-success, pagination-ui-big">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-success, pagination-ui-big"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-warn, pagination-ui-big">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-warn, pagination-ui-big"/>
+                        </tooltip>
+                    </Pagination>
+                    <Pagination maxPageIndicatorCount="3" styleClass="pagination-ui, pagination-ui-error, pagination-ui-big">
+                        <tooltip>
+                            <Tooltip text="pagination-ui, pagination-ui-error, pagination-ui-big"/>
+                        </tooltip>
+                    </Pagination>
+                </HBox>
+            </VBox>
+        </allShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>
