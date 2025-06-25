@@ -350,7 +350,7 @@ public class Modal implements MarkLogging {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         Label label = new Label(heading);
-        label.setStyle("-fx-font-weight: bold;-fx-font-size: 14;-fx-wrap-text: true");
+        label.setStyle("-fx-font-weight: bold;-fx-font-size: 14;-fx-wrap-text: true;-fx-text-fill: black");
         hBox.getChildren().add(label);
         return hBox;
     }
