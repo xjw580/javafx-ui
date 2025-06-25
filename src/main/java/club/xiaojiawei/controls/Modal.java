@@ -112,7 +112,7 @@ public class Modal implements MarkLogging {
      * @param content
      */
     public Modal(Parent baseParent, Node content) {
-        if (baseParent == null){
+        if (baseParent == null) {
             throw new NullPointerException("parent不能为null");
         }
         buildRootPane(content);
@@ -127,7 +127,7 @@ public class Modal implements MarkLogging {
      * @param btnHandler
      */
     public Modal(Parent baseParent, String heading, Object content, Runnable... btnHandler) {
-        if (baseParent == null){
+        if (baseParent == null) {
             throw new NullPointerException("parent不能为null");
         }
         VBox vBox = buildConfirmBody(baseParent, heading, content);
@@ -144,7 +144,7 @@ public class Modal implements MarkLogging {
      * @param btn
      */
     public Modal(Parent baseParent, String heading, Object content, Button... btn) {
-        if (baseParent == null){
+        if (baseParent == null) {
             throw new NullPointerException("parent不能为null");
         }
         VBox vBox = buildConfirmBody(baseParent, heading, content);
@@ -165,8 +165,8 @@ public class Modal implements MarkLogging {
      * @param content
      * @param btn
      */
-    public Modal(Parent baseParent, Node heading, Node content, Button... btn){
-        if (baseParent == null){
+    public Modal(Parent baseParent, Node heading, Node content, Button... btn) {
+        if (baseParent == null) {
             throw new NullPointerException("parent不能为null");
         }
         VBox vBox = new VBox(heading, content);
@@ -189,8 +189,8 @@ public class Modal implements MarkLogging {
      *         {@code null} is implicitly converted to an empty String.
      * @param btn
      */
-    public Modal(Parent baseParent, Node heading, Node content, String style, Button... btn){
-        if (baseParent == null){
+    public Modal(Parent baseParent, Node heading, Node content, String style, Button... btn) {
+        if (baseParent == null) {
             throw new NullPointerException("parent不能为null");
         }
         VBox vBox = new VBox(heading, content);
@@ -216,7 +216,7 @@ public class Modal implements MarkLogging {
      *                                                                         *
      **************************************************************************/
 
-    private void addBtnClickLogListen(Button... btn){
+    private void addBtnClickLogListen(Button... btn) {
         if (JavaFXUI.getLogMark() != null) {
             for (Button button : btn) {
                 button.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
@@ -226,39 +226,39 @@ public class Modal implements MarkLogging {
         }
     }
 
-    private void recordBtnClickLog(String text){
+    private void recordBtnClickLog(String text) {
         if (JavaFXUI.getLogMark() != null) {
             log.info(JavaFXUI.getLogMark(), "{}:点击了【{}】", CN_NAME, text);
         }
     }
 
-    private HBox buildBtnHBox(){
+    private HBox buildBtnHBox() {
         HBox hBox = new HBox();
         hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15");
         return hBox;
     }
 
-    private VBox buildConfirmBody(Parent baseParent, String heading, Object content){
+    private VBox buildConfirmBody(Parent baseParent, String heading, Object content) {
         VBox vBox = new VBox();
         vBox.setPrefWidth(Math.min(350, baseParent.getScene().getWidth() - 10));
         vBox.setMaxHeight(baseParent.getScene().getHeight() - 10);
         int headHeight = 0, btnHeight = 29, inset = 20;
-        if (vBox.getMaxHeight() < 140){
+        if (vBox.getMaxHeight() < 140) {
             inset = 15;
             vBox.setStyle("-fx-padding: 15;-fx-spacing: 15;");
-        }else {
+        } else {
             vBox.setStyle("-fx-padding: 20;-fx-spacing: 20;");
         }
         headingStr = heading;
         contentObj = content;
-        if (heading != null && !heading.isBlank()){
+        if (heading != null && !heading.isBlank()) {
             vBox.getChildren().add(createHeading(heading));
             headHeight = 14;
         }
         double maxWidth = vBox.getPrefWidth() - 40;
         double maxHeight = vBox.getMaxHeight() - btnHeight - headHeight - inset * 3;
         if (content instanceof String contentStr) {
-            if (!contentStr.isBlank()){
+            if (!contentStr.isBlank()) {
                 vBox.getChildren().add(createContent(contentStr, maxWidth, maxHeight));
             }
         } else if (content instanceof Node node) {
@@ -267,7 +267,7 @@ public class Modal implements MarkLogging {
         return vBox;
     }
 
-    private void init(Parent baseParent){
+    private void init(Parent baseParent) {
         this.parent = baseParent;
         this.stage.initOwner(baseParent.getScene().getWindow());
 //        this.stage.initModality(Modality.APPLICATION_MODAL);
@@ -277,19 +277,19 @@ public class Modal implements MarkLogging {
         addClosingListener();
     }
 
-    private void addClosingListener(){
+    private void addClosingListener() {
         this.stage.getScene().addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
-            if (escClosable && keyEvent.getCode() == KeyCode.ESCAPE){
+            if (escClosable && keyEvent.getCode() == KeyCode.ESCAPE) {
                 close();
-                if (cancelRunnable != null){
+                if (cancelRunnable != null) {
                     cancelRunnable.run();
                 }
             }
         });
         this.stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (maskClosable && event.getTarget() instanceof StackPane stackPane && stackPane.getStyleClass().contains("root")){
+            if (maskClosable && event.getTarget() instanceof StackPane stackPane && stackPane.getStyleClass().contains("root")) {
                 close();
-                if (cancelRunnable != null){
+                if (cancelRunnable != null) {
                     cancelRunnable.run();
                 }
                 event.consume();
@@ -297,29 +297,29 @@ public class Modal implements MarkLogging {
         });
     }
 
-    private void initScene(){
+    private void initScene() {
         Scene scene = new Scene(rootPane);
         scene.setFill(Color.TRANSPARENT);
         JavaFXUI.addjavafxUIStylesheet(scene);
         this.stage.setScene(scene);
     }
 
-    private void addSizeListener(){
+    private void addSizeListener() {
         this.parent.getScene().widthProperty().addListener((observableValue, number, t1) -> stage.setWidth(t1.doubleValue()));
         this.parent.getScene().heightProperty().addListener((observableValue, number, t1) -> stage.setHeight(t1.doubleValue()));
         this.parent.getScene().getWindow().yProperty().addListener((observableValue, number, t1) -> {
-            if (this.parent.getScene() != null){
+            if (this.parent.getScene() != null) {
                 stage.setY(t1.doubleValue() + this.parent.getScene().getY());
             }
         });
         this.parent.getScene().getWindow().xProperty().addListener((observableValue, number, t1) -> {
-            if (this.parent.getScene() != null){
+            if (this.parent.getScene() != null) {
                 stage.setX(t1.doubleValue() + this.parent.getScene().getX());
             }
         });
     }
 
-    private void initSize(){
+    private void initSize() {
         Scene scene = parent.getScene();
         double width = scene.getWidth();
         double height = scene.getHeight();
@@ -329,14 +329,24 @@ public class Modal implements MarkLogging {
         stage.setX(scene.getWindow().getX() + scene.getX());
     }
 
-    private void buildRootPane(Node content){
-        rootPane = new StackPane(this.content = new Group(new StackPane(content) {{
+    private void buildRootPane(Node content) {
+        ScrollPane scrollPane = new ScrollPane(new StackPane(new Group(new StackPane(content) {{
             setStyle("-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 3);-fx-background-color: white;");
-        }}));
+        }}))) {{
+            setFitToWidth(true);
+            setFitToHeight(true);
+            setStyle("""
+                        -fx-background: transparent;
+                        -fx-background-color: transparent;
+                        -fx-background-insets: 0;
+                        -fx-padding: 0;
+                    """);
+        }};
+        rootPane = new StackPane(this.content = scrollPane);
         rootPane.setStyle("-fx-background-color: #00000011");
     }
 
-    private Node createHeading(String heading){
+    private Node createHeading(String heading) {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         Label label = new Label(heading);
@@ -345,7 +355,7 @@ public class Modal implements MarkLogging {
         return hBox;
     }
 
-    private Node createContent(String content, double maxWidth, double maxHeight){
+    private Node createContent(String content, double maxWidth, double maxHeight) {
         ScrollPane scrollPane = createContentPane(maxWidth, maxHeight);
         Text text = new Text(content);
         text.setWrappingWidth(maxWidth - 15);
@@ -354,41 +364,41 @@ public class Modal implements MarkLogging {
         return scrollPane;
     }
 
-    private ScrollPane createContentPane(double maxWidth, double maxHeight){
+    private ScrollPane createContentPane(double maxWidth, double maxHeight) {
         ScrollPane scrollPane = new ScrollPane();
 //        edge-to-edge样式类：去除默认的灰色边框和获得焦点时的蓝色边框
         scrollPane.getStyleClass().add("edge-to-edge");
         scrollPane.setStyle("-fx-background: white;-fx-hbar-policy: NEVER;-fx-padding: 0 0 0 5");
         scrollPane.setMaxWidth(maxWidth);
-        if (maxHeight < 25){
+        if (maxHeight < 25) {
             scrollPane.setMaxHeight(maxHeight);
             scrollPane.setMinHeight(maxHeight);
             scrollPane.setPrefHeight(maxHeight);
-        }else {
+        } else {
             scrollPane.setMaxHeight(Math.min(maxHeight, 200));
         }
         return scrollPane;
     }
 
-    private Node createBtnGroup(Runnable... btnHandler){
+    private Node createBtnGroup(Runnable... btnHandler) {
         HBox hBox = new HBox();
         Button ok = new Button("确认");
         ok.setOnAction(actionEvent -> {
             close();
             recordBtnClickLog(ok.getText());
-            if (btnHandler != null && btnHandler.length > 0 && btnHandler[0] != null){
+            if (btnHandler != null && btnHandler.length > 0 && btnHandler[0] != null) {
                 btnHandler[0].run();
             }
         });
         ok.getStyleClass().addAll("btn-ui", "btn-ui-success");
         hBox.getChildren().add(ok);
-        if (btnHandler != null && btnHandler.length > 1){
+        if (btnHandler != null && btnHandler.length > 1) {
             this.cancelRunnable = btnHandler[1];
             Button cancel = new Button("取消");
             cancel.setOnAction(actionEvent -> {
                 close();
                 recordBtnClickLog(cancel.getText());
-                if (btnHandler[1] != null){
+                if (btnHandler[1] != null) {
                     btnHandler[1].run();
                 }
             });
@@ -408,11 +418,11 @@ public class Modal implements MarkLogging {
     /**
      * 关闭Modal
      */
-    public void close(){
+    public void close() {
         close(null);
     }
 
-    public void close(Runnable closedRunnable){
+    public void close(Runnable closedRunnable) {
         Duration duration = Duration.millis(150);
         ParallelTransition parallelTransition = new ParallelTransition(
                 BaseTransitionEnum.FADE.get(this.rootPane, 1, 0, duration),
@@ -430,15 +440,15 @@ public class Modal implements MarkLogging {
     /**
      * 显示Modal
      */
-    public void show(){
+    public void show() {
         show(null);
     }
 
-    public Window getWindow(){
+    public Window getWindow() {
         return stage;
     }
 
-    public void show(Runnable shownRunnable){
+    public void show(Runnable shownRunnable) {
         if (!Platform.isFxApplicationThread()) {
             Platform.runLater(() -> show(shownRunnable));
             return;
