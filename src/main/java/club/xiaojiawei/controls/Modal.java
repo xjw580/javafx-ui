@@ -234,7 +234,7 @@ public class Modal implements MarkLogging {
 
     private HBox buildBtnHBox() {
         HBox hBox = new HBox();
-        hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15");
+        hBox.setStyle("-fx-alignment: CENTER_RIGHT;-fx-spacing: 15;-fx-padding: 0 15 15 0");
         return hBox;
     }
 
