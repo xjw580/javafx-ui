@@ -454,23 +454,25 @@ public class Modal implements MarkLogging {
             return;
         }
         initSize();
-        stage.show();
-        if (JavaFXUI.getLogMark() != null) {
-            if (contentObj instanceof String || (headingStr != null && !headingStr.isBlank())) {
-                log.info(JavaFXUI.getLogMark(), "{}:{ heading: {}, content: {} }", CN_NAME, headingStr, contentObj);
+        if (parent != null && parent.getScene().getWindow().isShowing()) {
+            stage.show();
+            if (JavaFXUI.getLogMark() != null) {
+                if (contentObj instanceof String || (headingStr != null && !headingStr.isBlank())) {
+                    log.info(JavaFXUI.getLogMark(), "{}:{ heading: {}, content: {} }", CN_NAME, headingStr, contentObj);
+                }
             }
+            Duration duration = Duration.millis(200);
+            ParallelTransition parallelTransition = new ParallelTransition(
+                    BaseTransitionEnum.FADE.get(this.rootPane, 0, 1, duration),
+                    BaseTransitionEnum.SLIDE_Y.get(this.content, 25, 0, duration)
+            );
+            if (shownRunnable != null) {
+                parallelTransition.setOnFinished(event -> {
+                    JavaFXUIThreadPoolConfig.SCHEDULED_POOL.submit(shownRunnable);
+                });
+            }
+            parallelTransition.play();
         }
-        Duration duration = Duration.millis(200);
-        ParallelTransition parallelTransition = new ParallelTransition(
-                BaseTransitionEnum.FADE.get(this.rootPane, 0, 1, duration),
-                BaseTransitionEnum.SLIDE_Y.get(this.content, 25, 0, duration)
-        );
-        if (shownRunnable != null) {
-            parallelTransition.setOnFinished(event -> {
-                JavaFXUIThreadPoolConfig.SCHEDULED_POOL.submit(shownRunnable);
-            });
-        }
-        parallelTransition.play();
     }
 
 }
