@@ -19,6 +19,11 @@
             </Label>
         </baseShowChildren>
         <sizeShowChildren>
+            <Label styleClass="label-ui, label-ui-tiny">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="高深莫测" copyText="label-ui, label-ui-tiny"/>
+                </graphic>
+            </Label>
             <Label styleClass="label-ui, label-ui-small">
                 <graphic>
                     <CopyLabel notificationManager="${notificationManager}" text="高深莫测" copyText="label-ui, label-ui-small"/>

@@ -5,6 +5,9 @@
     -fx-border-color: rgba(0, 0, 0, .13);
 }
 /*Size*/
+.label-ui-tiny{
+    -fx-padding: 2 4 2 4!important;
+}
 .label-ui-small{
     -fx-padding: 4 8 4 8!important;
 }
