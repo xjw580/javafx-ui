@@ -1,37 +1,39 @@
 @import "common.css";
 
 .menu-bar-ui * {
-    -fx-accent: shallow-color !important;
+    -fx-accent: #e4e4e4 !important;
 }
 
 .menu-bar-ui {
     -fx-background-color: transparent;
 }
 
-.menu-ui .text {
+.menu-bar-ui .menu .text {
     -fx-fill: black;
 }
 
-.menu-ui:hover {
-    -fx-background-color: shallow-color;
+.menu-bar-ui .menu:hover {
+    -fx-background-color: normal-hover-color;
 }
 
-.menu-item-ui {
-    -fx-padding: 5 15 5 15;
-    -fx-font-size: 13px;
-    -fx-background-radius: 3;
-    -fx-border-radius: 3;
-}
-
-.menu-item-ui:hover {
-    -fx-background-color: hover-color;
-    /*-fx-text-fill: #ffffff;*/
-}
-
-.context-menu {
+.menu-bar-ui .context-menu {
     -fx-background-radius: 5;
     -fx-border-radius: 5;
-    -fx-padding: 4px;
+    -fx-padding: 4;
     -fx-background-color: white;
     -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+}
+
+/*Size*/
+
+.menu-bar-ui .menu .label {
+    -fx-padding: 4 1 4 1;
+}
+
+.menu-bar-ui-small .menu .label {
+    -fx-padding: 2 0 2 0;
+}
+
+.menu-bar-ui-big .menu .label {
+    -fx-padding: 8 2 8 2;
 }

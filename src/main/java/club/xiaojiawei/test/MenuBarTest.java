@@ -29,28 +29,20 @@ public class MenuBarTest extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         MenuBar menuBar = new MenuBar();
-        menuBar.getStyleClass().addAll("menu-bar-ui");
+        menuBar.getStyleClass().addAll("menu-bar-ui", "menu-bar-ui-small");
         menuBar.setMaxWidth(200);
-        Menu menu = new Menu();
-        menu.getStyleClass().add("menu-ui");
-        menu.setGraphic(new VBox(
-                new FileIco(),
-                new Label("复制")
-        ){{
-            setAlignment(Pos.CENTER);
-            setSpacing(4);
-            setPadding(new Insets(5, 2 , 3, 2));
-        }});
+        Menu menu = new Menu("复制");
+//        menu.getStyleClass().add("menu-ui");
         MenuItem menuItem = new MenuItem("复制1");
-        menuItem.getStyleClass().add("menu-item-ui");
+        menuItem.getStyleClass().addAll("menu-item-ui", "menu-item-ui-small");
         menuItem.setGraphic(new UpdateIco());
         MenuItem menuItem2 = new MenuItem("复制2");
-        menuItem2.getStyleClass().add("menu-item-ui");
+        menuItem2.getStyleClass().addAll("menu-item-ui", "menu-item-ui-small");
         menuItem2.setGraphic(new HelpIco());
         MenuItem menuItem3 = new MenuItem("复制3");
-        menuItem3.getStyleClass().add("menu-item-ui");
+        menuItem3.getStyleClass().addAll("menu-item-ui", "menu-item-ui-small");
         menuItem3.setGraphic(new ClearIco());
-        menu.getItems().addAll(menuItem, menuItem2, menuItem3);
+        menu.getItems().addAll(new Menu("fdsf"){{getItems().add(menuItem);getStyleClass().addAll("menu-ui", "menu-ui-small");}}, menuItem2, menuItem3);
         menuBar.getMenus().addAll(menu);
         HBox hBox = new HBox(menuBar, new Button("hello"));
         hBox.setAlignment(Pos.CENTER_LEFT);
