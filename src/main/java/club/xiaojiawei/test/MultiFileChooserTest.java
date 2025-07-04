@@ -27,6 +27,9 @@ public class MultiFileChooserTest extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        long l = System.currentTimeMillis();
+        new File("A:\\").listFiles();
+        System.out.println(System.currentTimeMillis() - l);
         MultiFileChooser multiFileChooser = new MultiFileChooser();
         multiFileChooser.setTitle("多选文件夹");
         multiFileChooser.setInitialDirectory(new File("S:\\fs data"));
@@ -38,7 +41,7 @@ public class MultiFileChooserTest extends Application {
                 multiFileChooser.showDialog(primaryStage, files -> {
                     System.out.println("files:" + files);
                 }, file -> {
-                    return new Text("hello ");
+                    return null;
                 }, SelectionMode.MULTIPLE, List.of(FileChooserFilter.FILE_CHOOSER_FILTER), null);
             });
         }}), 600, 700);

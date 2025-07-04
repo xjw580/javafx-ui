@@ -2,6 +2,7 @@ package club.xiaojiawei.component;
 
 import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.Nullable;
+import java.io.File;
 import club.xiaojiawei.bean.FileChooserFilter;
 import club.xiaojiawei.controls.*;
 import club.xiaojiawei.controls.ico.*;
@@ -36,7 +37,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -324,15 +331,13 @@ public class MultiFileChooserView extends StackPane {
             } else if (ctrlDown && code == KeyCode.C) {
                 Clipboard clipboard = Clipboard.getSystemClipboard();
                 ClipboardContent content = new ClipboardContent();
-                content.putFiles(getSelectedFiles());
+                content.putFiles(getSelectedFiles().stream().map(it -> new File(it.getAbsolutePath())).toList());
                 clipboard.setContent(content);
             } else if (code == KeyCode.DELETE) {
                 delFile();
             } else if (ctrlDown && code == KeyCode.F) {
                 url.requestFocus();
-            } else if (!ctrlDown && (code.getCode() >= KeyCode.A.getCode() && code.getCode() <= KeyCode.Z.getCode()
-                                     || code.getCode() >= KeyCode.DIGIT0.getCode() && code.getCode() <= KeyCode.DIGIT9.getCode())
-            ) {
+            } else if (!ctrlDown && (code.getCode() >= KeyCode.A.getCode() && code.getCode() <= KeyCode.Z.getCode() || code.getCode() >= KeyCode.DIGIT0.getCode() && code.getCode() <= KeyCode.DIGIT9.getCode())) {
                 int expandedItemCount = fileTreeView.getExpandedItemCount();
                 int selectIndex = 0;
                 TreeItem<File> selectedItem = fileTreeView.getSelectionModel().getSelectedItem();
@@ -389,63 +394,182 @@ public class MultiFileChooserView extends StackPane {
 
     private void updateFileCellFactory() {
         fileTreeView.setCellFactory(new Callback<>() {
+            private final FileInfoCache fileInfoCache = new FileInfoCache();
+
             @Override
             public TreeCell<File> call(TreeView<File> param) {
                 return new TreeCell<>() {
-
                     @Override
                     protected void updateItem(File item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty || item == null) {
-//                            setText(null);
                             setGraphic(null);
                         } else {
-                            String name = item.getName();
-                            if (name.isBlank()) {
-                                name = item.getAbsolutePath();
-                            }
-//                            setText(name);
-                            setFileItemStyle(item, name);
+                            FileInfoCache.FileInfo fileInfo = fileInfoCache.getFileInfo(item);
+                            setFileItemStyle(item, fileInfo);
                         }
                     }
 
-                    private void setFileItemStyle(File item, String name) {
+                    private final DirIco dirIco = new DirIco();
+                    private final UnknowFileIco unknowFileIco = new UnknowFileIco();
+                    private final HBox itemRoot;
+                    private final Text text = new Text();
+
+                    {
+                        HBox space = new HBox();
+                        HBox.setHgrow(space, Priority.ALWAYS);
+                        itemRoot = new HBox(dirIco, text, space) {{
+                            setSpacing(2);
+                        }};
+                    }
+
+                    private void setFileItemStyle(File item, FileInfoCache.FileInfo fileInfo) {
                         AbstractIco fileIcon;
-                        if (item.isDirectory()) {
-                            fileIcon = new DirIco();
+                        if (fileInfo.isDirectory()) {
+                            fileIcon = dirIco;
                         } else {
-                            fileIcon = new UnknowFileIco();
+                            fileIcon = unknowFileIco;
                         }
-                        fileIcon.getStyleClass().add("file-icon");
+
+                        // 如果信息还没加载完成，显示加载状态
+                        if (!fileInfo.isLoaded()) {
+                            fileIcon.setColor("lightgray");
+                            text.setText(fileInfo.getName() + " (加载中...)");
+                        } else {
+                            // 使用缓存的信息更新UI
+                            updateIconStyle(fileIcon, fileInfo, item);
+                            text.setText(fileInfo.getName());
+                        }
+
+                        // 设置图标
+                        if (itemRoot.getChildren().getFirst() instanceof AbstractIco) {
+                            itemRoot.getChildren().removeFirst();
+                        }
+                        itemRoot.getChildren().addFirst(fileIcon);
+
+                        // 处理文件注释
+                        handleFileComment(item);
+
+                        setGraphic(itemRoot);
+                    }
+
+                    private void updateIconStyle(AbstractIco fileIcon, FileInfoCache.FileInfo fileInfo, File item) {
+                        if (!fileIcon.getStyleClass().contains("file-icon")) {
+                            fileIcon.getStyleClass().add("file-icon");
+                        }
+
                         if (isSelected() && testFileResultFilter(item)) {
+                            fileIcon.getStyleClass().remove("filter-ico");
                             fileIcon.getStyleClass().add("filter-ico");
+                        } else {
+                            fileIcon.getStyleClass().remove("filter-ico");
                         }
-                        if (isHideFile(item)) {
+
+                        if (fileInfo.isHidden()) {
                             fileIcon.setColor("gray");
                             setStyle("-fx-text-fill: rgb(113,113,165)");
                         } else {
                             fileIcon.setColor("black");
                             setStyle("-fx-text-fill: black");
                         }
+
                         double scale = 0.85;
                         fileIcon.setScaleX(scale);
                         fileIcon.setScaleY(scale);
-                        HBox space = new HBox();
-                        HBox.setHgrow(space, Priority.ALWAYS);
-                        var itemRoot = new HBox(fileIcon, new Text(name), space) {{
-                            setSpacing(2);
-                        }};
+                    }
+
+                    private void handleFileComment(File item) {
                         if (fileCommentHandler != null) {
+                            if (itemRoot.getChildren().size() > 3) {
+                                itemRoot.getChildren().removeLast();
+                            }
                             Node fileComment = fileCommentHandler.apply(item);
                             if (fileComment != null) {
                                 itemRoot.getChildren().add(fileComment);
                             }
                         }
-                        setGraphic(itemRoot);
                     }
                 };
             }
         });
+    }
+
+    // 文件信息缓存类
+    public class FileInfoCache {
+        private final Map<String, FileInfo> cache = new ConcurrentHashMap<>();
+        private final ExecutorService executor = Executors.newFixedThreadPool(4);
+
+        public static class FileInfo {
+            private final boolean isDirectory;
+            private final boolean isHidden;
+            private final String name;
+            private final boolean loaded;
+
+            public FileInfo(boolean isDirectory, boolean isHidden, String name, boolean loaded) {
+                this.isDirectory = isDirectory;
+                this.isHidden = isHidden;
+                this.name = name;
+                this.loaded = loaded;
+            }
+
+            // getters...
+            public boolean isDirectory() {
+                return isDirectory;
+            }
+
+            public boolean isHidden() {
+                return isHidden;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public boolean isLoaded() {
+                return loaded;
+            }
+        }
+
+        public FileInfo getFileInfo(File file) {
+            String path = file.getAbsolutePath();
+            return cache.computeIfAbsent(path, k -> {
+                // 返回默认信息，异步加载真实信息
+                asyncLoadFileInfo(file);
+                return new FileInfo(false, false, file.getName(), false);
+            });
+        }
+
+        private void asyncLoadFileInfo(File file) {
+            executor.submit(() -> {
+                try {
+                    boolean isDirectory = file.isDirectory();
+                    boolean isHidden = isHideFile(file);
+                    String name = file.getName();
+                    if (name.isBlank()) {
+                        name = file.getAbsolutePath();
+                    }
+
+                    FileInfo realInfo = new FileInfo(isDirectory, isHidden, name, true);
+                    cache.put(file.getAbsolutePath(), realInfo);
+
+                    // 通知UI更新
+                    Platform.runLater(() -> {
+                        // 触发TreeView刷新这个特定项
+                        notifyFileInfoLoaded(file);
+                    });
+                } catch (Exception e) {
+                    // 网络错误时使用默认值
+                    FileInfo defaultInfo = new FileInfo(false, false, file.getName(), true);
+                    cache.put(file.getAbsolutePath(), defaultInfo);
+                }
+            });
+        }
+
+        private void notifyFileInfoLoaded(File file) {
+            // 这里需要你实现通知TreeView刷新的逻辑
+            // 可以通过观察者模式或者直接调用TreeView的刷新方法
+            fileTreeView.refresh();
+        }
     }
 
     private void scrollTo(int index) {
@@ -567,7 +691,7 @@ public class MultiFileChooserView extends StackPane {
                             if (file.isFile()) {
                                 file = file.getParentFile();
                             }
-                            File saveFile = file.toPath().resolve(fileName).toFile();
+                            File saveFile = new File(file.toPath().resolve(fileName).toString());
                             res = List.of(saveFile);
                             updateSaveHistory(fileName);
                         }
@@ -637,9 +761,24 @@ public class MultiFileChooserView extends StackPane {
                 files = noRemoteDrive.toArray(new File[0]);
             }
         } else {
-            File[] tempFiles = dir.listFiles();
-            if (tempFiles != null) {
+            if (loadChildren) {
+//                long start = System.currentTimeMillis();
+                ArrayList<File> fileArrayList = new ArrayList<>();
+                try (DirectoryStream<Path> paths = Files.newDirectoryStream(dir.toPath());) {
+                    for (Path path : paths) {
+                        fileArrayList.add(path.toFile());
+                    }
+                } catch (IOException e) {
+                    log.error("", e);
+                }
+
+                File[] tempFiles = fileArrayList.toArray(new File[0]);
                 files = Arrays.stream(tempFiles).filter(this::testFileShowFilter).toArray(File[]::new);
+//                    files = tempFiles;
+//                System.out.println((System.currentTimeMillis() - start) + "ms");
+            } else {
+                files = dir.isDirectory() ? new File[1] : null;
+//                files = new File[1];
             }
         }
         if (files == null) {
@@ -647,9 +786,10 @@ public class MultiFileChooserView extends StackPane {
         } else {
             List<TreeItem<File>> result = new ArrayList<>();
 //            为了性能考量
-            if (!loadChildren && files.length > 0) {
+            if ((!loadChildren && files.length > 0)) {
                 result.add(new TreeItem<>());
             } else {
+//                long start = System.currentTimeMillis();
                 for (File file : files) {
                     TreeItem<File> treeItem = new TreeItem<>(file);
                     treeItem.expandedProperty().addListener((observable, oldValue, newValue) -> {
@@ -660,6 +800,7 @@ public class MultiFileChooserView extends StackPane {
                     treeItem.getChildren().setAll(loadFiles(file, false));
                     result.add(treeItem);
                 }
+//                System.out.println((System.currentTimeMillis() - start) + "ms1");
             }
             return result;
         }
@@ -810,13 +951,9 @@ public class MultiFileChooserView extends StackPane {
         Button cancel = new Button("取消");
         cancel.getStyleClass().addAll("btn-ui", "btn-ui-small");
 
-        VBox root = new VBox(
-                new Label("输入新文件夹名:"),
-                textField,
-                new HBox(ok, cancel) {{
-                    setStyle("-fx-spacing: 20;-fx-alignment: center_right");
-                }}
-        );
+        VBox root = new VBox(new Label("输入新文件夹名:"), textField, new HBox(ok, cancel) {{
+            setStyle("-fx-spacing: 20;-fx-alignment: center_right");
+        }});
         root.setStyle("-fx-spacing: 15;-fx-padding: 15");
         Modal modal = new Modal(this.getScene().getRoot(), root);
         modal.setMaskClosable(true);
@@ -931,7 +1068,7 @@ public class MultiFileChooserView extends StackPane {
                         if (historySearchQueue != null && !historySearchQueue.isEmpty()) {
                             selectFileItem(historySearchQueue.getFirst());
                         }
-                    }else {
+                    } else {
                         selectFileItem(initialDirectory);
                     }
                 } else {

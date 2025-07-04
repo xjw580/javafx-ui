@@ -76,7 +76,7 @@
                     </StackPane>
                 </graphic>
                 <tooltip>
-                    <Tooltip text="显示文件和目录"/>
+                    <Tooltip text="显示隐藏文件和目录"/>
                 </tooltip>
             </Label>
             <Label onMouseClicked="#changeRemoveDriverStatus" styleClass="ico-btn" visible="false" managed="false">
