@@ -2,7 +2,7 @@
     /*Base*/
     system-color: linear-gradient(to bottom, #efefef, #dcdcdc);
     system-hover-color: linear-gradient(to bottom, #f4f4f4, #e7e7e7);
-    normal-hover-color: #e4e4e4;
+    normal-hover-color: rgba(0, 0, 0, 0.1);
     main-color: #0075FF;
     main-shallow-color: #4f9fff;
     border-color: #dcdcdc;

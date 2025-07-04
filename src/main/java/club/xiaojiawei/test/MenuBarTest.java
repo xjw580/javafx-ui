@@ -30,7 +30,7 @@ public class MenuBarTest extends Application {
     public void start(Stage primaryStage) throws IOException {
         MenuBar menuBar = new MenuBar();
         menuBar.getStyleClass().addAll("menu-bar-ui", "menu-bar-ui-small");
-        menuBar.setMaxWidth(200);
+//        menuBar.setMaxWidth(200);
         Menu menu = new Menu("复制");
 //        menu.getStyleClass().add("menu-ui");
         MenuItem menuItem = new MenuItem("复制1");
@@ -44,10 +44,10 @@ public class MenuBarTest extends Application {
         menuItem3.setGraphic(new ClearIco());
         menu.getItems().addAll(new Menu("fdsf"){{getItems().add(menuItem);getStyleClass().addAll("menu-ui", "menu-ui-small");}}, menuItem2, menuItem3);
         menuBar.getMenus().addAll(menu);
-        HBox hBox = new HBox(menuBar, new Button("hello"));
+        HBox hBox = new HBox(menuBar);
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setSpacing(10);
-        Scene scene = new Scene(new VBox(hBox), 400, 500);
+        Scene scene = new Scene(new VBox(menuBar), 400, 500);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,11 +1,13 @@
 @import "common.css";
 
 .menu-bar-ui * {
-    -fx-accent: #e4e4e4 !important;
+    -fx-accent: normal-hover-color !important;
 }
 
 .menu-bar-ui {
-    -fx-background-color: transparent;
+    -fx-background-color: linear-gradient(to right, shallow-color, background-color);
+    /*-fx-border-width: 0 0 1 0;*/
+    /*-fx-border-color: gray;*/
 }
 
 .menu-bar-ui .menu .text {
@@ -27,13 +29,13 @@
 /*Size*/
 
 .menu-bar-ui .menu .label {
-    -fx-padding: 4 1 4 1;
+    -fx-padding: 3;
 }
 
 .menu-bar-ui-small .menu .label {
-    -fx-padding: 2 0 2 0;
+    -fx-padding: 1;
 }
 
 .menu-bar-ui-big .menu .label {
-    -fx-padding: 8 2 8 2;
+    -fx-padding: 5;
 }
