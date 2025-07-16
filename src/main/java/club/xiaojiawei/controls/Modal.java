@@ -70,6 +70,8 @@ public class Modal implements MarkLogging {
 
     private Pane rootPane;
 
+    private Pane topPane;
+
     private Parent parent;
 
     private Node content;
@@ -287,7 +289,7 @@ public class Modal implements MarkLogging {
             }
         });
         this.stage.getScene().addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (maskClosable && event.getTarget() instanceof StackPane stackPane && stackPane.getStyleClass().contains("root")) {
+            if (maskClosable && event.getTarget() == topPane) {
                 close();
                 if (cancelRunnable != null) {
                     cancelRunnable.run();
@@ -330,9 +332,10 @@ public class Modal implements MarkLogging {
     }
 
     private void buildRootPane(Node content) {
-        ScrollPane scrollPane = new ScrollPane(new StackPane(new Group(new StackPane(content) {{
+        topPane = new StackPane(new Group(new StackPane(content) {{
             setStyle("-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 3);-fx-background-color: white;");
-        }}))) {{
+        }}));
+        ScrollPane scrollPane = new ScrollPane(topPane) {{
             setFitToWidth(true);
             setFitToHeight(true);
             setStyle("""
