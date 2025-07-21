@@ -25,27 +25,37 @@
     default-common-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 1, 1);
     default-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
 }
-.bg-hover-ui:hover{
+
+.bg-hover-ui:hover {
     -fx-background-color: effect-color;
 }
-.bg-ui, .bg-ui *{
-    -fx-background-color: main-color!important;
-    -fx-text-fill: white!important;
+
+.bg-ui, .bg-ui * {
+    -fx-background-color: main-color !important;
+    -fx-text-fill: white !important;
 }
-.radius-ui{
-    -fx-background-radius: 5!important;
-    -fx-border-radius: 5!important;
+
+.radius-ui {
+    -fx-background-radius: 5 !important;
+    -fx-border-radius: 5 !important;
 }
-.radius-ui-big{
-    -fx-background-radius: 10!important;
-    -fx-border-radius: 10!important;
+
+.radius-ui-big {
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
 }
+
 * {
     -fx-accent: main-color;
 }
+
 .split-pane *.split-pane-divider {
     -fx-padding: 1;
     /*-fx-background-color: transparent;*/
     /*-fx-border-color: gray;*/
     /*-fx-border-width: 0 0 1 0;*/
+}
+
+.fixed-label-color *.label {
+    -fx-text-fill: black; /* 固定字体颜色 */
 }

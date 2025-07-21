@@ -38,6 +38,7 @@ import java.util.Arrays;
 
 /**
  * 模态框
+ *
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/1/31 10:38
  */
@@ -110,6 +111,7 @@ public class Modal implements MarkLogging {
 
     /**
      * 构建自定义模态框
+     *
      * @param baseParent
      * @param content
      */
@@ -123,6 +125,7 @@ public class Modal implements MarkLogging {
 
     /**
      * 构建确认模态框
+     *
      * @param baseParent
      * @param heading
      * @param content
@@ -140,6 +143,7 @@ public class Modal implements MarkLogging {
 
     /**
      * 构建确认模态框
+     *
      * @param baseParent
      * @param heading
      * @param content
@@ -162,6 +166,7 @@ public class Modal implements MarkLogging {
 
     /**
      * 构建自定义确认模态框
+     *
      * @param baseParent
      * @param heading
      * @param content
@@ -184,11 +189,12 @@ public class Modal implements MarkLogging {
 
     /**
      * 构建自定义确认模态框
+     *
      * @param baseParent
      * @param heading
      * @param content
-     * @param style The inline CSS style to use for this {@code Node}.
-     *         {@code null} is implicitly converted to an empty String.
+     * @param style      The inline CSS style to use for this {@code Node}.
+     *                   {@code null} is implicitly converted to an empty String.
      * @param btn
      */
     public Modal(Parent baseParent, Node heading, Node content, String style, Button... btn) {
@@ -347,6 +353,7 @@ public class Modal implements MarkLogging {
         }};
         rootPane = new StackPane(this.content = scrollPane);
         rootPane.setStyle("-fx-background-color: #00000011");
+        rootPane.getStyleClass().add("fixed-label-color");
     }
 
     private Node createHeading(String heading) {

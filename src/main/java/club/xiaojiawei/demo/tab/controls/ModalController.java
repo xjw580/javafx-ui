@@ -3,6 +3,7 @@ package club.xiaojiawei.demo.tab.controls;
 import club.xiaojiawei.controls.Modal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 
 /**
@@ -15,7 +16,7 @@ public class ModalController {
     private ScrollPane rootPane;
 
     @FXML protected void showModal(ActionEvent actionEvent) {
-        Modal modal = new Modal(rootPane, "卸载360安全卫士", "你确定要不卸载360安全助手吗？", () -> System.out.println("确认"), () -> {
+        Modal modal = new Modal(rootPane, "卸载360安全卫士", new Label("你确定要不卸载360安全助手吗？"), () -> System.out.println("确认"), () -> {
             System.out.println("取消");
         });
         modal.setMaskClosable(true);
