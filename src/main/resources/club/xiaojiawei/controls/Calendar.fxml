@@ -35,7 +35,7 @@
             <Label styleClass="dayLabelTitle, blackFont" text="六"/>
             <Label styleClass="dayLabelTitle, blackFont" text="日"/>
         </TilePane>
-        <ScrollPane fx:id="monthPaneScroll">
+        <ScrollPane styleClass="monthPaneScroll" fx:id="monthPaneScroll">
             <VBox fx:id="monthsPane"/>
         </ScrollPane>
     </VBox>

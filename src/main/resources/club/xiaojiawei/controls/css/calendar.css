@@ -35,7 +35,7 @@
 .dayLabel:hover, #lastMonth:hover, #nextMonth:hover{
     -fx-background-color: hover-color;
 }
-.scroll-pane{
+.monthPaneScroll{
     -fx-padding: 0;
     -fx-background: white;
     -fx-background-color: white;

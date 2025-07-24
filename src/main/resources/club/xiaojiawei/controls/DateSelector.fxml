@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <fx:root type="HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/dateSelector.css, @css/common/scroll-bar.css, @css/common/titled-pane.css"
          fx:id="root" prefWidth="180" prefHeight="222">
-    <ScrollPane fx:id="scrollPane">
+    <ScrollPane styleClass="dateSelectorScrollPane" fx:id="scrollPane">
         <Accordion fx:id="yearsPane"/>
     </ScrollPane>
     <ScrollBar fx:id="scrollBar" orientation="VERTICAL" value="50"/>

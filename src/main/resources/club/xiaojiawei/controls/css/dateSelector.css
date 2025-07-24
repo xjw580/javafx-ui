@@ -14,7 +14,7 @@
     -fx-background-color: main-color!important;
     -fx-text-fill: white!important;
 }
-.scroll-pane{
+.dateSelectorScrollPane{
     -fx-padding: 0;
     -fx-background: white;
     -fx-background-color: white;
