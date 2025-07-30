@@ -1,6 +1,7 @@
 package club.xiaojiawei.demo.tab.controls;
 
 import club.xiaojiawei.controls.Date;
+import club.xiaojiawei.controls.Notification;
 import club.xiaojiawei.controls.NotificationManager;
 import club.xiaojiawei.controls.ico.ClearIco;
 import club.xiaojiawei.controls.ico.FileIco;
@@ -25,7 +26,16 @@ public class NotificationController {
         Label label = new Label("我在这捏");
         label.setGraphic(new FileIco());
         VBox hBox = new VBox(label);
-        notificationManager.showInfo("我在这捏", hBox, 2);
+//        notificationManager.showInfo("我在这捏", hBox, 2);
+        Notification<Object> shownInfo = notificationManager.showInfo("我在这捏", hBox);
+        Thread.ofVirtual().start(()->{
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            notificationManager.hide(shownInfo);
+        });
     }
     @FXML
     protected void topCenter(){

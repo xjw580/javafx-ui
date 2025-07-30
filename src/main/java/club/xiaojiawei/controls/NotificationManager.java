@@ -22,11 +22,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
-import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.V_THREAD_POOL;
 
 /**
  * 通知管理器
+ *
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/1/2 10:00
  */
@@ -274,6 +274,10 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
         return show(notification, closeSecTime, TimeUnit.SECONDS);
     }
 
+    public void hide(Notification<T> notification) {
+        notification.hide();
+    }
+
     public Notification<T> show(Notification<T> notification, long closeTime, TimeUnit timeUnit) {
         show(notification);
         if (closeTime > 0) {
@@ -283,9 +287,8 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification)));
+                hide(notification);
             });
-//            SCHEDULED_POOL.schedule(() -> Platform.runLater(() -> notification.hide(() -> notificationVBox.getChildren().remove(notification))), closeTime, timeUnit);
         }
         return notification;
     }

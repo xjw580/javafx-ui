@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
@@ -62,7 +63,21 @@ public class TableViewStyleTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         TableView<Person> tableView = new TableView<>();
-        tableView.getStyleClass().add("table-view-ui");
+        tableView.setStyle("-fx-background-color: white");
+//        tableView.setRowFactory(o -> new TableRow<>() {
+//            @Override
+//            protected void updateItem(Person recordFullVO, boolean empty) {
+//                super.updateItem(recordFullVO, empty);
+//                if (empty || recordFullVO == null) {
+//                    // 清除样式
+//                    setStyle("");
+//                } else {
+//                    // 设置变色条件，比如全部变黄
+//                    setStyle("-fx-background-color: yellow");
+//                }
+//            }
+//        });
+//        tableView.getStyleClass().add("table-view-ui");
         ObservableList<Person> data = FXCollections.observableArrayList(
                 new Person("John", "Doe"),
                 new Person("Jane", "Doe"),
@@ -82,7 +97,7 @@ public class TableViewStyleTest extends Application {
         tableView.setItems(data);
 
         StackPane root = new StackPane(tableView);
-        root.setStyle("-fx-padding: 10");
+        root.setStyle("-fx-padding: 10;-fx-background-color: white");
         Scene scene = new Scene(root, 300, 200);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
