@@ -12,14 +12,14 @@
             <StackPane fx:id="tipIcoPane">
                 <MessageIco/>
             </StackPane>
-            <Label fx:id="titleLabel"/>
+            <Label fx:id="titleLabel" wrapText="true"/>
             <HBox HBox.hgrow="ALWAYS"/>
             <StackPane fx:id="closeIcoPane">
                 <CloseIco styleClass="notificationCloseIco"/>
             </StackPane>
         </HBox>
         <HBox fx:id="bottomHBox" managed="false" visible="false">
-            <Label fx:id="contentLabel"/>
+            <Label fx:id="contentLabel" wrapText="true"/>
         </HBox>
     </VBox>
 </fx:root>

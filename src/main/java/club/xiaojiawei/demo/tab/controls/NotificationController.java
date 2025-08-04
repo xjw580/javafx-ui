@@ -40,7 +40,8 @@ public class NotificationController {
     @FXML
     protected void topCenter(){
         notificationManager.setNotificationPos(NotificationPosEnum.TOP_CENTER);
-        notificationManager.showSuccess("我在这捏", 1);
+        notificationManager.showSuccess("我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏",
+                "我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏我在这捏1", 1);
     }
     @FXML
     protected void topRight(){
