@@ -45,9 +45,9 @@
     -fx-border-radius: 10 !important;
 }
 
-* {
-    -fx-accent: main-color;
-}
+/** {*/
+/*    -fx-accent: main-color;*/
+/*}*/
 
 .split-pane *.split-pane-divider {
     -fx-padding: 1;
