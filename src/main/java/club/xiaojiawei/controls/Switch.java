@@ -14,9 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.val;
 
-import javax.management.ConstructorParameters;
 import java.io.IOException;
 
 import static club.xiaojiawei.enums.BaseTransitionEnum.*;
@@ -102,11 +100,7 @@ public class Switch extends StackPane {
     }
 
     public void setStatus(boolean status) {
-        if (status != this.status.get()) {
-            noneTranslation();
-            circleTranslate(false);
-            this.status.set(status);
-        }
+        this.status.set(status);
     }
 
     public void setSize(double size) {
@@ -148,6 +142,23 @@ public class Switch extends StackPane {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        statusProperty().addListener((observableValue, aBoolean, t1) -> {
+            System.out.println("status:" + t1);
+            switch (transitionType) {
+                case FADE -> {
+                    fadeTranslation(t1);
+                    circleTranslate(true, t1);
+                }
+                case SLIDE_X -> {
+                    slideTranslation(t1);
+                    circleTranslate(true, t1);
+                }
+                default -> {
+                    noneTranslation(t1);
+                    circleTranslate(false, t1);
+                }
+            }
+        });
         this.setOnMouseClicked(this::onMouseClicked);
         this.disabledProperty().addListener((observableValue, aBoolean, t1) -> {
             if (t1) {
@@ -195,21 +206,7 @@ public class Switch extends StackPane {
      * @param event
      */
     private void onMouseClicked(MouseEvent event) {
-        switch (transitionType) {
-            case FADE -> {
-                fadeTranslation();
-                circleTranslate(true);
-            }
-            case SLIDE_X -> {
-                slideTranslation();
-                circleTranslate(true);
-            }
-            default -> {
-                noneTranslation();
-                circleTranslate(false);
-            }
-        }
-        status.set(!status.get());
+        setStatus(!getStatus());
         if (event != null) {
             event.consume();
         }
@@ -218,9 +215,9 @@ public class Switch extends StackPane {
     /**
      * 开关中的圆平移
      */
-    private void circleTranslate(boolean playTransition) {
+    private void circleTranslate(boolean playTransition, boolean status) {
         double translateFrom = -size / 2, translateTo = -translateFrom;
-        if (status.get()) {
+        if (!status) {
             final double temp = translateFrom;
             translateFrom = translateTo;
             translateTo = temp;
@@ -235,25 +232,25 @@ public class Switch extends StackPane {
     /**
      * 开关中的背景动画：渐变
      */
-    private void fadeTranslation() {
+    private void fadeTranslation(boolean status) {
         final double fadeFrom = 0.0D, fadeTo = 1.0D;
-        if (status.get()) {
-            FADE.play(switchRectangle, fadeTo, fadeFrom, transitionDuration);
-        } else {
+        if (status) {
             FADE.play(switchRectangle, fadeFrom, fadeTo, transitionDuration);
+        } else {
+            FADE.play(switchRectangle, fadeTo, fadeFrom, transitionDuration);
         }
     }
 
     /**
      * 开关中的背景动画：平移
      */
-    private void slideTranslation() {
+    private void slideTranslation(boolean status) {
         switchRectangle.setOpacity(1.0D);
         final double clipTranslateFrom = size * 2, clipTranslateTo = 0;
-        if (status.get()) {
-            SLIDE_X.play(switchClipRectangle, clipTranslateTo, clipTranslateFrom, transitionDuration);
-        } else {
+        if (status) {
             SLIDE_X.play(switchClipRectangle, clipTranslateFrom, clipTranslateTo, transitionDuration);
+        } else {
+            SLIDE_X.play(switchClipRectangle, clipTranslateTo, clipTranslateFrom, transitionDuration);
         }
     }
 
@@ -267,11 +264,11 @@ public class Switch extends StackPane {
     /**
      * 开关中的背景动画：无
      */
-    private void noneTranslation() {
-        if (status.get()) {
-            switchRectangle.setOpacity(0.0D);
-        } else {
+    private void noneTranslation(boolean status) {
+        if (status) {
             switchRectangle.setOpacity(1.0D);
+        } else {
+            switchRectangle.setOpacity(0.0D);
         }
     }
 
