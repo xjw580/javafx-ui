@@ -143,7 +143,6 @@ public class Switch extends StackPane {
             throw new RuntimeException(e);
         }
         statusProperty().addListener((observableValue, aBoolean, t1) -> {
-            System.out.println("status:" + t1);
             switch (transitionType) {
                 case FADE -> {
                     fadeTranslation(t1);
