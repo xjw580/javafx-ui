@@ -241,7 +241,7 @@ public class Notification<T> extends Group {
         Parent parent = getParent();
         while (parent != null) {
             if (parent instanceof Region region) {
-                if (region.getWidth() > 0) {
+                if (region.getWidth() > 0 && !region.getStyleClass().contains(NotificationManager.NOTIFICATION_PANE_STYLE_CLASS)) {
                     double width = Math.max(region.getWidth() - (70 + 14 + 14), 20);
                     titleLabel.setMaxWidth(Math.max(width, -1));
                     contentLabel.setMaxWidth(Math.max(width, -1));

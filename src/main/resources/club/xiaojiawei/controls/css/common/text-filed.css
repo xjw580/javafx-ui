@@ -1,5 +1,6 @@
 @import "common.css";
-.text-field-ui{
+
+.text-field-ui {
     -fx-effect: default-press-effect;
     -fx-background-insets: 0;
     -fx-background-radius: 3;
@@ -10,18 +11,25 @@
     /*选中文本的颜色*/
     -fx-accent: main-color;
 }
-.text-field-ui:focused{
+
+.text-field {
+    -fx-accent: main-color;
+}
+
+.text-field-ui:focused {
     -fx-border-color: transparent;
-    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1)!important;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
 }
 
 /*Size*/
-.text-field-ui-tiny{
-    -fx-padding: 0!important;
+.text-field-ui-tiny {
+    -fx-padding: 0 !important;
 }
-.text-field-ui-small{
-    -fx-padding: 3!important;
+
+.text-field-ui-small {
+    -fx-padding: 3 !important;
 }
-.text-field-ui-big{
-    -fx-padding: 10!important;
+
+.text-field-ui-big {
+    -fx-padding: 10 !important;
 }

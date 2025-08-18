@@ -96,7 +96,11 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
 
     private ChangeListener<Scene> sceneListener;
 
-    private final VBox notificationVBox = new VBox();
+    public static final String NOTIFICATION_PANE_STYLE_CLASS = "notification-pane";
+
+    private final VBox notificationVBox = new VBox(){{
+        getStyleClass().add(NOTIFICATION_PANE_STYLE_CLASS);
+    }};
 
     /* *************************************************************************
      *                                                                         *

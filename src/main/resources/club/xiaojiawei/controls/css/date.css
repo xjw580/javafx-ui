@@ -1,22 +1,27 @@
 @import "common/date-time-common.css";
 
-.date-root-pane:disabled .javafx-ui-ico{
+.date-root-pane:disabled .javafx-ui-ico {
     -fx-opacity: 0.5;
 }
-.text-field{
+
+.text-field {
     -fx-pref-width: 18;
     -fx-padding: 0;
     -fx-border-color: transparent;
     -fx-background-color: transparent;
+    -fx-accent: main-color;
 }
-.dateSeparator{
+
+.dateSeparator {
     -fx-font-size: 17;
     -fx-translate-y: -1;
 }
-.dateSeparator *{
+
+.dateSeparator * {
     -fx-fill: grey;
 }
-.dateBackground{
+
+.dateBackground {
     -fx-border-color: main-shallow-color;
     -fx-pref-height: 30;
     -fx-pref-width: 115;
@@ -24,13 +29,16 @@
     -fx-background-radius: 15;
     -fx-background-color: white;
 }
-.hideIcoDateBackground{
-    -fx-pref-width: 93!important;
+
+.hideIcoDateBackground {
+    -fx-pref-width: 93 !important;
 }
-.dateBackgroundFocus{
-    -fx-border-color: main-color!important;
+
+.dateBackgroundFocus {
+    -fx-border-color: main-color !important;
     /*-fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;*/
 }
+
 #dateIco {
     -fx-scale-x: 0.9;
     -fx-scale-y: 0.9;

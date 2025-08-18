@@ -1,0 +1,5 @@
+@import "common.css";
+
+.hyperlink {
+    -fx-accent: main-color;
+}
