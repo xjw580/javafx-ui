@@ -83,7 +83,19 @@ public abstract class AbstractDateTimeField<T> extends Group implements DateTime
         }
     }
 
+    protected final DurationSelector timeSelector;
+
+    public AbstractDateTimeField(int maxHour, int maxMin, int maxSec, int minHour, int minMin, int minSec){
+        timeSelector =  new DurationSelector(maxHour, maxMin, maxSec, minHour, minMin, minSec);
+        init();
+    }
+
     public AbstractDateTimeField() {
+        timeSelector = null;
+        init();
+    }
+
+    private void init(){
         loadPage();
         afterPageLoaded();
         initPopup();

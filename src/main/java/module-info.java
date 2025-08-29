@@ -19,6 +19,7 @@ module club.xiaojiawei.javafx_ui {
     requires jdk.unsupported.desktop;
     requires org.apache.commons.io;
     requires java.management;
+    requires javafx.base;
 
     exports club.xiaojiawei;
     exports club.xiaojiawei.func;
@@ -30,6 +31,7 @@ module club.xiaojiawei.javafx_ui {
     exports club.xiaojiawei.annotations;
     exports club.xiaojiawei.component;
     exports club.xiaojiawei.bean;
+    exports club.xiaojiawei.utils;
 
     opens club.xiaojiawei.component to javafx.fxml;
     opens club.xiaojiawei.controls to javafx.fxml;
@@ -43,4 +45,5 @@ module club.xiaojiawei.javafx_ui {
     opens club.xiaojiawei.skin to javafx.fxml;
     opens club.xiaojiawei.func to javafx.fxml;
     opens club.xiaojiawei.test to javafx.fxml, javafx.base, javafx.graphics;
+    opens club.xiaojiawei.utils to javafx.fxml;
 }
