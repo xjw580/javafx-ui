@@ -451,21 +451,29 @@ public class Modal implements MarkLogging {
      * 显示Modal
      */
     public void show() {
-        show(null);
+        show(false, null);
+    }
+
+    public void showAndWait() {
+        show(true, null);
     }
 
     public Window getWindow() {
         return stage;
     }
 
-    public void show(Runnable shownRunnable) {
+    public void show(boolean isWait, Runnable shownRunnable) {
         if (!Platform.isFxApplicationThread()) {
-            Platform.runLater(() -> show(shownRunnable));
+            Platform.runLater(() -> show(isWait, shownRunnable));
             return;
         }
         initSize();
         if (parent != null && parent.getScene().getWindow().isShowing()) {
-            stage.show();
+            if (isWait) {
+                stage.showAndWait();
+            } else {
+                stage.show();
+            }
             if (JavaFXUI.getLogMark() != null) {
                 if (contentObj instanceof String || (headingStr != null && !headingStr.isBlank())) {
                     log.info(JavaFXUI.getLogMark(), "{}:{ heading: {}, content: {} }", CN_NAME, headingStr, contentObj);

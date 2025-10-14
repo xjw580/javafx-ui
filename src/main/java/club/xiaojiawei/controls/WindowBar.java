@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ import java.util.Objects;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/5/13 16:17
  */
-public class WindowBar extends AnchorPane {
+public class WindowBar extends StackPane {
 
     /* *************************************************************************
      *                                                                         *

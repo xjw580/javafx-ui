@@ -4,14 +4,14 @@
 <?import club.xiaojiawei.controls.ico.PinnedIco?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx"
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          stylesheets="@css/windowBar.css"
          fx:id="topPane" prefHeight="30" style="-fx-background-color: white;-fx-background-radius: 5 5 0 0">
     <HBox fx:id="titlePane" prefWidth="${topPane.width}" prefHeight="${topPane.height}" alignment="CENTER">
         <Text fx:id="titleText" style="-fx-font-weight: BOLD;-fx-font-size: 12"/>
     </HBox>
-    <HBox AnchorPane.rightAnchor="3" AnchorPane.topAnchor="3" spacing="2">
+    <HBox alignment="CENTER_RIGHT" spacing="2" pickOnBounds="false">
         <StackPane onMouseClicked="#pinMouseClicked" style="-fx-padding: 2;-fx-cursor: hand">
             <PinnedIco fx:id="pinIco" color="gray" styleClass="pinned-ico"/>
         </StackPane>
