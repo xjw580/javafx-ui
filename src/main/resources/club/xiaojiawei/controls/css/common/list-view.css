@@ -1,0 +1,43 @@
+@import "common.css";
+
+.list-view-ui {
+    -fx-background-color: background-color;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.list-view-ui .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-padding: 7;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+/*Size*/
+
+.list-view-ui-tiny .list-cell {
+    -fx-padding: 0!important;
+}
+.list-view-ui-small .list-cell {
+    -fx-padding: 3!important;
+}
+.list-view-ui-big .list-cell {
+    -fx-padding: 10!important;
+}
+
+.list-view-ui .list-cell:hover {
+    -fx-background-color: hover-color;
+    -fx-cursor: hand;
+}
+
+.list-view-ui .list-cell:selected {
+    -fx-background-color: #a7d2ff;
+    -fx-text-fill: white;
+}
+
+.list-view-ui .list-cell:selected:hover {
+    -fx-background-color: #a7d2ff;
+}

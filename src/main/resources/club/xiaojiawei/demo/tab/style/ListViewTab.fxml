@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import club.xiaojiawei.demo.component.StylePage?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.StackPane?>
+<?import java.lang.*?>
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml">
+    <StylePage
+            notificationManager="${notificationManager}"
+            baseStyleClasses="list-view-ui"
+            sizeStyleClasses="list-view-ui-tiny,list-view-ui-small,list-view-ui-big">
+        <baseShowChildren>
+            <ListView styleClass="list-view-ui">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="第一天"/>
+                        <String fx:value="开始懂了"/>
+                        <String fx:value="梦不落"/>
+                    </FXCollections>
+                </items>
+            </ListView>
+        </baseShowChildren>
+        <sizeShowChildren>
+            <ListView styleClass="list-view-ui, list-view-ui-tiny">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="第一天"/>
+                        <String fx:value="开始懂了"/>
+                        <String fx:value="梦不落"/>
+                    </FXCollections>
+                </items>
+            </ListView>
+            <ListView styleClass="list-view-ui, list-view-ui-small">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="第一天"/>
+                        <String fx:value="开始懂了"/>
+                        <String fx:value="梦不落"/>
+                    </FXCollections>
+                </items>
+            </ListView>
+            <ListView styleClass="list-view-ui, list-view-ui-big">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="第一天"/>
+                        <String fx:value="开始懂了"/>
+                        <String fx:value="梦不落"/>
+                    </FXCollections>
+                </items>
+            </ListView>
+        </sizeShowChildren>
+    </StylePage>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>
