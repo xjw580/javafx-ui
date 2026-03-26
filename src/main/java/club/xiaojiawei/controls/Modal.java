@@ -263,6 +263,7 @@ public class Modal implements MarkLogging {
 
     private void init(Parent baseParent) {
         this.parent = baseParent;
+        rootPane.setStyle(baseParent == null ? "-fx-background-color: transparent" : "-fx-background-color: #00000011");
         Window owner = getOwnerWindow(baseParent);
         if (owner != null) {
             this.stage.initOwner(owner);
