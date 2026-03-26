@@ -8,6 +8,7 @@ import javafx.animation.ParallelTransition;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -25,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -98,7 +100,6 @@ public class Modal implements MarkLogging {
     {
         stage = new Stage();
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initModality(Modality.WINDOW_MODAL);
         stage.setResizable(false);
         showing = stage.showingProperty();
     }
@@ -116,9 +117,6 @@ public class Modal implements MarkLogging {
      * @param content
      */
     public Modal(Parent baseParent, Node content) {
-        if (baseParent == null) {
-            throw new NullPointerException("parent不能为null");
-        }
         buildRootPane(content);
         init(baseParent);
     }
@@ -132,9 +130,6 @@ public class Modal implements MarkLogging {
      * @param btnHandler
      */
     public Modal(Parent baseParent, String heading, Object content, Runnable... btnHandler) {
-        if (baseParent == null) {
-            throw new NullPointerException("parent不能为null");
-        }
         VBox vBox = buildConfirmBody(baseParent, heading, content);
         vBox.getChildren().add(createBtnGroup(btnHandler));
         buildRootPane(vBox);
@@ -150,9 +145,6 @@ public class Modal implements MarkLogging {
      * @param btn
      */
     public Modal(Parent baseParent, String heading, Object content, Button... btn) {
-        if (baseParent == null) {
-            throw new NullPointerException("parent不能为null");
-        }
         VBox vBox = buildConfirmBody(baseParent, heading, content);
         if (btn != null) {
             addBtnClickLogListen(btn);
@@ -173,9 +165,6 @@ public class Modal implements MarkLogging {
      * @param btn
      */
     public Modal(Parent baseParent, Node heading, Node content, Button... btn) {
-        if (baseParent == null) {
-            throw new NullPointerException("parent不能为null");
-        }
         VBox vBox = new VBox(heading, content);
         if (btn != null) {
             addBtnClickLogListen(btn);
@@ -198,9 +187,6 @@ public class Modal implements MarkLogging {
      * @param btn
      */
     public Modal(Parent baseParent, Node heading, Node content, String style, Button... btn) {
-        if (baseParent == null) {
-            throw new NullPointerException("parent不能为null");
-        }
         VBox vBox = new VBox(heading, content);
         vBox.setStyle(style);
         if (btn != null) {
@@ -248,8 +234,8 @@ public class Modal implements MarkLogging {
 
     private VBox buildConfirmBody(Parent baseParent, String heading, Object content) {
         VBox vBox = new VBox();
-        vBox.setPrefWidth(Math.min(350, baseParent.getScene().getWidth() - 10));
-        vBox.setMaxHeight(baseParent.getScene().getHeight() - 10);
+        vBox.setPrefWidth(Math.min(350, resolveAvailableWidth(baseParent) - 10));
+        vBox.setMaxHeight(resolveAvailableHeight(baseParent) - 10);
         int headHeight = 0, btnHeight = 29, inset = 20;
         if (vBox.getMaxHeight() < 140) {
             inset = 15;
@@ -277,12 +263,40 @@ public class Modal implements MarkLogging {
 
     private void init(Parent baseParent) {
         this.parent = baseParent;
-        this.stage.initOwner(baseParent.getScene().getWindow());
-//        this.stage.initModality(Modality.APPLICATION_MODAL);
+        Window owner = getOwnerWindow(baseParent);
+        if (owner != null) {
+            this.stage.initOwner(owner);
+            this.stage.initModality(Modality.WINDOW_MODAL);
+        } else {
+            this.stage.initModality(Modality.APPLICATION_MODAL);
+        }
         initScene();
 //        initSize();
 //        addSizeListener();
         addClosingListener();
+    }
+
+    private Window getOwnerWindow(Parent baseParent) {
+        if (baseParent == null || baseParent.getScene() == null) {
+            return null;
+        }
+        return baseParent.getScene().getWindow();
+    }
+
+    private double resolveAvailableWidth(Parent baseParent) {
+        if (baseParent != null && baseParent.getScene() != null) {
+            return baseParent.getScene().getWidth();
+        }
+        Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+        return visualBounds.getWidth();
+    }
+
+    private double resolveAvailableHeight(Parent baseParent) {
+        if (baseParent != null && baseParent.getScene() != null) {
+            return baseParent.getScene().getHeight();
+        }
+        Rectangle2D visualBounds = Screen.getPrimary().getVisualBounds();
+        return visualBounds.getHeight();
     }
 
     private void addClosingListener() {
@@ -312,29 +326,34 @@ public class Modal implements MarkLogging {
         this.stage.setScene(scene);
     }
 
-    private void addSizeListener() {
-        this.parent.getScene().widthProperty().addListener((observableValue, number, t1) -> stage.setWidth(t1.doubleValue()));
-        this.parent.getScene().heightProperty().addListener((observableValue, number, t1) -> stage.setHeight(t1.doubleValue()));
-        this.parent.getScene().getWindow().yProperty().addListener((observableValue, number, t1) -> {
-            if (this.parent.getScene() != null) {
-                stage.setY(t1.doubleValue() + this.parent.getScene().getY());
-            }
-        });
-        this.parent.getScene().getWindow().xProperty().addListener((observableValue, number, t1) -> {
-            if (this.parent.getScene() != null) {
-                stage.setX(t1.doubleValue() + this.parent.getScene().getX());
-            }
-        });
-    }
+//    private void addSizeListener() {
+//        this.parent.getScene().widthProperty().addListener((observableValue, number, t1) -> stage.setWidth(t1.doubleValue()));
+//        this.parent.getScene().heightProperty().addListener((observableValue, number, t1) -> stage.setHeight(t1.doubleValue()));
+//        this.parent.getScene().getWindow().yProperty().addListener((observableValue, number, t1) -> {
+//            if (this.parent.getScene() != null) {
+//                stage.setY(t1.doubleValue() + this.parent.getScene().getY());
+//            }
+//        });
+//        this.parent.getScene().getWindow().xProperty().addListener((observableValue, number, t1) -> {
+//            if (this.parent.getScene() != null) {
+//                stage.setX(t1.doubleValue() + this.parent.getScene().getX());
+//            }
+//        });
+//    }
 
     private void initSize() {
-        Scene scene = parent.getScene();
-        double width = scene.getWidth();
-        double height = scene.getHeight();
-        stage.setWidth(width);
-        stage.setHeight(height);
-        stage.setY(scene.getWindow().getY() + scene.getY());
-        stage.setX(scene.getWindow().getX() + scene.getX());
+        if (parent != null && parent.getScene() != null && parent.getScene().getWindow() != null) {
+            Scene scene = parent.getScene();
+            double width = scene.getWidth();
+            double height = scene.getHeight();
+            stage.setWidth(width);
+            stage.setHeight(height);
+            stage.setY(scene.getWindow().getY() + scene.getY());
+            stage.setX(scene.getWindow().getX() + scene.getX());
+            return;
+        }
+        stage.sizeToScene();
+        stage.centerOnScreen();
     }
 
     private void buildRootPane(Node content) {
@@ -468,7 +487,8 @@ public class Modal implements MarkLogging {
             return;
         }
         initSize();
-        if (parent != null && parent.getScene().getWindow().isShowing()) {
+        Window owner = getOwnerWindow(parent);
+        if (owner == null || owner.isShowing()) {
             if (isWait) {
                 stage.showAndWait();
             } else {
