@@ -14,10 +14,14 @@
     </VBox>
     <StylePage
             notificationManager="${notificationManager}"
-            baseStyleClasses="text-area-ui">
+            baseStyleClasses="text-area-ui"
+            styleStyleClasses="text-area-ui-windows" styleIntroduce="Windows风格文本域">
         <baseShowChildren>
             <TextArea styleClass="text-area-ui"/>
         </baseShowChildren>
+        <styleShowChildren>
+            <TextArea styleClass="text-area-ui, text-area-ui-windows" promptText="Windows风格文本域"/>
+        </styleShowChildren>
     </StylePage>
     <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
 </StackPane>

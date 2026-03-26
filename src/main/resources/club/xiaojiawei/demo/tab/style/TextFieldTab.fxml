@@ -9,7 +9,8 @@
     <StylePage
             notificationManager="${notificationManager}"
             baseStyleClasses="text-field-ui" baseIntroduce="PasswordField也可以用"
-            sizeStyleClasses="text-field-ui-small,text-field-ui-big">
+            sizeStyleClasses="text-field-ui-small,text-field-ui-big"
+            styleStyleClasses="text-field-ui-windows" styleIntroduce="Windows风格文本框">
         <baseShowChildren>
             <TextField styleClass="text-field-ui"/>
         </baseShowChildren>
@@ -17,6 +18,9 @@
             <TextField styleClass="text-field-ui, text-field-ui-small"/>
             <TextField styleClass="text-field-ui, text-field-ui-big"/>
         </sizeShowChildren>
+        <styleShowChildren>
+            <TextField styleClass="text-field-ui, text-field-ui-windows" promptText="Windows风格文本框"/>
+        </styleShowChildren>
     </StylePage>
     <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
 </StackPane>

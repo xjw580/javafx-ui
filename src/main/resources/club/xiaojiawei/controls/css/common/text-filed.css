@@ -33,3 +33,34 @@
 .text-field-ui-big {
     -fx-padding: 10 !important;
 }
+
+/*Windows Style*/
+.text-field-ui-windows {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-padding: 5 8 5 8;
+    -fx-effect: win-border-effect;
+    -fx-accent: win-main-color;
+}
+
+.text-field-ui-windows:hover {
+    -fx-border-color: win-main-color;
+    -fx-effect: win-hover-effect;
+}
+
+.text-field-ui-windows:focused {
+    -fx-border-color: win-main-color;
+    -fx-border-width: 2;
+    -fx-effect: win-focus-effect !important;
+}
+
+.text-field-ui-windows:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+}

@@ -12,7 +12,8 @@
     <StylePage
             notificationManager="${notificationManager}"
             baseStyleClasses="radio-button-ui"
-            styleStyleClasses="radio-button-ui-main、radio-button-ui-normal、radio-button-ui-success、radio-button-ui-warn、radio-button-ui-error">
+            colorStyleClasses="radio-button-ui-main,radio-button-ui-normal,radio-button-ui-success,radio-button-ui-warn,radio-button-ui-error"
+            styleStyleClasses="radio-button-ui-windows" styleIntroduce="Windows风格单选按钮">
         <baseShowChildren>
             <RadioButton styleClass="radio-button-ui" selected="true">
                 <graphic>
@@ -20,7 +21,7 @@
                 </graphic>
             </RadioButton>
         </baseShowChildren>
-        <styleShowChildren>
+        <colorShowChildren>
             <fx:define>
                 <ToggleGroup fx:id="toggleGroup1"/>
             </fx:define>
@@ -47,6 +48,21 @@
             <RadioButton styleClass="radio-button-ui, radio-button-ui-error" toggleGroup="$toggleGroup1">
                 <graphic>
                     <CopyLabel notificationManager="${notificationManager}" text="Java并发编程实战" copyText="radio-button-ui, radio-button-ui-error" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
+            </RadioButton>
+        </colorShowChildren>
+        <styleShowChildren>
+            <fx:define>
+                <ToggleGroup fx:id="toggleGroup2"/>
+            </fx:define>
+            <RadioButton styleClass="radio-button-ui, radio-button-ui-windows" selected="true" toggleGroup="$toggleGroup2">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="Windows风格" copyText="radio-button-ui, radio-button-ui-windows" style="-fx-padding: 0 0 0 5"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton styleClass="radio-button-ui, radio-button-ui-windows" toggleGroup="$toggleGroup2">
+                <graphic>
+                    <CopyLabel notificationManager="${notificationManager}" text="未选中" copyText="radio-button-ui, radio-button-ui-windows" style="-fx-padding: 0 0 0 5"/>
                 </graphic>
             </RadioButton>
         </styleShowChildren>

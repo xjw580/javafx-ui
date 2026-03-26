@@ -11,7 +11,7 @@
             notificationManager="${notificationManager}"
             baseStyleClasses="check-box-ui"
             colorStyleClasses="check-box-ui-main,check-box-ui-normal,check-box-ui-success,check-box-ui-warn,check-box-ui-error"
-            styleStyleClasses="check-box-ui-circle">
+            styleStyleClasses="check-box-ui-circle,check-box-ui-windows" styleIntroduce="check-box-ui-circle为圆形样式，check-box-ui-windows为Windows风格样式">
         <baseShowChildren>
             <CheckBox selected="true" styleClass="check-box-ui" >
                 <graphic><CopyLabel text="韦小宝" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui"/></graphic>
@@ -37,6 +37,9 @@
         <styleShowChildren>
             <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-circle" >
                 <graphic><CopyLabel text="段正淳" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-circle"/></graphic>
+            </CheckBox>
+            <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-windows" >
+                <graphic><CopyLabel text="Windows风格" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-windows"/></graphic>
             </CheckBox>
         </styleShowChildren>
         <allShowChildren>
@@ -79,6 +82,17 @@
                     </CheckBox>
                     <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-error, check-box-ui-circle" >
                         <graphic><CopyLabel text="刀白凤" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-error, check-box-ui-circle"/></graphic>
+                    </CheckBox>
+                </HBox>
+                <HBox styleClass="show-hv-box">
+                    <CheckBox selected="true" styleClass="check-box-ui, check-box-ui-windows" >
+                        <graphic><CopyLabel text="Windows" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-windows"/></graphic>
+                    </CheckBox>
+                    <CheckBox styleClass="check-box-ui, check-box-ui-windows" >
+                        <graphic><CopyLabel text="未选中" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-windows"/></graphic>
+                    </CheckBox>
+                    <CheckBox indeterminate="true" styleClass="check-box-ui, check-box-ui-windows" >
+                        <graphic><CopyLabel text="不确定" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5" copyText="check-box-ui, check-box-ui-windows"/></graphic>
                     </CheckBox>
                 </HBox>
             </VBox>

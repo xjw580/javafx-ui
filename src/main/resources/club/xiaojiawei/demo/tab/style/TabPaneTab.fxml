@@ -12,7 +12,8 @@
     <StylePage
             notificationManager="${notificationManager}"
             baseStyleClasses="tab-pane-ui"
-            sizeStyleClasses="tab-pane-ui-small">
+            sizeStyleClasses="tab-pane-ui-small"
+            styleStyleClasses="tab-pane-ui-windows" styleIntroduce="Windows风格标签页">
         <baseShowChildren>
             <TabPane styleClass="tab-pane-ui">
                 <tooltip>
@@ -39,6 +40,22 @@
                 </Tab>
             </TabPane>
         </sizeShowChildren>
+        <styleShowChildren>
+            <TabPane styleClass="tab-pane-ui, tab-pane-ui-windows">
+                <tooltip>
+                    <Tooltip text="tab-pane-ui, tab-pane-ui-windows"/>
+                </tooltip>
+                <Tab text="工作" >
+                    <Text text="假装工作中"/>
+                </Tab>
+                <Tab text="摸鱼">
+                    <Text text="认真摸鱼中"/>
+                </Tab>
+                <Tab text="休息">
+                    <Text text="休息一会儿"/>
+                </Tab>
+            </TabPane>
+        </styleShowChildren>
     </StylePage>
     <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
 </StackPane>

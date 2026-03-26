@@ -34,7 +34,12 @@
 }
 
 .list-view-ui .list-cell:selected {
-    -fx-background-color: #a7d2ff;
+    -fx-background-color: #a7d2ff!important;;
+    -fx-text-fill: white;
+}
+
+.list-view-ui:focused .list-cell:selected {
+    -fx-background-color: #4da3ff!important;
     -fx-text-fill: white;
 }
 

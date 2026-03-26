@@ -94,3 +94,51 @@
 .check-box-ui-error .mark {
     -fx-background-color: white !important;
 }
+
+/*Windows Style*/
+.check-box-ui-windows .box {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-effect: win-border-effect;
+}
+
+.check-box-ui-windows:hover .box {
+    -fx-border-color: win-main-color;
+    -fx-background-color: win-hover-background-color;
+    -fx-effect: win-hover-effect;
+}
+
+.check-box-ui-windows:selected .box {
+    -fx-background-color: win-main-color;
+    -fx-border-color: win-main-color;
+    -fx-effect: win-border-effect !important;
+}
+
+.check-box-ui-windows:selected:hover .box {
+    -fx-background-color: win-main-hover-color;
+    -fx-border-color: win-main-hover-color;
+}
+
+.check-box-ui-windows:disabled .box {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-opacity: 0.6;
+}
+
+.check-box-ui-windows .mark {
+    -fx-background-color: white !important;
+}
+
+.check-box-ui-windows:indeterminate .box {
+    -fx-background-color: win-main-color;
+    -fx-border-color: win-main-color;
+}
+
+.check-box-ui-windows:indeterminate .mark {
+    -fx-background-color: white !important;
+    -fx-shape: "M 0 0 H 10 V 2 H 0 Z";
+}

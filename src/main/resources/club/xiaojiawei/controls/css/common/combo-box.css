@@ -173,3 +173,113 @@
     -fx-border-width: 0 0 2 0!important;
     -fx-border-insets: 0!important;
 }
+
+/*Windows Style*/
+.combo-box-ui-windows {
+    -fx-background-radius: 0;
+    -fx-border-width: 1;
+    -fx-border-color: win-border-color;
+    -fx-effect: win-border-effect;
+}
+
+.combo-box-ui-windows, .combo-box-ui-windows > .arrow-button {
+    -fx-background-color: white;
+}
+
+.combo-box-ui-windows:hover {
+    -fx-border-color: win-main-color;
+    -fx-effect: win-hover-effect;
+}
+
+.combo-box-ui-windows:hover, .combo-box-ui-windows:hover > .arrow-button {
+    -fx-background-color: win-hover-background-color;
+}
+
+.combo-box-ui-windows:focused {
+    -fx-border-color: win-main-color;
+    -fx-border-width: 2;
+    -fx-effect: win-focus-effect !important;
+}
+
+.combo-box-ui-windows > .arrow-button > .arrow {
+    -fx-background-color: win-text-color !important;
+}
+
+.combo-box-ui-windows:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-opacity: 0.6;
+}
+
+.combo-box-ui-windows:disabled > .arrow-button {
+    -fx-background-color: win-background-color !important;
+}
+
+.combo-box-ui-windows:disabled > .arrow-button > .arrow {
+    -fx-background-color: win-text-disabled-color !important;
+}
+
+.combo-box-ui-windows .list-cell {
+    -fx-text-fill: win-text-color;
+}
+
+.combo-box-ui-windows:editable > .text-input {
+    -fx-background-color: white;
+    -fx-text-fill: win-text-color;
+}
+
+.combo-box-ui-windows:editable {
+    -fx-background-color: white !important;
+    -fx-border-width: 1;
+    -fx-border-color: win-border-color;
+}
+
+.combo-box-ui-windows:editable:hover {
+    -fx-border-color: win-main-color;
+}
+
+.combo-box-ui-windows:editable:focused {
+    -fx-border-width: 2 !important;
+    -fx-border-color: win-main-color !important;
+}
+
+.combo-box-ui-windows:editable > .arrow-button {
+    -fx-background-color: win-background-color !important;
+}
+
+.combo-box-ui-windows:editable:hover > .arrow-button {
+    -fx-background-color: win-hover-background-color !important;
+}
+
+.combo-box-ui-windows .combo-box-popup .list-view {
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+.combo-box-ui-windows .combo-box-popup .grid-pane {
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+.combo-box-ui-windows .combo-box-popup .list-view .list-cell {
+    -fx-background-radius: 0;
+}
+
+.combo-box-ui-windows .combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-ui-windows .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: win-main-color;
+    -fx-text-fill: white;
+}
+
+.combo-box-ui-windows .combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-text-fill: win-text-color;
+}
+
+.combo-box-ui-windows .combo-box-popup .filter-v-box {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}

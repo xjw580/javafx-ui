@@ -50,3 +50,75 @@
 .scroll-bar:hover{
     -fx-background-insets: 4, 0, 0, 0;
 }
+
+/*Windows Style*/
+.scroll-bar-ui-windows {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar-ui-windows:horizontal .track,
+.scroll-bar-ui-windows:vertical .track {
+    -fx-background-color: #F0F0F0;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.scroll-bar-ui-windows:horizontal .increment-button,
+.scroll-bar-ui-windows:horizontal .decrement-button {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.scroll-bar-ui-windows:vertical .increment-button,
+.scroll-bar-ui-windows:vertical .decrement-button {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.scroll-bar-ui-windows .increment-arrow,
+.scroll-bar-ui-windows .decrement-arrow {
+    -fx-background-color: #606060;
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.scroll-bar-ui-windows:horizontal .thumb,
+.scroll-bar-ui-windows:vertical .thumb {
+    -fx-background-color: #CDCDCD;
+    -fx-background-insets: 2;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar-ui-windows:horizontal .thumb:hover,
+.scroll-bar-ui-windows:vertical .thumb:hover {
+    -fx-background-color: #A6A6A6;
+}
+
+.scroll-bar-ui-windows:horizontal .thumb:pressed,
+.scroll-bar-ui-windows:vertical .thumb:pressed {
+    -fx-background-color: #606060;
+}
+
+.scroll-bar-ui-windows:hover {
+    -fx-background-color: #F0F0F0;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar-ui-windows:horizontal .increment-button:hover,
+.scroll-bar-ui-windows:horizontal .decrement-button:hover,
+.scroll-bar-ui-windows:vertical .increment-button:hover,
+.scroll-bar-ui-windows:vertical .decrement-button:hover {
+    -fx-background-color: #E5E5E5;
+}
+
+.scroll-bar-ui-windows:horizontal .increment-button:pressed,
+.scroll-bar-ui-windows:horizontal .decrement-button:pressed,
+.scroll-bar-ui-windows:vertical .increment-button:pressed,
+.scroll-bar-ui-windows:vertical .decrement-button:pressed {
+    -fx-background-color: #CCCCCC;
+}

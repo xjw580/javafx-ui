@@ -96,3 +96,82 @@
 .btn-ui-error-3d:disabled{
     -fx-effect: none !important;
 }
+
+/*Windows Style*/
+.btn-ui-windows{
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-background-radius: 2;
+    -fx-border-radius: 2;
+    -fx-effect: win-border-effect;
+    -fx-text-fill: win-text-color;
+}
+.btn-ui-windows:hover{
+    -fx-background-color: win-hover-background-color;
+    -fx-border-color: win-main-color;
+    -fx-effect: win-hover-effect;
+}
+.btn-ui-windows:pressed, .btn-ui-windows:selected{
+    -fx-background-color: win-pressed-background-color;
+    -fx-border-color: win-main-pressed-color;
+    -fx-effect: win-border-effect!important;
+}
+.btn-ui-windows:disabled{
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+}
+
+.btn-ui-windows-primary{
+    -fx-background-color: win-main-color;
+    -fx-border-color: win-main-color;
+    -fx-border-width: 1;
+    -fx-background-radius: 2;
+    -fx-border-radius: 2;
+    -fx-effect: win-border-effect;
+    -fx-text-fill: white;
+}
+.btn-ui-windows-primary:hover{
+    -fx-background-color: win-main-hover-color;
+    -fx-border-color: win-main-hover-color;
+    -fx-effect: win-hover-effect;
+}
+.btn-ui-windows-primary:pressed, .btn-ui-windows-primary:selected{
+    -fx-background-color: win-main-pressed-color;
+    -fx-border-color: win-main-pressed-color;
+    -fx-effect: win-border-effect!important;
+}
+.btn-ui-windows-primary:disabled{
+    -fx-background-color: win-disabled-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+}
+
+.btn-ui-windows-default{
+    -fx-background-color: #E1E1E1;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-background-radius: 2;
+    -fx-border-radius: 2;
+    -fx-effect: win-border-effect;
+    -fx-text-fill: win-text-color;
+}
+.btn-ui-windows-default:hover{
+    -fx-background-color: #D0E9F5;
+    -fx-border-color: win-main-color;
+    -fx-effect: win-hover-effect;
+}
+.btn-ui-windows-default:pressed, .btn-ui-windows-default:selected{
+    -fx-background-color: #B8DCF0;
+    -fx-border-color: win-main-pressed-color;
+    -fx-effect: win-border-effect!important;
+}
+.btn-ui-windows-default:disabled{
+    -fx-background-color: #E1E1E1;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+}

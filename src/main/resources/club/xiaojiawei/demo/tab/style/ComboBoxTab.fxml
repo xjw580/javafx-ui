@@ -14,7 +14,8 @@
             notificationManager="${notificationManager}"
             baseStyleClasses="check-box-ui-main"
             sizeStyleClasses="combo-box-ui-small,combo-box-ui-big"
-            colorStyleClasses="combo-box-ui-normal,combo-box-ui-success,combo-box-ui-warn,combo-box-ui-error">
+            colorStyleClasses="combo-box-ui-normal,combo-box-ui-success,combo-box-ui-warn,combo-box-ui-error"
+            styleStyleClasses="combo-box-ui-windows" styleIntroduce="Windows风格下拉框">
         <baseShowChildren>
             <HBox styleClass="alignment-box">
                 <ComboBox visibleRowCount="3" styleClass="combo-box-ui" value="杀死一只知更鸟">
@@ -147,6 +148,44 @@
                         </CopyLabel>
                     </HBox>
         </colorShowChildren>
+        <styleShowChildren>
+            <HBox styleClass="alignment-box">
+                <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-windows" value="杀死一只知更鸟">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="太空漫游2001"/>
+                            <String fx:value="许三观卖血记"/>
+                            <String fx:value="杀死一只知更鸟"/>
+                            <String fx:value="无人生还"/>
+                            <String fx:value="白夜行"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <CopyLabel notificationManager="${notificationManager}" copyText="combo-box-ui, combo-box-ui-windows">
+                    <graphic>
+                        <CopyIco color="gray"/>
+                    </graphic>
+                </CopyLabel>
+            </HBox>
+            <HBox styleClass="alignment-box">
+                <ComboBox visibleRowCount="3" styleClass="combo-box-ui, combo-box-ui-windows" value="杀死一只知更鸟" editable="true">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="太空漫游2001"/>
+                            <String fx:value="许三观卖血记"/>
+                            <String fx:value="杀死一只知更鸟"/>
+                            <String fx:value="无人生还"/>
+                            <String fx:value="白夜行"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+                <CopyLabel notificationManager="${notificationManager}" copyText="combo-box-ui, combo-box-ui-windows(可编辑)">
+                    <graphic>
+                        <CopyIco color="gray"/>
+                    </graphic>
+                </CopyLabel>
+            </HBox>
+        </styleShowChildren>
         <allShowChildren>
             <VBox styleClass="show-hv-box">
                 <HBox styleClass="show-hv-box">

@@ -13,7 +13,8 @@
             notificationManager="${notificationManager}"
             baseStyleClasses="btn-ui" baseIntroduce="ToggleButton也可以用"
             sizeStyleClasses="btn-ui-small,btn-ui-big"
-            colorStyleClasses="btn-ui-normal,btn-ui-success,btn-ui-warn,btn-ui-error,btn-ui-normal-3d,btn-ui-warn-3d,btn-ui-error-3d">
+            colorStyleClasses="btn-ui-normal,btn-ui-success,btn-ui-warn,btn-ui-error,btn-ui-normal-3d,btn-ui-warn-3d,btn-ui-error-3d"
+            styleStyleClasses="btn-ui-windows,btn-ui-windows-primary,btn-ui-windows-default" styleIntroduce="Windows风格按钮">
         <baseShowChildren>
             <Button styleClass="btn-ui">
                 <tooltip><Tooltip text="btn-ui"/></tooltip>
@@ -64,6 +65,20 @@
                 <graphic><CopyLabel text="动物农场" copyText="btn-ui, btn-ui-error-3d" notificationManager="${notificationManager}"/></graphic>
             </Button>
         </colorShowChildren>
+        <styleShowChildren>
+            <Button styleClass="btn-ui, btn-ui-windows">
+                <tooltip><Tooltip text="btn-ui, btn-ui-windows"/></tooltip>
+                <graphic><CopyLabel text="Windows按钮" copyText="btn-ui, btn-ui-windows" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-windows-primary">
+                <tooltip><Tooltip text="btn-ui, btn-ui-windows-primary"/></tooltip>
+                <graphic><CopyLabel text="主要按钮" copyText="btn-ui, btn-ui-windows-primary" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+            <Button styleClass="btn-ui, btn-ui-windows-default">
+                <tooltip><Tooltip text="btn-ui, btn-ui-windows-default"/></tooltip>
+                <graphic><CopyLabel text="默认按钮" copyText="btn-ui, btn-ui-windows-default" notificationManager="${notificationManager}"/></graphic>
+            </Button>
+        </styleShowChildren>
         <allShowChildren>
             <VBox styleClass="show-hv-box">
                 <HBox styleClass="show-hv-box" alignment="CENTER_LEFT">

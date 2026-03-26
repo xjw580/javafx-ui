@@ -73,3 +73,51 @@
 .radio-button-ui-error:selected .dot {
     -fx-background-color: error-deep-color;
 }
+
+/*Windows Style*/
+.radio-button-ui-windows .radio {
+    -fx-border-color: win-border-color;
+    -fx-background-color: white;
+    -fx-border-radius: 15px;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+    -fx-effect: win-border-effect;
+}
+
+.radio-button-ui-windows .dot {
+    -fx-background-insets: 0;
+}
+
+.radio-button-ui-windows:hover .radio {
+    -fx-border-color: win-main-color;
+    -fx-background-color: win-hover-background-color;
+    -fx-effect: win-hover-effect;
+}
+
+.radio-button-ui-windows:selected .radio {
+    -fx-border-color: win-main-color;
+    -fx-background-color: white;
+    -fx-effect: win-border-effect !important;
+}
+
+.radio-button-ui-windows:selected:hover .radio {
+    -fx-border-color: win-main-hover-color;
+}
+
+.radio-button-ui-windows:selected .dot {
+    -fx-background-color: win-main-color;
+}
+
+.radio-button-ui-windows:selected:hover .dot {
+    -fx-background-color: win-main-hover-color;
+}
+
+.radio-button-ui-windows:disabled .radio {
+    -fx-border-color: win-disabled-color;
+    -fx-background-color: win-background-color;
+    -fx-opacity: 0.6;
+}
+
+.radio-button-ui-windows:disabled .dot {
+    -fx-background-color: win-disabled-color;
+}

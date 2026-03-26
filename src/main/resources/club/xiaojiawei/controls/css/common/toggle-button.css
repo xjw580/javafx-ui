@@ -13,3 +13,39 @@
     -fx-text-fill: white;
     -fx-background-color: main-color;
 }
+
+/*Windows Style*/
+.toggle-btn-ui-windows {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 1;
+    -fx-border-color: win-border-color;
+    -fx-padding: 6 12 6 12;
+    -fx-text-fill: win-text-color;
+    -fx-effect: win-border-effect;
+}
+
+.toggle-btn-ui-windows:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-border-color: win-main-color;
+    -fx-effect: win-hover-effect;
+}
+
+.toggle-btn-ui-windows:selected {
+    -fx-background-color: win-pressed-background-color;
+    -fx-border-color: win-main-color;
+    -fx-text-fill: win-main-color;
+    -fx-effect: win-border-effect;
+}
+
+.toggle-btn-ui-windows:selected:hover {
+    -fx-background-color: #B8DCF0;
+}
+
+.toggle-btn-ui-windows:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+}

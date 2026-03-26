@@ -24,6 +24,22 @@
     default-hover-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
     default-common-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 1, 1);
     default-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+
+    /*Windows Theme Colors*/
+    win-main-color: #0078D7;
+    win-main-hover-color: #005A9E;
+    win-main-pressed-color: #004275;
+    win-background-color: #F3F3F3;
+    win-border-color: #ABABAB;
+    win-hover-background-color: #E5F1FB;
+    win-pressed-background-color: #CCE4F7;
+    win-disabled-color: #CCCCCC;
+    win-text-color: #000000;
+    win-text-disabled-color: #6D6D6D;
+    /*Windows Effect*/
+    win-border-effect: none;
+    win-hover-effect: none;
+    win-focus-effect: dropshadow(gaussian, #0078D7, 3, 0, 0, 0);
 }
 
 .bg-hover-ui:hover {
