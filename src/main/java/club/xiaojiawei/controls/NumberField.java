@@ -310,4 +310,14 @@ public class NumberField extends IconTextField {
     public void decrement(double value, boolean playTransition){
         increment(-value, playTransition);
     }
+
+    /**
+     * 滚动选择器到指定数值的位置，但不改变当前值
+     * @param val
+     */
+    public void scrollTo(int val) {
+        if (numberSelector != null) {
+            numberSelector.scrollTo(val);
+        }
+    }
 }

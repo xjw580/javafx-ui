@@ -150,6 +150,25 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
 
     /* *************************************************************************
      *                                                                         *
+     * 公共方法                                                                 *
+     *                                                                         *
+     **************************************************************************/
+
+    /**
+     * 滚动到指定数值的位置，但不改变当前值
+     * @param val
+     */
+    public void scrollTo(int val) {
+        int totalSize = getMax() - getMin() + 1;
+        int index = val - getMin();
+        if (index < 0 || index >= numberVbox.getChildren().size()) {
+            return;
+        }
+        ScrollUtil.buildSlideTimeLine(index, totalSize, showRowCount, numberSelector).play();
+    }
+
+    /* *************************************************************************
+     *                                                                         *
      * 私有方法                                                                 *
      *                                                                         *
      **************************************************************************/
