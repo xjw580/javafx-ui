@@ -6,7 +6,9 @@ import club.xiaojiawei.skin.NumberFieldSkin;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Bounds;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
@@ -43,9 +45,9 @@ public class NumberField extends IconTextField {
      */
     private int decimalCount = 0;
 
-    private BigDecimal minValue = new BigDecimal("-" + Double.MAX_VALUE);
+    private BigDecimal minValue = new BigDecimal("-" + Integer.MAX_VALUE);
 
-    private BigDecimal maxValue = new BigDecimal(String.valueOf(Double.MAX_VALUE));
+    private BigDecimal maxValue = new BigDecimal(String.valueOf(Integer.MAX_VALUE));
 
     /**
      * 是否弹出选择器
@@ -55,6 +57,10 @@ public class NumberField extends IconTextField {
      * 是否强制范围检查（输入时拦截）
      */
     private final BooleanProperty forceRangeCheck = new SimpleBooleanProperty(true);
+    /**
+     * 选择器展示行数
+     */
+    private final DoubleProperty showRowCount = new SimpleDoubleProperty(6);
 
     private Popup selectorPopup;
     private NumberSelector numberSelector;
@@ -115,6 +121,18 @@ public class NumberField extends IconTextField {
 
     public void setForceRangeCheck(boolean forceRangeCheck) {
         this.forceRangeCheck.set(forceRangeCheck);
+    }
+
+    public double getShowRowCount() {
+        return showRowCount.get();
+    }
+
+    public DoubleProperty showRowCountProperty() {
+        return showRowCount;
+    }
+
+    public void setShowRowCount(double showRowCount) {
+        this.showRowCount.set(showRowCount);
     }
 
     /* *************************************************************************
@@ -216,6 +234,7 @@ public class NumberField extends IconTextField {
             numberSelector = new NumberSelector();
             numberSelector.setMin(minValue.intValue());
             numberSelector.setMax(maxValue.intValue());
+            numberSelector.setShowRowCount(getShowRowCount());
             numberSelector.valueProperty().addListener((observable, oldValue, newValue) -> {
                 if (isUpdating) {
                     return;
@@ -237,7 +256,7 @@ public class NumberField extends IconTextField {
             SCHEDULED_POOL.schedule(() -> Platform.runLater(() -> numberSelector.scrollTo(valToScroll)), 100, java.util.concurrent.TimeUnit.MILLISECONDS);
         }
         Bounds bounds = localToScreen(getBoundsInLocal());
-        selectorPopup.show(getScene().getWindow(), bounds.getMinX(), bounds.getMaxY());
+        selectorPopup.show(getScene().getWindow(), bounds.getMinX(), bounds.getMaxY() - 10);
         BaseTransitionEnum.FADE.play(numberSelector, 0.5D, 1D, Duration.millis(200));
     }
 
