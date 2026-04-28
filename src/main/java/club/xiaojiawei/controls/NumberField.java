@@ -21,6 +21,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
+import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
+
 /**
  * 数字输入框
  * @author 肖嘉威 xjw580@qq.com
@@ -57,6 +59,7 @@ public class NumberField extends IconTextField {
     private Popup selectorPopup;
     private NumberSelector numberSelector;
     private boolean isUpdating = false;
+    private Integer pendingScrollValue;
 
     public int getDecimalCount() {
         return decimalCount;
@@ -228,6 +231,11 @@ public class NumberField extends IconTextField {
         if (getText() != null && !getText().isBlank() && !getText().equals("-")) {
             numberSelector.setValue(new BigDecimal(getText()).intValue());
         }
+        if (pendingScrollValue != null) {
+            int valToScroll = pendingScrollValue;
+            pendingScrollValue = null;
+            SCHEDULED_POOL.schedule(() -> Platform.runLater(() -> numberSelector.scrollTo(valToScroll)), 100, java.util.concurrent.TimeUnit.MILLISECONDS);
+        }
         Bounds bounds = localToScreen(getBoundsInLocal());
         selectorPopup.show(getScene().getWindow(), bounds.getMinX(), bounds.getMaxY());
         BaseTransitionEnum.FADE.play(numberSelector, 0.5D, 1D, Duration.millis(200));
@@ -338,6 +346,7 @@ public class NumberField extends IconTextField {
      * @param val
      */
     public void scrollTo(int val) {
+        pendingScrollValue = val;
         if (numberSelector != null) {
             numberSelector.scrollTo(val);
         }
