@@ -26,8 +26,6 @@ import java.util.Objects;
  * @author 肖嘉威 xjw580@qq.com
  * @date 2024/2/19 14:57
  */
-@Setter
-@Getter
 @Slf4j
 @SuppressWarnings("all")
 public class NumberField extends IconTextField {
@@ -56,12 +54,28 @@ public class NumberField extends IconTextField {
     private NumberSelector numberSelector;
     private boolean isUpdating = false;
 
+    public int getDecimalCount() {
+        return decimalCount;
+    }
+
+    public void setDecimalCount(int decimalCount) {
+        this.decimalCount = decimalCount;
+    }
+
+    public BigDecimal getMinValue() {
+        return minValue;
+    }
+
     public void setMinValue(String minValue) {
         this.minValue = new BigDecimal(minValue);
     }
 
     public void setMinValue(BigDecimal minValue) {
         this.minValue = minValue;
+    }
+
+    public BigDecimal getMaxValue() {
+        return maxValue;
     }
 
     public void setMaxValue(String maxValue) {
@@ -127,11 +141,27 @@ public class NumberField extends IconTextField {
                 end();
             }
         });
-        focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue && isPopSelector()) {
+        setOnMouseClicked(event -> {
+            if (isPopSelector()) {
+                requestFocus();
                 showSelectorPopup();
-            } else if (!newValue && selectorPopup != null) {
-                selectorPopup.hide();
+            }
+        });
+        focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                if (selectorPopup != null) {
+                    selectorPopup.hide();
+                }
+                // 失焦时校验最小值
+                if (getText() != null && !getText().isBlank() && !getText().equals("-")) {
+                    try {
+                        BigDecimal current = new BigDecimal(getText());
+                        if (current.compareTo(minValue) < 0) {
+                            setText(minValue.toPlainString());
+                        }
+                    } catch (Exception ignored) {
+                    }
+                }
             }
         });
         textProperty().addListener((observable, oldValue, newValue) -> {
@@ -190,12 +220,19 @@ public class NumberField extends IconTextField {
             if (minValue.compareTo(new BigDecimal("0")) >= 0){
                 return false;
             }
-            text = "0";
+            return true;
         }
         BigDecimal temp;
-        return text == null
-                || text.isBlank()
-                || (maxValue.compareTo((temp = new BigDecimal(text))) >= 0 && minValue.compareTo(temp) <= 0);
+        try {
+            if (text == null || text.isBlank()){
+                return true;
+            }
+            temp = new BigDecimal(text);
+            // 输入过程中只校验最大值，允许中间状态（如最小值是30，允许先输入3）
+            return maxValue.compareTo(temp) >= 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private String formatText(String text){

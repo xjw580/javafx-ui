@@ -25,7 +25,13 @@ public class NumberFieldTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         NumberField numberField = new NumberField();
+        numberField.setMinValue("30");
+        numberField.setMaxValue("40");
+        numberField.setPopSelector(true);
         numberField.getStyleClass().addAll("text-field-ui", "text-field-ui-small");
+        numberField.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("value:" + newValue);
+        });
         Scene scene = new Scene(new StackPane(new Group(numberField)), 500, 500);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
