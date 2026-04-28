@@ -29,6 +29,10 @@
             <NumberField styleClass="text-field-ui" decimalCount="1" promptText="小数数量=1"/>
             <NumberField styleClass="text-field-ui" decimalCount="2" promptText="小数数量=2"/>
         </VBox>
+        <Label text="popSelector属性：获取焦点时弹出数值选择器（建议整数使用）" styleClass="title-three"/>
+        <VBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <NumberField styleClass="text-field-ui" popSelector="true" minValue="0" maxValue="50" promptText="弹出选择器 (0-50)"/>
+        </VBox>
         <Label text="数值增长动画，调用increment方法，playTransition形参为true" styleClass="title-three"/>
         <VBox styleClass="hv-box" alignment="CENTER_LEFT">
             <HBox spacing="15">

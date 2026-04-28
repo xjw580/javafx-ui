@@ -3,10 +3,16 @@ package club.xiaojiawei.controls;
 import club.xiaojiawei.component.IconTextField;
 import club.xiaojiawei.skin.IconTextFieldSkin;
 import club.xiaojiawei.skin.NumberFieldSkin;
+import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.geometry.Bounds;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Popup;
+import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +47,14 @@ public class NumberField extends IconTextField {
 
     private BigDecimal maxValue = new BigDecimal(String.valueOf(Double.MAX_VALUE));
 
+    /**
+     * 是否弹出选择器
+     */
+    private final BooleanProperty popSelector = new SimpleBooleanProperty(false);
+
+    private Popup selectorPopup;
+    private NumberSelector numberSelector;
+    private boolean isUpdating = false;
 
     public void setMinValue(String minValue) {
         this.minValue = new BigDecimal(minValue);
@@ -56,6 +70,18 @@ public class NumberField extends IconTextField {
 
     public void setMaxValue(BigDecimal maxValue) {
         this.maxValue = maxValue;
+    }
+
+    public boolean isPopSelector() {
+        return popSelector.get();
+    }
+
+    public BooleanProperty popSelectorProperty() {
+        return popSelector;
+    }
+
+    public void setPopSelector(boolean popSelector) {
+        this.popSelector.set(popSelector);
     }
 
     /* *************************************************************************
@@ -101,6 +127,29 @@ public class NumberField extends IconTextField {
                 end();
             }
         });
+        focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue && isPopSelector()) {
+                showSelectorPopup();
+            } else if (!newValue && selectorPopup != null) {
+                selectorPopup.hide();
+            }
+        });
+        textProperty().addListener((observable, oldValue, newValue) -> {
+            if (isUpdating || !isPopSelector() || numberSelector == null) {
+                return;
+            }
+            try {
+                isUpdating = true;
+                if (newValue == null || newValue.isBlank() || newValue.equals("-")) {
+                    // 保持原样或处理
+                } else {
+                    numberSelector.setValue(new BigDecimal(newValue).intValue());
+                }
+            } catch (Exception ignored) {
+            } finally {
+                isUpdating = false;
+            }
+        });
     }
 
     /* *************************************************************************
@@ -108,6 +157,33 @@ public class NumberField extends IconTextField {
      * 私有方法                                                                 *
      *                                                                         *
      **************************************************************************/
+
+    private void showSelectorPopup() {
+        if (selectorPopup == null) {
+            selectorPopup = new Popup();
+            selectorPopup.setAutoHide(true);
+            numberSelector = new NumberSelector();
+            numberSelector.setMin(minValue.intValue());
+            numberSelector.setMax(maxValue.intValue());
+            numberSelector.valueProperty().addListener((observable, oldValue, newValue) -> {
+                if (isUpdating) {
+                    return;
+                }
+                isUpdating = true;
+                setText(String.valueOf(newValue));
+                isUpdating = false;
+            });
+            selectorPopup.getContent().add(numberSelector);
+        }
+        numberSelector.setMin(minValue.intValue());
+        numberSelector.setMax(maxValue.intValue());
+        if (getText() != null && !getText().isBlank() && !getText().equals("-")) {
+            numberSelector.setValue(new BigDecimal(getText()).intValue());
+        }
+        Bounds bounds = localToScreen(getBoundsInLocal());
+        selectorPopup.show(getScene().getWindow(), bounds.getMinX(), bounds.getMaxY());
+        BaseTransitionEnum.FADE.play(numberSelector, 0.5D, 1D, Duration.millis(200));
+    }
 
     private boolean isInTheInterval(String text){
         if (Objects.equals(text, "-")){
