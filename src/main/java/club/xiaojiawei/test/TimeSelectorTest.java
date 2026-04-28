@@ -5,16 +5,12 @@ import club.xiaojiawei.controls.TimeSelector;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.time.LocalTime;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -36,6 +32,7 @@ public class TimeSelectorTest extends Application {
         System.out.println(timeSelector1.getTime());
         timeSelector1.readOnlyTimeProperty().addListener((observableValue, localTime, t1) -> System.out.println(t1));
         children.add(timeSelector1);
+
         Scene scene = new Scene(hBox);
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
@@ -52,5 +49,8 @@ public class TimeSelectorTest extends Application {
 //                timeSelector1.setTime(null);
 //            }
 //        }, 3000);
+        Platform.runLater(()->{
+            timeSelector1.setLocalTime(LocalTime.now());
+        });
     }
 }

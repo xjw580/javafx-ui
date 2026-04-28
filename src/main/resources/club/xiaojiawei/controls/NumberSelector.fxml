@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.*?>
+<fx:root type="FlowPane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+         stylesheets="@css/numberSelector.css"
+         fx:id="root" minWidth="50" maxWidth="50">
+    <ScrollPane fx:id="numberSelector" styleClass="numberSelector">
+        <VBox fx:id="numberVbox" styleClass="v-box"/>
+    </ScrollPane>
+</fx:root>

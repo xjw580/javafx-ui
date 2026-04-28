@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import club.xiaojiawei.controls.NumberSelector?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            style="-fx-padding: 20 0 0 0"
+            xmlns:fx="http://javafx.com/fxml">
+    <VBox styleClass="hv-box">
+        <Label text="NumberSelector: 单列数值选择器，支持设置最小值和最大值" styleClass="title-three"/>
+        <HBox styleClass="hv-box" alignment="CENTER_LEFT">
+            <TilePane hgap="20">
+                <VBox spacing="5" alignment="CENTER">
+                    <Label text="默认 (0-100)"/>
+                    <NumberSelector/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER">
+                    <Label text="范围 (10-50)"/>
+                    <NumberSelector min="10" max="50" value="25"/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER">
+                    <Label text="展示4行"/>
+                    <NumberSelector showRowCount="4"/>
+                </VBox>
+                <VBox spacing="5" alignment="CENTER">
+                    <Label text="展示8行"/>
+                    <NumberSelector showRowCount="8"/>
+                </VBox>
+            </TilePane>
+        </HBox>
+    </VBox>
+</ScrollPane>
