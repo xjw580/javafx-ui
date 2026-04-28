@@ -49,6 +49,10 @@ public class NumberField extends IconTextField {
      * 是否弹出选择器
      */
     private final BooleanProperty popSelector = new SimpleBooleanProperty(false);
+    /**
+     * 是否强制范围检查（输入时拦截）
+     */
+    private final BooleanProperty forceRangeCheck = new SimpleBooleanProperty(true);
 
     private Popup selectorPopup;
     private NumberSelector numberSelector;
@@ -96,6 +100,18 @@ public class NumberField extends IconTextField {
 
     public void setPopSelector(boolean popSelector) {
         this.popSelector.set(popSelector);
+    }
+
+    public boolean isForceRangeCheck() {
+        return forceRangeCheck.get();
+    }
+
+    public BooleanProperty forceRangeCheckProperty() {
+        return forceRangeCheck;
+    }
+
+    public void setForceRangeCheck(boolean forceRangeCheck) {
+        this.forceRangeCheck.set(forceRangeCheck);
     }
 
     /* *************************************************************************
@@ -152,12 +168,14 @@ public class NumberField extends IconTextField {
                 if (selectorPopup != null) {
                     selectorPopup.hide();
                 }
-                // 失焦时校验最小值
+                // 失焦时校验范围并矫正
                 if (getText() != null && !getText().isBlank() && !getText().equals("-")) {
                     try {
                         BigDecimal current = new BigDecimal(getText());
                         if (current.compareTo(minValue) < 0) {
                             setText(minValue.toPlainString());
+                        } else if (current.compareTo(maxValue) > 0) {
+                            setText(maxValue.toPlainString());
                         }
                     } catch (Exception ignored) {
                     }
@@ -217,7 +235,7 @@ public class NumberField extends IconTextField {
 
     private boolean isInTheInterval(String text){
         if (Objects.equals(text, "-")){
-            if (minValue.compareTo(new BigDecimal("0")) >= 0){
+            if (isForceRangeCheck() && minValue.compareTo(new BigDecimal("0")) >= 0){
                 return false;
             }
             return true;
@@ -228,8 +246,12 @@ public class NumberField extends IconTextField {
                 return true;
             }
             temp = new BigDecimal(text);
-            // 输入过程中只校验最大值，允许中间状态（如最小值是30，允许先输入3）
-            return maxValue.compareTo(temp) >= 0;
+            if (isForceRangeCheck()) {
+                // 强校验模式：必须在范围内（之前不能输入范围外的行为）
+                return maxValue.compareTo(temp) >= 0 && minValue.compareTo(temp) <= 0;
+            }
+            // 非强校验模式：输入时不拦截，失焦后矫正
+            return true;
         } catch (Exception e) {
             return false;
         }
