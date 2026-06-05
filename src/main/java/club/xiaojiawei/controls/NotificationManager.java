@@ -31,7 +31,7 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.V_THREAD_POOL;
  * @date 2024/1/2 10:00
  */
 @DefaultProperty("notificationFactory")
-public class NotificationManager<T> extends HBox implements MarkLogging {
+public class NotificationManager<T> extends Pane implements MarkLogging {
     private static final Logger log = LoggerFactory.getLogger(NotificationManager.class);
 
     /* *************************************************************************
@@ -69,6 +69,28 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
     @Setter
     private NotificationFactory<T> notificationFactory = new NotificationFactory<>();
 
+    /**
+     * 通知间距
+     */
+    @Getter
+    private double spacing = 10;
+
+    public void setSpacing(double spacing) {
+        this.spacing = spacing;
+        notificationVBox.setSpacing(spacing);
+    }
+
+    /**
+     * 通知与边距的距离
+     */
+    @Getter
+    private double margin = 10;
+
+    public void setMargin(double margin) {
+        this.margin = margin;
+        changeNotificationPos();
+    }
+
     public void setNotificationPos(NotificationPosEnum notificationPos) {
         this.notificationPos = notificationPos;
         changeNotificationPos();
@@ -84,6 +106,7 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
         setManaged(false);
         setPickOnBounds(false);
         notificationVBox.setPickOnBounds(false);
+        notificationVBox.setSpacing(spacing);
         getChildren().add(notificationVBox);
         sceneProperty().addListener(sceneListener = (observableValue, aBoolean, t1) -> {
             if (t1 != null) {
@@ -147,18 +170,18 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
         }
         switch (notificationPos) {
             case TOP_LEFT -> {
-                setLayoutX(0);
-                setLayoutY(0);
+                setLayoutX(margin);
+                setLayoutY(margin);
                 notificationVBox.setAlignment(Pos.TOP_LEFT);
             }
             case TOP_CENTER -> {
                 layoutXProperty().bind(widthProperty.subtract(notificationVBox.widthProperty()).divide(2));
-                setLayoutY(0);
+                setLayoutY(margin);
                 notificationVBox.setAlignment(Pos.TOP_CENTER);
             }
             case TOP_RIGHT -> {
-                layoutXProperty().bind(widthProperty.subtract(notificationVBox.widthProperty()));
-                setLayoutY(0);
+                layoutXProperty().bind(widthProperty.subtract(notificationVBox.widthProperty()).subtract(margin));
+                setLayoutY(margin);
                 notificationVBox.setAlignment(Pos.TOP_RIGHT);
             }
             case CENTER -> {
@@ -167,18 +190,18 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
                 notificationVBox.setAlignment(Pos.CENTER);
             }
             case BOTTOM_LEFT -> {
-                setLayoutX(0);
-                layoutYProperty().bind(heightProperty.subtract(notificationVBox.heightProperty()));
+                setLayoutX(margin);
+                layoutYProperty().bind(heightProperty.subtract(notificationVBox.heightProperty()).subtract(margin));
                 notificationVBox.setAlignment(Pos.BOTTOM_LEFT);
             }
             case BOTTOM_CENTER -> {
                 layoutXProperty().bind(widthProperty.subtract(notificationVBox.widthProperty()).divide(2));
-                layoutYProperty().bind(heightProperty.subtract(notificationVBox.heightProperty()));
+                layoutYProperty().bind(heightProperty.subtract(notificationVBox.heightProperty()).subtract(margin));
                 notificationVBox.setAlignment(Pos.BOTTOM_CENTER);
             }
             case BOTTOM_RIGHT -> {
-                layoutXProperty().bind(widthProperty.subtract(notificationVBox.widthProperty()));
-                layoutYProperty().bind(heightProperty.subtract(notificationVBox.heightProperty()));
+                layoutXProperty().bind(widthProperty.subtract(notificationVBox.widthProperty()).subtract(margin));
+                layoutYProperty().bind(heightProperty.subtract(notificationVBox.heightProperty()).subtract(margin));
                 notificationVBox.setAlignment(Pos.BOTTOM_RIGHT);
             }
         }
@@ -291,7 +314,7 @@ public class NotificationManager<T> extends HBox implements MarkLogging {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                hide(notification);
+                Platform.runLater(() -> hide(notification));
             });
         }
         return notification;

@@ -4,6 +4,8 @@ import club.xiaojiawei.annotations.ValidSizeRange;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.enums.SizeEnum;
+import club.xiaojiawei.func.FadeAnimationStrategy;
+import club.xiaojiawei.func.NotificationAnimationStrategy;
 import javafx.animation.ParallelTransition;
 import javafx.beans.property.*;
 import javafx.fxml.FXML;
@@ -13,10 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +29,7 @@ import java.io.IOException;
  * @date 2023/10/23 22:54
  */
 @Slf4j
-public class Notification<T> extends Group {
+public class Notification<T> extends Pane {
 
     /* *************************************************************************
      *                                                                         *
@@ -60,6 +59,12 @@ public class Notification<T> extends Group {
     @Getter
     @ValidSizeRange({SizeEnum.TINY, SizeEnum.SMALL, SizeEnum.MEDDLE, SizeEnum.DEFAULT, SizeEnum.BIG})
     private SizeEnum size;
+    /**
+     * 动画策略
+     */
+    @Getter
+    @Setter
+    private NotificationAnimationStrategy animationStrategy = new FadeAnimationStrategy();
     /**
      * 内容最大宽度，超过此宽度将换行
      */
@@ -219,7 +224,6 @@ public class Notification<T> extends Group {
     @FXML
     private VBox notificationVBox;
 
-    private ParallelTransition parallelTransition;
     private Runnable transitionFinishedRunnable;
     private Runnable closeRunnable;
 
@@ -257,22 +261,18 @@ public class Notification<T> extends Group {
 
     private void addListener() {
         showing.addListener((observableValue, aBoolean, t1) -> {
-            parallelTransition = new ParallelTransition();
-
             if (t1) {
                 setTextMaxWidth(getScene());
-                parallelTransition.getChildren().add(BaseTransitionEnum.FADE.get(this, 1D, Duration.millis(transitionTime / 2)));
                 this.setVisible(true);
                 this.setManaged(true);
-                parallelTransition.setOnFinished(actionEvent -> {
+                animationStrategy.playShowAnimation(this, transitionTime, () -> {
                     if (transitionFinishedRunnable != null) {
                         transitionFinishedRunnable.run();
                         transitionFinishedRunnable = null;
                     }
                 });
             } else {
-                parallelTransition.getChildren().add(BaseTransitionEnum.FADE.get(this, 0D, Duration.millis(transitionTime)));
-                parallelTransition.setOnFinished(actionEvent -> {
+                animationStrategy.playHideAnimation(this, transitionTime, () -> {
                     this.setVisible(false);
                     this.setManaged(false);
                     if (transitionFinishedRunnable != null) {
@@ -285,7 +285,6 @@ public class Notification<T> extends Group {
                     }
                 });
             }
-            parallelTransition.play();
         });
         closeIcoPane.setOnMouseClicked(mouseEvent -> showing.set(false));
         content.addListener((observableValue, s, t1) -> {
@@ -326,3 +325,4 @@ public class Notification<T> extends Group {
         this.closeRunnable = closeRunnable;
     }
 }
+
