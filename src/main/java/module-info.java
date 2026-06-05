@@ -46,4 +46,6 @@ module club.xiaojiawei.javafx_ui {
     opens club.xiaojiawei.func to javafx.fxml;
     opens club.xiaojiawei.test to javafx.fxml, javafx.base, javafx.graphics;
     opens club.xiaojiawei.utils to javafx.fxml;
+    exports club.xiaojiawei.animations;
+    opens club.xiaojiawei.animations to javafx.fxml;
 }

@@ -96,10 +96,10 @@ public enum BaseTransitionEnum {
     }
 
     public Transition get(Node node, double to, Duration duration){
-        return get(node, -1, to, duration, 0 ,false);
+        return get(node, -1, to, duration, 1 ,false);
     }
     public Transition get(Node node, double from, double to, Duration duration){
-        return get(node, from, to, duration, 0 ,false);
+        return get(node, from, to, duration, 1 ,false);
     }
     public Transition get(Node node, double from, double to, Duration duration, int cycleCount, boolean autoReverse){
         return this.transition.build(node, from, to, duration, cycleCount, autoReverse);

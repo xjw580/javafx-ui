@@ -1,6 +1,7 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.animations.AnimationStrategy;
 import club.xiaojiawei.enums.NotificationPosEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.factory.NotificationFactory;
@@ -10,9 +11,9 @@ import javafx.beans.DefaultProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import lombok.Getter;
@@ -207,6 +208,16 @@ public class NotificationManager<T> extends Pane implements MarkLogging {
         }
     }
 
+    private Side getAnimationSide() {
+        return switch (notificationPos) {
+            case TOP_LEFT, BOTTOM_LEFT -> Side.LEFT;
+            case TOP_RIGHT, BOTTOM_RIGHT -> Side.RIGHT;
+            case TOP_CENTER -> Side.TOP;
+            case BOTTOM_CENTER -> Side.BOTTOM;
+            default -> Side.RIGHT;
+        };
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 公共方法                                                                 *
@@ -281,9 +292,19 @@ public class NotificationManager<T> extends Pane implements MarkLogging {
         if (notificationVBox.getChildren().size() >= maxCount) {
             return notification;
         }
+        
         notificationVBox.getChildren().add(notification);
-        notification.setOnCloseEvent(() -> notificationVBox.getChildren().remove(notification));
-        notification.show();
+        notification.setOnRequestClose(this::hide);
+        
+        notification.updateTextMaxWidth(getScene());
+        notification.setVisible(true);
+        notification.setManaged(true);
+        
+        AnimationStrategy strategy = notificationFactory.getAnimationStrategy();
+        if (strategy != null) {
+            strategy.playShowAnimation(notification, notificationFactory.getTransitionTime(), getAnimationSide(), null);
+        }
+
         if (JavaFXUI.getLogMark() != null) {
             switch (notification.getType()) {
                 case INFO, SUCCESS ->
@@ -302,7 +323,18 @@ public class NotificationManager<T> extends Pane implements MarkLogging {
     }
 
     public void hide(Notification<T> notification) {
-        notification.hide();
+        AnimationStrategy strategy = notificationFactory.getAnimationStrategy();
+        Runnable removeTask = () -> {
+            notification.setVisible(false);
+            notification.setManaged(false);
+            notificationVBox.getChildren().remove(notification);
+        };
+        
+        if (strategy != null) {
+            strategy.playHideAnimation(notification, notificationFactory.getTransitionTime(), getAnimationSide(), removeTask);
+        } else {
+            removeTask.run();
+        }
     }
 
     public Notification<T> show(Notification<T> notification, long closeTime, TimeUnit timeUnit) {

@@ -1,30 +1,28 @@
 package club.xiaojiawei.controls;
 
 import club.xiaojiawei.annotations.ValidSizeRange;
-import club.xiaojiawei.enums.BaseTransitionEnum;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.enums.SizeEnum;
-import club.xiaojiawei.func.FadeAnimationStrategy;
-import club.xiaojiawei.func.NotificationAnimationStrategy;
-import javafx.animation.ParallelTransition;
-import javafx.beans.property.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 /**
- * 通知
+ * 通知组件
  * @author 肖嘉威 xjw580@qq.com
  * @date 2023/10/23 22:54
  */
@@ -48,23 +46,12 @@ public class Notification<T> extends Pane {
     @Getter
     private boolean showingCloseBtn = true;
     /**
-     * 动画时间
-     */
-    @Getter
-    @Setter
-    private double transitionTime = 200D;
-    /**
      * 通知的尺寸
      */
     @Getter
     @ValidSizeRange({SizeEnum.TINY, SizeEnum.SMALL, SizeEnum.MEDDLE, SizeEnum.DEFAULT, SizeEnum.BIG})
-    private SizeEnum size;
-    /**
-     * 动画策略
-     */
-    @Getter
-    @Setter
-    private NotificationAnimationStrategy animationStrategy = new FadeAnimationStrategy();
+    private SizeEnum size = SizeEnum.DEFAULT;
+
     /**
      * 内容最大宽度，超过此宽度将换行
      */
@@ -77,10 +64,12 @@ public class Notification<T> extends Pane {
      * 通知内容
      */
     private final ObjectProperty<T> content = new SimpleObjectProperty<>();
+
     /**
-     * 是否显示通知
+     * 关闭请求回调
      */
-    private final BooleanProperty showing = new SimpleBooleanProperty(false);
+    @Setter
+    private Consumer<Notification<T>> onRequestClose;
 
     public void setShowingCloseBtn(boolean showingCloseBtn) {
         this.showingCloseBtn = showingCloseBtn;
@@ -89,6 +78,7 @@ public class Notification<T> extends Pane {
     }
 
     public void setSize(SizeEnum size) {
+        if (size == null) return;
         this.size = size;
         switch (size) {
             case BIG -> {
@@ -144,21 +134,10 @@ public class Notification<T> extends Pane {
     }
 
     public void setType(NotificationTypeEnum type) {
+        if (type == null) return;
         this.type = type;
         tipIcoPane.getChildren().setAll(type.getBuilder().get());
         notificationVBox.setStyle("-fx-border-color: " + type.getColor());
-    }
-
-    public boolean getShowing() {
-        return showing.get();
-    }
-
-    public BooleanProperty showingProperty() {
-        return showing;
-    }
-
-    public void setShowing(boolean showing) {
-        this.showing.set(showing);
     }
 
     /* *************************************************************************
@@ -224,9 +203,6 @@ public class Notification<T> extends Pane {
     @FXML
     private VBox notificationVBox;
 
-    private Runnable transitionFinishedRunnable;
-    private Runnable closeRunnable;
-
     /* *************************************************************************
      *                                                                         *
      * 私有方法                                                                 *
@@ -234,13 +210,13 @@ public class Notification<T> extends Pane {
      **************************************************************************/
 
     private void afterFXMLLoaded() {
-        this.setVisible(false);
-        this.setManaged(false);
-        this.setOpacity(0D);
+//        this.setVisible(false);
+//        this.setManaged(false);
+//        this.setOpacity(0D);
         addListener();
     }
 
-    private void setTextMaxWidth(Scene scene) {
+    public void updateTextMaxWidth(Scene scene) {
         if (scene == null) return;
         Parent parent = getParent();
         while (parent != null) {
@@ -260,33 +236,11 @@ public class Notification<T> extends Pane {
     }
 
     private void addListener() {
-        showing.addListener((observableValue, aBoolean, t1) -> {
-            if (t1) {
-                setTextMaxWidth(getScene());
-                this.setVisible(true);
-                this.setManaged(true);
-                animationStrategy.playShowAnimation(this, transitionTime, () -> {
-                    if (transitionFinishedRunnable != null) {
-                        transitionFinishedRunnable.run();
-                        transitionFinishedRunnable = null;
-                    }
-                });
-            } else {
-                animationStrategy.playHideAnimation(this, transitionTime, () -> {
-                    this.setVisible(false);
-                    this.setManaged(false);
-                    if (transitionFinishedRunnable != null) {
-                        transitionFinishedRunnable.run();
-                        transitionFinishedRunnable = null;
-                    }
-                    if (closeRunnable != null) {
-                        closeRunnable.run();
-                        closeRunnable = null;
-                    }
-                });
+        closeIcoPane.setOnMouseClicked(mouseEvent -> {
+            if (onRequestClose != null) {
+                onRequestClose.accept(this);
             }
         });
-        closeIcoPane.setOnMouseClicked(mouseEvent -> showing.set(false));
         content.addListener((observableValue, s, t1) -> {
             if (t1 == null || t1.toString().isBlank()) {
                 bottomHBox.setManaged(false);
@@ -307,22 +261,4 @@ public class Notification<T> extends Pane {
      * 公共方法                                                                 *
      *                                                                         *
      **************************************************************************/
-
-    public void show() {
-        showing.set(true);
-    }
-
-    public void hide() {
-        showing.set(false);
-    }
-
-    public void hide(Runnable transitionFinishedRunnable) {
-        this.transitionFinishedRunnable = transitionFinishedRunnable;
-        hide();
-    }
-
-    public void setOnCloseEvent(Runnable closeRunnable) {
-        this.closeRunnable = closeRunnable;
-    }
 }
-
