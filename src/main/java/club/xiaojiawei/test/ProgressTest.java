@@ -27,7 +27,7 @@ public class ProgressTest extends Application {
         ProgressModal progressModal = new ProgressModal();
         Button click = new Button("click");
         click.setOnAction(event -> {
-            DoubleProperty progressProperty = progressModal.show("加载中");
+            ProgressModal.ProgressContext progressContext = progressModal.show("加载中");
             new Thread(() -> {
                 for (int i = 0; i < 100; i++) {
                     try {
@@ -35,9 +35,9 @@ public class ProgressTest extends Application {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-//                    progressProperty.set(progressProperty.get() + 0.01);
+                    progressContext.updateProgress(progressContext.getProgress() + 0.01);
                 }
-                progressModal.hide(progressProperty);
+                progressContext.finish();
             }).start();
         });
         Scene scene = new Scene(new VBox(click, progressModal), 400, 500);

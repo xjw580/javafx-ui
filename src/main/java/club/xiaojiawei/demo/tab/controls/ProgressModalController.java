@@ -2,7 +2,6 @@ package club.xiaojiawei.demo.tab.controls;
 
 import club.xiaojiawei.controls.ProgressModal;
 import club.xiaojiawei.controls.Switch;
-import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
@@ -23,13 +22,13 @@ public class ProgressModalController {
     @FXML
     void initialize() {
         textArea.setText("""
-                        DoubleProperty progress;
+                        ProgressModal.ProgressContext progress;
                         if (showProgress.getStatus()) {
-                //            显示（带进度）
-                            progress = progressModal.showByZero("加载中", "内容");
-                        }else {
-                //            显示（不带进度）
-                            progress = progressModal.show("加载中", "内容");
+                            // 显示（带进度）
+                            progress = progressModal.show("加载中", "内容", 0.0);
+                        } else {
+                            // 显示（不带进度）
+                            progress = progressModal.show("加载中", "内容", true);
                         }
                         new Thread(() -> {
                             for (int i = 0; i < 100; i++) {
@@ -38,25 +37,23 @@ public class ProgressModalController {
                                 } catch (InterruptedException e) {
                                     throw new RuntimeException(e);
                                 }
-                                progress.set(progress.getValue() + 0.01);
+                                progress.updateProgress(progress.getProgress() + 0.01);
                             }
+                            // 结束任务
+                            progress.finish();
                         }).start();
-                //        隐藏方式1
-                //        progress.setValue(1);
-                //        隐藏方式2
-                //        progressModal.hide(progress);
                 """);
     }
 
     @FXML
     protected void show(ActionEvent actionEvent) throws InterruptedException {
-        DoubleProperty progress;
+        ProgressModal.ProgressContext progress;
         if (showProgress.getStatus()) {
-//            显示（带进度）
-            progress = progressModal.showByZero("加载中", "内容");
+            // 显示（带进度）
+            progress = progressModal.show("加载中", "内容", 0.0);
         } else {
-//            显示（不带进度）
-            progress = progressModal.show("加载中", "内容");
+            // 显示（不带进度）
+            progress = progressModal.show("加载中", "内容", true);
         }
         new Thread(() -> {
             for (int i = 0; i < 1000; i++) {
@@ -65,13 +62,10 @@ public class ProgressModalController {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                progress.set(progress.getValue() + 0.001);
+                progress.updateProgress(progress.getProgress() + 0.001);
             }
+            progress.finish();
         }).start();
-//        隐藏方式1
-//        progress.setValue(1);
-//        隐藏方式2
-//        progressModal.hide(progress);
     }
 
 }

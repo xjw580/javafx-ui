@@ -7,7 +7,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +21,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * 进度模态
@@ -46,6 +48,7 @@ public class ProgressModal extends HBox {
     @Setter
     private int transitionDuration = 200;
 
+    private final Deque<ProgressContext> activeContexts = new ArrayDeque<>();
 
     public void setParentRegion(Region parentRegion) {
         this.parentRegion = parentRegion;
@@ -129,10 +132,6 @@ public class ProgressModal extends HBox {
     @FXML
     private StackPane progressPane;
 
-    private DoubleProperty progress;
-
-    private ChangeListener<Number> progressListener;
-
     public ProgressModal(@NamedArg("parent") Region parentRegion, @NamedArg("tip") String title) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(this.getClass().getSimpleName() + ".fxml"));
@@ -158,117 +157,169 @@ public class ProgressModal extends HBox {
         progressPane.prefWidthProperty().bind(size);
     }
 
-    private void changeProgress(Number progress) {
-        if (Platform.isFxApplicationThread()) {
-            double v = (progress.doubleValue() * 100);
-            v = Math.min(v, 100);
-            if (v == 100) {
-                this.setVisible(false);
-                progressLabel.setText("0%");
-            } else {
-                progressLabel.setText(String.format("%." + decimalCount.get() + "f", v) + "%");
-            }
+    private void refreshUI() {
+        if (!Platform.isFxApplicationThread()) {
+            Platform.runLater(this::refreshUI);
+            return;
+        }
+
+        if (activeContexts.isEmpty()) {
+            this.setVisible(false);
+            return;
+        }
+
+        ProgressContext context = activeContexts.peek();
+        setTitle(context.title);
+        setContent(context.content);
+
+        if (context.indeterminate || context.progress < 0) {
+            progressLabel.setVisible(false);
         } else {
-            Platform.runLater(() -> changeProgress(progress));
+            progressLabel.setVisible(true);
+            double v = Math.min(context.progress * 100, 100);
+            progressLabel.setText(String.format("%." + decimalCount.get() + "f", v) + "%");
+        }
+
+        if (!this.isVisible()) {
+            this.setVisible(true);
+            BaseTransitionEnum.FADE.play(this, 0, 1, Duration.millis(transitionDuration));
         }
     }
 
     /**
-     * 显示加载模态，隐藏进度
-     * @return 进度控制器
+     * 显示加载模态（不确定进度）
+     * @return 进度上下文
      */
-    public DoubleProperty show() {
-        return show(title.getText(), -1D);
+    public ProgressContext show() {
+        return show(title.getText(), null, true);
     }
 
     /**
-     * 显示加载模态，隐藏进度
-     * @param tip 提示信息
-     * @return 进度控制器
+     * 显示加载模态（不确定进度）
+     * @param title 标题
+     * @return 进度上下文
      */
-    public DoubleProperty show(String tip) {
-        return show(tip, -1D);
-    }
-
-    public DoubleProperty show(String title, String content, double progress) {
-        if (this.progress != null && this.progress.get() < 1) {
-            return new SimpleDoubleProperty(progress);
-        }
-        this.progress = new SimpleDoubleProperty(this, "progress");
-        this.progress.addListener(progressListener = (observable, oldValue, newValue) -> {
-            changeProgress(newValue);
-        });
-        if (progress >= 1) {
-            return this.progress;
-        } else progressLabel.setVisible(!(progress < 0));
-        progressLabel.setText("0%");
-
-        setTitle(title);
-        setContent(content);
-
-        progress = Math.min(progress, 1D);
-        progress = Math.max(0D, progress);
-        this.progress.set(progress);
-        this.setVisible(true);
-        BaseTransitionEnum.FADE.play(this, 0, 1, Duration.millis(transitionDuration));
-        return this.progress;
+    public ProgressContext show(String title) {
+        return show(title, null, true);
     }
 
     /**
      * 显示加载模态
-     * @param title
-     * @param progress [0, 1] 小于0时隐藏进度
-     * @return 进度控制器
+     * @param title 标题
+     * @param progress 初始进度 [0, 1]，负数表示不确定进度
+     * @return 进度上下文
      */
-    public DoubleProperty show(String title, double progress) {
+    public ProgressContext show(String title, double progress) {
         return show(title, null, progress);
     }
 
-    public DoubleProperty show(String title, String content) {
-        return show(title, content, 0D);
+    /**
+     * 显示加载模态
+     * @param title 标题
+     * @param content 内容
+     * @param progress 初始进度 [0, 1]，负数表示不确定进度
+     * @return 进度上下文
+     */
+    public ProgressContext show(String title, String content, double progress) {
+        return show(title, content, progress < 0, progress);
     }
 
     /**
      * 显示加载模态
-     * @return 进度控制器
+     * @param title 标题
+     * @param content 内容
+     * @param indeterminate 是否不确定进度
+     * @return 进度上下文
      */
-    public DoubleProperty showByZero() {
-        return show(title.getText(), 0D);
+    public ProgressContext show(String title, String content, boolean indeterminate) {
+        return show(title, content, indeterminate, indeterminate ? -1 : 0);
+    }
+
+    private ProgressContext show(String title, String content, boolean indeterminate, double progress) {
+        ProgressContext context = new ProgressContext(title, content, indeterminate, progress);
+        activeContexts.push(context);
+        refreshUI();
+        return context;
     }
 
     /**
-     * 显示加载模态
-     * @param title
-     * @return 进度控制器
+     * 绑定 JavaFX Task，自动同步进度、标题和消息
+     * @param task 要绑定的任务
+     * @return 进度上下文
      */
-    public DoubleProperty showByZero(String title) {
-        return show(title, 0D);
-    }
+    public ProgressContext bindTask(Task<?> task) {
+        ProgressContext context = show(task.getTitle(), task.getMessage(), true);
+        
+        task.titleProperty().addListener((obs, old, val) -> context.updateTitle(val));
+        task.messageProperty().addListener((obs, old, val) -> context.updateContent(val));
+        task.progressProperty().addListener((obs, old, val) -> {
+            if (val.doubleValue() < 0) {
+                context.setIndeterminate(true);
+            } else {
+                context.setIndeterminate(false);
+                context.updateProgress(val.doubleValue());
+            }
+        });
 
-    public DoubleProperty showByZero(String title, String content) {
-        return show(title, content, 0D);
-    }
+        task.setOnSucceeded(e -> context.finish());
+        task.setOnFailed(e -> context.finish());
+        task.setOnCancelled(e -> context.finish());
 
-    /**
-     * 隐藏加载模态
-     * @param progress 进度控制器
-     */
-    public void hide(DoubleProperty progress) {
-        if (progress == null) {
-            return;
-        }
-        progress.set(1D);
-        if (progressListener != null) {
-            progress.removeListener(progressListener);
-        }
-        if (progress == this.progress) {
-            this.progress = null;
-            progressListener = null;
-        }
+        return context;
     }
 
     public boolean isShowing() {
         return isVisible();
+    }
+
+    /**
+     * 进度上下文，用于更新进度模态的状态
+     */
+    public class ProgressContext {
+        private String title;
+        private String content;
+        private boolean indeterminate;
+        private double progress;
+        private boolean finished = false;
+
+        private ProgressContext(String title, String content, boolean indeterminate, double progress) {
+            this.title = title;
+            this.content = content;
+            this.indeterminate = indeterminate;
+            this.progress = progress;
+        }
+
+        public void updateTitle(String title) {
+            this.title = title;
+            refreshUI();
+        }
+
+        public void updateContent(String content) {
+            this.content = content;
+            refreshUI();
+        }
+
+        public void updateProgress(double progress) {
+            this.progress = progress;
+            this.indeterminate = false;
+            refreshUI();
+        }
+
+        public void setIndeterminate(boolean indeterminate) {
+            this.indeterminate = indeterminate;
+            refreshUI();
+        }
+
+        public void finish() {
+            if (finished) return;
+            finished = true;
+            activeContexts.remove(this);
+            refreshUI();
+        }
+
+        public double getProgress() {
+            return progress;
+        }
     }
 
 }

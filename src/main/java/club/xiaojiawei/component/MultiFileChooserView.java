@@ -1049,7 +1049,7 @@ public class MultiFileChooserView extends StackPane {
 
     public void refresh() {
         File initialDirectory = multiFileChooser.getInitialDirectory();
-        DoubleProperty progress = progressModal.show("加载文件中...");
+        ProgressModal.ProgressContext progress = progressModal.show("加载文件中...");
         fileTreeView.getSelectionModel().clearSelection();
         new Thread(() -> {
             List<TreeItem<File>> treeItems = loadFiles(null, true);
@@ -1075,7 +1075,7 @@ public class MultiFileChooserView extends StackPane {
                     selectFileItem(lastSelectedFile);
                 }
                 updateSelectedFile();
-                progressModal.hide(progress);
+                progress.finish();
             });
         }).start();
     }
