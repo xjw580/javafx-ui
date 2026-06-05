@@ -25,9 +25,9 @@ public class NotificationTest extends Application {
     @Override
     public void start(Stage primaryStage) {
         HBox hBox = new HBox();
-        hBox.setStyle("-fx-padding: 20");
-        Notification notification = new Notification();
-        notification.setShowingCloseBtn(false);
+        hBox.setStyle("-fx-padding: 20;-fx-spacing: 20");
+        Notification<Object> notification = new Notification<>();
+//        notification.setShowingCloseBtn(false);
         notification.setTitle("空指针异常");
         notification.setContent("顶顶顶顶的点点滴滴");
         Label hello = new Label("hello");
@@ -37,11 +37,5 @@ public class NotificationTest extends Application {
         JavaFXUI.addjavafxUIStylesheet(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(notification::show);
-            }
-        }, 3000);
     }
 }
