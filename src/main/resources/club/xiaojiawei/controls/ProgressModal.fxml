@@ -17,7 +17,7 @@
         </fx:define>
         <StackPane fx:id="progressPane">
 <!--            <LoadingIco scaleY="${scale}" scaleX="${scale}" color="main-color"/>-->
-            <ProgressIndicator minWidth="${progressPane.width}" minHeight="${progressPane.height}" styleClass="progress-indicator-ui"/>
+            <ProgressIndicator fx:id="progressIndicator" minWidth="${progressPane.width}" minHeight="${progressPane.height}" styleClass="progress-indicator-ui"/>
             <Label fx:id="progressLabel" style="-fx-text-fill: white;-fx-effect: default-common-effect"/>
         </StackPane>
         <VBox spacing="5" alignment="CENTER">

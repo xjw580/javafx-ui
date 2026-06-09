@@ -122,7 +122,7 @@ public class NotificationManager<T> extends Pane implements MarkLogging {
 
     public static final String NOTIFICATION_PANE_STYLE_CLASS = "notification-pane";
 
-    private final VBox notificationVBox = new VBox(){{
+    private final VBox notificationVBox = new VBox() {{
         getStyleClass().add(NOTIFICATION_PANE_STYLE_CLASS);
     }};
 
@@ -292,14 +292,14 @@ public class NotificationManager<T> extends Pane implements MarkLogging {
         if (notificationVBox.getChildren().size() >= maxCount) {
             return notification;
         }
-        
+
         notificationVBox.getChildren().add(notification);
         notification.setOnRequestClose(this::hide);
-        
+
         notification.updateTextMaxWidth(getScene());
         notification.setVisible(true);
         notification.setManaged(true);
-        
+
         AnimationStrategy strategy = notificationFactory.getAnimationStrategy();
         if (strategy != null) {
             strategy.playShowAnimation(notification, notificationFactory.getTransitionTime(), getAnimationSide(), null);
@@ -329,7 +329,7 @@ public class NotificationManager<T> extends Pane implements MarkLogging {
             notification.setManaged(false);
             notificationVBox.getChildren().remove(notification);
         };
-        
+
         if (strategy != null) {
             strategy.playHideAnimation(notification, notificationFactory.getTransitionTime(), getAnimationSide(), removeTask);
         } else {
@@ -350,6 +350,11 @@ public class NotificationManager<T> extends Pane implements MarkLogging {
             });
         }
         return notification;
+    }
+
+    public boolean isShowing(Notification<T> notification) {
+        if (notification == null) return false;
+        return notificationVBox.getChildren().contains(notification);
     }
 
 }
