@@ -48,6 +48,15 @@
                     <Tooltip text="桌面目录"/>
                 </tooltip>
             </Label>
+            <Label fx:id="downloadsButton" onMouseClicked="#downloadsDir" styleClass="ico-btn"
+                   accessibleText="下载目录">
+                <graphic>
+                    <DownloadIco scaleX="${icoScale}" scaleY="${icoScale}" color="gray"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="下载目录"/>
+                </tooltip>
+            </Label>
             <Separator orientation="VERTICAL"/>
             <Label onMouseClicked="#newDir" styleClass="ico-btn">
                 <graphic>
@@ -117,7 +126,8 @@
                     </fx:define>
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <Label text="文件名:" minWidth="${tagNameWidth}" alignment="CENTER_RIGHT"/>
-                        <ComboBox fx:id="saveFileName" styleClass="combo-box-idea" editable="true" prefWidth="${rootPane.width}"/>
+                        <ComboBox fx:id="saveFileName" styleClass="combo-box-idea" editable="true"
+                                  prefWidth="${rootPane.width}"/>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <Label text="保存类型:" minWidth="${tagNameWidth}" alignment="CENTER_RIGHT"/>

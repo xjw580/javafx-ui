@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -21,18 +20,22 @@ import java.util.List;
  */
 public class MultiFileChooserTest extends Application {
 
+    private static final String INITIAL_DIRECTORY_PROPERTY = "javafx.ui.multifilechooser.initialDirectory";
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        long l = System.currentTimeMillis();
-        new File("A:\\").listFiles();
-        System.out.println(System.currentTimeMillis() - l);
         MultiFileChooser multiFileChooser = new MultiFileChooser();
         multiFileChooser.setTitle("多选文件夹");
-        multiFileChooser.setInitialDirectory(new File("S:\\fs data"));
+        String initialDirectory = getParameters().getRaw().stream()
+                .findFirst()
+                .orElseGet(() -> System.getProperty(INITIAL_DIRECTORY_PROPERTY));
+        if (initialDirectory != null && !initialDirectory.isBlank()) {
+            multiFileChooser.setInitialDirectory(new File(initialDirectory));
+        }
         Scene scene = new Scene(new AnchorPane(new Button("click") {{
             setOnAction(event -> {
 //                multiFileChooser.showMultiFileDialog(primaryStage, files -> {

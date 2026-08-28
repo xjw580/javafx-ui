@@ -2,12 +2,11 @@ package club.xiaojiawei.component;
 
 import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.Nullable;
-import java.io.File;
 import club.xiaojiawei.bean.FileChooserFilter;
+import club.xiaojiawei.config.JavaFXUIThreadPoolConfig;
 import club.xiaojiawei.controls.*;
 import club.xiaojiawei.controls.ico.*;
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -37,13 +36,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.DirectoryStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -195,7 +193,48 @@ public class MultiFileChooserView extends StackPane {
 
     private final static int MAX_HISTORY_COUNT = 20;
 
-    private boolean isSelecting = false;
+    private final FileTreeLoader fileTreeLoader = new FileTreeLoader();
+
+    private final FileInfoCache fileInfoCache = new FileInfoCache();
+
+    private final Map<TreeItem<File>, NodeLoadState> nodeLoadStates = new IdentityHashMap<>();
+
+    private long refreshGeneration;
+
+    private long navigationGeneration;
+
+    private Long navigationExpansionOwner;
+
+    private boolean updatingUrlFromSelection;
+
+    private boolean internalNavigationSelection;
+
+    private ProgressModal.ProgressContext refreshProgress;
+
+    private static final class NodeLoadState {
+        private long generation;
+        private boolean loaded;
+        private boolean userOwned;
+        private boolean notifyOnFailure;
+        private FileTreeLoader.Request request;
+        private final Set<Long> navigationOwners = new HashSet<>();
+        private final List<NodeLoadWaiter> waiters = new ArrayList<>();
+    }
+
+    private record NodeLoadWaiter(
+            @Nullable Long navigationOwner,
+            Consumer<FileTreeLoader.Outcome> consumer
+    ) {
+    }
+
+    private enum CreateDirectoryOutcome {
+        SUCCESS,
+        ALREADY_EXISTS,
+        IO_FAILURE
+    }
+
+    private record DeleteTarget(TreeItem<File> treeItem, File file, boolean directory) {
+    }
 
     private String formatFileTypeList(List<String> fileTypes) {
         StringBuilder builder = new StringBuilder();
@@ -266,8 +305,14 @@ public class MultiFileChooserView extends StackPane {
         });
         title.textProperty().bind(multiFileChooser.titleProperty());
         url.valueProperty().addListener((observableValue, file, t1) -> {
-            if (url.isFocused() && url.isShowing()) {
-                selectFileItem(t1, true);
+            if (!updatingUrlFromSelection && url.isFocused() && url.isShowing()) {
+                updatingUrlFromSelection = true;
+                try {
+                    url.setValue(file);
+                } finally {
+                    updatingUrlFromSelection = false;
+                }
+                navigateToFile(t1, true, true, null, null);
             }
         });
         url.setConverter(new StringConverter<File>() {
@@ -290,12 +335,17 @@ public class MultiFileChooserView extends StackPane {
                 if (selectedItem != null && Objects.equals(selectedItem.getValue(), file)) {
                     selectedItem.setExpanded(!selectedItem.isExpanded());
                     scrollTo(fileTreeView.getRow(selectedItem));
-                } else if (!selectFileItem(file, true)) {
-                    notificationManager.showWarn("未找到" + file.getAbsolutePath(), 2);
+                    fileTreeView.requestFocus();
+                    updateSearchHistory(file);
+                    url.getEditor().setText(text);
+                    updateSelectedFile();
+                } else {
+                    String previousText = url.getConverter().toString(url.getValue());
+                    navigateToFile(file, true, true, () -> {
+                        url.getEditor().setText(text);
+                        updateSelectedFile();
+                    }, () -> url.getEditor().setText(previousText));
                 }
-                updateSearchHistory(file);
-                url.getEditor().setText(text);
-                updateSelectedFile();
             }
         });
         url.setCellFactory(new Callback<>() {
@@ -310,15 +360,7 @@ public class MultiFileChooserView extends StackPane {
                             setText(null);
                         } else {
                             setText(file.getAbsolutePath());
-                            if (file.exists()) {
-                                AbstractIco abstractIco = file.isFile() ? new UnknowFileIco() : new DirIco();
-                                double scale = 0.8;
-                                abstractIco.setScaleX(scale);
-                                abstractIco.setScaleY(scale);
-                                setGraphic(abstractIco);
-                            } else {
-                                setGraphic(null);
-                            }
+                            setGraphic(null);
                         }
                     }
                 };
@@ -381,10 +423,16 @@ public class MultiFileChooserView extends StackPane {
         updateFileCellFactory();
         fileTreeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         fileTreeView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == null || newValue.getValue() == null) {
-                url.setValue(null);
-            } else {
-                url.setValue(newValue.getValue());
+            if (newValue != null && newValue.getValue() != null) {
+                if (!internalNavigationSelection) {
+                    beginNavigation();
+                }
+                updatingUrlFromSelection = true;
+                try {
+                    url.setValue(newValue.getValue());
+                } finally {
+                    updatingUrlFromSelection = false;
+                }
                 if (testFileSaveFilter(newValue.getValue())) {
                     saveFileName.setValue(newValue.getValue().getName());
                 }
@@ -394,8 +442,6 @@ public class MultiFileChooserView extends StackPane {
 
     private void updateFileCellFactory() {
         fileTreeView.setCellFactory(new Callback<>() {
-            private final FileInfoCache fileInfoCache = new FileInfoCache();
-
             @Override
             public TreeCell<File> call(TreeView<File> param) {
                 return new TreeCell<>() {
@@ -494,10 +540,8 @@ public class MultiFileChooserView extends StackPane {
         });
     }
 
-    // 文件信息缓存类
     public class FileInfoCache {
-        private final Map<String, FileInfo> cache = new ConcurrentHashMap<>();
-        private final ExecutorService executor = Executors.newFixedThreadPool(4);
+        private final Map<String, FileInfo> cache = new HashMap<>();
 
         public static class FileInfo {
             private final boolean isDirectory;
@@ -512,7 +556,6 @@ public class MultiFileChooserView extends StackPane {
                 this.loaded = loaded;
             }
 
-            // getters...
             public boolean isDirectory() {
                 return isDirectory;
             }
@@ -532,43 +575,26 @@ public class MultiFileChooserView extends StackPane {
 
         public FileInfo getFileInfo(File file) {
             String path = file.getAbsolutePath();
-            return cache.computeIfAbsent(path, k -> {
-                // 返回默认信息，异步加载真实信息
-                asyncLoadFileInfo(file);
-                return new FileInfo(false, false, file.getName(), false);
-            });
+            FileInfo fileInfo = cache.get(path);
+            if (fileInfo != null) {
+                return fileInfo;
+            }
+            String name = file.getName();
+            return new FileInfo(false, false, name.isBlank() ? path : name, false);
         }
 
-        private void asyncLoadFileInfo(File file) {
-            executor.submit(() -> {
-                try {
-                    boolean isDirectory = file.isDirectory();
-                    boolean isHidden = isHideFile(file);
-                    String name = file.getName();
-                    if (name.isBlank()) {
-                        name = file.getAbsolutePath();
-                    }
-
-                    FileInfo realInfo = new FileInfo(isDirectory, isHidden, name, true);
-                    cache.put(file.getAbsolutePath(), realInfo);
-
-                    // 通知UI更新
-                    Platform.runLater(() -> {
-                        // 触发TreeView刷新这个特定项
-                        notifyFileInfoLoaded(file);
-                    });
-                } catch (Exception e) {
-                    // 网络错误时使用默认值
-                    FileInfo defaultInfo = new FileInfo(false, false, file.getName(), true);
-                    cache.put(file.getAbsolutePath(), defaultInfo);
-                }
-            });
+        private void put(FileTreeLoader.Entry entry) {
+            cache.put(entry.file().getAbsolutePath(),
+                    new FileInfo(entry.directory(), entry.hidden(), entry.name(), true));
         }
 
-        private void notifyFileInfoLoaded(File file) {
-            // 这里需要你实现通知TreeView刷新的逻辑
-            // 可以通过观察者模式或者直接调用TreeView的刷新方法
-            fileTreeView.refresh();
+        private boolean isDirectory(File file) {
+            FileInfo fileInfo = cache.get(file.getAbsolutePath());
+            return fileInfo != null && fileInfo.isDirectory();
+        }
+
+        private void clear() {
+            cache.clear();
         }
     }
 
@@ -596,10 +622,6 @@ public class MultiFileChooserView extends StackPane {
         return fileName.isEmpty() ? file.getAbsolutePath() : fileName;
     }
 
-    private boolean isHideFile(@NotNull File file) {
-        return file.isHidden() && !file.getName().isBlank();
-    }
-
     private boolean testFileSaveFilter(@NotNull File file) {
         boolean filter = true;
         FileChooser.ExtensionFilter value = saveFileType.getValue();
@@ -616,19 +638,32 @@ public class MultiFileChooserView extends StackPane {
         return filter;
     }
 
-    private boolean testFileShowFilter(@NotNull File file) {
-        boolean filter = true;
+    private Predicate<File> snapshotFileShowFilter() {
+        List<Predicate<@NotNull File>> showFilters = new ArrayList<>();
         for (FileChooserFilter fileFilter : fileFilters) {
             Predicate<@NotNull File> showFilter = fileFilter.getShowFilter();
-            if (showFilter != null && !showFilter.test(file)) {
-                filter = false;
-                break;
+            if (showFilter != null) {
+                showFilters.add(showFilter);
             }
         }
-        if (filter && file.isFile() && !isDiskFile(file)) {
-            filter = testFileSaveFilter(file);
-        }
-        return filter;
+        FileChooser.ExtensionFilter selectedType = saveFileType.getValue();
+        List<String> extensions = selectedType == null ? List.of() : List.copyOf(selectedType.getExtensions());
+        return file -> {
+            for (Predicate<File> showFilter : showFilters) {
+                if (!showFilter.test(file)) {
+                    return false;
+                }
+            }
+            if (!extensions.isEmpty() && file.isFile() && !isDiskFile(file)) {
+                String name = file.getName();
+                for (String extension : extensions) {
+                    if (!Pattern.matches(".*\\." + extension, name)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        };
     }
 
     private boolean isDiskFile(@NotNull File file) {
@@ -673,6 +708,12 @@ public class MultiFileChooserView extends StackPane {
         }
         lastSelectedFile = file;
         url.getItems().setAll(historySearchQueue);
+        updatingUrlFromSelection = true;
+        try {
+            url.setValue(file);
+        } finally {
+            updatingUrlFromSelection = false;
+        }
     }
 
     private void invokeCallback(boolean valid, Consumer<Boolean> callback) {
@@ -688,7 +729,7 @@ public class MultiFileChooserView extends StackPane {
                                 fileName += "." + suffix.getFirst();
                             }
                             File file = url.getValue();
-                            if (file.isFile()) {
+                            if (!fileInfoCache.isDirectory(file)) {
                                 file = file.getParentFile();
                             }
                             File saveFile = new File(file.toPath().resolve(fileName).toString());
@@ -742,128 +783,382 @@ public class MultiFileChooserView extends StackPane {
         }
     }
 
-    @NotNull
-    private List<TreeItem<File>> loadFiles(@Nullable File dir, boolean loadChildren) {
-        File[] files = null;
-        if (dir == null) {
-            if (showNetIco.isVisible()) {
-                files = File.listRoots();
-            } else {
-                File[] tempFiles = File.listRoots();
-                ArrayList<File> noRemoteDrive = new ArrayList<>();
-                if (tempFiles != null) {
-                    for (File file : tempFiles) {
-                        if (!isNetworkDrive(file.getAbsolutePath().replace(File.separator, ""))) {
-                            noRemoteDrive.add(file);
-                        }
-                    }
-                }
-                files = noRemoteDrive.toArray(new File[0]);
-            }
-        } else {
-            if (loadChildren) {
-//                long start = System.currentTimeMillis();
-                ArrayList<File> fileArrayList = new ArrayList<>();
-                try (DirectoryStream<Path> paths = Files.newDirectoryStream(dir.toPath());) {
-                    for (Path path : paths) {
-                        fileArrayList.add(path.toFile());
-                    }
-                } catch (IOException e) {
-                    log.error("", e);
-                }
+    private TreeItem<File> createRootTreeItem(File rootFile) {
+        return createFileTreeItem(new FileTreeLoader.Entry(
+                rootFile, true, false, rootFile.getAbsolutePath()));
+    }
 
-                File[] tempFiles = fileArrayList.toArray(new File[0]);
-                files = Arrays.stream(tempFiles).filter(this::testFileShowFilter).toArray(File[]::new);
-//                    files = tempFiles;
-//                System.out.println((System.currentTimeMillis() - start) + "ms");
-            } else {
-                files = dir.isDirectory() ? new File[1] : null;
-//                files = new File[1];
-            }
-        }
-        if (files == null) {
-            return Collections.emptyList();
-        } else {
-            List<TreeItem<File>> result = new ArrayList<>();
-//            为了性能考量
-            if ((!loadChildren && files.length > 0)) {
-                result.add(new TreeItem<>());
-            } else {
-//                long start = System.currentTimeMillis();
-                for (File file : files) {
-                    TreeItem<File> treeItem = new TreeItem<>(file);
-                    treeItem.expandedProperty().addListener((observable, oldValue, newValue) -> {
-                        if (newValue) {
-                            treeItem.getChildren().setAll(loadFiles(file, true));
-                        }
-                    });
-                    treeItem.getChildren().setAll(loadFiles(file, false));
-                    result.add(treeItem);
+    private TreeItem<File> createFileTreeItem(FileTreeLoader.Entry entry) {
+        fileInfoCache.put(entry);
+        TreeItem<File> treeItem = new TreeItem<>(entry.file());
+        NodeLoadState state = new NodeLoadState();
+        state.loaded = !entry.directory();
+        nodeLoadStates.put(treeItem, state);
+        if (entry.directory()) {
+            restoreLoadingPlaceholder(treeItem);
+            treeItem.expandedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    Long expansionOwner = navigationExpansionOwner;
+                    ensureNodeLoaded(treeItem, refreshGeneration,
+                            expansionOwner == null, expansionOwner, null);
+                } else {
+                    NodeLoadState loadState = nodeLoadStates.get(treeItem);
+                    if (loadState != null) {
+                        loadState.userOwned = false;
+                        loadState.notifyOnFailure = false;
+                    }
                 }
-//                System.out.println((System.currentTimeMillis() - start) + "ms1");
+            });
+        }
+        return treeItem;
+    }
+
+    private void restoreLoadingPlaceholder(TreeItem<File> treeItem) {
+        treeItem.getChildren().setAll(new TreeItem<>());
+    }
+
+    private void ensureNodeLoaded(
+            TreeItem<File> treeItem,
+            long expectedRefreshGeneration,
+            boolean notifyOnFailure,
+            @Nullable Long navigationOwner,
+            @Nullable Consumer<FileTreeLoader.Outcome> waiter
+    ) {
+        if (expectedRefreshGeneration != refreshGeneration) {
+            return;
+        }
+        NodeLoadState state = nodeLoadStates.get(treeItem);
+        if (state == null) {
+            return;
+        }
+        if (state.loaded) {
+            if (waiter != null) {
+                waiter.accept(FileTreeLoader.Outcome.SUCCESS);
             }
-            return result;
+            return;
+        }
+        if (navigationOwner == null) {
+            state.userOwned = true;
+        } else {
+            state.navigationOwners.add(navigationOwner);
+        }
+        if (waiter != null) {
+            state.waiters.add(new NodeLoadWaiter(navigationOwner, waiter));
+        }
+        state.notifyOnFailure |= notifyOnFailure;
+        if (state.request != null) {
+            return;
+        }
+
+        long nodeGeneration = ++state.generation;
+        FileTreeLoader.Request request = fileTreeLoader.load(treeItem.getValue(), snapshotFileShowFilter());
+        state.request = request;
+        request.completion().whenComplete((result, error) -> Platform.runLater(() ->
+                applyNodeLoadResult(treeItem, state, request, nodeGeneration,
+                        expectedRefreshGeneration, result, error)));
+    }
+
+    private void applyNodeLoadResult(
+            TreeItem<File> treeItem,
+            NodeLoadState state,
+            FileTreeLoader.Request request,
+            long nodeGeneration,
+            long expectedRefreshGeneration,
+            @Nullable FileTreeLoader.Result result,
+            @Nullable Throwable error
+    ) {
+        if (expectedRefreshGeneration != refreshGeneration
+            || nodeLoadStates.get(treeItem) != state
+            || state.request != request
+            || state.generation != nodeGeneration
+            || !request.token().isValid()) {
+            return;
+        }
+
+        state.request = null;
+        boolean hasLiveOwner = state.userOwned || state.navigationOwners.contains(navigationGeneration);
+        List<Consumer<FileTreeLoader.Outcome>> liveWaiters = state.waiters.stream()
+                .filter(waiter -> waiter.navigationOwner() == null
+                                  || waiter.navigationOwner() == navigationGeneration)
+                .map(NodeLoadWaiter::consumer)
+                .toList();
+        state.userOwned = false;
+        state.navigationOwners.clear();
+        state.waiters.clear();
+        if (!hasLiveOwner) {
+            state.notifyOnFailure = false;
+            return;
+        }
+
+        FileTreeLoader.Outcome outcome = error == null && result != null
+                ? result.outcome()
+                : FileTreeLoader.Outcome.IO_FAILURE;
+        if (outcome == FileTreeLoader.Outcome.SUCCESS) {
+            state.loaded = true;
+            state.notifyOnFailure = false;
+            treeItem.getChildren().setAll(result.entries().stream().map(this::createFileTreeItem).toList());
+        } else {
+            state.loaded = false;
+            boolean shouldNotifyNodeFailure = state.notifyOnFailure && liveWaiters.isEmpty();
+            restoreLoadingPlaceholder(treeItem);
+            treeItem.setExpanded(false);
+            if (shouldNotifyNodeFailure) {
+                showDirectoryLoadFailure(treeItem.getValue(), outcome);
+            }
+            state.notifyOnFailure = false;
+        }
+
+        liveWaiters.forEach(waiter -> waiter.accept(outcome));
+        fileTreeView.refresh();
+    }
+
+    private void showDirectoryLoadFailure(File directory, FileTreeLoader.Outcome outcome) {
+        if (outcome == FileTreeLoader.Outcome.TIMEOUT) {
+            notificationManager.showWarn("读取目录超时，可重新展开重试：" + directory.getAbsolutePath(), 3);
+        } else {
+            notificationManager.showWarn("无法读取目录，可重新展开重试：" + directory.getAbsolutePath(), 3);
         }
     }
 
-    private boolean selectFileItem(File targetFile) {
-        return selectFileItem(targetFile, true);
+    private void invalidateNodeLoads() {
+        for (NodeLoadState state : nodeLoadStates.values()) {
+            state.generation++;
+            if (state.request != null) {
+                state.request.cancel();
+            }
+            state.waiters.clear();
+            state.navigationOwners.clear();
+        }
+        nodeLoadStates.clear();
     }
 
-    private boolean selectFileItem(File targetFile, boolean clearPrevSelect) {
-        if (isSelecting || targetFile == null || !targetFile.exists()) return false;
+    private long beginNavigation() {
+        long generation = ++navigationGeneration;
+        for (NodeLoadState state : nodeLoadStates.values()) {
+            state.navigationOwners.removeIf(owner -> owner != generation);
+            state.waiters.removeIf(waiter ->
+                    waiter.navigationOwner() != null && waiter.navigationOwner() != generation);
+        }
+        return generation;
+    }
+
+    private void resetNodeForReload(TreeItem<File> treeItem) {
+        NodeLoadState state = nodeLoadStates.get(treeItem);
+        if (state == null) {
+            return;
+        }
+        state.generation++;
+        if (state.request != null) {
+            state.request.cancel();
+        }
+        state.request = null;
+        state.loaded = false;
+        state.userOwned = false;
+        state.notifyOnFailure = false;
+        state.waiters.clear();
+        state.navigationOwners.clear();
+        treeItem.setExpanded(false);
+        restoreLoadingPlaceholder(treeItem);
+    }
+
+    private void navigateToFile(
+            @Nullable File targetFile,
+            boolean clearPreviousSelection,
+            boolean updateHistory,
+            @Nullable Runnable successHandler,
+            @Nullable Runnable failureHandler
+    ) {
+        long navigationToken = beginNavigation();
+        navigateToFile(targetFile, clearPreviousSelection, updateHistory,
+                successHandler, failureHandler, navigationToken, refreshGeneration);
+    }
+
+    private void navigateToFile(
+            @Nullable File targetFile,
+            boolean clearPreviousSelection,
+            boolean updateHistory,
+            @Nullable Runnable successHandler,
+            @Nullable Runnable failureHandler,
+            long navigationToken,
+            long expectedRefreshGeneration
+    ) {
+        if (targetFile == null
+            || navigationToken != navigationGeneration
+            || expectedRefreshGeneration != refreshGeneration) {
+            if (failureHandler != null) {
+                failureHandler.run();
+            }
+            return;
+        }
+
+        List<File> hierarchy = buildPathHierarchy(targetFile);
+        TreeItem<File> root = fileTreeView.getRoot();
+        if (hierarchy.isEmpty() || root == null) {
+            failNavigation(targetFile, null, failureHandler, navigationToken, expectedRefreshGeneration);
+            return;
+        }
+        internalNavigationSelection = true;
         try {
-            isSelecting = true;
-            Stack<File> filesStack = new Stack<>();
-            File parent = targetFile;
-            do {
-                filesStack.push(parent);
-            } while ((parent = parent.getParentFile()) != null);
-            File pop;
-            TreeItem<File> lastTreeItem = null;
-            for (TreeItem<File> child : fileTreeView.getRoot().getChildren()) {
+            for (TreeItem<File> child : root.getChildren()) {
                 child.setExpanded(false);
             }
-            while (!filesStack.isEmpty() && (pop = filesStack.pop()) != null) {
-                TreeItem<File> fileTreeItem = searchFileItem(pop, fileTreeView.getRoot());
-                if (fileTreeItem == null) {
-                    break;
-                } else {
-                    fileTreeItem.setExpanded(true);
-                    lastTreeItem = fileTreeItem;
-                }
-            }
-            if (lastTreeItem == null) {
-                return false;
-            } else {
-                if (clearPrevSelect) {
-                    fileTreeView.getSelectionModel().clearSelection();
-                }
-                lastTreeItem.setExpanded(false);
-                fileTreeView.getSelectionModel().select(lastTreeItem);
-                scrollTo(fileTreeView.getRow(lastTreeItem));
-                return true;
-            }
         } finally {
-            isSelecting = false;
+            internalNavigationSelection = false;
         }
+        TreeItem<File> rootItem = findChild(root, hierarchy.getFirst());
+        if (rootItem == null) {
+            failNavigation(targetFile, null, failureHandler, navigationToken, expectedRefreshGeneration);
+            return;
+        }
+        navigatePathStep(hierarchy, 1, rootItem, targetFile, clearPreviousSelection, updateHistory,
+                successHandler, failureHandler, navigationToken, expectedRefreshGeneration);
+    }
+
+    private void navigatePathStep(
+            List<File> hierarchy,
+            int nextIndex,
+            TreeItem<File> currentItem,
+            File requestedFile,
+            boolean clearPreviousSelection,
+            boolean updateHistory,
+            @Nullable Runnable successHandler,
+            @Nullable Runnable failureHandler,
+            long navigationToken,
+            long expectedRefreshGeneration
+    ) {
+        if (navigationToken != navigationGeneration || expectedRefreshGeneration != refreshGeneration) {
+            return;
+        }
+        if (nextIndex >= hierarchy.size()) {
+            if (!fileInfoCache.isDirectory(currentItem.getValue())) {
+                completeNavigation(currentItem, clearPreviousSelection, updateHistory, successHandler);
+                return;
+            }
+            ensureNodeLoaded(currentItem, expectedRefreshGeneration, false, navigationToken, outcome -> {
+                if (navigationToken != navigationGeneration
+                    || expectedRefreshGeneration != refreshGeneration) {
+                    return;
+                }
+                if (outcome == FileTreeLoader.Outcome.SUCCESS) {
+                    completeNavigation(currentItem, clearPreviousSelection, updateHistory, successHandler);
+                } else {
+                    failNavigation(requestedFile, outcome, failureHandler,
+                            navigationToken, expectedRefreshGeneration);
+                }
+            });
+            return;
+        }
+
+        Long previousExpansionOwner = navigationExpansionOwner;
+        navigationExpansionOwner = navigationToken;
+        try {
+            currentItem.setExpanded(true);
+        } finally {
+            navigationExpansionOwner = previousExpansionOwner;
+        }
+        ensureNodeLoaded(currentItem, expectedRefreshGeneration, false, navigationToken, outcome -> {
+            if (navigationToken != navigationGeneration || expectedRefreshGeneration != refreshGeneration) {
+                return;
+            }
+            if (outcome != FileTreeLoader.Outcome.SUCCESS) {
+                failNavigation(requestedFile, outcome, failureHandler,
+                        navigationToken, expectedRefreshGeneration);
+                return;
+            }
+            TreeItem<File> nextItem = findChild(currentItem, hierarchy.get(nextIndex));
+            if (nextItem == null) {
+                failNavigation(requestedFile, null, failureHandler,
+                        navigationToken, expectedRefreshGeneration);
+                return;
+            }
+            navigatePathStep(hierarchy, nextIndex + 1, nextItem, requestedFile,
+                    clearPreviousSelection, updateHistory, successHandler, failureHandler,
+                    navigationToken, expectedRefreshGeneration);
+        });
+    }
+
+    private void completeNavigation(
+            TreeItem<File> targetItem,
+            boolean clearPreviousSelection,
+            boolean updateHistory,
+            @Nullable Runnable successHandler
+    ) {
+        internalNavigationSelection = true;
+        try {
+            if (clearPreviousSelection) {
+                fileTreeView.getSelectionModel().clearSelection();
+            }
+            fileTreeView.getSelectionModel().select(targetItem);
+        } finally {
+            internalNavigationSelection = false;
+        }
+        targetItem.setExpanded(false);
+        scrollTo(fileTreeView.getRow(targetItem));
+        fileTreeView.requestFocus();
+        if (updateHistory) {
+            updateSearchHistory(targetItem.getValue());
+        }
+        updateSelectedFile();
+        if (successHandler != null) {
+            successHandler.run();
+        }
+    }
+
+    private void failNavigation(
+            File targetFile,
+            @Nullable FileTreeLoader.Outcome outcome,
+            @Nullable Runnable failureHandler,
+            long navigationToken,
+            long expectedRefreshGeneration
+    ) {
+        if (navigationToken != navigationGeneration || expectedRefreshGeneration != refreshGeneration) {
+            return;
+        }
+        if (outcome == FileTreeLoader.Outcome.TIMEOUT) {
+            notificationManager.showWarn("访问超时：" + targetFile.getAbsolutePath(), 3);
+        } else if (outcome == FileTreeLoader.Outcome.IO_FAILURE) {
+            notificationManager.showWarn("无法访问：" + targetFile.getAbsolutePath(), 3);
+        } else {
+            notificationManager.showWarn("未找到" + targetFile.getAbsolutePath(), 2);
+        }
+        if (failureHandler != null) {
+            failureHandler.run();
+        }
+    }
+
+    private List<File> buildPathHierarchy(File targetFile) {
+        Path targetPath = targetFile.toPath().toAbsolutePath().normalize();
+        Path root = targetPath.getRoot();
+        if (root == null) {
+            return List.of();
+        }
+        List<File> hierarchy = new ArrayList<>();
+        Path current = root;
+        hierarchy.add(current.toFile());
+        for (Path name : targetPath) {
+            current = current.resolve(name);
+            hierarchy.add(current.toFile());
+        }
+        return hierarchy;
     }
 
     @Nullable
-    private TreeItem<File> searchFileItem(@NotNull File targetFile, @NotNull TreeItem<File> fileTreeItem) {
-        if (Objects.equals(targetFile, fileTreeItem.getValue())) {
-            return fileTreeItem;
-        }
-        ObservableList<TreeItem<File>> files = fileTreeItem.getChildren();
-        if (files.isEmpty()) {
-            files.setAll(loadFiles(fileTreeItem.getValue(), false));
-        }
-        for (TreeItem<File> file : files) {
-            if (targetFile.toPath().startsWith(file.getValue().toPath())) {
-                return searchFileItem(targetFile, file);
+    private TreeItem<File> findChild(TreeItem<File> parent, File targetFile) {
+        String targetPath = normalizedPath(targetFile);
+        for (TreeItem<File> child : parent.getChildren()) {
+            if (child.getValue() != null && pathsEqual(normalizedPath(child.getValue()), targetPath)) {
+                return child;
             }
         }
         return null;
+    }
+
+    private String normalizedPath(File file) {
+        return file.toPath().toAbsolutePath().normalize().toString();
+    }
+
+    private boolean pathsEqual(String first, String second) {
+        return File.separatorChar == '\\' ? first.equalsIgnoreCase(second) : first.equals(second);
     }
 
     @NotNull
@@ -887,6 +1182,32 @@ public class MultiFileChooserView extends StackPane {
     @NotNull
     private File getHomeFile() {
         return new File(System.getProperty("user.home"));
+    }
+
+    @NotNull
+    private File getDownloadsFile() throws IOException {
+        Process process = new ProcessBuilder(
+                "powershell.exe", "-NoProfile", "-NonInteractive", "-Command",
+                "$ErrorActionPreference = 'Stop'; "
+                + "[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new(); "
+                + "(New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path")
+                .redirectErrorStream(true)
+                .start();
+        try {
+            if (!process.waitFor(10, TimeUnit.SECONDS)) {
+                throw new IOException("读取下载目录超时");
+            }
+            String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8).strip();
+            if (process.exitValue() != 0 || output.isBlank()) {
+                throw new IOException("读取下载目录失败：" + output);
+            }
+            return new File(output);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new IOException("读取下载目录被中断", e);
+        } finally {
+            process.destroyForcibly();
+        }
     }
 
     @FXML
@@ -919,12 +1240,63 @@ public class MultiFileChooserView extends StackPane {
 
     @FXML
     protected void homeDir() {
-        selectFileItem(getHomeFile());
+        navigateToFile(getHomeFile(), true, true, null, null);
     }
 
     @FXML
     protected void desktopDir() {
-        selectFileItem(getDesktopFile());
+        long navigationToken = beginNavigation();
+        long expectedRefreshGeneration = refreshGeneration;
+        JavaFXUIThreadPoolConfig.V_THREAD_POOL.submit(() -> {
+            File desktopFile;
+            try {
+                desktopFile = getDesktopFile();
+            } catch (RuntimeException e) {
+                log.error("读取桌面目录失败", e);
+                desktopFile = null;
+            }
+            File result = desktopFile;
+            Platform.runLater(() -> {
+                if (navigationToken != navigationGeneration
+                    || expectedRefreshGeneration != refreshGeneration) {
+                    return;
+                }
+                if (result == null) {
+                    notificationManager.showWarn("无法读取桌面目录", 2);
+                } else {
+                    navigateToFile(result, true, true, null, null,
+                            navigationToken, expectedRefreshGeneration);
+                }
+            });
+        });
+    }
+
+    @FXML
+    protected void downloadsDir() {
+        long navigationToken = beginNavigation();
+        long expectedRefreshGeneration = refreshGeneration;
+        JavaFXUIThreadPoolConfig.V_THREAD_POOL.submit(() -> {
+            File downloadsFile;
+            try {
+                downloadsFile = getDownloadsFile();
+            } catch (IOException | RuntimeException e) {
+                log.error("读取下载目录失败", e);
+                downloadsFile = null;
+            }
+            File result = downloadsFile;
+            Platform.runLater(() -> {
+                if (navigationToken != navigationGeneration
+                    || expectedRefreshGeneration != refreshGeneration) {
+                    return;
+                }
+                if (result == null) {
+                    notificationManager.showWarn("无法读取下载目录", 2);
+                } else {
+                    navigateToFile(result, true, true, null, null,
+                            navigationToken, expectedRefreshGeneration);
+                }
+            });
+        });
     }
 
     @FXML
@@ -936,7 +1308,7 @@ public class MultiFileChooserView extends StackPane {
 
         File dir;
         TreeItem<File> dirItem;
-        if (file.isDirectory()) {
+        if (fileInfoCache.isDirectory(file)) {
             dir = file;
             dirItem = selectedItem;
         } else {
@@ -959,23 +1331,40 @@ public class MultiFileChooserView extends StackPane {
         modal.setMaskClosable(true);
         ok.setOnAction(event -> {
             String newDirName = textField.getText();
-            do {
-                if (newDirName != null && !newDirName.isBlank()) {
-                    File newDir = dir.toPath().resolve(newDirName).toFile();
-                    if (newDir.exists()) {
-                        notificationManager.showWarn(newDirName + "文件夹已经存在", 1);
-                        break;
-                    }
-                    if (newDir.mkdir()) {
-                        TreeItem<File> newFileItem = new TreeItem<>(newDir);
-                        dirItem.getChildren().add(newFileItem);
-                        selectFileItem(newDir);
-                        notificationManager.showSuccess("新建" + newDirName + "成功", 1);
-                        break;
-                    }
-                }
+            if (newDirName == null || newDirName.isBlank()) {
                 notificationManager.showError("新建失败", 2);
-            } while (false);
+                modal.close();
+                return;
+            }
+            File newDir = dir.toPath().resolve(newDirName).toFile();
+            long expectedRefreshGeneration = refreshGeneration;
+            JavaFXUIThreadPoolConfig.V_THREAD_POOL.submit(() -> {
+                CreateDirectoryOutcome outcome;
+                try {
+                    Files.createDirectory(newDir.toPath());
+                    outcome = CreateDirectoryOutcome.SUCCESS;
+                } catch (FileAlreadyExistsException e) {
+                    outcome = CreateDirectoryOutcome.ALREADY_EXISTS;
+                } catch (IOException | SecurityException e) {
+                    log.error("新建目录失败: {}", newDir, e);
+                    outcome = CreateDirectoryOutcome.IO_FAILURE;
+                }
+                CreateDirectoryOutcome result = outcome;
+                Platform.runLater(() -> {
+                    if (result == CreateDirectoryOutcome.ALREADY_EXISTS) {
+                        notificationManager.showWarn(newDirName + "文件夹已经存在", 1);
+                    } else if (result == CreateDirectoryOutcome.IO_FAILURE) {
+                        notificationManager.showError("新建失败", 2);
+                    } else {
+                        if (expectedRefreshGeneration == refreshGeneration
+                            && nodeLoadStates.containsKey(dirItem)) {
+                            resetNodeForReload(dirItem);
+                            navigateToFile(newDir, true, true, null, null);
+                        }
+                        notificationManager.showSuccess("新建" + newDirName + "成功", 1);
+                    }
+                });
+            });
             modal.close();
         });
         cancel.setOnAction(event -> {
@@ -999,25 +1388,46 @@ public class MultiFileChooserView extends StackPane {
         tip.delete(tip.length() - 2, tip.length());
 
         Modal modal = new Modal(this.getScene().getRoot(), "删除", tip.toString(), () -> {
-            ArrayList<TreeItem<File>> treeItems = new ArrayList<>(selectedItems);
-            for (TreeItem<File> treeItem : treeItems) {
+            List<DeleteTarget> targets = new ArrayList<>();
+            for (TreeItem<File> treeItem : new ArrayList<>(selectedItems)) {
                 if (treeItem.getValue().getName().isEmpty()) {
                     notificationManager.showWarn("不支持删除磁盘根目录", 3);
                     return;
                 }
-                try {
-                    if (treeItem.getValue().isFile()) {
-                        FileUtils.delete(treeItem.getValue());
-                    } else {
-                        FileUtils.deleteDirectory(treeItem.getValue());
-                    }
-                    TreeItem<File> parent = treeItem.getParent();
-                    parent.getChildren().remove(treeItem);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                targets.add(new DeleteTarget(treeItem, treeItem.getValue(),
+                        fileInfoCache.isDirectory(treeItem.getValue())));
             }
-            notificationManager.showSuccess("删除成功", 1);
+            JavaFXUIThreadPoolConfig.V_THREAD_POOL.submit(() -> {
+                List<DeleteTarget> deletedTargets = new ArrayList<>();
+                IOException failure = null;
+                try {
+                    for (DeleteTarget target : targets) {
+                        if (target.directory()) {
+                            FileUtils.deleteDirectory(target.file());
+                        } else {
+                            FileUtils.delete(target.file());
+                        }
+                        deletedTargets.add(target);
+                    }
+                } catch (IOException e) {
+                    failure = e;
+                }
+                IOException resultFailure = failure;
+                Platform.runLater(() -> {
+                    for (DeleteTarget target : deletedTargets) {
+                        TreeItem<File> parent = target.treeItem().getParent();
+                        if (parent != null) {
+                            parent.getChildren().remove(target.treeItem());
+                        }
+                    }
+                    if (resultFailure == null) {
+                        notificationManager.showSuccess("删除成功", 1);
+                    } else {
+                        log.error("删除文件失败", resultFailure);
+                        notificationManager.showError("删除失败", 2);
+                    }
+                });
+            });
         }, () -> {
         });
         modal.show();
@@ -1049,11 +1459,60 @@ public class MultiFileChooserView extends StackPane {
 
     public void refresh() {
         File initialDirectory = multiFileChooser.getInitialDirectory();
+        File recoveryTarget;
+        if (lastSelectedFile != null) {
+            recoveryTarget = lastSelectedFile;
+        } else if (initialDirectory != null) {
+            recoveryTarget = initialDirectory;
+        } else if (historySearchQueue != null && !historySearchQueue.isEmpty()) {
+            recoveryTarget = historySearchQueue.getFirst();
+        } else {
+            recoveryTarget = null;
+        }
+
+        long currentRefreshGeneration = ++refreshGeneration;
+        navigationGeneration++;
+        invalidateNodeLoads();
+        if (refreshProgress != null) {
+            refreshProgress.finish();
+        }
         ProgressModal.ProgressContext progress = progressModal.show("加载文件中...");
+        refreshProgress = progress;
         fileTreeView.getSelectionModel().clearSelection();
-        new Thread(() -> {
-            List<TreeItem<File>> treeItems = loadFiles(null, true);
+        boolean includeNetworkDrive = showNetIco.isVisible();
+        JavaFXUIThreadPoolConfig.V_THREAD_POOL.submit(() -> {
+            List<File> roots = new ArrayList<>();
+            Throwable error = null;
+            try {
+                File[] rootFiles = File.listRoots();
+                if (rootFiles != null) {
+                    for (File rootFile : rootFiles) {
+                        if (includeNetworkDrive
+                            || !isNetworkDrive(rootFile.getAbsolutePath().replace(File.separator, ""))) {
+                            roots.add(rootFile);
+                        }
+                    }
+                }
+            } catch (RuntimeException e) {
+                error = e;
+                log.error("枚举根目录失败", e);
+            }
+            Throwable resultError = error;
             Platform.runLater(() -> {
+                if (currentRefreshGeneration != refreshGeneration) {
+                    return;
+                }
+                if (refreshProgress == progress) {
+                    progress.finish();
+                    refreshProgress = null;
+                }
+                if (resultError != null) {
+                    notificationManager.showWarn("无法刷新磁盘列表", 2);
+                    return;
+                }
+
+                fileInfoCache.clear();
+                invalidateNodeLoads();
                 TreeItem<File> root = fileTreeView.getRoot();
                 if (root == null) {
                     root = new TreeItem<>();
@@ -1061,23 +1520,14 @@ public class MultiFileChooserView extends StackPane {
                     fileTreeView.setShowRoot(false);
                 }
                 root.setExpanded(true);
-                root.getChildren().setAll(treeItems);
+                root.getChildren().setAll(roots.stream().map(this::createRootTreeItem).toList());
                 fileTreeView.refresh();
-                if (lastSelectedFile == null) {
-                    if (initialDirectory == null) {
-                        if (historySearchQueue != null && !historySearchQueue.isEmpty()) {
-                            selectFileItem(historySearchQueue.getFirst());
-                        }
-                    } else {
-                        selectFileItem(initialDirectory);
-                    }
-                } else {
-                    selectFileItem(lastSelectedFile);
-                }
                 updateSelectedFile();
-                progress.finish();
+                if (recoveryTarget != null) {
+                    navigateToFile(recoveryTarget, true, true, null, null);
+                }
             });
-        }).start();
+        });
     }
 
     public static void clearHistory() {

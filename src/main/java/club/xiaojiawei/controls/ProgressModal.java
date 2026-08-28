@@ -160,6 +160,7 @@ public class ProgressModal extends HBox {
         });
         progressPane.prefHeightProperty().bind(size);
         progressPane.prefWidthProperty().bind(size);
+        progressIndicator.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
     }
 
     private void refreshUI() {
@@ -179,11 +180,9 @@ public class ProgressModal extends HBox {
 
         if (context.indeterminate || context.progress < 0) {
             progressLabel.setVisible(false);
-            progressIndicator.setProgress(-1);
         } else {
             progressLabel.setVisible(true);
             double v = Math.min(context.progress, 1.0);
-            progressIndicator.setProgress(v);
             progressLabel.setText(String.format("%." + decimalCount.get() + "f", v * 100) + "%");
         }
 
