@@ -1,10 +1,12 @@
+
+
 [![](https://jitpack.io/v/xjw580/javafx-ui.svg)](https://jitpack.io/#xjw580/javafx-ui) ![GitHub](https://img.shields.io/github/license/xjw580/javafx-ui?style=flat-square)
 
 ## JavaFX-UI
 
 
 
-![favicon.ico](src/main/resources/club/xiaojiawei/demo/demo.png)
+![demo.png](src/main/resources/club/xiaojiawei/demo/demo.png)
 
 > 适用于javafx的ui组件库（Javafx-based ui component library）
 
