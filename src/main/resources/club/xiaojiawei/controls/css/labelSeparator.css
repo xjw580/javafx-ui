@@ -1,0 +1,7 @@
+.label-separator-ui > .label {
+    -fx-padding: 0 8;
+}
+
+.label-separator-ui > .separator {
+    -fx-pref-width: 24;
+}

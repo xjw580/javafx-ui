@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.LabelSeparator?>
+<?import club.xiaojiawei.controls.ico.SettingsIco?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fitToWidth="true">
+    <VBox spacing="24" style="-fx-padding: 24" minWidth="0">
+        <Label text="文本分隔线" styleClass="title-three"/>
+        <Label text="修改文本预览对齐效果，清空文本显示横线。" wrapText="true"/>
+        <TextField fx:id="separatorText" text="分组标题" promptText="输入分隔线文本"/>
+        <LabelSeparator text="${separatorText.text}" textAlignment="LEFT"/>
+        <LabelSeparator text="${separatorText.text}"/>
+        <LabelSeparator text="${separatorText.text}" textAlignment="RIGHT"/>
+        <Label text="无文本" styleClass="title-three"/>
+        <LabelSeparator/>
+        <Label text="长文本（空间不足时省略）" styleClass="title-three"/>
+        <LabelSeparator text="这是一段较长的分组标题，缩小窗口可以查看文本省略效果"/>
+        <Label text="禁用状态" styleClass="title-three"/>
+        <LabelSeparator text="暂不可用" disable="true"/>
+        <Label text="图标与文字（整体对齐）" styleClass="title-three"/>
+        <LabelSeparator text="${separatorText.text}" textAlignment="LEFT">
+            <graphic>
+                <SettingsIco/>
+            </graphic>
+        </LabelSeparator>
+        <LabelSeparator text="${separatorText.text}">
+            <graphic>
+                <SettingsIco/>
+            </graphic>
+        </LabelSeparator>
+        <LabelSeparator text="${separatorText.text}" textAlignment="RIGHT">
+            <graphic>
+                <SettingsIco/>
+            </graphic>
+        </LabelSeparator>
+        <Label text="仅图标" styleClass="title-three"/>
+        <LabelSeparator>
+            <graphic>
+                <SettingsIco/>
+            </graphic>
+        </LabelSeparator>
+        <Label text="图文顺序：contentDisplay（图标在右）" styleClass="title-three" wrapText="true"/>
+        <LabelSeparator text="图标在右侧" contentDisplay="RIGHT" graphicTextGap="12">
+            <graphic>
+                <SettingsIco/>
+            </graphic>
+        </LabelSeparator>
+    </VBox>
+</ScrollPane>

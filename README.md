@@ -44,4 +44,41 @@
 
 
 
+## 文本分隔线
+
+`LabelSeparator` 是支持文本和图形节点的水平分隔线，图文整体默认居中，支持 `HPos.LEFT`、`HPos.CENTER`、`HPos.RIGHT`。
+
+```java
+import club.xiaojiawei.controls.LabelSeparator;
+import club.xiaojiawei.controls.ico.SettingsIco;
+import javafx.geometry.HPos;
+import javafx.scene.control.ContentDisplay;
+
+LabelSeparator separator = new LabelSeparator("分组标题");
+separator.setTextAlignment(HPos.LEFT);
+separator.setGraphic(new SettingsIco());
+separator.setContentDisplay(ContentDisplay.RIGHT);
+separator.setGraphicTextGap(8);
+```
+
+也可以在 FXML 中使用：
+
+```xml
+<?import club.xiaojiawei.controls.LabelSeparator?>
+<?import club.xiaojiawei.controls.ico.SettingsIco?>
+<LabelSeparator text="分组标题" textAlignment="RIGHT" contentDisplay="RIGHT" graphicTextGap="8">
+    <graphic>
+        <SettingsIco/>
+    </graphic>
+</LabelSeparator>
+```
+
+`textProperty()`、`graphicProperty()` 和 `textAlignmentProperty()` 支持属性绑定。
+`contentDisplay` 使用 JavaFX 的 `ContentDisplay`，支持 `LEFT`（默认）、`RIGHT`、`TOP`、`BOTTOM`、`CENTER`、`TEXT_ONLY` 和 `GRAPHIC_ONLY`。
+`graphicTextGap` 设置图文间距，默认 4 像素；这两个属性也支持绑定及 CSS 的 `-fx-content-display`、`-fx-graphic-text-gap`。
+`textAlignment` 控制图文整体在分隔线上的位置，与图文内部排列无关。
+文本为空时可单独显示图形，没有可见图文内容时显示完整横线，空间不足时自动省略文本。
+样式可通过 `.label-separator-ui > .label` 和 `.label-separator-ui > .separator` 设置。
+运行演示程序并打开 `LabelSeparator` 页面可预览三种对齐方式。
+
 ## [更新历史](HISTORY.md)
