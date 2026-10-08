@@ -525,14 +525,15 @@ public class MultiFileChooserView extends StackPane {
                     }
 
                     private void handleFileComment(File item) {
-                        if (fileCommentHandler != null) {
-                            if (itemRoot.getChildren().size() > 3) {
-                                itemRoot.getChildren().removeLast();
-                            }
-                            Node fileComment = fileCommentHandler.apply(item);
-                            if (fileComment != null) {
-                                itemRoot.getChildren().add(fileComment);
-                            }
+                        if (itemRoot.getChildren().size() > 3) {
+                            itemRoot.getChildren().removeLast();
+                        }
+                        if (fileCommentHandler == null || isUnloadedDisk(item)) {
+                            return;
+                        }
+                        Node fileComment = fileCommentHandler.apply(item);
+                        if (fileComment != null) {
+                            itemRoot.getChildren().add(fileComment);
                         }
                     }
                 };
@@ -670,7 +671,20 @@ public class MultiFileChooserView extends StackPane {
         return file.getName().isEmpty();
     }
 
+    private boolean isUnloadedDisk(@NotNull File file) {
+        if (!isDiskFile(file)) {
+            return false;
+        }
+        TreeItem<File> root = fileTreeView.getRoot();
+        TreeItem<File> diskItem = root == null ? null : findChild(root, file);
+        NodeLoadState loadState = nodeLoadStates.get(diskItem);
+        return loadState == null || !loadState.loaded;
+    }
+
     private boolean testFileResultFilter(@NotNull File file) {
+        if (isUnloadedDisk(file)) {
+            return false;
+        }
         boolean filter = true;
         for (FileChooserFilter fileFilter : fileFilters) {
             Predicate<@NotNull File> resultFilter = fileFilter.getResultFilter();
