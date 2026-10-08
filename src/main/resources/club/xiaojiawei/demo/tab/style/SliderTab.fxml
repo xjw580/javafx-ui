@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <ScrollPane fitToWidth="true">
+        <VBox spacing="24" style="-fx-padding: 24" minWidth="0">
+            <Label text="基类" styleClass="title-three-base"/>
+            <CopyLabel text="slider-ui" notificationManager="${notificationManager}"/>
+            <Label text="拖动滑块或点击轨道调整数值；获得焦点后可用方向键、Home 和 End 操作。" wrapText="true"/>
+            <Slider fx:id="baseSlider" styleClass="slider-ui" value="40" blockIncrement="5" minWidth="0"/>
+
+            <Label text="刻度与吸附" styleClass="title-three-base"/>
+            <Slider fx:id="tickSlider" styleClass="slider-ui" value="50" minWidth="0"
+                    showTickLabels="true" showTickMarks="true" snapToTicks="true"
+                    majorTickUnit="25" minorTickCount="4" blockIncrement="5"/>
+
+            <Label text="大小类（与 slider-ui 组合）" styleClass="title-three-extra"/>
+            <VBox spacing="12">
+                <CopyLabel text="slider-ui-small" notificationManager="${notificationManager}"/>
+                <Slider fx:id="smallSlider" styleClass="slider-ui, slider-ui-small" value="30" minWidth="0"/>
+                <CopyLabel text="slider-ui-big" notificationManager="${notificationManager}"/>
+                <Slider fx:id="bigSlider" styleClass="slider-ui, slider-ui-big" value="70" minWidth="0"/>
+            </VBox>
+
+            <Label text="颜色类（与 slider-ui 组合）" styleClass="title-three-extra"/>
+            <VBox spacing="12">
+                <CopyLabel text="slider-ui-main" notificationManager="${notificationManager}"/>
+                <Slider styleClass="slider-ui, slider-ui-main" value="50" minWidth="0"/>
+                <CopyLabel text="slider-ui-normal" notificationManager="${notificationManager}"/>
+                <Slider styleClass="slider-ui, slider-ui-normal" value="50" minWidth="0"/>
+                <CopyLabel text="slider-ui-success" notificationManager="${notificationManager}"/>
+                <Slider styleClass="slider-ui, slider-ui-success" value="50" minWidth="0"/>
+                <CopyLabel text="slider-ui-warn" notificationManager="${notificationManager}"/>
+                <Slider styleClass="slider-ui, slider-ui-warn" value="50" minWidth="0"/>
+                <CopyLabel text="slider-ui-error" notificationManager="${notificationManager}"/>
+                <Slider styleClass="slider-ui, slider-ui-error" value="50" minWidth="0"/>
+            </VBox>
+
+            <Label text="Windows 风格与禁用状态" styleClass="title-three-extra"/>
+            <CopyLabel text="slider-ui, slider-ui-windows" notificationManager="${notificationManager}"/>
+            <Slider fx:id="windowsSlider" styleClass="slider-ui, slider-ui-windows" value="50" minWidth="0"/>
+            <Label text="禁用：默认风格 / Windows 风格"/>
+            <Slider fx:id="disabledSlider" styleClass="slider-ui" value="40" disable="true" minWidth="0"/>
+            <Slider styleClass="slider-ui, slider-ui-windows" value="60" disable="true" minWidth="0"/>
+
+            <Label text="竖向（orientation = VERTICAL）" styleClass="title-three-base"/>
+            <HBox spacing="32" alignment="CENTER_LEFT">
+                <Slider fx:id="verticalSlider" styleClass="slider-ui" orientation="VERTICAL" value="40" prefHeight="180"
+                        showTickLabels="true" showTickMarks="true" majorTickUnit="25"/>
+                <Slider styleClass="slider-ui, slider-ui-big, slider-ui-success"
+                        orientation="VERTICAL" value="60" prefHeight="180"/>
+                <Slider fx:id="windowsVerticalSlider" styleClass="slider-ui, slider-ui-windows"
+                        orientation="VERTICAL" value="50" prefHeight="180"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

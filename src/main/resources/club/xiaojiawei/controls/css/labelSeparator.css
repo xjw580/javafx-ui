@@ -1,5 +1,7 @@
 .label-separator-ui > .label {
     -fx-padding: 0 8;
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
 }
 
 .label-separator-ui > .separator {

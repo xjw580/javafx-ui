@@ -1,0 +1,149 @@
+@import "common.css";
+
+/*Base*/
+.slider-ui {
+    slider-color: main-color;
+    -fx-padding: 6;
+}
+
+.slider-ui > .track {
+    -fx-background-color: border-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3;
+    -fx-padding: 2;
+}
+
+.slider-ui > .thumb {
+    -fx-background-color: slider-color, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 20;
+    -fx-padding: 7;
+    -fx-effect: default-effect;
+    -fx-cursor: hand;
+}
+
+.slider-ui:hover > .track {
+    -fx-background-color: derive(border-color, -10%);
+}
+
+.slider-ui > .thumb:hover {
+    -fx-background-color: slider-color, derive(slider-color, 85%);
+}
+
+.slider-ui:focused > .thumb {
+    -fx-effect: dropshadow(gaussian, slider-color, 6, 0.25, 0, 0);
+}
+
+.slider-ui > .thumb:pressed {
+    -fx-background-color: slider-color;
+    -fx-background-insets: 0;
+    -fx-effect: default-press-effect;
+}
+
+.slider-ui > .axis {
+    -fx-tick-label-fill: -fx-text-background-color;
+    -fx-tick-length: 5;
+    -fx-minor-tick-length: 3;
+}
+
+.slider-ui > .axis > .axis-tick-mark,
+.slider-ui > .axis > .axis-minor-tick-mark {
+    -fx-stroke: border-color;
+}
+
+/*Size*/
+.slider-ui-small > .track {
+    -fx-padding: 1.5;
+}
+
+.slider-ui-small > .thumb {
+    -fx-padding: 5;
+}
+
+.slider-ui-big > .track {
+    -fx-padding: 3;
+}
+
+.slider-ui-big > .thumb {
+    -fx-padding: 9;
+}
+
+/*Color*/
+.slider-ui-main {
+    slider-color: main-color;
+}
+
+.slider-ui-normal {
+    slider-color: normal-deep-color;
+}
+
+.slider-ui-success {
+    slider-color: success-deep-color;
+}
+
+.slider-ui-warn {
+    slider-color: warn-deep-color;
+}
+
+.slider-ui-error {
+    slider-color: error-deep-color;
+}
+
+/*Disabled*/
+.slider-ui:disabled {
+    -fx-opacity: 0.4;
+}
+
+.slider-ui:disabled > .thumb {
+    -fx-effect: none;
+    -fx-cursor: default;
+}
+
+/*Windows Style*/
+.slider-ui-windows {
+    slider-color: win-main-color;
+}
+
+.slider-ui-windows > .track {
+    -fx-background-color: win-border-color;
+    -fx-background-radius: 0;
+    -fx-padding: 1;
+}
+
+.slider-ui-windows > .thumb {
+    -fx-background-color: win-main-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 2;
+    -fx-padding: 8 3;
+    -fx-effect: none;
+}
+
+.slider-ui-windows:vertical > .thumb {
+    -fx-padding: 3 8;
+}
+
+.slider-ui-windows:hover > .track {
+    -fx-background-color: win-border-color;
+}
+
+.slider-ui-windows > .thumb:hover {
+    -fx-background-color: win-main-hover-color;
+}
+
+.slider-ui-windows:focused > .thumb {
+    -fx-effect: win-focus-effect;
+}
+
+.slider-ui-windows > .thumb:pressed {
+    -fx-background-color: win-main-pressed-color;
+    -fx-effect: none;
+}
+
+.slider-ui-windows:disabled > .track,
+.slider-ui-windows:disabled > .thumb {
+    -fx-background-color: win-disabled-color;
+}
+
+.slider-ui-windows:disabled > .thumb {
+    -fx-effect: none;
+}

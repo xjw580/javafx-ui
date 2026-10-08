@@ -30,6 +30,8 @@ public enum StylesheetEnum {
 
     SCROLL_BAR(),
 
+    SLIDER(),
+
     TAB_PANE(),
 
     TABLE_VIEW(),
