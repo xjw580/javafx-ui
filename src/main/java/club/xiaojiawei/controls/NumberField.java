@@ -9,6 +9,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.event.ActionEvent;
 import javafx.geometry.Bounds;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyCode;
@@ -242,6 +243,10 @@ public class NumberField extends IconTextField {
                 isUpdating = true;
                 setText(String.valueOf(newValue));
                 isUpdating = false;
+            });
+            numberSelector.addEventHandler(ActionEvent.ACTION, event -> {
+                setText(String.valueOf(numberSelector.getValue()));
+                selectorPopup.hide();
             });
             selectorPopup.getContent().add(numberSelector);
         }
