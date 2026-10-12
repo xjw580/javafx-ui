@@ -1,6 +1,7 @@
 package club.xiaojiawei.skin;
 
 import club.xiaojiawei.controls.WideComboBox;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.css.Styleable;
@@ -35,16 +36,77 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
 
     private final Label displayLabel = new Label();
 
-    private final ListChangeListener<? super T> itemChangeListener = observable -> {
-        draw();
+    private final Label measuringLabel = new Label();
+
+    private final ListChangeListener<T> itemChangeListener = observable -> itemsChanged();
+
+    private final ChangeListener<ObservableList<T>> itemsChangeListener = (observable, oldValue, newValue) -> {
+        if (oldValue != null) {
+            oldValue.removeListener(itemChangeListener);
+        }
+        if (newValue != null) {
+            newValue.addListener(itemChangeListener);
+        }
+        itemsChanged();
     };
 
     public ComboBoxWideSkin(WideComboBox<T> comboBoxBase) {
         super(comboBoxBase);
         outerComboBox = comboBoxBase;
+        measuringLabel.getStyleClass().add("list-cell");
+        measuringLabel.setManaged(false);
+        measuringLabel.setVisible(false);
+        getChildren().add(measuringLabel);
+        if (outerComboBox.getItems() != null) {
+            outerComboBox.getItems().addListener(itemChangeListener);
+        }
+        outerComboBox.itemsProperty().addListener(itemsChangeListener);
+        registerChangeListener(outerComboBox.converterProperty(), observable -> {
+            displayLabel.setText(outerComboBox.getConverter().toString(outerComboBox.getValue()));
+            itemsChanged();
+        });
     }
 
     private double prevWidth;
+
+    @Override
+    protected double computePrefWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
+        double prefWidth = super.computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
+        double displayWidth = displayLabel.prefWidth(height);
+        double widestItemWidth = displayWidth;
+        ObservableList<T> items = outerComboBox.getItems();
+        if (items != null) {
+            measuringLabel.applyCss();
+            StringConverter<T> converter = outerComboBox.getConverter();
+            for (T item : items) {
+                measuringLabel.setText(converter.toString(item));
+                widestItemWidth = Math.max(widestItemWidth, measuringLabel.prefWidth(height));
+            }
+        }
+        return prefWidth - displayWidth + widestItemWidth;
+    }
+
+    private void itemsChanged() {
+        outerComboBox.requestLayout();
+        if (popupNode != null) {
+            draw();
+        }
+    }
+
+    @Override
+    public void dispose() {
+        outerComboBox.itemsProperty().removeListener(itemsChangeListener);
+        if (outerComboBox.getItems() != null) {
+            outerComboBox.getItems().removeListener(itemChangeListener);
+        }
+        super.dispose();
+    }
+
+    @Override
+    protected double computeMinWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
+        // 根据内容计算最小宽度，避免箭头当前位置参与计算形成布局反馈。
+        return computePrefWidth(height, topInset, rightInset, bottomInset, leftInset);
+    }
 
     @Override
     public Node getDisplayNode() {
@@ -77,15 +139,6 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
             popupNode = new GridPane();
             popupNode.setStyle("-fx-background-color: white;-fx-effect: default-effect");
             popupNode.getStyleClass().add("grid-pane");
-            outerComboBox.getItems().addListener(itemChangeListener);
-            outerComboBox.itemsProperty().addListener((observable, oldValue, newValue) -> {
-                if (oldValue != null) {
-                    oldValue.removeListener(itemChangeListener);
-                }
-                if (newValue != null) {
-                    newValue.addListener(itemChangeListener);
-                }
-            });
             draw();
         }
         return popupNode;
@@ -93,7 +146,7 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
 
     private void draw() {
         ObservableList<T> items = outerComboBox.getItems();
-        int size = items.size();
+        int size = items == null ? 0 : items.size();
         GridPane gridPane = getPopupContent();
         gridPane.getChildren().clear();
         if (size == 0) {
@@ -101,7 +154,7 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
             gridPane.setPrefWidth(w);
             gridPane.setPrefHeight(15);
             return;
-        }else {
+        } else {
             gridPane.setPrefWidth(-1);
         }
         int maxCol = outerComboBox.getMaxColumCount(), col = 0, row = 0;
