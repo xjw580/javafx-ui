@@ -46,6 +46,10 @@ public class NumberField extends IconTextField {
      */
     private int decimalCount = 0;
 
+    private double step = 1D;
+
+    private boolean stepConfigured;
+
     private BigDecimal minValue = new BigDecimal("-" + Integer.MAX_VALUE);
 
     private BigDecimal maxValue = new BigDecimal(String.valueOf(Integer.MAX_VALUE));
@@ -74,6 +78,24 @@ public class NumberField extends IconTextField {
 
     public void setDecimalCount(int decimalCount) {
         this.decimalCount = decimalCount;
+    }
+
+    /**
+     * 按钮、方向键和无参增减方法使用的步长；未配置时为 decimalCount 对应的最小小数单位。
+     */
+    public double getStep() {
+        return stepConfigured ? step : calcStep();
+    }
+
+    /**
+     * 设置正数步长。小数步长需配合足够的 decimalCount 使用。
+     */
+    public void setStep(double step) {
+        if (!Double.isFinite(step) || step <= 0) {
+            throw new IllegalArgumentException("step必须为有限正数");
+        }
+        this.step = step;
+        stepConfigured = true;
     }
 
     public BigDecimal getMinValue() {
@@ -149,18 +171,18 @@ public class NumberField extends IconTextField {
             }
             String text = getText().substring(0, change.getRangeStart()) + change.getText() + getText().substring(change.getRangeEnd());
             if (decimalCount > 0
-                    && text.matches("^-?\\d*(\\.\\d{0," + decimalCount + "})?$")
-                    && isInTheInterval(text)
-            ){
-                if (text.matches("-0+")){
+                && text.matches("^-?\\d*(\\.\\d{0," + decimalCount + "})?$")
+                && isInTheInterval(text)
+            ) {
+                if (text.matches("-0+")) {
                     return null;
                 }
                 return change;
-            }else if (decimalCount <= 0
-                    && text.matches("^-?\\d*$")
-                    && isInTheInterval(text)
-            ){
-                if (text.matches("-0+")){
+            } else if (decimalCount <= 0
+                       && text.matches("^-?\\d*$")
+                       && isInTheInterval(text)
+            ) {
+                if (text.matches("-0+")) {
                     return null;
                 }
                 return change;
@@ -168,14 +190,14 @@ public class NumberField extends IconTextField {
             return null;
         }));
         addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.UP){
+            if (keyEvent.getCode() == KeyCode.UP) {
                 increment();
-            }else if (keyEvent.getCode() == KeyCode.DOWN){
+            } else if (keyEvent.getCode() == KeyCode.DOWN) {
                 decrement();
             }
         });
         addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.UP){
+            if (keyEvent.getCode() == KeyCode.UP) {
                 end();
             }
         });
@@ -265,16 +287,16 @@ public class NumberField extends IconTextField {
         BaseTransitionEnum.FADE.play(numberSelector, 0.5D, 1D, Duration.millis(200));
     }
 
-    private boolean isInTheInterval(String text){
-        if (Objects.equals(text, "-")){
-            if (isForceRangeCheck() && minValue.compareTo(new BigDecimal("0")) >= 0){
+    private boolean isInTheInterval(String text) {
+        if (Objects.equals(text, "-")) {
+            if (isForceRangeCheck() && minValue.compareTo(new BigDecimal("0")) >= 0) {
                 return false;
             }
             return true;
         }
         BigDecimal temp;
         try {
-            if (text == null || text.isBlank()){
+            if (text == null || text.isBlank()) {
                 return true;
             }
             temp = new BigDecimal(text);
@@ -289,14 +311,14 @@ public class NumberField extends IconTextField {
         }
     }
 
-    private String formatText(String text){
-        if (text == null || text.isBlank()){
+    private String formatText(String text) {
+        if (text == null || text.isBlank()) {
             return "0";
         }
         return text;
     }
 
-    private double calcStep(){
+    private double calcStep() {
         return 1 / Math.pow(10, decimalCount);
     }
 
@@ -311,8 +333,8 @@ public class NumberField extends IconTextField {
      *                                                                         *
      **************************************************************************/
 
-    public void increment(){
-        increment(calcStep(),false);
+    public void increment() {
+        increment(getStep(), false);
     }
 
     /**
@@ -320,30 +342,27 @@ public class NumberField extends IconTextField {
      * @param value
      * @param playTransition 是否播放数值增加动画（注意：value值过大时动画时间很长，(value * Math.pow(10, decimalCount))不要超过500太多）
      */
-    public void increment(double value, boolean playTransition){
-        if (!isEditable()){
+    public void increment(double value, boolean playTransition) {
+        if (!isEditable()) {
             return;
         }
-        if (playTransition){
+        if (playTransition) {
+            double transitionStep = Math.copySign(calcStep(), value);
+            long count = (long) (Math.abs(value) * Math.pow(10, decimalCount));
+            if (count == 0) {
+                return;
+            }
             new Thread(() -> {
-                long count = (long) (value * Math.pow(10, decimalCount));
                 long totalTime = 500L;
                 long step = totalTime / count;
                 step = Math.max(step, 1);
                 step = Math.min(step, 25);
                 try {
-                    if (value > 0){
-                        for (long i = 0; i < count; i++) {
-                            Thread.sleep(step);
-                            Platform.runLater(this::increment);
-                        }
-                    }else {
-                        for (long i = 0; i < count; i++) {
-                            Thread.sleep(step);
-                            Platform.runLater(this::decrement);
-                        }
+                    for (long i = 0; i < count; i++) {
+                        Thread.sleep(step);
+                        Platform.runLater(() -> increment(transitionStep, false));
                     }
-                }catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     log.error("", e);
                 }
             }).start();
@@ -357,11 +376,11 @@ public class NumberField extends IconTextField {
         end();
     }
 
-    public void decrement(){
-        increment(-calcStep(), false);
+    public void decrement() {
+        increment(-getStep(), false);
     }
 
-    public void decrement(double value, boolean playTransition){
+    public void decrement(double value, boolean playTransition) {
         increment(-value, playTransition);
     }
 
