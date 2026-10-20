@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.skin.FilterComboBoxListViewSkin;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -15,6 +16,11 @@ import lombok.Setter;
 @Setter
 @Getter
 public class FilterComboBox<T> extends ComboBox<T> {
+
+    {
+        JavaFXUI.initializeTheme(this, "filter-combo-box-ui");
+        getStyleClass().add("combo-box-ui");
+    }
 
     private boolean ignoreCase;
 

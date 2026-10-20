@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.FilterField;
 import club.xiaojiawei.controls.NumberField;
 import javafx.application.Application;
@@ -29,7 +30,7 @@ public class FilterFieldTest extends Application {
         filterField.setOnFilterAction(System.out::println);
         filterField.getStyleClass().addAll("text-field-ui", "text-field-ui-small");
         Scene scene = new Scene(new StackPane(new Group(filterField)), 500, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

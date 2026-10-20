@@ -13,13 +13,13 @@
             notificationManager="${notificationManager}"
             baseStyleClasses="tab-pane-ui"
             sizeStyleClasses="tab-pane-ui-small"
-            styleStyleClasses="tab-pane-ui-windows" styleIntroduce="Windows风格标签页">
+            baseIntroduce="通过左侧全局主题切换外观；点击标签切换内容，点击关闭图标关闭标签。">
         <baseShowChildren>
-            <TabPane styleClass="tab-pane-ui">
+            <TabPane fx:id="defaultTabs" styleClass="tab-pane-ui" prefWidth="400" prefHeight="140">
                 <tooltip>
                     <Tooltip text="tab-pane-ui"/>
                 </tooltip>
-                <Tab text="工作" >
+                <Tab text="工作">
                     <Text text="假装工作中"/>
                 </Tab>
                 <Tab text="摸鱼">
@@ -28,11 +28,11 @@
             </TabPane>
         </baseShowChildren>
         <sizeShowChildren>
-            <TabPane styleClass="tab-pane-ui, tab-pane-ui-small">
+            <TabPane fx:id="smallTabs" styleClass="tab-pane-ui, tab-pane-ui-small" prefWidth="400" prefHeight="140">
                 <tooltip>
                     <Tooltip text="tab-pane-ui, tab-pane-ui-small"/>
                 </tooltip>
-                <Tab text="工作" >
+                <Tab text="工作">
                     <Text text="假装工作中"/>
                 </Tab>
                 <Tab text="摸鱼">
@@ -40,22 +40,6 @@
                 </Tab>
             </TabPane>
         </sizeShowChildren>
-        <styleShowChildren>
-            <TabPane styleClass="tab-pane-ui, tab-pane-ui-windows">
-                <tooltip>
-                    <Tooltip text="tab-pane-ui, tab-pane-ui-windows"/>
-                </tooltip>
-                <Tab text="工作" >
-                    <Text text="假装工作中"/>
-                </Tab>
-                <Tab text="摸鱼">
-                    <Text text="认真摸鱼中"/>
-                </Tab>
-                <Tab text="休息">
-                    <Text text="休息一会儿"/>
-                </Tab>
-            </TabPane>
-        </styleShowChildren>
     </StylePage>
     <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
 </StackPane>

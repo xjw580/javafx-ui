@@ -1,0 +1,336 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.table-view-ui.table-view-ui-base,
+.table-view-ui:ui-base {
+    table-view-bg-color: shallow-color;
+    table-view-hover-color: shallow-color;
+    table-view-selected-color: hover-color;
+    table-view-ui-idea-bg-color: #efefef;
+    table-view-ui-idea-header-bg-color: transparent;
+    table-view-ui-idea-selected-color: #a7d2ff;
+    table-view-ui-idea-hover-color: #f5f8fe;
+    table-view-ui-idea-upright-bg-color: #efefef;
+    table-view-ui-upright-owner-bg-color: transparent;
+    table-view-ui-upright-header-bg-color: transparent;
+}
+
+.table-view-ui,
+.table-view-ui.table-view-ui-base,
+.table-view-ui:ui-base {
+    -fx-padding: 0;
+    -fx-table-cell-border-color: my-custom-table-cell-border-color;
+}
+
+.table-view-ui.table-view-ui-base,
+.table-view-ui:ui-base {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.table-view-ui.table-view-ui-base:focused,
+.table-view-ui:ui-base:focused {
+    -fx-background-radius: 2;
+    -fx-border-color: null;
+}
+
+.table-view-ui.table-view-ui-base:disabled,
+.table-view-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+}
+
+.table-view-ui .filler,
+.table-view-ui.table-view-ui-base .filler,
+.table-view-ui:ui-base .filler {
+    -fx-background-color: table-view-bg-color;
+    -fx-background-radius: 0 10 0 0;
+}
+
+.table-view-ui,
+.table-view-ui .column-header-background,
+.table-view-ui:constrained-resize .filler,
+.table-view-ui.table-view-ui-base,
+.table-view-ui.table-view-ui-base .column-header-background,
+.table-view-ui.table-view-ui-base:constrained-resize .filler,
+.table-view-ui:ui-base,
+.table-view-ui:ui-base .column-header-background,
+.table-view-ui:ui-base:constrained-resize .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view-ui .nested-column-header,
+.table-view-ui.table-view-ui-base .nested-column-header,
+.table-view-ui:ui-base .nested-column-header {
+    -fx-background-radius: 10 0 0 0;
+    -fx-background-color: table-view-bg-color;
+}
+
+.table-view-ui:constrained-resize .nested-column-header,
+.table-view-ui.table-view-ui-base:constrained-resize .nested-column-header,
+.table-view-ui:ui-base:constrained-resize .nested-column-header {
+    -fx-background-radius: 10 10 0 0;
+}
+
+.table-view-ui.table-view-ui-base:constrained-resize .nested-column-header,
+.table-view-ui:ui-base:constrained-resize .nested-column-header {
+    -fx-background-color: table-view-bg-color;
+}
+
+.table-view-ui .column-header,
+.table-view-ui.table-view-ui-base .column-header,
+.table-view-ui:ui-base .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-view-ui.table-view-ui-base .column-header,
+.table-view-ui:ui-base .column-header {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.table-view-ui.table-view-ui-base .column-header:hover,
+.table-view-ui:ui-base .column-header:hover {
+    -fx-background-color: transparent;
+}
+
+.table-view-ui.table-view-ui-base .column-header:last-visible,
+.table-view-ui:ui-base .column-header:last-visible {
+    -fx-border-width: 0;
+}
+
+.table-view-ui .column-header-background .label,
+.table-view-ui.table-view-ui-base .column-header-background .label,
+.table-view-ui:ui-base .column-header-background .label {
+    -fx-text-fill: black;
+    -fx-pref-height: 40;
+}
+
+.table-view-ui.table-view-ui-base .column-header .label,
+.table-view-ui:ui-base .column-header .label {
+    -fx-font-weight: bold;
+}
+
+.table-view-ui .table-row-cell .table-cell,
+.table-view-ui.table-view-ui-base .table-row-cell .table-cell,
+.table-view-ui:ui-base .table-row-cell .table-cell {
+    -fx-pref-height: 40;
+    -fx-alignment: CENTER;
+    -fx-border-width: 0.5 0 0 0.5;
+    -fx-border-color: #bebebe;
+}
+
+.table-view-ui .table-row-cell .table-cell,
+.table-view-ui .table-row-cell .table-cell *,
+.table-view-ui.table-view-ui-base .table-row-cell .table-cell,
+.table-view-ui.table-view-ui-base .table-row-cell .table-cell *,
+.table-view-ui:ui-base .table-row-cell .table-cell,
+.table-view-ui:ui-base .table-row-cell .table-cell * {
+    -fx-text-fill: black !important;
+}
+
+.table-view-ui .table-row-cell,
+.table-view-ui.table-view-ui-base .table-row-cell,
+.table-view-ui:ui-base .table-row-cell {
+    -fx-background-color: white;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.table-view-ui.table-view-ui-base .table-row-cell,
+.table-view-ui:ui-base .table-row-cell {
+    -fx-background-insets: 0;
+}
+
+.table-view-ui .table-row-cell:selected {
+    -fx-background-color: #cbe9ff !important;
+}
+
+.table-view-ui.table-view-ui-base .table-row-cell:empty,
+.table-view-ui:ui-base .table-row-cell:empty {
+    -fx-background-color: white !important;
+}
+
+.table-view-ui .table-row-cell:hover,
+.table-view-ui.table-view-ui-base .table-row-cell:hover,
+.table-view-ui.table-view-ui-base .table-row-cell:filled:hover,
+.table-view-ui:ui-base .table-row-cell:hover,
+.table-view-ui:ui-base .table-row-cell:filled:hover {
+    -fx-background-color: table-view-hover-color;
+}
+
+.table-view-ui:focused .table-row-cell:selected {
+    -fx-background-color: table-view-selected-color !important;
+}
+
+.table-view-ui.table-view-ui-base .table-row-cell:empty:hover,
+.table-view-ui:ui-base .table-row-cell:empty:hover {
+    -fx-background-color: table-view-hover-color !important;
+}
+
+.table-view-ui.table-view-ui-base .table-row-cell:selected,
+.table-view-ui.table-view-ui-base .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-base .table-row-cell:empty:selected,
+.table-view-ui.table-view-ui-base .table-row-cell:empty:selected:hover,
+.table-view-ui:ui-base .table-row-cell:selected,
+.table-view-ui:ui-base .table-row-cell:filled:selected,
+.table-view-ui:ui-base .table-row-cell:empty:selected,
+.table-view-ui:ui-base .table-row-cell:empty:selected:hover {
+    -fx-background-color: #cbe9ff !important;
+    -fx-background-insets: 0;
+}
+
+.table-view-ui.table-view-ui-base:focused .table-row-cell:selected,
+.table-view-ui.table-view-ui-base:focused .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-base:focused .table-row-cell:empty:selected,
+.table-view-ui.table-view-ui-base:focused .table-row-cell:empty:selected:hover,
+.table-view-ui:ui-base:focused .table-row-cell:selected,
+.table-view-ui:ui-base:focused .table-row-cell:filled:selected,
+.table-view-ui:ui-base:focused .table-row-cell:empty:selected,
+.table-view-ui:ui-base:focused .table-row-cell:empty:selected:hover {
+    -fx-background-color: table-view-selected-color !important;
+    -fx-background-insets: 0;
+}
+
+.table-view-ui.table-view-ui-base .table-row-cell:empty .table-cell,
+.table-view-ui:ui-base .table-row-cell:empty .table-cell {
+    -fx-border-color: #bebebe;
+}
+
+.table-view-ui.table-view-ui-base .table-cell:selected,
+.table-view-ui:ui-base .table-cell:selected {
+    -fx-background-color: -fx-table-cell-border-color, -fx-background !important;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-view-ui.table-view-ui-base .table-cell .text-field,
+.table-view-ui:ui-base .table-cell .text-field {
+    -fx-accent: #0096C9;
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
+    linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 3, 2;
+    -fx-border-color: null;
+    -fx-border-radius: 0;
+    -fx-effect: null !important;
+}
+
+.table-view-ui.table-view-ui-base .table-cell .text-field:focused,
+.table-view-ui:ui-base .table-cell .text-field:focused {
+    -fx-background-color: -fx-focus-color, -fx-control-inner-background, -fx-faint-focus-color,
+    linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+    -fx-background-insets: -0.2, 1, -1.4, 3;
+    -fx-background-radius: 3, 2, 4, 0;
+}
+
+.table-view-ui.table-view-ui-base:disabled .table-row-cell .table-cell,
+.table-view-ui.table-view-ui-base:disabled .table-row-cell .table-cell *,
+.table-view-ui:ui-base:disabled .table-row-cell .table-cell,
+.table-view-ui:ui-base:disabled .table-row-cell .table-cell * {
+    -fx-text-fill: black !important;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-upright,
+.table-view-ui:ui-base.table-view-ui-upright {
+    -fx-background-color: table-view-ui-upright-owner-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-upright .column-header-background,
+.table-view-ui:ui-base.table-view-ui-upright .column-header-background {
+    -fx-background-color: table-view-ui-upright-header-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-upright .filler,
+.table-view-ui:ui-base.table-view-ui-upright .filler {
+    -fx-background-color: table-view-bg-color;
+    -fx-background-radius: 0 !important;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-upright:constrained-resize .filler,
+.table-view-ui:ui-base.table-view-ui-upright:constrained-resize .filler {
+    -fx-background-color: table-view-ui-upright-header-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-upright .nested-column-header,
+.table-view-ui.table-view-ui-base.table-view-ui-upright:constrained-resize .nested-column-header,
+.table-view-ui:ui-base.table-view-ui-upright .nested-column-header,
+.table-view-ui:ui-base.table-view-ui-upright:constrained-resize .nested-column-header {
+    -fx-background-radius: 0 !important;
+    -fx-background-color: table-view-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .filler,
+.table-view-ui:ui-base.table-view-ui-idea .filler {
+    -fx-background-color: table-view-ui-idea-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .nested-column-header,
+.table-view-ui:ui-base.table-view-ui-idea .nested-column-header {
+    -fx-background-color: table-view-ui-idea-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .column-header-background,
+.table-view-ui:ui-base.table-view-ui-idea .column-header-background {
+    -fx-background-color: table-view-ui-idea-header-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .column-header,
+.table-view-ui:ui-base.table-view-ui-idea .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .column-header-background .label,
+.table-view-ui:ui-base.table-view-ui-idea .column-header-background .label {
+    -fx-font-weight: normal;
+    -fx-font-size: 11;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:selected,
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:empty:selected,
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:empty:selected:hover,
+.table-view-ui.table-view-ui-base.table-view-ui-idea:focused .table-row-cell:selected,
+.table-view-ui.table-view-ui-base.table-view-ui-idea:focused .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-base.table-view-ui-idea:focused .table-row-cell:empty:selected,
+.table-view-ui.table-view-ui-base.table-view-ui-idea:focused .table-row-cell:empty:selected:hover,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:selected,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:filled:selected,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:empty:selected,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:empty:selected:hover,
+.table-view-ui:ui-base.table-view-ui-idea:focused .table-row-cell:selected,
+.table-view-ui:ui-base.table-view-ui-idea:focused .table-row-cell:filled:selected,
+.table-view-ui:ui-base.table-view-ui-idea:focused .table-row-cell:empty:selected,
+.table-view-ui:ui-base.table-view-ui-idea:focused .table-row-cell:empty:selected:hover {
+    -fx-background-color: table-view-ui-idea-selected-color !important;
+    -fx-background-insets: 0;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:hover,
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:filled:hover,
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:empty:hover,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:hover,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:filled:hover,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:empty:hover {
+    -fx-background-color: table-view-ui-idea-hover-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea .table-row-cell:empty:hover,
+.table-view-ui:ui-base.table-view-ui-idea .table-row-cell:empty:hover {
+    -fx-background-color: table-view-ui-idea-hover-color !important;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea.table-view-ui-upright .filler,
+.table-view-ui:ui-base.table-view-ui-idea.table-view-ui-upright .filler {
+    -fx-background-color: table-view-ui-idea-upright-bg-color;
+}
+
+.table-view-ui.table-view-ui-base.table-view-ui-idea.table-view-ui-upright .nested-column-header,
+.table-view-ui:ui-base.table-view-ui-idea.table-view-ui-upright .nested-column-header {
+    -fx-background-color: table-view-ui-idea-upright-bg-color;
+}
+
+.table-view-ui.table-view-ui-base .table-cell:selected,
+.table-view-ui:ui-base .table-cell:selected {
+    -fx-background-insets: 0, 0 0 1 0;
+}

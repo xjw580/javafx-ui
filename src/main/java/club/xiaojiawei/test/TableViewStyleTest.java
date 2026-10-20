@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -99,7 +100,7 @@ public class TableViewStyleTest extends Application {
         StackPane root = new StackPane(tableView);
         root.setStyle("-fx-padding: 10;-fx-background-color: white");
         Scene scene = new Scene(root, 300, 200);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.setTitle("TableView Object Mapping");
         primaryStage.show();

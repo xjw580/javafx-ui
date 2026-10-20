@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Calendar;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -29,7 +30,7 @@ public class CalendarTest extends Application {
         calendar.setTranslateX(50);
         calendar.setTranslateY(50);
         Scene scene = new Scene(new AnchorPane(calendar), 400, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

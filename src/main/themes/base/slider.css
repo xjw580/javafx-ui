@@ -1,0 +1,183 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.slider-ui,
+.slider-ui.slider-ui-base,
+.slider-ui:ui-base {
+    slider-color: main-color;
+    -fx-padding: 6;
+}
+
+.slider-ui.slider-ui-base,
+.slider-ui:ui-base {
+    slider-hover-color: derive(main-color, 85%);
+    slider-pressed-color: main-color;
+    slider-focus-color: main-color;
+}
+
+.slider-ui > .track,
+.slider-ui.slider-ui-base > .track,
+.slider-ui:ui-base > .track {
+    -fx-background-color: border-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3;
+    -fx-padding: 2;
+}
+
+.slider-ui > .thumb,
+.slider-ui.slider-ui-base > .thumb,
+.slider-ui:ui-base > .thumb {
+    -fx-background-color: slider-color, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 20;
+    -fx-padding: 7;
+    -fx-effect: default-effect;
+    -fx-cursor: hand;
+}
+
+.slider-ui.slider-ui-base:vertical > .thumb,
+.slider-ui:ui-base:vertical > .thumb {
+    -fx-padding: 7;
+}
+
+.slider-ui:hover > .track,
+.slider-ui.slider-ui-base:hover > .track,
+.slider-ui:ui-base:hover > .track {
+    -fx-background-color: derive(border-color, -10%);
+}
+
+.slider-ui > .thumb:hover {
+    -fx-background-color: slider-color, derive(slider-color, 85%);
+}
+
+.slider-ui:focused > .thumb {
+    -fx-effect: dropshadow(gaussian, slider-color, 6, 0.25, 0, 0);
+}
+
+.slider-ui.slider-ui-base > .thumb:hover,
+.slider-ui:ui-base > .thumb:hover {
+    -fx-background-color: slider-color, slider-hover-color;
+}
+
+.slider-ui.slider-ui-base:focused > .thumb,
+.slider-ui:ui-base:focused > .thumb {
+    -fx-effect: dropshadow(gaussian, slider-focus-color, 6, 0.25, 0, 0);
+}
+
+.slider-ui > .thumb:pressed,
+.slider-ui.slider-ui-base > .thumb:pressed,
+.slider-ui:ui-base > .thumb:pressed {
+    -fx-background-insets: 0;
+    -fx-effect: default-press-effect;
+}
+
+.slider-ui > .thumb:pressed {
+    -fx-background-color: slider-color;
+}
+
+.slider-ui.slider-ui-base > .thumb:pressed,
+.slider-ui:ui-base > .thumb:pressed {
+    -fx-background-color: slider-pressed-color;
+}
+
+.slider-ui > .axis,
+.slider-ui.slider-ui-base > .axis,
+.slider-ui:ui-base > .axis {
+    -fx-tick-label-fill: -fx-text-background-color;
+    -fx-tick-length: 5;
+    -fx-minor-tick-length: 3;
+}
+
+.slider-ui > .axis > .axis-tick-mark,
+.slider-ui > .axis > .axis-minor-tick-mark,
+.slider-ui.slider-ui-base > .axis > .axis-tick-mark,
+.slider-ui.slider-ui-base > .axis > .axis-minor-tick-mark,
+.slider-ui:ui-base > .axis > .axis-tick-mark,
+.slider-ui:ui-base > .axis > .axis-minor-tick-mark {
+    -fx-stroke: border-color;
+}
+
+.slider-ui:disabled,
+.slider-ui.slider-ui-base:disabled,
+.slider-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+}
+
+.slider-ui.slider-ui-base:disabled > .track,
+.slider-ui:ui-base:disabled > .track {
+    -fx-background-color: border-color;
+}
+
+.slider-ui:disabled > .thumb,
+.slider-ui.slider-ui-base:disabled > .thumb,
+.slider-ui:ui-base:disabled > .thumb {
+    -fx-effect: none;
+    -fx-cursor: default;
+}
+
+.slider-ui.slider-ui-base:disabled > .thumb,
+.slider-ui:ui-base:disabled > .thumb {
+    -fx-background-color: slider-color, white;
+    -fx-background-insets: 0, 2;
+    -fx-background-radius: 20;
+}
+
+.slider-ui.slider-ui-base.slider-ui-small > .track,
+.slider-ui:ui-base.slider-ui-small > .track {
+    -fx-padding: 1.5;
+}
+
+.slider-ui.slider-ui-base.slider-ui-small > .thumb,
+.slider-ui:ui-base.slider-ui-small > .thumb {
+    -fx-padding: 5;
+}
+
+.slider-ui.slider-ui-base.slider-ui-big > .track,
+.slider-ui:ui-base.slider-ui-big > .track {
+    -fx-padding: 3;
+}
+
+.slider-ui.slider-ui-base.slider-ui-big > .thumb,
+.slider-ui:ui-base.slider-ui-big > .thumb {
+    -fx-padding: 9;
+}
+
+.slider-ui.slider-ui-base.slider-ui-main,
+.slider-ui:ui-base.slider-ui-main {
+    slider-color: main-color;
+    slider-hover-color: derive(main-color, 85%);
+    slider-pressed-color: main-color;
+    slider-focus-color: main-color;
+}
+
+.slider-ui.slider-ui-base.slider-ui-normal,
+.slider-ui:ui-base.slider-ui-normal {
+    slider-color: normal-deep-color;
+    slider-hover-color: derive(normal-deep-color, 85%);
+    slider-pressed-color: normal-deep-color;
+    slider-focus-color: normal-deep-color;
+}
+
+.slider-ui.slider-ui-base.slider-ui-success,
+.slider-ui:ui-base.slider-ui-success {
+    slider-color: success-deep-color;
+    slider-hover-color: derive(success-deep-color, 85%);
+    slider-pressed-color: success-deep-color;
+    slider-focus-color: success-deep-color;
+}
+
+.slider-ui.slider-ui-base.slider-ui-warn,
+.slider-ui:ui-base.slider-ui-warn {
+    slider-color: warn-deep-color;
+    slider-hover-color: derive(warn-deep-color, 85%);
+    slider-pressed-color: warn-deep-color;
+    slider-focus-color: warn-deep-color;
+}
+
+.slider-ui.slider-ui-base.slider-ui-error,
+.slider-ui:ui-base.slider-ui-error {
+    slider-color: error-deep-color;
+    slider-hover-color: derive(error-deep-color, 85%);
+    slider-pressed-color: error-deep-color;
+    slider-focus-color: error-deep-color;
+}

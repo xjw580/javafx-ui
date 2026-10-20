@@ -1,0 +1,313 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+/* The owner paints editable surfaces; children must not create separate blocks. Keep the cell/editor preferred-height contract; the owner adds no padding. */
+
+@import "../shared/combo-box.css";
+
+.combo-box-ui,
+.combo-box-ui.combo-box-ui-windows,
+.combo-box-ui:ui-windows {
+    -fx-padding: 0;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: win-border-color;
+    -fx-effect: null;
+    -fx-border-radius: 4;
+}
+
+.combo-box-ui.combo-box-ui-windows,
+.combo-box-ui:ui-windows {
+    -fx-background-color: white;
+}
+
+.combo-box-ui,
+.combo-box-ui > .arrow-button,
+.combo-box-ui.combo-box-ui-windows > .arrow-button,
+.combo-box-ui:ui-windows > .arrow-button {
+    -fx-background-color: white;
+}
+
+.combo-box-ui:hover,
+.combo-box-ui.combo-box-ui-windows:hover,
+.combo-box-ui:ui-windows:hover {
+    -fx-background-radius: 4;
+    -fx-border-color: win-main-color;
+    -fx-effect: null;
+    -fx-opacity: 1;
+}
+
+.combo-box-ui.combo-box-ui-windows:hover,
+.combo-box-ui:ui-windows:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.combo-box-ui:hover,
+.combo-box-ui:hover > .arrow-button,
+.combo-box-ui.combo-box-ui-windows:hover > .arrow-button,
+.combo-box-ui:ui-windows:hover > .arrow-button {
+    -fx-background-color: win-hover-background-color;
+}
+
+.combo-box-ui:focused,
+.combo-box-ui:focused:hover,
+.combo-box-ui.combo-box-ui-windows:focused,
+.combo-box-ui.combo-box-ui-windows:focused:hover,
+.combo-box-ui:ui-windows:focused,
+.combo-box-ui:ui-windows:focused:hover {
+    -fx-background-radius: 4;
+    -fx-border-color: win-main-color;
+    -fx-effect: win-focus-effect !important;
+    -fx-opacity: 1;
+}
+
+.combo-box-ui:focused,
+.combo-box-ui:focused > .arrow-button,
+.combo-box-ui.combo-box-ui-windows:focused,
+.combo-box-ui.combo-box-ui-windows:focused > .arrow-button,
+.combo-box-ui:ui-windows:focused,
+.combo-box-ui:ui-windows:focused > .arrow-button {
+    -fx-background-color: win-surface-color;
+}
+
+.combo-box-ui:focused:hover,
+.combo-box-ui:focused:hover > .arrow-button,
+.combo-box-ui.combo-box-ui-windows:focused:hover,
+.combo-box-ui.combo-box-ui-windows:focused:hover > .arrow-button,
+.combo-box-ui:ui-windows:focused:hover,
+.combo-box-ui:ui-windows:focused:hover > .arrow-button {
+    -fx-background-color: win-hover-background-color;
+}
+
+.combo-box-ui > .arrow-button > .arrow,
+.combo-box-ui:editable:focused > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-windows > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-windows:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-windows > .arrow-button > .arrow,
+.combo-box-ui:ui-windows:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: win-text-color !important;
+}
+
+.combo-box-ui:disabled,
+.combo-box-ui.combo-box-ui-windows:disabled,
+.combo-box-ui:ui-windows:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-opacity: 0.6;
+    -fx-background-radius: 4;
+    -fx-effect: null;
+}
+
+.combo-box-ui:disabled > .arrow-button,
+.combo-box-ui.combo-box-ui-windows:disabled > .arrow-button,
+.combo-box-ui:ui-windows:disabled > .arrow-button {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-ui:disabled > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-windows:disabled > .arrow-button > .arrow,
+.combo-box-ui:ui-windows:disabled > .arrow-button > .arrow {
+    -fx-background-color: win-text-disabled-color !important;
+}
+
+.combo-box-ui .list-cell,
+.combo-box-ui.combo-box-ui-windows .list-cell,
+.combo-box-ui:ui-windows .list-cell {
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+    -fx-text-fill: win-text-color;
+}
+
+.combo-box-ui:editable > .text-input,
+.combo-box-ui.combo-box-ui-windows:editable > .text-input,
+.combo-box-ui:ui-windows:editable > .text-input {
+    -fx-pref-width: 1;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-effect: null;
+    -fx-text-fill: win-text-color;
+}
+
+.combo-box-ui:editable,
+.combo-box-ui.combo-box-ui-windows:editable,
+.combo-box-ui:ui-windows:editable {
+    -fx-background-color: win-surface-color !important;
+    -fx-border-color: win-border-color;
+}
+
+.combo-box-ui:editable:hover,
+.combo-box-ui.combo-box-ui-windows:editable:hover,
+.combo-box-ui:ui-windows:editable:hover {
+    -fx-background-color: win-hover-background-color !important;
+    -fx-background-radius: 4;
+    -fx-border-color: win-main-color;
+    -fx-effect: null !important;
+}
+
+.combo-box-ui:editable:focused,
+.combo-box-ui.combo-box-ui-windows:editable:focused,
+.combo-box-ui:ui-windows:editable:focused {
+    -fx-background-radius: 4;
+    -fx-border-color: win-main-color !important;
+}
+
+.combo-box-ui:editable:focused:hover,
+.combo-box-ui.combo-box-ui-windows:editable:focused:hover,
+.combo-box-ui:ui-windows:editable:focused:hover {
+    -fx-effect: null !important;
+}
+
+.combo-box-ui:editable > .arrow-button,
+.combo-box-ui.combo-box-ui-windows:editable > .arrow-button,
+.combo-box-ui:ui-windows:editable > .arrow-button {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-ui:editable:hover > .arrow-button,
+.combo-box-ui.combo-box-ui-windows:editable:hover > .arrow-button,
+.combo-box-ui:ui-windows:editable:hover > .arrow-button {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-normal:editable:focused > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-normal:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-windows.combo-box-ui-normal:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: normal-deep-color !important;
+}
+
+.combo-box-ui.combo-box-ui-success:editable:focused > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-success:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-windows.combo-box-ui-success:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: success-deep-color !important;
+}
+
+.combo-box-ui.combo-box-ui-warn:editable:focused > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-warn:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-windows.combo-box-ui-warn:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: warn-deep-color !important;
+}
+
+.combo-box-ui.combo-box-ui-error:editable:focused > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-error:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-windows.combo-box-ui-error:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: error-deep-color !important;
+}
+
+.combo-box-ui .combo-box-popup .filter-v-box,
+.combo-box-ui.combo-box-ui-windows .combo-box-popup .filter-v-box,
+.combo-box-ui:ui-windows .combo-box-popup .filter-v-box {
+    -fx-effect: win-popup-effect;
+}
+
+.combo-box-ui .combo-box-popup .list-view,
+.combo-box-ui .combo-box-popup .grid-pane,
+.combo-box-ui.combo-box-ui-windows .combo-box-popup .list-view,
+.combo-box-ui.combo-box-ui-windows .combo-box-popup .grid-pane,
+.combo-box-ui:ui-windows .combo-box-popup .list-view,
+.combo-box-ui:ui-windows .combo-box-popup .grid-pane {
+    -fx-padding: 2;
+    -fx-background-color: white, white;
+    -fx-background-radius: 4;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-effect: win-popup-effect;
+}
+
+.combo-box-ui .combo-box-popup .list-view .list-cell,
+.combo-box-ui.combo-box-ui-windows .combo-box-popup .list-view .list-cell,
+.combo-box-ui:ui-windows .combo-box-popup .list-view .list-cell {
+    -fx-background-radius: 4;
+}
+
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:selected:hover,
+.combo-box-ui.combo-box-ui-windows .combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-ui.combo-box-ui-windows .combo-box-popup .list-view .list-cell:filled:selected:hover,
+.combo-box-ui:ui-windows .combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-ui:ui-windows .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: win-pressed-background-color;
+    -fx-text-fill: win-text-color;
+}
+
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:hover,
+.combo-box-ui.combo-box-ui-windows .combo-box-popup .list-view .list-cell:filled:hover,
+.combo-box-ui:ui-windows .combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-text-fill: win-text-color;
+}
+
+.combo-box-ui:editable:disabled,
+.combo-box-ui:editable:disabled:hover,
+.combo-box-ui.combo-box-ui-windows:editable:disabled,
+.combo-box-ui.combo-box-ui-windows:editable:disabled:hover,
+.combo-box-ui:ui-windows:editable:disabled,
+.combo-box-ui:ui-windows:editable:disabled:hover {
+    -fx-background-color: win-background-color !important;
+    -fx-border-color: win-disabled-color !important;
+    -fx-effect: null !important;
+}
+
+.combo-box-ui:editable:disabled > .text-input,
+.combo-box-ui.combo-box-ui-windows:editable:disabled > .text-input,
+.combo-box-ui:ui-windows:editable:disabled > .text-input {
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 1;
+}
+
+.combo-box-ui:editable,
+.combo-box-ui:editable:focused,
+.combo-box-ui.combo-box-ui-windows:editable,
+.combo-box-ui.combo-box-ui-windows:editable:focused,
+.combo-box-ui:ui-windows:editable,
+.combo-box-ui:ui-windows:editable:focused {
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+}
+
+.combo-box-ui > .list-cell,
+.combo-box-ui.combo-box-ui-windows > .list-cell,
+.combo-box-ui:ui-windows > .list-cell {
+    -fx-pref-height: 29;
+}
+
+.combo-box-ui.combo-box-ui-windows:editable > .text-input,
+.combo-box-ui:ui-windows:editable > .text-input {
+    -fx-pref-height: 29;
+}
+
+.combo-box-ui-tiny > .list-cell,
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-tiny > .list-cell,
+.combo-box-ui:ui-windows.combo-box-ui-tiny > .list-cell {
+    -fx-pref-height: 19 !important;
+    -fx-padding: 2 0.666667em;
+}
+
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-tiny:editable .text-input,
+.combo-box-ui:ui-windows.combo-box-ui-tiny:editable .text-input {
+    -fx-pref-height: 19 !important;
+}
+
+.combo-box-ui-small > .list-cell,
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-small > .list-cell,
+.combo-box-ui:ui-windows.combo-box-ui-small > .list-cell {
+    -fx-pref-height: 23 !important;
+}
+
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-small:editable .text-input,
+.combo-box-ui:ui-windows.combo-box-ui-small:editable .text-input {
+    -fx-pref-height: 23 !important;
+}
+
+.combo-box-ui-big > .list-cell,
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-big > .list-cell,
+.combo-box-ui:ui-windows.combo-box-ui-big > .list-cell {
+    -fx-pref-height: 35 !important;
+}
+
+.combo-box-ui.combo-box-ui-windows.combo-box-ui-big:editable .text-input,
+.combo-box-ui:ui-windows.combo-box-ui-big:editable .text-input {
+    -fx-pref-height: 35 !important;
+}

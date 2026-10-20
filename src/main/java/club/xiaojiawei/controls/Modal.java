@@ -323,8 +323,9 @@ public class Modal implements MarkLogging {
     private void initScene() {
         Scene scene = new Scene(rootPane);
         scene.setFill(Color.TRANSPARENT);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, parent == null ? JavaFXUI.getDefaultTheme() : JavaFXUI.getTheme(parent));
         this.stage.setScene(scene);
+        JavaFXUI.followTheme(stage, parent);
     }
 
 //    private void addSizeListener() {
@@ -359,7 +360,7 @@ public class Modal implements MarkLogging {
 
     private void buildRootPane(Node content) {
         topPane = new StackPane(new Group(new StackPane(content) {{
-            setStyle("-fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 3);-fx-background-color: white;");
+            getStyleClass().add("modal-surface");
         }}));
         ScrollPane scrollPane = new ScrollPane(topPane) {{
             setFitToWidth(true);
@@ -373,14 +374,15 @@ public class Modal implements MarkLogging {
         }};
         rootPane = new StackPane(this.content = scrollPane);
         rootPane.setStyle("-fx-background-color: #00000011");
-        rootPane.getStyleClass().add("fixed-label-color");
+        JavaFXUI.initializeTheme(rootPane, "modal-ui");
     }
 
     private Node createHeading(String heading) {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
         Label label = new Label(heading);
-        label.setStyle("-fx-font-weight: bold;-fx-font-size: 14;-fx-wrap-text: true;-fx-text-fill: black");
+        label.getStyleClass().add("modal-heading");
+        label.setStyle("-fx-font-weight: bold;-fx-font-size: 14;-fx-wrap-text: true;");
         hBox.getChildren().add(label);
         return hBox;
     }
@@ -389,6 +391,7 @@ public class Modal implements MarkLogging {
         ScrollPane scrollPane = createContentPane(maxWidth, maxHeight);
         Text text = new Text(content);
         text.setWrappingWidth(maxWidth - 15);
+        text.getStyleClass().add("modal-content-text");
         text.setStyle("-fx-font-size: 14;");
         scrollPane.setContent(text);
         return scrollPane;
@@ -398,7 +401,8 @@ public class Modal implements MarkLogging {
         ScrollPane scrollPane = new ScrollPane();
 //        edge-to-edge样式类：去除默认的灰色边框和获得焦点时的蓝色边框
         scrollPane.getStyleClass().add("edge-to-edge");
-        scrollPane.setStyle("-fx-background: white;-fx-hbar-policy: NEVER;-fx-padding: 0 0 0 5");
+        scrollPane.getStyleClass().add("modal-content-scroll");
+        scrollPane.setStyle("-fx-hbar-policy: NEVER;-fx-padding: 0 0 0 5");
         scrollPane.setMaxWidth(maxWidth);
         if (maxHeight < 25) {
             scrollPane.setMaxHeight(maxHeight);

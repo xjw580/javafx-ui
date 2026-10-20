@@ -5,6 +5,6 @@
 <fx:root type="TilePane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          fx:id="FileUploader"
          minHeight="132" maxWidth="132" minWidth="132"
-         stylesheets="@css/fileUploader.css, @css/common/progress.css">
+         stylesheets="@css/fileUploader.css">
     <Label fx:id="tipLabel" text="拖拽文件或点击此处上传文件" prefHeight="40" style="-fx-wrap-text: true;-fx-text-alignment: center"/>
 </fx:root>

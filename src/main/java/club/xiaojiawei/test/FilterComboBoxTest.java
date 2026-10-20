@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.FilterComboBox;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -42,7 +43,7 @@ public class FilterComboBoxTest extends Application {
         StackPane stackPane = new StackPane(comboBox);
         Scene scene = new Scene(stackPane, 500, 500);
         primaryStage.setScene(scene);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         comboBox.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, t1) -> {
             System.out.println("index:" + t1);
             System.out.println(comboBox.getSelectionModel().getSelectedItem().age);
@@ -61,14 +62,17 @@ public class FilterComboBoxTest extends Application {
         }, 1000);
     }
 
-    static class Student{
+    static class Student {
         String name;
         int age;
+
         public Student(String name, int age) {
             this.name = name;
             this.age = age;
         }
-        public Student() {}
+
+        public Student() {
+        }
 
         @Override
         public String toString() {

@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.ico.DateIco;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
@@ -28,6 +29,10 @@ import static club.xiaojiawei.controls.DateSelector.calcMaxDayForMonth;
  */
 public class Date extends AbstractDateTimeField<LocalDate> {
 
+    {
+        JavaFXUI.initializeTheme(this, "date-ui");
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 属性                                                                    *
@@ -44,10 +49,10 @@ public class Date extends AbstractDateTimeField<LocalDate> {
     private final BooleanProperty rightAngleBackground = new SimpleBooleanProperty(true);
 
     public String getDate() {
-        return getLocalDate() == null? null : DATE_FORMATTER.format(getLocalDate());
+        return getLocalDate() == null ? null : DATE_FORMATTER.format(getLocalDate());
     }
 
-    public LocalDate getLocalDate(){
+    public LocalDate getLocalDate() {
         return date.get();
     }
 
@@ -55,24 +60,24 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
-        if (date == null || date.isBlank()){
+        if (date == null || date.isBlank()) {
             setLocalDate(null);
-        }else {
+        } else {
             setLocalDate(LocalDate.from(DATE_FORMATTER.parse(date)));
         }
     }
 
-    public void setLocalDate(LocalDate localDate){
-        if (test(localDate)){
+    public void setLocalDate(LocalDate localDate) {
+        if (test(localDate)) {
             date.set(localDate);
         }
     }
 
-    public ObjectProperty<LocalDate> dateProperty(){
+    public ObjectProperty<LocalDate> dateProperty() {
         return calendar.dateProperty();
     }
 
-    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty(){
+    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty() {
         return date.getReadOnlyProperty();
     }
 
@@ -81,9 +86,9 @@ public class Date extends AbstractDateTimeField<LocalDate> {
         super.setShowIcon(showIcon);
         dateIco.setVisible(showIcon);
         dateIco.setManaged(false);
-        if (showIcon){
+        if (showIcon) {
             dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
-        }else {
+        } else {
             dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
             dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_BACKGROUND_STYLE_CLASS);
         }
@@ -97,9 +102,9 @@ public class Date extends AbstractDateTimeField<LocalDate> {
 
     public void setRightAngleBackground(boolean rightAngleBackground) {
         this.rightAngleBackground.set(rightAngleBackground);
-        if (rightAngleBackground){
+        if (rightAngleBackground) {
             dateTimeBg.getStyleClass().add("rightAngleBackground");
-        }else {
+        } else {
             dateTimeBg.getStyleClass().removeAll("rightAngleBackground");
         }
     }
@@ -130,7 +135,8 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      *                                                                         *
      **************************************************************************/
 
-    public Date() {}
+    public Date() {
+    }
 
     @FXML
     private TextField year;
@@ -166,7 +172,7 @@ public class Date extends AbstractDateTimeField<LocalDate> {
     }
 
     @Override
-    protected void afterPageLoaded(){
+    protected void afterPageLoaded() {
         initDateTextField(year, MAX_YEAR, 4);
         initDateTextField(month, MAX_MONTH, 2);
         initDateTextField(day, MAX_DAY, 2);
@@ -200,13 +206,13 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      *                                                                         *
      **************************************************************************/
 
-    private void updateCompleteDateTextField(LocalDate newDate){
+    private void updateCompleteDateTextField(LocalDate newDate) {
         isFromDate = true;
-        if (newDate == null){
+        if (newDate == null) {
             year.setText("");
             month.setText("");
             day.setText("");
-        }else {
+        } else {
             year.setText(YEAR_FORMATTER.format(newDate));
             month.setText(MONTH_FORMATTER.format(newDate));
             day.setText(DAY_FORMATTER.format(newDate));
@@ -220,7 +226,7 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      * @param maxValue
      * @param maxLength
      */
-    private void initDateTextField(TextField textField, int maxValue, int maxLength){
+    private void initDateTextField(TextField textField, int maxValue, int maxLength) {
         textField.setTextFormatter(interceptInput(textField, maxValue, maxLength));
         textField.focusedProperty().addListener(dateTextFieldFocusListener(textField));
 //        方向键按太快会因为动画问题而报错
@@ -228,14 +234,14 @@ public class Date extends AbstractDateTimeField<LocalDate> {
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             int yearInt = parseInt(year.getText()), monthInt = parseInt(month.getText()), dayInt = Math.min(calcMaxDayForMonth(yearInt, monthInt), parseInt(day.getText()));
 //            year、month、day三项全空时，日期设置为null
-            if (yearInt == 0 && monthInt == 0 && dayInt == 0){
+            if (yearInt == 0 && monthInt == 0 && dayInt == 0) {
                 setLocalDate(null);
-            } else if (!isFromDate && newValue.length() == maxLength){
-                if (yearInt != 0 && monthInt != 0 && dayInt != 0){
+            } else if (!isFromDate && newValue.length() == maxLength) {
+                if (yearInt != 0 && monthInt != 0 && dayInt != 0) {
                     LocalDate newLocalDate = LocalDate.of(yearInt, monthInt, dayInt);
-                    if (test(newLocalDate)){
+                    if (test(newLocalDate)) {
                         setLocalDate(newLocalDate);
-                    }else {
+                    } else {
                         updateCompleteDateTextField(getLocalDate());
                     }
                 }
@@ -250,10 +256,10 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      */
     private ChangeListener<Boolean> dateTextFieldFocusListener(TextField textField) {
         return (observableValue, aBoolean, isFocus) -> {
-            if (isFocus){
+            if (isFocus) {
                 dateTimeBg.getStyleClass().add(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
                 dateIco.setColor("main-color");
-            }else {
+            } else {
                 textField.setText(standardizationDateText(textField, textField.getText()));
                 dateTimeBg.getStyleClass().remove(DATE_BACKGROUND_FOCUS_STYLE_CLASS);
                 dateIco.setColor("main-shallow-color");
@@ -267,16 +273,16 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      * @param textField
      * @param time
      */
-    private String standardizationDateText(TextField textField, String time){
+    private String standardizationDateText(TextField textField, String time) {
         String timeStr = "";
         if (time != null && !time.isBlank()) {
             timeStr = "0".repeat((textField == year ? 4 : 2) - time.length()) + time;
             if (timeStr.matches("0+")) {
-                if (textField == year){
+                if (textField == year) {
                     timeStr = YEAR_FORMATTER.format(LocalDate.now());
-                }else if (textField == month){
+                } else if (textField == month) {
                     timeStr = MONTH_FORMATTER.format(LocalDate.now());
-                }else if (textField == day){
+                } else if (textField == day) {
                     timeStr = DAY_FORMATTER.format(LocalDate.now());
                 }
             }
@@ -294,9 +300,9 @@ public class Date extends AbstractDateTimeField<LocalDate> {
         return new TextFormatter<>(change -> {
             String temp;
             if (change.getText().matches("^\\d{0," + maxLength + "}")
-                    && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= maxLength
-                    && (parseInt(temp) <= maxValue || (textField == day && parseInt(temp) <= calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()))))
-            ){
+                && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= maxLength
+                && (parseInt(temp) <= maxValue || (textField == day && parseInt(temp) <= calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()))))
+            ) {
                 return change;
             }
             return null;
@@ -308,13 +314,13 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      * @param textField
      * @return
      */
-    private EventHandler<? super KeyEvent> keyPressedEventHandler(TextField textField, int maxValue){
+    private EventHandler<? super KeyEvent> keyPressedEventHandler(TextField textField, int maxValue) {
         return (EventHandler<KeyEvent>) event -> {
             int newValue, tempMaxValue = maxValue;
-            if (textField == day){
+            if (textField == day) {
                 tempMaxValue = calcMaxDayForMonth(parseInt(year.getText()), parseInt(month.getText()));
             }
-            switch (event.getCode()){
+            switch (event.getCode()) {
                 case UP -> newValue = parseInt(textField.getText()) + 1;
                 case DOWN -> newValue = parseInt(textField.getText()) - 1 + tempMaxValue;
                 default -> {
@@ -332,12 +338,12 @@ public class Date extends AbstractDateTimeField<LocalDate> {
      **************************************************************************/
 
     @Override
-    public void refresh(){
-        if (getLocalDate() == null){
+    public void refresh() {
+        if (getLocalDate() == null) {
             year.setText("");
             month.setText("");
             day.setText("");
-        }else {
+        } else {
             String[] dates = DATE_FORMATTER.format(getLocalDate()).split("/");
             year.setText(dates[0]);
             month.setText(dates[1]);

@@ -1,31 +1,29 @@
-.image{
-    -fx-background-size: cover ;
+/* Component structure. Appearance comes from the selected theme. */
+.image {
+    -fx-background-size: cover;
 }
-#left, #right{
+
+#left,
+#right {
     visibility: false;
     -fx-alignment: CENTER;
     -fx-cursor: hand;
     -fx-padding: 9 0 9 0;
     -fx-pref-width: 30;
-    -fx-background-radius: 15;
-    -fx-background-color: rgba(128, 128, 128, 0.5);
 }
-#rootPane:hover > #left{
+
+#rootPane:hover > #left {
     visibility: true;
 }
-#rootPane:hover > #right{
+
+#rootPane:hover > #right {
     visibility: true;
 }
-#rootPane{
+
+#rootPane {
     -fx-pref-height: 265;
 }
-.dot{
+
+.dot {
     -fx-cursor: hand;
-    -fx-fill: #e5e5e5;
-}
-.dot:hover{
-    -fx-fill: effect-color;
-}
-.currentDot{
-    -fx-fill: main-color!important;
 }

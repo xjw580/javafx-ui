@@ -1,0 +1,84 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.toggle-btn-ui,
+.toggle-btn-ui.toggle-btn-ui-base,
+.toggle-btn-ui:ui-base {
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: white;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base,
+.toggle-btn-ui:ui-base {
+    -fx-padding: 8 15;
+    -fx-border-width: 0;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-effect: null;
+    -fx-opacity: 1;
+    -fx-border-radius: 0;
+}
+
+.toggle-btn-ui:hover,
+.toggle-btn-ui.toggle-btn-ui-base:hover,
+.toggle-btn-ui:ui-base:hover {
+    -fx-background-color: hover-color;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base:hover,
+.toggle-btn-ui:ui-base:hover {
+    -fx-border-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-effect: null;
+    -fx-opacity: 1;
+}
+
+.toggle-btn-ui:selected {
+    -fx-text-fill: white;
+    -fx-background-color: main-color;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base:selected,
+.toggle-btn-ui.toggle-btn-ui-base:selected:hover,
+.toggle-btn-ui:ui-base:selected,
+.toggle-btn-ui:ui-base:selected:hover {
+    -fx-text-fill: white;
+    -fx-background-color: main-color;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-opacity: 1;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base:disabled,
+.toggle-btn-ui:ui-base:disabled {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-effect: null;
+    -fx-opacity: 0.4;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base:selected:disabled,
+.toggle-btn-ui:ui-base:selected:disabled {
+    -fx-background-color: main-color;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-effect: null;
+    -fx-opacity: 0.4;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base.toggle-btn-ui-tiny,
+.toggle-btn-ui:ui-base.toggle-btn-ui-tiny {
+    -fx-padding: 3 4 !important;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base.toggle-btn-ui-small,
+.toggle-btn-ui:ui-base.toggle-btn-ui-small {
+    -fx-padding: 5 8 !important;
+}
+
+.toggle-btn-ui.toggle-btn-ui-base.toggle-btn-ui-big,
+.toggle-btn-ui:ui-base.toggle-btn-ui-big {
+    -fx-padding: 11 20 !important;
+}

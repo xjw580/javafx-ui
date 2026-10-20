@@ -1,0 +1,148 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.tree-view-ui.tree-view-ui-base,
+.tree-view-ui:ui-base {
+    tree-view-cell-text-color: -fx-text-background-color;
+}
+
+.tree-view-ui,
+.tree-view-ui.tree-view-ui-base,
+.tree-view-ui:ui-base {
+    -fx-border-width: 0;
+    -fx-background-insets: 0 !important;
+}
+
+.tree-view-ui.tree-view-ui-base,
+.tree-view-ui:ui-base {
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-border-color: null;
+}
+
+.tree-view-ui:focused .tree-cell:selected {
+    -fx-background-color: #a7d2ff !important;
+}
+
+.tree-view-ui.tree-view-ui-base:focused,
+.tree-view-ui:ui-base:focused {
+    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-control-inner-background;
+    -fx-background-radius: 2, 0, 0;
+    -fx-border-color: null;
+}
+
+.tree-view-ui.tree-view-ui-base:disabled,
+.tree-view-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+}
+
+.tree-view-ui.tree-view-ui-base .tree-cell,
+.tree-view-ui:ui-base .tree-cell {
+    -fx-background: -fx-control-inner-background;
+    -fx-background-color: -fx-background;
+    -fx-border-color: null;
+    -fx-padding: 0.25em;
+    -fx-text-fill: tree-view-cell-text-color;
+    -fx-background-insets: 0;
+}
+
+.tree-view-ui.tree-view-ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused,
+.tree-view-ui:ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused {
+    -fx-background-color: -fx-background, -fx-cell-focus-inner-border, -fx-background !important;
+    -fx-background-insets: 0, 1, 2;
+}
+
+.tree-view-ui.tree-view-ui-base .tree-cell:filled:hover,
+.tree-view-ui:ui-base .tree-cell:filled:hover {
+    -fx-background-color: -fx-background;
+}
+
+.tree-view-ui.tree-view-ui-base .tree-cell:filled:selected,
+.tree-view-ui.tree-view-ui-base .tree-cell:filled:selected:hover,
+.tree-view-ui:ui-base .tree-cell:filled:selected,
+.tree-view-ui:ui-base .tree-cell:filled:selected:hover {
+    -fx-background: -fx-selection-bar-non-focused;
+    -fx-background-color: -fx-background !important;
+    -fx-text-fill: -fx-text-background-color !important;
+    -fx-background-insets: 0;
+}
+
+.tree-view-ui.tree-view-ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected,
+.tree-view-ui.tree-view-ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected:hover,
+.tree-view-ui:ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected,
+.tree-view-ui:ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected:hover {
+    -fx-background-color: #a7d2ff !important;
+    -fx-text-fill: white !important;
+    -fx-background-insets: 0;
+}
+
+.tree-view-ui .tree-cell:selected .filter-ico,
+.tree-view-ui.tree-view-ui-base .tree-cell:selected .filter-ico,
+.tree-view-ui:ui-base .tree-cell:selected .filter-ico {
+    -fx-background-color: success-color;
+}
+
+.tree-view-ui .tree-cell .file-icon,
+.tree-view-ui.tree-view-ui-base .tree-cell .file-icon,
+.tree-view-ui:ui-base .tree-cell .file-icon {
+    -fx-background-color: rgb(230, 234, 241);
+}
+
+.tree-view-ui:focused .tree-cell:hover,
+.tree-view-ui.tree-view-ui-base:focused .tree-cell:hover,
+.tree-view-ui.tree-view-ui-base:focused .tree-cell:filled:hover,
+.tree-view-ui:ui-base:focused .tree-cell:hover,
+.tree-view-ui:ui-base:focused .tree-cell:filled:hover {
+    -fx-background-color: #f5f8fe;
+}
+
+.tree-view-ui.tree-view-ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused:filled:hover,
+.tree-view-ui:ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused:filled:hover {
+    -fx-background-color: #f5f8fe !important;
+}
+
+.tree-view-ui.tree-view-ui-base .tree-cell:empty,
+.tree-view-ui.tree-view-ui-base .tree-cell:empty:hover,
+.tree-view-ui:ui-base .tree-cell:empty,
+.tree-view-ui:ui-base .tree-cell:empty:hover {
+    -fx-background: -fx-control-inner-background;
+    -fx-background-color: -fx-background !important;
+    -fx-border-color: null;
+    -fx-text-fill: tree-view-cell-text-color !important;
+}
+
+.tree-view-ui.tree-view-ui-base:focused .tree-cell:empty:hover,
+.tree-view-ui:ui-base:focused .tree-cell:empty:hover {
+    -fx-background-color: #f5f8fe !important;
+}
+
+.tree-view-ui.tree-view-ui-base:focused .tree-cell:selected,
+.tree-view-ui.tree-view-ui-base:focused .tree-cell:selected:hover,
+.tree-view-ui.tree-view-ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused:filled:selected:hover,
+.tree-view-ui:ui-base:focused .tree-cell:selected,
+.tree-view-ui:ui-base:focused .tree-cell:selected:hover,
+.tree-view-ui:ui-base:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused:filled:selected:hover {
+    -fx-background-color: #a7d2ff !important;
+    -fx-background-insets: 0;
+}
+
+.tree-view-ui.tree-view-ui-base:disabled .tree-cell,
+.tree-view-ui:ui-base:disabled .tree-cell {
+    -fx-text-fill: -fx-text-background-color !important;
+}
+
+.tree-view-ui .arrow,
+.tree-view-ui.tree-view-ui-base .tree-cell > .tree-disclosure-node > .arrow,
+.tree-view-ui.tree-view-ui-base:focused .tree-cell:selected > .tree-disclosure-node > .arrow,
+.tree-view-ui:ui-base .tree-cell > .tree-disclosure-node > .arrow,
+.tree-view-ui:ui-base:focused .tree-cell:selected > .tree-disclosure-node > .arrow {
+    -fx-rotate: -90;
+    -fx-background-color: #353535;
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.tree-view-ui .tree-cell:expanded .arrow,
+.tree-view-ui.tree-view-ui-base .tree-cell:expanded > .tree-disclosure-node > .arrow,
+.tree-view-ui:ui-base .tree-cell:expanded > .tree-disclosure-node > .arrow {
+    -fx-rotate: 0 !important;
+}

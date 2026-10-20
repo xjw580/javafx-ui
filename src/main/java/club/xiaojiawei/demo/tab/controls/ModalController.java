@@ -15,8 +15,9 @@ public class ModalController {
     @FXML
     private ScrollPane rootPane;
 
-    @FXML protected void showModal(ActionEvent actionEvent) {
-        Modal modal = new Modal(null, "卸载360安全卫士", new Label("你确定要不卸载360安全助手吗？"), () -> System.out.println("确认"), () -> {
+    @FXML
+    protected void showModal(ActionEvent actionEvent) {
+        Modal modal = new Modal(rootPane, "卸载360安全卫士", new Label("你确定要不卸载360安全助手吗？"), () -> System.out.println("确认"), () -> {
             System.out.println("取消");
         });
         modal.setMaskClosable(true);

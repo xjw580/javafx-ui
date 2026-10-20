@@ -1,0 +1,9 @@
+/* Shared sizes and semantic modifiers. */
+
+.menu-bar-ui-small .menu .label {
+    -fx-padding: 1;
+}
+
+.menu-bar-ui-big .menu .label {
+    -fx-padding: 5;
+}

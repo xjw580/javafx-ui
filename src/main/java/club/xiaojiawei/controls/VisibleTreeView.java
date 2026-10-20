@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.skin.VisibleTreeViewSkin;
 import javafx.scene.control.Skin;
 import javafx.scene.control.TreeView;
@@ -9,6 +10,11 @@ import javafx.scene.control.TreeView;
  * @date 2024/12/12 10:19
  */
 public class VisibleTreeView<T> extends TreeView<T> {
+
+    {
+        JavaFXUI.initializeTheme(this, "visible-tree-view-ui");
+        getStyleClass().add("tree-view-ui");
+    }
 
     private VisibleTreeViewSkin<?> visibleTreeViewSkin;
 

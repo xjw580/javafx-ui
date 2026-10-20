@@ -160,7 +160,7 @@ public class MultiFileChooser {
                 }
             });
             stage.setScene(scene);
-            JavaFXUI.addjavafxUIStylesheet(scene);
+            JavaFXUI.setTheme(scene, JavaFXUI.getTheme(parentWindows.getScene()));
             stage.initOwner(parentWindows);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.titleProperty().bind(titleProperty());
@@ -169,6 +169,7 @@ public class MultiFileChooser {
                 stage.getIcons().addAll(parentStage.getIcons());
             }
         }
+        JavaFXUI.setTheme(stage.getScene(), JavaFXUI.getTheme(parentWindows.getScene()));
         stage.setAlwaysOnTop(isAlwaysOnTop());
         stage.show();
     }

@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.TimeSelector;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -34,7 +35,7 @@ public class TimeSelectorTest extends Application {
         children.add(timeSelector1);
 
         Scene scene = new Scene(hBox);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
 //        new Timer().schedule(new TimerTask() {
@@ -49,7 +50,7 @@ public class TimeSelectorTest extends Application {
 //                timeSelector1.setTime(null);
 //            }
 //        }, 3000);
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             timeSelector1.setLocalTime(LocalTime.now());
         });
     }

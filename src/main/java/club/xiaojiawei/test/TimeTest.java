@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Time;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -30,7 +31,7 @@ public class TimeTest extends Application {
         time.setInterceptor(new Predicate<LocalTime>() {
             @Override
             public boolean test(LocalTime localTime) {
-                if (localTime != null && localTime.isAfter(LocalTime.now())){
+                if (localTime != null && localTime.isAfter(LocalTime.now())) {
                     return false;
                 }
                 return true;
@@ -44,7 +45,7 @@ public class TimeTest extends Application {
         refresh.setOnMouseClicked(mouseEvent -> time.refresh());
         flowPane.getChildren().addAll(time, refresh);
         Scene scene = new Scene(flowPane, 200, 200);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         stage.setScene(scene);
 
         stage.show();

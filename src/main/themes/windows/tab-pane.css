@@ -1,0 +1,339 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+/* Leave room beyond the exact header width: TabPaneSkin uses a strict fit comparison. Preserve the selected underline against the shared small-tab insets. */
+
+.tab-pane-ui .tab {
+    -fx-padding: 5 15 10 15;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0 2 5 2;
+    -fx-background-color: transparent;
+}
+
+.tab-pane-ui .tab:disabled *,
+.tab-pane-ui .tab:disabled {
+    -fx-text-fill: transparent !important;
+    -fx-fill: transparent !important;
+    -fx-background-color: transparent !important;
+}
+
+.tab-pane-ui > .tab-header-area {
+    -fx-padding: 2 2 -2 2;
+}
+
+.tab-pane-ui .control-buttons-tab {
+    -fx-translate-y: -5;
+}
+
+.tab-pane-ui .control-buttons-tab .tab-down-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5;
+    -fx-padding: 16 12.5 16 12.5;
+    -fx-background-insets: 0;
+}
+
+.tab-pane-ui .control-buttons-tab .tab-down-button .arrow {
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.tab-pane-ui .control-buttons-tab:hover .tab-down-button .arrow {
+    -fx-background-color: main-color;
+}
+
+.tab-pane-ui .control-buttons-tab:hover .tab-down-button {
+    -fx-background-color: rgb(0, 0, 0, 0.1);
+}
+
+.tab-pane-ui .tab .tab-close-button:hover {
+    -fx-background-color: red;
+}
+
+.tab-pane-ui > .tab-header-area > .tab-header-background {
+    -fx-text-box-border: shallow-color;
+    -fx-background-color: shallow-color;
+}
+
+.tab-pane-ui .tab:selected {
+    -fx-background-color: win-main-color, win-surface-color !important;
+    -fx-effect: null;
+    -fx-background-insets: 0, 0 0 2 0;
+    -fx-border-color: win-border-color !important;
+}
+
+.tab-pane-ui .tab:hover {
+    -fx-background-color: rgb(0, 0, 0, 0.1);
+}
+
+.tab-down-button .context-menu {
+    -fx-background-radius: 5;
+    -fx-background-color: shallow-color;
+}
+
+.tab-down-button .context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-background-insets: 2 2 2 2;
+    -fx-pref-height: 38;
+    -fx-background-radius: 5;
+}
+
+.tab-down-button .context-menu .menu-item:hover {
+    -fx-background-color: rgb(0, 0, 0, 0.1);
+}
+
+.tab-down-button .context-menu .menu-item:disabled {
+    -fx-background-color: transparent !important;
+}
+
+.tab-down-button .context-menu .menu-item:disabled .label {
+    -fx-text-fill: transparent !important;
+}
+
+.tab-down-button .context-menu .menu-item .label {
+    -fx-text-fill: black;
+}
+
+.tab-down-button .context-menu .menu-item .left-container > * {
+    -fx-background-color: black;
+}
+
+.tab-pane-ui:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.tab-pane-ui > .tab-content-area {
+    -fx-background-color: white;
+}
+
+.tab-pane-ui .tab,
+.tab-pane-ui.tab-pane-ui-windows .tab,
+.tab-pane-ui:ui-windows .tab {
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1 0 0 1;
+    -fx-text-fill: win-text-color;
+}
+
+.tab-pane-ui .tab:disabled *,
+.tab-pane-ui .tab:disabled,
+.tab-pane-ui.tab-pane-ui-windows .tab:disabled *,
+.tab-pane-ui.tab-pane-ui-windows .tab:disabled,
+.tab-pane-ui:ui-windows .tab:disabled *,
+.tab-pane-ui:ui-windows .tab:disabled {
+    -fx-text-fill: transparent !important;
+    -fx-fill: transparent !important;
+    -fx-background-color: transparent !important;
+}
+
+.tab-pane-ui .tab:disabled,
+.tab-pane-ui.tab-pane-ui-windows .tab:disabled,
+.tab-pane-ui:ui-windows .tab:disabled {
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1 0 0 1;
+}
+
+.tab-pane-ui > .tab-header-area,
+.tab-pane-ui.tab-pane-ui-windows > .tab-header-area,
+.tab-pane-ui:ui-windows > .tab-header-area {
+    -fx-padding: 0 1;
+}
+
+.tab-pane-ui .tab:hover,
+.tab-pane-ui.tab-pane-ui-windows .tab:hover,
+.tab-pane-ui:ui-windows .tab:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.tab-pane-ui .tab:selected,
+.tab-pane-ui.tab-pane-ui-windows .tab:selected,
+.tab-pane-ui:ui-windows .tab:selected {
+    -fx-background-color: win-main-color, win-surface-color !important;
+    -fx-border-color: win-border-color !important;
+    -fx-border-width: 1 0 0 1 !important;
+    -fx-effect: null;
+}
+
+.tab-pane-ui .tab:selected {
+    -fx-background-insets: 0, 0 0 2 0;
+}
+
+.tab-pane-ui.tab-pane-ui-windows .tab:selected,
+.tab-pane-ui:ui-windows .tab:selected {
+    -fx-background-insets: 0, 0 0 2 0 !important;
+}
+
+.tab-pane-ui:bottom .tab,
+.tab-pane-ui:left .tab,
+.tab-pane-ui.tab-pane-ui-windows:bottom .tab,
+.tab-pane-ui.tab-pane-ui-windows:left .tab,
+.tab-pane-ui:ui-windows:bottom .tab,
+.tab-pane-ui:ui-windows:left .tab {
+    -fx-border-width: 1 1 0 0 !important;
+}
+
+.tab-pane-ui > .tab-header-area > .headers-region,
+.tab-pane-ui.tab-pane-ui-windows > .tab-header-area > .headers-region,
+.tab-pane-ui:ui-windows > .tab-header-area > .headers-region {
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 1 0 0;
+}
+
+.tab-pane-ui:bottom > .tab-header-area > .headers-region,
+.tab-pane-ui:left > .tab-header-area > .headers-region,
+.tab-pane-ui.tab-pane-ui-windows:bottom > .tab-header-area > .headers-region,
+.tab-pane-ui.tab-pane-ui-windows:left > .tab-header-area > .headers-region,
+.tab-pane-ui:ui-windows:bottom > .tab-header-area > .headers-region,
+.tab-pane-ui:ui-windows:left > .tab-header-area > .headers-region {
+    -fx-border-width: 0 0 0 1;
+}
+
+.tab-pane-ui > .tab-header-area > .tab-header-background,
+.tab-pane-ui.tab-pane-ui-windows > .tab-header-area > .tab-header-background,
+.tab-pane-ui:ui-windows > .tab-header-area > .tab-header-background {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 0 1 0;
+}
+
+.tab-pane-ui > .tab-content-area,
+.tab-pane-ui.tab-pane-ui-windows > .tab-content-area,
+.tab-pane-ui:ui-windows > .tab-content-area {
+    -fx-background-color: white;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 1 1 1;
+}
+
+.tab-pane-ui:bottom > .tab-content-area,
+.tab-pane-ui.tab-pane-ui-windows:bottom > .tab-content-area,
+.tab-pane-ui:ui-windows:bottom > .tab-content-area {
+    -fx-border-width: 1 1 0 1;
+}
+
+.tab-pane-ui:left > .tab-content-area,
+.tab-pane-ui.tab-pane-ui-windows:left > .tab-content-area,
+.tab-pane-ui:ui-windows:left > .tab-content-area {
+    -fx-border-width: 1 1 1 0;
+}
+
+.tab-pane-ui:right > .tab-content-area,
+.tab-pane-ui.tab-pane-ui-windows:right > .tab-content-area,
+.tab-pane-ui:ui-windows:right > .tab-content-area {
+    -fx-border-width: 1 0 1 1;
+}
+
+.tab-pane-ui .tab .tab-close-button,
+.tab-pane-ui.tab-pane-ui-windows .tab .tab-close-button,
+.tab-pane-ui:ui-windows .tab .tab-close-button {
+    -fx-background-color: win-text-color;
+}
+
+.tab-pane-ui .tab .tab-close-button:hover,
+.tab-pane-ui.tab-pane-ui-windows .tab .tab-close-button:hover,
+.tab-pane-ui:ui-windows .tab .tab-close-button:hover {
+    -fx-background-color: #E81123;
+}
+
+.tab-pane-ui .control-buttons-tab,
+.tab-pane-ui.tab-pane-ui-windows .control-buttons-tab,
+.tab-pane-ui:ui-windows .control-buttons-tab {
+    -fx-translate-y: 0;
+}
+
+.tab-pane-ui .control-buttons-tab .tab-down-button,
+.tab-pane-ui.tab-pane-ui-windows .control-buttons-tab .tab-down-button,
+.tab-pane-ui:ui-windows .control-buttons-tab .tab-down-button {
+    -fx-background-color: win-background-color;
+    -fx-background-radius: 0;
+    -fx-padding: 8 10 8 10;
+    -fx-background-insets: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1 1 0 1;
+}
+
+.tab-pane-ui .control-buttons-tab .tab-down-button .arrow,
+.tab-pane-ui.tab-pane-ui-windows .control-buttons-tab .tab-down-button .arrow,
+.tab-pane-ui:ui-windows .control-buttons-tab .tab-down-button .arrow {
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.tab-pane-ui .control-buttons-tab:hover .tab-down-button,
+.tab-pane-ui.tab-pane-ui-windows .control-buttons-tab:hover .tab-down-button,
+.tab-pane-ui:ui-windows .control-buttons-tab:hover .tab-down-button {
+    -fx-background-color: win-hover-background-color;
+}
+
+.tab-pane-ui .control-buttons-tab:hover .tab-down-button .arrow,
+.tab-pane-ui.tab-pane-ui-windows .control-buttons-tab:hover .tab-down-button .arrow,
+.tab-pane-ui:ui-windows .control-buttons-tab:hover .tab-down-button .arrow {
+    -fx-background-color: win-main-color;
+}
+
+.tab-pane-ui:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator,
+.tab-pane-ui.tab-pane-ui-windows:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator,
+.tab-pane-ui:ui-windows:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.tab-pane-ui .tab-down-button .context-menu,
+.tab-pane-ui.tab-pane-ui-windows .tab-down-button .context-menu,
+.tab-pane-ui:ui-windows .tab-down-button .context-menu {
+    -fx-background-radius: 4;
+    -fx-background-color: white;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+}
+
+.tab-pane-ui .tab-down-button .context-menu .menu-item,
+.tab-pane-ui.tab-pane-ui-windows .tab-down-button .context-menu .menu-item,
+.tab-pane-ui:ui-windows .tab-down-button .context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-pref-height: 32;
+    -fx-background-radius: 4;
+}
+
+.tab-pane-ui .tab-down-button .context-menu .menu-item:hover,
+.tab-pane-ui.tab-pane-ui-windows .tab-down-button .context-menu .menu-item:hover,
+.tab-pane-ui:ui-windows .tab-down-button .context-menu .menu-item:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.tab-pane-ui .tab-down-button .context-menu .menu-item:disabled,
+.tab-pane-ui.tab-pane-ui-windows .tab-down-button .context-menu .menu-item:disabled,
+.tab-pane-ui:ui-windows .tab-down-button .context-menu .menu-item:disabled {
+    -fx-background-color: transparent !important;
+}
+
+.tab-pane-ui .tab-down-button .context-menu .menu-item:disabled .label,
+.tab-pane-ui.tab-pane-ui-windows .tab-down-button .context-menu .menu-item:disabled .label,
+.tab-pane-ui:ui-windows .tab-down-button .context-menu .menu-item:disabled .label {
+    -fx-text-fill: win-text-disabled-color !important;
+}
+
+.tab-pane-ui .tab-down-button .context-menu .menu-item .label,
+.tab-pane-ui.tab-pane-ui-windows .tab-down-button .context-menu .menu-item .label,
+.tab-pane-ui:ui-windows .tab-down-button .context-menu .menu-item .label {
+    -fx-text-fill: win-text-color;
+}
+
+.tab-pane-ui .tab-down-button .context-menu .menu-item .left-container > *,
+.tab-pane-ui.tab-pane-ui-windows .tab-down-button .context-menu .menu-item .left-container > *,
+.tab-pane-ui:ui-windows .tab-down-button .context-menu .menu-item .left-container > * {
+    -fx-background-color: win-text-color;
+}
+
+.tab-pane-ui:left > .tab-header-area,
+.tab-pane-ui:right > .tab-header-area,
+.tab-pane-ui.tab-pane-ui-windows:left > .tab-header-area,
+.tab-pane-ui.tab-pane-ui-windows:right > .tab-header-area,
+.tab-pane-ui:ui-windows:left > .tab-header-area,
+.tab-pane-ui:ui-windows:right > .tab-header-area {
+    -fx-padding: 1 0;
+}
+
+.tab-pane-ui.tab-pane-ui-small .tab:selected {
+    -fx-background-insets: 0, 0 0 2 0 !important;
+}

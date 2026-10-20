@@ -1,0 +1,310 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.table-view-ui,
+.table-view-ui.table-view-ui-windows,
+.table-view-ui:ui-windows {
+    table-view-bg-color: win-background-color;
+    table-view-hover-color: win-hover-background-color;
+    table-view-selected-color: win-pressed-background-color;
+    table-view-ui-idea-bg-color: win-background-color;
+    table-view-ui-idea-header-bg-color: win-background-color;
+    table-view-ui-idea-selected-color: win-pressed-background-color;
+    table-view-ui-idea-hover-color: win-hover-background-color;
+    table-view-ui-idea-upright-bg-color: #efefef;
+    table-view-ui-upright-owner-bg-color: win-surface-color;
+    table-view-ui-upright-header-bg-color: win-background-color;
+}
+
+.table-view-ui {
+    -fx-padding: 0;
+    -fx-background-color: win-surface-color;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-table-cell-border-color: win-border-color;
+}
+
+.table-view-ui.table-view-ui-windows,
+.table-view-ui:ui-windows {
+    -fx-background-color: win-surface-color;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-table-cell-border-color: win-border-color;
+}
+
+.table-view-ui:focused,
+.table-view-ui.table-view-ui-windows:focused,
+.table-view-ui:ui-windows:focused {
+    -fx-background-radius: 0;
+    -fx-border-color: win-main-color;
+}
+
+.table-view-ui .column-header-background,
+.table-view-ui .nested-column-header,
+.table-view-ui .filler,
+.table-view-ui:constrained-resize .nested-column-header,
+.table-view-ui:constrained-resize .filler,
+.table-view-ui.table-view-ui-windows .column-header-background,
+.table-view-ui.table-view-ui-windows .nested-column-header,
+.table-view-ui.table-view-ui-windows .filler,
+.table-view-ui.table-view-ui-windows:constrained-resize .nested-column-header,
+.table-view-ui.table-view-ui-windows:constrained-resize .filler,
+.table-view-ui:ui-windows .column-header-background,
+.table-view-ui:ui-windows .nested-column-header,
+.table-view-ui:ui-windows .filler,
+.table-view-ui:ui-windows:constrained-resize .nested-column-header,
+.table-view-ui:ui-windows:constrained-resize .filler {
+    -fx-background-color: win-background-color;
+    -fx-background-radius: 0;
+}
+
+.table-view-ui .column-header,
+.table-view-ui.table-view-ui-windows .column-header,
+.table-view-ui:ui-windows .column-header {
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 1 1 0;
+}
+
+.table-view-ui .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-view-ui .column-header:last-visible,
+.table-view-ui.table-view-ui-windows .column-header:last-visible,
+.table-view-ui:ui-windows .column-header:last-visible {
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view-ui .column-header:hover,
+.table-view-ui.table-view-ui-windows .column-header:hover,
+.table-view-ui:ui-windows .column-header:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.table-view-ui .column-header-background .label,
+.table-view-ui.table-view-ui-windows .column-header-background .label,
+.table-view-ui:ui-windows .column-header-background .label {
+    -fx-text-fill: win-text-color;
+    -fx-font-weight: normal;
+}
+
+.table-view-ui .column-header-background .label {
+    -fx-pref-height: 40;
+}
+
+.table-view-ui .table-row-cell,
+.table-view-ui.table-view-ui-windows .table-row-cell,
+.table-view-ui:ui-windows .table-row-cell {
+    -fx-background-color: win-surface-color;
+}
+
+.table-view-ui .table-row-cell {
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.table-view-ui .table-row-cell .table-cell,
+.table-view-ui.table-view-ui-windows .table-row-cell .table-cell,
+.table-view-ui:ui-windows .table-row-cell .table-cell {
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-view-ui .table-row-cell .table-cell {
+    -fx-pref-height: 40;
+    -fx-alignment: CENTER;
+}
+
+.table-view-ui .table-row-cell .table-cell,
+.table-view-ui .table-row-cell .table-cell *,
+.table-view-ui.table-view-ui-windows .table-row-cell .table-cell,
+.table-view-ui.table-view-ui-windows .table-row-cell .table-cell *,
+.table-view-ui:ui-windows .table-row-cell .table-cell,
+.table-view-ui:ui-windows .table-row-cell .table-cell * {
+    -fx-text-fill: win-text-color !important;
+}
+
+.table-view-ui .table-row-cell:filled:hover,
+.table-view-ui.table-view-ui-windows .table-row-cell:filled:hover,
+.table-view-ui:ui-windows .table-row-cell:filled:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.table-view-ui .table-row-cell:filled:selected,
+.table-view-ui:focused .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-windows .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-windows:focused .table-row-cell:filled:selected,
+.table-view-ui:ui-windows .table-row-cell:filled:selected,
+.table-view-ui:ui-windows:focused .table-row-cell:filled:selected {
+    -fx-background-color: win-main-color, win-pressed-background-color !important;
+    -fx-background-insets: 0, 0 0 0 3;
+}
+
+.table-view-ui.table-view-ui-idea .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-idea:focused .table-row-cell:filled:selected {
+    -fx-background-color: table-view-ui-idea-selected-color !important;
+}
+
+.table-view-ui.table-view-ui-idea .table-row-cell:filled:hover {
+    -fx-background-color: table-view-ui-idea-hover-color;
+}
+
+.table-view-ui .table-cell:selected {
+    -fx-background-color: win-pressed-background-color !important;
+    -fx-background-insets: 0;
+}
+
+.table-view-ui .table-row-cell:empty,
+.table-view-ui .table-row-cell:empty:hover,
+.table-view-ui.table-view-ui-windows .table-row-cell:empty,
+.table-view-ui.table-view-ui-windows .table-row-cell:empty:hover,
+.table-view-ui.table-view-ui-windows .table-row-cell:empty:selected,
+.table-view-ui.table-view-ui-windows .table-row-cell:empty:selected:hover,
+.table-view-ui:ui-windows .table-row-cell:empty,
+.table-view-ui:ui-windows .table-row-cell:empty:hover,
+.table-view-ui:ui-windows .table-row-cell:empty:selected,
+.table-view-ui:ui-windows .table-row-cell:empty:selected:hover {
+    -fx-background-color: win-surface-color !important;
+}
+
+.table-view-ui .table-row-cell:empty .table-cell,
+.table-view-ui.table-view-ui-windows .table-row-cell:empty .table-cell,
+.table-view-ui:ui-windows .table-row-cell:empty .table-cell {
+    -fx-border-color: transparent;
+}
+
+.table-view-ui .table-cell .text-field,
+.table-view-ui.table-view-ui-windows .table-cell .text-field,
+.table-view-ui:ui-windows .table-cell .text-field {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0, 1;
+    -fx-border-color: win-main-color;
+    -fx-border-radius: 0;
+    -fx-effect: null !important;
+    -fx-accent: win-main-color;
+}
+
+.table-view-ui .table-cell .text-field:focused,
+.table-view-ui.table-view-ui-windows .table-cell .text-field:focused,
+.table-view-ui:ui-windows .table-cell .text-field:focused {
+    -fx-background-color: win-main-color, win-surface-color;
+    -fx-background-insets: 0, 0 0 2 0;
+    -fx-background-radius: 0;
+}
+
+.table-view-ui:disabled,
+.table-view-ui.table-view-ui-windows:disabled,
+.table-view-ui:ui-windows:disabled {
+    -fx-opacity: 0.6;
+}
+
+.table-view-ui:disabled .table-row-cell .table-cell,
+.table-view-ui:disabled .table-row-cell .table-cell *,
+.table-view-ui.table-view-ui-windows:disabled .table-row-cell .table-cell,
+.table-view-ui.table-view-ui-windows:disabled .table-row-cell .table-cell *,
+.table-view-ui:ui-windows:disabled .table-row-cell .table-cell,
+.table-view-ui:ui-windows:disabled .table-row-cell .table-cell * {
+    -fx-text-fill: win-text-disabled-color !important;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-upright,
+.table-view-ui:ui-windows.table-view-ui-upright {
+    -fx-background-color: table-view-ui-upright-owner-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-upright .column-header-background,
+.table-view-ui:ui-windows.table-view-ui-upright .column-header-background {
+    -fx-background-color: table-view-ui-upright-header-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-upright .filler,
+.table-view-ui:ui-windows.table-view-ui-upright .filler {
+    -fx-background-color: table-view-bg-color;
+    -fx-background-radius: 0 !important;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-upright:constrained-resize .filler,
+.table-view-ui:ui-windows.table-view-ui-upright:constrained-resize .filler {
+    -fx-background-color: table-view-ui-upright-header-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-upright .nested-column-header,
+.table-view-ui.table-view-ui-windows.table-view-ui-upright:constrained-resize .nested-column-header,
+.table-view-ui:ui-windows.table-view-ui-upright .nested-column-header,
+.table-view-ui:ui-windows.table-view-ui-upright:constrained-resize .nested-column-header {
+    -fx-background-radius: 0 !important;
+    -fx-background-color: table-view-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .filler,
+.table-view-ui:ui-windows.table-view-ui-idea .filler {
+    -fx-background-color: table-view-ui-idea-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .nested-column-header,
+.table-view-ui:ui-windows.table-view-ui-idea .nested-column-header {
+    -fx-background-color: table-view-ui-idea-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .column-header-background,
+.table-view-ui:ui-windows.table-view-ui-idea .column-header-background {
+    -fx-background-color: table-view-ui-idea-header-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .column-header,
+.table-view-ui:ui-windows.table-view-ui-idea .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .column-header-background .label,
+.table-view-ui:ui-windows.table-view-ui-idea .column-header-background .label {
+    -fx-font-weight: normal;
+    -fx-font-size: 11;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .table-row-cell:selected,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .table-row-cell:empty:selected,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .table-row-cell:empty:selected:hover,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea:focused .table-row-cell:selected,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea:focused .table-row-cell:filled:selected,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea:focused .table-row-cell:empty:selected,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea:focused .table-row-cell:empty:selected:hover,
+.table-view-ui:ui-windows.table-view-ui-idea .table-row-cell:selected,
+.table-view-ui:ui-windows.table-view-ui-idea .table-row-cell:filled:selected,
+.table-view-ui:ui-windows.table-view-ui-idea .table-row-cell:empty:selected,
+.table-view-ui:ui-windows.table-view-ui-idea .table-row-cell:empty:selected:hover,
+.table-view-ui:ui-windows.table-view-ui-idea:focused .table-row-cell:selected,
+.table-view-ui:ui-windows.table-view-ui-idea:focused .table-row-cell:filled:selected,
+.table-view-ui:ui-windows.table-view-ui-idea:focused .table-row-cell:empty:selected,
+.table-view-ui:ui-windows.table-view-ui-idea:focused .table-row-cell:empty:selected:hover {
+    -fx-background-color: table-view-ui-idea-selected-color !important;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .table-row-cell:hover,
+.table-view-ui.table-view-ui-windows.table-view-ui-idea .table-row-cell:filled:hover,
+.table-view-ui:ui-windows.table-view-ui-idea .table-row-cell:hover,
+.table-view-ui:ui-windows.table-view-ui-idea .table-row-cell:filled:hover {
+    -fx-background-color: table-view-ui-idea-hover-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea.table-view-ui-upright .filler,
+.table-view-ui:ui-windows.table-view-ui-idea.table-view-ui-upright .filler {
+    -fx-background-color: table-view-ui-idea-upright-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows.table-view-ui-idea.table-view-ui-upright .nested-column-header,
+.table-view-ui:ui-windows.table-view-ui-idea.table-view-ui-upright .nested-column-header {
+    -fx-background-color: table-view-ui-idea-upright-bg-color;
+}
+
+.table-view-ui.table-view-ui-windows .table-cell:selected,
+.table-view-ui:ui-windows .table-cell:selected {
+    -fx-background-color: win-pressed-background-color !important;
+    -fx-background-insets: 0;
+}

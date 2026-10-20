@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Calendar;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -27,23 +28,23 @@ public class CalendarTest1 extends Application {
     public void start(Stage primaryStage) throws IOException {
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(
-                new Label(){{
+                new Label() {{
                     sceneProperty().addListener((ov, oldScene, newScene) -> {
                         System.out.println("scene: " + newScene);
                     });
                 }}
         );
         Scene scene = new Scene(stackPane, 400, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            Platform.runLater(()->{
+            Platform.runLater(() -> {
                 stackPane.getChildren().clear();
             });
         }).start();

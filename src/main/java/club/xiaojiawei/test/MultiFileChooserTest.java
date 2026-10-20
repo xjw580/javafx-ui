@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.bean.FileChooserFilter;
 import club.xiaojiawei.controls.MultiFileChooser;
 import javafx.application.Application;
@@ -48,7 +49,7 @@ public class MultiFileChooserTest extends Application {
                 }, SelectionMode.MULTIPLE, List.of(FileChooserFilter.FILE_CHOOSER_FILTER), null);
             });
         }}), 600, 700);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

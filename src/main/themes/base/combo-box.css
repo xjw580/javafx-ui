@@ -1,0 +1,382 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+@import "../shared/combo-box.css";
+
+.combo-box-ui,
+.combo-box-ui.combo-box-ui-base,
+.combo-box-ui:ui-base {
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+    -fx-background-insets: 0;
+    -fx-effect: default-effect;
+}
+
+.combo-box-ui.combo-box-ui-base,
+.combo-box-ui:ui-base {
+    -fx-padding: 0;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-background-color: system-color;
+    -fx-border-radius: 0;
+}
+
+.combo-box-ui.combo-box-ui-base > .arrow-button,
+.combo-box-ui:ui-base > .arrow-button {
+    -fx-background-color: system-color;
+}
+
+.combo-box-ui.combo-box-ui-base:hover,
+.combo-box-ui.combo-box-ui-base:focused,
+.combo-box-ui:ui-base:hover,
+.combo-box-ui:ui-base:focused {
+    -fx-background-color: system-hover-color;
+    -fx-border-color: transparent;
+    -fx-effect: default-hover-effect;
+    -fx-opacity: 1;
+}
+
+.combo-box-ui.combo-box-ui-base:hover > .arrow-button,
+.combo-box-ui.combo-box-ui-base:focused > .arrow-button,
+.combo-box-ui:ui-base:hover > .arrow-button,
+.combo-box-ui:ui-base:focused > .arrow-button {
+    -fx-background-color: system-hover-color;
+}
+
+.combo-box-ui.combo-box-ui-base:focused,
+.combo-box-ui:ui-base:focused {
+    -fx-effect: default-effect !important;
+}
+
+.combo-box-ui.combo-box-ui-base:focused:hover,
+.combo-box-ui:ui-base:focused:hover {
+    -fx-effect: default-hover-effect !important;
+}
+
+.combo-box-ui:disabled,
+.combo-box-ui.combo-box-ui-base:disabled,
+.combo-box-ui:ui-base:disabled {
+    -fx-opacity: 1;
+}
+
+.combo-box-ui.combo-box-ui-base:disabled,
+.combo-box-ui:ui-base:disabled {
+    -fx-background-color: system-color;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent;
+    -fx-effect: default-effect;
+}
+
+.combo-box-ui.combo-box-ui-base:disabled > .arrow-button,
+.combo-box-ui:ui-base:disabled > .arrow-button {
+    -fx-background-color: system-color !important;
+}
+
+.combo-box-ui:disabled .list-cell,
+.combo-box-ui.combo-box-ui-base:disabled .list-cell,
+.combo-box-ui:ui-base:disabled .list-cell {
+    -fx-text-fill: black;
+}
+
+.combo-box-ui:disabled > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-base:disabled > .arrow-button > .arrow,
+.combo-box-ui:ui-base:disabled > .arrow-button > .arrow {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-ui:hover {
+    -fx-effect: default-hover-effect;
+}
+
+.combo-box-ui > .arrow-button > .arrow,
+.combo-box-ui.combo-box-ui-base > .arrow-button > .arrow,
+.combo-box-ui:ui-base > .arrow-button > .arrow {
+    -fx-background-color: #585858 !important;
+}
+
+.combo-box-ui .list-cell,
+.combo-box-ui.combo-box-ui-base .list-cell,
+.combo-box-ui:ui-base .list-cell {
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.combo-box-ui.combo-box-ui-base .list-cell,
+.combo-box-ui:ui-base .list-cell {
+    -fx-pref-height: 31;
+}
+
+.combo-box-ui:editable > .text-input,
+.combo-box-ui.combo-box-ui-base:editable > .text-input,
+.combo-box-ui:ui-base:editable > .text-input {
+    -fx-pref-width: 1;
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.combo-box-ui.combo-box-ui-base:editable > .text-input,
+.combo-box-ui:ui-base:editable > .text-input {
+    -fx-pref-height: 29;
+}
+
+.combo-box-ui.combo-box-ui-base:editable,
+.combo-box-ui.combo-box-ui-base:editable > .arrow-button,
+.combo-box-ui.combo-box-ui-base:editable:hover,
+.combo-box-ui:ui-base:editable,
+.combo-box-ui:ui-base:editable > .arrow-button,
+.combo-box-ui:ui-base:editable:hover {
+    -fx-background-color: transparent !important;
+    -fx-effect: none !important;
+}
+
+.combo-box-ui.combo-box-ui-base:editable,
+.combo-box-ui:ui-base:editable {
+    -fx-background-radius: 4;
+    -fx-border-color: transparent transparent grey transparent;
+}
+
+.combo-box-ui.combo-box-ui-base:editable:hover,
+.combo-box-ui:ui-base:editable:hover {
+    -fx-border-color: transparent transparent grey transparent;
+}
+
+.combo-box-ui.combo-box-ui-base:editable:hover > .arrow-button,
+.combo-box-ui:ui-base:editable:hover > .arrow-button {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-base:editable:focused,
+.combo-box-ui:ui-base:editable:focused {
+    -fx-background-radius: 4;
+    -fx-border-color: transparent transparent main-color transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-base:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-base:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: #585858 !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-normal:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-normal:disabled > .arrow-button {
+    -fx-background-color: normal-color !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-success:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-success:disabled > .arrow-button {
+    -fx-background-color: success-color !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-warn:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-warn:disabled > .arrow-button {
+    -fx-background-color: warn-color !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-error:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-error:disabled > .arrow-button {
+    -fx-background-color: error-color !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-normal:editable:disabled > .arrow-button,
+.combo-box-ui.combo-box-ui-base.combo-box-ui-success:editable:disabled > .arrow-button,
+.combo-box-ui.combo-box-ui-base.combo-box-ui-warn:editable:disabled > .arrow-button,
+.combo-box-ui.combo-box-ui-base.combo-box-ui-error:editable:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-normal:editable:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-success:editable:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-warn:editable:disabled > .arrow-button,
+.combo-box-ui:ui-base.combo-box-ui-error:editable:disabled > .arrow-button {
+    -fx-background-color: transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-normal:editable:focused,
+.combo-box-ui:ui-base.combo-box-ui-normal:editable:focused {
+    -fx-border-color: transparent transparent normal-deep-color transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-normal:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-base.combo-box-ui-normal:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: normal-deep-color !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-success:editable:focused,
+.combo-box-ui:ui-base.combo-box-ui-success:editable:focused {
+    -fx-border-color: transparent transparent success-deep-color transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-success:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-base.combo-box-ui-success:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: success-deep-color !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-warn:editable:focused,
+.combo-box-ui:ui-base.combo-box-ui-warn:editable:focused {
+    -fx-border-color: transparent transparent warn-deep-color transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-warn:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-base.combo-box-ui-warn:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: warn-deep-color !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-error:editable:focused,
+.combo-box-ui:ui-base.combo-box-ui-error:editable:focused {
+    -fx-border-color: transparent transparent error-deep-color transparent !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-error:editable:focused > .arrow-button > .arrow,
+.combo-box-ui:ui-base.combo-box-ui-error:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: error-deep-color !important;
+}
+
+.combo-box-ui .combo-box-popup .filter-v-box,
+.combo-box-ui.combo-box-ui-base .combo-box-popup .filter-v-box,
+.combo-box-ui:ui-base .combo-box-popup .filter-v-box {
+    -fx-effect: dropshadow(three-pass-box, hover-color, 10, 0, 0, 0);
+}
+
+.combo-box-ui .combo-box-popup .list-view {
+    -fx-padding: 2;
+    -fx-background-color: white, white;
+    -fx-background-radius: 0 0 5 5;
+    -fx-effect: dropshadow(three-pass-box, hover-color, 10, 0, 0, 0);
+}
+
+.combo-box-ui .combo-box-popup .grid-pane {
+    -fx-padding: 2;
+    -fx-background-color: white, white;
+    -fx-background-radius: 0 0 5 5;
+    -fx-effect: dropshadow(three-pass-box, hover-color, 10, 0, 0, 0);
+}
+
+.combo-box-ui.combo-box-ui-base .combo-box-popup .list-view,
+.combo-box-ui.combo-box-ui-base .combo-box-popup .grid-pane,
+.combo-box-ui:ui-base .combo-box-popup .list-view,
+.combo-box-ui:ui-base .combo-box-popup .grid-pane {
+    -fx-padding: 2;
+    -fx-background-color: white, white;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: dropshadow(three-pass-box, hover-color, 10, 0, 0, 0);
+}
+
+.combo-box-ui .combo-box-popup .list-view .list-cell,
+.combo-box-ui.combo-box-ui-base .combo-box-popup .list-view .list-cell,
+.combo-box-ui:ui-base .combo-box-popup .list-view .list-cell {
+    -fx-alignment: CENTER;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+}
+
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:selected:hover,
+.combo-box-ui.combo-box-ui-base .combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-ui.combo-box-ui-base .combo-box-popup .list-view .list-cell:filled:selected:hover,
+.combo-box-ui:ui-base .combo-box-popup .list-view .list-cell:filled:selected,
+.combo-box-ui:ui-base .combo-box-popup .list-view .list-cell:filled:selected:hover {
+    -fx-background-color: main-color;
+    -fx-text-fill: white;
+}
+
+.combo-box-ui .combo-box-popup .list-view .list-cell:filled:hover,
+.combo-box-ui.combo-box-ui-base .combo-box-popup .list-view .list-cell:filled:hover,
+.combo-box-ui:ui-base .combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: hover-color;
+}
+
+.combo-box-ui.combo-box-ui-base .combo-box-popup .list-view .list-cell:filled:hover,
+.combo-box-ui:ui-base .combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.combo-box-ui,
+.combo-box-ui > .arrow-button {
+    -fx-background-color: system-color;
+}
+
+.combo-box-ui:hover,
+.combo-box-ui:focused,
+.combo-box-ui:hover > .arrow-button,
+.combo-box-ui:focused > .arrow-button {
+    -fx-background-color: system-hover-color;
+}
+
+.combo-box-ui:editable,
+.combo-box-ui:editable > .arrow-button,
+.combo-box-ui:editable:hover {
+    -fx-background-color: transparent !important;
+    -fx-effect: none !important;
+}
+
+.combo-box-ui:editable {
+    -fx-border-color: transparent transparent grey transparent;
+}
+
+.combo-box-ui:editable:focused {
+    -fx-border-color: transparent transparent main-color transparent;
+}
+
+.combo-box-ui.combo-box-ui-normal:editable:focused {
+    -fx-border-color: transparent transparent normal-deep-color transparent;
+}
+
+.combo-box-ui.combo-box-ui-success:editable:focused {
+    -fx-border-color: transparent transparent success-deep-color transparent;
+}
+
+.combo-box-ui.combo-box-ui-warn:editable:focused {
+    -fx-border-color: transparent transparent warn-deep-color transparent;
+}
+
+.combo-box-ui.combo-box-ui-error:editable:focused {
+    -fx-border-color: transparent transparent error-deep-color transparent;
+}
+
+.combo-box-ui.combo-box-ui-base:editable,
+.combo-box-ui:ui-base:editable {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-insets: 0 0 1 0;
+}
+
+.combo-box-ui.combo-box-ui-base:editable:focused,
+.combo-box-ui:ui-base:editable:focused {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-insets: 0;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-tiny .list-cell,
+.combo-box-ui:ui-base.combo-box-ui-tiny .list-cell {
+    -fx-pref-height: 21 !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-tiny:editable .text-input,
+.combo-box-ui:ui-base.combo-box-ui-tiny:editable .text-input {
+    -fx-pref-height: 19 !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-small .list-cell,
+.combo-box-ui:ui-base.combo-box-ui-small .list-cell {
+    -fx-pref-height: 25 !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-small:editable .text-input,
+.combo-box-ui:ui-base.combo-box-ui-small:editable .text-input {
+    -fx-pref-height: 23 !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-big .list-cell,
+.combo-box-ui:ui-base.combo-box-ui-big .list-cell {
+    -fx-pref-height: 37 !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-big:editable .text-input,
+.combo-box-ui:ui-base.combo-box-ui-big:editable .text-input {
+    -fx-pref-height: 35 !important;
+}
+
+.combo-box-ui.combo-box-ui-base.combo-box-ui-tiny > .list-cell,
+.combo-box-ui:ui-base.combo-box-ui-tiny > .list-cell {
+    -fx-padding: 3 0.666667em;
+}

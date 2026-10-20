@@ -1,0 +1,189 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 2em;
+}
+
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0 10 0;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0 10 0 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0.15em 0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0 0.15em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: derive(main-shallow-color, 50%);
+    -fx-background-insets: 6, 0, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar:hover:horizontal .thumb,
+.scroll-bar:hover:vertical .thumb {
+    -fx-background-color: derive(main-shallow-color, 0%);
+    -fx-background-insets: 4, 0, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar.scroll-bar-ui-base:horizontal .track,
+.scroll-bar.scroll-bar-ui-base:vertical .track,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .track,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-border-radius: 2.0em;
+}
+
+.scroll-bar.scroll-bar-ui-base:horizontal .increment-button,
+.scroll-bar.scroll-bar-ui-base:horizontal .decrement-button,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .increment-button,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0.0 0.0 10.0 0.0;
+}
+
+.scroll-bar.scroll-bar-ui-base:vertical .increment-button,
+.scroll-bar.scroll-bar-ui-base:vertical .decrement-button,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .increment-button,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0.0 10.0 0.0 0.0;
+}
+
+.scroll-bar.scroll-bar-ui-base .increment-arrow,
+.scroll-bar.scroll-bar-ui-base .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-base .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-base .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, derive(-fx-base, -45%);
+    -fx-shape: " ";
+    -fx-padding: 0.15em 0.0;
+}
+
+.scroll-bar.scroll-bar-ui-base:horizontal .increment-arrow,
+.scroll-bar.scroll-bar-ui-base:horizontal .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, derive(-fx-base, -45%);
+    -fx-shape: " ";
+    -fx-padding: 0.15em 0.0;
+}
+
+.scroll-bar.scroll-bar-ui-base:vertical .increment-arrow,
+.scroll-bar.scroll-bar-ui-base:vertical .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, derive(-fx-base, -45%);
+    -fx-shape: " ";
+    -fx-padding: 0.0 0.15em;
+}
+
+.scroll-bar.scroll-bar-ui-base .increment-button:hover .increment-arrow,
+.scroll-bar.scroll-bar-ui-base .decrement-button:hover .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-base .increment-button:hover .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-base .decrement-button:hover .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, derive(-fx-base, -50%);
+}
+
+.scroll-bar.scroll-bar-ui-base .increment-button:pressed .increment-arrow,
+.scroll-bar.scroll-bar-ui-base .decrement-button:pressed .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-base .increment-button:pressed .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-base .decrement-button:pressed .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, derive(-fx-base, -55%);
+}
+
+.scroll-bar.scroll-bar-ui-base:horizontal .thumb,
+.scroll-bar.scroll-bar-ui-base:vertical .thumb,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .thumb,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .thumb {
+    -fx-background-color: derive(main-shallow-color, 50.0%);
+    -fx-background-insets: 6, 0.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+.scroll-bar.scroll-bar-ui-base:hover:horizontal .thumb,
+.scroll-bar.scroll-bar-ui-base:hover:vertical .thumb,
+.scroll-bar.scroll-bar-ui:ui-base:hover:horizontal .thumb,
+.scroll-bar.scroll-bar-ui:ui-base:hover:vertical .thumb {
+    -fx-background-color: derive(main-shallow-color, 0%);
+    -fx-background-insets: 4, 0.0, 0.0, 0.0;
+    -fx-background-radius: 2em;
+}
+
+.scroll-bar.scroll-bar-ui-base:horizontal .thumb:hover,
+.scroll-bar.scroll-bar-ui-base:vertical .thumb:hover,
+.scroll-bar.scroll-bar-ui-base:horizontal .thumb:pressed,
+.scroll-bar.scroll-bar-ui-base:vertical .thumb:pressed,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .thumb:hover,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .thumb:hover,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .thumb:pressed,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .thumb:pressed {
+    -fx-background-color: derive(main-shallow-color, 50.0%);
+    -fx-background-insets: 6, 0.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+.scroll-bar.scroll-bar-ui-base:horizontal .increment-button:hover,
+.scroll-bar.scroll-bar-ui-base:horizontal .decrement-button:hover,
+.scroll-bar.scroll-bar-ui-base:vertical .increment-button:hover,
+.scroll-bar.scroll-bar-ui-base:vertical .decrement-button:hover,
+.scroll-bar.scroll-bar-ui-base:horizontal .increment-button:pressed,
+.scroll-bar.scroll-bar-ui-base:horizontal .decrement-button:pressed,
+.scroll-bar.scroll-bar-ui-base:vertical .increment-button:pressed,
+.scroll-bar.scroll-bar-ui-base:vertical .decrement-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .increment-button:hover,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .decrement-button:hover,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .increment-button:hover,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .decrement-button:hover,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .increment-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal .decrement-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .increment-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-base:vertical .decrement-button:pressed {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar,
+.scroll-bar.scroll-bar-ui-base,
+.scroll-bar.scroll-bar-ui:ui-base {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+    -fx-background-insets: 6, 0, 0, 0;
+}
+
+.scroll-bar:hover {
+    -fx-background-insets: 4, 0, 0, 0;
+}
+
+.scroll-bar.scroll-bar-ui-base:hover,
+.scroll-bar.scroll-bar-ui:ui-base:hover {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+    -fx-background-insets: 4, 0, 0, 0;
+}

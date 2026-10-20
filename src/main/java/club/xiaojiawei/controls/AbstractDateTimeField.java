@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.annotations.ValidSizeRange;
 import club.xiaojiawei.enums.SizeEnum;
 import club.xiaojiawei.func.DateTimeInterceptor;
@@ -69,7 +70,7 @@ public abstract class AbstractDateTimeField<T> extends Group implements DateTime
     public void setSize(SizeEnum size) {
         this.size = size;
         String smallStyleClass = "time-small-background", bigStyleClass = "time-big-background";
-        switch (size){
+        switch (size) {
             case BIG -> {
                 dateTimeBg.getStyleClass().removeAll(smallStyleClass, bigStyleClass);
                 dateTimeBg.getStyleClass().add(bigStyleClass);
@@ -85,8 +86,8 @@ public abstract class AbstractDateTimeField<T> extends Group implements DateTime
 
     protected final DurationSelector timeSelector;
 
-    public AbstractDateTimeField(int maxHour, int maxMin, int maxSec, int minHour, int minMin, int minSec){
-        timeSelector =  new DurationSelector(maxHour, maxMin, maxSec, minHour, minMin, minSec);
+    public AbstractDateTimeField(int maxHour, int maxMin, int maxSec, int minHour, int minMin, int minSec) {
+        timeSelector = new DurationSelector(maxHour, maxMin, maxSec, minHour, minMin, minSec);
         init();
     }
 
@@ -95,7 +96,7 @@ public abstract class AbstractDateTimeField<T> extends Group implements DateTime
         init();
     }
 
-    private void init(){
+    private void init() {
         loadPage();
         afterPageLoaded();
         initPopup();
@@ -112,29 +113,30 @@ public abstract class AbstractDateTimeField<T> extends Group implements DateTime
 
     protected void initPopup() {
         this.popup = createPopup();
+        JavaFXUI.followTheme(popup, this);
     }
 
     protected Popup getPopup() {
         return popup;
     }
 
-    public void showPopup(Window window, double anchorX, double anchorY){
-        if (anchorX >= 0){
+    public void showPopup(Window window, double anchorX, double anchorY) {
+        if (anchorX >= 0) {
             getPopup().setX(anchorX);
         }
-        if (anchorY >= 0){
+        if (anchorY >= 0) {
             getPopup().setY(anchorY);
         }
         getPopup().show(window);
         FADE.play(getPopup().getContent().get(0), 0.5D, 1D, Duration.millis(200));
     }
 
-    public void hidePopup(){
+    public void hidePopup() {
         popup.hide();
     }
 
-    protected int parseInt(String s){
-        if (s == null || s.isBlank()){
+    protected int parseInt(String s) {
+        if (s == null || s.isBlank()) {
             return 0;
         }
         return Integer.parseInt(s);
@@ -144,14 +146,17 @@ public abstract class AbstractDateTimeField<T> extends Group implements DateTime
      * 刷新显示的时间，和真正存储的时间同步
      */
     public abstract void refresh();
+
     /**
      * 加载页面
      */
     protected abstract void loadPage();
+
     /**
      * 页面加载完毕
      */
     protected abstract void afterPageLoaded();
+
     /**
      * 创建弹窗页，点击组件图标后弹出
      * @return

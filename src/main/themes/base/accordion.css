@@ -1,0 +1,120 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.accordion-ui.accordion-ui-base > .titled-pane.first-titled-pane > .title,
+.accordion-ui:ui-base > .titled-pane.first-titled-pane > .title {
+    -fx-background-insets: 0;
+    -fx-border-width: 1;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane,
+.accordion-ui:ui-base .titled-pane {
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane:disabled,
+.accordion-ui:ui-base .titled-pane:disabled {
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.accordion-ui .titled-pane > .title,
+.accordion-ui.accordion-ui-base .titled-pane > .title,
+.accordion-ui:ui-base .titled-pane > .title {
+    -fx-background-color: shallow-color;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #bce1ff;
+    -fx-border-width: 1;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane > .title,
+.accordion-ui:ui-base .titled-pane > .title {
+    -fx-background-insets: -1 0 0 0;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-effect: null;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane > .title:hover,
+.accordion-ui.accordion-ui-base .titled-pane:expanded > .title,
+.accordion-ui.accordion-ui-base .titled-pane:focused > .title,
+.accordion-ui:ui-base .titled-pane > .title:hover,
+.accordion-ui:ui-base .titled-pane:expanded > .title,
+.accordion-ui:ui-base .titled-pane:focused > .title {
+    -fx-background-color: shallow-color;
+    -fx-background-insets: -1 0 0 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #bce1ff;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane:hover:focused > .title,
+.accordion-ui.accordion-ui-base .titled-pane:focused > .title:hover,
+.accordion-ui.accordion-ui-base .titled-pane:expanded:focused > .title,
+.accordion-ui:ui-base .titled-pane:hover:focused > .title,
+.accordion-ui:ui-base .titled-pane:focused > .title:hover,
+.accordion-ui:ui-base .titled-pane:expanded:focused > .title {
+    -fx-background-color: shallow-color;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane:disabled > .title,
+.accordion-ui:ui-base .titled-pane:disabled > .title {
+    -fx-background-color: shallow-color;
+    -fx-background-insets: -1 0 0 0;
+    -fx-background-radius: 0;
+    -fx-border-color: #bce1ff;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.accordion-ui .titled-pane > .content > *,
+.accordion-ui.accordion-ui-base .titled-pane > .content > *,
+.accordion-ui:ui-base .titled-pane > .content > * {
+    -fx-padding: 0;
+}
+
+.accordion-ui .titled-pane > .content,
+.accordion-ui.accordion-ui-base .titled-pane > .content,
+.accordion-ui:ui-base .titled-pane > .content {
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane > .content,
+.accordion-ui:ui-base .titled-pane > .content {
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-box-border;
+    -fx-border-insets: -1 0 0 0;
+}
+
+.accordion-ui .titled-pane:focused > .title > .arrow-button > .arrow,
+.accordion-ui.accordion-ui-base .titled-pane:focused > .title > .arrow-button > .arrow,
+.accordion-ui:ui-base .titled-pane:focused > .title > .arrow-button > .arrow {
+    -fx-effect: null;
+    -fx-background-insets: 0;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane:focused > .title > .arrow-button > .arrow,
+.accordion-ui:ui-base .titled-pane:focused > .title > .arrow-button > .arrow {
+    -fx-background-color: -fx-focus-color, -fx-mark-color;
+}
+
+.accordion-ui .titled-pane > .title > .arrow-button > .arrow,
+.accordion-ui.accordion-ui-base .titled-pane > .title > .arrow-button > .arrow,
+.accordion-ui:ui-base .titled-pane > .title > .arrow-button > .arrow {
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.accordion-ui.accordion-ui-base .titled-pane > .title > .arrow-button > .arrow,
+.accordion-ui:ui-base .titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 0;
+}
+
+.accordion-ui .titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-insets: 0;
+}

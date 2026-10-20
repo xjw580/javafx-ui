@@ -1,0 +1,77 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.menu-item-ui:hover {
+    -fx-background-color: hover-color;
+}
+
+.menu-item-ui,
+.menu-item-ui.menu-item-ui-base,
+.menu-item-ui:ui-base {
+    -fx-padding: 7 14 7 14;
+    -fx-background-radius: 5;
+}
+
+.menu-item-ui.menu-item-ui-base,
+.menu-item-ui:ui-base {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-opacity: 1;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-item-ui.menu-item-ui-base > .label,
+.menu-item-ui:ui-base > .label {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-item-ui.menu-item-ui-base:hover,
+.menu-item-ui:ui-base:hover {
+    -fx-background-color: hover-color !important;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-item-ui.menu-item-ui-base:hover > .label,
+.menu-item-ui:ui-base:hover > .label {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-item-ui.menu-item-ui-base:focused,
+.menu-item-ui.menu-item-ui-base:showing,
+.menu-item-ui:ui-base:focused,
+.menu-item-ui:ui-base:showing {
+    -fx-background-color: -fx-selection-bar !important;
+    -fx-text-fill: -fx-selection-bar-text;
+    -fx-mark-color: -fx-focused-mark-color;
+}
+
+.menu-item-ui.menu-item-ui-base:focused > .label,
+.menu-item-ui.menu-item-ui-base:showing > .label,
+.menu-item-ui:ui-base:focused > .label,
+.menu-item-ui:ui-base:showing > .label {
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.menu-item-ui.menu-item-ui-base:focused:hover,
+.menu-item-ui.menu-item-ui-base:showing:hover,
+.menu-item-ui:ui-base:focused:hover,
+.menu-item-ui:ui-base:showing:hover {
+    -fx-background-color: hover-color !important;
+}
+
+.menu-item-ui.menu-item-ui-base:disabled,
+.menu-item-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+}
+
+.menu-item-ui.menu-item-ui-base .arrow,
+.menu-item-ui.menu-item-ui-base .check,
+.menu-item-ui.menu-item-ui-base .radio,
+.menu-item-ui:ui-base .arrow,
+.menu-item-ui:ui-base .check,
+.menu-item-ui:ui-base .radio {
+    -fx-background-color: -fx-mark-color;
+}

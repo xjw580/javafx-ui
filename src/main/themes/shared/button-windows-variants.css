@@ -1,0 +1,74 @@
+/* Standalone Windows button variants remain available in every theme entry. */
+
+.btn-ui-windows-primary {
+    -fx-background-color: win-main-color;
+    -fx-border-color: win-main-color;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-effect: win-control-effect;
+    -fx-text-fill: white;
+}
+
+.btn-ui-windows-primary:hover {
+    -fx-background-color: win-main-hover-color;
+    -fx-border-color: win-main-hover-color;
+    -fx-effect: win-control-effect;
+}
+
+.btn-ui-windows-primary:pressed,
+.btn-ui-windows-primary:selected {
+    -fx-background-color: win-main-pressed-color;
+    -fx-border-color: win-main-pressed-color;
+    -fx-effect: null !important;
+}
+
+.btn-ui-windows-primary:disabled {
+    -fx-background-color: win-disabled-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+}
+
+.btn-ui-windows-default {
+    -fx-background-color: win-surface-color;
+    -fx-border-color: win-border-color;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-effect: win-control-effect;
+    -fx-text-fill: win-text-color;
+}
+
+.btn-ui-windows-default:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-border-color: win-main-color;
+    -fx-effect: win-control-effect;
+}
+
+.btn-ui-windows-default:pressed,
+.btn-ui-windows-default:selected {
+    -fx-background-color: win-pressed-background-color;
+    -fx-border-color: win-main-pressed-color;
+    -fx-effect: null !important;
+}
+
+.btn-ui-windows-default:disabled {
+    -fx-background-color: win-surface-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+}
+
+.btn-ui-windows-primary.btn-ui-tiny,
+.btn-ui-windows-default.btn-ui-tiny {
+    -fx-padding: 2 4 !important;
+}
+
+.btn-ui-windows-primary.btn-ui-small,
+.btn-ui-windows-default.btn-ui-small {
+    -fx-padding: 4 8 !important;
+}
+
+.btn-ui-windows-primary.btn-ui-big,
+.btn-ui-windows-default.btn-ui-big {
+    -fx-padding: 10 20 !important;
+}

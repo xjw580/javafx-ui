@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.skin.PasswordTextFieldSkin;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -11,6 +12,11 @@ import javafx.scene.control.*;
  * @date 2023/10/31 14:25
  */
 public class PasswordTextField extends PasswordField {
+
+    {
+        JavaFXUI.initializeTheme(this, "password-text-field-ui");
+        getStyleClass().add("text-field-ui");
+    }
 
     /**
      * 是否永远隐藏（是否显示眼睛图标）

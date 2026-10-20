@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Title;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -23,7 +24,7 @@ public class LabelUITest extends Application {
         title.setPrefHeight(40);
         title.setPrefWidth(220);
         Scene scene = new Scene(new Group(title), 400, 400);
-        scene.getStylesheets().add(JavaFXUI.javafxUIStylesheet());
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

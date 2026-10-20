@@ -22,6 +22,7 @@
         <javafx-version>21.0.5</javafx-version>
         <lombok-version>1.18.34</lombok-version>
         <java.version>21</java.version>
+        <skipTests>false</skipTests>
     </properties>
 
     <distributionManagement>
@@ -73,8 +74,63 @@
                     <!--                    <exclude>**/test/**</exclude>-->
                 </excludes>
             </resource>
+            <resource>
+                <directory>${project.build.directory}/generated-resources/themes</directory>
+            </resource>
         </resources>
         <plugins>
+            <!-- Generate runtime CSS from the single source for each theme component. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-theme-css</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <exec executable="${java.home}/bin/java" failonerror="true">
+                                    <arg value="--source"/>
+                                    <arg value="${java.version}"/>
+                                    <arg value="${project.basedir}/tools/GenerateThemeCss.java"/>
+                                    <arg value="${project.basedir}/src/main/themes"/>
+                                    <arg value="${project.build.directory}/generated-resources/themes"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify-theme-css-generator</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <target>
+                                <mkdir dir="${project.build.directory}/theme-verification"/>
+                                <javac destdir="${project.build.directory}/theme-verification"
+                                       release="${java.version}" encoding="UTF-8" includeantruntime="false">
+                                    <src path="${project.basedir}/tools"/>
+                                    <src path="${project.basedir}/verification"/>
+                                    <include name="GenerateThemeCss.java"/>
+                                    <include name="ThemeCssGenerationVerification.java"/>
+                                </javac>
+                                <java classname="ThemeCssGenerationVerification" fork="true"
+                                      failonerror="true" dir="${project.basedir}">
+                                    <classpath>
+                                        <pathelement location="${project.build.directory}/theme-verification"/>
+                                    </classpath>
+                                </java>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

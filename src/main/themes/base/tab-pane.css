@@ -1,0 +1,235 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+/* A forced Base small tab keeps its own shape inside the Windows entry. */
+
+.tab-pane-ui .tab,
+.tab-pane-ui.tab-pane-ui-base .tab,
+.tab-pane-ui:ui-base .tab {
+    -fx-padding: 5 15 10 15;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0 2 5 2;
+    -fx-background-color: transparent;
+}
+
+.tab-pane-ui.tab-pane-ui-base .tab,
+.tab-pane-ui:ui-base .tab {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.tab-pane-ui .tab:disabled *,
+.tab-pane-ui .tab:disabled,
+.tab-pane-ui.tab-pane-ui-base .tab:disabled *,
+.tab-pane-ui.tab-pane-ui-base .tab:disabled,
+.tab-pane-ui:ui-base .tab:disabled *,
+.tab-pane-ui:ui-base .tab:disabled {
+    -fx-text-fill: transparent !important;
+    -fx-fill: transparent !important;
+    -fx-background-color: transparent !important;
+}
+
+.tab-pane-ui.tab-pane-ui-base .tab:disabled,
+.tab-pane-ui:ui-base .tab:disabled {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.tab-pane-ui > .tab-header-area,
+.tab-pane-ui.tab-pane-ui-base > .tab-header-area,
+.tab-pane-ui:ui-base > .tab-header-area {
+    -fx-padding: 2 2 -2 2;
+}
+
+.tab-pane-ui .control-buttons-tab,
+.tab-pane-ui.tab-pane-ui-base .control-buttons-tab,
+.tab-pane-ui:ui-base .control-buttons-tab {
+    -fx-translate-y: -5;
+}
+
+.tab-pane-ui .control-buttons-tab .tab-down-button,
+.tab-pane-ui.tab-pane-ui-base .control-buttons-tab .tab-down-button,
+.tab-pane-ui:ui-base .control-buttons-tab .tab-down-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5;
+    -fx-padding: 16 12.5 16 12.5;
+    -fx-background-insets: 0;
+}
+
+.tab-pane-ui.tab-pane-ui-base .control-buttons-tab .tab-down-button,
+.tab-pane-ui:ui-base .control-buttons-tab .tab-down-button {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.tab-pane-ui .control-buttons-tab .tab-down-button .arrow,
+.tab-pane-ui.tab-pane-ui-base .control-buttons-tab .tab-down-button .arrow,
+.tab-pane-ui:ui-base .control-buttons-tab .tab-down-button .arrow {
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.tab-pane-ui.tab-pane-ui-base .control-buttons-tab .tab-down-button .arrow,
+.tab-pane-ui:ui-base .control-buttons-tab .tab-down-button .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 0 0 -1 0, 0;
+}
+
+.tab-pane-ui .control-buttons-tab:hover .tab-down-button .arrow,
+.tab-pane-ui.tab-pane-ui-base .control-buttons-tab:hover .tab-down-button .arrow,
+.tab-pane-ui:ui-base .control-buttons-tab:hover .tab-down-button .arrow {
+    -fx-background-color: main-color;
+}
+
+.tab-pane-ui .control-buttons-tab:hover .tab-down-button,
+.tab-pane-ui.tab-pane-ui-base .control-buttons-tab:hover .tab-down-button,
+.tab-pane-ui:ui-base .control-buttons-tab:hover .tab-down-button {
+    -fx-background-color: rgb(0, 0, 0, 0.1);
+}
+
+.tab-pane-ui.tab-pane-ui-base .tab .tab-close-button,
+.tab-pane-ui:ui-base .tab .tab-close-button {
+    -fx-background-color: -fx-mark-color;
+}
+
+.tab-pane-ui .tab .tab-close-button:hover,
+.tab-pane-ui.tab-pane-ui-base .tab .tab-close-button:hover,
+.tab-pane-ui:ui-base .tab .tab-close-button:hover {
+    -fx-background-color: red;
+}
+
+.tab-pane-ui > .tab-header-area > .tab-header-background,
+.tab-pane-ui.tab-pane-ui-base > .tab-header-area > .tab-header-background,
+.tab-pane-ui:ui-base > .tab-header-area > .tab-header-background {
+    -fx-text-box-border: shallow-color;
+    -fx-background-color: shallow-color;
+}
+
+.tab-pane-ui.tab-pane-ui-base > .tab-header-area > .tab-header-background,
+.tab-pane-ui:ui-base > .tab-header-area > .tab-header-background {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.tab-pane-ui .tab:selected,
+.tab-pane-ui.tab-pane-ui-base .tab:selected,
+.tab-pane-ui:ui-base .tab:selected {
+    -fx-background-color: white !important;
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+}
+
+.tab-pane-ui.tab-pane-ui-base .tab:selected,
+.tab-pane-ui:ui-base .tab:selected {
+    -fx-border-color: null !important;
+    -fx-border-width: 0 !important;
+}
+
+.tab-pane-ui.tab-pane-ui-base:bottom .tab,
+.tab-pane-ui.tab-pane-ui-base:left .tab,
+.tab-pane-ui:ui-base:bottom .tab,
+.tab-pane-ui:ui-base:left .tab {
+    -fx-border-width: 0 !important;
+}
+
+.tab-pane-ui.tab-pane-ui-base > .tab-header-area > .headers-region,
+.tab-pane-ui:ui-base > .tab-header-area > .headers-region {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.tab-pane-ui.tab-pane-ui-base:bottom > .tab-header-area > .headers-region,
+.tab-pane-ui.tab-pane-ui-base:left > .tab-header-area > .headers-region,
+.tab-pane-ui:ui-base:bottom > .tab-header-area > .headers-region,
+.tab-pane-ui:ui-base:left > .tab-header-area > .headers-region {
+    -fx-border-width: 0;
+}
+
+.tab-pane-ui .tab:hover,
+.tab-pane-ui.tab-pane-ui-base .tab:hover,
+.tab-pane-ui:ui-base .tab:hover {
+    -fx-background-color: rgb(0, 0, 0, 0.1);
+}
+
+.tab-down-button .context-menu {
+    -fx-background-radius: 5;
+    -fx-background-color: shallow-color;
+}
+
+.tab-pane-ui.tab-pane-ui-base .tab-down-button .context-menu,
+.tab-pane-ui:ui-base .tab-down-button .context-menu {
+    -fx-background-radius: 5;
+    -fx-background-color: shallow-color;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.tab-down-button .context-menu .menu-item,
+.tab-pane-ui.tab-pane-ui-base .tab-down-button .context-menu .menu-item,
+.tab-pane-ui:ui-base .tab-down-button .context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-background-insets: 2 2 2 2;
+    -fx-pref-height: 38;
+    -fx-background-radius: 5;
+}
+
+.tab-down-button .context-menu .menu-item:hover,
+.tab-pane-ui.tab-pane-ui-base .tab-down-button .context-menu .menu-item:hover,
+.tab-pane-ui:ui-base .tab-down-button .context-menu .menu-item:hover {
+    -fx-background-color: rgb(0, 0, 0, 0.1);
+}
+
+.tab-down-button .context-menu .menu-item:disabled,
+.tab-pane-ui.tab-pane-ui-base .tab-down-button .context-menu .menu-item:disabled,
+.tab-pane-ui:ui-base .tab-down-button .context-menu .menu-item:disabled {
+    -fx-background-color: transparent !important;
+}
+
+.tab-down-button .context-menu .menu-item:disabled .label,
+.tab-pane-ui.tab-pane-ui-base .tab-down-button .context-menu .menu-item:disabled .label,
+.tab-pane-ui:ui-base .tab-down-button .context-menu .menu-item:disabled .label {
+    -fx-text-fill: transparent !important;
+}
+
+.tab-down-button .context-menu .menu-item .label,
+.tab-pane-ui.tab-pane-ui-base .tab-down-button .context-menu .menu-item .label,
+.tab-pane-ui:ui-base .tab-down-button .context-menu .menu-item .label {
+    -fx-text-fill: black;
+}
+
+.tab-down-button .context-menu .menu-item .left-container > *,
+.tab-pane-ui.tab-pane-ui-base .tab-down-button .context-menu .menu-item .left-container > *,
+.tab-pane-ui:ui-base .tab-down-button .context-menu .menu-item .left-container > * {
+    -fx-background-color: black;
+}
+
+.tab-pane-ui:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator,
+.tab-pane-ui.tab-pane-ui-base:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator,
+.tab-pane-ui:ui-base:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.tab-pane-ui > .tab-content-area,
+.tab-pane-ui.tab-pane-ui-base > .tab-content-area,
+.tab-pane-ui:ui-base > .tab-content-area {
+    -fx-background-color: white;
+}
+
+.tab-pane-ui.tab-pane-ui-base > .tab-content-area,
+.tab-pane-ui:ui-base > .tab-content-area {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.tab-pane-ui.tab-pane-ui-base:bottom > .tab-content-area,
+.tab-pane-ui.tab-pane-ui-base:left > .tab-content-area,
+.tab-pane-ui.tab-pane-ui-base:right > .tab-content-area,
+.tab-pane-ui:ui-base:bottom > .tab-content-area,
+.tab-pane-ui:ui-base:left > .tab-content-area,
+.tab-pane-ui:ui-base:right > .tab-content-area {
+    -fx-border-width: 0;
+}
+
+.tab-pane-ui.tab-pane-ui-base.tab-pane-ui-small .tab:selected,
+.tab-pane-ui:ui-base.tab-pane-ui-small .tab:selected {
+    -fx-background-insets: 0 1 3 1 !important;
+}

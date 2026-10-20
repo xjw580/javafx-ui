@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.ico.TimeIco;
 import club.xiaojiawei.utils.SystemUtil;
 import javafx.beans.property.*;
@@ -33,6 +34,10 @@ import static club.xiaojiawei.controls.TimeSelector.TIME_FULL_FORMATTER;
  */
 @SuppressWarnings("unused")
 public class Time extends AbstractDateTimeField<LocalTime> {
+
+    {
+        JavaFXUI.initializeTheme(this, "time-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *
@@ -300,8 +305,8 @@ public class Time extends AbstractDateTimeField<LocalTime> {
         return new TextFormatter<>(change -> {
             String temp;
             if (change.getText().matches("^\\d{0,2}")
-                    && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= 2
-                    && parseInt(temp) <= maxValue
+                && (temp = textField.getText().substring(0, change.getRangeStart()) + change.getText() + textField.getText().substring(change.getRangeEnd())).length() <= 2
+                && parseInt(temp) <= maxValue
             ) {
                 return change;
             }

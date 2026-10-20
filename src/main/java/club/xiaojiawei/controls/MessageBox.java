@@ -1,5 +1,7 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -19,6 +21,10 @@ import java.io.IOException;
  */
 @Slf4j
 public class MessageBox extends Group {
+
+    {
+        JavaFXUI.initializeTheme(this, "message-box-ui");
+    }
 
     private final StringProperty text;
 
@@ -73,7 +79,7 @@ public class MessageBox extends Group {
     @FXML
     private Label msg;
 
-    private void afterFXMLLoaded(){
+    private void afterFXMLLoaded() {
         color.addListener((observableValue, s, t1) -> {
             msg.setStyle(String.format("-fx-background-color: %s", t1));
             triangle.setStyle(String.format("-fx-fill: %s", t1));

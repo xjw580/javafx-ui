@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.skin.ComboBoxWideSkin;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -16,6 +17,11 @@ import javafx.scene.input.ScrollEvent;
  * @date 2024/11/15 11:31
  */
 public class WideComboBox<T> extends ComboBox<T> {
+
+    {
+        JavaFXUI.initializeTheme(this, "wide-combo-box-ui");
+        getStyleClass().add("combo-box-ui");
+    }
 
     private final IntegerProperty maxColumCount = new SimpleIntegerProperty(this, "maxColumCount", 4);
 

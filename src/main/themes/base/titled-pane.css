@@ -1,0 +1,117 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.titled-pane-ui.titled-pane-ui-base,
+.titled-pane-ui:ui-base {
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.titled-pane-ui.titled-pane-ui-base:disabled,
+.titled-pane-ui:ui-base:disabled {
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.titled-pane-ui > .title,
+.titled-pane-ui.titled-pane-ui-base > .title,
+.titled-pane-ui:ui-base > .title {
+    -fx-background-color: #e9f5ff;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #d7ecfd;
+    -fx-border-width: 1;
+}
+
+.titled-pane-ui.titled-pane-ui-base > .title,
+.titled-pane-ui:ui-base > .title {
+    -fx-background-insets: 0;
+    -fx-background-radius: 3 3 0 0;
+    -fx-border-radius: 0;
+    -fx-effect: null;
+}
+
+.titled-pane-ui.titled-pane-ui-base > .title:hover,
+.titled-pane-ui.titled-pane-ui-base:expanded > .title,
+.titled-pane-ui.titled-pane-ui-base:focused > .title,
+.titled-pane-ui:ui-base > .title:hover,
+.titled-pane-ui:ui-base:expanded > .title,
+.titled-pane-ui:ui-base:focused > .title {
+    -fx-background-color: #e9f5ff;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3 3 0 0;
+    -fx-border-color: #d7ecfd;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.titled-pane-ui.titled-pane-ui-base:hover:focused > .title,
+.titled-pane-ui.titled-pane-ui-base:focused > .title:hover,
+.titled-pane-ui:ui-base:hover:focused > .title,
+.titled-pane-ui:ui-base:focused > .title:hover {
+    -fx-background-color: #e9f5ff;
+}
+
+.titled-pane-ui.titled-pane-ui-base:expanded:focused > .title,
+.titled-pane-ui:ui-base:expanded:focused > .title {
+    -fx-background-color: #e9f5ff;
+}
+
+.titled-pane-ui.titled-pane-ui-base:disabled > .title,
+.titled-pane-ui:ui-base:disabled > .title {
+    -fx-background-color: #e9f5ff;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3 3 0 0;
+    -fx-border-color: #d7ecfd;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.titled-pane-ui > .content > *,
+.titled-pane-ui.titled-pane-ui-base > .content > *,
+.titled-pane-ui:ui-base > .content > * {
+    -fx-padding: 0;
+}
+
+.titled-pane-ui > .content,
+.titled-pane-ui.titled-pane-ui-base > .content,
+.titled-pane-ui:ui-base > .content {
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+
+.titled-pane-ui.titled-pane-ui-base > .content,
+.titled-pane-ui:ui-base > .content {
+    -fx-background-radius: 0;
+    -fx-border-color: -fx-box-border;
+    -fx-border-insets: -1 0 0 0;
+}
+
+.titled-pane-ui:focused > .title > .arrow-button > .arrow,
+.titled-pane-ui.titled-pane-ui-base:focused > .title > .arrow-button > .arrow,
+.titled-pane-ui:ui-base:focused > .title > .arrow-button > .arrow {
+    -fx-effect: null;
+    -fx-background-insets: 0;
+}
+
+.titled-pane-ui.titled-pane-ui-base:focused > .title > .arrow-button > .arrow,
+.titled-pane-ui:ui-base:focused > .title > .arrow-button > .arrow {
+    -fx-background-color: -fx-focus-color, -fx-mark-color;
+}
+
+.titled-pane-ui > .title > .arrow-button > .arrow,
+.titled-pane-ui.titled-pane-ui-base > .title > .arrow-button > .arrow,
+.titled-pane-ui:ui-base > .title > .arrow-button > .arrow {
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.titled-pane-ui.titled-pane-ui-base > .title > .arrow-button > .arrow,
+.titled-pane-ui:ui-base > .title > .arrow-button > .arrow {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 0;
+}
+
+.titled-pane-ui > .title > .arrow-button > .arrow {
+    -fx-background-insets: 0;
+}

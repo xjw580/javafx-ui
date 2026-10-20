@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.MultiFileChooser;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -38,7 +39,7 @@ public class FileSaveTest extends Application {
                 ));
             });
         }}), 600, 700);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

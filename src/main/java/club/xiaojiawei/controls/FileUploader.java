@@ -1,8 +1,10 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.component.FileUploaderItem;
 import club.xiaojiawei.enums.MimeEnum;
 import javafx.beans.property.ObjectProperty;
+import javafx.css.PseudoClass;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -36,6 +38,10 @@ import static club.xiaojiawei.enums.MimeEnum.IMAGE_ALL;
  * @date 2023/11/9 15:58
  */
 public class FileUploader extends TilePane {
+
+    {
+        JavaFXUI.initializeTheme(this, "file-uploader-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *
@@ -133,7 +139,8 @@ public class FileUploader extends TilePane {
         }
     }
 
-    @FXML private Label tipLabel;
+    @FXML
+    private Label tipLabel;
 
     private static final Tika tika = new Tika();
 
@@ -143,7 +150,7 @@ public class FileUploader extends TilePane {
      *                                                                         *
      **************************************************************************/
 
-    private void addListener(){
+    private void addListener() {
         this.setOnDragOver(event -> {
             if (event.getGestureSource() != this) {
                 event.acceptTransferModes(TransferMode.ANY);
@@ -153,7 +160,7 @@ public class FileUploader extends TilePane {
             Dragboard db = event.getDragboard();
             if (db.hasFiles()) {
                 for (File file : db.getFiles()) {
-                    if (!addFile(file)){
+                    if (!addFile(file)) {
                         break;
                     }
                 }
@@ -161,45 +168,45 @@ public class FileUploader extends TilePane {
             event.setDropCompleted(true);
         });
         this.getChildren().addListener((ListChangeListener<Node>) c -> {
-            if (this.getChildren().size() == 1){
+            if (this.getChildren().size() == 1) {
                 tipLabel.setManaged(true);
                 tipLabel.setVisible(true);
-            }else {
+            } else {
                 tipLabel.setVisible(false);
                 tipLabel.setManaged(false);
             }
             int size = Math.min(this.getChildren().size() - 1, maxColumns);
-            this.setMaxWidth(30 + 2 + size * 100 + (size == 0? 0 : (size - 1) * 17));
+            this.setMaxWidth(30 + 2 + size * 100 + (size == 0 ? 0 : (size - 1) * 17));
         });
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (this.getChildren().size() <= maxFileQuantity){
+            if (this.getChildren().size() <= maxFileQuantity) {
                 FileChooser fileChooser = new FileChooser();
-                if (lastChooseDir != null){
+                if (lastChooseDir != null) {
                     fileChooser.setInitialDirectory(new File(lastChooseDir));
                 }
                 addFile(fileChooser.showOpenDialog(new Stage()));
             }
         });
-        this.setOnDragEntered(event -> this.setStyle("-fx-border-style: solid"));
-        this.setOnDragExited(event -> this.setStyle("-fx-border-style: dashed"));
+        this.setOnDragEntered(event -> pseudoClassStateChanged(PseudoClass.getPseudoClass("drag-over"), true));
+        this.setOnDragExited(event -> pseudoClassStateChanged(PseudoClass.getPseudoClass("drag-over"), false));
     }
 
-    private boolean addFile(File file){
-        if (file == null){
+    private boolean addFile(File file) {
+        if (file == null) {
             return false;
         }
-        if (this.getChildren().size() > maxFileQuantity){
-            if (this.onAddFileFailEventHandler.get() != null){
+        if (this.getChildren().size() > maxFileQuantity) {
+            if (this.onAddFileFailEventHandler.get() != null) {
                 this.onAddFileFailEventHandler.get().accept(FailEvent.MAX_QUANTITY_LIMIT);
             }
             return false;
         }
         lastChooseDir = file.getParent();
         String mimeType = tika.detect(file.getName());
-        if (isAllowFileType(mimeType)){
+        if (isAllowFileType(mimeType)) {
             this.getChildren().add(buildFilePane(file.getPath(), mimeType));
-        }else {
-            if (this.onAddFileFailEventHandler.get() != null){
+        } else {
+            if (this.onAddFileFailEventHandler.get() != null) {
                 this.onAddFileFailEventHandler.get().accept(FailEvent.FILE_TYPE_LIMIT);
             }
             return false;
@@ -207,19 +214,19 @@ public class FileUploader extends TilePane {
         return true;
     }
 
-    private boolean isAllowFileType(String fileType){
-        if (fileType == null || fileType.isBlank()){
+    private boolean isAllowFileType(String fileType) {
+        if (fileType == null || fileType.isBlank()) {
             return false;
         }
         for (MimeEnum type : fileTypes) {
-            if (type == MimeEnum.ALL || fileType.startsWith(type.getMimeType())){
+            if (type == MimeEnum.ALL || fileType.startsWith(type.getMimeType())) {
                 return true;
             }
         }
         return false;
     }
 
-    private AnchorPane buildFilePane(String filePath, String fileType){
+    private AnchorPane buildFilePane(String filePath, String fileType) {
         FileUploaderItem fileUploaderItem = new FileUploaderItem();
         ProgressIndicator uploadProgressIndicator = fileUploaderItem.getUploadProgressIndicator();
         uploadProgressIndicator.progressProperty().addListener((observable, oldValue, newValue) -> {
@@ -232,7 +239,7 @@ public class FileUploader extends TilePane {
         fileUploaderItem.setFileSize(file.length());
         fileUploaderItem.setFileName(file.getName());
 
-        if (fileType != null && fileType.startsWith(IMAGE_ALL.getMimeType())){
+        if (fileType != null && fileType.startsWith(IMAGE_ALL.getMimeType())) {
             fileUploaderItem.setBackgroundImage(filePath);
         }
 
@@ -240,7 +247,7 @@ public class FileUploader extends TilePane {
             event.consume();
             ObservableList<Node> children = this.getChildren();
             for (int i = 1; i < children.size(); i++) {
-                if (children.get(i) == fileUploaderItem){
+                if (children.get(i) == fileUploaderItem) {
                     children.remove(i);
                     fileURLs.remove(i - 1);
                     indicators.remove(i - 1);
@@ -255,7 +262,7 @@ public class FileUploader extends TilePane {
     /**
      * 上传失败事件
      */
-    public enum FailEvent{
+    public enum FailEvent {
 
         /**
          * 超过最大文件数量

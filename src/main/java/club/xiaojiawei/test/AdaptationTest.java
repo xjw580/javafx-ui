@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import javafx.application.Application;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +34,7 @@ public class AdaptationTest extends Application {
         launch(args);
     }
 
-    public void initialize(){
+    public void initialize() {
         System.out.println("bottomScrollPane prefWidth:" + bottomScrollPane.getPrefWidth());
         System.out.println("bottomScrollPane width:" + bottomScrollPane.getWidth());
         System.out.println("bottomContent prefWidth:" + bottomContent.getPrefWidth());
@@ -57,7 +58,7 @@ public class AdaptationTest extends Application {
         });
     }
 
-    private void calcItemH(){
+    private void calcItemH() {
         long count = bottomTagPane.getChildren().stream().filter(Node::isManaged).count();
         double itemH = bottomTagPane.getHeight() / count;
         for (Node child : bottomTagPane.getChildren()) {
@@ -70,7 +71,7 @@ public class AdaptationTest extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("AdaptationTest.fxml")));
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
 
         primaryStage.setOnShowing(event -> {

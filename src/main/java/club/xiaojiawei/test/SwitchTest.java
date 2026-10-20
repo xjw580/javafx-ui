@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Switch;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.application.Application;
@@ -41,7 +42,7 @@ public class SwitchTest extends Application {
         aSwitch.setTranslateY(50);
         titledPane.getChildren().add(aSwitch);
         Scene scene = new Scene(titledPane, 200, 200);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         stage.setScene(scene);
         stage.show();
     }

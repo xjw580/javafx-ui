@@ -1,0 +1,40 @@
+@import "accordion.css";
+@import "button.css";
+@import "check-box.css";
+@import "combo-box.css";
+@import "context-menu.css";
+@import "hyperlink.css";
+@import "label.css";
+@import "list-view.css";
+@import "menu-bar.css";
+@import "menu-item.css";
+@import "menu.css";
+@import "pagination.css";
+@import "progress.css";
+@import "radio-button.css";
+@import "scroll-bar.css";
+@import "internal-scroll-bar.css";
+@import "slider.css";
+@import "tab-pane.css";
+@import "table-view.css";
+@import "text-area.css";
+@import "text-field.css";
+@import "title.css";
+@import "titled-pane.css";
+@import "toggle-button.css";
+@import "tree-view.css";
+
+@import "custom-controls.css";
+
+/* Explicit variants also serve composite controls via internal theme pseudo-classes. */
+@import "explicit/index.css";
+
+/* Background utility classes follow this theme. */
+.bg-hover-ui:hover {
+    -fx-background-color: effect-color;
+}
+
+.bg-ui, .bg-ui * {
+    -fx-background-color: main-color !important;
+    -fx-text-fill: white !important;
+}

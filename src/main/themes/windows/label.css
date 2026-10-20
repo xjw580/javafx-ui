@@ -1,0 +1,83 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.label-ui,
+.label-ui.label-ui-windows,
+.label-ui:ui-windows {
+    -fx-background-color: win-background-color;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-text-fill: win-text-color;
+}
+
+.label-ui:disabled,
+.label-ui.label-ui-windows:disabled,
+.label-ui:ui-windows:disabled {
+    -fx-text-fill: win-text-disabled-color;
+    -fx-border-color: win-disabled-color;
+}
+
+.label-ui-normal,
+.label-ui.label-ui-windows.label-ui-normal,
+.label-ui:ui-windows.label-ui-normal {
+    -fx-background-color: rgba(32, 128, 240, 0.12) !important;
+    -fx-border-color: rgba(32, 128, 240, 0.3) !important;
+}
+
+.label-ui-normal * {
+    -fx-fill: rgba(32, 128, 240);
+}
+
+.label-ui.label-ui-windows.label-ui-normal *,
+.label-ui:ui-windows.label-ui-normal * {
+    -fx-fill: rgb(32, 128, 240);
+}
+
+.label-ui-success,
+.label-ui.label-ui-windows.label-ui-success,
+.label-ui:ui-windows.label-ui-success {
+    -fx-background-color: rgba(24, 160, 88, 0.12) !important;
+    -fx-border-color: rgba(24, 160, 88, 0.3) !important;
+}
+
+.label-ui-success * {
+    -fx-fill: rgba(24, 160, 88);
+}
+
+.label-ui.label-ui-windows.label-ui-success *,
+.label-ui:ui-windows.label-ui-success * {
+    -fx-fill: rgb(24, 160, 88);
+}
+
+.label-ui-warn,
+.label-ui.label-ui-windows.label-ui-warn,
+.label-ui:ui-windows.label-ui-warn {
+    -fx-background-color: rgba(240, 160, 32, 0.12) !important;
+    -fx-border-color: rgba(240, 160, 32, 0.3) !important;
+}
+
+.label-ui-warn * {
+    -fx-fill: rgba(240, 160, 32);
+}
+
+.label-ui.label-ui-windows.label-ui-warn *,
+.label-ui:ui-windows.label-ui-warn * {
+    -fx-fill: rgb(240, 160, 32);
+}
+
+.label-ui-error,
+.label-ui.label-ui-windows.label-ui-error,
+.label-ui:ui-windows.label-ui-error {
+    -fx-background-color: rgba(208, 48, 80, 0.12) !important;
+    -fx-border-color: rgba(208, 48, 80, 0.3) !important;
+}
+
+.label-ui-error * {
+    -fx-fill: rgba(208, 48, 80);
+}
+
+.label-ui.label-ui-windows.label-ui-error *,
+.label-ui:ui-windows.label-ui-error * {
+    -fx-fill: rgb(208, 48, 80);
+}

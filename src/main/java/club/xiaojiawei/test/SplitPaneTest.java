@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.ico.NextIco;
 import club.xiaojiawei.controls.ico.NextPageIco;
 import javafx.application.Application;
@@ -37,18 +38,20 @@ public class SplitPaneTest extends Application {
         for (int i = 0; i < size; i++) {
             Item item = new Item();
             item.setPrefHeight(100);
-            splitPane.setDividerPosition(i, 1D * (i +1) / 6 );
+            splitPane.setDividerPosition(i, 1D * (i + 1) / 6);
             splitPane.getItems().add(item);
         }
 
 
-        Scene scene = new Scene(new StackPane(splitPane){{setStyle("-fx-padding: 20");}}, 1000, 600);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        Scene scene = new Scene(new StackPane(splitPane) {{
+            setStyle("-fx-padding: 20");
+        }}, 1000, 600);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    static class Item extends HBox{
+    static class Item extends HBox {
 
         private final ImageView imageView;
 
@@ -64,11 +67,10 @@ public class SplitPaneTest extends Application {
         }
     }
 
-    static class TagPane extends HBox{
+    static class TagPane extends HBox {
 
         private final GridPane contentPane = new GridPane();
         private final AnchorPane scalePane = new AnchorPane();
-
 
 
         public TagPane() {
@@ -78,18 +80,30 @@ public class SplitPaneTest extends Application {
             setStyle("-fx-border-color: gray;-fx-border-width: 0 1 0 0");
             HBox.setHgrow(contentPane, Priority.ALWAYS);
             contentPane.getRowConstraints().addAll(
-                    new RowConstraints(){{setValignment(VPos.CENTER);}},
-                    new RowConstraints(){{setValignment(VPos.CENTER);}},
-                    new RowConstraints(){{setValignment(VPos.CENTER);}}
+                    new RowConstraints() {{
+                        setValignment(VPos.CENTER);
+                    }},
+                    new RowConstraints() {{
+                        setValignment(VPos.CENTER);
+                    }},
+                    new RowConstraints() {{
+                        setValignment(VPos.CENTER);
+                    }}
             );
             contentPane.getColumnConstraints().addAll(
-                    new ColumnConstraints(){{setHalignment(HPos.CENTER);}},
-                    new ColumnConstraints(){{setHalignment(HPos.CENTER);}}
+                    new ColumnConstraints() {{
+                        setHalignment(HPos.CENTER);
+                    }},
+                    new ColumnConstraints() {{
+                        setHalignment(HPos.CENTER);
+                    }}
             );
             VBox vBox = new VBox();
             vBox.getChildren().addAll(new NextIco(), new NextPageIco());
             contentPane.add(vBox, 0, 0, 1, 1);
-            contentPane.add(new Text("FP1"){{setStyle("-fx-font-size: 16;-fx-font-weight: bold");}}, 0, 1, 2, 1);
+            contentPane.add(new Text("FP1") {{
+                setStyle("-fx-font-size: 16;-fx-font-weight: bold");
+            }}, 0, 1, 2, 1);
             contentPane.add(new Text("(0.0/0.0)"), 0, 2, 2, 1);
 
             Label label = new Label("100");

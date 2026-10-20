@@ -1,0 +1,569 @@
+/* Custom control appearance; component geometry stays in local stylesheets. */
+
+.calendar-ui#calendar {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 6;
+    -fx-effect: win-popup-effect !important;
+}
+
+.calendar-ui #dateMsg:hover {
+    -fx-text-fill: win-main-color;
+}
+
+.calendar-ui .bottomLabel {
+    -fx-text-fill: win-main-color;
+    -fx-background-radius: 6;
+}
+
+.calendar-ui .bottomLabel:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.calendar-ui .dayLabel,
+.calendar-ui .dayLabelTitle {
+    -fx-background-radius: 6;
+    -fx-text-fill: rgb(128, 128, 128);
+}
+
+.calendar-ui .blackFont {
+    -fx-text-fill: win-text-color;
+}
+
+.calendar-ui .selectedDayLabel {
+    -fx-background-color: win-main-color !important;
+    -fx-text-fill: white !important;
+}
+
+.calendar-ui .dayLabel:hover,
+.calendar-ui #lastMonth:hover,
+.calendar-ui #nextMonth:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.calendar-ui .monthPaneScroll {
+    -fx-background: win-surface-color;
+    -fx-background-color: win-surface-color;
+    -fx-border-color: white;
+    -fx-background-insets: 0;
+}
+
+.calendar-ui #lastMonth,
+.calendar-ui #nextMonth {
+    -fx-background-radius: 6;
+}
+
+.carousel-ui #left,
+.carousel-ui #right {
+    -fx-background-radius: 4;
+    -fx-background-color: rgba(128, 128, 128, 0.5);
+}
+
+.carousel-ui .dot {
+    -fx-fill: #e5e5e5;
+}
+
+.carousel-ui .dot:hover {
+    -fx-fill: win-border-color;
+}
+
+.carousel-ui .currentDot {
+    -fx-fill: win-main-color !important;
+}
+
+.date-ui.date-root-pane:disabled .javafx-ui-ico {
+    -fx-opacity: 0.5;
+}
+
+.date-ui .text-field {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-accent: win-main-color;
+}
+
+.date-ui .dateSeparator * {
+    -fx-fill: win-text-disabled-color;
+}
+
+.date-ui .dateBackground {
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-background-color: win-surface-color;
+}
+
+.date-ui .dateBackgroundFocus {
+    -fx-border-color: win-main-color !important;
+}
+
+.date-selector-ui .label {
+    -fx-background-radius: 4;
+}
+
+.date-selector-ui .label:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.date-selector-ui .selectedLabel {
+    -fx-background-color: win-main-color !important;
+    -fx-text-fill: white !important;
+}
+
+.date-selector-ui .dateSelectorScrollPane {
+    -fx-background: win-surface-color;
+    -fx-background-color: win-surface-color;
+    -fx-border-color: white;
+    -fx-background-insets: 0;
+}
+
+.date-selector-ui#root {
+    -fx-background-color: win-surface-color;
+}
+
+.date-time-ui.date-time-root-pane:disabled .javafx-ui-ico {
+    -fx-opacity: 0.5;
+}
+
+.date-time-ui .dateTimeBackground {
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-background-color: win-surface-color;
+}
+
+.date-time-ui .dateTimeFullBackground {
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-background-color: win-surface-color;
+}
+
+.date-time-ui .dateTimeBackgroundFocus {
+    -fx-border-color: win-main-color !important;
+}
+
+.date-time-ui .dateTimeSeparator * {
+    -fx-fill: win-text-disabled-color;
+}
+
+.time-ui.time-root-pane:disabled .javafx-ui-ico {
+    -fx-opacity: 0.5;
+}
+
+.time-ui .text-field {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-accent: win-main-color;
+}
+
+.time-ui .timeBackground {
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-background-color: win-surface-color;
+}
+
+.time-ui .timeFullBackground {
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-background-color: win-surface-color;
+}
+
+.time-ui .timeBackgroundFocus {
+    -fx-border-color: win-main-color !important;
+}
+
+.time-selector-ui#root {
+    -fx-effect: win-popup-effect !important;
+    -fx-background-radius: 6;
+    -fx-background-color: win-surface-color;
+}
+
+.time-selector-ui .timeSelector {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.time-selector-ui .v-box {
+    -fx-background-color: win-surface-color;
+}
+
+.time-selector-ui .timeLabel {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 6;
+}
+
+.time-selector-ui .timeLabel:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.time-selector-ui .selectedTimeLabel {
+    -fx-background-color: win-main-color !important;
+    -fx-text-fill: white !important;
+}
+
+.number-selector-ui#root {
+    -fx-effect: win-popup-effect;
+    -fx-background-radius: 6;
+    -fx-background-color: win-surface-color;
+}
+
+.number-selector-ui .numberSelector {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.number-selector-ui .v-box {
+    -fx-background-color: win-surface-color;
+}
+
+.number-selector-ui .numberLabel {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 6;
+}
+
+.number-selector-ui .numberLabel:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.number-selector-ui .selectedNumberLabel {
+    -fx-background-color: win-main-color !important;
+    -fx-text-fill: white !important;
+}
+
+.file-uploader-ui#FileUploader {
+    -fx-border-radius: 4;
+    -fx-background-color: win-surface-color;
+    -fx-border-color: win-border-color;
+}
+
+.message-box-ui #msg {
+    -fx-background-color: normal-color;
+    -fx-background-radius: 6;
+}
+
+.message-box-ui #triangle {
+    -fx-fill: normal-color;
+}
+
+.notification-ui #notificationVBox {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 6;
+    -fx-effect: win-popup-effect;
+    -fx-border-radius: 6;
+}
+
+.notification-ui #notificationVBox > .notificationTopHBox > #closeIcoPane {
+    -fx-background-radius: 6;
+}
+
+.notification-ui #notificationVBox > .notificationTopHBox > #closeIcoPane:hover {
+    -fx-background-color: rgba(128, 128, 128, 0.1);
+}
+
+.switch-ui #bgRectangle {
+    -fx-fill: #E6E6E6;
+}
+
+.switch-ui #switchRectangle {
+    -fx-fill: win-main-color;
+}
+
+.switch-ui #switchCircle {
+    -fx-fill: white;
+}
+
+.table-filter-ui .filterBtn {
+    -fx-background-color: transparent;
+}
+
+.table-filter-ui .filterBtn:hover .javafx-ui-ico * {
+    -fx-fill: win-text-color;
+}
+
+.table-filter-ui .filteringBtn .javafx-ui-ico * {
+    -fx-fill: #56a86b !important;
+}
+
+.window-bar-ui .close-ico:hover * {
+    -fx-fill: red;
+}
+
+.window-bar-ui .pinned-ico:hover * {
+    -fx-fill: win-text-color;
+}
+
+.multi-file-chooser-ui .ico-btn {
+    -fx-background-radius: 4;
+}
+
+.multi-file-chooser-ui .ico-btn:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.multi-file-chooser-ui .close-ico:hover * {
+    -fx-fill: red;
+}
+
+.multi-file-chooser-ui .combo-box-idea {
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.multi-file-chooser-ui .combo-box-idea:focused {
+    -fx-border-color: win-main-color;
+}
+
+.multi-file-chooser-ui .combo-box-idea:editable > .text-input,
+.multi-file-chooser-ui .combo-box-idea .list-cell {
+    -fx-text-fill: -fx-text-base-color;
+    -fx-background-insets: 0;
+    -fx-background-color: win-surface-color;
+}
+
+.multi-file-chooser-ui .combo-box-idea:editable:focused > .text-input {
+    -fx-border-color: win-main-color;
+}
+
+.multi-file-chooser-ui .combo-box-idea > .arrow-button {
+    -fx-background-color: win-surface-color;
+    -fx-border-color: win-border-color;
+    -fx-background-insets: 0;
+}
+
+.multi-file-chooser-ui .combo-box-idea .combo-box-popup .list-view {
+    -fx-background-color: white, white;
+    -fx-background-radius: 0 0 5 5;
+    -fx-effect: win-popup-effect;
+}
+
+.multi-file-chooser-ui .combo-box-idea .combo-box-popup .list-view .list-cell {
+    -fx-background-color: win-surface-color;
+    -fx-text-fill: win-text-color;
+    -fx-background-radius: 5;
+}
+
+.multi-file-chooser-ui .combo-box-idea .combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.file-uploader-item-ui#fileUploaderItem {
+    -fx-effect: win-popup-effect;
+    -fx-background-color: win-surface-color;
+}
+
+.file-uploader-item-ui#fileUploaderItem #closeIcoOuter {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-background-radius: 9;
+}
+
+.file-uploader-item-ui#fileUploaderItem #fileNameLabel,
+.file-uploader-item-ui#fileUploaderItem #fileSizeLabel {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-effect: win-popup-effect;
+    -fx-background-radius: 10;
+}
+
+
+.calendar-ui .calendar-navigation {
+    -fx-stroke: win-main-color;
+}
+
+.window-bar-ui#topPane {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 5 5 0 0;
+}
+
+.modal-ui .modal-surface {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 8;
+    -fx-effect: win-popup-effect;
+}
+
+.modal-ui .modal-heading, .modal-ui .label {
+    -fx-text-fill: win-text-color;
+}
+
+.modal-ui .modal-content-text {
+    -fx-fill: win-text-color;
+}
+
+.modal-ui .modal-content-scroll {
+    -fx-background: win-surface-color;
+}
+
+.table-filter-panel-ui {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 6;
+    -fx-effect: win-popup-effect;
+}
+
+.date-time-popup-ui {
+    -fx-effect: win-popup-effect !important;
+}
+
+.date-time-popup-ui .date-time-popup-time#root {
+    -fx-background-radius: 0 6 6 0;
+    -fx-effect: null !important;
+}
+
+.date-time-popup-ui .date-time-popup-calendar#calendar {
+    -fx-background-radius: 6 0 0 6;
+    -fx-effect: null !important;
+}
+
+.progress-modal-ui {
+    -fx-background-color: rgba(0, 0, 0, 0.25);
+}
+
+.progress-modal-ui .progress-modal-label {
+    -fx-text-fill: white;
+    -fx-effect: null;
+}
+
+.progress-modal-ui .progress-modal-title, .progress-modal-ui .progress-modal-content {
+    -fx-fill: white;
+    -fx-effect: null;
+}
+
+.filter-field-ui .input-action-button,
+.number-field-ui .input-action-button,
+.password-text-field-ui .input-action-button {
+    -fx-background-color: transparent;
+}
+
+.filter-field-ui .input-action-graphic,
+.number-field-ui .input-action-graphic,
+.password-text-field-ui .input-action-graphic {
+    -fx-fill: win-text-color;
+}
+
+.password-text-field-ui .input-action-button:revealed .input-action-graphic {
+    -fx-fill: win-main-color;
+}
+
+.tip-field-ui .input-tip-button {
+    -fx-text-fill: win-text-disabled-color !important;
+}
+
+.file-uploader-ui#FileUploader:drag-over {
+    -fx-border-style: solid;
+}
+
+/* Windows interaction feedback changes paint, not component dimensions. */
+.date-ui .rightAngleBackground,
+.time-ui .rightAngleBackground,
+.date-time-ui .rightAngleBackground {
+    -fx-background-radius: 4 !important;
+    -fx-border-radius: 4 !important;
+}
+
+.date-ui .dateBackground:hover,
+.time-ui .timeBackground:hover,
+.time-ui .timeFullBackground:hover,
+.date-time-ui .dateTimeBackground:hover,
+.date-time-ui .dateTimeFullBackground:hover {
+    -fx-border-color: win-main-color;
+}
+
+.date-ui .text-field, .time-ui .text-field {
+    -fx-text-fill: win-text-color;
+    -fx-prompt-text-fill: win-text-disabled-color;
+}
+
+.switch-ui:hover #bgRectangle {
+    -fx-fill: win-border-color;
+}
+
+.switch-ui:hover #switchRectangle {
+    -fx-fill: win-main-hover-color;
+}
+
+.switch-ui:focused #bgRectangle {
+    -fx-stroke: win-main-color;
+    -fx-stroke-width: 1;
+    -fx-stroke-type: inside;
+}
+
+.switch-ui:disabled #switchRectangle {
+    -fx-fill: win-disabled-color;
+}
+
+.calendar-ui .dayLabel:disabled {
+    -fx-text-fill: win-text-disabled-color;
+}
+
+.notification-ui #notificationVBox > .notificationTopHBox > #closeIcoPane:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.notification-ui #titleLabel, .notification-ui #contentLabel {
+    -fx-text-fill: win-text-color;
+}
+
+.window-bar-ui .window-pin-button:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.window-bar-ui .window-close-button:hover {
+    -fx-background-color: #C42B1C;
+}
+
+.window-bar-ui .window-close-button:hover .close-ico * {
+    -fx-fill: white;
+}
+
+.file-uploader-ui#FileUploader:hover, .file-uploader-ui#FileUploader:drag-over {
+    -fx-border-color: win-main-color;
+    -fx-background-color: win-hover-background-color;
+}
+
+.file-uploader-ui#FileUploader:disabled {
+    -fx-opacity: 0.5;
+}
+
+.label-separator-ui > .label {
+    -fx-text-fill: win-text-color;
+}
+
+.label-separator-ui > .separator > .line {
+    -fx-border-color: win-border-color;
+}
+
+.filter-field-ui .input-action-button:hover,
+.number-field-ui .input-action-button:hover,
+.password-text-field-ui .input-action-button:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.filter-field-ui .input-action-button:pressed,
+.number-field-ui .input-action-button:pressed,
+.password-text-field-ui .input-action-button:pressed {
+    -fx-background-color: win-pressed-background-color;
+}
+
+.filter-field-ui:disabled .input-action-graphic,
+.number-field-ui:disabled .input-action-graphic,
+.password-text-field-ui:disabled .input-action-graphic {
+    -fx-fill: win-text-disabled-color;
+}
+
+.tip-field-ui .input-tip-button:hover {
+    -fx-text-fill: win-main-color !important;
+}
+
+.multi-file-chooser-ui .ico-btn:disabled {
+    -fx-opacity: 0.5;
+}
+
+.multi-file-chooser-ui .combo-box-idea:hover {
+    -fx-border-color: win-main-color;
+}
+
+.multi-file-chooser-ui .combo-box-idea .combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: win-hover-background-color;
+    -fx-text-fill: win-main-color;
+}

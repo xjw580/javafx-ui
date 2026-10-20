@@ -1,0 +1,139 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.check-box-ui .box,
+.check-box-ui.check-box-ui-base .box,
+.check-box-ui:ui-base .box {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3;
+    -fx-effect: default-press-effect;
+    -fx-border-color: border-color;
+    -fx-border-radius: 3;
+}
+
+.check-box-ui.check-box-ui-base .box,
+.check-box-ui:ui-base .box {
+    -fx-border-width: 1;
+    -fx-opacity: 1;
+}
+
+.check-box-ui:hover .box {
+    -fx-effect: innershadow(one-pass-box, grey, 5, 0, 1, 1);
+}
+
+.check-box-ui:selected .box {
+    -fx-background-color: system-color;
+    -fx-effect: dropshadow(two-pass-box, grey, 5, 0, 1, 1);
+    -fx-border-color: transparent;
+}
+
+.check-box-ui.check-box-ui-base .mark,
+.check-box-ui:ui-base .mark {
+    -fx-background-color: null;
+}
+
+.check-box-ui.check-box-ui-base:hover .box,
+.check-box-ui:ui-base:hover .box {
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-effect: innershadow(one-pass-box, grey, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base:selected .box,
+.check-box-ui.check-box-ui-base:selected:hover .box,
+.check-box-ui:ui-base:selected .box,
+.check-box-ui:ui-base:selected:hover .box {
+    -fx-background-color: system-color;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(two-pass-box, grey, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base:selected .mark,
+.check-box-ui.check-box-ui-base:indeterminate .mark,
+.check-box-ui:ui-base:selected .mark,
+.check-box-ui:ui-base:indeterminate .mark {
+    -fx-background-color: -fx-mark-highlight-color, -fx-mark-color;
+    -fx-background-insets: 1 0 -1 0, 0;
+}
+
+.check-box-ui.check-box-ui-base:indeterminate .box,
+.check-box-ui:ui-base:indeterminate .box {
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-effect: default-press-effect;
+}
+
+.check-box-ui.check-box-ui-base:indeterminate .mark,
+.check-box-ui:ui-base:indeterminate .mark {
+    -fx-shape: "M0,0H10V2H0Z";
+    -fx-scale-shape: false;
+}
+
+.check-box-ui.check-box-ui-base:disabled .box,
+.check-box-ui:ui-base:disabled .box {
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-opacity: 1;
+}
+
+.check-box-ui.check-box-ui-base:selected:disabled .box,
+.check-box-ui:ui-base:selected:disabled .box {
+    -fx-background-color: system-color;
+    -fx-border-color: transparent;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-main:hover .box,
+.check-box-ui:ui-base.check-box-ui-main:hover .box {
+    -fx-effect: innershadow(one-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-main:selected .box,
+.check-box-ui:ui-base.check-box-ui-main:selected .box {
+    -fx-background-color: main-color;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-normal:hover .box,
+.check-box-ui:ui-base.check-box-ui-normal:hover .box {
+    -fx-effect: innershadow(one-pass-box, normal-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-normal:selected .box,
+.check-box-ui:ui-base.check-box-ui-normal:selected .box {
+    -fx-background-color: normal-deep-color;
+    -fx-effect: dropshadow(two-pass-box, normal-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-success:hover .box,
+.check-box-ui:ui-base.check-box-ui-success:hover .box {
+    -fx-effect: innershadow(one-pass-box, success-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-success:selected .box,
+.check-box-ui:ui-base.check-box-ui-success:selected .box {
+    -fx-background-color: success-deep-color;
+    -fx-effect: dropshadow(two-pass-box, success-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-warn:hover .box,
+.check-box-ui:ui-base.check-box-ui-warn:hover .box {
+    -fx-effect: innershadow(one-pass-box, warn-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-warn:selected .box,
+.check-box-ui:ui-base.check-box-ui-warn:selected .box {
+    -fx-background-color: warn-deep-color;
+    -fx-effect: dropshadow(two-pass-box, warn-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-error:hover .box,
+.check-box-ui:ui-base.check-box-ui-error:hover .box {
+    -fx-effect: innershadow(one-pass-box, error-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui.check-box-ui-base.check-box-ui-error:selected .box,
+.check-box-ui:ui-base.check-box-ui-error:selected .box {
+    -fx-background-color: error-deep-color;
+    -fx-effect: dropshadow(two-pass-box, error-deep-color, 5, 0, 1, 1) !important;
+}

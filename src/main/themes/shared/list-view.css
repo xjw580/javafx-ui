@@ -1,0 +1,13 @@
+/* Shared sizes and semantic modifiers. */
+
+.list-view-ui-tiny .list-cell {
+    -fx-padding: 0!important;
+}
+
+.list-view-ui-small .list-cell {
+    -fx-padding: 3!important;
+}
+
+.list-view-ui-big .list-cell {
+    -fx-padding: 10!important;
+}

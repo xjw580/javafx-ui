@@ -1,0 +1,155 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.root,
+.tree-view-ui.tree-view-ui-windows,
+.tree-view-ui:ui-windows {
+    tree-view-cell-text-color: win-text-color;
+}
+
+.tree-view-ui,
+.tree-view-ui.tree-view-ui-windows,
+.tree-view-ui:ui-windows {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+}
+
+.tree-view-ui {
+    -fx-background-insets: 0 !important;
+}
+
+.tree-view-ui:focused,
+.tree-view-ui.tree-view-ui-windows:focused,
+.tree-view-ui:ui-windows:focused {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 0;
+    -fx-border-color: win-main-color;
+}
+
+.tree-view-ui .tree-cell,
+.tree-view-ui.tree-view-ui-windows .tree-cell,
+.tree-view-ui:ui-windows .tree-cell {
+    -fx-background: -fx-control-inner-background;
+    -fx-background-color: win-surface-color;
+    -fx-border-color: transparent;
+    -fx-padding: 0.25em;
+    -fx-text-fill: tree-view-cell-text-color;
+}
+
+.tree-view-ui:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused,
+.tree-view-ui.tree-view-ui-windows:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused,
+.tree-view-ui:ui-windows:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused {
+    -fx-background-color: win-surface-color !important;
+    -fx-background-insets: 0;
+}
+
+.tree-view-ui .tree-cell:filled:hover,
+.tree-view-ui.tree-view-ui-windows .tree-cell:filled:hover,
+.tree-view-ui:ui-windows .tree-cell:filled:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.tree-view-ui:focused .tree-cell:filled:hover {
+    -fx-background-color: #f5f8fe;
+}
+
+.tree-view-ui:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused:filled:hover,
+.tree-view-ui.tree-view-ui-windows:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused:filled:hover,
+.tree-view-ui:ui-windows:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:focused:filled:hover {
+    -fx-background-color: win-hover-background-color !important;
+}
+
+.tree-view-ui .tree-cell:filled:selected,
+.tree-view-ui .tree-cell:filled:selected:hover,
+.tree-view-ui.tree-view-ui-windows .tree-cell:filled:selected,
+.tree-view-ui.tree-view-ui-windows .tree-cell:filled:selected:hover,
+.tree-view-ui:ui-windows .tree-cell:filled:selected,
+.tree-view-ui:ui-windows .tree-cell:filled:selected:hover {
+    -fx-background-color: win-main-color, win-pressed-background-color !important;
+    -fx-text-fill: win-text-color !important;
+    -fx-background-insets: 0, 0 0 0 3;
+}
+
+.tree-view-ui:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected,
+.tree-view-ui.tree-view-ui-windows:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected,
+.tree-view-ui:ui-windows:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected {
+    -fx-background-color: win-main-color, win-pressed-background-color !important;
+    -fx-text-fill: win-text-color !important;
+    -fx-background-insets: 0, 0 0 0 3;
+}
+
+.tree-view-ui:focused > .virtual-flow > .clipped-container > .sheet > .tree-cell:filled:selected:hover {
+    -fx-background-color: win-main-color, win-pressed-background-color !important;
+    -fx-text-fill: win-text-color !important;
+    -fx-background-insets: 0, 0 0 0 3;
+}
+
+.tree-view-ui .tree-cell:empty,
+.tree-view-ui.tree-view-ui-windows .tree-cell:empty,
+.tree-view-ui.tree-view-ui-windows:focused .tree-cell:empty:hover,
+.tree-view-ui.tree-view-ui-windows:focused .tree-cell:empty:selected,
+.tree-view-ui.tree-view-ui-windows:focused .tree-cell:empty:selected:hover,
+.tree-view-ui:ui-windows .tree-cell:empty,
+.tree-view-ui:ui-windows:focused .tree-cell:empty:hover,
+.tree-view-ui:ui-windows:focused .tree-cell:empty:selected,
+.tree-view-ui:ui-windows:focused .tree-cell:empty:selected:hover {
+    -fx-background-color: win-surface-color !important;
+    -fx-border-color: transparent;
+}
+
+.tree-view-ui .tree-cell:empty:hover,
+.tree-view-ui.tree-view-ui-windows .tree-cell:empty:hover,
+.tree-view-ui:ui-windows .tree-cell:empty:hover {
+    -fx-background-color: win-surface-color !important;
+    -fx-border-color: null;
+}
+
+.tree-view-ui:focused .tree-cell:empty:hover {
+    -fx-background-color: win-surface-color !important;
+    -fx-border-color: transparent;
+}
+
+.tree-view-ui:disabled,
+.tree-view-ui.tree-view-ui-windows:disabled,
+.tree-view-ui:ui-windows:disabled {
+    -fx-opacity: 0.6;
+}
+
+.tree-view-ui:disabled .tree-cell,
+.tree-view-ui.tree-view-ui-windows:disabled .tree-cell,
+.tree-view-ui:ui-windows:disabled .tree-cell {
+    -fx-text-fill: win-text-disabled-color !important;
+}
+
+.tree-view-ui .tree-cell > .tree-disclosure-node > .arrow,
+.tree-view-ui.tree-view-ui-windows .tree-cell > .tree-disclosure-node > .arrow,
+.tree-view-ui:ui-windows .tree-cell > .tree-disclosure-node > .arrow {
+    -fx-background-color: win-text-color;
+}
+
+.tree-view-ui .tree-cell > .tree-disclosure-node > .arrow {
+    -fx-rotate: -90;
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.tree-view-ui:focused .tree-cell:selected > .tree-disclosure-node > .arrow,
+.tree-view-ui.tree-view-ui-windows:focused .tree-cell:selected > .tree-disclosure-node > .arrow,
+.tree-view-ui:ui-windows:focused .tree-cell:selected > .tree-disclosure-node > .arrow {
+    -fx-background-color: win-text-color;
+}
+
+.tree-view-ui .tree-cell:expanded > .tree-disclosure-node > .arrow {
+    -fx-rotate: 0 !important;
+}
+
+.tree-view-ui .tree-cell:selected .filter-ico {
+    -fx-background-color: success-color;
+}
+
+.tree-view-ui .tree-cell .file-icon {
+    -fx-background-color: rgb(230, 234, 241);
+}

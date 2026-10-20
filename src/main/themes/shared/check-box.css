@@ -1,0 +1,78 @@
+/* Shared shapes and legacy semantic modifiers. */
+
+.check-box-ui-circle .box {
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
+}
+
+.check-box-ui-main:hover .box {
+    -fx-effect: innershadow(one-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-main:selected .box {
+    -fx-background-color: main-color;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-normal:hover .box {
+    -fx-effect: innershadow(one-pass-box, normal-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-normal:selected .box {
+    -fx-background-color: normal-deep-color;
+    -fx-effect: dropshadow(two-pass-box, normal-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-success:hover .box {
+    -fx-effect: innershadow(one-pass-box, success-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-success:selected .box {
+    -fx-background-color: success-deep-color;
+    -fx-effect: dropshadow(two-pass-box, success-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-warn:hover .box {
+    -fx-effect: innershadow(one-pass-box, warn-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-warn:selected .box {
+    -fx-background-color: warn-deep-color;
+    -fx-effect: dropshadow(two-pass-box, warn-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-error:hover .box {
+    -fx-effect: innershadow(one-pass-box, error-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-error:selected .box {
+    -fx-background-color: error-deep-color;
+    -fx-effect: dropshadow(two-pass-box, error-deep-color, 5, 0, 1, 1) !important;
+}
+
+.check-box-ui-main .mark,
+.check-box-ui-normal .mark,
+.check-box-ui-success .mark,
+.check-box-ui-warn .mark,
+.check-box-ui-error .mark {
+    -fx-background-color: white !important;
+}
+
+/* Keep the same square layout while painting a centered indeterminate bar. */
+.check-box-ui.check-box-ui-tiny:indeterminate > .box > .mark,
+.check-box-ui.check-box-ui-small:indeterminate > .box > .mark,
+.check-box-ui.check-box-ui-big:indeterminate > .box > .mark {
+    -fx-scale-shape: true;
+}
+
+.check-box-ui.check-box-ui-tiny:indeterminate > .box > .mark {
+    -fx-background-insets: 0.22em 0;
+}
+
+.check-box-ui.check-box-ui-small:indeterminate > .box > .mark {
+    -fx-background-insets: 0.3em 0;
+}
+
+.check-box-ui.check-box-ui-big:indeterminate > .box > .mark {
+    -fx-background-insets: 0.52em 0;
+}

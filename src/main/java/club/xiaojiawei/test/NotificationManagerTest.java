@@ -3,6 +3,7 @@ package club.xiaojiawei.test;
 import club.xiaojiawei.controls.Notification;
 import club.xiaojiawei.controls.NotificationManager;
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -39,7 +40,7 @@ public class NotificationManagerTest extends Application {
 //        hBox.getChildren().add(click);
 //        hBox.getChildren().add(notificationManager);
         Scene scene = new Scene(hBox, 500, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
         new Timer().schedule(new TimerTask() {

@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.NumberField;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -47,7 +48,7 @@ public class NumberFieldTest extends Application {
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(30));
         Scene scene = new Scene(root, 560, 300);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setTitle("NumberField 步长验证");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -124,7 +125,7 @@ public class NumberFieldTest extends Application {
     private void verifyFxml() throws IOException {
         Parent demo = FXMLLoader.load(NumberFieldTest.class.getResource("/club/xiaojiawei/demo/tab/controls/NumberFieldTab.fxml"));
         Scene demoScene = new Scene(demo, 640, 900);
-        JavaFXUI.addjavafxUIStylesheet(demoScene);
+        JavaFXUI.setTheme(demoScene, Theme.BASE);
         demo.applyCss();
         demo.layout();
         var fields = demo.lookupAll(".text-field-ui");

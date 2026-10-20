@@ -1,0 +1,61 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.text-field-ui,
+.text-field-ui.text-field-ui-base,
+.text-field-ui:ui-base {
+    -fx-effect: default-press-effect;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3;
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-border-radius: 3;
+    -fx-accent: main-color;
+}
+
+.text-field-ui.text-field-ui-base,
+.text-field-ui:ui-base {
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 1;
+}
+
+.text-field-ui:focused,
+.text-field-ui.text-field-ui-base:focused,
+.text-field-ui:ui-base:focused {
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+
+.text-field-ui.text-field-ui-base:focused,
+.text-field-ui:ui-base:focused {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 1;
+}
+
+.text-field-ui.text-field-ui-base:hover,
+.text-field-ui:ui-base:hover {
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-effect: default-press-effect;
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 1;
+}
+
+.text-field-ui.text-field-ui-base:focused:hover,
+.text-field-ui:ui-base:focused:hover {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 1;
+}
+
+.text-field-ui.text-field-ui-base:disabled,
+.text-field-ui:ui-base:disabled {
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-effect: default-press-effect !important;
+    -fx-text-fill: -fx-text-inner-color;
+    -fx-opacity: 0.4;
+}

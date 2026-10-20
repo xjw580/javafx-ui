@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.beans.property.ObjectProperty;
@@ -32,6 +33,10 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 @SuppressWarnings("unused")
 public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalTime> {
 
+    {
+        JavaFXUI.initializeTheme(this, "time-selector-ui");
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 属性                                                                    *
@@ -45,11 +50,13 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
     /**
      * 展示行数
      */
-    @Getter private double showRowCount;
+    @Getter
+    private double showRowCount;
     /**
      * 显示秒
      */
-    @Getter private boolean showSec;
+    @Getter
+    private boolean showSec;
 
     /**
      * 时间拦截器，点击日期时拦截是否应用
@@ -60,36 +67,36 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
      * @param time 格式：HH:mm，showSec=true时HH:mm:ss
      */
     public void setTime(String time) {
-        if (time == null || time.isBlank()){
+        if (time == null || time.isBlank()) {
             setLocalTime(null);
-        }else if (showSec){
+        } else if (showSec) {
             setLocalTime(LocalTime.from(TIME_FULL_FORMATTER.parse(time)));
-        }else {
+        } else {
             setLocalTime(LocalTime.from(TIME_FORMATTER.parse(time)));
         }
     }
 
-    public void setLocalTime(LocalTime localTime){
-        if (test(localTime)){
+    public void setLocalTime(LocalTime localTime) {
+        if (test(localTime)) {
             time.set(localTime);
         }
     }
 
     public String getTime() {
-        return getLocalTime() == null? null : (showSec? TIME_FULL_FORMATTER.format(getLocalTime()) : TIME_FORMATTER.format(getLocalTime()));
+        return getLocalTime() == null ? null : (showSec ? TIME_FULL_FORMATTER.format(getLocalTime()) : TIME_FORMATTER.format(getLocalTime()));
     }
 
-    public LocalTime getLocalTime(){
+    public LocalTime getLocalTime() {
         return time.get();
     }
 
-    public ObjectProperty<LocalTime> timeProperty(){
-        if (virtualTime == null){
+    public ObjectProperty<LocalTime> timeProperty() {
+        if (virtualTime == null) {
             virtualTime = new SimpleObjectProperty<>(getLocalTime());
             virtualTime.addListener((observableValue, localDate, t1) -> {
-                if (test(t1)){
+                if (test(t1)) {
                     time.set(t1);
-                }else {
+                } else {
                     virtualTime.set(localDate);
                 }
             });
@@ -97,7 +104,7 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
         return virtualTime;
     }
 
-    public ReadOnlyObjectProperty<LocalTime> readOnlyTimeProperty(){
+    public ReadOnlyObjectProperty<LocalTime> readOnlyTimeProperty() {
         return time.getReadOnlyProperty();
     }
 
@@ -112,12 +119,12 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
 
     public void setShowSec(boolean showSec) {
         this.showSec = showSec;
-        if (showSec){
+        if (showSec) {
             this.setMinWidth(133);
             this.setMaxWidth(133);
             secSelector.setVisible(true);
             secSelector.setManaged(true);
-        }else {
+        } else {
             this.setMinWidth(91);
             this.setMaxWidth(91);
             secSelector.setVisible(false);
@@ -143,12 +150,18 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
         }
     }
 
-    @FXML private ScrollPane hourSelector;
-    @FXML private ScrollPane minSelector;
-    @FXML private ScrollPane secSelector;
-    @FXML private VBox hourVbox;
-    @FXML private VBox minVbox;
-    @FXML private VBox secVbox;
+    @FXML
+    private ScrollPane hourSelector;
+    @FXML
+    private ScrollPane minSelector;
+    @FXML
+    private ScrollPane secSelector;
+    @FXML
+    private VBox hourVbox;
+    @FXML
+    private VBox minVbox;
+    @FXML
+    private VBox secVbox;
 
     private static final String SELECTED_TIME_LABEL_STYLE_CLASS = "selectedTimeLabel";
     private static final String TIME_LABEL_STYLE_CLASS = "timeLabel";
@@ -170,7 +183,7 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
      *                                                                         *
      **************************************************************************/
 
-    private void afterFXMLLoaded(){
+    private void afterFXMLLoaded() {
         addTimePropertyChangedListener();
         buildTimeSelector(hourVbox.getChildren(), MAX_HOUR, hourGroup);
         buildTimeSelector(minVbox.getChildren(), MAX_MIN, minGroup);
@@ -182,38 +195,38 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
     /**
      * 添加时间监听器
      */
-    private void addTimePropertyChangedListener(){
+    private void addTimePropertyChangedListener() {
         time.addListener((observable, oldTime, newTime) -> {
-            if (virtualTime != null){
+            if (virtualTime != null) {
                 virtualTime.set(newTime);
             }
-            if (newTime == null){
+            if (newTime == null) {
                 hourGroup.selectToggle(null);
                 minGroup.selectToggle(null);
-                if (showSec){
+                if (showSec) {
                     secGroup.selectToggle(null);
                 }
-            }else {
+            } else {
                 String[] timeArr;
-                if (showSec){
+                if (showSec) {
                     timeArr = TIME_FULL_FORMATTER.format(newTime).split(":");
                     for (Toggle toggle : secGroup.getToggles()) {
-                        if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[2])){
+                        if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[2])) {
                             secGroup.selectToggle(toggle);
                             break;
                         }
                     }
-                }else {
+                } else {
                     timeArr = TIME_FORMATTER.format(newTime).split(":");
                 }
                 for (Toggle toggle : hourGroup.getToggles()) {
-                    if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[0])){
+                    if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[0])) {
                         hourGroup.selectToggle(toggle);
                         break;
                     }
                 }
                 for (Toggle toggle : minGroup.getToggles()) {
-                    if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[1])){
+                    if (toggle instanceof ToggleButton toggleButton && Objects.equals(toggleButton.getText(), timeArr[1])) {
                         minGroup.selectToggle(toggle);
                         break;
                     }
@@ -221,7 +234,7 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
                 syncTimeSelector(hourVbox.getChildren(), newTime.getHour(), MAX_HOUR, showRowCount, hourSelector);
 //                延迟同步，防止动画播放失败
                 SCHEDULED_POOL.schedule(() -> syncTimeSelector(minVbox.getChildren(), newTime.getMinute(), MAX_MIN, showRowCount, minSelector), 60, TimeUnit.MILLISECONDS);
-                if (showSec){
+                if (showSec) {
                     SCHEDULED_POOL.schedule(() -> syncTimeSelector(secVbox.getChildren(), newTime.getSecond(), MAX_SEC, showRowCount, secSelector), 120, TimeUnit.MILLISECONDS);
                 }
             }
@@ -236,11 +249,11 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
      * @param showRowCount 展示时间行数
      * @param timeScroll 时间选择器
      */
-    private void syncTimeSelector(ObservableList<Node> timeChildren, int pointTime, int maxValue, double showRowCount, ScrollPane timeScroll){
+    private void syncTimeSelector(ObservableList<Node> timeChildren, int pointTime, int maxValue, double showRowCount, ScrollPane timeScroll) {
         for (int i = 0; i < timeChildren.size(); i++) {
             Node child = timeChildren.get(i);
             child.getStyleClass().remove(SELECTED_TIME_LABEL_STYLE_CLASS);
-            if (i == pointTime){
+            if (i == pointTime) {
                 child.getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
                 ScrollUtil.buildSlideTimeLine(pointTime, maxValue + 1, showRowCount, timeScroll).play();
             }
@@ -253,82 +266,82 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
      * @param maxTime 最大时或最大分
      * @param timeToggleGroup 时间组
      */
-    private void buildTimeSelector(ObservableList<Node> timeChildren, int maxTime, ToggleGroup timeToggleGroup){
-        for (int i = 0; i <= maxTime ; i++) {
+    private void buildTimeSelector(ObservableList<Node> timeChildren, int maxTime, ToggleGroup timeToggleGroup) {
+        for (int i = 0; i <= maxTime; i++) {
             ToggleButton label = new ToggleButton();
             label.setToggleGroup(timeToggleGroup);
             label.getStyleClass().add(TIME_LABEL_STYLE_CLASS);
-            if (i < 10){
+            if (i < 10) {
                 label.setText("0" + i);
-            }else {
+            } else {
                 label.setText(String.valueOf(i));
             }
             timeChildren.add(label);
         }
         timeToggleGroup.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
 //            移除旧选中效果
-            if (oldToggle != null){
-                ((ToggleButton)oldToggle).getStyleClass().remove(SELECTED_TIME_LABEL_STYLE_CLASS);
+            if (oldToggle != null) {
+                ((ToggleButton) oldToggle).getStyleClass().remove(SELECTED_TIME_LABEL_STYLE_CLASS);
             }
 //            添加新选中效果
-            if (newToggle != null){
-                ((ToggleButton)newToggle).getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
+            if (newToggle != null) {
+                ((ToggleButton) newToggle).getStyleClass().add(SELECTED_TIME_LABEL_STYLE_CLASS);
             }
             ToggleButton hourSelected = (ToggleButton) hourGroup.getSelectedToggle();
 //            设置时间
-            if (hourSelected == null){
+            if (hourSelected == null) {
                 return;
             }
             ToggleButton minSelected = (ToggleButton) minGroup.getSelectedToggle();
             ToggleButton secSelected = (ToggleButton) secGroup.getSelectedToggle();
-            if (getInterceptor() == null){
-                if (minSelected != null){
-                    if (showSec){
-                        if (secSelected != null){
+            if (getInterceptor() == null) {
+                if (minSelected != null) {
+                    if (showSec) {
+                        if (secSelected != null) {
                             setLocalTime(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":" + secSelected.getText())));
                         }
-                    }else {
+                    } else {
                         setLocalTime(LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText())));
                     }
                 }
                 return;
             }
-            if (showSec){
-                if (minSelected == null && secSelected == null){
+            if (showSec) {
+                if (minSelected == null && secSelected == null) {
                     if (getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":59:59")))
-                            || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":00:00")))
-                    ){
+                        || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":00:00")))
+                    ) {
                         return;
                     }
-                }else if (minSelected != null && secSelected != null){
+                } else if (minSelected != null && secSelected != null) {
                     LocalTime localTime = LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":" + secSelected.getText()));
-                    if (getInterceptor().test(localTime)){
+                    if (getInterceptor().test(localTime)) {
                         setLocalTime(localTime);
                         return;
                     }
-                }else if (minSelected == null){
+                } else if (minSelected == null) {
                     if (getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":59:" + secSelected.getText())))
-                            || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":00:" + secSelected.getText())))
-                    ){
+                        || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":00:" + secSelected.getText())))
+                    ) {
                         return;
                     }
-                }else {
+                } else {
                     if (getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":59")))
-                            || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":00")))
-                    ){
+                        || getInterceptor().test(LocalTime.from(TIME_FULL_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText() + ":00")))
+                    ) {
                         return;
                     }
                 }
-            }else {
-                if (minSelected == null){
+            } else {
+                if (minSelected == null) {
                     if (getInterceptor().test(LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":59")))
-                            || getInterceptor().test(LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":00")))
-                    ){
+                        || getInterceptor().test(LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":00")))
+                    ) {
                         return;
                     }
-                }else {
+                } else {
                     LocalTime localTime = LocalTime.from(TIME_FORMATTER.parse(hourSelected.getText() + ":" + minSelected.getText()));
-                    if (getInterceptor().test(localTime)){
+                    if (getInterceptor().test(localTime)) {
                         setLocalTime(localTime);
                         return;
                     }
@@ -341,21 +354,21 @@ public class TimeSelector extends FlowPane implements DateTimeInterceptor<LocalT
     /**
      * 为时间选择器添加按键监听器
      */
-    private void addTimeSelectorKeyPressedListener(){
+    private void addTimeSelectorKeyPressedListener() {
         hourSelector.setOnKeyPressed(event -> {
-            switch (event.getCode()){
+            switch (event.getCode()) {
                 case UP -> setLocalTime(getLocalTime().plusHours(1));
                 case DOWN -> setLocalTime(getLocalTime().minusHours(1));
             }
         });
         minSelector.setOnKeyPressed(event -> {
-            switch (event.getCode()){
+            switch (event.getCode()) {
                 case UP -> setLocalTime(getLocalTime().plusMinutes(1));
                 case DOWN -> setLocalTime(getLocalTime().minusMinutes(1));
             }
         });
         secSelector.setOnKeyPressed(event -> {
-            switch (event.getCode()){
+            switch (event.getCode()) {
                 case UP -> setLocalTime(getLocalTime().plusSeconds(1));
                 case DOWN -> setLocalTime(getLocalTime().minusSeconds(1));
             }

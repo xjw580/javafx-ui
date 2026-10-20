@@ -1,0 +1,182 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.radio-button-ui .radio,
+.radio-button-ui.radio-button-ui-windows .radio,
+.radio-button-ui:ui-windows .radio {
+    -fx-border-color: win-border-color;
+    -fx-background-color: white;
+    -fx-border-radius: 15px;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+    -fx-effect: null;
+}
+
+.radio-button-ui .dot,
+.radio-button-ui.radio-button-ui-windows .dot,
+.radio-button-ui:ui-windows .dot {
+    -fx-background-insets: 0;
+}
+
+.radio-button-ui:hover .radio,
+.radio-button-ui.radio-button-ui-windows:hover .radio,
+.radio-button-ui:ui-windows:hover .radio {
+    -fx-border-color: win-main-color;
+    -fx-background-color: win-hover-background-color;
+    -fx-effect: null !important;
+}
+
+.radio-button-ui:selected .radio,
+.radio-button-ui.radio-button-ui-windows:selected .radio,
+.radio-button-ui:ui-windows:selected .radio {
+    -fx-border-color: win-main-color;
+    -fx-background-color: white;
+    -fx-effect: null !important;
+}
+
+.radio-button-ui:selected:hover .radio,
+.radio-button-ui.radio-button-ui-windows:selected:hover .radio,
+.radio-button-ui:ui-windows:selected:hover .radio {
+    -fx-border-color: win-main-hover-color;
+}
+
+.radio-button-ui:selected .dot,
+.radio-button-ui.radio-button-ui-windows:selected .dot,
+.radio-button-ui:ui-windows:selected .dot {
+    -fx-background-color: win-main-color;
+}
+
+.radio-button-ui:selected:hover .dot,
+.radio-button-ui.radio-button-ui-windows:selected:hover .dot,
+.radio-button-ui:ui-windows:selected:hover .dot {
+    -fx-background-color: win-main-hover-color;
+}
+
+.radio-button-ui:disabled .radio,
+.radio-button-ui.radio-button-ui-windows:disabled .radio,
+.radio-button-ui:ui-windows:disabled .radio {
+    -fx-border-color: win-disabled-color;
+    -fx-background-color: win-background-color;
+    -fx-opacity: 0.6;
+}
+
+.radio-button-ui:disabled .dot,
+.radio-button-ui.radio-button-ui-windows:disabled .dot,
+.radio-button-ui:ui-windows:disabled .dot {
+    -fx-background-color: win-disabled-color;
+}
+
+.radio-button-ui:selected:hover .radio,
+.radio-button-ui.radio-button-ui-windows:selected:hover .radio,
+.radio-button-ui:ui-windows:selected:hover .radio {
+    -fx-effect: null !important;
+}
+
+.radio-button-ui.radio-button-ui-main:selected .radio,
+.radio-button-ui.radio-button-ui-normal:selected .radio,
+.radio-button-ui.radio-button-ui-success:selected .radio,
+.radio-button-ui.radio-button-ui-warn:selected .radio,
+.radio-button-ui.radio-button-ui-error:selected .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-main:selected .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-normal:selected .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-success:selected .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-warn:selected .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-error:selected .radio,
+.radio-button-ui:ui-windows.radio-button-ui-main:selected .radio,
+.radio-button-ui:ui-windows.radio-button-ui-normal:selected .radio,
+.radio-button-ui:ui-windows.radio-button-ui-success:selected .radio,
+.radio-button-ui:ui-windows.radio-button-ui-warn:selected .radio,
+.radio-button-ui:ui-windows.radio-button-ui-error:selected .radio {
+    -fx-effect: null !important;
+}
+
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-main:selected .dot,
+.radio-button-ui:ui-windows.radio-button-ui-main:selected .dot {
+    -fx-background-color: main-color;
+}
+
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-normal:selected .dot,
+.radio-button-ui:ui-windows.radio-button-ui-normal:selected .dot {
+    -fx-background-color: normal-deep-color;
+}
+
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-success:selected .dot,
+.radio-button-ui:ui-windows.radio-button-ui-success:selected .dot {
+    -fx-background-color: success-deep-color;
+}
+
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-warn:selected .dot,
+.radio-button-ui:ui-windows.radio-button-ui-warn:selected .dot {
+    -fx-background-color: warn-deep-color;
+}
+
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-error:selected .dot,
+.radio-button-ui:ui-windows.radio-button-ui-error:selected .dot {
+    -fx-background-color: error-deep-color;
+}
+
+.radio-button-ui.radio-button-ui-main:selected:hover .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-main:selected:hover .radio,
+.radio-button-ui:ui-windows.radio-button-ui-main:selected:hover .radio {
+    -fx-effect: null !important;
+}
+
+.radio-button-ui.radio-button-ui-main:selected:hover .dot,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-main:selected:hover .dot,
+.radio-button-ui:ui-windows.radio-button-ui-main:selected:hover .dot {
+    -fx-background-color: main-color;
+}
+
+.radio-button-ui.radio-button-ui-normal:selected:hover .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-normal:selected:hover .radio,
+.radio-button-ui:ui-windows.radio-button-ui-normal:selected:hover .radio {
+    -fx-effect: null !important;
+}
+
+.radio-button-ui.radio-button-ui-normal:selected:hover .dot,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-normal:selected:hover .dot,
+.radio-button-ui:ui-windows.radio-button-ui-normal:selected:hover .dot {
+    -fx-background-color: normal-deep-color;
+}
+
+.radio-button-ui.radio-button-ui-success:selected:hover .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-success:selected:hover .radio,
+.radio-button-ui:ui-windows.radio-button-ui-success:selected:hover .radio {
+    -fx-effect: null !important;
+}
+
+.radio-button-ui.radio-button-ui-success:selected:hover .dot,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-success:selected:hover .dot,
+.radio-button-ui:ui-windows.radio-button-ui-success:selected:hover .dot {
+    -fx-background-color: success-deep-color;
+}
+
+.radio-button-ui.radio-button-ui-warn:selected:hover .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-warn:selected:hover .radio,
+.radio-button-ui:ui-windows.radio-button-ui-warn:selected:hover .radio {
+    -fx-effect: null !important;
+}
+
+.radio-button-ui.radio-button-ui-warn:selected:hover .dot,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-warn:selected:hover .dot,
+.radio-button-ui:ui-windows.radio-button-ui-warn:selected:hover .dot {
+    -fx-background-color: warn-deep-color;
+}
+
+.radio-button-ui.radio-button-ui-error:selected:hover .radio,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-error:selected:hover .radio,
+.radio-button-ui:ui-windows.radio-button-ui-error:selected:hover .radio {
+    -fx-effect: null !important;
+}
+
+.radio-button-ui.radio-button-ui-error:selected:hover .dot,
+.radio-button-ui.radio-button-ui-windows.radio-button-ui-error:selected:hover .dot,
+.radio-button-ui:ui-windows.radio-button-ui-error:selected:hover .dot {
+    -fx-background-color: error-deep-color;
+}
+
+.radio-button-ui:focused .radio,
+.radio-button-ui.radio-button-ui-windows:focused .radio,
+.radio-button-ui:ui-windows:focused .radio {
+    -fx-border-color: win-main-color;
+}

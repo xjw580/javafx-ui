@@ -1,0 +1,92 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.text-area-ui,
+.text-area-ui.text-area-ui-base,
+.text-area-ui:ui-base {
+    -fx-effect: default-press-effect;
+    -fx-background-radius: 3;
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-border-insets: 0 1 0 0;
+    -fx-border-radius: 3;
+    -fx-accent: main-color;
+}
+
+.text-area-ui.text-area-ui-base,
+.text-area-ui:ui-base {
+    -fx-border-width: 1;
+    -fx-opacity: 1;
+}
+
+.text-area-ui.text-area-ui-base:hover,
+.text-area-ui:ui-base:hover {
+    -fx-background-color: white;
+    -fx-background-radius: 3;
+    -fx-border-color: border-color;
+    -fx-border-insets: 0 1 0 0;
+    -fx-border-radius: 3;
+    -fx-border-width: 1;
+    -fx-effect: default-press-effect;
+    -fx-accent: main-color;
+    -fx-opacity: 1;
+}
+
+.text-area-ui:focused,
+.text-area-ui.text-area-ui-base:focused,
+.text-area-ui:ui-base:focused {
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+
+.text-area-ui.text-area-ui-base:focused,
+.text-area-ui:ui-base:focused {
+    -fx-background-color: white;
+    -fx-background-radius: 3;
+    -fx-border-insets: 0 1 0 0;
+    -fx-border-radius: 3;
+    -fx-border-width: 1;
+    -fx-accent: main-color;
+    -fx-opacity: 1;
+}
+
+.text-area-ui .content,
+.text-area-ui.text-area-ui-base .content,
+.text-area-ui:ui-base .content {
+    -fx-background-insets: 0;
+    -fx-background-color: white;
+}
+
+.text-area-ui.text-area-ui-base .content,
+.text-area-ui:ui-base .content {
+    -fx-background-radius: 2;
+}
+
+.text-area-ui.text-area-ui-base .text,
+.text-area-ui:ui-base .text {
+    -fx-fill: -fx-text-inner-color;
+}
+
+.text-area-ui.text-area-ui-base:disabled,
+.text-area-ui:ui-base:disabled {
+    -fx-background-color: white;
+    -fx-background-radius: 3;
+    -fx-border-color: border-color;
+    -fx-border-insets: 0 1 0 0;
+    -fx-border-radius: 3;
+    -fx-border-width: 1;
+    -fx-effect: default-press-effect;
+    -fx-accent: main-color;
+    -fx-opacity: 0.4;
+}
+
+.text-area-ui.text-area-ui-base:disabled .content,
+.text-area-ui:ui-base:disabled .content {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+}
+
+.text-area-ui.text-area-ui-base:disabled .text,
+.text-area-ui:ui-base:disabled .text {
+    -fx-fill: -fx-text-inner-color;
+}

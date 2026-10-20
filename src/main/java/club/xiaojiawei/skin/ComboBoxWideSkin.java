@@ -1,5 +1,6 @@
 package club.xiaojiawei.skin;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.WideComboBox;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
@@ -137,7 +138,6 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
     private GridPane getPopupContent() {
         if (popupNode == null) {
             popupNode = new GridPane();
-            popupNode.setStyle("-fx-background-color: white;-fx-effect: default-effect");
             popupNode.getStyleClass().add("grid-pane");
             draw();
         }
@@ -253,6 +253,7 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
                 }
             });
             popup.getStyleClass().add("combo-box-popup");
+            JavaFXUI.followTheme(popup, outerComboBox);
         }
         return popup;
     }

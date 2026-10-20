@@ -1,0 +1,215 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.btn-ui,
+.btn-ui.btn-ui-base,
+.btn-ui:ui-base {
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-background-insets: 0;
+    -fx-effect: default-effect;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.btn-ui.btn-ui-base,
+.btn-ui:ui-base {
+    -fx-padding: 8 14;
+    -fx-border-width: 0;
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.btn-ui.btn-ui-base:focused,
+.btn-ui:ui-base:focused {
+    -fx-background-color: -fx-focus-color, -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;
+    -fx-border-color: transparent;
+    -fx-effect: default-effect;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.btn-ui:hover,
+.btn-ui.btn-ui-base:hover,
+.btn-ui:ui-base:hover {
+    -fx-effect: default-hover-effect;
+}
+
+.btn-ui.btn-ui-base:hover,
+.btn-ui:ui-base:hover {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-border-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.btn-ui.btn-ui-base:focused:hover,
+.btn-ui:ui-base:focused:hover {
+    -fx-background-color: -fx-focus-color, -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;
+    -fx-border-color: transparent;
+    -fx-effect: default-hover-effect;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.btn-ui:pressed,
+.btn-ui:selected,
+.btn-ui.btn-ui-base:pressed,
+.btn-ui.btn-ui-base:selected,
+.btn-ui:ui-base:pressed,
+.btn-ui:ui-base:selected {
+    -fx-effect: default-press-effect !important;
+}
+
+.btn-ui.btn-ui-base:pressed,
+.btn-ui.btn-ui-base:selected,
+.btn-ui:ui-base:pressed,
+.btn-ui:ui-base:selected {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-border-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.btn-ui.btn-ui-base:focused:pressed,
+.btn-ui.btn-ui-base:focused:selected,
+.btn-ui:ui-base:focused:pressed,
+.btn-ui:ui-base:focused:selected {
+    -fx-background-color: -fx-focus-color, -fx-inner-border, -fx-body-color, -fx-faint-focus-color, -fx-body-color;
+    -fx-border-color: transparent;
+    -fx-effect: default-press-effect !important;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 1;
+}
+
+.btn-ui.btn-ui-base:disabled,
+.btn-ui:ui-base:disabled {
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-border-color: transparent;
+    -fx-effect: default-effect;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-opacity: 0.4;
+}
+
+.btn-ui.btn-ui-base.btn-ui-normal,
+.btn-ui:ui-base.btn-ui-normal {
+    -fx-background-color: normal-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-normal:hover,
+.btn-ui:ui-base.btn-ui-normal:hover {
+    -fx-background-color: normal-deep-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-success,
+.btn-ui:ui-base.btn-ui-success {
+    -fx-background-color: success-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-success:hover,
+.btn-ui:ui-base.btn-ui-success:hover {
+    -fx-background-color: success-deep-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-warn,
+.btn-ui:ui-base.btn-ui-warn {
+    -fx-background-color: warn-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-warn:hover,
+.btn-ui:ui-base.btn-ui-warn:hover {
+    -fx-background-color: warn-deep-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-error,
+.btn-ui:ui-base.btn-ui-error {
+    -fx-background-color: error-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-error:hover,
+.btn-ui:ui-base.btn-ui-error:hover {
+    -fx-background-color: error-deep-color;
+}
+
+.btn-ui.btn-ui-base.btn-ui-normal-3d,
+.btn-ui:ui-base.btn-ui-normal-3d {
+    -fx-background-color: normal-color;
+    -fx-effect: dropshadow(gaussian, #81c2f8, 2, 0, 0, 4) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-success-3d,
+.btn-ui:ui-base.btn-ui-success-3d {
+    -fx-background-color: success-color;
+    -fx-effect: dropshadow(gaussian, #71b271, 2, 0, 0, 4) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-warn-3d,
+.btn-ui:ui-base.btn-ui-warn-3d {
+    -fx-background-color: warn-color;
+    -fx-effect: dropshadow(gaussian, #f6c250, 2, 0, 0, 4) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-error-3d,
+.btn-ui:ui-base.btn-ui-error-3d {
+    -fx-background-color: error-color;
+    -fx-effect: dropshadow(gaussian, #e75858, 2, 0, 0, 4) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-normal-3d:pressed,
+.btn-ui.btn-ui-base.btn-ui-normal-3d:selected,
+.btn-ui:ui-base.btn-ui-normal-3d:pressed,
+.btn-ui:ui-base.btn-ui-normal-3d:selected {
+    -fx-background-color: #b2dafc;
+    -fx-effect: dropshadow(gaussian, #81c2f8, 2, 0, 0, 2) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-success-3d:pressed,
+.btn-ui.btn-ui-base.btn-ui-success-3d:selected,
+.btn-ui:ui-base.btn-ui-success-3d:pressed,
+.btn-ui:ui-base.btn-ui-success-3d:selected {
+    -fx-background-color: #80ce80;
+    -fx-effect: dropshadow(gaussian, #71b271, 2, 0, 0, 2) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-warn-3d:pressed,
+.btn-ui.btn-ui-base.btn-ui-warn-3d:selected,
+.btn-ui:ui-base.btn-ui-warn-3d:pressed,
+.btn-ui:ui-base.btn-ui-warn-3d:selected {
+    -fx-background-color: #fccf6d;
+    -fx-effect: dropshadow(gaussian, #f6c250, 2, 0, 0, 2) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-error-3d:pressed,
+.btn-ui.btn-ui-base.btn-ui-error-3d:selected,
+.btn-ui:ui-base.btn-ui-error-3d:pressed,
+.btn-ui:ui-base.btn-ui-error-3d:selected {
+    -fx-background-color: #fa7a7a;
+    -fx-effect: dropshadow(gaussian, #e75858, 2, 0, 0, 2) !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-normal-3d:disabled,
+.btn-ui.btn-ui-base.btn-ui-success-3d:disabled,
+.btn-ui.btn-ui-base.btn-ui-warn-3d:disabled,
+.btn-ui.btn-ui-base.btn-ui-error-3d:disabled,
+.btn-ui:ui-base.btn-ui-normal-3d:disabled,
+.btn-ui:ui-base.btn-ui-success-3d:disabled,
+.btn-ui:ui-base.btn-ui-warn-3d:disabled,
+.btn-ui:ui-base.btn-ui-error-3d:disabled {
+    -fx-effect: none !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-tiny,
+.btn-ui:ui-base.btn-ui-tiny {
+    -fx-padding: 3 4 !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-small,
+.btn-ui:ui-base.btn-ui-small {
+    -fx-padding: 5 8 !important;
+}
+
+.btn-ui.btn-ui-base.btn-ui-big,
+.btn-ui:ui-base.btn-ui-big {
+    -fx-padding: 11 20 !important;
+}

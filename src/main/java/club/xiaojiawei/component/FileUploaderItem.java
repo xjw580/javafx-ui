@@ -1,5 +1,7 @@
 package club.xiaojiawei.component;
 
+import club.xiaojiawei.JavaFXUI;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -20,7 +22,10 @@ import java.nio.charset.StandardCharsets;
  * @date 2024/3/7 12:30
  */
 @Getter
-public class FileUploaderItem extends AnchorPane{
+public class FileUploaderItem extends AnchorPane {
+    {
+        JavaFXUI.initializeTheme(this, "file-uploader-item-ui");
+    }
 
     @FXML
     private AnchorPane fileUploaderItem;
@@ -52,30 +57,30 @@ public class FileUploaderItem extends AnchorPane{
      * 设置文件大小
      * @param fileLength Byte
      */
-    public void setFileSize(long fileLength){
+    public void setFileSize(long fileLength) {
         String size;
-        if (fileLength > 1024 * 1024 * 1024){
+        if (fileLength > 1024 * 1024 * 1024) {
             size = String.format("%.2f%s", fileLength / (1024D * 1024 * 1024), "GB");
-        }else if (fileLength > 1024 * 1024){
+        } else if (fileLength > 1024 * 1024) {
             size = String.format("%.2f%s", fileLength / (1024D * 1024), "MB");
-        }else if (fileLength > 1024){
+        } else if (fileLength > 1024) {
             size = String.format("%.2f%s", fileLength / 1024D, "KB");
-        }else {
+        } else {
             size = String.format("%d%s", fileLength, "B");
         }
         fileSizeLabel.setText(size);
         fileSizeLabel.setTooltip(new Tooltip(size));
     }
 
-    public void setFileName(String fileName){
+    public void setFileName(String fileName) {
         fileNameLabel.setText(fileName);
         fileNameLabel.setTooltip(new Tooltip(fileName));
     }
 
     @SuppressWarnings("all")
-    public void setBackgroundImage(String filePath){
+    public void setBackgroundImage(String filePath) {
         filePath = encodePath(filePath.replace("\\", "/"));
-        setStyle("-fx-background-image: url(\"file:/"+ filePath +"\");");
+        setStyle("-fx-background-image: url(\"file:/" + filePath + "\");");
     }
 
     private String encodePath(String path) {

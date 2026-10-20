@@ -1,0 +1,177 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.menu-bar-ui.menu-bar-ui-base,
+.menu-bar-ui:ui-base {
+    -fx-background-color: linear-gradient(to right, shallow-color, background-color);
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
+.menu-bar-ui *,
+.menu-bar-ui.menu-bar-ui-base *,
+.menu-bar-ui:ui-base * {
+    -fx-accent: normal-hover-color !important;
+}
+
+.menu-bar-ui {
+    -fx-background-color: linear-gradient(to right, shallow-color, background-color);
+}
+
+.menu-bar-ui .menu .text {
+    -fx-fill: black;
+}
+
+.menu-bar-ui.menu-bar-ui-base > .container > .menu-button,
+.menu-bar-ui:ui-base > .container > .menu-button {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
+.menu-bar-ui .menu:hover,
+.menu-bar-ui.menu-bar-ui-base > .container > .menu-button:hover,
+.menu-bar-ui.menu-bar-ui-base > .container > .menu-button:focused,
+.menu-bar-ui.menu-bar-ui-base > .container > .menu-button:showing,
+.menu-bar-ui:ui-base > .container > .menu-button:hover,
+.menu-bar-ui:ui-base > .container > .menu-button:focused,
+.menu-bar-ui:ui-base > .container > .menu-button:showing {
+    -fx-background-color: normal-hover-color;
+}
+
+.menu-bar-ui.menu-bar-ui-base .menu:hover,
+.menu-bar-ui.menu-bar-ui-base .menu:focused,
+.menu-bar-ui.menu-bar-ui-base .menu:showing,
+.menu-bar-ui:ui-base .menu:hover,
+.menu-bar-ui:ui-base .menu:focused,
+.menu-bar-ui:ui-base .menu:showing {
+    -fx-background-color: normal-hover-color;
+}
+
+.menu-bar-ui.menu-bar-ui-base .menu .label,
+.menu-bar-ui:ui-base .menu .label {
+    -fx-padding: 3;
+    -fx-text-fill: black;
+}
+
+.menu-bar-ui.menu-bar-ui-base .menu .text,
+.menu-bar-ui:ui-base .menu .text {
+    -fx-fill: black;
+}
+
+.menu-bar-ui.menu-bar-ui-base:disabled,
+.menu-bar-ui:ui-base:disabled {
+    -fx-opacity: 1;
+}
+
+.menu-bar-ui.menu-bar-ui-base .menu:disabled,
+.menu-bar-ui:ui-base .menu:disabled {
+    -fx-opacity: 0.4;
+}
+
+.menu-bar-ui .context-menu,
+.menu-bar-ui.menu-bar-ui-base .context-menu,
+.menu-bar-ui:ui-base .context-menu {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 4;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+}
+
+.menu-bar-ui .context-menu {
+    -fx-background-color: white;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu,
+.menu-bar-ui:ui-base .context-menu {
+    -fx-background-color: white !important;
+    -fx-background-insets: 0;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.menu-bar-ui .menu .label {
+    -fx-padding: 3;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item,
+.menu-bar-ui:ui-base .context-menu .menu-item {
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0 !important;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0 !important;
+    -fx-padding: 0.333333em 0.41777em 0.333333em 0.41777em;
+    -fx-opacity: 1;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item > .label,
+.menu-bar-ui:ui-base .context-menu .menu-item > .label {
+    -fx-text-fill: black;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item:hover,
+.menu-bar-ui:ui-base .context-menu .menu-item:hover {
+    -fx-background-color: transparent !important;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item:focused,
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item:showing,
+.menu-bar-ui:ui-base .context-menu .menu-item:focused,
+.menu-bar-ui:ui-base .context-menu .menu-item:showing {
+    -fx-background-color: -fx-selection-bar !important;
+    -fx-text-fill: -fx-selection-bar-text;
+    -fx-mark-color: -fx-focused-mark-color;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item:focused > .label,
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item:showing > .label,
+.menu-bar-ui:ui-base .context-menu .menu-item:focused > .label,
+.menu-bar-ui:ui-base .context-menu .menu-item:showing > .label {
+    -fx-text-fill: black;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item:disabled,
+.menu-bar-ui:ui-base .context-menu .menu-item:disabled {
+    -fx-background-color: transparent !important;
+    -fx-opacity: 0.4;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item:disabled > .label,
+.menu-bar-ui:ui-base .context-menu .menu-item:disabled > .label {
+    -fx-text-fill: black;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .separator:horizontal .line,
+.menu-bar-ui:ui-base .context-menu .separator:horizontal .line {
+    -fx-border-color: -fx-box-border transparent transparent transparent;
+    -fx-border-width: 1;
+    -fx-border-insets: 1 0 0 0;
+}
+
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item .arrow,
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item .check,
+.menu-bar-ui.menu-bar-ui-base .context-menu .menu-item .radio,
+.menu-bar-ui:ui-base .context-menu .menu-item .arrow,
+.menu-bar-ui:ui-base .context-menu .menu-item .check,
+.menu-bar-ui:ui-base .context-menu .menu-item .radio {
+    -fx-background-color: -fx-mark-color;
+}
+
+.menu-bar-ui.menu-bar-ui-base.menu-bar-ui-small .menu .label,
+.menu-bar-ui:ui-base.menu-bar-ui-small .menu .label {
+    -fx-padding: 1;
+}
+
+.menu-bar-ui.menu-bar-ui-base.menu-bar-ui-big .menu .label,
+.menu-bar-ui:ui-base.menu-bar-ui-big .menu .label {
+    -fx-padding: 5;
+}

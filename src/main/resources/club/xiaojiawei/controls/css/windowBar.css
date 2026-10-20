@@ -1,6 +1,1 @@
-.close-ico:hover *{
-    -fx-fill: red;
-}
-.pinned-ico:hover *{
-    -fx-fill: black;
-}
+/* Component structure. Appearance comes from the selected theme. */

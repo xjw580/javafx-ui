@@ -1,0 +1,96 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.list-view-ui,
+.list-view-ui.list-view-ui-base,
+.list-view-ui:ui-base {
+    -fx-background-color: background-color;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.list-view-ui.list-view-ui-base:focused,
+.list-view-ui:ui-base:focused {
+    -fx-border-color: #e0e0e0;
+}
+
+.list-view-ui.list-view-ui-base:disabled,
+.list-view-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+}
+
+.list-view-ui .list-cell,
+.list-view-ui.list-view-ui-base .list-cell,
+.list-view-ui:ui-base .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-padding: 7;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-view-ui.list-view-ui-base .list-cell,
+.list-view-ui:ui-base .list-cell {
+    -fx-background-insets: 0;
+}
+
+.list-view-ui .list-cell:hover,
+.list-view-ui.list-view-ui-base .list-cell:filled:hover,
+.list-view-ui:ui-base .list-cell:filled:hover {
+    -fx-background-color: hover-color;
+    -fx-cursor: hand;
+}
+
+.list-view-ui .list-cell:selected {
+    -fx-background-color: #a7d2ff !important;
+    -fx-text-fill: white;
+}
+
+.list-view-ui:focused .list-cell:selected {
+    -fx-background-color: #4da3ff !important;
+    -fx-text-fill: white;
+}
+
+.list-view-ui .list-cell:selected:hover {
+    -fx-background-color: #a7d2ff;
+}
+
+.list-view-ui.list-view-ui-base .list-cell:filled:selected,
+.list-view-ui.list-view-ui-base .list-cell:filled:selected:hover,
+.list-view-ui:ui-base .list-cell:filled:selected,
+.list-view-ui:ui-base .list-cell:filled:selected:hover {
+    -fx-background-color: #a7d2ff !important;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+.list-view-ui.list-view-ui-base:focused .list-cell:filled:selected,
+.list-view-ui:ui-base:focused .list-cell:filled:selected {
+    -fx-background-color: #4da3ff !important;
+    -fx-text-fill: white;
+    -fx-background-insets: 0;
+}
+
+.list-view-ui.list-view-ui-base .list-cell:empty,
+.list-view-ui:ui-base .list-cell:empty {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-text-fill: #000000;
+}
+
+.list-view-ui.list-view-ui-base .list-cell:empty:hover,
+.list-view-ui.list-view-ui-base:focused .list-cell:empty:hover,
+.list-view-ui:ui-base .list-cell:empty:hover,
+.list-view-ui:ui-base:focused .list-cell:empty:hover {
+    -fx-background-color: hover-color !important;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-cursor: hand;
+}
+
+.list-view-ui.list-view-ui-base:disabled .list-cell,
+.list-view-ui:ui-base:disabled .list-cell {
+    -fx-text-fill: #000000;
+}

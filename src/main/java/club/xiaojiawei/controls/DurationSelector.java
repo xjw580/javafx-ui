@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import club.xiaojiawei.utils.TimeUtils;
@@ -35,6 +36,10 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
  */
 @SuppressWarnings("unused")
 public class DurationSelector extends FlowPane implements DateTimeInterceptor<Duration> {
+
+    {
+        JavaFXUI.initializeTheme(this, "duration-selector-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *

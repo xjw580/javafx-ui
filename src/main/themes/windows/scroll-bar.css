@@ -1,0 +1,174 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.scroll-bar,
+.scroll-bar.scroll-bar-ui-windows,
+.scroll-bar.scroll-bar-ui:ui-windows {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track,
+.scroll-bar.scroll-bar-ui-windows:horizontal .track,
+.scroll-bar.scroll-bar-ui-windows:vertical .track,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .track,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .track {
+    -fx-background-color: #F0F0F0;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-button,
+.scroll-bar.scroll-bar-ui-windows:horizontal .increment-button,
+.scroll-bar.scroll-bar-ui-windows:horizontal .decrement-button,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .increment-button,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .decrement-button {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button,
+.scroll-bar.scroll-bar-ui-windows:vertical .increment-button,
+.scroll-bar.scroll-bar-ui-windows:vertical .decrement-button,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .increment-button,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .decrement-button {
+    -fx-background-color: #F0F0F0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar.scroll-bar-ui-windows .increment-arrow,
+.scroll-bar.scroll-bar-ui-windows .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows .decrement-arrow {
+    -fx-background-color: #606060;
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.scroll-bar:horizontal .increment-arrow,
+.scroll-bar:horizontal .decrement-arrow,
+.scroll-bar.scroll-bar-ui-windows:horizontal .increment-arrow,
+.scroll-bar.scroll-bar-ui-windows:horizontal .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .decrement-arrow {
+    -fx-background-color: #606060;
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow,
+.scroll-bar.scroll-bar-ui-windows:vertical .increment-arrow,
+.scroll-bar.scroll-bar-ui-windows:vertical .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .decrement-arrow {
+    -fx-background-color: #606060;
+    -fx-shape: " ";
+    -fx-padding: 0 0.15em;
+}
+
+.scroll-bar .increment-button:hover .increment-arrow,
+.scroll-bar .decrement-button:hover .decrement-arrow,
+.scroll-bar .increment-button:pressed .increment-arrow,
+.scroll-bar .decrement-button:pressed .decrement-arrow,
+.scroll-bar.scroll-bar-ui-windows .increment-button:hover .increment-arrow,
+.scroll-bar.scroll-bar-ui-windows .decrement-button:hover .decrement-arrow,
+.scroll-bar.scroll-bar-ui-windows .increment-button:pressed .increment-arrow,
+.scroll-bar.scroll-bar-ui-windows .decrement-button:pressed .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows .increment-button:hover .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows .decrement-button:hover .decrement-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows .increment-button:pressed .increment-arrow,
+.scroll-bar.scroll-bar-ui:ui-windows .decrement-button:pressed .decrement-arrow {
+    -fx-background-color: #606060;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb,
+.scroll-bar.scroll-bar-ui-windows:horizontal .thumb,
+.scroll-bar.scroll-bar-ui-windows:vertical .thumb,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .thumb,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .thumb {
+    -fx-background-color: #CDCDCD;
+    -fx-background-insets: 2;
+    -fx-background-radius: 20;
+}
+
+.scroll-bar:hover:horizontal .thumb,
+.scroll-bar:hover:vertical .thumb,
+.scroll-bar.scroll-bar-ui-windows:hover:horizontal .thumb,
+.scroll-bar.scroll-bar-ui-windows:hover:vertical .thumb,
+.scroll-bar.scroll-bar-ui:ui-windows:hover:horizontal .thumb,
+.scroll-bar.scroll-bar-ui:ui-windows:hover:vertical .thumb {
+    -fx-background-color: #A6A6A6;
+    -fx-background-insets: 2;
+    -fx-background-radius: 20;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover,
+.scroll-bar.scroll-bar-ui-windows:horizontal .thumb:hover,
+.scroll-bar.scroll-bar-ui-windows:vertical .thumb:hover,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .thumb:hover,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .thumb:hover {
+    -fx-background-color: #A6A6A6;
+    -fx-background-insets: 2;
+    -fx-background-radius: 20;
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed,
+.scroll-bar.scroll-bar-ui-windows:horizontal .thumb:pressed,
+.scroll-bar.scroll-bar-ui-windows:vertical .thumb:pressed,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .thumb:pressed,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .thumb:pressed {
+    -fx-background-color: #606060;
+    -fx-background-insets: 2;
+    -fx-background-radius: 20;
+}
+
+.scroll-bar:hover,
+.scroll-bar.scroll-bar-ui-windows:hover,
+.scroll-bar.scroll-bar-ui:ui-windows:hover {
+    -fx-background-color: #F0F0F0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:horizontal .increment-button:hover,
+.scroll-bar:horizontal .decrement-button:hover,
+.scroll-bar:vertical .increment-button:hover,
+.scroll-bar:vertical .decrement-button:hover,
+.scroll-bar.scroll-bar-ui-windows:horizontal .increment-button:hover,
+.scroll-bar.scroll-bar-ui-windows:horizontal .decrement-button:hover,
+.scroll-bar.scroll-bar-ui-windows:vertical .increment-button:hover,
+.scroll-bar.scroll-bar-ui-windows:vertical .decrement-button:hover,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .increment-button:hover,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .decrement-button:hover,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .increment-button:hover,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .decrement-button:hover {
+    -fx-background-color: #E5E5E5;
+}
+
+.scroll-bar:horizontal .increment-button:pressed,
+.scroll-bar:horizontal .decrement-button:pressed,
+.scroll-bar:vertical .increment-button:pressed,
+.scroll-bar:vertical .decrement-button:pressed,
+.scroll-bar.scroll-bar-ui-windows:horizontal .increment-button:pressed,
+.scroll-bar.scroll-bar-ui-windows:horizontal .decrement-button:pressed,
+.scroll-bar.scroll-bar-ui-windows:vertical .increment-button:pressed,
+.scroll-bar.scroll-bar-ui-windows:vertical .decrement-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .increment-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal .decrement-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .increment-button:pressed,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical .decrement-button:pressed {
+    -fx-background-color: #CCCCCC;
+}

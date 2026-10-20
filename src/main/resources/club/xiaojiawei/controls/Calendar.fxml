@@ -15,12 +15,12 @@
         <HBox spacing="10" translateY="1" fx:id="icoBox">
             <Label fx:id="lastMonth">
                 <graphic>
-                    <SVGPath content="M0,7 7,0 14,7" style="-fx-fill: none;-fx-stroke: #0075FF;-fx-stroke-width: 2"/>
+                    <SVGPath content="M0,7 7,0 14,7" styleClass="calendar-navigation" style="-fx-fill: none;-fx-stroke-width: 2"/>
                 </graphic>
             </Label>
             <Label fx:id="nextMonth">
                 <graphic>
-                    <SVGPath content="M0,0 7,7 14,0" style="-fx-fill: none;-fx-stroke: #0075FF;-fx-stroke-width: 2"/>
+                    <SVGPath content="M0,0 7,7 14,0" styleClass="calendar-navigation" style="-fx-fill: none;-fx-stroke-width: 2"/>
                 </graphic>
             </Label>
         </HBox>

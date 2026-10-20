@@ -1,0 +1,105 @@
+/* Shared sizes and legacy semantic modifiers. */
+
+.btn-ui-small {
+    -fx-background-radius: 4 !important;
+}
+
+.btn-ui-big {
+    -fx-background-radius: 6 !important;
+}
+
+.btn-ui-normal {
+    -fx-background-color: normal-color;
+}
+
+.btn-ui-normal:hover {
+    -fx-background-color: normal-deep-color;
+}
+
+.btn-ui-normal-3d {
+    -fx-background-color: normal-color;
+    -fx-effect: dropshadow(gaussian, #81c2f8, 2, 0, 0, 4) !important;
+}
+
+.btn-ui-normal-3d:pressed,
+.btn-ui-normal-3d:selected {
+    -fx-translate-y: 2;
+    -fx-background-color: #b2dafc;
+    -fx-effect: dropshadow(gaussian, #81c2f8, 2, 0, 0, 2) !important;
+}
+
+.btn-ui-normal-3d:disabled {
+    -fx-effect: none !important;
+}
+
+.btn-ui-success {
+    -fx-background-color: success-color;
+}
+
+.btn-ui-success:hover {
+    -fx-background-color: success-deep-color;
+}
+
+.btn-ui-success-3d {
+    -fx-background-color: success-color;
+    -fx-effect: dropshadow(gaussian, #71b271, 2, 0, 0, 4) !important;
+}
+
+.btn-ui-success-3d:pressed,
+.btn-ui-success-3d:selected {
+    -fx-translate-y: 2;
+    -fx-background-color: #80ce80;
+    -fx-effect: dropshadow(gaussian, #71b271, 2, 0, 0, 2) !important;
+}
+
+.btn-ui-success-3d:disabled {
+    -fx-effect: none !important;
+}
+
+.btn-ui-warn {
+    -fx-background-color: warn-color;
+}
+
+.btn-ui-warn:hover {
+    -fx-background-color: warn-deep-color;
+}
+
+.btn-ui-warn-3d {
+    -fx-background-color: warn-color;
+    -fx-effect: dropshadow(gaussian, #f6c250, 2, 0, 0, 4) !important;
+}
+
+.btn-ui-warn-3d:pressed,
+.btn-ui-warn-3d:selected {
+    -fx-translate-y: 2;
+    -fx-background-color: #fccf6d;
+    -fx-effect: dropshadow(gaussian, #f6c250, 2, 0, 0, 2) !important;
+}
+
+.btn-ui-warn-3d:disabled {
+    -fx-effect: none !important;
+}
+
+.btn-ui-error {
+    -fx-background-color: error-color;
+}
+
+.btn-ui-error:hover {
+    -fx-background-color: error-deep-color;
+}
+
+.btn-ui-error-3d {
+    -fx-background-color: error-color;
+    -fx-effect: dropshadow(gaussian, #e75858, 2, 0, 0, 4) !important;
+}
+
+.btn-ui-error-3d:pressed,
+.btn-ui-error-3d:selected {
+    -fx-translate-y: 2;
+    -fx-background-color: #fa7a7a;
+    -fx-effect: dropshadow(gaussian, #e75858, 2, 0, 0, 2) !important;
+}
+
+.btn-ui-error-3d:disabled {
+    -fx-effect: none !important;
+}

@@ -3,11 +3,11 @@ package club.xiaojiawei.demo;
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.FilterField;
 import club.xiaojiawei.controls.ico.AbstractIco;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.utils.SystemUtil;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -189,6 +189,8 @@ public class DemoController implements Initializable {
             }
             styleItems.setAll(styleList);
             controlsItems.setAll(controlsList);
+            updateNavigationBorders(styleItems);
+            updateNavigationBorders(controlsItems);
             resultCount.setText(String.valueOf(styleList.size() + controlsList.size()));
         });
         Platform.runLater(() -> {
@@ -239,8 +241,19 @@ public class DemoController implements Initializable {
             vBox.getChildren().add(toggleButton);
         }
         tab.setContent(vBox);
+        updateNavigationBorders(vBox.getChildren());
         return vBox.getChildren();
     }
+
+    private void updateNavigationBorders(List<Node> items) {
+        for (Node item : items) {
+            item.getStyleClass().remove("last-navigation-item");
+        }
+        if (!items.isEmpty()) {
+            items.getLast().getStyleClass().add("last-navigation-item");
+        }
+    }
+
     private boolean isSelected(String name){
         return Objects.equals(INIT_SELECTED_TAB_NAME, name);
     }
@@ -386,6 +399,16 @@ public class DemoController implements Initializable {
         if (rightTabPane.getSelectionModel().getSelectedItem() != null){
             rightTabPane.getTabs().remove(rightTabPane.getSelectionModel().getSelectedItem());
         }
+    }
+
+    @FXML
+    private void selectBaseTheme() {
+        JavaFXUI.setTheme(rootPane.getScene(), Theme.BASE);
+    }
+
+    @FXML
+    private void selectWindowsTheme() {
+        JavaFXUI.setTheme(rootPane.getScene(), Theme.WINDOWS);
     }
 
     @FXML

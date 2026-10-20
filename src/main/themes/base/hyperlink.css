@@ -1,0 +1,63 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.hyperlink {
+    -fx-accent: main-color;
+}
+
+.hyperlink-ui-base,
+.hyperlink-ui:ui-base {
+    -fx-accent: main-color;
+    -fx-text-fill: -fx-accent;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+    -fx-underline: false;
+    -fx-opacity: 1;
+}
+
+.hyperlink-ui-base:hover,
+.hyperlink-ui-base:hover:visited,
+.hyperlink-ui:ui-base:hover,
+.hyperlink-ui:ui-base:hover:visited {
+    -fx-text-fill: -fx-accent;
+    -fx-underline: true;
+}
+
+.hyperlink-ui-base:armed,
+.hyperlink-ui-base:visited,
+.hyperlink-ui-base:hover:armed,
+.hyperlink-ui:ui-base:armed,
+.hyperlink-ui:ui-base:visited,
+.hyperlink-ui:ui-base:hover:armed {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.hyperlink-ui-base:visited,
+.hyperlink-ui:ui-base:visited {
+    -fx-underline: true;
+}
+
+.hyperlink-ui-base:visited:armed,
+.hyperlink-ui:ui-base:visited:armed {
+    -fx-underline: false;
+}
+
+.hyperlink-ui-base:pressed,
+.hyperlink-ui:ui-base:pressed {
+    -fx-text-fill: -fx-accent;
+}
+
+.hyperlink-ui-base:focused,
+.hyperlink-ui:ui-base:focused {
+    -fx-border-color: -fx-focus-color;
+    -fx-border-style: segments(0.166667em, 0.166667em);
+    -fx-border-width: 1;
+}
+
+.hyperlink-ui-base:disabled,
+.hyperlink-ui:ui-base:disabled {
+    -fx-text-fill: -fx-accent;
+    -fx-underline: false;
+    -fx-opacity: 0.4;
+}

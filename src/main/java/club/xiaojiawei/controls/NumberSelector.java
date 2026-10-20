@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.beans.property.IntegerProperty;
@@ -27,6 +28,10 @@ import java.util.function.Predicate;
  */
 @SuppressWarnings("unused")
 public class NumberSelector extends FlowPane implements DateTimeInterceptor<Integer> {
+
+    {
+        JavaFXUI.initializeTheme(this, "number-selector-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *
@@ -139,8 +144,10 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
         }
     }
 
-    @FXML private ScrollPane numberSelector;
-    @FXML private VBox numberVbox;
+    @FXML
+    private ScrollPane numberSelector;
+    @FXML
+    private VBox numberVbox;
 
     private static final String SELECTED_NUMBER_LABEL_STYLE_CLASS = "selectedNumberLabel";
     private static final String NUMBER_LABEL_STYLE_CLASS = "numberLabel";
@@ -173,7 +180,7 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
      *                                                                         *
      **************************************************************************/
 
-    private void afterFXMLLoaded(){
+    private void afterFXMLLoaded() {
         addValuePropertyChangedListener();
         buildAndSync();
         setShowRowCount(showRowCount);
@@ -188,13 +195,13 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
     /**
      * 添加数值监听器
      */
-    private void addValuePropertyChangedListener(){
+    private void addValuePropertyChangedListener() {
         value.addListener((observable, oldValue, newValue) -> {
-            if (newValue == null){
+            if (newValue == null) {
                 numberGroup.selectToggle(null);
             } else {
                 for (Toggle toggle : numberGroup.getToggles()) {
-                    if (toggle instanceof ToggleButton toggleButton && Integer.parseInt(toggleButton.getText()) == newValue.intValue()){
+                    if (toggle instanceof ToggleButton toggleButton && Integer.parseInt(toggleButton.getText()) == newValue.intValue()) {
                         numberGroup.selectToggle(toggle);
                         break;
                     }
@@ -207,7 +214,7 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
     /**
      * 同步数值选择器
      */
-    private void syncNumberSelector(ObservableList<Node> children, int pointValue, int min, int max, double showRowCount, ScrollPane scrollPane){
+    private void syncNumberSelector(ObservableList<Node> children, int pointValue, int min, int max, double showRowCount, ScrollPane scrollPane) {
         int totalSize = max - min + 1;
         int index = pointValue - min;
         if (index < 0 || index >= children.size()) return;
@@ -215,7 +222,7 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
         for (int i = 0; i < children.size(); i++) {
             Node child = children.get(i);
             child.getStyleClass().remove(SELECTED_NUMBER_LABEL_STYLE_CLASS);
-            if (i == index){
+            if (i == index) {
                 child.getStyleClass().add(SELECTED_NUMBER_LABEL_STYLE_CLASS);
                 ScrollUtil.buildSlideTimeLine(index, totalSize, showRowCount, scrollPane).play();
             }
@@ -225,9 +232,9 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
     /**
      * 构建数值选择器
      */
-    private void buildNumberSelector(ObservableList<Node> children, int min, int max, ToggleGroup toggleGroup){
+    private void buildNumberSelector(ObservableList<Node> children, int min, int max, ToggleGroup toggleGroup) {
         children.clear();
-        for (int i = min; i <= max ; i++) {
+        for (int i = min; i <= max; i++) {
             ToggleButton label = new ToggleButton();
             label.setToggleGroup(toggleGroup);
             label.getStyleClass().add(NUMBER_LABEL_STYLE_CLASS);
@@ -235,12 +242,12 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
             children.add(label);
         }
         toggleGroup.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
-            if (oldToggle != null){
-                ((ToggleButton)oldToggle).getStyleClass().remove(SELECTED_NUMBER_LABEL_STYLE_CLASS);
+            if (oldToggle != null) {
+                ((ToggleButton) oldToggle).getStyleClass().remove(SELECTED_NUMBER_LABEL_STYLE_CLASS);
             }
-            if (newToggle != null){
-                ((ToggleButton)newToggle).getStyleClass().add(SELECTED_NUMBER_LABEL_STYLE_CLASS);
-                setValue(Integer.parseInt(((ToggleButton)newToggle).getText()));
+            if (newToggle != null) {
+                ((ToggleButton) newToggle).getStyleClass().add(SELECTED_NUMBER_LABEL_STYLE_CLASS);
+                setValue(Integer.parseInt(((ToggleButton) newToggle).getText()));
             }
         });
     }
@@ -248,9 +255,9 @@ public class NumberSelector extends FlowPane implements DateTimeInterceptor<Inte
     /**
      * 为选择器添加按键监听器
      */
-    private void addNumberSelectorKeyPressedListener(){
+    private void addNumberSelectorKeyPressedListener() {
         numberSelector.setOnKeyPressed(event -> {
-            switch (event.getCode()){
+            switch (event.getCode()) {
                 case UP -> setValue(getValue() + 1);
                 case DOWN -> setValue(getValue() - 1);
             }

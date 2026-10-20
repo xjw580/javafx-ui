@@ -23,6 +23,12 @@
 #accordion{
     -fx-padding: 0 2 0 0;
 }
+#accordion .toggle-btn-ui {
+    -fx-border-style: hidden hidden solid hidden;
+}
+#accordion .toggle-btn-ui.last-navigation-item {
+    -fx-border-color: transparent;
+}
 .hv-box{
     -fx-padding: 0 0 0 20;
     -fx-spacing: 25;

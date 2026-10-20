@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.DurationTime;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -36,7 +37,7 @@ public class DurationTimeTest extends Application {
         refresh.setOnMouseClicked(mouseEvent -> time.refresh());
         flowPane.getChildren().addAll(time, refresh);
         Scene scene = new Scene(flowPane, 200, 200);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         stage.setScene(scene);
 
         stage.show();

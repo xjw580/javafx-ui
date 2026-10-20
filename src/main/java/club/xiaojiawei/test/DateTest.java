@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Date;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -39,7 +40,7 @@ public class DateTest extends Application {
         refresh.setOnMouseClicked(mouseEvent -> date.refresh());
         hBox.getChildren().addAll(date, refresh);
         Scene scene = new Scene(vBox, 400, 400);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.setTitle("hello");
         primaryStage.show();

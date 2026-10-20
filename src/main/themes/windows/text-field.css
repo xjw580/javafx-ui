@@ -1,0 +1,43 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.text-field-ui,
+.text-field-ui.text-field-ui-windows,
+.text-field-ui:ui-windows {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: win-border-color;
+    -fx-effect: null;
+    -fx-accent: win-main-color;
+}
+
+.text-field-ui:hover,
+.text-field-ui.text-field-ui-windows:hover,
+.text-field-ui:ui-windows:hover {
+    -fx-border-color: win-main-color;
+    -fx-effect: null;
+}
+
+.text-field-ui:focused,
+.text-field-ui:focused:hover,
+.text-field-ui.text-field-ui-windows:focused,
+.text-field-ui.text-field-ui-windows:focused:hover,
+.text-field-ui:ui-windows:focused,
+.text-field-ui:ui-windows:focused:hover {
+    -fx-background-color: win-main-color, win-surface-color;
+    -fx-border-color: win-main-color;
+    -fx-effect: null !important;
+    -fx-background-insets: 0, 0 0 2 0;
+}
+
+.text-field-ui:disabled,
+.text-field-ui.text-field-ui-windows:disabled,
+.text-field-ui:ui-windows:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+    -fx-effect: null !important;
+}

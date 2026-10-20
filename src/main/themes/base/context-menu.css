@@ -1,0 +1,102 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.context-menu-ui .menu-item {
+    -fx-background-radius: 5;
+    -fx-padding: 7 14 7 14;
+}
+
+.context-menu-ui .menu-item:focused {
+    -fx-background-color: #b3d5ff !important;
+}
+
+.context-menu-ui,
+.context-menu-ui.context-menu-ui-base,
+.context-menu-ui:ui-base {
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 15, 0, 3, 3);
+    -fx-padding: 5 3 5 3;
+    -fx-background-color: background-color !important;
+    -fx-border-color: transparent;
+    -fx-background-radius: 5;
+}
+
+.context-menu-ui.context-menu-ui-base,
+.context-menu-ui:ui-base {
+    -fx-background-insets: 0;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item,
+.context-menu-ui:ui-base .menu-item {
+    -fx-background-insets: 0;
+    -fx-background-radius: 5;
+    -fx-border-radius: 0;
+    -fx-padding: 7 14 7 14;
+    -fx-opacity: 1;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item > .label,
+.context-menu-ui:ui-base .menu-item > .label {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item:hover > .label,
+.context-menu-ui:ui-base .menu-item:hover > .label {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item:focused,
+.context-menu-ui.context-menu-ui-base .menu-item:showing,
+.context-menu-ui:ui-base .menu-item:focused,
+.context-menu-ui:ui-base .menu-item:showing {
+    -fx-background-color: #b3d5ff !important;
+    -fx-text-fill: -fx-focused-text-base-color;
+    -fx-mark-color: -fx-focused-mark-color;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item:focused > .label,
+.context-menu-ui.context-menu-ui-base .menu-item:showing > .label,
+.context-menu-ui:ui-base .menu-item:focused > .label,
+.context-menu-ui:ui-base .menu-item:showing > .label {
+    -fx-text-fill: -fx-focused-text-base-color;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item:disabled,
+.context-menu-ui:ui-base .menu-item:disabled {
+    -fx-opacity: 0.4;
+}
+
+.menu-item.context-menu-ui.context-menu-ui-base:disabled,
+.menu-item.context-menu-ui.context-menu-ui-base:hover,
+.menu-item.context-menu-ui:ui-base:disabled,
+.menu-item.context-menu-ui:ui-base:hover {
+    -fx-background-color: background-color !important;
+}
+
+.menu-item.context-menu-ui.context-menu-ui-base:focused,
+.menu-item.context-menu-ui:ui-base:focused {
+    -fx-background-color: #b3d5ff !important;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item:disabled > .label,
+.context-menu-ui:ui-base .menu-item:disabled > .label {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.context-menu-ui.context-menu-ui-base .separator:horizontal .line,
+.context-menu-ui:ui-base .separator:horizontal .line {
+    -fx-border-color: -fx-box-border transparent transparent transparent;
+    -fx-border-width: 1;
+    -fx-border-insets: 1 0 0 0;
+}
+
+.context-menu-ui.context-menu-ui-base .menu-item .arrow,
+.context-menu-ui.context-menu-ui-base .menu-item .check,
+.context-menu-ui.context-menu-ui-base .menu-item .radio,
+.context-menu-ui:ui-base .menu-item .arrow,
+.context-menu-ui:ui-base .menu-item .check,
+.context-menu-ui:ui-base .menu-item .radio {
+    -fx-background-color: -fx-mark-color;
+}

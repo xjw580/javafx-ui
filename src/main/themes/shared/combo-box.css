@@ -1,0 +1,81 @@
+/* Shared sizes and legacy semantic modifiers. */
+
+.combo-box-ui-normal,
+.combo-box-ui-normal > .arrow-button {
+    -fx-background-color: normal-color !important;
+}
+
+.combo-box-ui-normal:hover,
+.combo-box-ui-normal:focused,
+.combo-box-ui-normal:hover > .arrow-button,
+.combo-box-ui-normal:focused > .arrow-button {
+    -fx-background-color: normal-deep-color !important;
+}
+
+.combo-box-ui-normal:editable:focused {
+    -fx-border-color: normal-deep-color;
+}
+
+.combo-box-ui-normal:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: normal-deep-color !important;
+}
+
+.combo-box-ui-success,
+.combo-box-ui-success > .arrow-button {
+    -fx-background-color: success-color !important;
+}
+
+.combo-box-ui-success:hover,
+.combo-box-ui-success:focused,
+.combo-box-ui-success:hover > .arrow-button,
+.combo-box-ui-success:focused > .arrow-button {
+    -fx-background-color: success-deep-color !important;
+}
+
+.combo-box-ui-success:editable:focused {
+    -fx-border-color: success-deep-color;
+}
+
+.combo-box-ui-success:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: success-deep-color !important;
+}
+
+.combo-box-ui-warn,
+.combo-box-ui-warn > .arrow-button {
+    -fx-background-color: warn-color !important;
+}
+
+.combo-box-ui-warn:hover,
+.combo-box-ui-warn:focused,
+.combo-box-ui-warn:hover > .arrow-button,
+.combo-box-ui-warn:focused > .arrow-button {
+    -fx-background-color: warn-deep-color !important;
+}
+
+.combo-box-ui-warn:editable:focused {
+    -fx-border-color: warn-deep-color;
+}
+
+.combo-box-ui-warn:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: warn-deep-color !important;
+}
+
+.combo-box-ui-error,
+.combo-box-ui-error > .arrow-button {
+    -fx-background-color: error-color !important;
+}
+
+.combo-box-ui-error:hover,
+.combo-box-ui-error:focused,
+.combo-box-ui-error:hover > .arrow-button,
+.combo-box-ui-error:focused > .arrow-button {
+    -fx-background-color: error-deep-color !important;
+}
+
+.combo-box-ui-error:editable:focused {
+    -fx-border-color: error-deep-color;
+}
+
+.combo-box-ui-error:editable:focused > .arrow-button > .arrow {
+    -fx-background-color: error-deep-color !important;
+}

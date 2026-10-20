@@ -1,0 +1,173 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.check-box-ui .box,
+.check-box-ui.check-box-ui-windows .box,
+.check-box-ui:ui-windows .box {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.check-box-ui:hover .box,
+.check-box-ui.check-box-ui-windows:hover .box,
+.check-box-ui:ui-windows:hover .box {
+    -fx-border-color: win-main-color;
+    -fx-background-color: win-hover-background-color;
+    -fx-effect: null !important;
+}
+
+.check-box-ui:selected .box,
+.check-box-ui.check-box-ui-windows:selected .box,
+.check-box-ui:ui-windows:selected .box {
+    -fx-background-color: win-main-color;
+    -fx-border-color: win-main-color;
+    -fx-effect: null !important;
+}
+
+.check-box-ui:selected:hover .box,
+.check-box-ui.check-box-ui-windows:selected:hover .box,
+.check-box-ui:ui-windows:selected:hover .box {
+    -fx-background-color: win-main-hover-color;
+    -fx-border-color: win-main-hover-color;
+}
+
+.check-box-ui:disabled .box,
+.check-box-ui.check-box-ui-windows:disabled .box,
+.check-box-ui:ui-windows:disabled .box {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-opacity: 0.6;
+}
+
+.check-box-ui .mark,
+.check-box-ui:selected .mark,
+.check-box-ui.check-box-ui-windows .mark,
+.check-box-ui.check-box-ui-windows:selected .mark,
+.check-box-ui:ui-windows .mark,
+.check-box-ui:ui-windows:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box-ui:indeterminate .box,
+.check-box-ui.check-box-ui-windows:indeterminate .box,
+.check-box-ui:ui-windows:indeterminate .box {
+    -fx-background-color: win-main-color;
+    -fx-border-color: win-main-color;
+}
+
+.check-box-ui:indeterminate .mark,
+.check-box-ui.check-box-ui-windows:indeterminate .mark,
+.check-box-ui:ui-windows:indeterminate .mark {
+    -fx-background-color: white;
+    -fx-shape: "M 0 0 H 10 V 2 H 0 Z";
+}
+
+.check-box-ui:selected:hover .box,
+.check-box-ui.check-box-ui-windows:selected:hover .box,
+.check-box-ui:ui-windows:selected:hover .box {
+    -fx-effect: null !important;
+}
+
+.check-box-ui.check-box-ui-main:hover .box,
+.check-box-ui.check-box-ui-main:selected .box,
+.check-box-ui.check-box-ui-normal:hover .box,
+.check-box-ui.check-box-ui-normal:selected .box,
+.check-box-ui.check-box-ui-success:hover .box,
+.check-box-ui.check-box-ui-success:selected .box,
+.check-box-ui.check-box-ui-warn:hover .box,
+.check-box-ui.check-box-ui-warn:selected .box,
+.check-box-ui.check-box-ui-error:hover .box,
+.check-box-ui.check-box-ui-error:selected .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-main:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-main:selected .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-normal:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-normal:selected .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-success:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-success:selected .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-warn:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-warn:selected .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-error:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-error:selected .box,
+.check-box-ui:ui-windows.check-box-ui-main:hover .box,
+.check-box-ui:ui-windows.check-box-ui-main:selected .box,
+.check-box-ui:ui-windows.check-box-ui-normal:hover .box,
+.check-box-ui:ui-windows.check-box-ui-normal:selected .box,
+.check-box-ui:ui-windows.check-box-ui-success:hover .box,
+.check-box-ui:ui-windows.check-box-ui-success:selected .box,
+.check-box-ui:ui-windows.check-box-ui-warn:hover .box,
+.check-box-ui:ui-windows.check-box-ui-warn:selected .box,
+.check-box-ui:ui-windows.check-box-ui-error:hover .box,
+.check-box-ui:ui-windows.check-box-ui-error:selected .box {
+    -fx-effect: null !important;
+}
+
+.check-box-ui.check-box-ui-windows.check-box-ui-main:selected .box,
+.check-box-ui:ui-windows.check-box-ui-main:selected .box {
+    -fx-background-color: main-color;
+}
+
+.check-box-ui.check-box-ui-windows.check-box-ui-normal:selected .box,
+.check-box-ui:ui-windows.check-box-ui-normal:selected .box {
+    -fx-background-color: normal-deep-color;
+}
+
+.check-box-ui.check-box-ui-windows.check-box-ui-success:selected .box,
+.check-box-ui:ui-windows.check-box-ui-success:selected .box {
+    -fx-background-color: success-deep-color;
+}
+
+.check-box-ui.check-box-ui-windows.check-box-ui-warn:selected .box,
+.check-box-ui:ui-windows.check-box-ui-warn:selected .box {
+    -fx-background-color: warn-deep-color;
+}
+
+.check-box-ui.check-box-ui-windows.check-box-ui-error:selected .box,
+.check-box-ui:ui-windows.check-box-ui-error:selected .box {
+    -fx-background-color: error-deep-color;
+}
+
+.check-box-ui.check-box-ui-main:selected:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-main:selected:hover .box,
+.check-box-ui:ui-windows.check-box-ui-main:selected:hover .box {
+    -fx-background-color: main-color;
+    -fx-effect: null !important;
+}
+
+.check-box-ui.check-box-ui-normal:selected:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-normal:selected:hover .box,
+.check-box-ui:ui-windows.check-box-ui-normal:selected:hover .box {
+    -fx-background-color: normal-deep-color;
+    -fx-effect: null !important;
+}
+
+.check-box-ui.check-box-ui-success:selected:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-success:selected:hover .box,
+.check-box-ui:ui-windows.check-box-ui-success:selected:hover .box {
+    -fx-background-color: success-deep-color;
+    -fx-effect: null !important;
+}
+
+.check-box-ui.check-box-ui-warn:selected:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-warn:selected:hover .box,
+.check-box-ui:ui-windows.check-box-ui-warn:selected:hover .box {
+    -fx-background-color: warn-deep-color;
+    -fx-effect: null !important;
+}
+
+.check-box-ui.check-box-ui-error:selected:hover .box,
+.check-box-ui.check-box-ui-windows.check-box-ui-error:selected:hover .box,
+.check-box-ui:ui-windows.check-box-ui-error:selected:hover .box {
+    -fx-background-color: error-deep-color;
+    -fx-effect: null !important;
+}
+
+.check-box-ui:focused .box,
+.check-box-ui.check-box-ui-windows:focused .box,
+.check-box-ui:ui-windows:focused .box {
+    -fx-border-color: win-main-color;
+}

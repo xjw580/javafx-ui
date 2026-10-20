@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Calendar;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -36,7 +37,7 @@ public class ListViewTest extends Application {
         root.setStyle("-fx-padding: 20;");
 
         Scene scene = new Scene(root, 400, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
 
         stage.setTitle("ListView CSS 美化示例");
         stage.setScene(scene);

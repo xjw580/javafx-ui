@@ -1,0 +1,237 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.pagination-ui,
+.pagination-ui.pagination-ui-base,
+.pagination-ui:ui-base {
+    -fx-page-information-visible: false;
+    -fx-background-color: transparent;
+}
+
+.pagination-ui > .pagination-control,
+.pagination-ui.pagination-ui-base > .pagination-control,
+.pagination-ui:ui-base > .pagination-control {
+    -fx-background-color: transparent;
+}
+
+.pagination-ui > .pagination-control > .control-box,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box,
+.pagination-ui:ui-base > .pagination-control > .control-box {
+    -fx-spacing: 10;
+}
+
+.pagination-ui > .pagination-control > .control-box > .number-button,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button {
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-border-width: 0;
+    -fx-effect: default-effect;
+    -fx-background-color: btn-background-color;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+    -fx-font-size: 12;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button {
+    -fx-border-color: null;
+    -fx-background-insets: 0 0 -1 0;
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.pagination-ui > .pagination-control > .control-box > .number-button:pressed,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:pressed,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:pressed {
+    -fx-effect: default-press-effect !important;
+}
+
+.pagination-ui > .pagination-control > .control-box > .number-button:selected,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:selected,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:selected {
+    -fx-background-color: system-hover-color;
+    -fx-text-fill: black;
+    -fx-effect: default-press-effect !important;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:selected,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:selected {
+    -fx-border-color: null;
+}
+
+.pagination-ui > .pagination-control > .control-box > .number-button:hover {
+    -fx-background-color: system-hover-color;
+    -fx-effect: default-hover-effect;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:selected:hover,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:selected:hover {
+    -fx-background-color: system-hover-color;
+    -fx-text-fill: black;
+    -fx-effect: default-press-effect !important;
+    -fx-border-color: null;
+}
+
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button > .left-arrow,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button > .left-arrow,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button > .left-arrow {
+    -fx-background-color: black;
+    -fx-scale-shape: false;
+    -fx-scale-y: 1.15;
+    -fx-scale-x: 1.15;
+}
+
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button > .left-arrow,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button > .left-arrow,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button > .left-arrow {
+    -fx-shape: "M0.1,6.5L0.1,6.5C-0.1,6.9,0,7.3,0.3,7.6l6.1,6.2c0.3,0.3,0.8,0.3,1.2,0l0,0c0.3-0.3,0.3-0.9,0-1.2L2.1,7.1l5.5-5.7 c0.3-0.3,0.3-0.9,0-1.2s-0.8-0.3-1.1,0l0,0L0.4,6.4l0,0l0,0C0.2,6.3,0.2,6.4,0.1,6.5L0.1,6.5z";
+}
+
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button > .right-arrow,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button > .right-arrow {
+    -fx-shape: "M7.7,7.5L7.7,7.5c0.2-0.4,0.1-0.8-0.2-1.1L1.4,0.2c-0.3-0.3-0.8-0.3-1.2,0l0,0c-0.3,0.3-0.3,0.9,0,1.2l5.5,5.5l-5.5,5.7 c-0.3,0.3-0.3,0.9,0,1.2s0.8,0.3,1.1,0l0,0l6.1-6.2l0,0l0,0C7.6,7.7,7.6,7.6,7.7,7.5L7.7,7.5z";
+}
+
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button {
+    -fx-background-radius: 50%;
+    -fx-border-width: 0;
+    -fx-min-width: 35;
+    -fx-min-height: 30;
+    -fx-effect: default-effect;
+    -fx-background-color: transparent;
+    -fx-border-radius: 50%;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button {
+    -fx-border-color: null;
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button {
+    -fx-background-insets: 0 0 -1 5;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button {
+    -fx-background-insets: 0 5 -1 0;
+}
+
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button:pressed,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button:pressed,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button:pressed,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button:pressed,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button:pressed,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button:pressed {
+    -fx-effect: default-press-effect !important;
+}
+
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button:hover,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button:hover {
+    -fx-background-color: system-hover-color;
+    -fx-effect: default-hover-effect;
+}
+
+.pagination-ui > .pagination-control > .control-box > .number-button:disabled,
+.pagination-ui > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui > .pagination-control > .control-box > .right-arrow-button:disabled,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:disabled,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button:disabled {
+    -fx-opacity: 0.5;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:disabled,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button:disabled {
+    -fx-background-color: btn-background-color;
+    -fx-border-color: null;
+    -fx-effect: default-effect;
+    -fx-text-fill: -fx-text-base-color;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:selected:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:selected:disabled {
+    -fx-background-color: system-hover-color;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-text-fill: black;
+    -fx-effect: default-press-effect;
+    -fx-opacity: 0.5;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button:disabled,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button:disabled {
+    -fx-background-color: transparent;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:focused,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:focused {
+    -fx-background-insets: -0.2;
+    -fx-border-color: null;
+    -fx-effect: default-press-effect;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button:focused,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button:focused,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button:focused,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button:focused {
+    -fx-background-insets: -0.2;
+    -fx-border-color: null;
+    -fx-effect: default-effect;
+}
+
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .number-button:hover,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .left-arrow-button:hover,
+.pagination-ui.pagination-ui-base > .pagination-control > .control-box > .right-arrow-button:hover,
+.pagination-ui:ui-base > .pagination-control > .control-box > .number-button:hover,
+.pagination-ui:ui-base > .pagination-control > .control-box > .left-arrow-button:hover,
+.pagination-ui:ui-base > .pagination-control > .control-box > .right-arrow-button:hover {
+    -fx-background-color: system-hover-color;
+    -fx-border-color: null;
+    -fx-effect: default-hover-effect;
+}
+
+.pagination-ui.pagination-ui-base.pagination-ui-normal > .pagination-control > .control-box > .number-button:selected,
+.pagination-ui:ui-base.pagination-ui-normal > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: normal-deep-color !important;
+}
+
+.pagination-ui.pagination-ui-base.pagination-ui-success > .pagination-control > .control-box > .number-button:selected,
+.pagination-ui:ui-base.pagination-ui-success > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: success-deep-color !important;
+}
+
+.pagination-ui.pagination-ui-base.pagination-ui-warn > .pagination-control > .control-box > .number-button:selected,
+.pagination-ui:ui-base.pagination-ui-warn > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: warn-deep-color !important;
+}
+
+.pagination-ui.pagination-ui-base.pagination-ui-error > .pagination-control > .control-box > .number-button:selected,
+.pagination-ui:ui-base.pagination-ui-error > .pagination-control > .control-box > .number-button:selected {
+    -fx-text-fill: white !important;
+    -fx-background-color: error-deep-color !important;
+}

@@ -1,0 +1,37 @@
+/* Shared sizes and semantic modifiers. */
+
+.slider-ui-small > .track {
+    -fx-padding: 1.5;
+}
+
+.slider-ui-small > .thumb {
+    -fx-padding: 5;
+}
+
+.slider-ui-big > .track {
+    -fx-padding: 3;
+}
+
+.slider-ui-big > .thumb {
+    -fx-padding: 9;
+}
+
+.slider-ui-main {
+    slider-color: main-color;
+}
+
+.slider-ui-normal {
+    slider-color: normal-deep-color;
+}
+
+.slider-ui-success {
+    slider-color: success-deep-color;
+}
+
+.slider-ui-warn {
+    slider-color: warn-deep-color;
+}
+
+.slider-ui-error {
+    slider-color: error-deep-color;
+}

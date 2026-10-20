@@ -1,0 +1,96 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.progress-bar-ui {
+    -fx-accent: main-color !important;
+}
+
+.progress-bar-ui .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+}
+
+.progress-bar-ui > .track {
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-text-box-border: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.progress-indicator-ui {
+    -fx-accent: main-color !important;
+}
+
+.progress-indicator-ui .percentage {
+    -fx-fill: null;
+}
+
+.progress-bar-ui,
+.progress-indicator-ui,
+.progress-bar-ui.progress-bar-ui-windows,
+.progress-indicator-ui.progress-indicator-ui-windows,
+.progress-bar-ui:ui-windows,
+.progress-indicator-ui:ui-windows {
+    -fx-accent: win-main-color !important;
+}
+
+.progress-bar-ui > .track,
+.progress-bar-ui.progress-bar-ui-windows > .track,
+.progress-bar-ui:ui-windows > .track {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+}
+
+.progress-bar-ui > .bar,
+.progress-bar-ui.progress-bar-ui-windows > .bar,
+.progress-bar-ui:ui-windows > .bar {
+    -fx-background-color: win-main-color;
+    -fx-background-insets: 1;
+    -fx-background-radius: 4;
+    -fx-effect: null;
+}
+
+.progress-indicator-ui > .determinate-indicator > .indicator,
+.progress-indicator-ui.progress-indicator-ui-windows > .determinate-indicator > .indicator,
+.progress-indicator-ui:ui-windows > .determinate-indicator > .indicator {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-border-radius: 100%;
+}
+
+.progress-indicator-ui > .determinate-indicator > .progress,
+.progress-indicator-ui.progress-indicator-ui-windows > .determinate-indicator > .progress,
+.progress-indicator-ui:ui-windows > .determinate-indicator > .progress {
+    -fx-background-color: win-main-color;
+}
+
+.progress-indicator-ui > .determinate-indicator > .tick,
+.progress-indicator-ui.progress-indicator-ui-windows > .determinate-indicator > .tick,
+.progress-indicator-ui:ui-windows > .determinate-indicator > .tick {
+    -fx-background-color: win-selection-text-color;
+}
+
+.progress-bar-ui:disabled,
+.progress-indicator-ui:disabled,
+.progress-bar-ui.progress-bar-ui-windows:disabled,
+.progress-indicator-ui.progress-indicator-ui-windows:disabled,
+.progress-bar-ui:ui-windows:disabled,
+.progress-indicator-ui:ui-windows:disabled {
+    -fx-opacity: 0.6;
+    -fx-accent: win-disabled-color !important;
+}
+
+.progress-bar-ui:disabled > .bar,
+.progress-indicator-ui:disabled > .determinate-indicator > .progress,
+.progress-bar-ui.progress-bar-ui-windows:disabled > .bar,
+.progress-indicator-ui.progress-indicator-ui-windows:disabled > .determinate-indicator > .progress,
+.progress-bar-ui:ui-windows:disabled > .bar,
+.progress-indicator-ui:ui-windows:disabled > .determinate-indicator > .progress {
+    -fx-background-color: win-disabled-color;
+}

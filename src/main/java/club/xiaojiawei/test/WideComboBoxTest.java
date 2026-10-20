@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.WideComboBox;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -35,7 +36,7 @@ public class WideComboBoxTest extends Application {
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(30));
         Scene scene = new Scene(root, 640, 360);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setTitle("WideComboBox 宽度验证");
         primaryStage.setScene(scene);
         primaryStage.show();

@@ -1,0 +1,20 @@
+/* Shared sizes and semantic modifiers. */
+
+.tab-pane-ui-small .tab {
+    -fx-padding: 0 6 4 6 !important;
+    -fx-background-radius: 3 !important;
+    -fx-background-insets: 0 1 3 1 !important;
+}
+
+.tab-pane-ui-small > .tab-header-area {
+    -fx-padding: 2 2 0 2 !important;
+}
+
+.tab-pane-ui-small .control-buttons-tab {
+    -fx-translate-y: -2 !important;
+}
+
+.tab-pane-ui-small .control-buttons-tab .tab-down-button {
+    -fx-background-radius: 3 !important;
+    -fx-padding: 12 8.5 12 8.5 !important;
+}

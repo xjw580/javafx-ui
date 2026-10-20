@@ -1,0 +1,138 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.titled-pane-ui > .title {
+    -fx-background-color: #e9f5ff;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #d7ecfd;
+    -fx-border-width: 1;
+}
+
+.titled-pane-ui > .content > * {
+    -fx-padding: 0;
+}
+
+.titled-pane-ui > .content {
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+
+.titled-pane-ui:focused > .title > .arrow-button > .arrow {
+    -fx-effect: null;
+    -fx-background-insets: 0;
+}
+
+.titled-pane-ui > .title > .arrow-button > .arrow {
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.titled-pane-ui > .title > .arrow-button > .arrow {
+    -fx-background-insets: 0;
+}
+
+.titled-pane-ui,
+.titled-pane-ui.titled-pane-ui-windows,
+.titled-pane-ui:ui-windows {
+    -fx-text-fill: win-text-color;
+}
+
+.titled-pane-ui > .title,
+.titled-pane-ui.titled-pane-ui-windows > .title,
+.titled-pane-ui:ui-windows > .title {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.titled-pane-ui > .title:hover,
+.titled-pane-ui.titled-pane-ui-windows > .title:hover,
+.titled-pane-ui:ui-windows > .title:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.titled-pane-ui:expanded > .title,
+.titled-pane-ui.titled-pane-ui-windows:expanded > .title,
+.titled-pane-ui:ui-windows:expanded > .title {
+    -fx-background-color: win-pressed-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.titled-pane-ui:focused > .title,
+.titled-pane-ui.titled-pane-ui-windows:focused > .title,
+.titled-pane-ui:ui-windows:focused > .title {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-main-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}
+
+.titled-pane-ui:hover:focused > .title,
+.titled-pane-ui.titled-pane-ui-windows:hover:focused > .title,
+.titled-pane-ui:ui-windows:hover:focused > .title {
+    -fx-background-color: win-hover-background-color;
+}
+
+.titled-pane-ui:expanded:focused > .title,
+.titled-pane-ui.titled-pane-ui-windows:expanded:focused > .title,
+.titled-pane-ui:ui-windows:expanded:focused > .title {
+    -fx-background-color: win-pressed-background-color;
+}
+
+.titled-pane-ui > .title > .arrow-button > .arrow,
+.titled-pane-ui.titled-pane-ui-windows > .title > .arrow-button > .arrow,
+.titled-pane-ui:ui-windows > .title > .arrow-button > .arrow {
+    -fx-background-color: win-text-color;
+}
+
+.titled-pane-ui:focused > .title > .arrow-button > .arrow,
+.titled-pane-ui.titled-pane-ui-windows:focused > .title > .arrow-button > .arrow,
+.titled-pane-ui:ui-windows:focused > .title > .arrow-button > .arrow {
+    -fx-background-color: win-text-color;
+    -fx-background-insets: 0;
+}
+
+.titled-pane-ui > .content,
+.titled-pane-ui.titled-pane-ui-windows > .content,
+.titled-pane-ui:ui-windows > .content {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 1 1 1;
+}
+
+.titled-pane-ui:disabled,
+.titled-pane-ui.titled-pane-ui-windows:disabled,
+.titled-pane-ui:ui-windows:disabled {
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+}
+
+.titled-pane-ui:disabled > .title,
+.titled-pane-ui.titled-pane-ui-windows:disabled > .title,
+.titled-pane-ui:ui-windows:disabled > .title {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-effect: null;
+}

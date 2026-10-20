@@ -1,50 +1,36 @@
+/* Component structure. Appearance comes from the selected theme. */
 @import "common/date-time-common.css";
-
-.date-time-root-pane:disabled .javafx-ui-ico{
-    -fx-opacity: 0.5;
-}
-.dateTimeBackground{
-    -fx-border-color: main-shallow-color;
+.dateTimeBackground {
     -fx-pref-height: 30;
     -fx-pref-width: 170;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
-    -fx-background-color: white;
 }
-.dateTimeFullBackground{
-    -fx-border-color: main-shallow-color;
+
+.dateTimeFullBackground {
     -fx-pref-height: 30;
     -fx-pref-width: 190;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
-    -fx-background-color: white;
 }
-.hideIcoDateTimeBackground{
+
+.hideIcoDateTimeBackground {
     -fx-pref-width: 151!important;
 }
-.hideIcoDateTimeFullBackground{
+
+.hideIcoDateTimeFullBackground {
     -fx-pref-width: 171!important;
 }
-.dateTimeBackgroundFocus{
-    -fx-border-color: main-color!important;
-    /*-fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;*/
-}
-#dateTimeIco{
-    /*-fx-scale-x: 1.1;*/
-    /*-fx-scale-y: 1.1;*/
-}
-.dateTimeSeparator{
+
+.dateTimeSeparator {
     -fx-font-size: 17;
 }
-.dateTimeSeparator *{
-    -fx-fill: grey;
-}
-#dateControls{
+
+#dateControls {
     -fx-translate-x: 3;
 }
-#timeControls{
+
+#timeControls {
     -fx-translate-x: -4;
 }
-#dateOuterUI, #timeOuterUI{
+
+#dateOuterUI,
+#timeOuterUI {
     -fx-padding: 0!important;
 }

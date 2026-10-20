@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.animation.ParallelTransition;
@@ -43,6 +44,10 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.SLIDE_Y;
 @SuppressWarnings("unused")
 public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
 
+    {
+        JavaFXUI.initializeTheme(this, "calendar-ui");
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 属性                                                                    *
@@ -71,18 +76,18 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
     private final BooleanProperty showControls = new SimpleBooleanProperty(true);
 
     public String getDate() {
-        return getLocalDate() == null? "" : DATE_FORMATTER.format(getLocalDate());
+        return getLocalDate() == null ? "" : DATE_FORMATTER.format(getLocalDate());
     }
 
-    public LocalDate getLocalDate(){
+    public LocalDate getLocalDate() {
         return date.get();
     }
 
-    public ObjectProperty<LocalDate> dateProperty(){
+    public ObjectProperty<LocalDate> dateProperty() {
         return dateSelector.dateProperty();
     }
 
-    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty(){
+    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty() {
         return date.getReadOnlyProperty();
     }
 
@@ -90,15 +95,15 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      * @param date 格式：yyyy/MM/dd
      */
     public void setDate(String date) {
-        if (date == null || date.isBlank()){
+        if (date == null || date.isBlank()) {
             setLocalDate(null);
-        }else {
+        } else {
             setLocalDate(LocalDate.from(DATE_FORMATTER.parse(date)));
         }
     }
 
-    public void setLocalDate(LocalDate localDate){
-        if (test(localDate)){
+    public void setLocalDate(LocalDate localDate) {
+        if (test(localDate)) {
             date.set(localDate);
         }
     }
@@ -195,15 +200,15 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      *                                                                         *
      **************************************************************************/
 
-    private void afterFXMLLoaded(){
+    private void afterFXMLLoaded() {
         lastMonth.setOnMouseClicked(event -> beforeDate());
         nextMonth.setOnMouseClicked(event -> laterDate());
         today.setOnMouseClicked(event -> {
             LocalDate nowLocalDate = LocalDate.now();
-            if (Objects.equals(nowLocalDate, getLocalDate())){
+            if (Objects.equals(nowLocalDate, getLocalDate())) {
 //                可能不在当前日期面板，需要跳转
                 skipToPointDate(nowLocalDate);
-            }else {
+            } else {
                 setLocalDate(nowLocalDate);
             }
         });
@@ -219,8 +224,9 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
 //        skipToPointDate(now);
     }
 
-    private void initDateSelectorPopup(){
+    private void initDateSelectorPopup() {
         popup = new Popup();
+        JavaFXUI.followTheme(popup, this);
         dateSelector = new DateSelector();
         date = dateSelector.date;
         dateMsg.setText(SHORT_DATE_FORMATTER.format(LocalDate.now()));
@@ -244,7 +250,8 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
             FADE.play(dateSelector, 0.5D, 1D, Duration.millis(200));
         });
     }
-    private void addDatePropertyListener(){
+
+    private void addDatePropertyListener() {
         date.addListener((observable, oldDate, newDate) -> {
             popup.hide();
             skipToPointDate(newDate);
@@ -255,21 +262,21 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      * 跳转到指定日期
      * @param newDate
      */
-    private void skipToPointDate(LocalDate newDate){
-        if (newDate == null){
-            if (selectedLabel != null){
+    private void skipToPointDate(LocalDate newDate) {
+        if (newDate == null) {
+            if (selectedLabel != null) {
                 selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
             }
             return;
         }
-        if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) == newDate.getYear() * 100 + newDate.getMonthValue()){
-            if (selectedLabel != null){
+        if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) == newDate.getYear() * 100 + newDate.getMonthValue()) {
+            if (selectedLabel != null) {
                 selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
             }
             (selectedLabel = findPointDay(newDate)).getStyleClass().add(SELECTED_DAY_LABEL_STYLE_CLASS);
-        }else if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) < newDate.getYear() * 100 + newDate.getMonthValue()){
+        } else if (Integer.parseInt(dateMsg.getText().substring(0, 4)) * 100 + Integer.parseInt(dateMsg.getText().substring(5, 7)) < newDate.getYear() * 100 + newDate.getMonthValue()) {
             laterDate(newDate);
-        }else {
+        } else {
             beforeDate(newDate);
         }
     }
@@ -279,7 +286,7 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      * @param tilePane
      * @return
      */
-    private Label addDay(TilePane tilePane, LocalDate selfDate){
+    private Label addDay(TilePane tilePane, LocalDate selfDate) {
         Label label = new Label(String.valueOf(selfDate.getDayOfMonth()));
         label.getStyleClass().add(DAY_LABEL_STYLE_CLASS);
         label.setOnMouseClicked(event -> setLocalDate(selfDate));
@@ -291,9 +298,9 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      * 时间流逝
      * @param laterDate
      */
-    private void laterDate(LocalDate laterDate){
+    private void laterDate(LocalDate laterDate) {
 //        icoBox.setDisable(true);
-        if (laterDate.getYear() > 9999){
+        if (laterDate.getYear() > 9999) {
             laterDate = laterDate.withYear(1);
         }
         dateMsg.setText(SHORT_DATE_FORMATTER.format(laterDate));
@@ -307,25 +314,25 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
 //                    icoBox.setDisable(false);
                 });
                 timeline.play();
-                if (selectedLabel != null){
+                if (selectedLabel != null) {
                     try {
                         selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
-                    }catch (NullPointerException e){
+                    } catch (NullPointerException e) {
                         log.warn("方向键按太快导致，不影响正常使用", e);
                     }
                 }
-                if ((selectedLabel = findPointDay()) != null){
+                if ((selectedLabel = findPointDay()) != null) {
                     selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL_STYLE_CLASS);
                 }
             }
         }, 50);
     }
 
-    private void laterDate(){
+    private void laterDate() {
         LocalDate tempDate = LocalDate.from(DateTimeFormatter.ofPattern("yyyy年MM月dd").parse(dateMsg.getText() + "01"));
-        if (tempDate.getMonthValue() < 12){
+        if (tempDate.getMonthValue() < 12) {
             tempDate = tempDate.plusMonths(1);
-        }else {
+        } else {
             tempDate = tempDate.plusYears(1).withMonth(1);
         }
         laterDate(tempDate);
@@ -335,9 +342,9 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      * 时间回溯
      * @param beforeDate
      */
-    private void beforeDate(LocalDate beforeDate){
+    private void beforeDate(LocalDate beforeDate) {
 //        icoBox.setDisable(true);
-        if (beforeDate.getYear() <= 0){
+        if (beforeDate.getYear() <= 0) {
             beforeDate = beforeDate.withYear(9999);
         }
         dateMsg.setText(SHORT_DATE_FORMATTER.format(beforeDate));
@@ -357,21 +364,21 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
 //                    icoBox.setDisable(false);
                 });
                 parallelTransition.play();
-                if (selectedLabel != null){
+                if (selectedLabel != null) {
                     selectedLabel.getStyleClass().remove(SELECTED_DAY_LABEL_STYLE_CLASS);
                 }
-                if ((selectedLabel = findPointDay()) != null){
+                if ((selectedLabel = findPointDay()) != null) {
                     selectedLabel.getStyleClass().add(SELECTED_DAY_LABEL_STYLE_CLASS);
                 }
             }
         }, 50);
     }
 
-    private void beforeDate(){
+    private void beforeDate() {
         LocalDate tempDate = LocalDate.from(DateTimeFormatter.ofPattern("yyyy年MM月dd").parse(dateMsg.getText() + "01"));
-        if (tempDate.getMonthValue() > 1){
+        if (tempDate.getMonthValue() > 1) {
             tempDate = tempDate.minusMonths(1);
-        }else {
+        } else {
             tempDate = tempDate.minusYears(1).withMonth(12);
         }
         beforeDate(tempDate);
@@ -380,8 +387,8 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
     /**
      * 从展示的月份面板中寻找指定的日期
      */
-    private Node findPointDay(LocalDate pointDate){
-        if (pointDate == null){
+    private Node findPointDay(LocalDate pointDate) {
+        if (pointDate == null) {
             return null;
         }
         int showPaneYear = Integer.parseInt(dateMsg.getText().substring(0, 4));
@@ -389,16 +396,16 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
         ObservableList<Node> showPaneChildren = showMonthPane.getChildren();
         for (int i = 1; i <= showPaneChildren.size(); i++) {
             if (i >= pointDate.getDayOfMonth()
-                    && pointDate.getYear() == showPaneYear
-                    && pointDate.getMonthValue() == showPaneMonth
-                    && Integer.parseInt(((Label)showPaneChildren.get(i - 1)).getText()) == pointDate.getDayOfMonth()){
+                && pointDate.getYear() == showPaneYear
+                && pointDate.getMonthValue() == showPaneMonth
+                && Integer.parseInt(((Label) showPaneChildren.get(i - 1)).getText()) == pointDate.getDayOfMonth()) {
                 return showPaneChildren.get(i - 1);
             }
         }
         return new Label();
     }
 
-    private Node findPointDay(){
+    private Node findPointDay() {
         return findPointDay(getLocalDate());
     }
 
@@ -407,15 +414,15 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
      * @param buildDate
      * @return
      */
-    private TilePane buildMonthPane(LocalDate buildDate){
+    private TilePane buildMonthPane(LocalDate buildDate) {
         TilePane tilePane = new TilePane();
         int lastMonthDays = buildDate.withDayOfMonth(1).getDayOfWeek().getValue() - 1;
         LocalDate tempDate;
 //            添加上月剩余天数
-        if (lastMonthDays != 0){
+        if (lastMonthDays != 0) {
             int lastMonthMaxDay = DateSelector.calcMaxDayForMonth(buildDate.minusMonths(1));
             tempDate = buildDate.minusMonths(1);
-            if (tempDate.getYear() <= 0){
+            if (tempDate.getYear() <= 0) {
                 tempDate = tempDate.withYear(9999);
             }
             for (int i = lastMonthMaxDay - lastMonthDays + 1; i <= lastMonthMaxDay; i++) {
@@ -429,10 +436,10 @@ public class Calendar extends VBox implements DateTimeInterceptor<LocalDate> {
         }
 //            添加下月剩余天数
         tempDate = buildDate.plusMonths(1);
-        if (tempDate.getYear() > 9999){
+        if (tempDate.getYear() > 9999) {
             tempDate = tempDate.withYear(1);
         }
-        for (int i = 1; i <= 42 - lastMonthDays - currentMonthMaxDay; i++){
+        for (int i = 1; i <= 42 - lastMonthDays - currentMonthMaxDay; i++) {
             addDay(tilePane, tempDate.withDayOfMonth(i));
         }
         tilePane.getStyleClass().add(DAY_PANE_STYLE_CLASS);

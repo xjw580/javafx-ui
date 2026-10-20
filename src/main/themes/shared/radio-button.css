@@ -1,0 +1,61 @@
+/* Shared legacy semantic modifiers. */
+
+.radio-button-ui-main:selected .radio {
+    -fx-effect: dropshadow(two-pass-box, main-color, 5, 0, 1, 1) !important;
+}
+
+.radio-button-ui-main:hover .radio {
+    -fx-effect: innershadow(one-pass-box, main-color, 5, 0, 1, 1);
+}
+
+.radio-button-ui-main:selected .dot {
+    -fx-background-color: main-color;
+}
+
+.radio-button-ui-normal:selected .radio {
+    -fx-effect: dropshadow(two-pass-box, normal-deep-color, 5, 0, 1, 1) !important;
+}
+
+.radio-button-ui-normal:hover .radio {
+    -fx-effect: innershadow(one-pass-box, normal-deep-color, 5, 0, 1, 1);
+}
+
+.radio-button-ui-normal:selected .dot {
+    -fx-background-color: normal-deep-color;
+}
+
+.radio-button-ui-success:selected .radio {
+    -fx-effect: dropshadow(two-pass-box, success-deep-color, 5, 0, 1, 1) !important;
+}
+
+.radio-button-ui-success:hover .radio {
+    -fx-effect: innershadow(one-pass-box, success-deep-color, 5, 0, 1, 1);
+}
+
+.radio-button-ui-success:selected .dot {
+    -fx-background-color: success-deep-color;
+}
+
+.radio-button-ui-warn:selected .radio {
+    -fx-effect: dropshadow(two-pass-box, warn-deep-color, 5, 0, 1, 1) !important;
+}
+
+.radio-button-ui-warn:hover .radio {
+    -fx-effect: innershadow(one-pass-box, warn-deep-color, 5, 0, 1, 1);
+}
+
+.radio-button-ui-warn:selected .dot {
+    -fx-background-color: warn-deep-color;
+}
+
+.radio-button-ui-error:selected .radio {
+    -fx-effect: dropshadow(two-pass-box, error-deep-color, 5, 0, 1, 1) !important;
+}
+
+.radio-button-ui-error:hover .radio {
+    -fx-effect: innershadow(one-pass-box, error-deep-color, 5, 0, 1, 1);
+}
+
+.radio-button-ui-error:selected .dot {
+    -fx-background-color: error-deep-color;
+}

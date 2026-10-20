@@ -1,0 +1,32 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.title-ui,
+.title-ui.title-ui-base,
+.title-ui:ui-base {
+    -fx-background-color: #e8f0fe;
+    -fx-padding: 13 50 13 13;
+    -fx-fill: #1c74e8;
+    -fx-background-radius: 0 19 19 0;
+}
+
+.title-ui.title-ui-base,
+.title-ui:ui-base {
+    -fx-text-fill: #1c74e8;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.title-ui * {
+    -fx-fill: #1c74e8;
+}
+
+.title-ui.title-ui-base *,
+.title-ui.title-ui-base:disabled,
+.title-ui.title-ui-base:disabled *,
+.title-ui:ui-base *,
+.title-ui:ui-base:disabled,
+.title-ui:ui-base:disabled * {
+    -fx-fill: #1c74e8;
+    -fx-text-fill: #1c74e8;
+}

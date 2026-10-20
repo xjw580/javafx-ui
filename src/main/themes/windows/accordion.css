@@ -1,0 +1,146 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.accordion-ui .titled-pane > .title {
+    -fx-background-color: shallow-color;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #bce1ff;
+    -fx-border-width: 1;
+}
+
+.accordion-ui .titled-pane > .content > * {
+    -fx-padding: 0;
+}
+
+.accordion-ui .titled-pane > .content {
+    -fx-background-color: white;
+    -fx-border-width: 0;
+}
+
+.accordion-ui .titled-pane:focused > .title > .arrow-button > .arrow {
+    -fx-effect: null;
+    -fx-background-insets: 0;
+}
+
+.accordion-ui .titled-pane > .title > .arrow-button > .arrow {
+    -fx-shape: "M1.87,2.5H8.15a1.06,1.06,0,0,1,.64,1.78L5.71,7.79a.91.91,0,0,1-1.4,0L1.23,4.28A1.06,1.06,0,0,1,1.87,2.5Z";
+    -fx-scale-shape: false;
+}
+
+.accordion-ui .titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-insets: 0;
+}
+
+.accordion-ui > .titled-pane,
+.accordion-ui.accordion-ui-windows > .titled-pane,
+.accordion-ui:ui-windows > .titled-pane {
+    -fx-text-fill: win-text-color;
+}
+
+.accordion-ui > .titled-pane > .title,
+.accordion-ui.accordion-ui-windows > .titled-pane > .title,
+.accordion-ui:ui-windows > .titled-pane > .title {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 1 1 1;
+    -fx-effect: null;
+}
+
+.accordion-ui > .titled-pane > .title:hover,
+.accordion-ui.accordion-ui-windows > .titled-pane > .title:hover,
+.accordion-ui:ui-windows > .titled-pane > .title:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 1 1 1;
+    -fx-effect: null;
+}
+
+.accordion-ui > .titled-pane:expanded > .title,
+.accordion-ui.accordion-ui-windows > .titled-pane:expanded > .title,
+.accordion-ui:ui-windows > .titled-pane:expanded > .title {
+    -fx-background-color: win-pressed-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 1 1 1;
+    -fx-effect: null;
+}
+
+.accordion-ui > .titled-pane:focused > .title,
+.accordion-ui.accordion-ui-windows > .titled-pane:focused > .title,
+.accordion-ui:ui-windows > .titled-pane:focused > .title {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-main-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 1 1 1;
+    -fx-effect: null;
+}
+
+.accordion-ui > .titled-pane:hover:focused > .title,
+.accordion-ui.accordion-ui-windows > .titled-pane:hover:focused > .title,
+.accordion-ui:ui-windows > .titled-pane:hover:focused > .title {
+    -fx-background-color: win-hover-background-color;
+}
+
+.accordion-ui > .titled-pane:expanded:focused > .title,
+.accordion-ui.accordion-ui-windows > .titled-pane:expanded:focused > .title,
+.accordion-ui:ui-windows > .titled-pane:expanded:focused > .title {
+    -fx-background-color: win-pressed-background-color;
+}
+
+.accordion-ui > .titled-pane > .title > .arrow-button > .arrow,
+.accordion-ui.accordion-ui-windows > .titled-pane > .title > .arrow-button > .arrow,
+.accordion-ui:ui-windows > .titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: win-text-color;
+}
+
+.accordion-ui > .titled-pane:focused > .title > .arrow-button > .arrow,
+.accordion-ui.accordion-ui-windows > .titled-pane:focused > .title > .arrow-button > .arrow,
+.accordion-ui:ui-windows > .titled-pane:focused > .title > .arrow-button > .arrow {
+    -fx-background-color: win-text-color;
+    -fx-background-insets: 0;
+}
+
+.accordion-ui > .titled-pane > .content,
+.accordion-ui.accordion-ui-windows > .titled-pane > .content,
+.accordion-ui:ui-windows > .titled-pane > .content {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 1 1 1;
+    -fx-border-insets: 0;
+}
+
+.accordion-ui > .titled-pane:disabled,
+.accordion-ui.accordion-ui-windows > .titled-pane:disabled,
+.accordion-ui:ui-windows > .titled-pane:disabled {
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+}
+
+.accordion-ui > .titled-pane:disabled > .title,
+.accordion-ui.accordion-ui-windows > .titled-pane:disabled > .title,
+.accordion-ui:ui-windows > .titled-pane:disabled > .title {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-radius: 0;
+    -fx-border-width: 0 1 1 1;
+    -fx-effect: null;
+}
+
+.accordion-ui > .titled-pane.first-titled-pane > .title,
+.accordion-ui.accordion-ui-windows > .titled-pane.first-titled-pane > .title,
+.accordion-ui:ui-windows > .titled-pane.first-titled-pane > .title {
+    -fx-border-width: 1;
+}

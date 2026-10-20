@@ -1,0 +1,89 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.progress-bar-ui,
+.progress-bar-ui.progress-bar-ui-base,
+.progress-bar-ui:ui-base {
+    -fx-accent: main-color !important;
+}
+
+.progress-bar-ui .bar,
+.progress-bar-ui.progress-bar-ui-base .bar,
+.progress-bar-ui:ui-base .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.progress-bar-ui.progress-bar-ui-base .bar,
+.progress-bar-ui:ui-base .bar {
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-accent, -7%), derive(-fx-accent, 0%), derive(-fx-accent, -3%), derive(-fx-accent, -9%));
+    -fx-effect: null;
+}
+
+.progress-bar-ui > .track,
+.progress-bar-ui.progress-bar-ui-base > .track,
+.progress-bar-ui:ui-base > .track {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-box-border: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.progress-bar-ui.progress-bar-ui-base > .track,
+.progress-bar-ui:ui-base > .track {
+    -fx-background-insets: 0;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.progress-indicator-ui,
+.progress-indicator-ui.progress-indicator-ui-base,
+.progress-indicator-ui:ui-base {
+    -fx-accent: main-color !important;
+}
+
+.progress-indicator-ui .percentage,
+.progress-indicator-ui.progress-indicator-ui-base .percentage,
+.progress-indicator-ui:ui-base .percentage {
+    -fx-fill: null;
+}
+
+.progress-indicator-ui.progress-indicator-ui-base > .determinate-indicator > .indicator,
+.progress-indicator-ui:ui-base > .determinate-indicator > .indicator {
+    -fx-background-color: -fx-box-border,
+    radial-gradient(center 50% 50%, radius 50%, -fx-control-inner-background 70%, derive(-fx-control-inner-background, -9%) 100%),
+    -fx-control-inner-background;
+    -fx-background-insets: 0, 1, 5 2 1 2;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+}
+
+.progress-indicator-ui.progress-indicator-ui-base > .determinate-indicator > .progress,
+.progress-indicator-ui:ui-base > .determinate-indicator > .progress {
+    -fx-background-color: -fx-accent;
+}
+
+.progress-indicator-ui.progress-indicator-ui-base > .determinate-indicator > .tick,
+.progress-indicator-ui:ui-base > .determinate-indicator > .tick {
+    -fx-background-color: white;
+}
+
+.progress-bar-ui.progress-bar-ui-base:disabled,
+.progress-indicator-ui.progress-indicator-ui-base:disabled,
+.progress-bar-ui:ui-base:disabled,
+.progress-indicator-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+    -fx-accent: main-color !important;
+}
+
+.progress-bar-ui.progress-bar-ui-base:disabled > .bar,
+.progress-bar-ui:ui-base:disabled > .bar {
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-accent, -7%), derive(-fx-accent, 0%), derive(-fx-accent, -3%), derive(-fx-accent, -9%));
+}
+
+.progress-indicator-ui.progress-indicator-ui-base:disabled > .determinate-indicator > .progress,
+.progress-indicator-ui:ui-base:disabled > .determinate-indicator > .progress {
+    -fx-background-color: -fx-accent;
+}

@@ -1,21 +1,20 @@
-#fileUploaderItem{
+/* Component structure; appearance is scoped by the selected theme. */
+
+#fileUploaderItem {
     -fx-background-size: cover;
-    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 1), 5, 0, 0, 0);
-    -fx-background-color: white;
 }
-#fileUploaderItem #msgOuter{
+
+#fileUploaderItem #msgOuter {
     -fx-spacing: 8;
-    -fx-padding: 8 0 0 0
+    -fx-padding: 8 0 0 0;
 }
-#fileUploaderItem #closeIcoOuter{
+
+#fileUploaderItem #closeIcoOuter {
     -fx-padding: 3;
-    -fx-background-color: rgba(255, 255, 255, 0.8);
-    -fx-background-radius: 9;
     -fx-alignment: CENTER;
 }
-#fileUploaderItem #fileNameLabel, #fileUploaderItem #fileSizeLabel{
-    -fx-background-color: rgba(255, 255, 255, 0.8);
-    -fx-effect: default-effect;
-    -fx-background-radius: 10;
+
+#fileUploaderItem #fileNameLabel,
+#fileUploaderItem #fileSizeLabel {
     -fx-padding: 1 5 1 5;
 }

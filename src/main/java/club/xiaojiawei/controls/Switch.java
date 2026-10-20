@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.ico.LoadingIco;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.animation.RotateTransition;
@@ -27,6 +28,10 @@ import static club.xiaojiawei.enums.BaseTransitionEnum.*;
  */
 @SuppressWarnings("unused")
 public class Switch extends StackPane {
+
+    {
+        JavaFXUI.initializeTheme(this, "switch-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *

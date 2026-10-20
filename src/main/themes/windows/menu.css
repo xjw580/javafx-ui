@@ -1,0 +1,433 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.context-menu-ui .menu-item {
+    -fx-background-radius: 5;
+    -fx-padding: 7 14 7 14;
+}
+
+.context-menu-ui .menu-item:focused {
+    -fx-background-color: #b3d5ff !important;
+}
+
+.context-menu-ui {
+    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 15, 0, 3, 3);
+    -fx-padding: 5 3 5 3;
+    -fx-background-color: background-color !important;
+    -fx-border-color: transparent;
+    -fx-background-radius: 5;
+}
+
+.menu-bar-ui * {
+    -fx-accent: normal-hover-color !important;
+}
+
+.menu-bar-ui {
+    -fx-background-color: linear-gradient(to right, shallow-color, background-color);
+}
+
+.menu-bar-ui .menu .text {
+    -fx-fill: black;
+}
+
+.menu-bar-ui .menu:hover {
+    -fx-background-color: normal-hover-color;
+}
+
+.menu-bar-ui .context-menu {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 4;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, 0.2), 8, 0, 0, 2);
+}
+
+.menu-bar-ui .menu .label {
+    -fx-padding: 3;
+}
+
+.menu-item-ui:hover {
+    -fx-background-color: hover-color;
+}
+
+.menu-item-ui {
+    -fx-padding: 7 14 7 14;
+    -fx-background-radius: 5;
+}
+
+.menu-ui .text {
+    -fx-fill: black;
+}
+
+.menu-ui:hover {
+    -fx-background-color: normal-hover-color;
+}
+
+.menu-ui {
+    -fx-padding: 7 14 7 14;
+    -fx-background-radius: 5;
+}
+
+.context-menu-ui,
+.menu-bar-ui .context-menu,
+.menu-ui .context-menu,
+.context-menu-ui.context-menu-ui-windows,
+.menu-bar-ui.menu-bar-ui-windows .context-menu,
+.menu-ui.menu-ui-windows .context-menu,
+.context-menu-ui:ui-windows,
+.menu-bar-ui:ui-windows .context-menu,
+.menu-ui:ui-windows .context-menu {
+    -fx-background-color: win-surface-color !important;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
+    -fx-padding: 3;
+    -fx-effect: win-popup-effect;
+}
+
+.menu-item.context-menu-ui,
+.menu-item.context-menu-ui.context-menu-ui-windows,
+.menu-item.context-menu-ui:ui-windows {
+    -fx-background-color: transparent !important;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+}
+
+.menu-item.context-menu-ui.context-menu-ui-windows,
+.menu-item.context-menu-ui:ui-windows {
+    -fx-padding: 7 14 7 14;
+}
+
+.menu-item-ui,
+.menu-ui,
+.context-menu-ui .menu-item,
+.menu-bar-ui .context-menu .menu-item,
+.menu-ui .context-menu .menu-item,
+.menu-item-ui.menu-item-ui-windows,
+.menu-ui.menu-ui-windows,
+.context-menu-ui.context-menu-ui-windows .menu-item,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item,
+.menu-ui.menu-ui-windows .context-menu .menu-item,
+.menu-item-ui:ui-windows,
+.menu-ui:ui-windows,
+.context-menu-ui:ui-windows .menu-item,
+.menu-bar-ui:ui-windows .context-menu .menu-item,
+.menu-ui:ui-windows .context-menu .menu-item {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-text-fill: win-text-color;
+}
+
+.menu-item-ui > .label,
+.menu-ui > .label,
+.context-menu-ui .menu-item > .label,
+.menu-bar-ui .context-menu .menu-item > .label,
+.menu-ui .context-menu .menu-item > .label,
+.menu-item-ui.menu-item-ui-windows > .label,
+.menu-ui.menu-ui-windows > .label,
+.context-menu-ui.context-menu-ui-windows .menu-item > .label,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item > .label,
+.menu-ui.menu-ui-windows .context-menu .menu-item > .label,
+.menu-item-ui:ui-windows > .label,
+.menu-ui:ui-windows > .label,
+.context-menu-ui:ui-windows .menu-item > .label,
+.menu-bar-ui:ui-windows .context-menu .menu-item > .label,
+.menu-ui:ui-windows .context-menu .menu-item > .label {
+    -fx-text-fill: win-text-color;
+}
+
+.menu-item-ui:hover,
+.menu-ui:hover,
+.context-menu-ui .menu-item:hover,
+.menu-bar-ui .context-menu .menu-item:hover,
+.menu-ui .context-menu .menu-item:hover,
+.menu-item-ui:focused,
+.menu-ui:focused,
+.context-menu-ui .menu-item:focused,
+.menu-bar-ui .context-menu .menu-item:focused,
+.menu-ui .context-menu .menu-item:focused,
+.menu-item-ui:showing,
+.menu-ui:showing,
+.context-menu-ui .menu-item:showing,
+.menu-bar-ui .context-menu .menu-item:showing,
+.menu-ui .context-menu .menu-item:showing,
+.menu-item-ui.menu-item-ui-windows:hover,
+.menu-ui.menu-ui-windows:hover,
+.context-menu-ui.context-menu-ui-windows .menu-item:hover,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:hover,
+.menu-ui.menu-ui-windows .context-menu .menu-item:hover,
+.menu-item-ui.menu-item-ui-windows:focused,
+.menu-ui.menu-ui-windows:focused,
+.context-menu-ui.context-menu-ui-windows .menu-item:focused,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:focused,
+.menu-ui.menu-ui-windows .context-menu .menu-item:focused,
+.menu-item-ui.menu-item-ui-windows:showing,
+.menu-ui.menu-ui-windows:showing,
+.context-menu-ui.context-menu-ui-windows .menu-item:showing,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:showing,
+.menu-ui.menu-ui-windows .context-menu .menu-item:showing,
+.menu-item-ui:ui-windows:hover,
+.menu-ui:ui-windows:hover,
+.context-menu-ui:ui-windows .menu-item:hover,
+.menu-bar-ui:ui-windows .context-menu .menu-item:hover,
+.menu-ui:ui-windows .context-menu .menu-item:hover,
+.menu-item-ui:ui-windows:focused,
+.menu-ui:ui-windows:focused,
+.context-menu-ui:ui-windows .menu-item:focused,
+.menu-bar-ui:ui-windows .context-menu .menu-item:focused,
+.menu-ui:ui-windows .context-menu .menu-item:focused,
+.menu-item-ui:ui-windows:showing,
+.menu-ui:ui-windows:showing,
+.context-menu-ui:ui-windows .menu-item:showing,
+.menu-bar-ui:ui-windows .context-menu .menu-item:showing,
+.menu-ui:ui-windows .context-menu .menu-item:showing {
+    -fx-background-color: win-hover-background-color !important;
+}
+
+.menu-item-ui:disabled,
+.menu-ui:disabled,
+.context-menu-ui .menu-item:disabled,
+.menu-bar-ui .context-menu .menu-item:disabled,
+.menu-ui .context-menu .menu-item:disabled,
+.menu-item-ui.menu-item-ui-windows:disabled,
+.menu-ui.menu-ui-windows:disabled,
+.context-menu-ui.context-menu-ui-windows .menu-item:disabled,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:disabled,
+.menu-ui.menu-ui-windows .context-menu .menu-item:disabled,
+.menu-item-ui:ui-windows:disabled,
+.menu-ui:ui-windows:disabled,
+.context-menu-ui:ui-windows .menu-item:disabled,
+.menu-bar-ui:ui-windows .context-menu .menu-item:disabled,
+.menu-ui:ui-windows .context-menu .menu-item:disabled {
+    -fx-background-color: transparent !important;
+    -fx-opacity: 0.6;
+}
+
+.menu-item-ui:disabled > .label,
+.menu-ui:disabled > .label,
+.context-menu-ui .menu-item:disabled > .label,
+.menu-bar-ui .context-menu .menu-item:disabled > .label,
+.menu-ui .context-menu .menu-item:disabled > .label,
+.menu-item-ui.menu-item-ui-windows:disabled > .label,
+.menu-ui.menu-ui-windows:disabled > .label,
+.context-menu-ui.context-menu-ui-windows .menu-item:disabled > .label,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:disabled > .label,
+.menu-ui.menu-ui-windows .context-menu .menu-item:disabled > .label,
+.menu-item-ui:ui-windows:disabled > .label,
+.menu-ui:ui-windows:disabled > .label,
+.context-menu-ui:ui-windows .menu-item:disabled > .label,
+.menu-bar-ui:ui-windows .context-menu .menu-item:disabled > .label,
+.menu-ui:ui-windows .context-menu .menu-item:disabled > .label {
+    -fx-text-fill: win-text-disabled-color;
+}
+
+.context-menu-ui .separator .line,
+.menu-bar-ui .context-menu .separator .line,
+.menu-ui .context-menu .separator .line,
+.context-menu-ui.context-menu-ui-windows .separator .line,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .separator .line,
+.menu-ui.menu-ui-windows .context-menu .separator .line,
+.context-menu-ui:ui-windows .separator .line,
+.menu-bar-ui:ui-windows .context-menu .separator .line,
+.menu-ui:ui-windows .context-menu .separator .line {
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1 0 0 0;
+}
+
+.menu-item-ui .arrow,
+.menu-ui .arrow,
+.context-menu-ui .menu-item .arrow,
+.menu-bar-ui .context-menu .menu-item .arrow,
+.menu-ui .context-menu .menu-item .arrow,
+.menu-item-ui .check,
+.menu-ui .check,
+.context-menu-ui .menu-item .check,
+.menu-bar-ui .context-menu .menu-item .check,
+.menu-ui .context-menu .menu-item .check,
+.menu-item-ui .radio,
+.menu-ui .radio,
+.context-menu-ui .menu-item .radio,
+.menu-bar-ui .context-menu .menu-item .radio,
+.menu-ui .context-menu .menu-item .radio,
+.menu-item-ui.menu-item-ui-windows .arrow,
+.menu-ui.menu-ui-windows .arrow,
+.context-menu-ui.context-menu-ui-windows .menu-item .arrow,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item .arrow,
+.menu-ui.menu-ui-windows .context-menu .menu-item .arrow,
+.menu-item-ui.menu-item-ui-windows .check,
+.menu-ui.menu-ui-windows .check,
+.context-menu-ui.context-menu-ui-windows .menu-item .check,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item .check,
+.menu-ui.menu-ui-windows .context-menu .menu-item .check,
+.menu-item-ui.menu-item-ui-windows .radio,
+.menu-ui.menu-ui-windows .radio,
+.context-menu-ui.context-menu-ui-windows .menu-item .radio,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item .radio,
+.menu-ui.menu-ui-windows .context-menu .menu-item .radio,
+.menu-item-ui:ui-windows .arrow,
+.menu-ui:ui-windows .arrow,
+.context-menu-ui:ui-windows .menu-item .arrow,
+.menu-bar-ui:ui-windows .context-menu .menu-item .arrow,
+.menu-ui:ui-windows .context-menu .menu-item .arrow,
+.menu-item-ui:ui-windows .check,
+.menu-ui:ui-windows .check,
+.context-menu-ui:ui-windows .menu-item .check,
+.menu-bar-ui:ui-windows .context-menu .menu-item .check,
+.menu-ui:ui-windows .context-menu .menu-item .check,
+.menu-item-ui:ui-windows .radio,
+.menu-ui:ui-windows .radio,
+.context-menu-ui:ui-windows .menu-item .radio,
+.menu-bar-ui:ui-windows .context-menu .menu-item .radio,
+.menu-ui:ui-windows .context-menu .menu-item .radio {
+    -fx-background-color: win-text-color;
+}
+
+.menu-ui .text,
+.menu-ui.menu-ui-windows .text,
+.menu-ui:ui-windows .text {
+    -fx-fill: win-text-color;
+}
+
+.menu-ui:disabled .text,
+.menu-ui.menu-ui-windows:disabled .text,
+.menu-ui:ui-windows:disabled .text {
+    -fx-fill: win-text-disabled-color;
+}
+
+.menu-item-ui:hover > .label,
+.menu-item-ui:focused > .label,
+.menu-item-ui:showing > .label,
+.menu-ui:hover > .label,
+.menu-ui:focused > .label,
+.menu-ui:showing > .label,
+.context-menu-ui .menu-item:hover > .label,
+.context-menu-ui .menu-item:focused > .label,
+.context-menu-ui .menu-item:showing > .label,
+.menu-bar-ui .context-menu .menu-item:hover > .label,
+.menu-bar-ui .context-menu .menu-item:focused > .label,
+.menu-bar-ui .context-menu .menu-item:showing > .label,
+.menu-ui .context-menu .menu-item:hover > .label,
+.menu-ui .context-menu .menu-item:focused > .label,
+.menu-ui .context-menu .menu-item:showing > .label,
+.menu-item-ui.menu-item-ui-windows:hover > .label,
+.menu-item-ui.menu-item-ui-windows:focused > .label,
+.menu-item-ui.menu-item-ui-windows:showing > .label,
+.menu-ui.menu-ui-windows:hover > .label,
+.menu-ui.menu-ui-windows:focused > .label,
+.menu-ui.menu-ui-windows:showing > .label,
+.context-menu-ui.context-menu-ui-windows .menu-item:hover > .label,
+.context-menu-ui.context-menu-ui-windows .menu-item:focused > .label,
+.context-menu-ui.context-menu-ui-windows .menu-item:showing > .label,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:hover > .label,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:focused > .label,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:showing > .label,
+.menu-ui.menu-ui-windows .context-menu .menu-item:hover > .label,
+.menu-ui.menu-ui-windows .context-menu .menu-item:focused > .label,
+.menu-ui.menu-ui-windows .context-menu .menu-item:showing > .label,
+.menu-item-ui:ui-windows:hover > .label,
+.menu-item-ui:ui-windows:focused > .label,
+.menu-item-ui:ui-windows:showing > .label,
+.menu-ui:ui-windows:hover > .label,
+.menu-ui:ui-windows:focused > .label,
+.menu-ui:ui-windows:showing > .label,
+.context-menu-ui:ui-windows .menu-item:hover > .label,
+.context-menu-ui:ui-windows .menu-item:focused > .label,
+.context-menu-ui:ui-windows .menu-item:showing > .label,
+.menu-bar-ui:ui-windows .context-menu .menu-item:hover > .label,
+.menu-bar-ui:ui-windows .context-menu .menu-item:focused > .label,
+.menu-bar-ui:ui-windows .context-menu .menu-item:showing > .label,
+.menu-ui:ui-windows .context-menu .menu-item:hover > .label,
+.menu-ui:ui-windows .context-menu .menu-item:focused > .label,
+.menu-ui:ui-windows .context-menu .menu-item:showing > .label {
+    -fx-text-fill: win-text-color;
+}
+
+.menu-item-ui:disabled > .label,
+.menu-ui:disabled > .label,
+.context-menu-ui .menu-item:disabled > .label,
+.menu-bar-ui .context-menu .menu-item:disabled > .label,
+.menu-ui .context-menu .menu-item:disabled > .label,
+.menu-item-ui.menu-item-ui-windows:disabled > .label,
+.menu-ui.menu-ui-windows:disabled > .label,
+.context-menu-ui.context-menu-ui-windows .menu-item:disabled > .label,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .menu-item:disabled > .label,
+.menu-ui.menu-ui-windows .context-menu .menu-item:disabled > .label,
+.menu-item-ui:ui-windows:disabled > .label,
+.menu-ui:ui-windows:disabled > .label,
+.context-menu-ui:ui-windows .menu-item:disabled > .label,
+.menu-bar-ui:ui-windows .context-menu .menu-item:disabled > .label,
+.menu-ui:ui-windows .context-menu .menu-item:disabled > .label {
+    -fx-text-fill: win-text-disabled-color;
+}
+
+.context-menu-ui .separator:horizontal .line,
+.menu-bar-ui .context-menu .separator:horizontal .line,
+.menu-ui .context-menu .separator:horizontal .line,
+.context-menu-ui.context-menu-ui-windows .separator:horizontal .line,
+.menu-bar-ui.menu-bar-ui-windows .context-menu .separator:horizontal .line,
+.menu-ui.menu-ui-windows .context-menu .separator:horizontal .line,
+.context-menu-ui:ui-windows .separator:horizontal .line,
+.menu-bar-ui:ui-windows .context-menu .separator:horizontal .line,
+.menu-ui:ui-windows .context-menu .separator:horizontal .line {
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1 0 0 0;
+}
+
+.menu-bar-ui,
+.menu-bar-ui.menu-bar-ui-windows,
+.menu-bar-ui:ui-windows {
+    -fx-background-color: win-background-color;
+    -fx-background-insets: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 0 0 1 0;
+}
+
+.menu-bar-ui *,
+.menu-bar-ui.menu-bar-ui-windows *,
+.menu-bar-ui:ui-windows * {
+    -fx-accent: win-hover-background-color !important;
+}
+
+.menu-bar-ui > .container > .menu-button,
+.menu-bar-ui.menu-bar-ui-windows > .container > .menu-button,
+.menu-bar-ui:ui-windows > .container > .menu-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 4;
+}
+
+.menu-bar-ui > .container > .menu-button:hover,
+.menu-bar-ui > .container > .menu-button:focused,
+.menu-bar-ui > .container > .menu-button:showing,
+.menu-bar-ui.menu-bar-ui-windows > .container > .menu-button:hover,
+.menu-bar-ui.menu-bar-ui-windows > .container > .menu-button:focused,
+.menu-bar-ui.menu-bar-ui-windows > .container > .menu-button:showing,
+.menu-bar-ui:ui-windows > .container > .menu-button:hover,
+.menu-bar-ui:ui-windows > .container > .menu-button:focused,
+.menu-bar-ui:ui-windows > .container > .menu-button:showing {
+    -fx-background-color: win-hover-background-color;
+}
+
+.menu-bar-ui .menu .label,
+.menu-bar-ui.menu-bar-ui-windows .menu .label,
+.menu-bar-ui:ui-windows .menu .label {
+    -fx-text-fill: win-text-color;
+}
+
+.menu-bar-ui .menu .text,
+.menu-bar-ui.menu-bar-ui-windows .menu .text,
+.menu-bar-ui:ui-windows .menu .text {
+    -fx-fill: win-text-color;
+}
+
+.menu-bar-ui:disabled,
+.menu-bar-ui .menu:disabled,
+.menu-bar-ui.menu-bar-ui-windows:disabled,
+.menu-bar-ui.menu-bar-ui-windows .menu:disabled,
+.menu-bar-ui:ui-windows:disabled,
+.menu-bar-ui:ui-windows .menu:disabled {
+    -fx-opacity: 0.6;
+}

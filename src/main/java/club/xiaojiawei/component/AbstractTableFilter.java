@@ -1,5 +1,6 @@
 package club.xiaojiawei.component;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.TableValueFilterManager;
 import club.xiaojiawei.controls.TableFilterManagerGroup;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -25,11 +26,7 @@ abstract public class AbstractTableFilter<S, T> extends VBox {
     private final TableFilterManagerGroup<S, T> managerGroup;
 
     public AbstractTableFilter(TableColumn<S, T> tableColumn, TableFilterManagerGroup<S, T> managerGroup) {
-        setStyle("""
-                    -fx-background-color: #F7F8FAFF;
-                    -fx-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 0, 0);
-                    -fx-background-radius: 5;
-                """);
+        JavaFXUI.initializeTheme(this, "table-filter-panel-ui");
         this.tableColumn = tableColumn;
         this.managerGroup = managerGroup;
     }
@@ -50,7 +47,7 @@ abstract public class AbstractTableFilter<S, T> extends VBox {
     /**
      * 请求过滤
      */
-    protected final void requestFiltering(boolean isFiltering){
+    protected final void requestFiltering(boolean isFiltering) {
         this.isFiltering.set(isFiltering);
         managerGroup.filtration(this);
     }
@@ -71,19 +68,20 @@ abstract public class AbstractTableFilter<S, T> extends VBox {
     /**
      * 刷新显示，防止数据和显示不同步的情况
      */
-    public void refresh(){}
+    public void refresh() {
+    }
 
     /**
      * 重置为一开始的模样
      */
-    public void reset(){
+    public void reset() {
         resetInit();
         isFiltering.set(false);
         managerGroup.filtration(null);
         refresh();
     }
 
-    public void changeTableItems(List<S> newItems){
+    public void changeTableItems(List<S> newItems) {
         isFiltering.set(updateTableItems(newItems));
         refresh();
     }

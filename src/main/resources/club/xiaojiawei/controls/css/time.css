@@ -1,47 +1,28 @@
+/* Component structure. Appearance comes from the selected theme. */
 @import "common/date-time-common.css";
-
-.time-root-pane:disabled .javafx-ui-ico{
-    -fx-opacity: 0.5;
-}
-.text-field{
+.text-field {
     -fx-pref-width: 18;
     -fx-padding: 0;
-    -fx-border-color: transparent;
-    -fx-background-color: transparent;
-    /*选中文本的颜色*/
-    -fx-accent: main-color;
-}
-.timeSeparator{
-    -fx-translate-y: -1;
-}
-.timeBackground{
-    -fx-border-color: main-shallow-color;
-    -fx-pref-height: 30;
-    -fx-pref-width: 70;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
-    -fx-background-color: white;
-}
-.timeFullBackground{
-    -fx-border-color: main-shallow-color;
-    -fx-pref-height: 30;
-    -fx-pref-width: 90;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-background-color: white;
-}
-.hideIcoTimeBackground{
-    -fx-pref-width: 50!important;
-}
-.hideIcoTimeFullBackground{
-    -fx-pref-width: 70!important;
 }
 
-.timeBackgroundFocus{
-    -fx-border-color: main-color!important;
-    /*-fx-effect: dropshadow(gaussian, main-shallow-color, 10, 0, 0, 0)!important;*/
+.timeSeparator {
+    -fx-translate-y: -1;
 }
-#timeIco{
-    /*-fx-scale-x: 0.9;*/
-    /*-fx-scale-y: 0.9;*/
+
+.timeBackground {
+    -fx-pref-height: 30;
+    -fx-pref-width: 70;
+}
+
+.timeFullBackground {
+    -fx-pref-height: 30;
+    -fx-pref-width: 90;
+}
+
+.hideIcoTimeBackground {
+    -fx-pref-width: 50!important;
+}
+
+.hideIcoTimeFullBackground {
+    -fx-pref-width: 70!important;
 }

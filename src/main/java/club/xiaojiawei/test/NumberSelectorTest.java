@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.NumberSelector;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -22,7 +23,7 @@ public class NumberSelectorTest extends Application {
     public void start(Stage primaryStage) {
         HBox hBox = new HBox();
         hBox.setSpacing(10);
-        
+
         NumberSelector numberSelector = new NumberSelector();
         numberSelector.setMin(10);
         numberSelector.setMax(50);
@@ -31,15 +32,15 @@ public class NumberSelectorTest extends Application {
         numberSelector.valueProperty().addListener((obs, oldVal, newVal) -> {
             System.out.println("Selected value: " + newVal);
         });
-        
+
         hBox.getChildren().add(numberSelector);
-        
+
         Scene scene = new Scene(hBox, 300, 400);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.setTitle("NumberSelector Test");
         primaryStage.show();
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             numberSelector.setValue(35);
         });
     }

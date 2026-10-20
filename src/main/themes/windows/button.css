@@ -1,0 +1,278 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+/* Semantic fills retain the solid palette and matching borders; sizes remain padding-based. */
+
+.btn-ui,
+.btn-ui.btn-ui-windows,
+.btn-ui:ui-windows {
+    -fx-padding: 7 14;
+    -fx-border-width: 1;
+    -fx-background-color: win-surface-color;
+    -fx-background-insets: 0;
+    win-button-border-color: win-border-color;
+    win-button-active-border-color: win-main-color;
+    win-button-disabled-border-color: win-disabled-color;
+    -fx-border-color: win-button-border-color;
+    -fx-border-style: solid;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-effect: win-control-effect;
+    -fx-text-fill: win-text-color;
+    -fx-cursor: hand;
+}
+
+.btn-ui:hover,
+.btn-ui.btn-ui-windows:hover,
+.btn-ui.btn-ui-windows:focused:hover,
+.btn-ui:ui-windows:hover,
+.btn-ui:ui-windows:focused:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-border-color: win-button-active-border-color;
+    -fx-effect: win-control-effect;
+    -fx-text-fill: win-text-color;
+}
+
+.btn-ui:focused,
+.btn-ui.btn-ui-windows:focused,
+.btn-ui:ui-windows:focused {
+    -fx-background-color: win-surface-color;
+    -fx-border-color: win-button-active-border-color;
+    -fx-effect: win-control-effect;
+    -fx-text-fill: win-text-color;
+}
+
+.btn-ui:focused:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-border-color: win-button-active-border-color;
+    -fx-effect: win-control-effect;
+    -fx-text-fill: win-text-color;
+}
+
+.btn-ui:pressed,
+.btn-ui:selected,
+.btn-ui:focused:pressed,
+.btn-ui:focused:selected,
+.btn-ui.btn-ui-windows:pressed,
+.btn-ui.btn-ui-windows:selected,
+.btn-ui.btn-ui-windows:focused:pressed,
+.btn-ui.btn-ui-windows:focused:selected,
+.btn-ui:ui-windows:pressed,
+.btn-ui:ui-windows:selected,
+.btn-ui:ui-windows:focused:pressed,
+.btn-ui:ui-windows:focused:selected {
+    -fx-background-color: win-pressed-background-color;
+    -fx-border-color: win-button-active-border-color;
+    -fx-effect: null !important;
+    -fx-text-fill: win-text-color;
+}
+
+.btn-ui:disabled,
+.btn-ui.btn-ui-windows:disabled,
+.btn-ui:ui-windows:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-button-disabled-border-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+    -fx-effect: null;
+}
+
+.btn-ui.btn-ui-normal-3d,
+.btn-ui.btn-ui-success-3d,
+.btn-ui.btn-ui-warn-3d,
+.btn-ui.btn-ui-error-3d,
+.btn-ui.btn-ui-normal-3d:pressed,
+.btn-ui.btn-ui-normal-3d:selected,
+.btn-ui.btn-ui-success-3d:pressed,
+.btn-ui.btn-ui-success-3d:selected,
+.btn-ui.btn-ui-warn-3d:pressed,
+.btn-ui.btn-ui-warn-3d:selected,
+.btn-ui.btn-ui-error-3d:pressed,
+.btn-ui.btn-ui-error-3d:selected,
+.btn-ui.btn-ui-normal-3d:disabled,
+.btn-ui.btn-ui-success-3d:disabled,
+.btn-ui.btn-ui-warn-3d:disabled,
+.btn-ui.btn-ui-error-3d:disabled,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d,
+.btn-ui.btn-ui-windows.btn-ui-success-3d,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d,
+.btn-ui.btn-ui-windows.btn-ui-error-3d,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-success-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-success-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-error-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-error-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d:disabled,
+.btn-ui.btn-ui-windows.btn-ui-success-3d:disabled,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d:disabled,
+.btn-ui.btn-ui-windows.btn-ui-error-3d:disabled,
+.btn-ui:ui-windows.btn-ui-normal-3d,
+.btn-ui:ui-windows.btn-ui-success-3d,
+.btn-ui:ui-windows.btn-ui-warn-3d,
+.btn-ui:ui-windows.btn-ui-error-3d,
+.btn-ui:ui-windows.btn-ui-normal-3d:pressed,
+.btn-ui:ui-windows.btn-ui-normal-3d:selected,
+.btn-ui:ui-windows.btn-ui-success-3d:pressed,
+.btn-ui:ui-windows.btn-ui-success-3d:selected,
+.btn-ui:ui-windows.btn-ui-warn-3d:pressed,
+.btn-ui:ui-windows.btn-ui-warn-3d:selected,
+.btn-ui:ui-windows.btn-ui-error-3d:pressed,
+.btn-ui:ui-windows.btn-ui-error-3d:selected,
+.btn-ui:ui-windows.btn-ui-normal-3d:disabled,
+.btn-ui:ui-windows.btn-ui-success-3d:disabled,
+.btn-ui:ui-windows.btn-ui-warn-3d:disabled,
+.btn-ui:ui-windows.btn-ui-error-3d:disabled {
+    -fx-effect: null !important;
+}
+
+.btn-ui.btn-ui-normal,
+.btn-ui.btn-ui-normal-3d,
+.btn-ui.btn-ui-windows.btn-ui-normal,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d,
+.btn-ui:ui-windows.btn-ui-normal,
+.btn-ui:ui-windows.btn-ui-normal-3d {
+    -fx-background-color: normal-color;
+    win-button-border-color: normal-deep-color;
+    win-button-active-border-color: derive(normal-deep-color, -20%);
+    win-button-disabled-border-color: normal-deep-color;
+}
+
+.btn-ui.btn-ui-normal:hover,
+.btn-ui.btn-ui-normal:pressed,
+.btn-ui.btn-ui-normal:selected,
+.btn-ui.btn-ui-normal-3d:hover,
+.btn-ui.btn-ui-normal-3d:pressed,
+.btn-ui.btn-ui-normal-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-normal:hover,
+.btn-ui.btn-ui-windows.btn-ui-normal:pressed,
+.btn-ui.btn-ui-windows.btn-ui-normal:selected,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d:hover,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-normal-3d:selected,
+.btn-ui:ui-windows.btn-ui-normal:hover,
+.btn-ui:ui-windows.btn-ui-normal:pressed,
+.btn-ui:ui-windows.btn-ui-normal:selected,
+.btn-ui:ui-windows.btn-ui-normal-3d:hover,
+.btn-ui:ui-windows.btn-ui-normal-3d:pressed,
+.btn-ui:ui-windows.btn-ui-normal-3d:selected {
+    -fx-background-color: normal-deep-color;
+}
+
+.btn-ui.btn-ui-success,
+.btn-ui.btn-ui-success-3d,
+.btn-ui.btn-ui-windows.btn-ui-success,
+.btn-ui.btn-ui-windows.btn-ui-success-3d,
+.btn-ui:ui-windows.btn-ui-success,
+.btn-ui:ui-windows.btn-ui-success-3d {
+    -fx-background-color: success-color;
+    win-button-border-color: success-deep-color;
+    win-button-active-border-color: derive(success-deep-color, -20%);
+    win-button-disabled-border-color: success-deep-color;
+}
+
+.btn-ui.btn-ui-success:hover,
+.btn-ui.btn-ui-success:pressed,
+.btn-ui.btn-ui-success:selected,
+.btn-ui.btn-ui-success-3d:hover,
+.btn-ui.btn-ui-success-3d:pressed,
+.btn-ui.btn-ui-success-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-success:hover,
+.btn-ui.btn-ui-windows.btn-ui-success:pressed,
+.btn-ui.btn-ui-windows.btn-ui-success:selected,
+.btn-ui.btn-ui-windows.btn-ui-success-3d:hover,
+.btn-ui.btn-ui-windows.btn-ui-success-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-success-3d:selected,
+.btn-ui:ui-windows.btn-ui-success:hover,
+.btn-ui:ui-windows.btn-ui-success:pressed,
+.btn-ui:ui-windows.btn-ui-success:selected,
+.btn-ui:ui-windows.btn-ui-success-3d:hover,
+.btn-ui:ui-windows.btn-ui-success-3d:pressed,
+.btn-ui:ui-windows.btn-ui-success-3d:selected {
+    -fx-background-color: success-deep-color;
+}
+
+.btn-ui.btn-ui-warn,
+.btn-ui.btn-ui-warn-3d,
+.btn-ui.btn-ui-windows.btn-ui-warn,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d,
+.btn-ui:ui-windows.btn-ui-warn,
+.btn-ui:ui-windows.btn-ui-warn-3d {
+    -fx-background-color: warn-color;
+    win-button-border-color: warn-deep-color;
+    win-button-active-border-color: derive(warn-deep-color, -20%);
+    win-button-disabled-border-color: warn-deep-color;
+}
+
+.btn-ui.btn-ui-warn:hover,
+.btn-ui.btn-ui-warn:pressed,
+.btn-ui.btn-ui-warn:selected,
+.btn-ui.btn-ui-warn-3d:hover,
+.btn-ui.btn-ui-warn-3d:pressed,
+.btn-ui.btn-ui-warn-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-warn:hover,
+.btn-ui.btn-ui-windows.btn-ui-warn:pressed,
+.btn-ui.btn-ui-windows.btn-ui-warn:selected,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d:hover,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-warn-3d:selected,
+.btn-ui:ui-windows.btn-ui-warn:hover,
+.btn-ui:ui-windows.btn-ui-warn:pressed,
+.btn-ui:ui-windows.btn-ui-warn:selected,
+.btn-ui:ui-windows.btn-ui-warn-3d:hover,
+.btn-ui:ui-windows.btn-ui-warn-3d:pressed,
+.btn-ui:ui-windows.btn-ui-warn-3d:selected {
+    -fx-background-color: warn-deep-color;
+}
+
+.btn-ui.btn-ui-error,
+.btn-ui.btn-ui-error-3d,
+.btn-ui.btn-ui-windows.btn-ui-error,
+.btn-ui.btn-ui-windows.btn-ui-error-3d,
+.btn-ui:ui-windows.btn-ui-error,
+.btn-ui:ui-windows.btn-ui-error-3d {
+    -fx-background-color: error-color;
+    win-button-border-color: error-deep-color;
+    win-button-active-border-color: derive(error-deep-color, -20%);
+    win-button-disabled-border-color: error-deep-color;
+}
+
+.btn-ui.btn-ui-error:hover,
+.btn-ui.btn-ui-error:pressed,
+.btn-ui.btn-ui-error:selected,
+.btn-ui.btn-ui-error-3d:hover,
+.btn-ui.btn-ui-error-3d:pressed,
+.btn-ui.btn-ui-error-3d:selected,
+.btn-ui.btn-ui-windows.btn-ui-error:hover,
+.btn-ui.btn-ui-windows.btn-ui-error:pressed,
+.btn-ui.btn-ui-windows.btn-ui-error:selected,
+.btn-ui.btn-ui-windows.btn-ui-error-3d:hover,
+.btn-ui.btn-ui-windows.btn-ui-error-3d:pressed,
+.btn-ui.btn-ui-windows.btn-ui-error-3d:selected,
+.btn-ui:ui-windows.btn-ui-error:hover,
+.btn-ui:ui-windows.btn-ui-error:pressed,
+.btn-ui:ui-windows.btn-ui-error:selected,
+.btn-ui:ui-windows.btn-ui-error-3d:hover,
+.btn-ui:ui-windows.btn-ui-error-3d:pressed,
+.btn-ui:ui-windows.btn-ui-error-3d:selected {
+    -fx-background-color: error-deep-color;
+}
+
+.btn-ui-tiny,
+.btn-ui.btn-ui-windows.btn-ui-tiny,
+.btn-ui:ui-windows.btn-ui-tiny {
+    -fx-padding: 2 4 !important;
+}
+
+.btn-ui-small,
+.btn-ui.btn-ui-windows.btn-ui-small,
+.btn-ui:ui-windows.btn-ui-small {
+    -fx-padding: 4 8 !important;
+}
+
+.btn-ui-big,
+.btn-ui.btn-ui-windows.btn-ui-big,
+.btn-ui:ui-windows.btn-ui-big {
+    -fx-padding: 10 20 !important;
+}

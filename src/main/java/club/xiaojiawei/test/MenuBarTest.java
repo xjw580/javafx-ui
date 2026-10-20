@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.ico.ClearIco;
 import club.xiaojiawei.controls.ico.FileIco;
 import club.xiaojiawei.controls.ico.HelpIco;
@@ -42,13 +43,16 @@ public class MenuBarTest extends Application {
         MenuItem menuItem3 = new MenuItem("复制3");
         menuItem3.getStyleClass().addAll("menu-item-ui", "menu-item-ui-small");
         menuItem3.setGraphic(new ClearIco());
-        menu.getItems().addAll(new Menu("fdsf"){{getItems().add(menuItem);getStyleClass().addAll("menu-ui", "menu-ui-small");}}, menuItem2, menuItem3);
+        menu.getItems().addAll(new Menu("fdsf") {{
+            getItems().add(menuItem);
+            getStyleClass().addAll("menu-ui", "menu-ui-small");
+        }}, menuItem2, menuItem3);
         menuBar.getMenus().addAll(menu);
         HBox hBox = new HBox(menuBar);
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.setSpacing(10);
         Scene scene = new Scene(new VBox(menuBar), 400, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

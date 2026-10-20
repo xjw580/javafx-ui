@@ -1,0 +1,136 @@
+/* Preserve the 2.52.2 sizing contracts.
+ * Labeled controls use padding; ComboBox uses cell/editor preferred heights.
+ * Theme borders are accounted for numerically, without an outer height constraint.
+ */
+.btn-ui {
+    -fx-padding: 8 14;
+    -fx-border-width: 0;
+}
+
+.label-ui {
+    -fx-padding: 7 14;
+    -fx-border-width: 1;
+}
+
+.text-field-ui {
+    -fx-padding: 7;
+    -fx-border-width: 1;
+}
+
+.toggle-btn-ui {
+    -fx-padding: 8 15;
+    -fx-border-width: 0;
+}
+
+/* Selection size classes affect the indicator only. */
+.check-box-ui,
+.radio-button-ui {
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.combo-box-ui {
+    -fx-padding: 0;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+}
+
+.combo-box-ui .list-cell {
+    -fx-pref-height: 31;
+}
+
+.combo-box-ui:editable > .text-input {
+    -fx-pref-height: 29;
+}
+
+.combo-box-ui:editable {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-insets: 0 0 1 0;
+}
+
+.combo-box-ui:editable:focused {
+    -fx-border-width: 0 0 2 0;
+    -fx-border-insets: 0;
+}
+
+.combo-box-ui .combo-box-popup .list-view .list-cell {
+    -fx-padding: 0;
+}
+
+.btn-ui-windows-primary,
+.btn-ui-windows-default {
+    -fx-padding: 7 14;
+    -fx-border-width: 1;
+}
+
+.btn-ui-tiny,
+.toggle-btn-ui-tiny {
+    -fx-padding: 3 4 !important;
+}
+
+.label-ui-tiny {
+    -fx-padding: 2 4 !important;
+}
+
+.text-field-ui-tiny {
+    -fx-padding: 2 !important;
+}
+
+.combo-box-ui-tiny .list-cell {
+    -fx-pref-height: 21 !important;
+}
+
+.combo-box-ui-tiny:editable .text-input {
+    -fx-pref-height: 19 !important;
+}
+
+.btn-ui-small,
+.toggle-btn-ui-small {
+    -fx-padding: 5 8 !important;
+}
+
+.label-ui-small {
+    -fx-padding: 4 8 !important;
+}
+
+.text-field-ui-small {
+    -fx-padding: 4 !important;
+}
+
+.combo-box-ui-small .list-cell {
+    -fx-pref-height: 25 !important;
+}
+
+.combo-box-ui-small:editable .text-input {
+    -fx-pref-height: 23 !important;
+}
+
+.btn-ui-big,
+.toggle-btn-ui-big {
+    -fx-padding: 11 20 !important;
+}
+
+.label-ui-big {
+    -fx-padding: 10 20 !important;
+}
+
+.text-field-ui-big {
+    -fx-padding: 10 !important;
+}
+
+.combo-box-ui-big .list-cell {
+    -fx-pref-height: 37 !important;
+}
+
+.combo-box-ui-big:editable .text-input {
+    -fx-pref-height: 35 !important;
+}
+
+/* Tiny cells/editors reduce their native inner padding, never the owner's height. */
+.combo-box-ui-tiny > .list-cell {
+    -fx-padding: 3 0.666667em;
+}
+
+.combo-box-ui-tiny:editable > .text-input {
+    -fx-padding: 2 0.583333em;
+}

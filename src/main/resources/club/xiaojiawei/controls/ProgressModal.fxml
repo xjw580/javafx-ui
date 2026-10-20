@@ -9,7 +9,7 @@
 <?import java.lang.Double?>
 <fx:root type="HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
          styleClass="progress-modal-root-pane"
-         alignment="CENTER" style="-fx-background-color: rgba(0,0,0,.15)" visible="false"
+         alignment="CENTER" visible="false"
          stylesheets="@css/progressModal.css">
     <VBox alignment="CENTER" spacing="10">
         <fx:define>
@@ -18,11 +18,11 @@
         <StackPane fx:id="progressPane">
 <!--            <LoadingIco scaleY="${scale}" scaleX="${scale}" color="main-color"/>-->
             <ProgressIndicator fx:id="progressIndicator" minWidth="${progressPane.width}" minHeight="${progressPane.height}" styleClass="progress-indicator-ui"/>
-            <Label fx:id="progressLabel" style="-fx-text-fill: white;-fx-effect: default-common-effect"/>
+            <Label fx:id="progressLabel" styleClass="progress-modal-label"/>
         </StackPane>
         <VBox spacing="5" alignment="CENTER">
-            <Text fx:id="title" style="-fx-fill: white;-fx-font-size: 16;-fx-font-weight:bold;-fx-effect: default-common-effect"/>
-            <Text fx:id="content" style="-fx-fill: white;-fx-font-size: 14;-fx-effect: default-common-effect"/>
+            <Text fx:id="title" styleClass="progress-modal-title" style="-fx-font-size: 16;-fx-font-weight:bold"/>
+            <Text fx:id="content" styleClass="progress-modal-content" style="-fx-font-size: 14"/>
         </VBox>
     </VBox>
 </fx:root>

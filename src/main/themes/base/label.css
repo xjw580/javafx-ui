@@ -1,0 +1,110 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.label-ui,
+.label-ui.label-ui-base,
+.label-ui:ui-base {
+    -fx-background-color: rgb(250, 250, 252);
+    -fx-border-color: rgba(0, 0, 0, .13);
+}
+
+.label-ui.label-ui-base,
+.label-ui:ui-base {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui-normal {
+    -fx-background-color: rgba(32, 128, 240, 0.12) !important;
+    -fx-border-color: rgba(32, 128, 240, 0.3) !important;
+}
+
+.label-ui-normal * {
+    -fx-fill: rgba(32, 128, 240);
+}
+
+.label-ui-success {
+    -fx-background-color: rgba(24, 160, 88, 0.12) !important;
+    -fx-border-color: rgba(24, 160, 88, 0.3) !important;
+}
+
+.label-ui-success * {
+    -fx-fill: rgba(24, 160, 88);
+}
+
+.label-ui-warn {
+    -fx-background-color: rgba(240, 160, 32, 0.12) !important;
+    -fx-border-color: rgba(240, 160, 32, 0.3) !important;
+}
+
+.label-ui-warn * {
+    -fx-fill: rgba(240, 160, 32);
+}
+
+.label-ui-error {
+    -fx-background-color: rgba(208, 48, 80, 0.12) !important;
+    -fx-border-color: rgba(208, 48, 80, 0.3) !important;
+}
+
+.label-ui-error * {
+    -fx-fill: rgba(208, 48, 80);
+}
+
+.label-ui.label-ui-base:disabled,
+.label-ui:ui-base:disabled {
+    -fx-border-color: rgba(0, 0, 0, .13);
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-normal,
+.label-ui:ui-base.label-ui-normal {
+    -fx-background-color: rgba(32, 128, 240, 0.12) !important;
+    -fx-border-color: rgba(32, 128, 240, 0.3) !important;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-normal *,
+.label-ui:ui-base.label-ui-normal * {
+    -fx-fill: rgb(32, 128, 240);
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-success,
+.label-ui:ui-base.label-ui-success {
+    -fx-background-color: rgba(24, 160, 88, 0.12) !important;
+    -fx-border-color: rgba(24, 160, 88, 0.3) !important;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-success *,
+.label-ui:ui-base.label-ui-success * {
+    -fx-fill: rgb(24, 160, 88);
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-warn,
+.label-ui:ui-base.label-ui-warn {
+    -fx-background-color: rgba(240, 160, 32, 0.12) !important;
+    -fx-border-color: rgba(240, 160, 32, 0.3) !important;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-warn *,
+.label-ui:ui-base.label-ui-warn * {
+    -fx-fill: rgb(240, 160, 32);
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-error,
+.label-ui:ui-base.label-ui-error {
+    -fx-background-color: rgba(208, 48, 80, 0.12) !important;
+    -fx-border-color: rgba(208, 48, 80, 0.3) !important;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.label-ui.label-ui-base.label-ui-error *,
+.label-ui:ui-base.label-ui-error * {
+    -fx-fill: rgb(208, 48, 80);
+    -fx-text-fill: -fx-text-background-color;
+}

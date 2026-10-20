@@ -1,8 +1,4 @@
-#msg{
-    -fx-background-color: normal-color;
+/* Component structure. Appearance comes from the selected theme. */
+#msg {
     -fx-padding: 8;
-    -fx-background-radius: 6
-}
-#triangle{
-    -fx-fill: normal-color
 }

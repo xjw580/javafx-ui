@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.func.DateTimeInterceptor;
 import club.xiaojiawei.utils.ScrollUtil;
 import javafx.animation.Timeline;
@@ -31,6 +32,10 @@ import java.util.function.Predicate;
  */
 public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate> {
 
+    {
+        JavaFXUI.initializeTheme(this, "date-selector-ui");
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 属性                                                                    *
@@ -48,20 +53,20 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
     private final ObjectProperty<Predicate<LocalDate>> dateInterceptor = new SimpleObjectProperty<>();
 
     public String getDate() {
-        return getLocalDate() == null? "" : SHORT_DATE_FORMATTER.format(getLocalDate());
+        return getLocalDate() == null ? "" : SHORT_DATE_FORMATTER.format(getLocalDate());
     }
 
-    public LocalDate getLocalDate(){
+    public LocalDate getLocalDate() {
         return date.get();
     }
 
-    protected ObjectProperty<LocalDate> dateProperty(){
-        if (virtualDate == null){
+    protected ObjectProperty<LocalDate> dateProperty() {
+        if (virtualDate == null) {
             virtualDate = new SimpleObjectProperty<>(getLocalDate());
             virtualDate.addListener((observableValue, localDate, t1) -> {
-                if (test(t1)){
+                if (test(t1)) {
                     date.set(t1);
-                }else {
+                } else {
                     virtualDate.set(localDate);
                 }
             });
@@ -69,7 +74,7 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
         return virtualDate;
     }
 
-    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty(){
+    public ReadOnlyObjectProperty<LocalDate> readOnlyDateProperty() {
         return date.getReadOnlyProperty();
     }
 
@@ -77,19 +82,19 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
      * @param date 格式：yyyy/MM/dd 或 yyyy/MM
      */
     public void setDate(String date) {
-        if (date == null || date.isBlank()){
+        if (date == null || date.isBlank()) {
             setLocalDate(null);
-        }else {
-            if (date.length() == 6){
+        } else {
+            if (date.length() == 6) {
                 setLocalDate(LocalDate.from(DATE_FORMATTER.parse(date)));
-            }else {
+            } else {
                 setLocalDate(LocalDate.from(SHORT_DATE_FORMATTER.parse(date)));
             }
         }
     }
 
-    public void setLocalDate(LocalDate localDate){
-        if (test(localDate)){
+    public void setLocalDate(LocalDate localDate) {
+        if (test(localDate)) {
             date.set(localDate);
         }
     }
@@ -135,18 +140,18 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
      *                                                                         *
      **************************************************************************/
 
-    private void afterFXMLLoaded(){
+    private void afterFXMLLoaded() {
         loadYearPane(LocalDate.now());
         date.addListener((observable, oldDate, newDate) -> {
-            if (virtualDate != null){
+            if (virtualDate != null) {
                 virtualDate.set(newDate);
             }
-            if (newDate != null){
+            if (newDate != null) {
                 yearsPane.getPanes().clear();
                 selectedLabel = null;
                 TitledPane titledPane = loadYearPane(newDate);
 //        解决错位以及pane高度异常问题
-                if (titledPane != null){
+                if (titledPane != null) {
                     titledPane.setExpanded(false);
                     titledPane.setExpanded(true);
                 }
@@ -154,24 +159,25 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
         });
         initScrollBar();
     }
+
     /**
      * 加载年面板
      * @param nowDate
      * @return
      */
-    private TitledPane loadYearPane(LocalDate nowDate){
-        if (nowDate == null){
+    private TitledPane loadYearPane(LocalDate nowDate) {
+        if (nowDate == null) {
             return null;
         }
         yearsPane.setOnScroll(event -> {
-            if (event.getDeltaY() > 0){
+            if (event.getDeltaY() > 0) {
 //                往上滑
-                if (scrollPane.getVvalue() == 0D && Integer.parseInt(yearsPane.getPanes().get(0).getText()) > 0){
+                if (scrollPane.getVvalue() == 0D && Integer.parseInt(yearsPane.getPanes().get(0).getText()) > 0) {
                     yearsPane.getPanes().add(0, buildYearTitledPane(nowDate, Integer.parseInt(yearsPane.getPanes().get(0).getText()) - 1));
                 }
-            }else if (event.getDeltaY() < 0 && Integer.parseInt(yearsPane.getPanes().get(0).getText()) < 9999){
+            } else if (event.getDeltaY() < 0 && Integer.parseInt(yearsPane.getPanes().get(0).getText()) < 9999) {
 //                往下滑
-                if (scrollPane.getVvalue() == 1D){
+                if (scrollPane.getVvalue() == 1D) {
                     yearsPane.getPanes().add(buildYearTitledPane(nowDate));
                 }
             }
@@ -180,7 +186,7 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
         TitledPane expandedPane = null;
         for (int y = nowDate.getYear(); y < endYear; y++) {
             TitledPane titledPane = buildYearTitledPane(nowDate, y);
-            if (y == nowDate.getYear()){
+            if (y == nowDate.getYear()) {
                 yearsPane.setExpandedPane(expandedPane = titledPane);
             }
             yearsPane.getPanes().add(titledPane);
@@ -193,24 +199,24 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
     /**
      * 初始化侧边的滚动条
      */
-    private void initScrollBar(){
+    private void initScrollBar() {
         scrollBar.setOnScroll(event -> {
-            if (event.getDeltaY() > 0){
+            if (event.getDeltaY() > 0) {
                 yearsPane.fireEvent(event);
-            }else if (event.getDeltaY() < 0){
+            } else if (event.getDeltaY() < 0) {
                 yearsPane.fireEvent(event);
             }
             scrollBar.setValue(50D);
         });
         scrollBar.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (!allowExec){
+            if (!allowExec) {
                 allowExec = true;
                 return;
             }
-            if (newValue.doubleValue() > oldValue.doubleValue()){
+            if (newValue.doubleValue() > oldValue.doubleValue()) {
                 allowExec = false;
                 yearsPane.fireEvent(ScrollUtil.ofNewEvent(-10D));
-            }else if (newValue.doubleValue() < oldValue.doubleValue()){
+            } else if (newValue.doubleValue() < oldValue.doubleValue()) {
                 allowExec = false;
                 yearsPane.fireEvent(ScrollUtil.ofNewEvent(10D));
             }
@@ -223,7 +229,7 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
      * @param nowDate
      * @return
      */
-    private TitledPane buildYearTitledPane(LocalDate nowDate){
+    private TitledPane buildYearTitledPane(LocalDate nowDate) {
         return buildYearTitledPane(nowDate, Integer.parseInt(yearsPane.getPanes().get(yearsPane.getPanes().size() - 1).getText()) + 1);
     }
 
@@ -233,11 +239,11 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
      * @param buildYear 需要创建哪一年的年面板
      * @return
      */
-    private TitledPane buildYearTitledPane(LocalDate nowDate, int buildYear){
+    private TitledPane buildYearTitledPane(LocalDate nowDate, int buildYear) {
         TitledPane newYearPane = new TitledPane();
         newYearPane.getStyleClass().add(TITLED_PANE_UI_STYLE_CLASS);
         newYearPane.expandedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue){
+            if (newValue) {
                 ObservableList<TitledPane> panes = this.yearsPane.getPanes();
                 int yearIndex = 0;
                 for (; yearIndex < panes.size(); yearIndex++) {
@@ -251,7 +257,7 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
                 for (int j = panes.size() - yearIndex; j < showCount; j++) {
                     panes.add(buildYearTitledPane(nowDate));
                 }
-                if (yearIndex != 0){
+                if (yearIndex != 0) {
                     int finalYearIndex = yearIndex;
 //                    延迟等待新加的pane渲染完毕
                     new Timer().schedule(new TimerTask() {
@@ -280,25 +286,26 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
         newYearPane.setContent(buildMonthTilePane(nowDate, buildYear));
         return newYearPane;
     }
+
     /**
      * 创建月面板
      * @param nowDate
      * @param buildYear 需要创建哪一年的月面板
      * @return
      */
-    private TilePane buildMonthTilePane(LocalDate nowDate, int buildYear){
+    private TilePane buildMonthTilePane(LocalDate nowDate, int buildYear) {
         TilePane newMonthPane = new TilePane();
         newMonthPane.setAlignment(Pos.CENTER);
         for (int m = 1; m <= 12; m++) {
             Label label = new Label();
-            if (nowDate.getYear() == buildYear && nowDate.getMonthValue() == m){
+            if (nowDate.getYear() == buildYear && nowDate.getMonthValue() == m) {
                 (selectedLabel = label).getStyleClass().add(SELECTED_LABEL_STYLE_CLASS);
             }
             label.setText(String.valueOf(m));
             int finalM = m;
             label.setOnMouseClicked(event -> {
                 LocalDate localDate = LocalDate.of(buildYear, Month.of(finalM), Math.min((getLocalDate() == null ? LocalDate.now().getDayOfMonth() : getLocalDate().getDayOfMonth()), calcMaxDayForMonth(LocalDate.of(buildYear, finalM, 1))));
-                if (test(localDate)){
+                if (test(localDate)) {
                     selectedLabel.getStyleClass().remove(SELECTED_LABEL_STYLE_CLASS);
                     (selectedLabel = label).getStyleClass().add(SELECTED_LABEL_STYLE_CLASS);
                     setLocalDate(localDate);
@@ -335,16 +342,16 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
      * @param date
      * @return
      */
-    public static int calcMaxDayForMonth(LocalDate date){
+    public static int calcMaxDayForMonth(LocalDate date) {
         int days = 30;
         int month = date.getMonth().getValue();
-        if (month == 2){
-            if (date.getYear() % 4 == 0 && (date.getYear() % 100 != 0 || date.getYear() % 400 == 0)){
+        if (month == 2) {
+            if (date.getYear() % 4 == 0 && (date.getYear() % 100 != 0 || date.getYear() % 400 == 0)) {
                 days = 29;
-            }else {
+            } else {
                 days = 28;
             }
-        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
+        } else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)) {
             days = 31;
         }
         return days;
@@ -356,15 +363,15 @@ public class DateSelector extends HBox implements DateTimeInterceptor<LocalDate>
      * @param month
      * @return
      */
-    public static int calcMaxDayForMonth(int year, int month){
+    public static int calcMaxDayForMonth(int year, int month) {
         int days = 30;
-        if (month == 2){
-            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)){
+        if (month == 2) {
+            if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
                 days = 29;
-            }else {
+            } else {
                 days = 28;
             }
-        }else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)){
+        } else if ((month < 8 && (month & 1) == 1) || (month >= 8 && (month & 1) == 0)) {
             days = 31;
         }
         return days;

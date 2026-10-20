@@ -1,0 +1,84 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.text-area-ui,
+.text-area-ui.text-area-ui-windows,
+.text-area-ui:ui-windows {
+    -fx-background-color: white;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-effect: null;
+    -fx-accent: win-main-color;
+}
+
+.text-area-ui:hover,
+.text-area-ui.text-area-ui-windows:hover,
+.text-area-ui:ui-windows:hover {
+    -fx-background-color: white;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: win-main-color;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-effect: null;
+    -fx-accent: win-main-color;
+    -fx-opacity: 1;
+}
+
+.text-area-ui:focused,
+.text-area-ui.text-area-ui-windows:focused,
+.text-area-ui:ui-windows:focused {
+    -fx-background-color: white;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-color: win-main-color;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-effect: null !important;
+    -fx-accent: win-main-color;
+    -fx-opacity: 1;
+}
+
+.text-area-ui .content,
+.text-area-ui.text-area-ui-windows .content,
+.text-area-ui:ui-windows .content {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3;
+}
+
+.text-area-ui:disabled,
+.text-area-ui.text-area-ui-windows:disabled,
+.text-area-ui:ui-windows:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-opacity: 0.6;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-effect: null;
+    -fx-accent: win-main-color;
+}
+
+.text-area-ui:disabled .content,
+.text-area-ui.text-area-ui-windows:disabled .content,
+.text-area-ui:ui-windows:disabled .content {
+    -fx-background-color: win-background-color;
+    -fx-background-radius: 3;
+}
+
+.text-area-ui .text,
+.text-area-ui.text-area-ui-windows .text,
+.text-area-ui:ui-windows .text {
+    -fx-fill: win-text-color;
+}
+
+.text-area-ui:disabled .text,
+.text-area-ui.text-area-ui-windows:disabled .text,
+.text-area-ui:ui-windows:disabled .text {
+    -fx-fill: win-text-disabled-color;
+}

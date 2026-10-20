@@ -1,66 +1,74 @@
-#notificationVBox{
-    -fx-background-color: white;
-    -fx-background-radius: 3;
-    -fx-effect: default-hover-effect;
+/* Component structure. Appearance comes from the selected theme. */
+#notificationVBox {
     -fx-alignment: CENTER;
     -fx-padding: 15 10 15 15;
     -fx-spacing: 20;
     -fx-border-width: 0 0 0 2;
-    -fx-border-radius: 3;
 }
-.notificationVBox-small{
+
+.notificationVBox-small {
     -fx-padding: 10 5 10 15!important;
     -fx-spacing: 10!important;
 }
-.notificationVBox-small > #bottomHBox{
+
+.notificationVBox-small > #bottomHBox {
     -fx-padding: 0 20 0 25!important;
 }
-.notificationVBox-small > .notificationTopHBox{
+
+.notificationVBox-small > .notificationTopHBox {
     -fx-spacing: 10!important;
 }
-.notificationVBox-small > .notificationTopHBox > #tipIcoPane{
+
+.notificationVBox-small > .notificationTopHBox > #tipIcoPane {
     -fx-scale-x: 1.3!important;
     -fx-scale-y: 1.3!important;
 }
-.notificationVBox-tiny{
+
+.notificationVBox-tiny {
     -fx-padding: 6 3 6 10!important;
     -fx-spacing: 10!important;
 }
-.notificationVBox-tiny > #bottomHBox{
+
+.notificationVBox-tiny > #bottomHBox {
     -fx-padding: 0 12 0 18!important;
 }
-.notificationVBox-tiny > .notificationTopHBox{
+
+.notificationVBox-tiny > .notificationTopHBox {
     -fx-spacing: 5!important;
 }
-.notificationVBox-tiny > .notificationTopHBox > #tipIcoPane{
+
+.notificationVBox-tiny > .notificationTopHBox > #tipIcoPane {
     -fx-scale-x: 1.1!important;
     -fx-scale-y: 1.1!important;
 }
-#notificationVBox > .notificationTopHBox > #titleLabel{
+
+#notificationVBox > .notificationTopHBox > #titleLabel {
     -fx-font-weight: BOLD;
 }
-#notificationVBox > #bottomHBox > #contentLabel{
+
+#notificationVBox > #bottomHBox > #contentLabel {
     -fx-wrap-text: true;
 }
-#notificationVBox > .notificationTopHBox{
+
+#notificationVBox > .notificationTopHBox {
     -fx-alignment: CENTER;
     -fx-spacing: 15;
 }
-#notificationVBox > #bottomHBox{
+
+#notificationVBox > #bottomHBox {
     -fx-padding: 0 25 0 30;
 }
-#notificationVBox > .notificationTopHBox > #closeIcoPane{
+
+#notificationVBox > .notificationTopHBox > #closeIcoPane {
     -fx-padding: 3;
-    -fx-background-radius: 3;
 }
-#notificationVBox > .notificationTopHBox > #closeIcoPane:hover{
-    -fx-background-color: rgba(128, 128, 128, 0.1);
-}
-#notificationVBox > .notificationTopHBox > #closeIcoPane > .notificationCloseIco{
+
+#notificationVBox > .notificationTopHBox > #closeIcoPane > .notificationCloseIco {
     -fx-scale-y: 0.75;
     -fx-scale-x: 0.75;
 }
-#notificationVBox > .notificationTopHBox > #tipIcoPane{
+
+#notificationVBox > .notificationTopHBox > #tipIcoPane {
     -fx-scale-x: 1.5;
     -fx-scale-y: 1.5;
 }

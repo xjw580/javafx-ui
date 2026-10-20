@@ -1,0 +1,253 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.table-view-ui.table-view-ui-base .scroll-bar:vertical,
+.list-view-ui.list-view-ui-base .scroll-bar:vertical,
+.tree-view-ui.tree-view-ui-base .scroll-bar:vertical,
+.text-area-ui.text-area-ui-base .scroll-bar:vertical,
+.combo-box-ui.combo-box-ui-base .scroll-bar:vertical,
+.table-view-ui:ui-base .scroll-bar:vertical,
+.list-view-ui:ui-base .scroll-bar:vertical,
+.tree-view-ui:ui-base .scroll-bar:vertical,
+.text-area-ui:ui-base .scroll-bar:vertical,
+.combo-box-ui:ui-base .scroll-bar:vertical {
+    -fx-pref-width: -1;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar:horizontal,
+.list-view-ui.list-view-ui-base .scroll-bar:horizontal,
+.tree-view-ui.tree-view-ui-base .scroll-bar:horizontal,
+.text-area-ui.text-area-ui-base .scroll-bar:horizontal,
+.combo-box-ui.combo-box-ui-base .scroll-bar:horizontal,
+.table-view-ui:ui-base .scroll-bar:horizontal,
+.list-view-ui:ui-base .scroll-bar:horizontal,
+.tree-view-ui:ui-base .scroll-bar:horizontal,
+.text-area-ui:ui-base .scroll-bar:horizontal,
+.combo-box-ui:ui-base .scroll-bar:horizontal {
+    -fx-pref-height: -1;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar,
+.list-view-ui.list-view-ui-base .scroll-bar,
+.tree-view-ui.tree-view-ui-base .scroll-bar,
+.text-area-ui.text-area-ui-base .scroll-bar,
+.combo-box-ui.combo-box-ui-base .scroll-bar,
+.table-view-ui:ui-base .scroll-bar,
+.list-view-ui:ui-base .scroll-bar,
+.tree-view-ui:ui-base .scroll-bar,
+.text-area-ui:ui-base .scroll-bar,
+.combo-box-ui:ui-base .scroll-bar {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+    -fx-background-insets: 6, 0, 0, 0;
+    -fx-border-width: 0;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar:hover,
+.list-view-ui.list-view-ui-base .scroll-bar:hover,
+.tree-view-ui.tree-view-ui-base .scroll-bar:hover,
+.text-area-ui.text-area-ui-base .scroll-bar:hover,
+.combo-box-ui.combo-box-ui-base .scroll-bar:hover,
+.table-view-ui:ui-base .scroll-bar:hover,
+.list-view-ui:ui-base .scroll-bar:hover,
+.tree-view-ui:ui-base .scroll-bar:hover,
+.text-area-ui:ui-base .scroll-bar:hover,
+.combo-box-ui:ui-base .scroll-bar:hover {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+    -fx-background-insets: 4, 0, 0, 0;
+    -fx-border-width: 0;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar .track,
+.list-view-ui.list-view-ui-base .scroll-bar .track,
+.tree-view-ui.tree-view-ui-base .scroll-bar .track,
+.text-area-ui.text-area-ui-base .scroll-bar .track,
+.combo-box-ui.combo-box-ui-base .scroll-bar .track,
+.table-view-ui:ui-base .scroll-bar .track,
+.list-view-ui:ui-base .scroll-bar .track,
+.tree-view-ui:ui-base .scroll-bar .track,
+.text-area-ui:ui-base .scroll-bar .track,
+.combo-box-ui:ui-base .scroll-bar .track {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 2em;
+    -fx-border-width: 1;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar:horizontal .increment-button,
+.table-view-ui.table-view-ui-base .scroll-bar:horizontal .decrement-button,
+.list-view-ui.list-view-ui-base .scroll-bar:horizontal .increment-button,
+.list-view-ui.list-view-ui-base .scroll-bar:horizontal .decrement-button,
+.tree-view-ui.tree-view-ui-base .scroll-bar:horizontal .increment-button,
+.tree-view-ui.tree-view-ui-base .scroll-bar:horizontal .decrement-button,
+.text-area-ui.text-area-ui-base .scroll-bar:horizontal .increment-button,
+.text-area-ui.text-area-ui-base .scroll-bar:horizontal .decrement-button,
+.combo-box-ui.combo-box-ui-base .scroll-bar:horizontal .increment-button,
+.combo-box-ui.combo-box-ui-base .scroll-bar:horizontal .decrement-button,
+.table-view-ui:ui-base .scroll-bar:horizontal .increment-button,
+.table-view-ui:ui-base .scroll-bar:horizontal .decrement-button,
+.list-view-ui:ui-base .scroll-bar:horizontal .increment-button,
+.list-view-ui:ui-base .scroll-bar:horizontal .decrement-button,
+.tree-view-ui:ui-base .scroll-bar:horizontal .increment-button,
+.tree-view-ui:ui-base .scroll-bar:horizontal .decrement-button,
+.text-area-ui:ui-base .scroll-bar:horizontal .increment-button,
+.text-area-ui:ui-base .scroll-bar:horizontal .decrement-button,
+.combo-box-ui:ui-base .scroll-bar:horizontal .increment-button,
+.combo-box-ui:ui-base .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0 0 10 0;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar:vertical .increment-button,
+.table-view-ui.table-view-ui-base .scroll-bar:vertical .decrement-button,
+.list-view-ui.list-view-ui-base .scroll-bar:vertical .increment-button,
+.list-view-ui.list-view-ui-base .scroll-bar:vertical .decrement-button,
+.tree-view-ui.tree-view-ui-base .scroll-bar:vertical .increment-button,
+.tree-view-ui.tree-view-ui-base .scroll-bar:vertical .decrement-button,
+.text-area-ui.text-area-ui-base .scroll-bar:vertical .increment-button,
+.text-area-ui.text-area-ui-base .scroll-bar:vertical .decrement-button,
+.combo-box-ui.combo-box-ui-base .scroll-bar:vertical .increment-button,
+.combo-box-ui.combo-box-ui-base .scroll-bar:vertical .decrement-button,
+.table-view-ui:ui-base .scroll-bar:vertical .increment-button,
+.table-view-ui:ui-base .scroll-bar:vertical .decrement-button,
+.list-view-ui:ui-base .scroll-bar:vertical .increment-button,
+.list-view-ui:ui-base .scroll-bar:vertical .decrement-button,
+.tree-view-ui:ui-base .scroll-bar:vertical .increment-button,
+.tree-view-ui:ui-base .scroll-bar:vertical .decrement-button,
+.text-area-ui:ui-base .scroll-bar:vertical .increment-button,
+.text-area-ui:ui-base .scroll-bar:vertical .decrement-button,
+.combo-box-ui:ui-base .scroll-bar:vertical .increment-button,
+.combo-box-ui:ui-base .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0 10 0 0;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar .increment-arrow,
+.table-view-ui.table-view-ui-base .scroll-bar .decrement-arrow,
+.list-view-ui.list-view-ui-base .scroll-bar .increment-arrow,
+.list-view-ui.list-view-ui-base .scroll-bar .decrement-arrow,
+.tree-view-ui.tree-view-ui-base .scroll-bar .increment-arrow,
+.tree-view-ui.tree-view-ui-base .scroll-bar .decrement-arrow,
+.text-area-ui.text-area-ui-base .scroll-bar .increment-arrow,
+.text-area-ui.text-area-ui-base .scroll-bar .decrement-arrow,
+.combo-box-ui.combo-box-ui-base .scroll-bar .increment-arrow,
+.combo-box-ui.combo-box-ui-base .scroll-bar .decrement-arrow,
+.table-view-ui:ui-base .scroll-bar .increment-arrow,
+.table-view-ui:ui-base .scroll-bar .decrement-arrow,
+.list-view-ui:ui-base .scroll-bar .increment-arrow,
+.list-view-ui:ui-base .scroll-bar .decrement-arrow,
+.tree-view-ui:ui-base .scroll-bar .increment-arrow,
+.tree-view-ui:ui-base .scroll-bar .decrement-arrow,
+.text-area-ui:ui-base .scroll-bar .increment-arrow,
+.text-area-ui:ui-base .scroll-bar .decrement-arrow,
+.combo-box-ui:ui-base .scroll-bar .increment-arrow,
+.combo-box-ui:ui-base .scroll-bar .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, derive(-fx-base, -45%);
+    -fx-shape: " ";
+    -fx-padding: 0.15em 0;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar:vertical .increment-arrow,
+.table-view-ui.table-view-ui-base .scroll-bar:vertical .decrement-arrow,
+.list-view-ui.list-view-ui-base .scroll-bar:vertical .increment-arrow,
+.list-view-ui.list-view-ui-base .scroll-bar:vertical .decrement-arrow,
+.tree-view-ui.tree-view-ui-base .scroll-bar:vertical .increment-arrow,
+.tree-view-ui.tree-view-ui-base .scroll-bar:vertical .decrement-arrow,
+.text-area-ui.text-area-ui-base .scroll-bar:vertical .increment-arrow,
+.text-area-ui.text-area-ui-base .scroll-bar:vertical .decrement-arrow,
+.combo-box-ui.combo-box-ui-base .scroll-bar:vertical .increment-arrow,
+.combo-box-ui.combo-box-ui-base .scroll-bar:vertical .decrement-arrow,
+.table-view-ui:ui-base .scroll-bar:vertical .increment-arrow,
+.table-view-ui:ui-base .scroll-bar:vertical .decrement-arrow,
+.list-view-ui:ui-base .scroll-bar:vertical .increment-arrow,
+.list-view-ui:ui-base .scroll-bar:vertical .decrement-arrow,
+.tree-view-ui:ui-base .scroll-bar:vertical .increment-arrow,
+.tree-view-ui:ui-base .scroll-bar:vertical .decrement-arrow,
+.text-area-ui:ui-base .scroll-bar:vertical .increment-arrow,
+.text-area-ui:ui-base .scroll-bar:vertical .decrement-arrow,
+.combo-box-ui:ui-base .scroll-bar:vertical .increment-arrow,
+.combo-box-ui:ui-base .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 0 0.15em;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar:horizontal .thumb,
+.table-view-ui.table-view-ui-base .scroll-bar:vertical .thumb,
+.list-view-ui.list-view-ui-base .scroll-bar:horizontal .thumb,
+.list-view-ui.list-view-ui-base .scroll-bar:vertical .thumb,
+.tree-view-ui.tree-view-ui-base .scroll-bar:horizontal .thumb,
+.tree-view-ui.tree-view-ui-base .scroll-bar:vertical .thumb,
+.text-area-ui.text-area-ui-base .scroll-bar:horizontal .thumb,
+.text-area-ui.text-area-ui-base .scroll-bar:vertical .thumb,
+.combo-box-ui.combo-box-ui-base .scroll-bar:horizontal .thumb,
+.combo-box-ui.combo-box-ui-base .scroll-bar:vertical .thumb,
+.table-view-ui:ui-base .scroll-bar:horizontal .thumb,
+.table-view-ui:ui-base .scroll-bar:vertical .thumb,
+.list-view-ui:ui-base .scroll-bar:horizontal .thumb,
+.list-view-ui:ui-base .scroll-bar:vertical .thumb,
+.tree-view-ui:ui-base .scroll-bar:horizontal .thumb,
+.tree-view-ui:ui-base .scroll-bar:vertical .thumb,
+.text-area-ui:ui-base .scroll-bar:horizontal .thumb,
+.text-area-ui:ui-base .scroll-bar:vertical .thumb,
+.combo-box-ui:ui-base .scroll-bar:horizontal .thumb,
+.combo-box-ui:ui-base .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(main-shallow-color, 50%);
+    -fx-background-insets: 6, 0, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar .thumb:hover,
+.list-view-ui.list-view-ui-base .scroll-bar .thumb:hover,
+.tree-view-ui.tree-view-ui-base .scroll-bar .thumb:hover,
+.text-area-ui.text-area-ui-base .scroll-bar .thumb:hover,
+.combo-box-ui.combo-box-ui-base .scroll-bar .thumb:hover,
+.table-view-ui.table-view-ui-base .scroll-bar .thumb:pressed,
+.list-view-ui.list-view-ui-base .scroll-bar .thumb:pressed,
+.tree-view-ui.tree-view-ui-base .scroll-bar .thumb:pressed,
+.text-area-ui.text-area-ui-base .scroll-bar .thumb:pressed,
+.combo-box-ui.combo-box-ui-base .scroll-bar .thumb:pressed,
+.table-view-ui:ui-base .scroll-bar .thumb:hover,
+.list-view-ui:ui-base .scroll-bar .thumb:hover,
+.tree-view-ui:ui-base .scroll-bar .thumb:hover,
+.text-area-ui:ui-base .scroll-bar .thumb:hover,
+.combo-box-ui:ui-base .scroll-bar .thumb:hover,
+.table-view-ui:ui-base .scroll-bar .thumb:pressed,
+.list-view-ui:ui-base .scroll-bar .thumb:pressed,
+.tree-view-ui:ui-base .scroll-bar .thumb:pressed,
+.text-area-ui:ui-base .scroll-bar .thumb:pressed,
+.combo-box-ui:ui-base .scroll-bar .thumb:pressed {
+    -fx-background-color: derive(main-shallow-color, 50%);
+    -fx-background-insets: 6, 0, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.table-view-ui.table-view-ui-base .scroll-bar:hover .thumb,
+.list-view-ui.list-view-ui-base .scroll-bar:hover .thumb,
+.tree-view-ui.tree-view-ui-base .scroll-bar:hover .thumb,
+.text-area-ui.text-area-ui-base .scroll-bar:hover .thumb,
+.combo-box-ui.combo-box-ui-base .scroll-bar:hover .thumb,
+.table-view-ui:ui-base .scroll-bar:hover .thumb,
+.list-view-ui:ui-base .scroll-bar:hover .thumb,
+.tree-view-ui:ui-base .scroll-bar:hover .thumb,
+.text-area-ui:ui-base .scroll-bar:hover .thumb,
+.combo-box-ui:ui-base .scroll-bar:hover .thumb {
+    -fx-background-color: derive(main-shallow-color, 0%);
+    -fx-background-insets: 4, 0, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.table-view-ui.table-view-ui-base .corner,
+.list-view-ui.list-view-ui-base .corner,
+.tree-view-ui.tree-view-ui-base .corner,
+.text-area-ui.text-area-ui-base .corner,
+.combo-box-ui.combo-box-ui-base .corner,
+.table-view-ui:ui-base .corner,
+.list-view-ui:ui-base .corner,
+.tree-view-ui:ui-base .corner,
+.text-area-ui:ui-base .corner,
+.combo-box-ui:ui-base .corner {
+    -fx-background-color: derive(-fx-base, -1%);
+}

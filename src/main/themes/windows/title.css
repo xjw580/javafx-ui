@@ -1,0 +1,30 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.title-ui,
+.title-ui.title-ui-windows,
+.title-ui:ui-windows {
+    -fx-background-color: win-background-color;
+    -fx-background-radius: 0;
+    -fx-border-color: win-main-color;
+    -fx-border-width: 0 0 0 3;
+    -fx-padding: 13 50 13 13;
+    -fx-fill: win-text-color;
+    -fx-text-fill: win-text-color;
+}
+
+.title-ui *,
+.title-ui.title-ui-windows *,
+.title-ui:ui-windows * {
+    -fx-fill: win-text-color;
+}
+
+.title-ui:disabled,
+.title-ui:disabled *,
+.title-ui.title-ui-windows:disabled,
+.title-ui.title-ui-windows:disabled *,
+.title-ui:ui-windows:disabled,
+.title-ui:ui-windows:disabled * {
+    -fx-fill: win-text-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+}

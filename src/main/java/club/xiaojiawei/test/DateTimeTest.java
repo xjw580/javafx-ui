@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.DateTime;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -31,7 +32,7 @@ public class DateTimeTest extends Application {
         Button refresh = new Button("refresh");
         refresh.setOnMouseClicked(mouseEvent -> dateTime.refresh());
         Scene scene = new Scene(new FlowPane(dateTime, refresh), 300, 200);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
 //        dateTime.dateTimeProperty().set(LocalDateTime.now().plusHours(1));

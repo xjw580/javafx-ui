@@ -1,0 +1,84 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.toggle-btn-ui,
+.toggle-btn-ui.toggle-btn-ui-windows,
+.toggle-btn-ui:ui-windows {
+    -fx-padding: 7 15;
+    -fx-border-width: 1;
+    -fx-background-color: win-surface-color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: win-border-color;
+    -fx-text-fill: win-text-color;
+    -fx-effect: win-control-effect;
+    -fx-opacity: 1;
+    -fx-border-radius: 4;
+}
+
+.toggle-btn-ui:hover,
+.toggle-btn-ui.toggle-btn-ui-windows:hover,
+.toggle-btn-ui:ui-windows:hover {
+    -fx-background-color: win-hover-background-color;
+    -fx-border-color: win-main-color;
+    -fx-effect: win-control-effect;
+    -fx-text-fill: win-text-color;
+    -fx-opacity: 1;
+}
+
+.toggle-btn-ui:selected,
+.toggle-btn-ui.toggle-btn-ui-windows:selected,
+.toggle-btn-ui:ui-windows:selected {
+    -fx-background-color: win-pressed-background-color;
+    -fx-border-color: win-main-color;
+    -fx-text-fill: win-main-color;
+    -fx-effect: win-control-effect;
+    -fx-opacity: 1;
+}
+
+.toggle-btn-ui:selected:hover,
+.toggle-btn-ui.toggle-btn-ui-windows:selected:hover,
+.toggle-btn-ui:ui-windows:selected:hover {
+    -fx-background-color: win-pressed-background-color;
+    -fx-border-color: win-main-color;
+    -fx-text-fill: win-main-color;
+    -fx-effect: win-control-effect;
+    -fx-opacity: 1;
+}
+
+.toggle-btn-ui:disabled,
+.toggle-btn-ui:selected:disabled,
+.toggle-btn-ui.toggle-btn-ui-windows:disabled,
+.toggle-btn-ui.toggle-btn-ui-windows:selected:disabled,
+.toggle-btn-ui:ui-windows:disabled,
+.toggle-btn-ui:ui-windows:selected:disabled {
+    -fx-background-color: win-background-color;
+    -fx-border-color: win-disabled-color;
+    -fx-text-fill: win-text-disabled-color;
+    -fx-opacity: 0.6;
+    -fx-effect: null;
+}
+
+.toggle-btn-ui:focused,
+.toggle-btn-ui.toggle-btn-ui-windows:focused,
+.toggle-btn-ui:ui-windows:focused {
+    -fx-border-color: win-main-color;
+}
+
+.toggle-btn-ui-tiny,
+.toggle-btn-ui.toggle-btn-ui-windows.toggle-btn-ui-tiny,
+.toggle-btn-ui:ui-windows.toggle-btn-ui-tiny {
+    -fx-padding: 2 4 !important;
+}
+
+.toggle-btn-ui-small,
+.toggle-btn-ui.toggle-btn-ui-windows.toggle-btn-ui-small,
+.toggle-btn-ui:ui-windows.toggle-btn-ui-small {
+    -fx-padding: 4 8 !important;
+}
+
+.toggle-btn-ui-big,
+.toggle-btn-ui.toggle-btn-ui-windows.toggle-btn-ui-big,
+.toggle-btn-ui:ui-windows.toggle-btn-ui-big {
+    -fx-padding: 10 20 !important;
+}

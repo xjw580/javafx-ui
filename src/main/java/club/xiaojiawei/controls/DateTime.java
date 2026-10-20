@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.ico.DateIco;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.*;
@@ -29,6 +30,10 @@ import static club.xiaojiawei.controls.TimeSelector.TIME_FULL_FORMATTER;
  */
 public class DateTime extends AbstractDateTimeField<LocalDateTime> {
 
+    {
+        JavaFXUI.initializeTheme(this, "date-time-ui");
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 属性                                                                    *
@@ -52,10 +57,10 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
     private final BooleanProperty rightAngleBackground = new SimpleBooleanProperty(false);
 
     public String getDateTime() {
-        return dateTime.get() == null? null : DATE_TIME_FORMATTER.format(dateTime.get());
+        return dateTime.get() == null ? null : DATE_TIME_FORMATTER.format(dateTime.get());
     }
 
-    public LocalDateTime getLocalDateTime(){
+    public LocalDateTime getLocalDateTime() {
         return dateTime.get();
     }
 
@@ -63,26 +68,26 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
      * @param dateTime 格式：yyyy/MM/dd-HH:mm
      */
     public void setDateTime(String dateTime) {
-        if (dateTime == null ||dateTime.isBlank()){
+        if (dateTime == null || dateTime.isBlank()) {
             setLocalDateTime(null);
-        }else {
+        } else {
             setLocalDateTime(LocalDateTime.from(DATE_TIME_FORMATTER.parse(dateTime)));
         }
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime){
-        if (test(localDateTime)){
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        if (test(localDateTime)) {
             this.dateTime.set(localDateTime);
         }
     }
 
     public ObjectProperty<LocalDateTime> dateTimeProperty() {
-        if (virtualDateTime == null){
+        if (virtualDateTime == null) {
             virtualDateTime = new SimpleObjectProperty<>(getLocalDateTime());
             virtualDateTime.addListener((observableValue, o, t1) -> {
-                if (test(t1)){
+                if (test(t1)) {
                     dateTime.set(t1);
-                }else {
+                } else {
                     virtualDateTime.set(o);
                 }
             });
@@ -90,18 +95,18 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         return virtualDateTime;
     }
 
-    public ReadOnlyObjectProperty<LocalDateTime> readOnlyDateTimeProperty(){
+    public ReadOnlyObjectProperty<LocalDateTime> readOnlyDateTimeProperty() {
         return dateTime.getReadOnlyProperty();
     }
 
     public void setShowSec(boolean showSec) {
         this.showSec = showSec;
         timeControls.setShowSec(showSec);
-        if (showSec){
+        if (showSec) {
             dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_STYLE_CLASS);
             dateTimeBg.getStyleClass().remove(DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
             dateTimeBg.getStyleClass().add(DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
-        }else {
+        } else {
             dateTimeBg.getStyleClass().remove(DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
             dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_STYLE_CLASS);
             dateTimeBg.getStyleClass().add(DATE_TIME_BACKGROUND_STYLE_CLASS);
@@ -114,12 +119,12 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         super.setShowIcon(showIcon);
         dateTimeIco.setVisible(showIcon);
         dateTimeIco.setManaged(showIcon);
-        if (showIcon){
+        if (showIcon) {
             dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS);
             dateTimeBg.getStyleClass().remove(HIDE_ICO_DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
-        }else if (showSec){
+        } else if (showSec) {
             dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_TIME_FULL_BACKGROUND_STYLE_CLASS);
-        }else {
+        } else {
             dateTimeBg.getStyleClass().add(HIDE_ICO_DATE_TIME_BACKGROUND_STYLE_CLASS);
         }
     }
@@ -132,9 +137,9 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
 
     public void setRightAngleBackground(boolean rightAngleBackground) {
         this.rightAngleBackground.set(rightAngleBackground);
-        if (rightAngleBackground){
+        if (rightAngleBackground) {
             dateTimeBg.getStyleClass().add("rightAngleBackground");
-        }else {
+        } else {
             dateTimeBg.getStyleClass().removeAll("rightAngleBackground");
         }
     }
@@ -165,7 +170,8 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
      *                                                                         *
      **************************************************************************/
 
-    public DateTime() {}
+    public DateTime() {
+    }
 
     @FXML
     private DateIco dateTimeIco;
@@ -188,12 +194,12 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
     protected Popup createPopup() {
         Popup dateTimeSelectorPopup = new Popup();
         HBox hBox = new HBox();
-        hBox.setStyle("-fx-effect: dropshadow(gaussian, effect-color, 10, 0, 0, 0)!important;");
+        JavaFXUI.initializeTheme(hBox, "date-time-popup-ui");
         TimeSelector timeSelector = (TimeSelector) timeControls.getPopup().getContent().get(0);
-        timeSelector.setStyle("-fx-background-radius: 0 10 10 0;-fx-effect: none!important;");
+        timeSelector.getStyleClass().add("date-time-popup-time");
         timeSelector.setShowRowCount(9.55);
         Calendar calendar = (Calendar) dateControls.getPopup().getContent().get(0);
-        calendar.setStyle("-fx-background-radius: 10 0 0 10;-fx-effect: none!important;");
+        calendar.getStyleClass().add("date-time-popup-calendar");
         hBox.getChildren().add(calendar);
         hBox.getChildren().add(timeSelector);
         dateTimeSelectorPopup.getContent().add(hBox);
@@ -218,12 +224,12 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         dateControls.focusedReadOnlyProperty().addListener((observableValue, aBoolean, t1) -> dealFocusChange(t1));
         dateControls.dateProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
         dateControls.setInterceptor(localDate -> {
-            if (localDate != null && getInterceptor() != null){
+            if (localDate != null && getInterceptor() != null) {
                 LocalTime localTime = timeControls.getLocalTime();
-                if (localTime == null){
+                if (localTime == null) {
                     return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), LocalTime.MIN.getHour(), LocalTime.MIN.getMinute()))
-                            || getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), LocalTime.MAX.getHour(), LocalTime.MAX.getMinute()));
-                }else {
+                           || getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), LocalTime.MAX.getHour(), LocalTime.MAX.getMinute()));
+                } else {
                     return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute(), localTime.getSecond()));
                 }
             }
@@ -232,13 +238,13 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         timeControls.timeProperty().addListener((observable, oldValue, newValue) -> afterDateTimeChange());
         timeControls.focusedReadOnlyProperty().addListener((observableValue, aBoolean, t1) -> dealFocusChange(t1));
         timeControls.setInterceptor(localTime -> {
-            if (localTime != null && getInterceptor() != null){
+            if (localTime != null && getInterceptor() != null) {
                 LocalDate localDate = dateControls.getLocalDate();
-                if (localDate == null){
+                if (localDate == null) {
                     LocalDate min = LocalDate.MIN, max = LocalDate.MAX;
                     return getInterceptor().test(LocalDateTime.of(min.getYear(), min.getMonth(), min.getDayOfMonth(), localTime.getHour(), localTime.getMinute()))
-                            || getInterceptor().test(LocalDateTime.of(max.getYear(), max.getMonth(), max.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
-                }else {
+                           || getInterceptor().test(LocalDateTime.of(max.getYear(), max.getMonth(), max.getDayOfMonth(), localTime.getHour(), localTime.getMinute()));
+                } else {
                     return getInterceptor().test(LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute(), localTime.getSecond()));
                 }
             }
@@ -246,7 +252,7 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
         });
         dateTime = new ReadOnlyObjectWrapper<>();
         dateTime.addListener((observable, oldValue, newValue) -> {
-            if (virtualDateTime != null){
+            if (virtualDateTime != null) {
                 virtualDateTime.set(newValue);
             }
             updateCompleteDateTime(newValue);
@@ -268,35 +274,35 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
      *                                                                         *
      **************************************************************************/
 
-    private void afterDateTimeChange(){
-        if (!isFromDateTime){
+    private void afterDateTimeChange() {
+        if (!isFromDateTime) {
             LocalDate localDate = dateControls.dateProperty().get();
             LocalTime localTime = timeControls.timeProperty().get();
-            if (localDate != null && localTime != null){
+            if (localDate != null && localTime != null) {
                 LocalDateTime localDateTime = LocalDateTime.of(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth(), localTime.getHour(), localTime.getMinute(), localTime.getSecond());
-                if (test(localDateTime)){
+                if (test(localDateTime)) {
                     dateTime.set(localDateTime);
-                }else {
+                } else {
                     LocalDateTime dateTime = getLocalDateTime();
-                    if (dateTime == null){
+                    if (dateTime == null) {
                         dateControls.setDate(null);
                         PauseTransition pauseTransition = new PauseTransition(Duration.millis(200));
                         pauseTransition.setOnFinished(e -> timeControls.setTime(null));
                         pauseTransition.play();
-                    }else {
+                    } else {
                         dateControls.setLocalDate(LocalDate.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth()));
                         timeControls.setLocalTime(LocalTime.of(dateTime.getHour(), dateTime.getMinute(), dateTime.getSecond()));
                     }
                 }
-            }else if (localDate == null && localTime == null){
+            } else if (localDate == null && localTime == null) {
                 setLocalDateTime(null);
             }
         }
     }
 
-    private void updateCompleteDateTime(LocalDateTime newDateTime){
+    private void updateCompleteDateTime(LocalDateTime newDateTime) {
         isFromDateTime = true;
-        if (newDateTime != null){
+        if (newDateTime != null) {
             dateControls.setLocalDate(LocalDate.of(newDateTime.getYear(), newDateTime.getMonthValue(), newDateTime.getDayOfMonth()));
             timeControls.setLocalTime(LocalTime.of(newDateTime.getHour(), newDateTime.getMinute(), newDateTime.getSecond()));
         }
@@ -304,10 +310,10 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
     }
 
     private void dealFocusChange(boolean isFocus) {
-        if (isFocus){
+        if (isFocus) {
             dateTimeBg.getStyleClass().add(DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS);
             dateTimeIco.setColor("main-color");
-        }else {
+        } else {
             dateTimeBg.getStyleClass().remove(DATE_TIME_BACKGROUND_FOCUS_STYLE_CLASS);
             dateTimeIco.setColor("main-shallow-color");
         }
@@ -321,7 +327,7 @@ public class DateTime extends AbstractDateTimeField<LocalDateTime> {
      **************************************************************************/
 
     @Override
-    public void refresh(){
+    public void refresh() {
         dateControls.refresh();
         timeControls.refresh();
     }

@@ -1,10 +1,8 @@
-#FileUploader{
+/* Component structure. Appearance comes from the selected theme. */
+#FileUploader {
     -fx-padding: 15;
-    -fx-border-radius: 3;
     -fx-cursor: hand;
     -fx-border-style: dashed;
-    -fx-background-color: #fbfbfb;
-    -fx-border-color: grey;
     -fx-alignment: CENTER;
     -fx-hgap: 15;
     -fx-vgap: 15;

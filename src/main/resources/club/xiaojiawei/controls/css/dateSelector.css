@@ -1,31 +1,20 @@
-.label{
+/* Component structure. Appearance comes from the selected theme. */
+.label {
     -fx-pref-width: 34;
     -fx-pref-height: 25;
     -fx-alignment: CENTER;
-    -fx-background-radius: 5;
 }
-.tile-pane{
+
+.tile-pane {
     -fx-alignment: TOP_CENTER;
 }
-.label:hover{
-    -fx-background-color: hover-color;
-}
-.selectedLabel{
-    -fx-background-color: main-color!important;
-    -fx-text-fill: white!important;
-}
-.dateSelectorScrollPane{
+
+.dateSelectorScrollPane {
     -fx-padding: 0;
-    -fx-background: white;
-    -fx-background-color: white;
-    -fx-border-color: white;
-    -fx-background-insets: 0;/*防止点击时移动*/
     -fx-hbar-policy: never;
     -fx-vbar-policy: never;
 }
-#yearsPane{
+
+#yearsPane {
     -fx-padding: 0 1 0 0;
-}
-#root{
-    -fx-background-color: white;
 }

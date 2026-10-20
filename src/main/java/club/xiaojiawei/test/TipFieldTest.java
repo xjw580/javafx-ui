@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Calendar;
 import club.xiaojiawei.controls.NumberField;
 import club.xiaojiawei.controls.TipField;
@@ -43,7 +44,7 @@ public class TipFieldTest extends Application {
         vBox.setSpacing(30);
         vBox.getChildren().addAll(tipField, new Button("click"));
         Scene scene = new Scene(new StackPane(vBox), 400, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

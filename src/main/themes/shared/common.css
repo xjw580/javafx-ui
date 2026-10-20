@@ -1,0 +1,88 @@
+.root {
+    /*Base*/
+    system-color: linear-gradient(to bottom, #efefef, #dcdcdc);
+    system-hover-color: linear-gradient(to bottom, #f4f4f4, #e7e7e7);
+    normal-hover-color: rgba(0, 0, 0, 0.1);
+    main-color: #0075FF;
+    main-shallow-color: #4f9fff;
+    border-color: #dcdcdc;
+    effect-color: #b3d5ff;
+    hover-color: #cae1ff;
+    shallow-color: #e0f0fd;
+    background-color: rgba(251, 251, 251);
+    /*Color*/
+    normal-color: #c7e3fa;
+    normal-deep-color: #aad6fc;
+    success-color: #9ecb9e;
+    success-deep-color: #80ce80;
+    warn-color: #f8da9a;
+    warn-deep-color: #fccf6d;
+    error-color: #f89494;
+    error-deep-color: #fa7a7a;
+
+    /*Effect*/
+    default-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+    default-hover-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 3, 3);
+    default-common-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 10, 0, 1, 1);
+    default-press-effect: innershadow(one-pass-box, rgba(128, 128, 128, 0.67), 5, 0, 1, 1);
+
+    /*TableView*/
+    table-view-bg-color: shallow-color;
+    table-view-hover-color: shallow-color;
+    table-view-selected-color: hover-color;
+    my-custom-table-cell-border-color: #c5c4c4;
+    table-view-ui-idea-bg-color: #efefef;
+    table-view-ui-idea-header-bg-color: transparent;
+    table-view-ui-idea-selected-color: #a7d2ff;
+    table-view-ui-idea-hover-color: #f5f8fe;
+    table-view-ui-idea-upright-bg-color: #efefef;
+    table-view-ui-upright-owner-bg-color: transparent;
+    table-view-ui-upright-header-bg-color: transparent;
+
+    /*Windows Theme Colors*/
+    win-main-color: #0067C0;
+    win-main-hover-color: #005FB8;
+    win-main-pressed-color: #0057A8;
+    win-background-color: #F3F3F3;
+    win-surface-color: #FFFFFF;
+    win-selection-text-color: #FFFFFF;
+    win-border-color: #D1D5DB;
+    win-hover-background-color: #EDF5FD;
+    win-pressed-background-color: #E0EFFF;
+    win-disabled-color: #D8DBE0;
+    win-text-color: #202020;
+    win-text-disabled-color: #7A7A7A;
+    /*Windows Effect*/
+    win-focus-effect: innershadow(gaussian, win-main-color, 1, 1, 0, 0);
+    win-control-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 2, 0, 0, 1);
+    win-popup-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.14), 12, 0, 0, 3);
+}
+
+.text-field {
+    -fx-accent: main-color;
+}
+
+.radius-ui {
+    -fx-background-radius: 5 !important;
+    -fx-border-radius: 5 !important;
+}
+
+.radius-ui-big {
+    -fx-background-radius: 10 !important;
+    -fx-border-radius: 10 !important;
+}
+
+/** {*/
+/*    -fx-accent: main-color;*/
+/*}*/
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 1;
+    /*-fx-background-color: transparent;*/
+    /*-fx-border-color: gray;*/
+    /*-fx-border-width: 0 0 1 0;*/
+}
+
+.fixed-label-color *.label {
+    -fx-text-fill: black; /* �̶�������ɫ */
+}

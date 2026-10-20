@@ -1,0 +1,157 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.menu-ui .text {
+    -fx-fill: black;
+}
+
+.menu-ui:hover {
+    -fx-background-color: normal-hover-color;
+}
+
+.menu-ui,
+.menu-ui.menu-ui-base,
+.menu-ui:ui-base {
+    -fx-padding: 7 14 7 14;
+    -fx-background-radius: 5;
+}
+
+.menu-ui.menu-ui-base,
+.menu-ui:ui-base {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-opacity: 1;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-ui.menu-ui-base > .label,
+.menu-ui:ui-base > .label {
+    -fx-text-fill: black;
+}
+
+.menu-ui.menu-ui-base .text,
+.menu-ui:ui-base .text {
+    -fx-fill: black;
+}
+
+.menu-ui.menu-ui-base:hover,
+.menu-ui:ui-base:hover {
+    -fx-background-color: normal-hover-color !important;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-ui.menu-ui-base:hover > .label,
+.menu-ui:ui-base:hover > .label {
+    -fx-text-fill: black;
+}
+
+.menu-ui.menu-ui-base:focused,
+.menu-ui.menu-ui-base:showing,
+.menu-ui:ui-base:focused,
+.menu-ui:ui-base:showing {
+    -fx-background-color: -fx-selection-bar !important;
+    -fx-text-fill: -fx-selection-bar-text;
+    -fx-mark-color: -fx-focused-mark-color;
+}
+
+.menu-ui.menu-ui-base:focused > .label,
+.menu-ui.menu-ui-base:showing > .label,
+.menu-ui:ui-base:focused > .label,
+.menu-ui:ui-base:showing > .label {
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.menu-ui.menu-ui-base:disabled,
+.menu-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+}
+
+.menu-ui.menu-ui-base:disabled .text,
+.menu-ui:ui-base:disabled .text {
+    -fx-fill: -fx-selection-bar-text;
+}
+
+.menu-ui.menu-ui-base .context-menu,
+.menu-ui:ui-base .context-menu {
+    -fx-background-color: linear-gradient(to bottom, derive(-fx-color, -17%), derive(-fx-color, -30%)), -fx-control-inner-background !important;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-padding: 0.333333em 0.083333em 0.333333em 0.083333em;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0, 0, 8);
+}
+
+.menu-ui.menu-ui-base .context-menu .menu-item,
+.menu-ui:ui-base .context-menu .menu-item {
+    -fx-background-color: transparent !important;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0 !important;
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-border-radius: 0 !important;
+    -fx-padding: 0.333333em 0.41777em 0.333333em 0.41777em;
+    -fx-opacity: 1;
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-ui.menu-ui-base .context-menu .menu-item > .label,
+.menu-ui:ui-base .context-menu .menu-item > .label {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.context-menu .menu-item.menu-ui.menu-ui-base > .label,
+.context-menu .menu-item.menu-ui:ui-base > .label {
+    -fx-text-fill: black;
+}
+
+.menu-ui.menu-ui-base .context-menu .menu-item:hover,
+.menu-ui:ui-base .context-menu .menu-item:hover {
+    -fx-background-color: transparent !important;
+}
+
+.menu-ui.menu-ui-base .context-menu .menu-item:focused,
+.menu-ui.menu-ui-base .context-menu .menu-item:showing,
+.menu-ui:ui-base .context-menu .menu-item:focused,
+.menu-ui:ui-base .context-menu .menu-item:showing {
+    -fx-background-color: -fx-selection-bar !important;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.menu-ui.menu-ui-base .context-menu .menu-item:focused > .label,
+.menu-ui.menu-ui-base .context-menu .menu-item:showing > .label,
+.menu-ui:ui-base .context-menu .menu-item:focused > .label,
+.menu-ui:ui-base .context-menu .menu-item:showing > .label {
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.menu-ui.menu-ui-base .context-menu .menu-item:disabled,
+.menu-ui:ui-base .context-menu .menu-item:disabled {
+    -fx-background-color: transparent !important;
+    -fx-opacity: 0.4;
+}
+
+.menu-ui.menu-ui-base .context-menu .menu-item:disabled > .label,
+.menu-ui:ui-base .context-menu .menu-item:disabled > .label {
+    -fx-text-fill: -fx-text-background-color;
+}
+
+.menu-ui.menu-ui-base .context-menu .separator:horizontal .line,
+.menu-ui:ui-base .context-menu .separator:horizontal .line {
+    -fx-border-color: -fx-box-border transparent transparent transparent;
+    -fx-border-width: 1;
+    -fx-border-insets: 1 0 0 0;
+}
+
+.menu-ui.menu-ui-base .arrow,
+.menu-ui.menu-ui-base .check,
+.menu-ui.menu-ui-base .radio,
+.menu-ui:ui-base .arrow,
+.menu-ui:ui-base .check,
+.menu-ui:ui-base .radio {
+    -fx-background-color: -fx-mark-color;
+}

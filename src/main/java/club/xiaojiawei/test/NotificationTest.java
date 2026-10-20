@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Notification;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -34,7 +35,7 @@ public class NotificationTest extends Application {
         hBox.getChildren().add(notification);
         hBox.getChildren().add(hello);
         Scene scene = new Scene(hBox, 500, 500);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

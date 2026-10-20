@@ -23,7 +23,8 @@ public class TipFieldSkin extends IconTextFieldSkin {
         Button button = new Button(tipField.getTip());
         button.textProperty().bind(tipField.tipProperty());
         button.setFocusTraversable(false);
-        button.setStyle("-fx-background-color: transparent;-fx-border-color: transparent;-fx-text-fill: gray!important;-fx-font-size: 10!important;-fx-padding: 1 0 0 2");
+        button.getStyleClass().add("input-tip-button");
+        button.setStyle("-fx-background-color: transparent;-fx-border-color: transparent;-fx-font-size: 10!important;-fx-padding: 1 0 0 2");
 
         change(button, false);
         addTipButton(button);
@@ -34,7 +35,7 @@ public class TipFieldSkin extends IconTextFieldSkin {
                     isShow = false;
 //                    removeTipButton(button);
                     change(button, false);
-                }else if (!isShow) {
+                } else if (!isShow) {
                     isShow = true;
 //                    addTipButton(button);
                     change(button, true);
@@ -44,7 +45,7 @@ public class TipFieldSkin extends IconTextFieldSkin {
         tipField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 focusText = tipField.getText();
-            }else {
+            } else {
                 isShow = false;
 //                removeTipButton(button);
                 change(button, false);
@@ -53,7 +54,7 @@ public class TipFieldSkin extends IconTextFieldSkin {
 
     }
 
-    private void change(Button button, boolean enable){
+    private void change(Button button, boolean enable) {
         button.setVisible(enable);
 //        button.setManaged(enable);
     }

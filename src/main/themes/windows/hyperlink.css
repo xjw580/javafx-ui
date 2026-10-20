@@ -1,0 +1,48 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.hyperlink,
+.hyperlink-ui-windows,
+.hyperlink-ui:ui-windows {
+    -fx-text-fill: win-main-color;
+    -fx-accent: win-main-color;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+}
+
+.hyperlink:visited,
+.hyperlink-ui-windows:visited,
+.hyperlink-ui:ui-windows:visited {
+    -fx-text-fill: win-main-hover-color;
+}
+
+.hyperlink:hover,
+.hyperlink:hover:visited,
+.hyperlink-ui-windows:hover,
+.hyperlink-ui-windows:hover:visited,
+.hyperlink-ui:ui-windows:hover,
+.hyperlink-ui:ui-windows:hover:visited {
+    -fx-text-fill: win-main-hover-color;
+    -fx-underline: true;
+}
+
+.hyperlink:pressed,
+.hyperlink-ui-windows:pressed,
+.hyperlink-ui:ui-windows:pressed {
+    -fx-text-fill: win-main-pressed-color;
+}
+
+.hyperlink:focused,
+.hyperlink-ui-windows:focused,
+.hyperlink-ui:ui-windows:focused {
+    -fx-border-color: win-main-color;
+    -fx-border-style: dotted;
+}
+
+.hyperlink:disabled,
+.hyperlink-ui-windows:disabled,
+.hyperlink-ui:ui-windows:disabled {
+    -fx-text-fill: win-text-disabled-color;
+    -fx-underline: false;
+}

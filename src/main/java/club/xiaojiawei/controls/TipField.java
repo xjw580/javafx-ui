@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.func.FilterAction;
 import club.xiaojiawei.skin.FilterFieldSkin;
 import club.xiaojiawei.skin.TipFieldSkin;
@@ -14,6 +15,11 @@ import javafx.scene.input.KeyCode;
  * @date 2024/2/22 15:55
  */
 public class TipField extends TextField {
+
+    {
+        JavaFXUI.initializeTheme(this, "tip-field-ui");
+        getStyleClass().add("text-field-ui");
+    }
 
     private final StringProperty tip = new SimpleStringProperty();
 

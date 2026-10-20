@@ -1,0 +1,84 @@
+/* @theme-variants */
+/* Shared declarations for the default theme and explicit theme selectors. */
+
+.list-view-ui,
+.list-view-ui.list-view-ui-windows,
+.list-view-ui:ui-windows {
+    -fx-background-color: win-surface-color;
+    -fx-background-radius: 0;
+    -fx-border-color: win-border-color;
+    -fx-border-width: 1;
+    -fx-border-radius: 0;
+}
+
+.list-view-ui:focused,
+.list-view-ui.list-view-ui-windows:focused,
+.list-view-ui:ui-windows:focused {
+    -fx-border-color: win-main-color;
+}
+
+.list-view-ui .list-cell,
+.list-view-ui.list-view-ui-windows .list-cell,
+.list-view-ui:ui-windows .list-cell {
+    -fx-background-color: win-surface-color;
+    -fx-text-fill: win-text-color;
+    -fx-border-color: transparent;
+}
+
+.list-view-ui .list-cell {
+    -fx-padding: 7;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-view-ui .list-cell:filled:hover,
+.list-view-ui.list-view-ui-windows .list-cell:filled:hover,
+.list-view-ui:ui-windows .list-cell:filled:hover {
+    -fx-background-color: win-hover-background-color;
+}
+
+.list-view-ui .list-cell:filled:selected,
+.list-view-ui .list-cell:filled:selected:hover,
+.list-view-ui.list-view-ui-windows .list-cell:filled:selected,
+.list-view-ui.list-view-ui-windows .list-cell:filled:selected:hover,
+.list-view-ui:ui-windows .list-cell:filled:selected,
+.list-view-ui:ui-windows .list-cell:filled:selected:hover {
+    -fx-background-color: win-main-color, win-pressed-background-color !important;
+    -fx-text-fill: win-text-color;
+    -fx-background-insets: 0, 0 0 0 3;
+}
+
+.list-view-ui:focused .list-cell:filled:selected,
+.list-view-ui.list-view-ui-windows:focused .list-cell:filled:selected,
+.list-view-ui:ui-windows:focused .list-cell:filled:selected {
+    -fx-background-color: win-main-color, win-pressed-background-color !important;
+    -fx-text-fill: win-text-color;
+    -fx-background-insets: 0, 0 0 0 3;
+}
+
+.list-view-ui .list-cell:empty,
+.list-view-ui:focused .list-cell:empty:hover,
+.list-view-ui.list-view-ui-windows .list-cell:empty,
+.list-view-ui.list-view-ui-windows:focused .list-cell:empty:hover,
+.list-view-ui:ui-windows .list-cell:empty,
+.list-view-ui:ui-windows:focused .list-cell:empty:hover {
+    -fx-background-color: win-surface-color !important;
+    -fx-border-color: transparent;
+}
+
+.list-view-ui .list-cell:empty:hover {
+    -fx-background-color: win-surface-color !important;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.list-view-ui:disabled,
+.list-view-ui.list-view-ui-windows:disabled,
+.list-view-ui:ui-windows:disabled {
+    -fx-opacity: 0.6;
+}
+
+.list-view-ui:disabled .list-cell,
+.list-view-ui.list-view-ui-windows:disabled .list-cell,
+.list-view-ui:ui-windows:disabled .list-cell {
+    -fx-text-fill: win-text-disabled-color;
+}

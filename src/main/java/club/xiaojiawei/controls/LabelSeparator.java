@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.skin.LabelSeparatorSkin;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
@@ -34,6 +35,10 @@ import java.util.List;
  */
 public class LabelSeparator extends Control {
 
+    {
+        JavaFXUI.initializeTheme(this, "label-separator-ui");
+    }
+
     public static final String DEFAULT_STYLE_CLASS = "label-separator-ui";
 
     private static final StyleablePropertyFactory<LabelSeparator> STYLEABLES =
@@ -63,7 +68,6 @@ public class LabelSeparator extends Control {
     }
 
     public LabelSeparator(String text, HPos textAlignment) {
-        getStyleClass().add(DEFAULT_STYLE_CLASS);
         setFocusTraversable(false);
         setAccessibleRole(AccessibleRole.TEXT);
         setText(text);

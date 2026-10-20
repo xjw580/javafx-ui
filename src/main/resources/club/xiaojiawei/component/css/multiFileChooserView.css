@@ -1,47 +1,23 @@
+/* Component structure; appearance is scoped by the selected theme. */
+
 .ico-btn {
     -fx-padding: 2;
-    -fx-background-radius: 4;
     -fx-border-width: 0;
-}
-
-.ico-btn:hover {
-    -fx-background-color: rgba(128, 128, 128, 0.25);
-}
-
-.close-ico:hover * {
-    -fx-fill: red;
 }
 
 .combo-box-idea {
-    -fx-border-color: #bababa;
     -fx-border-width: 1.5;
-    -fx-border-radius: 4;
-    -fx-background-radius: 4;
 }
 
-.combo-box-idea:focused {
-    -fx-border-color: main-color;
-}
-
-.combo-box-idea:editable > .text-input, .combo-box-idea .list-cell {
+.combo-box-idea:editable > .text-input,
+.combo-box-idea .list-cell {
     -fx-font-size: 13;
-    /*约束大小，防止过宽*/
     -fx-pref-width: 1;
-    -fx-text-fill: -fx-text-base-color;
-    -fx-background-insets: 0;
     -fx-border-width: 0;
-    -fx-background-color: white;
-}
-
-.combo-box-idea:editable:focused > .text-input {
-    -fx-border-color: main-color;
 }
 
 .combo-box-idea > .arrow-button {
-    -fx-background-color: white;
     -fx-border-width: 0 0 0 1;
-    -fx-border-color: #bababa;
-    -fx-background-insets: 0;
     -fx-border-insets: 0;
 }
 
@@ -51,17 +27,5 @@
 }
 
 .combo-box-idea .combo-box-popup .list-view {
-    /*-fx-font-size: 13;*/
     -fx-padding: 2;
-    -fx-background-color: white, white;
-    -fx-background-radius: 0 0 5 5;
-    -fx-effect: dropshadow( three-pass-box , gray , 15, 0 , 0 , 0 );
-}
-.combo-box-idea .combo-box-popup .list-view .list-cell {
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-background-radius: 5;
-}
-.combo-box-idea  .combo-box-popup .list-view .list-cell:filled:hover {
-    -fx-background-color: #a7d2ff;
 }

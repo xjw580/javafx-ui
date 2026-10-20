@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.OnlyOnce;
 import club.xiaojiawei.component.AbstractTableFilter;
@@ -24,6 +25,10 @@ import java.io.IOException;
  */
 public abstract class AbstractTableFilterManager<S, T> extends StackPane {
 
+    {
+        JavaFXUI.initializeTheme(this, "table-filter-ui");
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 属性                                                                    *
@@ -43,20 +48,20 @@ public abstract class AbstractTableFilterManager<S, T> extends StackPane {
 
     @OnlyOnce
     public void setTableColumn(TableColumn<S, T> tableColumn) {
-        if (tableColumn == null){
+        if (tableColumn == null) {
             throw new NullPointerException("tableColumn");
         }
-        if (outerTableColumn == null){
+        if (outerTableColumn == null) {
             outerTableColumn = tableColumn;
         }
     }
 
     @OnlyOnce
     public void setTableFilterManagerGroup(TableFilterManagerGroup<S, T> tableFilterManagerGroup) {
-        if (tableFilterManagerGroup == null){
+        if (tableFilterManagerGroup == null) {
             throw new NullPointerException("tableFilterManagerGroup");
         }
-        if (this.tableFilterManagerGroup == null){
+        if (this.tableFilterManagerGroup == null) {
             this.tableFilterManagerGroup = tableFilterManagerGroup;
         }
     }
@@ -109,20 +114,20 @@ public abstract class AbstractTableFilterManager<S, T> extends StackPane {
         addListener();
     }
 
-    private void addListener(){
+    private void addListener() {
         filterBtn.setOnAction(actionEvent -> {
-            if (outerTableColumn == null || tableFilterManagerGroup == null){
+            if (outerTableColumn == null || tableFilterManagerGroup == null) {
                 throw new NullPointerException();
             }
             initPopup();
-            if (popup.isShowing()){
+            if (popup.isShowing()) {
                 JavaFXUIThreadPoolConfig.SCHEDULED_POOL.submit(() -> {
                     for (int i = 6; i > 0; i--) {
                         try {
-                            if (popup.getOpacity() == 1){
+                            if (popup.getOpacity() == 1) {
                                 Platform.runLater(() -> popup.setOpacity(0.4));
                                 Thread.sleep(100);
-                            }else {
+                            } else {
                                 Platform.runLater(() -> popup.setOpacity(1));
                                 Thread.sleep(100);
                             }
@@ -131,28 +136,29 @@ public abstract class AbstractTableFilterManager<S, T> extends StackPane {
                         }
                     }
                 });
-            }else {
+            } else {
                 popup.show(this.getScene().getWindow());
             }
         });
     }
 
     @OnlyOnce
-    private void initPopup(){
-        if (popup != null){
+    private void initPopup() {
+        if (popup != null) {
             return;
         }
         String filteringStyleClass = "filteringBtn";
         tableFilter = getTableFilter(outerTableColumn, tableFilterManagerGroup);
         tableFilter.isFilteringReadOnlyProperty().addListener((observableValue, aBoolean, t1) -> {
             filterBtn.getStyleClass().remove(filteringStyleClass);
-            if (t1){
+            if (t1) {
                 filterBtn.getStyleClass().add(filteringStyleClass);
             }
             isFilter.set(t1);
         });
         tableFilterManagerGroup.register(tableFilter);
         Popup newPopup = new Popup();
+        JavaFXUI.followTheme(newPopup, this);
         newPopup.getContent().add(tableFilter);
         newPopup.setAutoHide(true);
         Bounds bounds = this.localToScreen(this.getBoundsInLocal());
@@ -169,8 +175,8 @@ public abstract class AbstractTableFilterManager<S, T> extends StackPane {
      *                                                                         *
      **************************************************************************/
 
-    public void refresh(){
-        if (tableFilter != null){
+    public void refresh() {
+        if (tableFilter != null) {
             tableFilter.refresh();
         }
     }

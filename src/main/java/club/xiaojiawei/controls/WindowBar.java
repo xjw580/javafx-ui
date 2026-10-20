@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.ico.AbstractIco;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -27,6 +28,10 @@ import java.util.Objects;
  */
 public class WindowBar extends StackPane {
 
+    {
+        JavaFXUI.initializeTheme(this, "window-bar-ui");
+    }
+
     /* *************************************************************************
      *                                                                         *
      * 属性                                                                    *
@@ -45,10 +50,10 @@ public class WindowBar extends StackPane {
             if (this.getScene() != null) {
                 if (this.getScene().getWindow() != null) {
                     pinMouseClicked();
-                }else {
+                } else {
                     addWindowListener();
                 }
-            }else {
+            } else {
                 addSceneListener();
             }
         }
@@ -107,7 +112,7 @@ public class WindowBar extends StackPane {
         addListener();
     }
 
-    private void addListener(){
+    private void addListener() {
         titlePane.setCursor(Cursor.MOVE);
         titlePane.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
             this.getScene().getWindow().setOpacity(0.4);
@@ -121,7 +126,7 @@ public class WindowBar extends StackPane {
         });
     }
 
-    private void addSceneListener(){
+    private void addSceneListener() {
         if (sceneChangeListener != null) {
             this.sceneProperty().removeListener(sceneChangeListener);
         }
@@ -130,7 +135,7 @@ public class WindowBar extends StackPane {
                 this.sceneProperty().removeListener(sceneChangeListener);
                 if (newValue.getWindow() == null) {
                     addWindowListener();
-                }else {
+                } else {
                     pinMouseClicked();
                 }
             }
@@ -138,7 +143,7 @@ public class WindowBar extends StackPane {
         this.sceneProperty().addListener(sceneChangeListener);
     }
 
-    private void addWindowListener(){
+    private void addWindowListener() {
         if (windowChangeListener != null) {
             this.getScene().windowProperty().removeListener(windowChangeListener);
         }
@@ -155,21 +160,21 @@ public class WindowBar extends StackPane {
      * 是否置顶窗口
      */
     @FXML
-    protected void pinMouseClicked(){
-        if (Objects.equals(pinIco.getColor(), "gray")){
+    protected void pinMouseClicked() {
+        if (Objects.equals(pinIco.getColor(), "gray")) {
             pinIco.setColor("main-color!important");
             Window window = this.getScene().getWindow();
-            if (window instanceof Popup popup){
+            if (window instanceof Popup popup) {
                 popup.setAutoHide(false);
-            }else if (window instanceof Stage stage){
+            } else if (window instanceof Stage stage) {
                 stage.setAlwaysOnTop(true);
             }
-        }else {
+        } else {
             pinIco.setColor("gray");
             Window window = this.getScene().getWindow();
-            if (window instanceof Popup popup){
+            if (window instanceof Popup popup) {
                 popup.setAutoHide(true);
-            }else if (window instanceof Stage stage){
+            } else if (window instanceof Stage stage) {
                 stage.setAlwaysOnTop(false);
             }
         }
@@ -179,7 +184,7 @@ public class WindowBar extends StackPane {
      * 关闭窗口
      */
     @FXML
-    protected void closeMouseClicked(){
+    protected void closeMouseClicked() {
         this.getScene().getWindow().hide();
     }
 

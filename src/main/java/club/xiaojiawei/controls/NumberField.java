@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.component.IconTextField;
 import club.xiaojiawei.skin.IconTextFieldSkin;
 import club.xiaojiawei.skin.NumberFieldSkin;
@@ -34,6 +35,11 @@ import static club.xiaojiawei.config.JavaFXUIThreadPoolConfig.SCHEDULED_POOL;
 @Slf4j
 @SuppressWarnings("all")
 public class NumberField extends IconTextField {
+
+    {
+        JavaFXUI.initializeTheme(this, "number-field-ui");
+        getStyleClass().add("text-field-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *
@@ -253,6 +259,7 @@ public class NumberField extends IconTextField {
     private void showSelectorPopup() {
         if (selectorPopup == null) {
             selectorPopup = new Popup();
+            JavaFXUI.followTheme(selectorPopup, this);
             selectorPopup.setAutoHide(true);
             numberSelector = new NumberSelector();
             numberSelector.setMin(minValue.intValue());

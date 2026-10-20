@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.annotations.ValidSizeRange;
 import club.xiaojiawei.enums.NotificationTypeEnum;
 import club.xiaojiawei.enums.SizeEnum;
@@ -28,6 +29,10 @@ import java.util.function.Consumer;
  */
 @Slf4j
 public class Notification<T> extends Pane {
+
+    {
+        JavaFXUI.initializeTheme(this, "notification-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *

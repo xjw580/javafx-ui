@@ -3,10 +3,9 @@ package club.xiaojiawei.skin;
 import club.xiaojiawei.controls.PasswordTextField;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.css.PseudoClass;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.SVGPath;
 import lombok.Getter;
 
@@ -27,13 +26,13 @@ public class PasswordTextFieldSkin extends IconTextFieldSkin {
         actionButton.setId("action-btn");
         actionButton.setVisible(false);
         actionButton.setOnMouseClicked(event -> {
-            if(mask.get()) {
+            if (mask.get()) {
                 actionIcon.setContent(Icons.HIDE.getContent());
-                actionIcon.setFill(Paint.valueOf("#0075FF"));
+                actionButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("revealed"), true);
                 mask.set(false);
             } else {
                 actionIcon.setContent(Icons.SHOW.getContent());
-                actionIcon.setFill(Color.BLACK);
+                actionButton.pseudoClassStateChanged(PseudoClass.getPseudoClass("revealed"), false);
                 mask.set(true);
             }
             passwordTextField.setText(passwordTextField.getText());
@@ -41,6 +40,7 @@ public class PasswordTextFieldSkin extends IconTextFieldSkin {
         });
 
         actionIcon.setContent(Icons.SHOW.getContent());
+        actionIcon.getStyleClass().add("input-action-graphic");
         actionButton.setGraphic(actionIcon);
 
         addTipButton(actionButton);

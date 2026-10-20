@@ -12,60 +12,78 @@
     <StylePage
             notificationManager="${notificationManager}"
             baseStyleClasses="radio-button-ui"
-            colorStyleClasses="radio-button-ui-main,radio-button-ui-normal,radio-button-ui-success,radio-button-ui-warn,radio-button-ui-error"
-            styleStyleClasses="radio-button-ui-windows" styleIntroduce="Windows风格单选按钮">
+            sizeStyleClasses="radio-button-ui-tiny,radio-button-ui-small,radio-button-ui-big"
+            sizeIntroduce="尺寸类调整圆框和圆点，文字字号不变；不加尺寸类时为默认大小。"
+            colorStyleClasses="radio-button-ui-main,radio-button-ui-normal,radio-button-ui-success,radio-button-ui-warn,radio-button-ui-error">
         <baseShowChildren>
             <RadioButton styleClass="radio-button-ui" selected="true">
                 <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="windows程序设计" copyText="radio-button-ui" style="-fx-padding: 0 0 0 5"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="windows程序设计"
+                               copyText="radio-button-ui" style="-fx-padding: 0 0 0 5"/>
                 </graphic>
             </RadioButton>
         </baseShowChildren>
+        <sizeShowChildren>
+            <RadioButton selected="true" styleClass="radio-button-ui, radio-button-ui-tiny">
+                <graphic>
+                    <CopyLabel text="极小" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5"
+                               copyText="radio-button-ui, radio-button-ui-tiny"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton selected="true" styleClass="radio-button-ui, radio-button-ui-small">
+                <graphic>
+                    <CopyLabel text="小" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5"
+                               copyText="radio-button-ui, radio-button-ui-small"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton selected="true" styleClass="radio-button-ui">
+                <graphic>
+                    <CopyLabel text="默认" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5"
+                               copyText="radio-button-ui"/>
+                </graphic>
+            </RadioButton>
+            <RadioButton selected="true" styleClass="radio-button-ui, radio-button-ui-big">
+                <graphic>
+                    <CopyLabel text="大" notificationManager="${notificationManager}" style="-fx-padding: 0 0 0 5"
+                               copyText="radio-button-ui, radio-button-ui-big"/>
+                </graphic>
+            </RadioButton>
+        </sizeShowChildren>
         <colorShowChildren>
             <fx:define>
                 <ToggleGroup fx:id="toggleGroup1"/>
             </fx:define>
             <RadioButton styleClass="radio-button-ui, radio-button-ui-main" selected="true" toggleGroup="$toggleGroup1">
                 <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="Java核心技术" copyText="radio-button-ui, radio-button-ui-main" style="-fx-padding: 0 0 0 5"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java核心技术"
+                               copyText="radio-button-ui, radio-button-ui-main" style="-fx-padding: 0 0 0 5"/>
                 </graphic>
             </RadioButton>
             <RadioButton styleClass="radio-button-ui, radio-button-ui-normal" toggleGroup="$toggleGroup1">
                 <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="Java网络编程" copyText="radio-button-ui, radio-button-ui-normal" style="-fx-padding: 0 0 0 5"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java网络编程"
+                               copyText="radio-button-ui, radio-button-ui-normal" style="-fx-padding: 0 0 0 5"/>
                 </graphic>
             </RadioButton>
             <RadioButton styleClass="radio-button-ui, radio-button-ui-success" toggleGroup="$toggleGroup1">
                 <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="Java编程思想" copyText="radio-button-ui, radio-button-ui-success" style="-fx-padding: 0 0 0 5"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java编程思想"
+                               copyText="radio-button-ui, radio-button-ui-success" style="-fx-padding: 0 0 0 5"/>
                 </graphic>
             </RadioButton>
             <RadioButton styleClass="radio-button-ui, radio-button-ui-warn" toggleGroup="$toggleGroup1">
                 <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="深入理解Java虚拟机" copyText="radio-button-ui, radio-button-ui-warn" style="-fx-padding: 0 0 0 5"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="深入理解Java虚拟机"
+                               copyText="radio-button-ui, radio-button-ui-warn" style="-fx-padding: 0 0 0 5"/>
                 </graphic>
             </RadioButton>
             <RadioButton styleClass="radio-button-ui, radio-button-ui-error" toggleGroup="$toggleGroup1">
                 <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="Java并发编程实战" copyText="radio-button-ui, radio-button-ui-error" style="-fx-padding: 0 0 0 5"/>
+                    <CopyLabel notificationManager="${notificationManager}" text="Java并发编程实战"
+                               copyText="radio-button-ui, radio-button-ui-error" style="-fx-padding: 0 0 0 5"/>
                 </graphic>
             </RadioButton>
         </colorShowChildren>
-        <styleShowChildren>
-            <fx:define>
-                <ToggleGroup fx:id="toggleGroup2"/>
-            </fx:define>
-            <RadioButton styleClass="radio-button-ui, radio-button-ui-windows" selected="true" toggleGroup="$toggleGroup2">
-                <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="Windows风格" copyText="radio-button-ui, radio-button-ui-windows" style="-fx-padding: 0 0 0 5"/>
-                </graphic>
-            </RadioButton>
-            <RadioButton styleClass="radio-button-ui, radio-button-ui-windows" toggleGroup="$toggleGroup2">
-                <graphic>
-                    <CopyLabel notificationManager="${notificationManager}" text="未选中" copyText="radio-button-ui, radio-button-ui-windows" style="-fx-padding: 0 0 0 5"/>
-                </graphic>
-            </RadioButton>
-        </styleShowChildren>
     </StylePage>
     <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
 </StackPane>

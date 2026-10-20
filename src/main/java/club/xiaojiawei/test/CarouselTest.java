@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Carousel;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -24,8 +25,12 @@ public class CarouselTest extends Application {
     @SneakyThrows
     @Override
     public void start(Stage primaryStage) {
-        HBox hBox = new HBox(){{setAlignment(Pos.CENTER);}};
-        VBox vBox = new VBox(){{setAlignment(Pos.CENTER);}};
+        HBox hBox = new HBox() {{
+            setAlignment(Pos.CENTER);
+        }};
+        VBox vBox = new VBox() {{
+            setAlignment(Pos.CENTER);
+        }};
         vBox.getChildren().add(hBox);
         Carousel carousel = new Carousel();
         carousel.setAutoPlay(true);
@@ -49,7 +54,7 @@ public class CarouselTest extends Application {
         hBox.getChildren().add(carousel);
         Scene scene = new Scene(vBox, 1500, 800);
         primaryStage.setScene(scene);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.show();
 //        new Timer().schedule(new TimerTask() {
 //            @Override

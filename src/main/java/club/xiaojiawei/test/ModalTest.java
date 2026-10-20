@@ -1,6 +1,7 @@
 package club.xiaojiawei.test;
 
 import club.xiaojiawei.JavaFXUI;
+import club.xiaojiawei.enums.Theme;
 import club.xiaojiawei.controls.Modal;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -30,7 +31,7 @@ public class ModalTest extends Application {
         StackPane stackPane = new StackPane(button);
         Scene scene = new Scene(stackPane, 300, 300);
         primaryStage.setScene(scene);
-        JavaFXUI.addjavafxUIStylesheet(scene);
+        JavaFXUI.setTheme(scene, Theme.BASE);
         primaryStage.show();
     }
 }

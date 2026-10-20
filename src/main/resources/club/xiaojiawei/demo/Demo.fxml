@@ -18,6 +18,7 @@
     <fx:define>
         <Double fx:value="170" fx:id="leftWidth"/>
         <Double fx:value="50" fx:id="titleIconSize"/>
+        <ToggleGroup fx:id="themeToggleGroup"/>
     </fx:define>
     <VBox maxWidth="${leftWidth}" minWidth="${leftWidth}" prefWidth="${leftWidth}">
         <HBox fx:id="demoTitle">
@@ -31,6 +32,13 @@
                 <Label text="过滤结果数量："/>
                 <Label fx:id="resultCount"/>
             </HBox>
+            <VBox spacing="4">
+                <Label text="全局主题"/>
+                <RadioButton text="基础" selected="true" toggleGroup="$themeToggleGroup"
+                             onAction="#selectBaseTheme" styleClass="radio-button-ui, radio-button-ui-main"/>
+                <RadioButton text="Windows" toggleGroup="$themeToggleGroup"
+                             onAction="#selectWindowsTheme" styleClass="radio-button-ui, radio-button-ui-main"/>
+            </VBox>
             <FilterField fx:id="search" styleClass="text-field-ui, text-field-ui-small" promptText="搜索，Ctrl+F获取焦点" realTime="true"/>
         </VBox>
         <ScrollPane fx:id="leftScrollPane" maxWidth="${leftWidth}" minWidth="${leftWidth}" prefWidth="${leftWidth}" prefHeight="${rootPane.height}" hbarPolicy="NEVER">

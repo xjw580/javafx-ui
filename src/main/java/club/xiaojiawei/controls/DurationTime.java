@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.ico.TimeIco;
 import club.xiaojiawei.utils.SystemUtil;
 import javafx.beans.NamedArg;
@@ -31,6 +32,10 @@ import static club.xiaojiawei.controls.TimeSelector.TIME_FORMATTER;
  */
 @SuppressWarnings("unused")
 public class DurationTime extends AbstractDateTimeField<Duration> {
+
+    {
+        JavaFXUI.initializeTheme(this, "duration-time-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *

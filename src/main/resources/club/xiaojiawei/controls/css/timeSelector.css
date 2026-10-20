@@ -1,32 +1,17 @@
-#root{
+/* Component structure. Appearance comes from the selected theme. */
+#root {
     -fx-padding: 4;
-    -fx-effect: dropshadow(gaussian, #b3d5ff, 10, 0, 0, 0)!important;
-    -fx-background-radius: 5;
-    -fx-background-color: white;
 }
-.timeSelector{
+
+.timeSelector {
     -fx-padding: 0;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-background-insets: 0;/*防止点击时移动*/
     -fx-hbar-policy: never;
     -fx-vbar-policy: never;
 }
-.v-box{
-   -fx-background-color: white;
-}
-.timeLabel{
+
+.timeLabel {
     -fx-alignment: CENTER;
     -fx-pref-width: 38;
     -fx-pref-height: 29;
-    -fx-background-color: white;
     -fx-font-size: 15;
-    -fx-background-radius: 5;
-}
-.timeLabel:hover{
-    -fx-background-color: hover-color;
-}
-.selectedTimeLabel{
-    -fx-background-color: main-color!important;
-    -fx-text-fill: white!important;
 }

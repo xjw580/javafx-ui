@@ -1,5 +1,6 @@
 package club.xiaojiawei.controls;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.enums.BaseTransitionEnum;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
@@ -33,6 +34,10 @@ import java.util.List;
  * @date 2024/5/13 16:17
  */
 public class ProgressModal extends HBox {
+
+    {
+        JavaFXUI.initializeTheme(this, "progress-modal-ui");
+    }
 
     /* *************************************************************************
      *                                                                         *

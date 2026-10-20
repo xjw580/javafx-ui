@@ -1,5 +1,6 @@
 package club.xiaojiawei.component;
 
+import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.annotations.NotNull;
 import club.xiaojiawei.annotations.Nullable;
 import club.xiaojiawei.bean.FileChooserFilter;
@@ -53,6 +54,10 @@ import java.util.regex.Pattern;
  */
 @Slf4j
 public class MultiFileChooserView extends StackPane {
+
+    {
+        JavaFXUI.initializeTheme(this, "multi-file-chooser-ui");
+    }
 
     @FXML
     private Label title;
@@ -1250,7 +1255,6 @@ public class MultiFileChooserView extends StackPane {
             }
         });
     }
-
 
     @FXML
     protected void homeDir() {

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.WideComboBox?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<ScrollPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fitToWidth="true">
+    <fx:define>
+        <FXCollections fx:factory="observableArrayList" fx:id="cities">
+            <String fx:value="北京"/>
+            <String fx:value="上海"/>
+            <String fx:value="广州"/>
+            <String fx:value="深圳"/>
+            <String fx:value="杭州"/>
+            <String fx:value="南京"/>
+            <String fx:value="苏州"/>
+            <String fx:value="成都"/>
+            <String fx:value="重庆"/>
+            <String fx:value="武汉"/>
+            <String fx:value="西安"/>
+            <String fx:value="长沙"/>
+            <String fx:value="郑州"/>
+            <String fx:value="青岛"/>
+            <String fx:value="厦门"/>
+            <String fx:value="福州"/>
+            <String fx:value="济南"/>
+            <String fx:value="合肥"/>
+            <String fx:value="昆明"/>
+            <String fx:value="天津"/>
+        </FXCollections>
+    </fx:define>
+    <VBox spacing="24" fillWidth="false">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label text="WideComboBox：多列下拉选择" styleClass="title-two"/>
+        <Label text="点击展开选项；在控件上滚动鼠标可切换选中项。外观随左侧全局主题切换。" wrapText="true"/>
+
+        <VBox spacing="10" fillWidth="false">
+            <Label text="长短选项：切换选择时宽度保持稳定" styleClass="title-three"/>
+            <WideComboBox fx:id="widthExample" value="短选项">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="短选项"/>
+                        <String fx:value="中等长度的选项"/>
+                        <String fx:value="这是下拉列表中最长的一个选项"/>
+                    </FXCollections>
+                </items>
+            </WideComboBox>
+            <Label text="${'当前选择：' + widthExample.value}"/>
+        </VBox>
+
+        <VBox spacing="10" fillWidth="false">
+            <Label text="横向排列：从左到右填充，最多 4 列" styleClass="title-three"/>
+            <WideComboBox fx:id="horizontalExample" value="北京"
+                          orientation="HORIZONTAL" maxColumCount="4" prefWidth="200">
+                <items>
+                    <fx:reference source="cities"/>
+                </items>
+            </WideComboBox>
+            <Label text="${'当前选择：' + horizontalExample.value}"/>
+        </VBox>
+
+        <VBox spacing="10" fillWidth="false">
+            <Label text="纵向排列：从上到下填充，最多 4 列" styleClass="title-three"/>
+            <WideComboBox fx:id="verticalExample" value="北京"
+                          orientation="VERTICAL" maxColumCount="4" prefWidth="200"
+                          enlargeEnabled="false" scrollValueEnabled="false">
+                <items>
+                    <fx:reference source="cities"/>
+                </items>
+            </WideComboBox>
+            <Label text="紧凑选项，关闭滚轮切换；点击下拉选项进行选择。" wrapText="true"/>
+            <Label text="${'当前选择：' + verticalExample.value}"/>
+        </VBox>
+    </VBox>
+</ScrollPane>
