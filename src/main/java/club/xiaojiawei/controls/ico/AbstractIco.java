@@ -1,12 +1,15 @@
 package club.xiaojiawei.controls.ico;
 
-import javafx.application.Platform;
+import club.xiaojiawei.controls.images.ImagesLoader;
+import club.xiaojiawei.svg.SvgView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.layout.StackPane;
 
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.Objects;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -14,14 +17,18 @@ import java.util.Base64;
  */
 public abstract class AbstractIco extends StackPane{
 
+    private String colorStylesheet;
+
     public AbstractIco() {
         getStyleClass().add("javafx-ui-ico");
         color.addListener((observableValue, s, t1) -> {
-            if (!this.getStylesheets().isEmpty()){
-                this.getStylesheets().remove(0);
+            if (colorStylesheet != null) {
+                getStylesheets().remove(colorStylesheet);
+                colorStylesheet = null;
             }
             if (t1 != null && !t1.isBlank()){
-                this.getStylesheets().add(0, dataUriStylesheet(t1));
+                colorStylesheet = dataUriStylesheet(t1);
+                getStylesheets().add(0, colorStylesheet);
             }
         });
     }
@@ -31,6 +38,20 @@ public abstract class AbstractIco extends StackPane{
         if (color != null && !color.isEmpty()){
             setColor(color);
         }
+    }
+
+    /** Loads a cached document into a fresh scene graph for this icon. */
+    protected final void loadSvg(String resourceName) {
+        URL resource = Objects.requireNonNull(ImagesLoader.class.getResource(resourceName),
+                "Missing icon resource: " + resourceName);
+        SvgView view = new SvgView();
+        view.setSource(resource.toExternalForm());
+        // Unlike SVGImage, SvgView is a resizable Region. Keep the icon's natural
+        // size even when its StackPane is laid out smaller or larger than it.
+        view.setMinSize(USE_PREF_SIZE, USE_PREF_SIZE);
+        view.setMaxSize(USE_PREF_SIZE, USE_PREF_SIZE);
+        setMaxWidth(view.prefWidth(-1));
+        getChildren().add(view);
     }
 
     private final StringProperty color = new SimpleStringProperty();
@@ -57,8 +78,8 @@ public abstract class AbstractIco extends StackPane{
      * @return
      */
     public String getColorStyle(String color){
-        return String.format("* { " +
-                "-fx-fill: %s;" +
+        return String.format(".svg-view { " +
+                "-svg-fill: %s;" +
                 "}", color);
     }
 

@@ -10,7 +10,7 @@
     <name>javafx-ui</name>
 
     <repositories>
-        <!--fxsvgimage库需要-->
+        <!-- SVG library is built from source by JitPack. -->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
@@ -19,10 +19,11 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javafx-version>21.0.5</javafx-version>
+        <javafx-version>21.0.8</javafx-version>
         <lombok-version>1.18.34</lombok-version>
         <java.version>21</java.version>
         <skipTests>false</skipTests>
+        <javafx-svg.version>e8d64c5a7491f67e7a448a9dbf2eac594f99cf4f</javafx-svg.version>
     </properties>
 
     <distributionManagement>
@@ -52,9 +53,9 @@
         </dependency>
         <!--svg加载库-->
         <dependency>
-            <groupId>com.github.hervegirod</groupId>
-            <artifactId>fxsvgimage</artifactId>
-            <version>1.1</version>
+            <groupId>com.github.xjw580</groupId>
+            <artifactId>javafx-svg</artifactId>
+            <version>${javafx-svg.version}</version>
         </dependency>
         <!--媒体类型库-->
         <dependency>

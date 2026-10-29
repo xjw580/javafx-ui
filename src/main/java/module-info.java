@@ -11,7 +11,8 @@ module club.xiaojiawei.javafx_ui {
     requires static lombok;
     requires javafx.controls;
     requires javafx.fxml;
-    requires org.girod.javafx.svgimage;
+    requires club.xiaojiawei.svg;
+    requires kotlin.stdlib;
     requires java.desktop;
     requires org.apache.tika.core;
     requires org.slf4j;
