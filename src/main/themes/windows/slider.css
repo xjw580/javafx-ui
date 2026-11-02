@@ -9,7 +9,6 @@
 .slider-ui > .track {
     -fx-background-color: border-color;
     -fx-background-insets: 0;
-    -fx-background-radius: 20;
     -fx-padding: 2;
 }
 
@@ -24,7 +23,6 @@
 
 .slider-ui:hover > .track {
     -fx-background-color: derive(border-color, -10%);
-    -fx-background-radius: 20;
 }
 
 .slider-ui > .thumb:hover {
@@ -70,11 +68,12 @@
     slider-focus-color: win-main-color;
 }
 
+/* SliderSkin extends the track by this radius; keep it at half the track thickness. */
 .slider-ui > .track,
 .slider-ui.slider-ui-windows > .track,
 .slider-ui:ui-windows > .track {
     -fx-background-color: win-border-color;
-    -fx-background-radius: 20;
+    -fx-background-radius: 1;
     -fx-padding: 1;
 }
 
@@ -98,7 +97,6 @@
 .slider-ui.slider-ui-windows:hover > .track,
 .slider-ui:ui-windows:hover > .track {
     -fx-background-color: win-border-color;
-    -fx-background-radius: 20;
 }
 
 .slider-ui > .thumb:hover,
@@ -127,7 +125,6 @@
 .slider-ui:ui-windows:disabled > .track,
 .slider-ui:ui-windows:disabled > .thumb {
     -fx-background-color: win-disabled-color;
-    -fx-background-radius: 20;
 }
 
 .slider-ui:disabled > .thumb,
@@ -138,10 +135,11 @@
     -fx-effect: null;
 }
 
+.slider-ui-small > .track,
 .slider-ui.slider-ui-windows.slider-ui-small > .track,
 .slider-ui:ui-windows.slider-ui-small > .track {
     -fx-padding: 1.5;
-    -fx-background-radius: 20;
+    -fx-background-radius: 1.5;
 }
 
 .slider-ui.slider-ui-windows.slider-ui-small > .thumb,
@@ -149,10 +147,11 @@
     -fx-padding: 5;
 }
 
+.slider-ui-big > .track,
 .slider-ui.slider-ui-windows.slider-ui-big > .track,
 .slider-ui:ui-windows.slider-ui-big > .track {
     -fx-padding: 3;
-    -fx-background-radius: 20;
+    -fx-background-radius: 3;
 }
 
 .slider-ui.slider-ui-windows.slider-ui-big > .thumb,
