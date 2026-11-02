@@ -43,12 +43,8 @@
                 <Slider styleClass="slider-ui, slider-ui-error" value="50" minWidth="0"/>
             </VBox>
 
-            <Label text="Windows 风格与禁用状态" styleClass="title-three-extra"/>
-            <CopyLabel text="slider-ui, slider-ui-windows" notificationManager="${notificationManager}"/>
-            <Slider fx:id="windowsSlider" styleClass="slider-ui, slider-ui-windows" value="50" minWidth="0"/>
-            <Label text="禁用：默认风格 / Windows 风格"/>
+            <Label text="禁用状态" styleClass="title-three-extra"/>
             <Slider fx:id="disabledSlider" styleClass="slider-ui" value="40" disable="true" minWidth="0"/>
-            <Slider styleClass="slider-ui, slider-ui-windows" value="60" disable="true" minWidth="0"/>
 
             <Label text="竖向（orientation = VERTICAL）" styleClass="title-three-base"/>
             <HBox spacing="32" alignment="CENTER_LEFT">
@@ -56,8 +52,6 @@
                         showTickLabels="true" showTickMarks="true" majorTickUnit="25"/>
                 <Slider styleClass="slider-ui, slider-ui-big, slider-ui-success"
                         orientation="VERTICAL" value="60" prefHeight="180"/>
-                <Slider fx:id="windowsVerticalSlider" styleClass="slider-ui, slider-ui-windows"
-                        orientation="VERTICAL" value="50" prefHeight="180"/>
             </HBox>
         </VBox>
     </ScrollPane>
