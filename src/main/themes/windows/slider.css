@@ -142,9 +142,16 @@
     -fx-background-radius: 1.5;
 }
 
+.slider-ui.slider-ui-small > .thumb,
 .slider-ui.slider-ui-windows.slider-ui-small > .thumb,
 .slider-ui:ui-windows.slider-ui-small > .thumb {
-    -fx-padding: 5;
+    -fx-padding: 6 2;
+}
+
+.slider-ui.slider-ui-small:vertical > .thumb,
+.slider-ui.slider-ui-windows.slider-ui-small:vertical > .thumb,
+.slider-ui:ui-windows.slider-ui-small:vertical > .thumb {
+    -fx-padding: 2 6;
 }
 
 .slider-ui-big > .track,
@@ -154,9 +161,16 @@
     -fx-background-radius: 3;
 }
 
+.slider-ui.slider-ui-big > .thumb,
 .slider-ui.slider-ui-windows.slider-ui-big > .thumb,
 .slider-ui:ui-windows.slider-ui-big > .thumb {
-    -fx-padding: 9;
+    -fx-padding: 10 4;
+}
+
+.slider-ui.slider-ui-big:vertical > .thumb,
+.slider-ui.slider-ui-windows.slider-ui-big:vertical > .thumb,
+.slider-ui:ui-windows.slider-ui-big:vertical > .thumb {
+    -fx-padding: 4 10;
 }
 
 .slider-ui.slider-ui-main,
