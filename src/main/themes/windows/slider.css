@@ -21,7 +21,7 @@
     -fx-cursor: hand;
 }
 
-.slider-ui:hover > .track {
+.slider-ui > .track:hover {
     -fx-background-color: derive(border-color, -10%);
 }
 
@@ -93,9 +93,9 @@
     -fx-padding: 3 8;
 }
 
-.slider-ui:hover > .track,
-.slider-ui.slider-ui-windows:hover > .track,
-.slider-ui:ui-windows:hover > .track {
+.slider-ui > .track:hover,
+.slider-ui.slider-ui-windows > .track:hover,
+.slider-ui:ui-windows > .track:hover {
     -fx-background-color: derive(win-border-color, -20%);
 }
 

@@ -40,9 +40,9 @@
     -fx-padding: 7;
 }
 
-.slider-ui:hover > .track,
-.slider-ui.slider-ui-base:hover > .track,
-.slider-ui:ui-base:hover > .track {
+.slider-ui > .track:hover,
+.slider-ui.slider-ui-base > .track:hover,
+.slider-ui:ui-base > .track:hover {
     -fx-background-color: derive(border-color, -10%);
 }
 
@@ -103,6 +103,7 @@
     -fx-opacity: 0.4;
 }
 
+.slider-ui:disabled > .track,
 .slider-ui.slider-ui-base:disabled > .track,
 .slider-ui:ui-base:disabled > .track {
     -fx-background-color: border-color;
