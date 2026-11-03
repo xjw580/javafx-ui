@@ -96,7 +96,7 @@
 .slider-ui:hover > .track,
 .slider-ui.slider-ui-windows:hover > .track,
 .slider-ui:ui-windows:hover > .track {
-    -fx-background-color: win-border-color;
+    -fx-background-color: derive(win-border-color, -20%);
 }
 
 .slider-ui > .thumb:hover,
