@@ -1,6 +1,19 @@
 /* @theme-variants */
 /* Shared declarations for the default theme and explicit theme selectors. */
 
+/* Keep a visible thumb when arrow buttons have zero padding. */
+.scroll-bar:vertical,
+.scroll-bar.scroll-bar-ui-windows:vertical,
+.scroll-bar.scroll-bar-ui:ui-windows:vertical {
+    -fx-pref-width: 12;
+}
+
+.scroll-bar:horizontal,
+.scroll-bar.scroll-bar-ui-windows:horizontal,
+.scroll-bar.scroll-bar-ui:ui-windows:horizontal {
+    -fx-pref-height: 12;
+}
+
 .scroll-bar,
 .scroll-bar.scroll-bar-ui-windows,
 .scroll-bar.scroll-bar-ui:ui-windows {

@@ -1,6 +1,17 @@
 /* @theme-variants */
 /* Shared declarations for the default theme and explicit theme selectors. */
 
+/* Restore native thickness when forcing Base inside the Windows entry. */
+.scroll-bar.scroll-bar-ui-base:vertical,
+.scroll-bar.scroll-bar-ui:ui-base:vertical {
+    -fx-pref-width: -1;
+}
+
+.scroll-bar.scroll-bar-ui-base:horizontal,
+.scroll-bar.scroll-bar-ui:ui-base:horizontal {
+    -fx-pref-height: -1;
+}
+
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track {
     -fx-background-color: transparent;
