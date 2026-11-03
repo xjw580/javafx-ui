@@ -15,7 +15,10 @@
 .list-view-ui:ui-windows .scroll-bar:vertical,
 .tree-view-ui:ui-windows .scroll-bar:vertical,
 .text-area-ui:ui-windows .scroll-bar:vertical,
-.combo-box-ui:ui-windows .scroll-bar:vertical {
+.combo-box-ui:ui-windows .scroll-bar:vertical,
+.scroll-pane-ui > .scroll-bar:vertical,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:vertical,
+.scroll-pane-ui:ui-windows > .scroll-bar:vertical {
     -fx-pref-width: 12;
 }
 
@@ -33,7 +36,10 @@
 .list-view-ui:ui-windows .scroll-bar:horizontal,
 .tree-view-ui:ui-windows .scroll-bar:horizontal,
 .text-area-ui:ui-windows .scroll-bar:horizontal,
-.combo-box-ui:ui-windows .scroll-bar:horizontal {
+.combo-box-ui:ui-windows .scroll-bar:horizontal,
+.scroll-pane-ui > .scroll-bar:horizontal,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:horizontal,
+.scroll-pane-ui:ui-windows > .scroll-bar:horizontal {
     -fx-pref-height: 12;
 }
 
@@ -81,7 +87,16 @@
 .list-view-ui:ui-windows .scroll-bar .track,
 .tree-view-ui:ui-windows .scroll-bar .track,
 .text-area-ui:ui-windows .scroll-bar .track,
-.combo-box-ui:ui-windows .scroll-bar .track {
+.combo-box-ui:ui-windows .scroll-bar .track,
+.scroll-pane-ui > .scroll-bar,
+.scroll-pane-ui > .scroll-bar:hover,
+.scroll-pane-ui > .scroll-bar .track,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:hover,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar .track,
+.scroll-pane-ui:ui-windows > .scroll-bar,
+.scroll-pane-ui:ui-windows > .scroll-bar:hover,
+.scroll-pane-ui:ui-windows > .scroll-bar .track {
     -fx-background-color: win-background-color;
     -fx-background-radius: 0;
     -fx-background-insets: 0;
@@ -148,7 +163,19 @@
 .list-view-ui:ui-windows .scroll-bar .decrement-arrow,
 .tree-view-ui:ui-windows .scroll-bar .decrement-arrow,
 .text-area-ui:ui-windows .scroll-bar .decrement-arrow,
-.combo-box-ui:ui-windows .scroll-bar .decrement-arrow {
+.combo-box-ui:ui-windows .scroll-bar .decrement-arrow,
+.scroll-pane-ui > .scroll-bar .increment-button,
+.scroll-pane-ui > .scroll-bar .decrement-button,
+.scroll-pane-ui > .scroll-bar .increment-arrow,
+.scroll-pane-ui > .scroll-bar .decrement-arrow,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar .increment-button,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar .decrement-button,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar .increment-arrow,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar .decrement-arrow,
+.scroll-pane-ui:ui-windows > .scroll-bar .increment-button,
+.scroll-pane-ui:ui-windows > .scroll-bar .decrement-button,
+.scroll-pane-ui:ui-windows > .scroll-bar .increment-arrow,
+.scroll-pane-ui:ui-windows > .scroll-bar .decrement-arrow {
     -fx-padding: 0;
     -fx-background-color: transparent;
 }
@@ -182,7 +209,13 @@
 .text-area-ui:ui-windows .scroll-bar:vertical .increment-arrow,
 .text-area-ui:ui-windows .scroll-bar:vertical .decrement-arrow,
 .combo-box-ui:ui-windows .scroll-bar:vertical .increment-arrow,
-.combo-box-ui:ui-windows .scroll-bar:vertical .decrement-arrow {
+.combo-box-ui:ui-windows .scroll-bar:vertical .decrement-arrow,
+.scroll-pane-ui > .scroll-bar:vertical .increment-arrow,
+.scroll-pane-ui > .scroll-bar:vertical .decrement-arrow,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:vertical .increment-arrow,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:vertical .decrement-arrow,
+.scroll-pane-ui:ui-windows > .scroll-bar:vertical .increment-arrow,
+.scroll-pane-ui:ui-windows > .scroll-bar:vertical .decrement-arrow {
     -fx-padding: 0;
 }
 
@@ -230,7 +263,16 @@
 .list-view-ui:ui-windows .scroll-bar:hover .thumb,
 .tree-view-ui:ui-windows .scroll-bar:hover .thumb,
 .text-area-ui:ui-windows .scroll-bar:hover .thumb,
-.combo-box-ui:ui-windows .scroll-bar:hover .thumb {
+.combo-box-ui:ui-windows .scroll-bar:hover .thumb,
+.scroll-pane-ui > .scroll-bar:horizontal .thumb,
+.scroll-pane-ui > .scroll-bar:vertical .thumb,
+.scroll-pane-ui > .scroll-bar:hover .thumb,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:horizontal .thumb,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:vertical .thumb,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:hover .thumb,
+.scroll-pane-ui:ui-windows > .scroll-bar:horizontal .thumb,
+.scroll-pane-ui:ui-windows > .scroll-bar:vertical .thumb,
+.scroll-pane-ui:ui-windows > .scroll-bar:hover .thumb {
     -fx-background-color: win-disabled-color;
     -fx-background-insets: 2;
     -fx-background-radius: 20;
@@ -250,7 +292,10 @@
 .list-view-ui:ui-windows .scroll-bar .thumb:hover,
 .tree-view-ui:ui-windows .scroll-bar .thumb:hover,
 .text-area-ui:ui-windows .scroll-bar .thumb:hover,
-.combo-box-ui:ui-windows .scroll-bar .thumb:hover {
+.combo-box-ui:ui-windows .scroll-bar .thumb:hover,
+.scroll-pane-ui > .scroll-bar .thumb:hover,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar .thumb:hover,
+.scroll-pane-ui:ui-windows > .scroll-bar .thumb:hover {
     -fx-background-color: win-border-color;
     -fx-background-radius: 20;
 }
@@ -269,7 +314,10 @@
 .list-view-ui:ui-windows .scroll-bar .thumb:pressed,
 .tree-view-ui:ui-windows .scroll-bar .thumb:pressed,
 .text-area-ui:ui-windows .scroll-bar .thumb:pressed,
-.combo-box-ui:ui-windows .scroll-bar .thumb:pressed {
+.combo-box-ui:ui-windows .scroll-bar .thumb:pressed,
+.scroll-pane-ui > .scroll-bar .thumb:pressed,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar .thumb:pressed,
+.scroll-pane-ui:ui-windows > .scroll-bar .thumb:pressed {
     -fx-background-color: win-text-disabled-color;
     -fx-background-radius: 20;
 }
@@ -288,7 +336,10 @@
 .list-view-ui:ui-windows .corner,
 .tree-view-ui:ui-windows .corner,
 .text-area-ui:ui-windows .corner,
-.combo-box-ui:ui-windows .corner {
+.combo-box-ui:ui-windows .corner,
+.scroll-pane-ui > .corner,
+.scroll-pane-ui.scroll-pane-ui-windows > .corner,
+.scroll-pane-ui:ui-windows > .corner {
     -fx-background-color: win-background-color;
 }
 
@@ -351,7 +402,19 @@
 .text-area-ui:ui-windows .scroll-bar:vertical .increment-button,
 .text-area-ui:ui-windows .scroll-bar:vertical .decrement-button,
 .combo-box-ui:ui-windows .scroll-bar:vertical .increment-button,
-.combo-box-ui:ui-windows .scroll-bar:vertical .decrement-button {
+.combo-box-ui:ui-windows .scroll-bar:vertical .decrement-button,
+.scroll-pane-ui > .scroll-bar:horizontal .increment-button,
+.scroll-pane-ui > .scroll-bar:horizontal .decrement-button,
+.scroll-pane-ui > .scroll-bar:vertical .increment-button,
+.scroll-pane-ui > .scroll-bar:vertical .decrement-button,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:horizontal .increment-button,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:horizontal .decrement-button,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:vertical .increment-button,
+.scroll-pane-ui.scroll-pane-ui-windows > .scroll-bar:vertical .decrement-button,
+.scroll-pane-ui:ui-windows > .scroll-bar:horizontal .increment-button,
+.scroll-pane-ui:ui-windows > .scroll-bar:horizontal .decrement-button,
+.scroll-pane-ui:ui-windows > .scroll-bar:vertical .increment-button,
+.scroll-pane-ui:ui-windows > .scroll-bar:vertical .decrement-button {
     -fx-padding: 0;
     -fx-background-color: transparent;
 }

@@ -1,0 +1,48 @@
+/* @theme-variants */
+/* Keep the focus border inside the same one-pixel frame in every state. */
+
+.scroll-pane-ui,
+.scroll-pane-ui.scroll-pane-ui-base,
+.scroll-pane-ui:ui-base,
+.scroll-pane-ui:focused,
+.scroll-pane-ui.scroll-pane-ui-base:focused,
+.scroll-pane-ui:ui-base:focused {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: border-color;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-border-radius: 4;
+    -fx-padding: 0;
+    -fx-effect: null;
+}
+
+.scroll-pane-ui:focused,
+.scroll-pane-ui.scroll-pane-ui-base:focused,
+.scroll-pane-ui:ui-base:focused {
+    -fx-border-color: main-color;
+}
+
+/* Style only the skin viewport, leaving content backgrounds under caller control. */
+.scroll-pane-ui > .viewport,
+.scroll-pane-ui.scroll-pane-ui-base > .viewport,
+.scroll-pane-ui:ui-base > .viewport {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 3;
+}
+
+.scroll-pane-ui:disabled,
+.scroll-pane-ui.scroll-pane-ui-base:disabled,
+.scroll-pane-ui:ui-base:disabled {
+    -fx-background-color: white;
+    -fx-border-color: border-color;
+    -fx-opacity: 0.4;
+}
+
+.scroll-pane-ui:disabled > .viewport,
+.scroll-pane-ui.scroll-pane-ui-base:disabled > .viewport,
+.scroll-pane-ui:ui-base:disabled > .viewport {
+    -fx-background-color: white;
+}

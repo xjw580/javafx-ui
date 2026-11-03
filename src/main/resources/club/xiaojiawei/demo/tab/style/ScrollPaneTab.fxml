@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <ScrollPane fitToWidth="true">
+        <VBox spacing="24" style="-fx-padding: 24" minWidth="0">
+            <Label text="基类" styleClass="title-three-base"/>
+            <CopyLabel text="scroll-pane-ui" notificationManager="${notificationManager}"/>
+            <Label text="本页示例随全局主题切换。内容超出视口时显示滚动条，聚焦后可用方向键滚动。" wrapText="true"/>
+
+            <Label text="双向滚动与拖动内容（pannable）" styleClass="title-three-extra"/>
+            <ScrollPane fx:id="bothAxesPane" styleClass="scroll-pane-ui" pannable="true"
+                        prefHeight="180" minHeight="180" maxHeight="180" maxWidth="640">
+                <Pane minWidth="1000" prefWidth="1000" minHeight="360" prefHeight="360">
+                    <Label text="左上角 · 拖动空白处或使用滚动条" layoutX="16" layoutY="16"/>
+                    <Label text="右上角" styleClass="label-ui, label-ui-success" layoutX="840" layoutY="16"/>
+                    <Label text="左下角" styleClass="label-ui, label-ui-normal" layoutX="16" layoutY="300"/>
+                    <Label text="右下角 · 滚动终点" layoutX="840" layoutY="300"/>
+                </Pane>
+            </ScrollPane>
+
+            <Label text="适应宽度（fitToWidth）" styleClass="title-three-extra"/>
+            <ScrollPane fx:id="fitWidthPane" styleClass="scroll-pane-ui" fitToWidth="true"
+                        hbarPolicy="NEVER" prefHeight="180" minHeight="180" maxHeight="180" maxWidth="640">
+                <VBox spacing="24" minHeight="360" style="-fx-padding: 16">
+                    <Label text="内容宽度随视口调整，文字自动换行。" wrapText="true"/>
+                    <Label text="可在容器内放置表单、列表或其他布局。内容的背景与内边距由内容自身设置。" wrapText="true"/>
+                    <Label text="调整窗口宽度可以观察换行和视口变化。" wrapText="true"/>
+                    <Label text="滚动到底部查看这段内容。" wrapText="true"/>
+                </VBox>
+            </ScrollPane>
+
+            <Label text="禁用状态" styleClass="title-three-extra"/>
+            <ScrollPane fx:id="disabledPane" styleClass="scroll-pane-ui" disable="true"
+                        prefHeight="130" minHeight="130" maxHeight="130" maxWidth="640">
+                <Pane minWidth="1000" prefWidth="1000" minHeight="260" prefHeight="260">
+                    <Label text="禁用后，内容和滚动条一同变淡。" layoutX="16" layoutY="16"/>
+                </Pane>
+            </ScrollPane>
+        </VBox>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

@@ -10,7 +10,10 @@
 .list-view-ui:ui-base .scroll-bar:vertical,
 .tree-view-ui:ui-base .scroll-bar:vertical,
 .text-area-ui:ui-base .scroll-bar:vertical,
-.combo-box-ui:ui-base .scroll-bar:vertical {
+.combo-box-ui:ui-base .scroll-bar:vertical,
+.scroll-pane-ui > .scroll-bar:vertical,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:vertical,
+.scroll-pane-ui:ui-base > .scroll-bar:vertical {
     -fx-pref-width: -1;
 }
 
@@ -23,7 +26,10 @@
 .list-view-ui:ui-base .scroll-bar:horizontal,
 .tree-view-ui:ui-base .scroll-bar:horizontal,
 .text-area-ui:ui-base .scroll-bar:horizontal,
-.combo-box-ui:ui-base .scroll-bar:horizontal {
+.combo-box-ui:ui-base .scroll-bar:horizontal,
+.scroll-pane-ui > .scroll-bar:horizontal,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:horizontal,
+.scroll-pane-ui:ui-base > .scroll-bar:horizontal {
     -fx-pref-height: -1;
 }
 
@@ -36,7 +42,10 @@
 .list-view-ui:ui-base .scroll-bar,
 .tree-view-ui:ui-base .scroll-bar,
 .text-area-ui:ui-base .scroll-bar,
-.combo-box-ui:ui-base .scroll-bar {
+.combo-box-ui:ui-base .scroll-bar,
+.scroll-pane-ui > .scroll-bar,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar,
+.scroll-pane-ui:ui-base > .scroll-bar {
     -fx-background-color: transparent;
     -fx-background-radius: 2em;
     -fx-background-insets: 6, 0, 0, 0;
@@ -52,7 +61,10 @@
 .list-view-ui:ui-base .scroll-bar:hover,
 .tree-view-ui:ui-base .scroll-bar:hover,
 .text-area-ui:ui-base .scroll-bar:hover,
-.combo-box-ui:ui-base .scroll-bar:hover {
+.combo-box-ui:ui-base .scroll-bar:hover,
+.scroll-pane-ui > .scroll-bar:hover,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:hover,
+.scroll-pane-ui:ui-base > .scroll-bar:hover {
     -fx-background-color: transparent;
     -fx-background-radius: 2em;
     -fx-background-insets: 4, 0, 0, 0;
@@ -68,7 +80,10 @@
 .list-view-ui:ui-base .scroll-bar .track,
 .tree-view-ui:ui-base .scroll-bar .track,
 .text-area-ui:ui-base .scroll-bar .track,
-.combo-box-ui:ui-base .scroll-bar .track {
+.combo-box-ui:ui-base .scroll-bar .track,
+.scroll-pane-ui > .scroll-bar .track,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar .track,
+.scroll-pane-ui:ui-base > .scroll-bar .track {
     -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-border-color: transparent;
@@ -95,7 +110,13 @@
 .text-area-ui:ui-base .scroll-bar:horizontal .increment-button,
 .text-area-ui:ui-base .scroll-bar:horizontal .decrement-button,
 .combo-box-ui:ui-base .scroll-bar:horizontal .increment-button,
-.combo-box-ui:ui-base .scroll-bar:horizontal .decrement-button {
+.combo-box-ui:ui-base .scroll-bar:horizontal .decrement-button,
+.scroll-pane-ui > .scroll-bar:horizontal .decrement-button,
+.scroll-pane-ui > .scroll-bar:horizontal .increment-button,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:horizontal .increment-button,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:horizontal .decrement-button,
+.scroll-pane-ui:ui-base > .scroll-bar:horizontal .increment-button,
+.scroll-pane-ui:ui-base > .scroll-bar:horizontal .decrement-button {
     -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-padding: 0 0 10 0;
@@ -120,7 +141,13 @@
 .text-area-ui:ui-base .scroll-bar:vertical .increment-button,
 .text-area-ui:ui-base .scroll-bar:vertical .decrement-button,
 .combo-box-ui:ui-base .scroll-bar:vertical .increment-button,
-.combo-box-ui:ui-base .scroll-bar:vertical .decrement-button {
+.combo-box-ui:ui-base .scroll-bar:vertical .decrement-button,
+.scroll-pane-ui > .scroll-bar:vertical .decrement-button,
+.scroll-pane-ui > .scroll-bar:vertical .increment-button,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:vertical .increment-button,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:vertical .decrement-button,
+.scroll-pane-ui:ui-base > .scroll-bar:vertical .increment-button,
+.scroll-pane-ui:ui-base > .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
     -fx-background-radius: 0;
     -fx-padding: 0 10 0 0;
@@ -145,7 +172,13 @@
 .text-area-ui:ui-base .scroll-bar .increment-arrow,
 .text-area-ui:ui-base .scroll-bar .decrement-arrow,
 .combo-box-ui:ui-base .scroll-bar .increment-arrow,
-.combo-box-ui:ui-base .scroll-bar .decrement-arrow {
+.combo-box-ui:ui-base .scroll-bar .decrement-arrow,
+.scroll-pane-ui > .scroll-bar .decrement-arrow,
+.scroll-pane-ui > .scroll-bar .increment-arrow,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar .increment-arrow,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar .decrement-arrow,
+.scroll-pane-ui:ui-base > .scroll-bar .increment-arrow,
+.scroll-pane-ui:ui-base > .scroll-bar .decrement-arrow {
     -fx-background-color: -fx-mark-highlight-color, derive(-fx-base, -45%);
     -fx-shape: " ";
     -fx-padding: 0.15em 0;
@@ -170,7 +203,13 @@
 .text-area-ui:ui-base .scroll-bar:vertical .increment-arrow,
 .text-area-ui:ui-base .scroll-bar:vertical .decrement-arrow,
 .combo-box-ui:ui-base .scroll-bar:vertical .increment-arrow,
-.combo-box-ui:ui-base .scroll-bar:vertical .decrement-arrow {
+.combo-box-ui:ui-base .scroll-bar:vertical .decrement-arrow,
+.scroll-pane-ui > .scroll-bar:vertical .decrement-arrow,
+.scroll-pane-ui > .scroll-bar:vertical .increment-arrow,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:vertical .increment-arrow,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:vertical .decrement-arrow,
+.scroll-pane-ui:ui-base > .scroll-bar:vertical .increment-arrow,
+.scroll-pane-ui:ui-base > .scroll-bar:vertical .decrement-arrow {
     -fx-padding: 0 0.15em;
 }
 
@@ -193,7 +232,13 @@
 .text-area-ui:ui-base .scroll-bar:horizontal .thumb,
 .text-area-ui:ui-base .scroll-bar:vertical .thumb,
 .combo-box-ui:ui-base .scroll-bar:horizontal .thumb,
-.combo-box-ui:ui-base .scroll-bar:vertical .thumb {
+.combo-box-ui:ui-base .scroll-bar:vertical .thumb,
+.scroll-pane-ui > .scroll-bar:vertical .thumb,
+.scroll-pane-ui > .scroll-bar:horizontal .thumb,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:horizontal .thumb,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:vertical .thumb,
+.scroll-pane-ui:ui-base > .scroll-bar:horizontal .thumb,
+.scroll-pane-ui:ui-base > .scroll-bar:vertical .thumb {
     -fx-background-color: derive(main-shallow-color, 50%);
     -fx-background-insets: 6, 0, 0, 0;
     -fx-background-radius: 2em;
@@ -218,7 +263,13 @@
 .list-view-ui:ui-base .scroll-bar .thumb:pressed,
 .tree-view-ui:ui-base .scroll-bar .thumb:pressed,
 .text-area-ui:ui-base .scroll-bar .thumb:pressed,
-.combo-box-ui:ui-base .scroll-bar .thumb:pressed {
+.combo-box-ui:ui-base .scroll-bar .thumb:pressed,
+.scroll-pane-ui > .scroll-bar .thumb:pressed,
+.scroll-pane-ui > .scroll-bar .thumb:hover,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar .thumb:hover,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar .thumb:pressed,
+.scroll-pane-ui:ui-base > .scroll-bar .thumb:hover,
+.scroll-pane-ui:ui-base > .scroll-bar .thumb:pressed {
     -fx-background-color: derive(main-shallow-color, 50%);
     -fx-background-insets: 6, 0, 0, 0;
     -fx-background-radius: 2em;
@@ -233,7 +284,10 @@
 .list-view-ui:ui-base .scroll-bar:hover .thumb,
 .tree-view-ui:ui-base .scroll-bar:hover .thumb,
 .text-area-ui:ui-base .scroll-bar:hover .thumb,
-.combo-box-ui:ui-base .scroll-bar:hover .thumb {
+.combo-box-ui:ui-base .scroll-bar:hover .thumb,
+.scroll-pane-ui > .scroll-bar:hover .thumb,
+.scroll-pane-ui.scroll-pane-ui-base > .scroll-bar:hover .thumb,
+.scroll-pane-ui:ui-base > .scroll-bar:hover .thumb {
     -fx-background-color: derive(main-shallow-color, 0%);
     -fx-background-insets: 4, 0, 0, 0;
     -fx-background-radius: 2em;
@@ -248,6 +302,9 @@
 .list-view-ui:ui-base .corner,
 .tree-view-ui:ui-base .corner,
 .text-area-ui:ui-base .corner,
-.combo-box-ui:ui-base .corner {
+.combo-box-ui:ui-base .corner,
+.scroll-pane-ui > .corner,
+.scroll-pane-ui.scroll-pane-ui-base > .corner,
+.scroll-pane-ui:ui-base > .corner {
     -fx-background-color: derive(-fx-base, -1%);
 }
