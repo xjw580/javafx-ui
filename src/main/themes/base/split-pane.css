@@ -69,18 +69,18 @@
     -fx-position-shape: true;
 }
 
-/* Grabber names describe the pane orientation, not the visible grip direction. */
+/* Keep the three stripes parallel to the divider in either pane orientation. */
 .split-pane-ui > .split-pane-divider > .horizontal-grabber,
 .split-pane-ui.split-pane-ui-base > .split-pane-divider > .horizontal-grabber,
 .split-pane-ui:ui-base > .split-pane-divider > .horizontal-grabber {
-    -fx-shape: "M0 0 H6 V1 H0 Z M0 4 H6 V5 H0 Z M0 8 H6 V9 H0 Z";
+    -fx-shape: "M0 0 H1 V9 H0 Z M2.5 0 H3.5 V9 H2.5 Z M5 0 H6 V9 H5 Z";
     -fx-padding: 4.5 3;
 }
 
 .split-pane-ui > .split-pane-divider > .vertical-grabber,
 .split-pane-ui.split-pane-ui-base > .split-pane-divider > .vertical-grabber,
 .split-pane-ui:ui-base > .split-pane-divider > .vertical-grabber {
-    -fx-shape: "M0 0 H1 V6 H0 Z M4 0 H5 V6 H4 Z M8 0 H9 V6 H8 Z";
+    -fx-shape: "M0 0 H9 V1 H0 Z M0 2.5 H9 V3.5 H0 Z M0 5 H9 V6 H0 Z";
     -fx-padding: 3 4.5;
 }
 
