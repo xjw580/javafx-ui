@@ -63,21 +63,25 @@
 .split-pane-ui:ui-base > .split-pane-divider > .vertical-grabber {
     -fx-background-color: #B0B0B0;
     -fx-background-insets: 0;
-    -fx-background-radius: 2;
+    -fx-background-radius: 0;
     -fx-border-width: 0;
+    -fx-scale-shape: true;
+    -fx-position-shape: true;
 }
 
 /* Grabber names describe the pane orientation, not the visible grip direction. */
 .split-pane-ui > .split-pane-divider > .horizontal-grabber,
 .split-pane-ui.split-pane-ui-base > .split-pane-divider > .horizontal-grabber,
 .split-pane-ui:ui-base > .split-pane-divider > .horizontal-grabber {
-    -fx-padding: 12 1;
+    -fx-shape: "M0 0 H6 V1 H0 Z M0 4 H6 V5 H0 Z M0 8 H6 V9 H0 Z";
+    -fx-padding: 4.5 3;
 }
 
 .split-pane-ui > .split-pane-divider > .vertical-grabber,
 .split-pane-ui.split-pane-ui-base > .split-pane-divider > .vertical-grabber,
 .split-pane-ui:ui-base > .split-pane-divider > .vertical-grabber {
-    -fx-padding: 1 12;
+    -fx-shape: "M0 0 H1 V6 H0 Z M4 0 H5 V6 H4 Z M8 0 H9 V6 H8 Z";
+    -fx-padding: 3 4.5;
 }
 
 .split-pane-ui > .split-pane-divider:hover > .horizontal-grabber,
