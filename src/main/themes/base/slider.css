@@ -5,7 +5,7 @@
 .slider-ui.slider-ui-base,
 .slider-ui:ui-base {
     slider-color: main-color;
-    -fx-padding: 6;
+    -fx-padding: 0;
 }
 
 .slider-ui.slider-ui-base,

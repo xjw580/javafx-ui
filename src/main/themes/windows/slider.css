@@ -3,7 +3,7 @@
 
 .slider-ui {
     slider-color: main-color;
-    -fx-padding: 6;
+    -fx-padding: 0;
 }
 
 .slider-ui > .track {
