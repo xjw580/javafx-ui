@@ -125,6 +125,7 @@
 .slider-ui.slider-ui-base.slider-ui-small > .track,
 .slider-ui:ui-base.slider-ui-small > .track {
     -fx-padding: 1.5;
+    -fx-background-radius: 3;
 }
 
 .slider-ui.slider-ui-base.slider-ui-small > .thumb,

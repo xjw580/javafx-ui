@@ -73,8 +73,8 @@
 .slider-ui.slider-ui-windows > .track,
 .slider-ui:ui-windows > .track {
     -fx-background-color: win-border-color;
-    -fx-background-radius: 1;
-    -fx-padding: 1;
+    -fx-background-radius: 2;
+    -fx-padding: 2;
 }
 
 .slider-ui > .thumb,
@@ -135,11 +135,11 @@
     -fx-effect: null;
 }
 
-.slider-ui-small > .track,
+.slider-ui.slider-ui-small > .track,
 .slider-ui.slider-ui-windows.slider-ui-small > .track,
 .slider-ui:ui-windows.slider-ui-small > .track {
-    -fx-padding: 1.5;
-    -fx-background-radius: 1.5;
+    -fx-padding: 1;
+    -fx-background-radius: 1;
 }
 
 .slider-ui.slider-ui-small > .thumb,
