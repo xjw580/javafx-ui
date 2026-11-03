@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <ScrollPane fitToWidth="true">
+        <VBox spacing="24" style="-fx-padding: 24" minWidth="0">
+            <Label text="基类" styleClass="title-three-base"/>
+            <CopyLabel text="split-pane-ui" notificationManager="${notificationManager}"/>
+            <Label text="拖动分隔条调整布局。本页示例随全局主题切换，悬浮与拖动时分隔条呈现主题色。" wrapText="true"/>
+
+            <Label text="左右分栏" styleClass="title-three-extra"/>
+            <SplitPane fx:id="horizontalSplitPane" styleClass="split-pane-ui" dividerPositions="0.3"
+                       prefHeight="180" minHeight="180" maxHeight="180">
+                <VBox spacing="14" minWidth="100" style="-fx-padding: 16">
+                    <Label text="项目"/>
+                    <Label text="资源"/>
+                    <Label text="设置"/>
+                    <Label text="日志"/>
+                </VBox>
+                <VBox spacing="12" minWidth="140" style="-fx-padding: 16">
+                    <Label text="内容区域" style="-fx-font-weight: bold"/>
+                    <Label text="拖动中间的分隔条，调整左右区域的大小。" wrapText="true"/>
+                    <Label text="分隔条中间的短柄提示可拖动位置。" wrapText="true"/>
+                </VBox>
+            </SplitPane>
+
+            <Label text="上下分栏（orientation = VERTICAL）" styleClass="title-three-extra"/>
+            <SplitPane fx:id="verticalSplitPane" styleClass="split-pane-ui" orientation="VERTICAL"
+                       dividerPositions="0.55" prefHeight="260" minHeight="260" maxHeight="260">
+                <VBox spacing="12" minHeight="70" style="-fx-padding: 16">
+                    <Label text="编辑区域" style="-fx-font-weight: bold"/>
+                    <Label text="在这里编辑内容。" wrapText="true"/>
+                </VBox>
+                <VBox spacing="12" minHeight="70" style="-fx-padding: 16">
+                    <Label text="输出信息" style="-fx-font-weight: bold"/>
+                    <Label text="在这里显示处理结果或日志信息。" wrapText="true"/>
+                </VBox>
+            </SplitPane>
+
+            <Label text="多区域分栏" styleClass="title-three-extra"/>
+            <SplitPane fx:id="multipleSplitPane" styleClass="split-pane-ui" dividerPositions="0.25, 0.7"
+                       prefHeight="140" minHeight="140" maxHeight="140">
+                <StackPane minWidth="80">
+                    <Label text="导航"/>
+                </StackPane>
+                <StackPane minWidth="100">
+                    <Label text="工作区域"/>
+                </StackPane>
+                <StackPane minWidth="80">
+                    <Label text="属性"/>
+                </StackPane>
+            </SplitPane>
+
+            <Label text="禁用状态" styleClass="title-three-extra"/>
+            <SplitPane fx:id="disabledSplitPane" styleClass="split-pane-ui" disable="true"
+                       dividerPositions="0.4" prefHeight="100" minHeight="100" maxHeight="100">
+                <StackPane minWidth="80">
+                    <Label text="左侧内容"/>
+                </StackPane>
+                <StackPane minWidth="80">
+                    <Label text="右侧内容"/>
+                </StackPane>
+            </SplitPane>
+        </VBox>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

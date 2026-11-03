@@ -1,0 +1,117 @@
+/* @theme-variants */
+/* Native SplitPaneSkin supplies the dividers, drag handling and centered grabbers. */
+
+.split-pane-ui,
+.split-pane-ui.split-pane-ui-base,
+.split-pane-ui:ui-base,
+.split-pane-ui:focused,
+.split-pane-ui.split-pane-ui-base:focused,
+.split-pane-ui:ui-base:focused {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-border-color: border-color;
+    -fx-border-width: 1;
+    -fx-border-insets: 0;
+    -fx-border-radius: 4;
+    -fx-padding: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 2, 0, 0, 1);
+}
+
+.split-pane-ui:focused,
+.split-pane-ui.split-pane-ui-base:focused,
+.split-pane-ui:ui-base:focused {
+    -fx-border-color: main-color;
+}
+
+/* The skin uses prefWidth for divider thickness in both orientations. */
+.split-pane-ui > .split-pane-divider,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider,
+.split-pane-ui:ui-base > .split-pane-divider {
+    -fx-pref-width: 8;
+    -fx-pref-height: 8;
+    -fx-padding: 0;
+    -fx-background-color: border-color, #F5F5F5;
+    -fx-background-insets: 0, 0 1;
+    -fx-background-radius: 0;
+    -fx-border-width: 0;
+}
+
+.split-pane-ui:vertical > .split-pane-divider,
+.split-pane-ui.split-pane-ui-base:vertical > .split-pane-divider,
+.split-pane-ui:ui-base:vertical > .split-pane-divider {
+    -fx-background-insets: 0, 1 0;
+}
+
+.split-pane-ui > .split-pane-divider:hover,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider:hover,
+.split-pane-ui:ui-base > .split-pane-divider:hover {
+    -fx-background-color: border-color, shallow-color;
+}
+
+.split-pane-ui > .split-pane-divider:pressed,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider:pressed,
+.split-pane-ui:ui-base > .split-pane-divider:pressed {
+    -fx-background-color: border-color, hover-color;
+}
+
+.split-pane-ui > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui:ui-base > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui > .split-pane-divider > .vertical-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider > .vertical-grabber,
+.split-pane-ui:ui-base > .split-pane-divider > .vertical-grabber {
+    -fx-background-color: #B0B0B0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 2;
+    -fx-border-width: 0;
+}
+
+/* Grabber names describe the pane orientation, not the visible grip direction. */
+.split-pane-ui > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui:ui-base > .split-pane-divider > .horizontal-grabber {
+    -fx-padding: 12 1;
+}
+
+.split-pane-ui > .split-pane-divider > .vertical-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider > .vertical-grabber,
+.split-pane-ui:ui-base > .split-pane-divider > .vertical-grabber {
+    -fx-padding: 1 12;
+}
+
+.split-pane-ui > .split-pane-divider:hover > .horizontal-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider:hover > .horizontal-grabber,
+.split-pane-ui:ui-base > .split-pane-divider:hover > .horizontal-grabber,
+.split-pane-ui > .split-pane-divider:hover > .vertical-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider:hover > .vertical-grabber,
+.split-pane-ui:ui-base > .split-pane-divider:hover > .vertical-grabber,
+.split-pane-ui > .split-pane-divider:pressed > .horizontal-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider:pressed > .horizontal-grabber,
+.split-pane-ui:ui-base > .split-pane-divider:pressed > .horizontal-grabber,
+.split-pane-ui > .split-pane-divider:pressed > .vertical-grabber,
+.split-pane-ui.split-pane-ui-base > .split-pane-divider:pressed > .vertical-grabber,
+.split-pane-ui:ui-base > .split-pane-divider:pressed > .vertical-grabber {
+    -fx-background-color: main-color;
+}
+
+.split-pane-ui:disabled,
+.split-pane-ui.split-pane-ui-base:disabled,
+.split-pane-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+}
+
+.split-pane-ui:disabled > .split-pane-divider,
+.split-pane-ui.split-pane-ui-base:disabled > .split-pane-divider,
+.split-pane-ui:ui-base:disabled > .split-pane-divider {
+    -fx-background-color: border-color, #F5F5F5;
+}
+
+.split-pane-ui:disabled > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui.split-pane-ui-base:disabled > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui:ui-base:disabled > .split-pane-divider > .horizontal-grabber,
+.split-pane-ui:disabled > .split-pane-divider > .vertical-grabber,
+.split-pane-ui.split-pane-ui-base:disabled > .split-pane-divider > .vertical-grabber,
+.split-pane-ui:ui-base:disabled > .split-pane-divider > .vertical-grabber {
+    -fx-background-color: #B0B0B0;
+}
