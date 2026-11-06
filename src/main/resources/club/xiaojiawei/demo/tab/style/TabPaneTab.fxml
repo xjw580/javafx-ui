@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import club.xiaojiawei.demo.component.StylePage?>
@@ -12,7 +11,7 @@
     <StylePage
             notificationManager="${notificationManager}"
             baseStyleClasses="tab-pane-ui"
-            sizeStyleClasses="tab-pane-ui-small"
+            sizeStyleClasses="tab-pane-ui-tiny,tab-pane-ui-small,tab-pane-ui-big"
             baseIntroduce="通过左侧全局主题切换外观；点击标签切换内容，点击关闭图标关闭标签。">
         <baseShowChildren>
             <TabPane fx:id="defaultTabs" styleClass="tab-pane-ui" prefWidth="400" prefHeight="140">
@@ -28,17 +27,44 @@
             </TabPane>
         </baseShowChildren>
         <sizeShowChildren>
-            <TabPane fx:id="smallTabs" styleClass="tab-pane-ui, tab-pane-ui-small" prefWidth="400" prefHeight="140">
-                <tooltip>
-                    <Tooltip text="tab-pane-ui, tab-pane-ui-small"/>
-                </tooltip>
-                <Tab text="工作">
-                    <Text text="假装工作中"/>
-                </Tab>
-                <Tab text="摸鱼">
-                    <Text text="认真摸鱼中"/>
-                </Tab>
-            </TabPane>
+            <VBox spacing="12">
+                <Label text="Tiny"/>
+                <TabPane fx:id="tinyTabs" styleClass="tab-pane-ui, tab-pane-ui-tiny" prefWidth="400" prefHeight="140">
+                    <tooltip>
+                        <Tooltip text="tab-pane-ui, tab-pane-ui-tiny"/>
+                    </tooltip>
+                    <Tab text="工作">
+                        <Text text="假装工作中"/>
+                    </Tab>
+                    <Tab text="摸鱼">
+                        <Text text="认真摸鱼中"/>
+                    </Tab>
+                </TabPane>
+                <Label text="Small"/>
+                <TabPane fx:id="smallTabs" styleClass="tab-pane-ui, tab-pane-ui-small" prefWidth="400" prefHeight="140">
+                    <tooltip>
+                        <Tooltip text="tab-pane-ui, tab-pane-ui-small"/>
+                    </tooltip>
+                    <Tab text="工作">
+                        <Text text="假装工作中"/>
+                    </Tab>
+                    <Tab text="摸鱼">
+                        <Text text="认真摸鱼中"/>
+                    </Tab>
+                </TabPane>
+                <Label text="Big"/>
+                <TabPane fx:id="bigTabs" styleClass="tab-pane-ui, tab-pane-ui-big" prefWidth="400" prefHeight="140">
+                    <tooltip>
+                        <Tooltip text="tab-pane-ui, tab-pane-ui-big"/>
+                    </tooltip>
+                    <Tab text="工作">
+                        <Text text="假装工作中"/>
+                    </Tab>
+                    <Tab text="摸鱼">
+                        <Text text="认真摸鱼中"/>
+                    </Tab>
+                </TabPane>
+            </VBox>
         </sizeShowChildren>
     </StylePage>
     <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>

@@ -1,6 +1,6 @@
 /* @theme-variants */
 /* Shared declarations for the default theme and explicit theme selectors. */
-/* Leave room beyond the exact header width: TabPaneSkin uses a strict fit comparison. Preserve the selected underline against the shared small-tab insets. */
+/* Leave room beyond the exact header width: TabPaneSkin uses a strict fit comparison. Preserve the selected underline against the shared size insets. */
 
 .tab-pane-ui .tab {
     -fx-padding: 5 15 10 15;
@@ -334,6 +334,8 @@
     -fx-padding: 1 0;
 }
 
-.tab-pane-ui.tab-pane-ui-small .tab:selected {
+.tab-pane-ui.tab-pane-ui-tiny .tab:selected,
+.tab-pane-ui.tab-pane-ui-small .tab:selected,
+.tab-pane-ui.tab-pane-ui-big .tab:selected {
     -fx-background-insets: 0, 0 0 2 0 !important;
 }

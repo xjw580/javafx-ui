@@ -1,6 +1,6 @@
 /* @theme-variants */
 /* Shared declarations for the default theme and explicit theme selectors. */
-/* A forced Base small tab keeps its own shape inside the Windows entry. */
+/* Forced Base size variants keep their own shape inside the Windows entry. */
 
 .tab-pane-ui .tab,
 .tab-pane-ui.tab-pane-ui-base .tab,
@@ -229,7 +229,17 @@
     -fx-border-width: 0;
 }
 
+.tab-pane-ui.tab-pane-ui-base.tab-pane-ui-tiny .tab:selected,
+.tab-pane-ui:ui-base.tab-pane-ui-tiny .tab:selected {
+    -fx-background-insets: 0 1 3 1 !important;
+}
+
 .tab-pane-ui.tab-pane-ui-base.tab-pane-ui-small .tab:selected,
 .tab-pane-ui:ui-base.tab-pane-ui-small .tab:selected {
-    -fx-background-insets: 0 1 3 1 !important;
+    -fx-background-insets: 0 1 4 1 !important;
+}
+
+.tab-pane-ui.tab-pane-ui-base.tab-pane-ui-big .tab:selected,
+.tab-pane-ui:ui-base.tab-pane-ui-big .tab:selected {
+    -fx-background-insets: 0 2 6 2 !important;
 }
