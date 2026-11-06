@@ -19,17 +19,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.Window;
+import javafx.stage.*;
 import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,11 +60,22 @@ public class Modal implements MarkLogging {
     @Setter
     private boolean escClosable = true;
 
+    public void setMaskColor(Color maskColor) {
+        this.maskColor = maskColor == null ? Color.TRANSPARENT : maskColor;
+        setMaskBackground();
+    }
+
+    /**
+     * 遮罩颜色
+     */
+    @Getter
+    private Color maskColor = Color.web("#00000025");
+
     private final ReadOnlyBooleanProperty showing;
 
     private final Stage stage;
 
-    private Pane rootPane;
+    private Pane maskRootPane;
 
     private Pane topPane;
 
@@ -261,9 +265,15 @@ public class Modal implements MarkLogging {
         return vBox;
     }
 
+    private void setMaskBackground() {
+        var pane = maskRootPane;
+        if (pane == null) return;
+        pane.setBackground(new Background(new BackgroundFill(parent == null ? Color.TRANSPARENT : maskColor, null, null)));
+    }
+
     private void init(Parent baseParent) {
         this.parent = baseParent;
-        rootPane.setStyle(baseParent == null ? "-fx-background-color: transparent" : "-fx-background-color: #00000011");
+        setMaskBackground();
         Window owner = getOwnerWindow(baseParent);
         if (owner != null) {
             this.stage.initOwner(owner);
@@ -321,7 +331,7 @@ public class Modal implements MarkLogging {
     }
 
     private void initScene() {
-        Scene scene = new Scene(rootPane);
+        Scene scene = new Scene(maskRootPane);
         scene.setFill(Color.TRANSPARENT);
         JavaFXUI.setTheme(scene, parent == null ? JavaFXUI.getDefaultTheme() : JavaFXUI.getTheme(parent));
         this.stage.setScene(scene);
@@ -372,9 +382,9 @@ public class Modal implements MarkLogging {
                         -fx-padding: 0;
                     """);
         }};
-        rootPane = new StackPane(this.content = scrollPane);
-        rootPane.setStyle("-fx-background-color: #00000011");
-        JavaFXUI.initializeTheme(rootPane, "modal-ui");
+        maskRootPane = new StackPane(this.content = scrollPane);
+        setMaskBackground();
+        JavaFXUI.initializeTheme(maskRootPane, "modal-ui");
     }
 
     private Node createHeading(String heading) {
@@ -459,7 +469,7 @@ public class Modal implements MarkLogging {
     public void close(Runnable closedRunnable) {
         Duration duration = Duration.millis(150);
         ParallelTransition parallelTransition = new ParallelTransition(
-                BaseTransitionEnum.FADE.get(this.rootPane, 1, 0, duration),
+                BaseTransitionEnum.FADE.get(this.maskRootPane, 1, 0, duration),
                 BaseTransitionEnum.SLIDE_Y.get(this.content, 0, -25, duration)
         );
         parallelTransition.setOnFinished(actionEvent -> {
@@ -506,7 +516,7 @@ public class Modal implements MarkLogging {
             }
             Duration duration = Duration.millis(200);
             ParallelTransition parallelTransition = new ParallelTransition(
-                    BaseTransitionEnum.FADE.get(this.rootPane, 0, 1, duration),
+                    BaseTransitionEnum.FADE.get(this.maskRootPane, 0, 1, duration),
                     BaseTransitionEnum.SLIDE_Y.get(this.content, 25, 0, duration)
             );
             if (shownRunnable != null) {
