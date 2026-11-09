@@ -1,11 +1,8 @@
 /* Shared sizes and semantic modifiers. */
 
 .accordion-ui-big .titled-pane > .title {
-    -fx-pref-height: 36!important;
-}
-
-.accordion-ui-big .titled-pane > .title > .text {
-    -fx-translate-y: -6!important;
+    /* Let the skin measure the title so its arrow and label share a center. */
+    -fx-padding: 0.75em !important;
 }
 
 .accordion-ui-big .titled-pane > .title > .arrow-button > .arrow {
@@ -13,6 +10,6 @@
 }
 
 .accordion-ui-pure .titled-pane > .title {
-    -fx-background-color: white!important;
-    -fx-border-color: white!important;
+    -fx-background-color: white !important;
+    -fx-border-color: white !important;
 }

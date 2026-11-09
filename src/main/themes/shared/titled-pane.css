@@ -1,11 +1,8 @@
 /* Shared sizes and semantic modifiers. */
 
 .titled-pane-ui-big > .title {
-    -fx-pref-height: 36!important;
-}
-
-.titled-pane-ui-big > .title > .text {
-    -fx-translate-y: -6!important;
+    /* Let the skin measure the title so its arrow and label share a center. */
+    -fx-padding: 0.75em !important;
 }
 
 .titled-pane-ui-big > .title > .arrow-button > .arrow {
@@ -13,6 +10,6 @@
 }
 
 .titled-pane-ui-pure > .title {
-    -fx-background-color: white!important;
-    -fx-border-color: white!important;
+    -fx-background-color: white !important;
+    -fx-border-color: white !important;
 }
