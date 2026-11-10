@@ -1,0 +1,80 @@
+/* @theme-variants */
+/* Theme values and padding; behavior and semantic colors live in shared/menu-button.css. */
+
+.menu-btn-ui,
+.menu-btn-ui.menu-btn-ui-base,
+.menu-btn-ui:ui-base {
+    menu-button-fill: -fx-body-color;
+    menu-button-hover-fill: -fx-body-color;
+    menu-button-pressed-fill: -fx-body-color;
+    menu-button-disabled-fill: -fx-body-color;
+    menu-button-text: -fx-text-base-color;
+    menu-button-disabled-text: -fx-text-base-color;
+    menu-button-border: transparent;
+    menu-button-active-border: transparent;
+    menu-button-disabled-border: transparent;
+    menu-button-effect: default-effect;
+    menu-button-hover-effect: default-hover-effect;
+    menu-button-main-fill: main-color;
+    menu-button-main-hover-fill: main-shallow-color;
+    menu-button-main-pressed-fill: derive(main-color, -15%);
+    menu-button-popup-fill: background-color;
+    menu-button-popup-border: transparent;
+    menu-button-popup-separator: border-color;
+    menu-button-popup-hover: effect-color;
+    menu-button-popup-text: -fx-text-base-color;
+    menu-button-popup-disabled-text: -fx-text-base-color;
+    menu-button-popup-effect: dropshadow(gaussian, rgba(128, 128, 128, 0.67), 15, 0, 3, 3);
+    -fx-padding: 8 14;
+    -fx-border-width: 0;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.menu-button.menu-btn-ui:pressed,
+.menu-button.menu-btn-ui.menu-btn-ui-base:pressed,
+.menu-button.menu-btn-ui:ui-base:pressed,
+.menu-button.menu-btn-ui:showing,
+.menu-button.menu-btn-ui.menu-btn-ui-base:showing,
+.menu-button.menu-btn-ui:ui-base:showing {
+    -fx-effect: default-press-effect;
+}
+
+.menu-btn-ui.menu-btn-ui-tiny,
+.menu-btn-ui.menu-btn-ui-base.menu-btn-ui-tiny,
+.menu-btn-ui:ui-base.menu-btn-ui-tiny {
+    -fx-padding: 3 4;
+}
+
+.menu-btn-ui.menu-btn-ui-small,
+.menu-btn-ui.menu-btn-ui-base.menu-btn-ui-small,
+.menu-btn-ui:ui-base.menu-btn-ui-small {
+    -fx-padding: 5 8;
+}
+
+.menu-btn-ui.menu-btn-ui-big,
+.menu-btn-ui.menu-btn-ui-base.menu-btn-ui-big,
+.menu-btn-ui:ui-base.menu-btn-ui-big {
+    -fx-padding: 11 20;
+}
+
+.menu-button.menu-btn-ui:disabled,
+.menu-button.menu-btn-ui.menu-btn-ui-base:disabled,
+.menu-button.menu-btn-ui:ui-base:disabled {
+    -fx-opacity: 0.4;
+    -fx-effect: null;
+}
+
+.menu-btn-ui .context-menu,
+.menu-btn-ui.menu-btn-ui-base .context-menu,
+.menu-btn-ui:ui-base .context-menu {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-padding: 5 3;
+}
+
+.menu-btn-ui .context-menu .menu-item:disabled,
+.menu-btn-ui.menu-btn-ui-base .context-menu .menu-item:disabled,
+.menu-btn-ui:ui-base .context-menu .menu-item:disabled {
+    -fx-opacity: 0.4;
+}

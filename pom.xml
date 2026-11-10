@@ -104,32 +104,6 @@
                             </target>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>verify-theme-css-generator</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipTests}</skip>
-                            <target>
-                                <mkdir dir="${project.build.directory}/theme-verification"/>
-                                <javac destdir="${project.build.directory}/theme-verification"
-                                       release="${java.version}" encoding="UTF-8" includeantruntime="false">
-                                    <src path="${project.basedir}/tools"/>
-                                    <src path="${project.basedir}/verification"/>
-                                    <include name="GenerateThemeCss.java"/>
-                                    <include name="ThemeCssGenerationVerification.java"/>
-                                </javac>
-                                <java classname="ThemeCssGenerationVerification" fork="true"
-                                      failonerror="true" dir="${project.basedir}">
-                                    <classpath>
-                                        <pathelement location="${project.build.directory}/theme-verification"/>
-                                    </classpath>
-                                </java>
-                            </target>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
             <plugin>

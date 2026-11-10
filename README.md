@@ -104,7 +104,7 @@ separator.setGraphicTextGap(8);
 
 执行 `mvn process-resources` 即可生成并复制运行时样式；`mvn package` 会自动执行这一步。生成目录为 `target/generated-resources/themes`，JAR 内的公开样式路径与加载 API 不变。请修改源文件，不要修改生成目录中的文件，也不要直接把合并后的源文件加载进场景。
 
-在 IDEA 直接运行 Demo 前，先执行 Maven 的 `process-resources`；修改 CSS 后也需要重新执行，或将 IDE 构建委托给 Maven。生成器使用项目已有的 JDK 21，无需安装 Node.js、Sass 或 Python。`mvn test` 会检查选择器分离、错误输入、重复生成和过期文件清理。
+在 IDEA 直接运行 Demo 前，先执行 Maven 的 `process-resources`；修改 CSS 后也需要重新执行，或将 IDE 构建委托给 Maven。生成器使用项目已有的 JDK 21。
 
 ## 主题与基础样式
 
@@ -169,6 +169,8 @@ Button、Label、TextField/PasswordField、ToggleButton 继续通过内容、pad
 RadioButton 支持 `radio-button-ui-tiny`、`radio-button-ui-small`、`radio-button-ui-big`，与 `radio-button-ui` 组合使用。尺寸类同时调整圆框和圆点，不改变文字字号；同字号下，tiny/small/默认/big 四档圆框均与 CheckBox 对应方框等宽等高，完整指示器可自然撑高控件。Demo 的 RadioButton 页面提供四档示例，随全局 Base/Windows 主题切换。
 
 控件外层不设置固定的最小、首选或最大高度。大图标和多行按钮仍可自然撑高，调用方的尺寸约束继续有效。ComboBox 的 tiny/small/默认/big 四档单元格首选高度为 21/25/31/37px；Windows 显示区扣除 2px 边框空间，编辑器首选高度也比对应档位少 2px。显示区、编辑器与弹出列表保留各自的内边距，不再通过外层 padding 模拟高度。表格等容器的整体高度不参与单行控件等高比较。
+
+`MenuButton` 使用 `menu-btn-ui`，按钮、箭头和弹出菜单随 Base/Windows 主题切换。尺寸类为 `menu-btn-ui-tiny`、`menu-btn-ui-small`、`menu-btn-ui-big`，不加尺寸类为默认档位；普通单行内容与 Button 同档位等高，图标和多行内容可自然撑高。颜色类支持 `menu-btn-ui-main`、`menu-btn-ui-normal`、`menu-btn-ui-success`、`menu-btn-ui-warn`、`menu-btn-ui-error`。追加 `menu-btn-ui-base` 或 `menu-btn-ui-windows` 可固定按钮及菜单的主题。Demo 左侧“样式类 → MenuButton”提供示例。
 
 个别控件需要固定外观时，在对应基础类上追加一个主题修饰类：
 

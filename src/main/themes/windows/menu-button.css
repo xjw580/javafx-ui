@@ -1,0 +1,80 @@
+/* @theme-variants */
+/* Theme values and padding; behavior and semantic colors live in shared/menu-button.css. */
+
+.menu-btn-ui,
+.menu-btn-ui.menu-btn-ui-windows,
+.menu-btn-ui:ui-windows {
+    menu-button-fill: win-surface-color;
+    menu-button-hover-fill: win-hover-background-color;
+    menu-button-pressed-fill: win-pressed-background-color;
+    menu-button-disabled-fill: win-background-color;
+    menu-button-text: win-text-color;
+    menu-button-disabled-text: win-text-disabled-color;
+    menu-button-border: win-border-color;
+    menu-button-active-border: win-main-color;
+    menu-button-disabled-border: win-disabled-color;
+    menu-button-effect: win-control-effect;
+    menu-button-hover-effect: win-control-effect;
+    menu-button-main-fill: win-main-color;
+    menu-button-main-hover-fill: win-main-hover-color;
+    menu-button-main-pressed-fill: win-main-pressed-color;
+    menu-button-popup-fill: win-surface-color;
+    menu-button-popup-border: win-border-color;
+    menu-button-popup-separator: win-border-color;
+    menu-button-popup-hover: win-hover-background-color;
+    menu-button-popup-text: win-text-color;
+    menu-button-popup-disabled-text: win-text-disabled-color;
+    menu-button-popup-effect: win-popup-effect;
+    -fx-padding: 7 14;
+    -fx-border-width: 1;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+}
+
+.menu-button.menu-btn-ui:pressed,
+.menu-button.menu-btn-ui.menu-btn-ui-windows:pressed,
+.menu-button.menu-btn-ui:ui-windows:pressed,
+.menu-button.menu-btn-ui:showing,
+.menu-button.menu-btn-ui.menu-btn-ui-windows:showing,
+.menu-button.menu-btn-ui:ui-windows:showing {
+    -fx-effect: null;
+}
+
+.menu-btn-ui.menu-btn-ui-tiny,
+.menu-btn-ui.menu-btn-ui-windows.menu-btn-ui-tiny,
+.menu-btn-ui:ui-windows.menu-btn-ui-tiny {
+    -fx-padding: 2 4;
+}
+
+.menu-btn-ui.menu-btn-ui-small,
+.menu-btn-ui.menu-btn-ui-windows.menu-btn-ui-small,
+.menu-btn-ui:ui-windows.menu-btn-ui-small {
+    -fx-padding: 4 8;
+}
+
+.menu-btn-ui.menu-btn-ui-big,
+.menu-btn-ui.menu-btn-ui-windows.menu-btn-ui-big,
+.menu-btn-ui:ui-windows.menu-btn-ui-big {
+    -fx-padding: 10 20;
+}
+
+.menu-button.menu-btn-ui:disabled,
+.menu-button.menu-btn-ui.menu-btn-ui-windows:disabled,
+.menu-button.menu-btn-ui:ui-windows:disabled {
+    -fx-opacity: 0.6;
+    -fx-effect: null;
+}
+
+.menu-btn-ui .context-menu,
+.menu-btn-ui.menu-btn-ui-windows .context-menu,
+.menu-btn-ui:ui-windows .context-menu {
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-padding: 3;
+}
+
+.menu-btn-ui .context-menu .menu-item:disabled,
+.menu-btn-ui.menu-btn-ui-windows .context-menu .menu-item:disabled,
+.menu-btn-ui:ui-windows .context-menu .menu-item:disabled {
+    -fx-opacity: 0.6;
+}

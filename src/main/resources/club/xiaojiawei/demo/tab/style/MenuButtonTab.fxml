@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import club.xiaojiawei.controls.CopyLabel?>
+<?import club.xiaojiawei.controls.NotificationManager?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <ScrollPane fitToWidth="true">
+        <VBox spacing="24" style="-fx-padding: 24">
+            <Label text="基类" styleClass="title-three-base"/>
+            <CopyLabel text="menu-btn-ui" notificationManager="${notificationManager}"/>
+            <Label text="按钮和弹出菜单随全局主题切换。点击按钮或聚焦后按空格打开菜单。" wrapText="true"/>
+            <MenuButton fx:id="basicMenuButton" text="更多操作" styleClass="menu-btn-ui">
+                <items>
+                    <MenuItem text="打开"/>
+                    <MenuItem text="另存为"/>
+                    <SeparatorMenuItem/>
+                    <CheckMenuItem text="显示详细信息" selected="true"/>
+                    <Menu text="导出格式">
+                        <items>
+                            <MenuItem text="PDF"/>
+                            <MenuItem text="图片"/>
+                        </items>
+                    </Menu>
+                    <MenuItem text="暂不可用" disable="true"/>
+                </items>
+            </MenuButton>
+
+            <Label text="大小类" styleClass="title-three-extra"/>
+            <CopyLabel text="menu-btn-ui-tiny、menu-btn-ui-small、menu-btn-ui-big"
+                       notificationManager="${notificationManager}"/>
+            <Label text="与 menu-btn-ui 组合使用，不加尺寸类为默认大小。同字号、普通单行内容与 Button 同档位等高。"
+                   wrapText="true"/>
+            <FlowPane hgap="24" vgap="16">
+                <MenuButton text="极小" styleClass="menu-btn-ui, menu-btn-ui-tiny">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="小" styleClass="menu-btn-ui, menu-btn-ui-small">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="默认" styleClass="menu-btn-ui">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="大" styleClass="menu-btn-ui, menu-btn-ui-big">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+            </FlowPane>
+
+            <Label text="颜色类" styleClass="title-three-extra"/>
+            <CopyLabel
+                    text="menu-btn-ui-main、menu-btn-ui-normal、menu-btn-ui-success、menu-btn-ui-warn、menu-btn-ui-error"
+                    wrapText="true" notificationManager="${notificationManager}"/>
+            <FlowPane hgap="24" vgap="16">
+                <MenuButton text="主要" styleClass="menu-btn-ui, menu-btn-ui-main">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="普通" styleClass="menu-btn-ui, menu-btn-ui-normal">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="成功" styleClass="menu-btn-ui, menu-btn-ui-success">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="警告" styleClass="menu-btn-ui, menu-btn-ui-warn">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="危险" styleClass="menu-btn-ui, menu-btn-ui-error">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+            </FlowPane>
+
+            <Label text="禁用状态" styleClass="title-three-extra"/>
+            <FlowPane hgap="24" vgap="16">
+                <MenuButton text="不可用" styleClass="menu-btn-ui" disable="true">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+                <MenuButton text="不可用" styleClass="menu-btn-ui, menu-btn-ui-success" disable="true">
+                    <items>
+                        <MenuItem text="菜单选项"/>
+                    </items>
+                </MenuButton>
+            </FlowPane>
+
+            <Label text="图文内容" styleClass="title-three-extra"/>
+            <Label text="图标或多行文字可自然撑高按钮。" wrapText="true"/>
+            <MenuButton fx:id="graphicMenuButton" text="图文菜单" contentDisplay="TOP" styleClass="menu-btn-ui">
+                <graphic>
+                    <Circle radius="20" fill="#0075FF"/>
+                </graphic>
+                <items>
+                    <MenuItem text="菜单选项"/>
+                </items>
+            </MenuButton>
+        </VBox>
+    </ScrollPane>
+    <NotificationManager fx:id="notificationManager" autoTop="false" notificationPos="TOP_RIGHT"/>
+</StackPane>

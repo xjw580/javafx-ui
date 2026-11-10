@@ -1,0 +1,161 @@
+/* MenuButton content is measured by the native skin, including large graphics. */
+.menu-btn-ui {
+    -fx-background-color: menu-button-fill;
+    -fx-background-insets: 0;
+    -fx-border-color: menu-button-border;
+    -fx-border-insets: 0;
+    -fx-effect: menu-button-effect;
+    -fx-text-fill: menu-button-text;
+    -fx-cursor: hand;
+    -fx-opacity: 1;
+}
+
+.menu-btn-ui:hover {
+    -fx-background-color: menu-button-hover-fill;
+    -fx-border-color: menu-button-active-border;
+    -fx-effect: menu-button-hover-effect;
+}
+
+.menu-btn-ui:focused {
+    -fx-border-color: menu-button-active-border;
+}
+
+.menu-btn-ui:pressed,
+.menu-btn-ui:showing {
+    -fx-background-color: menu-button-pressed-fill;
+    -fx-border-color: menu-button-active-border;
+}
+
+.menu-btn-ui:disabled {
+    -fx-background-color: menu-button-disabled-fill;
+    -fx-border-color: menu-button-disabled-border;
+    -fx-text-fill: menu-button-disabled-text;
+    -fx-effect: null;
+}
+
+.menu-btn-ui > .label {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: menu-button-text;
+    -fx-opacity: 1;
+}
+
+.menu-btn-ui > .arrow-button {
+    -fx-padding: 0 0 0 0.583333em;
+    -fx-background-color: transparent;
+}
+
+.menu-btn-ui > .arrow-button > .arrow {
+    -fx-padding: 0.166667em 0.333333em;
+    -fx-background-color: menu-button-text;
+    -fx-background-insets: 0;
+    -fx-effect: null;
+}
+
+.menu-btn-ui:disabled > .label {
+    -fx-text-fill: menu-button-disabled-text;
+}
+
+.menu-btn-ui:disabled > .arrow-button > .arrow {
+    -fx-background-color: menu-button-disabled-text;
+}
+
+/* Native popup style ancestry carries the owner's explicit theme as well. */
+.menu-btn-ui .context-menu {
+    -fx-background-color: menu-button-popup-fill;
+    -fx-background-insets: 0;
+    -fx-border-color: menu-button-popup-border;
+    -fx-border-width: 1;
+    -fx-effect: menu-button-popup-effect;
+}
+
+.menu-btn-ui .context-menu .menu-item {
+    -fx-padding: 7 14;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 4;
+    -fx-text-fill: menu-button-popup-text;
+    -fx-mark-color: menu-button-popup-text;
+}
+
+.menu-btn-ui .context-menu .menu-item > .label {
+    -fx-text-fill: menu-button-popup-text;
+}
+
+.menu-btn-ui .context-menu .menu-item:hover,
+.menu-btn-ui .context-menu .menu-item:focused,
+.menu-btn-ui .context-menu .menu-item:showing {
+    -fx-background-color: menu-button-popup-hover;
+}
+
+.menu-btn-ui .context-menu .menu-item:disabled {
+    -fx-background-color: transparent;
+}
+
+.menu-btn-ui .context-menu .menu-item:disabled > .label {
+    -fx-text-fill: menu-button-popup-disabled-text;
+}
+
+.menu-btn-ui .context-menu .menu-item .arrow,
+.menu-btn-ui .context-menu .menu-item .check,
+.menu-btn-ui .context-menu .menu-item .radio {
+    -fx-background-color: menu-button-popup-text;
+}
+
+.menu-btn-ui .context-menu .separator:horizontal .line {
+    -fx-border-color: menu-button-popup-separator;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* Extra specificity keeps semantic colors when an explicit theme is selected. */
+.menu-button.menu-btn-ui.menu-btn-ui-main {
+    menu-button-fill: menu-button-main-fill;
+    menu-button-hover-fill: menu-button-main-hover-fill;
+    menu-button-pressed-fill: menu-button-main-pressed-fill;
+    menu-button-disabled-fill: menu-button-main-fill;
+    menu-button-border: menu-button-main-fill;
+    menu-button-active-border: menu-button-main-hover-fill;
+    menu-button-disabled-border: menu-button-main-fill;
+    menu-button-text: white;
+    menu-button-disabled-text: white;
+}
+
+.menu-button.menu-btn-ui.menu-btn-ui-normal {
+    menu-button-fill: normal-color;
+    menu-button-hover-fill: normal-deep-color;
+    menu-button-pressed-fill: normal-deep-color;
+    menu-button-disabled-fill: normal-color;
+    menu-button-border: normal-deep-color;
+    menu-button-active-border: derive(normal-deep-color, -20%);
+    menu-button-disabled-border: normal-deep-color;
+}
+
+.menu-button.menu-btn-ui.menu-btn-ui-success {
+    menu-button-fill: success-color;
+    menu-button-hover-fill: success-deep-color;
+    menu-button-pressed-fill: success-deep-color;
+    menu-button-disabled-fill: success-color;
+    menu-button-border: success-deep-color;
+    menu-button-active-border: derive(success-deep-color, -20%);
+    menu-button-disabled-border: success-deep-color;
+}
+
+.menu-button.menu-btn-ui.menu-btn-ui-warn {
+    menu-button-fill: warn-color;
+    menu-button-hover-fill: warn-deep-color;
+    menu-button-pressed-fill: warn-deep-color;
+    menu-button-disabled-fill: warn-color;
+    menu-button-border: warn-deep-color;
+    menu-button-active-border: derive(warn-deep-color, -20%);
+    menu-button-disabled-border: warn-deep-color;
+}
+
+.menu-button.menu-btn-ui.menu-btn-ui-error {
+    menu-button-fill: error-color;
+    menu-button-hover-fill: error-deep-color;
+    menu-button-pressed-fill: error-deep-color;
+    menu-button-disabled-fill: error-color;
+    menu-button-border: error-deep-color;
+    menu-button-active-border: derive(error-deep-color, -20%);
+    menu-button-disabled-border: error-deep-color;
+}
