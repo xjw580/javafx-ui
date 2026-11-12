@@ -67,12 +67,6 @@
     -fx-effect: null;
 }
 
-.titled-pane-ui > .content > *,
-.titled-pane-ui.titled-pane-ui-base > .content > *,
-.titled-pane-ui:ui-base > .content > * {
-    -fx-padding: 0;
-}
-
 .titled-pane-ui > .content,
 .titled-pane-ui.titled-pane-ui-base > .content,
 .titled-pane-ui:ui-base > .content {
