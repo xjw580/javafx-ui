@@ -11,9 +11,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PopupControl;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.StringConverter;
+
+import java.util.List;
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -37,10 +43,11 @@ public class WideComboBoxTest extends Application {
         root.setPadding(new Insets(30));
         Scene scene = new Scene(root, 640, 360);
         JavaFXUI.setTheme(scene, Theme.BASE);
-        primaryStage.setTitle("WideComboBox 宽度验证");
+        primaryStage.setTitle("WideComboBox 宽度与列表更新验证");
         primaryStage.setScene(scene);
         primaryStage.show();
         verifyWidths(wideComboBox, root);
+        verifyItemsTracking(root);
         if (getParameters().getRaw().contains("--verify")) {
             Platform.exit();
         }
@@ -106,6 +113,84 @@ public class WideComboBoxTest extends Application {
         assertWidth(initialWidth, layoutWidth(comboBox, root), "恢复样式");
         System.out.printf("PASS: initial=%.1f, expanded=%.1f, converted=%.1f, largeFont=%.1f%n",
                 initialWidth, expandedWidth, convertedWidth, largeFontWidth);
+    }
+
+    private void verifyItemsTracking(VBox root) {
+        WideComboBox<String> comboBox = new WideComboBox<>();
+        root.getChildren().add(comboBox);
+        try {
+            root.applyCss();
+            root.layout();
+            GridPane popup = popupContent(comboBox);
+            ObservableList<String> originalItems = comboBox.getItems();
+            ObservableList<String> replacement = FXCollections.observableArrayList();
+            comboBox.setItems(replacement);
+            replacement.addAll("趋势组A", "趋势组B");
+            assertPopupItems(popup, List.of("趋势组A", "趋势组B"), "等值空列表替换后添加项目");
+
+            var popupNodes = List.copyOf(popup.getChildren());
+            originalItems.add("旧列表项目");
+            if (!popupNodes.equals(popup.getChildren())) {
+                throw new AssertionError("替换后旧列表仍在触发弹出列表重绘");
+            }
+
+            ObservableList<String> equalItems = FXCollections.observableArrayList(replacement);
+            comboBox.setItems(equalItems);
+            equalItems.setAll("趋势组C", "趋势组D");
+            assertPopupItems(popup, List.of("趋势组C", "趋势组D"), "等值非空列表替换后修改项目");
+            popupNodes = List.copyOf(popup.getChildren());
+            replacement.clear();
+            if (!popupNodes.equals(popup.getChildren())) {
+                throw new AssertionError("等值非空列表替换后旧列表监听未解除");
+            }
+
+            equalItems.setAll("趋势组A", "趋势组B");
+            assertPopupItems(popup, List.of("趋势组A", "趋势组B"), "切回原协议项目");
+            comboBox.setItems(null);
+            assertPopupItems(popup, List.of(), "清空数据源");
+            ObservableList<String> restoredItems = FXCollections.observableArrayList();
+            comboBox.setItems(restoredItems);
+            restoredItems.add("恢复项目");
+            assertPopupItems(popup, List.of("恢复项目"), "从空数据源恢复");
+
+            comboBox.setSkin(null);
+            popupNodes = List.copyOf(popup.getChildren());
+            restoredItems.add("销毁后添加");
+            comboBox.setItems(FXCollections.observableArrayList("销毁后替换"));
+            if (!popupNodes.equals(popup.getChildren())) {
+                throw new AssertionError("皮肤销毁后列表监听未解除");
+            }
+            System.out.println("PASS: 数据源替换、协议切换和监听清理");
+        } finally {
+            comboBox.hide();
+            comboBox.setSkin(null);
+            root.getChildren().remove(comboBox);
+        }
+    }
+
+    private GridPane popupContent(WideComboBox<String> comboBox) {
+        comboBox.show();
+        try {
+            return Window.getWindows().stream()
+                    .filter(window -> window instanceof PopupControl popup
+                                      && popup.getOwnerWindow() == comboBox.getScene().getWindow())
+                    .map(window -> window.getScene().getRoot().lookup(".grid-pane"))
+                    .filter(GridPane.class::isInstance)
+                    .map(GridPane.class::cast)
+                    .findFirst()
+                    .orElseThrow(() -> new AssertionError("未找到趋势组弹出列表"));
+        } finally {
+            comboBox.hide();
+        }
+    }
+
+    private void assertPopupItems(GridPane popup, List<String> expected, String scenario) {
+        List<String> actual = popup.getChildren().stream()
+                .map(node -> ((Label) ((StackPane) node).getChildren().getFirst()).getText())
+                .toList();
+        if (!expected.equals(actual)) {
+            throw new AssertionError(scenario + ": expected=" + expected + ", actual=" + actual);
+        }
     }
 
     private double layoutWidth(WideComboBox<String> comboBox, VBox root) {

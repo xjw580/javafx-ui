@@ -2,7 +2,7 @@ package club.xiaojiawei.skin;
 
 import club.xiaojiawei.JavaFXUI;
 import club.xiaojiawei.controls.WideComboBox;
-import javafx.beans.value.ChangeListener;
+import javafx.beans.InvalidationListener;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.css.Styleable;
@@ -41,15 +41,10 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
 
     private final ListChangeListener<T> itemChangeListener = observable -> itemsChanged();
 
-    private final ChangeListener<ObservableList<T>> itemsChangeListener = (observable, oldValue, newValue) -> {
-        if (oldValue != null) {
-            oldValue.removeListener(itemChangeListener);
-        }
-        if (newValue != null) {
-            newValue.addListener(itemChangeListener);
-        }
-        itemsChanged();
-    };
+    private ObservableList<T> observedItems;
+
+    // 数据源替换必须按引用处理，ChangeListener 会忽略内容相等的不同列表。
+    private final InvalidationListener itemsChangeListener = observable -> updateItemsListener();
 
     public ComboBoxWideSkin(WideComboBox<T> comboBoxBase) {
         super(comboBoxBase);
@@ -58,10 +53,8 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
         measuringLabel.setManaged(false);
         measuringLabel.setVisible(false);
         getChildren().add(measuringLabel);
-        if (outerComboBox.getItems() != null) {
-            outerComboBox.getItems().addListener(itemChangeListener);
-        }
         outerComboBox.itemsProperty().addListener(itemsChangeListener);
+        updateItemsListener();
         registerChangeListener(outerComboBox.converterProperty(), observable -> {
             displayLabel.setText(outerComboBox.getConverter().toString(outerComboBox.getValue()));
             itemsChanged();
@@ -87,6 +80,21 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
         return prefWidth - displayWidth + widestItemWidth;
     }
 
+    private void updateItemsListener() {
+        ObservableList<T> items = outerComboBox.getItems();
+        if (observedItems == items) {
+            return;
+        }
+        if (observedItems != null) {
+            observedItems.removeListener(itemChangeListener);
+        }
+        observedItems = items;
+        if (observedItems != null) {
+            observedItems.addListener(itemChangeListener);
+        }
+        itemsChanged();
+    }
+
     private void itemsChanged() {
         outerComboBox.requestLayout();
         if (popupNode != null) {
@@ -97,8 +105,9 @@ public class ComboBoxWideSkin<T> extends ComboBoxBaseSkin<T> {
     @Override
     public void dispose() {
         outerComboBox.itemsProperty().removeListener(itemsChangeListener);
-        if (outerComboBox.getItems() != null) {
-            outerComboBox.getItems().removeListener(itemChangeListener);
+        if (observedItems != null) {
+            observedItems.removeListener(itemChangeListener);
+            observedItems = null;
         }
         super.dispose();
     }
