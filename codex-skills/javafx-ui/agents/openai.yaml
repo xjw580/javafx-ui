@@ -1,0 +1,7 @@
+interface:
+  display_name: "JavaFX UI"
+  short_description: "在应用项目中使用 javafx-ui 控件、图标、主题与样式的指南"
+  default_prompt: "使用 $javafx-ui 在当前应用项目中编写或修改界面，按依赖版本调用本库控件、加载主题并组合样式类。"
+
+policy:
+  allow_implicit_invocation: true

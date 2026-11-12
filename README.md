@@ -191,4 +191,8 @@ RadioButton 支持 `radio-button-ui-tiny`、`radio-button-ui-small`、`radio-but
 
 启动 `DemoApplication` 后，在左侧切换 Base/Windows 主题即可查看现有各控件页面的对应风格，无需单独的主题展示页。
 
+## Codex Skill
+
+本仓库提供 [javafx-ui 技能](codex-skills/javafx-ui/SKILL.md)，供将本库作为依赖的项目使用，包含公开控件 API 索引、主题与样式规则及调用示例。
+
 ## [更新历史](HISTORY.md)
